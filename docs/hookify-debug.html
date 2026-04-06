@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Hookify Pattern Debugger</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: #0f1117; color: #e2e8f0; min-height: 100vh; padding: 24px; }
+  h1 { font-size: 20px; font-weight: 700; margin-bottom: 20px; color: #f8fafc; }
+  .layout { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 1400px; margin: 0 auto; }
+  @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } }
+  .panel { background: #1a1d27; border: 1px solid #2d3139; border-radius: 10px; padding: 16px; }
+  .panel-title { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: #64748b; margin-bottom: 12px; }
+  label { display: block; font-size: 12px; color: #94a3b8; margin-bottom: 4px; }
+  textarea, select, input[type=text] { width: 100%; background: #0f1117; border: 1px solid #2d3139; border-radius: 6px; color: #e2e8f0; font-size: 13px; font-family: 'Consolas', 'Courier New', monospace; }
+  textarea { resize: vertical; }
+  textarea.rule-input { height: 320px; }
+  textarea.payload-input { height: 120px; }
+  select, input[type=text] { padding: 8px 10px; }
+  .btn { padding: 10px 20px; background: #3b82f6; color: #fff; border: none; border-radius: 6px; font-size: 14px; font-weight: 600; cursor: pointer; width: 100%; margin-top: 10px; }
+  .btn:hover { background: #2563eb; }
+  .btn:disabled { background: #1e293b; color: #475569; cursor: not-allowed; }
+  .results { font-family: 'Consolas', 'Courier New', monospace; font-size: 13px; line-height: 1.6; white-space: pre-wrap; word-break: break-all; }
+  .result-hit { color: #4ade80; }
+  .result-miss { color: #f87171; }
+  .result-info { color: #60a5fa; }
+  .result-warn { color: #fbbf24; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+  .badge-hit { background: rgba(74,222,128,0.15); color: #4ade80; }
+  .badge-miss { background: rgba(248,113,113,0.15); color: #f87171; }
+  .badge-info { background: rgba(96,165,250,0.15); color: #60a5fa; }
+  .rule-parse { margin-bottom: 12px; padding: 10px; background: #0f1117; border-radius: 6px; }
+  .rule-parse dt { font-size: 11px; color: #64748b; text-transform: uppercase; }
+  .rule-parse dd { color: #e2e8f0; margin-top: 2px; }
+  dl { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; }
+  dt { color: #64748b; font-size: 12px; }
+  dd { color: #e2e8f0; font-size: 13px; }
+  .divider { border-top: 1px solid #2d3139; margin: 16px 0; }
+  .examples { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+  .example-btn { padding: 8px 12px; background: #1e293b; border: 1px solid #334155; border-radius: 6px; color: #94a3b8; font-size: 12px; cursor: pointer; text-align: left; transition: all 0.15s; }
+  .example-btn:hover { background: #2d3748; color: #e2e8f0; border-color: #3b82f6; }
+  .example-btn code { color: #60a5fa; }
+</style>
+</head>
+<body>
+<h1>Hookify Pattern Debugger</h1>
+
+<div class="layout">
+  <div>
+    <div class="panel">
+      <div class="panel-title">Hookify Rule Markdown</div>
+      <textarea class="rule-input" id="ruleInput" placeholder="Paste hookify rule markdown here...&#10;&#10;---&#10;name: my-rule&#10;enabled: true&#10;event: bash&#10;pattern: rm\s+-rf&#10;---&#10;&#10;Warning message here..."></textarea>
+    </div>
+
+    <div class="panel" style="margin-top: 16px;">
+      <div class="panel-title">Test Payload</div>
+      <label>Event type</label>
+      <select id="eventType">
+        <option value="bash">bash</option>
+        <option value="file">file</option>
+        <option value="stop">stop</option>
+        <option value="prompt">prompt</option>
+        <option value="all">all</option>
+      </select>
+      <div style="height: 8px;"></div>
+      <label>Payload (command / file path / text)</label>
+      <textarea class="payload-input" id="payloadInput" placeholder="rm -rf /tmp/test"></textarea>
+
+      <div class="examples">
+        <button class="example-btn" onclick="loadExample('bash', 'rm -rf /home')"><code>bash</code> rm -rf /home</button>
+        <button class="example-btn" onclick="loadExample('bash', 'chmod 777 /tmp')"><code>bash</code> chmod 777</button>
+        <button class="example-btn" onclick="loadExample('file', 'src/auth.ts', 'const API_KEY = process.env.API_KEY')"><code>file</code> API_KEY in .ts</button>
+        <button class="example-btn" onclick="loadExample('file', 'src/utils.ts', 'console.log(userInput)')"><code>file</code> console.log in .ts</button>
+        <button class="example-btn" onclick="loadExample('prompt', 'deploy to production')"><code>prompt</code> deploy command</button>
+        <button class="example-btn" onclick="loadExample('bash', 'sudo rm -rf /')"><code>bash</code> sudo rm -rf</button>
+      </div>
+
+      <button class="btn" id="runBtn" onclick="runTest()">Test Pattern</button>
+    </div>
+  </div>
+
+  <div>
+    <div class="panel">
+      <div class="panel-title">Parsed Rule</div>
+      <dl id="parsedRule">
+        <dt>name</dt><dd id="pr-name">—</dd>
+        <dt>enabled</dt><dd id="pr-enabled">—</dd>
+        <dt>event</dt><dd id="pr-event">—</dd>
+        <dt>pattern</dt><dd id="pr-pattern">—</dd>
+        <dt>action</dt><dd id="pr-action">—</dd>
+        <dt>conditions</dt><dd id="pr-conditions">—</dd>
+      </dl>
+      <div class="divider"></div>
+      <div class="panel-title">Result</div>
+      <div class="results" id="resultOutput">Paste a rule and payload, then click Test Pattern.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+const ruleInput = document.getElementById('ruleInput');
+const payloadInput = document.getElementById('payloadInput');
+const eventType = document.getElementById('eventType');
+const runBtn = document.getElementById('runBtn');
+
+ruleInput.addEventListener('input', parseRule);
+eventType.addEventListener('change', parseRule);
+
+function parseRule() {
+  const md = ruleInput.value;
+  // Extract YAML frontmatter
+  const fmMatch = md.match(/^---\n([\s\S]*?)\n---/);
+  if (!fmMatch) {
+    setParsed({});
+    return;
+  }
+  const raw = fmMatch[1];
+  const result = {};
+  for (const line of raw.split('\n')) {
+    const colonIdx = line.indexOf(':');
+    if (colonIdx < 0) continue;
+    const key = line.slice(0, colonIdx).trim();
+    let val = line.slice(colonIdx + 1).trim();
+    // Handle quoted strings
+    if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
+      val = val.slice(1, -1);
+    }
+    result[key] = val;
+  }
+  setParsed(result);
+}
+
+function setParsed(r) {
+  document.getElementById('pr-name').textContent = r.name || '—';
+  document.getElementById('pr-enabled').textContent = r.enabled || '—';
+  document.getElementById('pr-event').textContent = r.event || '—';
+  document.getElementById('pr-pattern').textContent = r.pattern || '—';
+  document.getElementById('pr-action').textContent = r.action || '—';
+  document.getElementById('pr-conditions').textContent = r.conditions ? JSON.stringify(r.conditions) : '—';
+}
+
+function loadExample(type, cmd, fileContent) {
+  const examples = {
+    'bash': `---
+name: warn-dangerous-rm
+enabled: true
+event: bash
+pattern: rm\\s+-rf
+---
+
+⚠️ **Dangerous rm detected!**
+
+You are running \`rm -rf\` which permanently deletes files.
+`,
+    'file-api-key': `---
+name: warn-api-key
+enabled: true
+event: file
+conditions:
+  - field: file_path
+    operator: regex_match
+    pattern: \\.ts$
+  - field: new_text
+    operator: contains
+    pattern: API_KEY
+---
+
+🔑 **API key detected!**
+
+Storing secrets in code is a security risk.
+`,
+    'prompt-deploy': `---
+name: warn-production-deploy
+enabled: true
+event: prompt
+conditions:
+  - field: user_prompt
+    operator: contains
+    pattern: deploy to production
+---
+
+🚨 **Production deployment!**
+
+Are you sure you want to deploy to production?
+`
+  };
+
+  const key = type === 'file' && cmd.includes('API_KEY') ? 'file-api-key'
+    : type === 'prompt' ? 'prompt-deploy'
+    : 'bash';
+
+  const map = {
+    'bash': `---
+name: warn-dangerous-rm
+enabled: true
+event: bash
+pattern: rm\\s+-rf
+---
+
+⚠️ **Dangerous rm detected!**
+
+You are running \`rm -rf\` which permanently deletes files.
+`,
+    'file': `---
+name: warn-console-log
+enabled: true
+event: file
+conditions:
+  - field: file_path
+    operator: regex_match
+    pattern: \\.tsx?$
+  - field: new_text
+    operator: regex_match
+    pattern: console\\.log\\(
+---
+
+🐛 **Console.log detected!**
+
+Debug logs shouldn't ship to production.
+`
+  };
+
+  ruleInput.value = type === 'prompt' ? examples['prompt-deploy'] : map[type] || examples['bash'];
+  eventType.value = type;
+  payloadInput.value = fileContent || cmd;
+  parseRule();
+}
+
+function runTest() {
+  const md = ruleInput.value;
+  const payload = payloadInput.value.trim();
+  const ev = eventType.value;
+
+  // Parse frontmatter
+  const fmMatch = md.match(/^---\n([\s\S]*?)\n---/);
+  const out = document.getElementById('resultOutput');
+  if (!fmMatch) {
+    out.innerHTML = '<span class="result-warn">No valid frontmatter found. Use --- delimiters.</span>';
+    return;
+  }
+
+  const front = {};
+  for (const line of fmMatch[1].split('\n')) {
+    const ci = line.indexOf(':');
+    if (ci < 0) continue;
+    let k = line.slice(0, ci).trim(), v = line.slice(ci + 1).trim();
+    if ((v.startsWith('"') && v.endsWith('"')) || (v.startsWith("'") && v.endsWith("'"))) v = v.slice(1, -1);
+    front[k] = v;
+  }
+
+  const enabled = front.enabled !== 'false';
+  const ruleEvent = front.event;
+  const pattern = front.pattern || '';
+  const action = front.action || 'warn';
+  const body = md.slice(fmMatch[0].length).trim();
+
+  // Extract conditions
+  const bodyLines = body.split('\n');
+  const conditions = [];
+  let inConditions = false;
+  let condBlock = [];
+  for (const line of bodyLines) {
+    if (line.startsWith('conditions:')) { inConditions = true; continue; }
+    if (inConditions) {
+      if (line.startsWith('  - ') || line.match(/^\s+\S/)) {
+        condBlock.push(line.replace(/^\s+/, ''));
+      } else if (condBlock.length) {
+        conditions.push(condBlock.join('\n'));
+        condBlock = [];
+        inConditions = false;
+      }
+    }
+  }
+  if (condBlock.length) conditions.push(condBlock.join('\n'));
+
+  const selectedEvent = ev;
+
+  // Event filter check
+  let eventMatch = true;
+  if (ruleEvent && ruleEvent !== 'all' && ruleEvent !== selectedEvent) {
+    eventMatch = false;
+  }
+
+  // Pattern match
+  let patternHit = false;
+  let patternError = null;
+  if (pattern) {
+    try {
+      const re = new RegExp(pattern);
+      patternHit = re.test(payload);
+    } catch (e) {
+      patternError = e.message;
+    }
+  }
+
+  // Condition checks (simple: field/operator/pattern)
+  let condResults = [];
+  for (const cond of conditions) {
+    const fieldMatch = cond.match(/field:\s*(\S+)/);
+    const opMatch = cond.match(/operator:\s*(\S+)/);
+    const patMatch = cond.match(/pattern:\s*(.+)/);
+    if (!fieldMatch || !opMatch || !patMatch) continue;
+    const field = fieldMatch[1];
+    const op = opMatch[1];
+    let pat = patMatch[1].trim();
+    if ((pat.startsWith('"') && pat.endsWith('"')) || (pat.startsWith("'") && pat.endsWith("'"))) pat = pat.slice(1, -1);
+    let value = '';
+    if (field === 'user_prompt' || field === 'command' || field === 'new_text') value = payload;
+    else if (field === 'file_path') value = payload.split('\n')[0] || payload;
+    let hit = false;
+    try {
+      if (op === 'regex_match') hit = new RegExp(pat).test(value);
+      else if (op === 'contains') hit = value.includes(pat);
+      else if (op === 'equals') hit = value === pat;
+      else if (op === 'starts_with') hit = value.startsWith(pat);
+      else if (op === 'ends_with') hit = value.endsWith(pat);
+    } catch(e) { hit = false; }
+    condResults.push({ field, op, pattern: pat, hit });
+  }
+
+  const hasConditions = condResults.length > 0;
+  const condAllHit = hasConditions && condResults.every(c => c.hit);
+  const overallHit = enabled && eventMatch && (hasConditions ? condAllHit : (pattern ? patternHit : true));
+
+  // Build output
+  let html = '';
+  html += `<span class="${enabled ? 'result-info' : 'result-warn'}">enabled: ${enabled}</span>  `;
+  html += `<span class="result-info">event: ${ruleEvent || 'all'} (selected: ${selectedEvent})</span>\n`;
+  if (pattern) {
+    if (patternError) {
+      html += `<span class="result-warn">pattern: [ERROR] ${patternError}</span>\n`;
+    } else {
+      html += `<span class="${patternHit ? 'result-hit' : 'result-miss'}">pattern: /${pattern}/ → ${patternHit ? 'HIT' : 'MISS'}</span>\n`;
+    }
+  }
+  if (condResults.length) {
+    for (const c of condResults) {
+      html += `<span class="${c.hit ? 'result-hit' : 'result-miss'}">condition ${c.field} ${c.op} /${c.pattern}/ → ${c.hit ? 'HIT' : 'MISS'}</span>\n`;
+    }
+  }
+
+  html += `\n`;
+  if (!enabled) {
+    html += `<span class="badge badge-miss">DISABLED</span> Rule is disabled — would not trigger\n`;
+  } else if (!eventMatch) {
+    html += `<span class="badge badge-miss">EVENT MISMATCH</span> Rule events: ${ruleEvent}, payload event: ${selectedEvent}\n`;
+  } else if (hasConditions ? condAllHit : (pattern ? patternHit : true)) {
+    html += `<span class="badge badge-hit">HIT</span> Rule would trigger!\n`;
+    if (action !== 'warn') html += `<span class="result-info">action: ${action}</span>\n`;
+    html += `\n<span class="result-info">--- Message ---</span>\n${escapeHtml(body.replace(/^conditions:[\s\S]*$/m, '').trim())}`;
+  } else {
+    html += `<span class="badge badge-miss">MISS</span> Pattern ${hasConditions ? '(conditions not met)' : 'did not match'}`;
+  }
+
+  out.innerHTML = html;
+}
+
+function escapeHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// Init
+parseRule();
+</script>
+</body>
+</html>

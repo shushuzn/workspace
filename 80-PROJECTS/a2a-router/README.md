@@ -26,6 +26,22 @@ router.registerAgent('agent-id', ['coding', 'reasoning'], { version: '1.0' });
 router.discoverAgents({ capabilities: ['coding'] });
 ```
 
+### Schema Registry
+
+Agent 可在注册时附带 input/output schema，供路由决策和验证：
+
+```javascript
+router.registerAgent('agent-id', ['coding'], {
+  inputSchema: { type: 'object', properties: { code: { type: 'string' } } },
+  outputSchema: { type: 'object', properties: { result: { type: 'string' } } },
+  description: '代码生成 agent'
+});
+
+// match() 结果包含 hasSchema 字段
+const matches = router.capabilityRegistry.match('coding');
+// [{ agentId, score, hasSchema: true, ... }]
+```
+
 ### Capability 路由
 
 根据 capability 匹配最佳 agent：

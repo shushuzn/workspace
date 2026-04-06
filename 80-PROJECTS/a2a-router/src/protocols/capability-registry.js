@@ -4,24 +4,38 @@
  * Maintains:
  * - capabilityIndex: Map<capability, Set<agentId>> — fast lookup by capability
  * - subscriptions: Map<capability, Set<agentId>> — pub/sub subscribers
+ * - agentSchemas: Map<agentId, AgentSchema> — schema validation per agent
  */
+
+export class AgentSchema {
+  constructor({ inputSchema, outputSchema, description } = {}) {
+    this.inputSchema = inputSchema || { type: "object" };
+    this.outputSchema = outputSchema || { type: "object" };
+    this.description = description || "";
+  }
+}
 
 export class CapabilityRegistry {
   constructor(router) {
     this.router = router;
     this.capabilityIndex = new Map(); // capability -> Set<agentId>
     this.subscriptions = new Map();    // capability -> Set<agentId>
+    this.agentSchemas = new Map();    // agentId -> AgentSchema
   }
 
   /**
    * Register agent capabilities in the index
    */
-  register(agentId, capabilities) {
+  register(agentId, capabilities, schema) {
     for (const cap of capabilities) {
       if (!this.capabilityIndex.has(cap)) {
         this.capabilityIndex.set(cap, new Set());
       }
       this.capabilityIndex.get(cap).add(agentId);
+    }
+    // Store schema if provided
+    if (schema) {
+      this.agentSchemas.set(agentId, new AgentSchema(schema));
     }
     // Emit capability:added events
     for (const cap of capabilities) {
@@ -121,7 +135,8 @@ export class CapabilityRegistry {
           capabilities: Array.from(agent.capabilities),
           status: agent.status,
           load: agent.load,
-          lastHeartbeat: agent.lastHeartbeat
+          lastHeartbeat: agent.lastHeartbeat,
+          hasSchema: this.agentSchemas.has(agentId)
         });
       }
     }

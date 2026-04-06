@@ -72,6 +72,43 @@ def voices(locale, gender):
         click.echo(f"\n  ... and {len(voice_list) - 20} more. Use --locale to filter.")
 
 
+TOPIC_COLORS = {
+    "tech": "#3B82F6",
+    "science": "#10B981",
+    "business": "#F59E0B",
+    "politics": "#EF4444",
+    "sports": "#8B5CF6",
+    "entertainment": "#EC4899",
+    "health": "#14B8A6",
+    "default": "#6B7280",
+}
+
+def get_topic_color(topic: str) -> str:
+    t = topic.lower()
+    for key, color in TOPIC_COLORS.items():
+        if key in t:
+            return color
+    return TOPIC_COLORS["default"]
+
+
+@cli.command()
+@click.argument("topic")
+@click.option("-o", "--output", default=None, help="Output file path (default: stdout)")
+def badge(topic, output):
+    """Generate an SVG discussion topic badge"""
+    color = get_topic_color(topic)
+    svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 60" width="240" height="60">
+  <rect width="240" height="60" rx="8" fill="{color}"/>
+  <text x="120" y="36" font-family="system-ui,sans-serif" font-size="18" font-weight="700"
+    text-anchor="middle" fill="white"># {topic}</text>
+</svg>'''
+    if output:
+        Path(output).write_text(svg, encoding="utf-8")
+        click.echo(f"✅ Badge saved: {output}")
+    else:
+        click.echo(svg)
+
+
 @cli.command()
 @click.argument("input_file", type=click.Path(exists=True))
 @click.option("-v", "--voice", default="zh-CN-XiaoxiaoNeural", help="Voice name")

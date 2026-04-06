@@ -1,5 +1,12 @@
 # 🎮 Star Forge Web - 星之熔炉网页版
 
+<!-- COVERAGE_BADGE -->
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="24" viewBox="0 0 420 24">
+  <rect width="420" height="24" rx="4" fill="#4caf50"/>
+  <text x="12" y="17" font-family="monospace" font-size="11" fill="white" font-weight="bold">Lines: 94.1% | Stmts: 94.1% | Funcs: 0% | Branch: 100%</text>
+</svg>
+<!-- /COVERAGE_BADGE -->
+
 ![Version](https://img.shields.io/badge/version-1.0.0-blue)
 ![React](https://img.shields.io/badge/React-19.2.4-61dafb)
 ![Vite](https://img.shields.io/badge/Vite-8.0.1-646cff)

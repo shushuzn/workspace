@@ -4,6 +4,7 @@ AI Agent 驱动的任务自动编排
 """
 
 import json
+import uuid
 import asyncio
 from pathlib import Path
 from typing import List, Optional, Dict, Any
@@ -203,6 +204,48 @@ class AgenticOrchestrator:
                 return False
 
         return True
+
+    # ============== 模板管理 ==============
+
+    def load_template(self, template_name: str) -> Optional[Workflow]:
+        """从模板加载工作流"""
+        template_dir = Path(__file__).parent.parent / "templates"
+        template_path = template_dir / f"{template_name}_workflow.json"
+
+        if not template_path.exists():
+            # 尝试直接名称
+            template_path = template_dir / f"{template_name}.json"
+            if not template_path.exists():
+                return None
+
+        with open(template_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+
+        wf = Workflow(
+            id=data["id"] if "id" in data else str(uuid.uuid4())[:8],
+            name=data["name"],
+            description=data.get("description", "")
+        )
+
+        for t in data.get("tasks", []):
+            task = Task(
+                id=t["id"],
+                name=t["name"],
+                description=t.get("description", ""),
+                priority=t.get("priority", 5),
+                depends_on=t.get("depends_on", [])
+            )
+            wf.tasks.append(task)
+
+        self.current_workflow = wf
+        return wf
+
+    def list_templates(self) -> list:
+        """列出可用模板"""
+        template_dir = Path(__file__).parent.parent / "templates"
+        if not template_dir.exists():
+            return []
+        return [f.stem.replace("_workflow", "") for f in template_dir.glob("*_workflow.json")]
 
     def _find_task(self, task_id: str) -> Optional[Task]:
         """查找任务"""

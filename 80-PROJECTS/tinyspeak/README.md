@@ -184,4 +184,30 @@ MIT License — 自由使用，保留作者信息。
 
 ---
 
+## CLI Usage
+
+```bash
+# speak — Convert text to speech
+python -m tinyspeak.cli speak "TEXT" [-v VOICE] [-o OUTPUT] [-r RATE] [-p PITCH] [--volume VOLUME]
+  -v, --voice     Voice name (default: zh-CN-XiaoxiaoNeural)
+  -o, --output    Output file path
+  -r, --rate      Speaking rate, e.g. +10% or -20% (default: +0%)
+  -p, --pitch     Pitch adjustment, e.g. +5Hz or -10Hz (default: +0Hz)
+  --volume        Volume adjustment, e.g. +10% or -20% (default: +0%)
+
+# voices — List available voices
+python -m tinyspeak.cli voices [-l LOCALE] [-g GENDER]
+  -l, --locale    Filter by locale, e.g. zh-CN or en-US
+  -g, --gender    Filter by gender (Male or Female)
+
+# badge — Generate SVG discussion topic badge
+python -m tinyspeak.cli badge TOPIC [-o OUTPUT]
+  -o, --output    Output file path (default: stdout)
+
+# batch — Batch convert text file to speech
+python -m tinyspeak.cli batch INPUT_FILE [-v VOICE] [-o OUTPUT_DIR]
+  -v, --voice       Voice name (default: zh-CN-XiaoxiaoNeural)
+  -o, --output-dir  Output directory (default: output)
+```
+
 **Made with ❤️ by OpenClaw**

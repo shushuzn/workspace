@@ -1,0 +1,117 @@
+{
+  "id": "easy_level_1",
+  "name": "Golden Vault",
+  "tier": "easy",
+  "terrain": "grass",
+  "difficulty": "Easy",
+  "waves": 2,
+  "enemies": [
+    {
+      "wave": 1,
+      "enemies": [
+        {
+          "id": "enemy_mnn1bwtf_cfyt",
+          "type": "robot",
+          "name": "Dark Robot",
+          "level": 3,
+          "stats": {
+            "hp": 120,
+            "atk": 27,
+            "def": 9,
+            "speed": 22
+          },
+          "skills": [],
+          "reward": 30
+        },
+        {
+          "id": "enemy_mnn1bwtf_4t5c",
+          "type": "beast",
+          "name": "Abyssal Beast",
+          "level": 3,
+          "stats": {
+            "hp": 78,
+            "atk": 15,
+            "def": 9,
+            "speed": 32
+          },
+          "skills": [],
+          "reward": 30
+        }
+      ]
+    },
+    {
+      "wave": 2,
+      "enemies": [
+        {
+          "id": "enemy_mnn1bwtf_iez7",
+          "type": "elemental",
+          "name": "Frozen Elemental",
+          "level": 3,
+          "stats": {
+            "hp": 60,
+            "atk": 24,
+            "def": 15,
+            "speed": 29
+          },
+          "skills": [],
+          "reward": 30
+        },
+        {
+          "id": "enemy_mnn1bwtf_qidp",
+          "type": "goblin",
+          "name": "Frozen Goblin",
+          "level": 3,
+          "stats": {
+            "hp": 93,
+            "atk": 21,
+            "def": 9,
+            "speed": 32
+          },
+          "skills": [],
+          "reward": 30
+        },
+        {
+          "id": "enemy_mnn1bwtf_qv9p",
+          "type": "goblin",
+          "name": "Shadow Goblin",
+          "level": 3,
+          "stats": {
+            "hp": 75,
+            "atk": 24,
+            "def": 6,
+            "speed": 32
+          },
+          "skills": [],
+          "reward": 30
+        }
+      ]
+    }
+  ],
+  "buffs": [
+    {
+      "id": "buff_mnn1bwtf_vzxj",
+      "type": "critical_up",
+      "value": 21
+    }
+  ],
+  "debuffs": [
+    {
+      "id": "debuff_mnn1bwtf_eqi3",
+      "type": "slow",
+      "value": 17
+    }
+  ],
+  "objectives": [
+    {
+      "type": "collect",
+      "description": "Complete Easy challenge"
+    }
+  ],
+  "rewards": {
+    "exp": 100,
+    "coins": 50,
+    "gems": 0
+  },
+  "unlocksAt": 1,
+  "scoreMultiplier": 1
+}

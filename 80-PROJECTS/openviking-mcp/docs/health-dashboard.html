@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OpenViking MCP Health Dashboard</title>
+  <style>
+    body { font-family: system-ui, sans-serif; background: #0f0f1a; color: #e0e0e0; padding: 1.5rem; margin: 0; }
+    h1 { color: #818cf8; font-size: 1.4rem; }
+    .subtitle { color: #64748b; font-size: 0.85rem; margin-bottom: 1.5rem; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+    .card { background: #1e1e2e; border: 1px solid #3b3b5c; border-radius: 10px; padding: 1rem; }
+    .card-label { color: #64748b; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    .card-value { color: #fff; font-size: 1.8rem; font-weight: 700; margin-top: 0.25rem; }
+    .card-value.green { color: #22c55e; }
+    .card-value.amber { color: #f59e0b; }
+    .card-value.red { color: #ef4444; }
+    .controls { display: flex; gap: 0.5rem; margin-bottom: 1rem; align-items: center; }
+    button { background: #3730a3; color: #fff; border: none; padding: 0.4rem 1rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; }
+    button:hover { background: #4338ca; }
+    button:disabled { background: #3b3b5c; color: #64748b; cursor: not-allowed; }
+    .info { background: #1e1e2e; border: 1px solid #3b3b5c; border-radius: 8px; padding: 0.75rem 1rem; margin-bottom: 1rem; font-size: 0.85rem; color: #94a3b8; }
+    .info code { color: #818cf8; background: #2d2d4a; padding: 0.1em 0.4em; border-radius: 4px; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    th { background: #1e1e2e; color: #a5b4fc; text-align: left; padding: 0.5rem 0.75rem; border-bottom: 1px solid #3b3b5c; cursor: pointer; }
+    td { padding: 0.5rem 0.75rem; border-bottom: 1px solid #1e1e2e; }
+    tr:hover td { background: #1a1a2e; }
+    .tool-name { font-weight: 600; color: #818cf8; }
+    .calls { font-weight: 700; }
+    .latency { color: #94a3b8; font-size: 0.8rem; }
+    .latency.fast { color: #22c55e; }
+    .latency.slow { color: #f59e0b; }
+    .latency.very-slow { color: #ef4444; }
+    .loading { color: #94a3b8; padding: 2rem; text-align: center; }
+    .uptime { color: #64748b; font-size: 0.8rem; margin-top: 0.25rem; }
+    .note { color: #475569; font-size: 0.75rem; margin-top: 1rem; text-align: center; }
+  </style>
+</head>
+<body>
+  <h1>OpenViking MCP Health Dashboard</h1>
+  <p class="subtitle">Tool call metrics for openviking-mcp JSON-RPC server</p>
+
+  <div class="info">
+    <strong>How to use:</strong> This dashboard requires an MCP client that calls <code>tools/metrics</code> on your openviking-mcp server.
+    Add a metrics collector to your client, then point it at this dashboard URL with <code>?data=</code> param (base64 JSON), or use the manual refresh below.
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <div class="card-label">Total Calls</div>
+      <div class="card-value" id="totalCalls">—</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Active Tools</div>
+      <div class="card-value green" id="activeTools">—</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Avg Latency</div>
+      <div class="card-value" id="avgLatency">—</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Uptime</div>
+      <div class="card-value" id="uptime">—</div>
+      <div class="uptime" id="uptimeRaw"></div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button id="refreshBtn" onclick="loadSample()">Load Sample Data</button>
+    <button id="clearBtn" onclick="clearMetrics()">Clear</button>
+    <input type="text" id="dataInput" placeholder="Paste base64 metrics JSON..." style="flex:1;background:#1e1e2e;border:1px solid #3b3b5c;color:#e0e0e0;padding:0.4rem 0.6rem;border-radius:6px;font-size:0.85rem" />
+    <button onclick="loadFromInput()">Apply</button>
+  </div>
+
+  <div id="loading" class="loading">No data — click "Load Sample Data" or paste metrics JSON</div>
+  <table id="metricsTable" style="display:none">
+    <thead>
+      <tr>
+        <th onclick="sort('tool')">Tool</th>
+        <th onclick="sort('calls')">Calls</th>
+        <th onclick="sort('avg_latency_ms')">Avg Latency</th>
+        <th onclick="sort('total_latency_ms')">Total Latency</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+  </table>
+
+  <p class="note">Metrics reset on server restart. Use <code>tools/metrics</code> MCP call to fetch live data.</p>
+
+<script>
+const SAMPLE = {
+  total_calls: 142,
+  uptime_seconds: 3741.2,
+  tools: [
+    { tool: "session_create", calls: 38, avg_latency_ms: 12.4, total_latency_ms: 471.2 },
+    { tool: "session_info", calls: 31, avg_latency_ms: 5.7, total_latency_ms: 176.7 },
+    { tool: "session_add_message", calls: 29, avg_latency_ms: 8.2, total_latency_ms: 237.8 },
+    { tool: "session_commit", calls: 18, avg_latency_ms: 23.1, total_latency_ms: 415.8 },
+    { tool: "search", calls: 12, avg_latency_ms: 145.3, total_latency_ms: 1743.6 },
+    { tool: "context_overview", calls: 7, avg_latency_ms: 31.4, total_latency_ms: 219.8 },
+    { tool: "context_read", calls: 4, avg_latency_ms: 18.6, total_latency_ms: 74.4 },
+    { tool: "context_write", calls: 2, avg_latency_ms: 42.1, total_latency_ms: 84.2 },
+    { tool: "resource_ls", calls: 1, avg_latency_ms: 3.2, total_latency_ms: 3.2 },
+  ]
+};
+
+let current = null;
+let sortKey = 'calls';
+let sortDir = -1;
+
+function latClass(ms) {
+  if (ms < 20) return 'fast';
+  if (ms < 100) return 'slow';
+  return 'very-slow';
+}
+
+function formatUptime(s) {
+  if (s < 60) return s.toFixed(0) + 's';
+  if (s < 3600) return (s / 60).toFixed(1) + 'm';
+  return (s / 3600).toFixed(2) + 'h';
+}
+
+function render(data) {
+  current = data;
+  document.getElementById('loading').style.display = 'none';
+  document.getElementById('metricsTable').style.display = 'table';
+
+  const tools = data.tools || [];
+  document.getElementById('totalCalls').textContent = data.total_calls || 0;
+  document.getElementById('activeTools').textContent = tools.length;
+
+  const avgLat = tools.length
+    ? (tools.reduce((s, t) => s + t.avg_latency_ms, 0) / tools.length).toFixed(1)
+    : 0;
+  const latEl = document.getElementById('avgLatency');
+  latEl.textContent = avgLat + 'ms';
+  latEl.className = 'card-value ' + (avgLat < 20 ? 'green' : avgLat < 100 ? 'amber' : 'red');
+
+  document.getElementById('uptime').textContent = formatUptime(data.uptime_seconds || 0);
+  document.getElementById('uptimeRaw').textContent = (data.uptime_seconds || 0).toFixed(1) + 's';
+
+  const sorted = [...tools].sort((a, b) => (a[sortKey] - b[sortKey]) * sortDir);
+  const tbody = document.getElementById('tableBody');
+  tbody.innerHTML = sorted.map(t => {
+    const lc = latClass(t.avg_latency_ms);
+    return '<tr><td class="tool-name">' + t.tool + '</td>' +
+      '<td class="calls">' + t.calls + '</td>' +
+      '<td class="latency ' + lc + '">' + t.avg_latency_ms + 'ms</td>' +
+      '<td class="latency">' + t.total_latency_ms.toFixed(1) + 'ms</td></tr>';
+  }).join('');
+}
+
+function sort(key) {
+  if (sortKey === key) sortDir *= -1;
+  else { sortKey = key; sortDir = -1; }
+  if (current) render(current);
+}
+
+function loadSample() { render(SAMPLE); }
+function clearMetrics() {
+  current = null;
+  document.getElementById('loading').style.display = 'block';
+  document.getElementById('metricsTable').style.display = 'none';
+  document.getElementById('totalCalls').textContent = '—';
+  document.getElementById('activeTools').textContent = '—';
+  document.getElementById('avgLatency').textContent = '—';
+  document.getElementById('uptime').textContent = '—';
+}
+
+function loadFromInput() {
+  try {
+    const raw = document.getElementById('dataInput').value.trim();
+    if (!raw) return;
+    const data = JSON.parse(atob(raw));
+    render(data);
+  } catch(e) {
+    alert('Invalid base64 JSON: ' + e.message);
+  }
+}
+
+// Auto-load from ?data= param
+const params = new URLSearchParams(location.search);
+if (params.has('data')) {
+  try { render(JSON.parse(atob(params.get('data')))); } catch {}
+}
+</script>
+</body>
+</html>

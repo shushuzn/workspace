@@ -1,0 +1,27 @@
+name: Update README Index
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '80-PROJECTS/**'
+      - 'scripts/**'
+  workflow_dispatch:
+
+jobs:
+  update-index:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Generate README index
+        run: node scripts/api-reference.mjs --readme-index
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add README-index.md docs/workspace-api-ref.md
+          git diff --staged --quiet || git commit -m "docs: auto-update workspace project index"
+          git push

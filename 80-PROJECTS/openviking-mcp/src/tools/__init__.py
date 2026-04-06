@@ -7,6 +7,8 @@ try:
         session_add_message,
         session_commit,
         session_list,
+        session_export,
+        session_import,
     )
     from openviking_mcp.tools.context import (
         search,
@@ -21,6 +23,9 @@ try:
         relation_link,
         relation_list,
     )
+    from openviking_mcp.tools.analyzer import (
+        session_analyze,
+    )
 except ImportError:
     from tools.session import (
         session_create,
@@ -28,6 +33,8 @@ except ImportError:
         session_add_message,
         session_commit,
         session_list,
+        session_export,
+        session_import,
     )
     from tools.context import (
         search,
@@ -41,6 +48,9 @@ except ImportError:
         resource_tree,
         relation_link,
         relation_list,
+    )
+    from tools.analyzer import (
+        session_analyze,
     )
 
 __all__ = [
@@ -58,4 +68,5 @@ __all__ = [
     "resource_tree",
     "relation_link",
     "relation_list",
+    "session_analyze",
 ]

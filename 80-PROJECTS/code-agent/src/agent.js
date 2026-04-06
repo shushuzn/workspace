@@ -4,10 +4,10 @@
  * Orchestrates Semgrep and Tree-sitter analysis
  */
 
-import { SemgrepWrapper } from './analyzer/semgrepWrapper.js';
-import { TreeSitterAnalyzer } from './analyzer/treeSitterAnalyzer.js';
-import { ResultFormatter } from './reporter/resultFormatter.js';
-import { MemoryStore } from './reporter/memoryStore.js';
+import SemgrepWrapper from './analyzer/semgrepWrapper.js';
+import TreeSitterAnalyzer from './analyzer/treeSitterAnalyzer.js';
+import ResultFormatter from './reporter/resultFormatter.js';
+import MemoryStore from './reporter/memoryStore.js';
 import fs from 'fs';
 import path from 'path';
 
@@ -299,6 +299,20 @@ class CodeAgent {
       findings,
       total: findings.length
     };
+  }
+
+  /**
+   * Query AST by node type
+   */
+  async getAst(filePath, nodeType, language = null) {
+    try {
+      const lang = language || this.treeSitter.detectLanguage(filePath) || 'javascript';
+      const content = fs.readFileSync(filePath, 'utf-8');
+      const nodes = this.treeSitter.query(content, lang, nodeType);
+      return { success: true, file: filePath, language: lang, nodeType, count: nodes.length, nodes };
+    } catch (error) {
+      return { success: false, error: error.message };
+    }
   }
 
   /**

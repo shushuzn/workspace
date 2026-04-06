@@ -7,4 +7,4 @@ __author__ = "OpenClaw"
 
 from .orchestrator import AgenticOrchestrator, Task, Workflow
 
-__all__ = ["AgenticOrchestrator", "Task", "Workflow"]
+__all__ = ["AgenticOrchestrator", "Task", "Workflow", "load_template", "list_templates"]

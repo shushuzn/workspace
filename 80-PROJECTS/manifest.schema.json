@@ -1,0 +1,62 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "OpenClaw Capability Manifest",
+  "description": "Standardized capability manifest for OpenClaw workspace projects. Describes CLI/API capabilities exposed by each project for cross-project task orchestration.",
+  "type": "object",
+  "required": ["version", "project", "capabilities"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "Manifest schema version (e.g. 1.0.0)"
+    },
+    "project": {
+      "type": "object",
+      "required": ["name", "path"],
+      "properties": {
+        "name": { "type": "string" },
+        "path": { "type": "string", "description": "Relative path from workspace root" },
+        "description": { "type": "string" },
+        "keywords": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "type"],
+        "properties": {
+          "name": { "type": "string", "description": "Capability name (e.g. 'browse', 'deploy', 'analyze')" },
+          "type": {
+            "type": "string",
+            "enum": ["cli", "api", "adapter", "script", "mcp"],
+            "description": "Capability delivery type"
+          },
+          "description": { "type": "string" },
+          "keywords": { "type": "array", "items": { "type": "string" } },
+          "inputSlots": { "type": "array", "items": { "type": "string" }, "description": "Expected input slot names" },
+          "outputSlots": { "type": "array", "items": { "type": "string" }, "description": "Provided output slot names" },
+          "adapterType": {
+            "type": "string",
+            "enum": ["opencli", "cli-anything", "multi-agent-hub", "swarm", "task-orchestrator"],
+            "description": "Which orchestrator adapter handles this"
+          },
+          "examples": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Usage examples"
+          }
+        }
+      }
+    },
+    "exposes": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "CLI commands or API endpoints exposed"
+    },
+    "requires": {
+      "type": "object",
+      "description": "Runtime dependencies (env vars, external services)",
+      "additionalProperties": { "type": "string" }
+    }
+  }
+}

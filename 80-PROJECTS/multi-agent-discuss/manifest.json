@@ -1,0 +1,38 @@
+{
+  "version": "1.0.0",
+  "project": {
+    "name": "multi-agent-discuss",
+    "path": "80-PROJECTS/multi-agent-discuss",
+    "description": "Multi-agent辩论平台，支持AI Agent间的结构化辩论、讨论和裁判机制",
+    "keywords": ["debate", "discuss", "argue", "multi-agent", "adjudicate", "agent"]
+  },
+  "capabilities": [
+    {
+      "name": "debate",
+      "type": "cli",
+      "description": "启动结构化辩论会话，多个Agent围绕主题展开辩论",
+      "keywords": ["debate", "discuss", "argue", "adjudicate"],
+      "inputSlots": ["topic", "participants", "rounds"],
+      "outputSlots": ["transcript", "verdict", "scores"],
+      "adapterType": "task-orchestrator",
+      "examples": ["debate <topic> --participants 3 --rounds 5"]
+    },
+    {
+      "name": "discuss",
+      "type": "cli",
+      "description": "Agent间自由讨论模式，聚焦观点交换",
+      "keywords": ["discuss", "dialogue", "exchange"],
+      "inputSlots": ["topic", "agents"],
+      "outputSlots": ["summary", "positions"],
+      "adapterType": "task-orchestrator",
+      "examples": ["discuss <topic>"]
+    }
+  ],
+  "exposes": [
+    "cmd/agent/main.go",
+    "pkg/dispatcher/dispatcher.go"
+  ],
+  "requires": {
+    "OLLAMA_HOST": "http://localhost:11434"
+  }
+}

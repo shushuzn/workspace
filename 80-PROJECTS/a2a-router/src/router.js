@@ -91,6 +91,18 @@ export class A2ARouter extends EventEmitter {
 
     // Start maintenance loop
     this.startMaintenance();
+
+    // Replay pending tasks from previous crash
+    const pending = this.messageStore.findPendingTasks();
+    for (const row of pending) {
+      const msg = { id: row.id, from: row.from_agent, to: row.to_agent, type: row.type, priority: row.priority, payload: JSON.parse(row.payload), timestamp: row.created_at, status: row.status };
+      const priority = msg.priority || 'NORMAL';
+      if (!this.queues.get(priority).find(item => item.message.id === msg.id)) {
+        this.queues.get(priority).push({ message: msg, enqueuedAt: row.created_at, retryCount: 0 });
+        console.log(`[Router] Replayed task ${msg.id} (status=${row.status})`);
+      }
+    }
+    if (pending.length > 0) console.log(`[Router] Replayed ${pending.length} pending tasks from SQLite`);
   }
 
   /**
@@ -643,6 +655,9 @@ export class A2ARouter extends EventEmitter {
       enqueuedAt: message.enqueuedAt,
       retryCount: 0
     });
+
+    // Persist task to SQLite
+    this.messageStore.saveTask({ ...message, status: 'pending', created_at: message.enqueuedAt, updated_at: message.enqueuedAt });
 
     // Check thresholds after enqueue
     const alerts = this.queueMonitor.checkThresholds();

@@ -11,6 +11,7 @@ import { Agent } from './core/agent.mjs';
 import { MetaCognizer } from './core/meta-cognizer.mjs';
 import { STM } from './memory/stm.mjs';
 import { CONFIG } from './config/default.mjs';
+import { getAllOperations } from './operations/index.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const WORKSPACE = path.join(__dirname, '..', '..');
@@ -45,6 +46,20 @@ async function main() {
       console.log(`║  • ${r.name}: ${rate}% (${r.success}/${r.total})`);
     }
     console.log('╚══════════════════════════════════════╝');
+    return;
+  }
+
+  if (args.includes('--export-metrics')) {
+    const workspace = WORKSPACE;
+    const operations = getAllOperations(workspace);
+    const metrics = operations.map(op => ({
+      id: op.id,
+      name: op.name,
+      type: op.type,
+      destructive: op.destructive,
+      canImprove: op.canImprove(),
+    }));
+    console.log(JSON.stringify({ operations: metrics, total: metrics.length }, null, 2));
     return;
   }
 

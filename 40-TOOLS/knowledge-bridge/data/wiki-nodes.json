@@ -1,0 +1,148 @@
+{
+  "nodes": [
+    {
+      "id": "wiki:outofdomain-stress-test-for-temporal-braid-group-privilege-e-1775478553307",
+      "label": "Out-of-Domain Stress Test for Temporal Braid Group Privilege Escalation Detection",
+      "group": "wikipedia",
+      "category": "AI",
+      "tags": [
+        "安全",
+        "IAM",
+        "privilege-escalation",
+        "Burau-Lyapunov",
+        "arxiv",
+        "cloud"
+      ],
+      "summary": "# Out-of-Domain Stress Test for Temporal Braid Group Privilege Escalation Detection\n\n**arXiv**: 2604.02366 | **Author**: Christophe Parisel | **Domain**: cs.CR (Security)\n\n## 摘要\n\n在云身份与访问管理（IAM）系统中，特权升"
+    },
+    {
+      "id": "wiki:braid-group-20260406",
+      "label": "辫群",
+      "group": "wikipedia",
+      "category": "数学",
+      "tags": [
+        "辫群",
+        "braid-group",
+        "代数拓扑",
+        "拓扑量子计算",
+        "Yang-Baxter"
+      ],
+      "summary": "# 辫群\n\n**英文**: Braid Group | **符号**: B_n（n 条辫子的辫群）\n\n## 定义\n\n辫群 B_n 是由 n 个生成元 σ₁, σ₂, ..., σ_{n-1} 构成的无限离散群，描述 n 条\"辫子\"在三维空间中的编织方式。\n\n### 生成元关系\n\n- **局部性**：σᵢ 与 σⱼ 可交换，当 |i - j| ≥ 2\n  ```\n  σᵢ σⱼ = σⱼ σᵢ  ("
+    },
+    {
+      "id": "wiki:burau-lyapunov-20260406",
+      "label": "Burau-Lyapunov 指数",
+      "group": "wikipedia",
+      "category": "数学",
+      "tags": [
+        "Burau-Lyapunov",
+        "辫群",
+        "braid-group",
+        "拓扑",
+        "云安全"
+      ],
+      "summary": "# Burau-Lyapunov 指数\n\n**英文**: Burau-Lyapunov Exponent | **来源**: arXiv 2604.02366 | **领域**: 拓扑学 × 云安全\n\n## 定义\n\nBurau-Lyapunov 指数（LE）是通过辫群（braid group）的 Burau 表示（线性表示）计算得到的一个数值指标，用于量化 IAM 权限图的拓扑结构复杂度。\n\n##"
+    },
+    {
+      "id": "wiki:iam-cloud-20260406",
+      "label": "IAM 云身份与访问管理",
+      "group": "wikipedia",
+      "category": "安全",
+      "tags": [
+        "IAM",
+        "identity",
+        "access-management",
+        "云安全",
+        "AWS",
+        "最小权限"
+      ],
+      "summary": "# IAM 云身份与访问管理\n\n**英文**: Identity and Access Management (IAM)\n\n## 定义\n\nIAM 是云平台中管理**谁可以做什么**的核心系统。包括：\n\n- **身份 (Identity)**：用户、服务账户、角色\n- **认证 (Authentication)**：验证身份是否合法\n- **授权 (Authorization)**：决定身份可以访问"
+    },
+    {
+      "id": "wiki:iam-privilege-escalation-20260406",
+      "label": "IAM 特权升级",
+      "group": "wikipedia",
+      "category": "安全",
+      "tags": [
+        "IAM",
+        "privilege-escalation",
+        "云安全",
+        "横向移动"
+      ],
+      "summary": "# IAM 特权升级\n\n**英文**: IAM Privilege Escalation | **相关论文**: arXiv 2604.02366\n\n## 定义\n\n在云身份与访问管理（IAM）系统中，特权升级是指攻击者通过一系列合法操作，逐步提升自身权限，最终获得管理员或 root 访问权限的攻击路径。\n\n## 攻击模式\n\n### 经典路径\n\n1. **初始入口**：通过弱密码、钓鱼或漏洞获得普通"
+    }
+  ],
+  "edges": [
+    {
+      "from": "wiki:outofdomain-stress-test-for-temporal-braid-group-privilege-e-1775478553307",
+      "to": "wiki:iam-privilege-escalation-20260406",
+      "type": "wiki-link",
+      "label": "wiki"
+    },
+    {
+      "from": "wiki:outofdomain-stress-test-for-temporal-braid-group-privilege-e-1775478553307",
+      "to": "wiki:burau-lyapunov-20260406",
+      "type": "wiki-link",
+      "label": "wiki"
+    },
+    {
+      "from": "wiki:outofdomain-stress-test-for-temporal-braid-group-privilege-e-1775478553307",
+      "to": "wiki:braid-group-20260406",
+      "type": "wiki-link",
+      "label": "wiki"
+    },
+    {
+      "from": "wiki:outofdomain-stress-test-for-temporal-braid-group-privilege-e-1775478553307",
+      "to": "wiki:iam-cloud-20260406",
+      "type": "wiki-link",
+      "label": "wiki"
+    },
+    {
+      "from": "wiki:braid-group-20260406",
+      "to": "wiki:burau-lyapunov-20260406",
+      "type": "wiki-link",
+      "label": "wiki"
+    },
+    {
+      "from": "wiki:burau-lyapunov-20260406",
+      "to": "wiki:braid-group-20260406",
+      "type": "wiki-link",
+      "label": "wiki"
+    },
+    {
+      "from": "wiki:burau-lyapunov-20260406",
+      "to": "wiki:iam-privilege-escalation-20260406",
+      "type": "wiki-link",
+      "label": "wiki"
+    },
+    {
+      "from": "wiki:iam-cloud-20260406",
+      "to": "wiki:iam-privilege-escalation-20260406",
+      "type": "wiki-link",
+      "label": "wiki"
+    },
+    {
+      "from": "wiki:iam-cloud-20260406",
+      "to": "wiki:burau-lyapunov-20260406",
+      "type": "wiki-link",
+      "label": "wiki"
+    },
+    {
+      "from": "wiki:iam-privilege-escalation-20260406",
+      "to": "wiki:iam-cloud-20260406",
+      "type": "wiki-link",
+      "label": "wiki"
+    },
+    {
+      "from": "wiki:iam-privilege-escalation-20260406",
+      "to": "wiki:burau-lyapunov-20260406",
+      "type": "wiki-link",
+      "label": "wiki"
+    }
+  ],
+  "meta": {
+    "source": "wikipedia",
+    "count": 5,
+    "synced": "2026-04-06T12:58:19.732Z"
+  }
+}

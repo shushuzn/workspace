@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<title>Strategy Evolution Visualizer — D3 Gantt</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: ui-monospace, monospace; background: #0d1117; color: #e6edf3; }
+  #toolbar { padding: 12px 16px; border-bottom: 1px solid #21262d; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+  #toolbar label { font-size: 11px; color: #8b949e; }
+  #toolbar input[type=file] { font-size: 11px; color: #e6edf3; background: #161b22; border: 1px solid #30363d; border-radius: 4px; padding: 2px 6px; }
+  #toolbar input[type=url] { width: 280px; font-size: 11px; background: #161b22; border: 1px solid #30363d; border-radius: 4px; padding: 2px 6px; color: #e6edf3; }
+  #toolbar button { font-size: 11px; background: #238636; color: #fff; border: none; border-radius: 4px; padding: 3px 10px; cursor: pointer; }
+  #toolbar button:hover { background: #2ea043; }
+  #toolbar .sep { width: 1px; height: 20px; background: #30363d; }
+  #toolbar .title { font-size: 13px; font-weight: bold; color: #58a6ff; margin-right: 8px; }
+  #summary { font-size: 11px; color: #8b949e; margin-left: auto; }
+  #svg-container { overflow: auto; padding: 16px; }
+  svg { display: block; }
+  .bar { cursor: pointer; transition: opacity 0.15s; }
+  .bar:hover { opacity: 0.85; }
+  .bar-converged { stroke: #3fb950; stroke-width: 2; }
+  .bar-failed { stroke: #f85149; stroke-width: 2; }
+  .bar-pending { stroke: #484f58; stroke-width: 1; }
+  .bar-text { font-size: 10px; fill: #e6edf3; pointer-events: none; text-anchor: middle; }
+  .axis-label { font-size: 10px; fill: #8b949e; }
+  .strategy-label { font-size: 11px; fill: #e6edf3; }
+  .legend { font-size: 10px; fill: #8b949e; }
+  .legend rect { stroke: none; }
+  .tooltip { position: absolute; background: #161b22; border: 1px solid #30363d; border-radius: 4px; padding: 8px 10px; font-size: 11px; color: #e6edf3; pointer-events: none; opacity: 0; transition: opacity 0.15s; max-width: 300px; }
+  .tooltip.visible { opacity: 1; }
+  .tooltip .tip-name { color: #58a6ff; font-weight: bold; margin-bottom: 4px; }
+  .tooltip .tip-row { color: #8b949e; margin: 2px 0; }
+  .tooltip .tip-val { color: #e3b341; }
+  .score-label { font-size: 9px; fill: #8b949e; text-anchor: middle; }
+</style>
+</head>
+<body>
+<div id="toolbar">
+  <span class="title">Strategy Evolution</span>
+  <label>Load JSON:</label>
+  <input type="file" id="fileInput" accept=".json"/>
+  <label>or URL:</label>
+  <input type="url" id="urlInput" placeholder="Paste --export-d3 JSON URL or endpoint"/>
+  <button onclick="fetchUrl()">Fetch</button>
+  <div class="sep"></div>
+  <button onclick="resetZoom()">Reset Zoom</button>
+  <div id="summary">No data</div>
+</div>
+<div id="svg-container"></div>
+<div class="tooltip" id="tooltip"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<script>
+const container = document.getElementById('svg-container');
+const tooltip = document.getElementById('tooltip');
+
+let data = null;
+let svgSel = null;
+let zoomBehavior = null;
+
+const granularityColor = {
+  coarse: '#58a6ff',
+  medium: '#9e6a03',
+  fine: '#8957e5',
+};
+
+function getStrategyColor(granularity) {
+  return granularityColor[granularity] || '#30363d';
+}
+
+function render(data) {
+  container.innerHTML = '';
+  const strategies = data.strategies || [];
+  const timeline = data.timeline || [];
+  const maxRounds = data.maxRounds || 1;
+
+  const margin = { top: 50, right: 20, bottom: 30, left: 130 };
+  const strategyHeight = 48;
+  const barHeight = 24;
+  const barGap = (strategyHeight - barHeight) / 2;
+  const iterationWidth = 120;
+  const width = margin.left + (maxRounds * iterationWidth) + margin.right + 60;
+  const height = margin.top + strategies.length * strategyHeight + margin.bottom;
+
+  const svg = d3.select(container).append('svg')
+    .attr('width', width).attr('height', height);
+  svgSel = svg;
+
+  zoomBehavior = d3.zoom().scaleExtent([0.2, 3]).on('zoom', e => svg.selectAll('g').attr('transform', e.transform));
+  svg.call(zoomBehavior);
+
+  const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+
+  // Grid lines per iteration
+  for (let i = 0; i <= maxRounds; i++) {
+    const x = i * iterationWidth;
+    g.append('line')
+      .attr('x1', x).attr('y1', 0)
+      .attr('x2', x).attr('y2', strategies.length * strategyHeight)
+      .attr('stroke', i === 0 ? '#30363d' : '#21262d')
+      .attr('stroke-width', 1);
+    if (i < maxRounds) {
+      g.append('text').attr('x', x + iterationWidth / 2).attr('y', -8)
+        .attr('text-anchor', 'middle').attr('class', 'axis-label')
+        .text(`Round ${i + 1}`);
+    }
+  }
+
+  // Strategy rows
+  const strategiesWithRounds = strategies.filter(s => s.rounds > 0);
+  strategiesWithRounds.forEach((strategy, si) => {
+    const y = si * strategyHeight;
+    const stratTimeline = timeline.filter(t => t.strategy === strategy.name);
+
+    // Strategy label
+    g.append('text').attr('x', -8).attr('y', y + strategyHeight / 2 + 4)
+      .attr('text-anchor', 'end').attr('class', 'strategy-label')
+      .text(strategy.name);
+
+    // Granularity badge
+    g.append('rect')
+      .attr('x', -8).attr('y', y + 2)
+      .attr('width', 4).attr('height', strategyHeight - 4)
+      .attr('rx', 2)
+      .attr('fill', getStrategyColor(strategy.granularity))
+      .attr('opacity', 0.6);
+
+    // Score bar per iteration
+    stratTimeline.forEach((entry, ei) => {
+      const x = ei * iterationWidth;
+      const barWidth = iterationWidth - 16;
+      const score = entry.score;
+      const barY = y + barGap;
+
+      const color = getStrategyColor(strategy.granularity);
+      const barClass = entry.converged ? 'bar-converged' : (score < 0.3 ? 'bar-failed' : 'bar-pending');
+
+      const bar = g.append('g').attr('class', 'bar').attr('data-strategy', strategy.name).attr('data-iteration', entry.iteration);
+
+      // Background bar (empty)
+      bar.append('rect')
+        .attr('x', x + 8).attr('y', barY)
+        .attr('width', barWidth).attr('height', barHeight)
+        .attr('rx', 3)
+        .attr('fill', color).attr('opacity', 0.15);
+
+      // Filled bar (proportional to score)
+      bar.append('rect')
+        .attr('x', x + 8).attr('y', barY)
+        .attr('width', Math.max(4, barWidth * score)).attr('height', barHeight)
+        .attr('rx', 3)
+        .attr('fill', color).attr('opacity', 0.7)
+        .attr('class', barClass);
+
+      // Score label inside bar
+      bar.append('text')
+        .attr('x', x + 8 + barWidth / 2).attr('y', barY + barHeight / 2 + 3)
+        .attr('class', 'bar-text')
+        .text(score.toFixed(2));
+
+      bar.on('mousemove', event => showTooltip(event, strategy, entry))
+        .on('mouseout', hideTooltip);
+    });
+
+    // Avg score to the right
+    const avgX = maxRounds * iterationWidth + 10;
+    g.append('text')
+      .attr('x', avgX).attr('y', y + strategyHeight / 2 + 4)
+      .attr('class', 'score-label')
+      .text(`avg=${strategy.score.toFixed(2)}`);
+  });
+
+  // Legend
+  const legendY = strategies.length * strategyHeight + 8;
+  const legends = [
+    { color: '#58a6ff', label: 'Coarse' },
+    { color: '#9e6a03', label: 'Medium' },
+    { color: '#8957e5', label: 'Fine' },
+  ];
+  legends.forEach((l, i) => {
+    const lx = i * 80;
+    g.append('rect').attr('x', lx).attr('y', legendY)
+      .attr('width', 10).attr('height', 10).attr('fill', l.color).attr('opacity', 0.6);
+    g.append('text').attr('x', lx + 14).attr('y', legendY + 9)
+      .attr('class', 'legend').text(l.label);
+  });
+
+  // Metadata
+  const meta = `Score: ${(data.finalScore || 0).toFixed(2)} | Converged: ${data.converged} | Iterations: ${data.iterations || 0}`;
+  document.getElementById('summary').textContent = `${strategies.length} strategies | ${maxRounds} rounds | ${meta}`;
+}
+
+function showTooltip(event, strategy, entry) {
+  tooltip.innerHTML = `
+    <div class="tip-name">${strategy.name}</div>
+    <div class="tip-row">Granularity: <span class="tip-val">${strategy.granularity}</span></div>
+    <div class="tip-row">Model Hint: <span class="tip-val">${strategy.modelHint}</span></div>
+    <div class="tip-row">Round: <span class="tip-val">${entry.iteration}</span></div>
+    <div class="tip-row">Score: <span class="tip-val">${entry.score.toFixed(3)}</span></div>
+    <div class="tip-row">Converged: <span class="tip-val">${entry.converged}</span></div>
+    <div class="tip-row">Avg Score: <span class="tip-val">${strategy.score.toFixed(3)}</span></div>
+    <div class="tip-row">Total Rounds: <span class="tip-val">${strategy.rounds}</span></div>
+  `;
+  tooltip.classList.add('visible');
+  const rect = container.getBoundingClientRect();
+  tooltip.style.left = (event.clientX - rect.left + 12) + 'px';
+  tooltip.style.top = (event.clientY - rect.top + 12) + 'px';
+}
+
+function hideTooltip() {
+  tooltip.classList.remove('visible');
+}
+
+function resetZoom() {
+  if (svgSel && zoomBehavior) svgSel.transition().duration(300).call(zoomBehavior.transform, d3.zoomIdentity);
+}
+
+function fetchUrl() {
+  const url = document.getElementById('urlInput').value.trim();
+  if (!url) return;
+  fetch(url).then(r => r.json()).then(d => {
+    data = d;
+    render(d);
+  }).catch(e => {
+    document.getElementById('summary').textContent = 'Error: ' + e.message;
+  });
+}
+
+document.getElementById('fileInput').addEventListener('change', function() {
+  const file = this.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const d = JSON.parse(e.target.result);
+      data = d;
+      render(d);
+    } catch (err) {
+      document.getElementById('summary').textContent = 'Invalid JSON: ' + err.message;
+    }
+  };
+  reader.readAsText(file);
+});
+
+// Demo mode
+const sample = {
+  strategies: [
+    { id: 'coarse-fast', name: 'coarse-fast', granularity: 'coarse', modelHint: 'fast', score: 0.55, rounds: 2 },
+    { id: 'coarse-strong', name: 'coarse-strong', granularity: 'coarse', modelHint: 'strong', score: 0.72, rounds: 3 },
+    { id: 'medium-fast', name: 'medium-fast', granularity: 'medium', modelHint: 'fast', score: 0.41, rounds: 1 },
+    { id: 'medium-strong', name: 'medium-strong', granularity: 'medium', modelHint: 'strong', score: 0.68, rounds: 2 },
+    { id: 'fine-fast', name: 'fine-fast', granularity: 'fine', modelHint: 'fast', score: 0.33, rounds: 1 },
+    { id: 'fine-strong', name: 'fine-strong', granularity: 'fine', modelHint: 'strong', score: 0.77, rounds: 3 },
+  ],
+  timeline: [
+    { strategy: 'coarse-fast', iteration: 1, score: 0.50, converged: false },
+    { strategy: 'coarse-fast', iteration: 2, score: 0.60, converged: false },
+    { strategy: 'coarse-strong', iteration: 1, score: 0.65, converged: false },
+    { strategy: 'coarse-strong', iteration: 2, score: 0.70, converged: false },
+    { strategy: 'coarse-strong', iteration: 3, score: 0.80, converged: true },
+    { strategy: 'medium-fast', iteration: 1, score: 0.41, converged: false },
+    { strategy: 'medium-strong', iteration: 1, score: 0.60, converged: false },
+    { strategy: 'medium-strong', iteration: 2, score: 0.76, converged: true },
+    { strategy: 'fine-fast', iteration: 1, score: 0.33, converged: false },
+    { strategy: 'fine-strong', iteration: 1, score: 0.70, converged: false },
+    { strategy: 'fine-strong', iteration: 2, score: 0.75, converged: false },
+    { strategy: 'fine-strong', iteration: 3, score: 0.85, converged: true },
+  ],
+  maxRounds: 3,
+  finalScore: 0.80,
+  converged: true,
+  iterations: 3,
+};
+
+render(sample);
+</script>
+</body>
+</html>

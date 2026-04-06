@@ -22,8 +22,54 @@ const initialState = {
   },
   notifications: [],
   showModal: null,
-  modalData: null
+  modalData: null,
+  battleAnalytics: {
+    history: [],
+    totalBattles: 0,
+    totalWins: 0,
+    totalLosses: 0,
+    skillFrequency: {},
+    powerHistory: [],
+  },
 };
+
+// ─── Battle Analytics Helper ──────────────────────────────────────────────────
+
+const MAX_ANALYTICS_HISTORY = 200;
+
+function _recordBattleAnalytics(result, playerAgent) {
+  const entry = {
+    id: Date.now().toString(36) + Math.random().toString(36).substr(2, 5),
+    timestamp: result.timestamp || Date.now(),
+    type: result.type || (result.playerWins !== undefined ? 'ai' : 'pvp'),
+    winnerId: result.playerWins ? playerAgent?.id : result.opponent?.id,
+    winnerName: result.playerWins ? playerAgent?.name : result.opponent?.name,
+    loserId: result.playerWins ? result.opponent?.id : playerAgent?.id,
+    loserName: result.playerWins ? result.opponent?.name : playerAgent?.name,
+    playerPower: result.playerPower ?? 0,
+    aiPower: result.aiPower ?? 0,
+    reward: result.reward ?? 0,
+    turnsElapsed: result.turns ?? 1,
+  };
+
+  update(state => {
+    const prev = state.battleAnalytics ?? {
+      history: [], totalBattles: 0, totalWins: 0,
+      totalLosses: 0, skillFrequency: {}, powerHistory: [],
+    };
+    return {
+      ...state,
+      battleAnalytics: {
+        ...prev,
+        history: [entry, ...prev.history].slice(0, MAX_ANALYTICS_HISTORY),
+        totalBattles: prev.totalBattles + 1,
+        totalWins: prev.totalWins + (result.playerWins ? 1 : 0),
+        totalLosses: prev.totalLosses + (result.playerWins === false ? 1 : 0),
+        powerHistory: [...prev.powerHistory, entry.playerPower + entry.aiPower].slice(-100),
+      },
+    };
+  });
+}
 
 // Create the store
 function createGameStore() {
@@ -65,7 +111,7 @@ function createGameStore() {
     addAgent: (agent) => {
       update(state => ({
         ...state,
-        agents: [...state.agents, agent]
+        agents: [...state.agents, { ...agent, elo: agent.elo || 1000, tournamentWins: 0, tournamentLosses: 0 }]
       }));
     },
 
@@ -190,15 +236,20 @@ function createGameStore() {
         }
       }));
 
-      return {
+      const result = {
         success: true,
         playerWins,
         opponent: aiAgent,
         playerPower: Math.floor(playerPower),
         aiPower: Math.floor(aiPower),
         reward,
-        timestamp: Date.now()
+        timestamp: Date.now(),
       };
+
+      // Record battle analytics
+      _recordBattleAnalytics(result, agent);
+
+      return result;
     },
 
     // Spend coins (returns false if not enough)

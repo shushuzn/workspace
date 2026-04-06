@@ -188,6 +188,43 @@ def list():
         click.echo(f"     Progress: {completed}/{task_count} ({progress:.0f}%)")
 
 
+@cli.group()
+def template():
+    """Template management"""
+    pass
+
+
+@template.command("list")
+def template_list():
+    """List available templates"""
+    orch = AgenticOrchestrator()
+    templates = orch.list_templates()
+
+    if not templates:
+        click.echo("No templates found.")
+        return
+
+    click.echo(f"\n📦 Available templates: {len(templates)}")
+    for t in templates:
+        click.echo(f"  • {t}")
+
+
+@template.command("load")
+@click.argument("template_name")
+def template_load(template_name):
+    """Load a workflow from template"""
+    orch = AgenticOrchestrator()
+    wf = orch.load_template(template_name)
+
+    if not wf:
+        click.echo(f"❌ Template not found: {template_name}", err=True)
+        sys.exit(1)
+
+    orch.save_workflow()
+    click.echo(f"✅ Template loaded: {wf.name} ({wf.id})")
+    click.echo(f"   Tasks: {len(wf.tasks)}")
+
+
 @cli.command()
 @click.argument("workflow_id")
 def load(workflow_id):

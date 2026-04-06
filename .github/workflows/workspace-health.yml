@@ -1,0 +1,46 @@
+name: Workspace Health Report
+
+on:
+  schedule:
+    # Every Sunday at 03:00 UTC
+    - cron: '0 3 * * 0'
+  workflow_dispatch:
+    inputs:
+      csv_only:
+        description: 'CSV only (skip badges)'
+        required: false
+        default: 'false'
+
+jobs:
+  health-report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            .github/workflows/workspace-health.yml
+            scripts/workspace-health.mjs
+            80-PROJECTS
+          sparse-checkout-cone-mode: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run health report
+        run: |
+          node scripts/workspace-health.mjs \
+            --csv .github/workspace-health-report.csv \
+            ${{ inputs.csv_only != 'true' && '--badges' || '' }}
+
+      - name: Commit report
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add .github/workspace-health-report.csv
+          if [ "${{ inputs.csv_only }}" != "true" ]; then
+            git add '80-PROJECTS/*/README.md'
+          fi
+          git diff --cached --quiet || git commit -m "ci: weekly workspace health report"
+          git push

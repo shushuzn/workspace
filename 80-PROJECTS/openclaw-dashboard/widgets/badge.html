@@ -1,0 +1,45 @@
+<!-- OpenClaw Badge Widget -->
+<!-- Usage: <div id="badge-target"></div><script src="/openclaw-dashboard/widgets/badge.html"></script> -->
+<template id="oc-badge-template">
+  <style>
+    .oc-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-family: system-ui, sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      border: 1px solid;
+    }
+    .oc-badge.green { background: #00ff9520; border-color: #00ff95; color: #00ff95; }
+    .oc-badge.red { background: #ff336620; border-color: #ff3366; color: #ff3366; }
+    .oc-badge.amber { background: #ffb80020; border-color: #ffb800; color: #ffb800; }
+    .oc-badge.cyan { background: #00d4ff20; border-color: #00d4ff; color: #00d4ff; }
+    .oc-badge.gray { background: #6b728020; border-color: #6b7280; color: #6b7280; }
+  </style>
+  <div class="oc-badge" id="oc-badge-inner">#</div>
+</template>
+<script>
+  (function() {
+    var tmpl = document.getElementById('oc-badge-template');
+    if (!tmpl) return;
+    var clone = tmpl.content.cloneNode(true);
+    var container = document.createElement('div');
+    container.appendChild(clone);
+    document.currentScript._container = container;
+  })();
+  window.renderOCBadge = function(targetId, label, color) {
+    var target = document.getElementById(targetId);
+    if (!target) return;
+    var tmpl = document.getElementById('oc-badge-template');
+    if (!tmpl) return;
+    var clone = tmpl.content.cloneNode(true);
+    var inner = clone.getElementById('oc-badge-inner');
+    if (!inner) return;
+    inner.textContent = label;
+    inner.className = 'oc-badge ' + (color || 'green');
+    target.appendChild(clone);
+  };
+</script>

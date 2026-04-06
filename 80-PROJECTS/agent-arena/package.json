@@ -19,7 +19,9 @@
     "preview": "vite preview",
     "test": "vitest",
     "test:ui": "vitest --ui",
-    "start": "echo \"No start script\""
+    "start": "echo \"No start script\"",
+    "health": "node scripts/health-check.mjs",
+    "generate-levels": "node scripts/generate-levels.mjs"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^4.0.0",

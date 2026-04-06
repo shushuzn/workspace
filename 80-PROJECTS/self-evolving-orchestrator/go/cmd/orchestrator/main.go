@@ -9,6 +9,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/openclaw/self-evolving-orchestrator/orchestrator"
@@ -20,6 +21,7 @@ var (
 	threshold  float64
 	timeoutSec int
 	fastMode   bool
+	exportD3   bool
 )
 
 func main() {
@@ -28,6 +30,7 @@ func main() {
 	flag.Float64Var(&threshold, "threshold", 0.7, "Quality threshold")
 	flag.IntVar(&timeoutSec, "timeout", 60, "Timeout in seconds")
 	flag.BoolVar(&fastMode, "fast", false, "Fast mode: single iteration, skip embeddings")
+	flag.BoolVar(&exportD3, "export-d3", false, "Export D3-compatible JSON: {strategies,edges}")
 	flag.Parse()
 
 	if task == "" {
@@ -100,6 +103,18 @@ func main() {
 
 	if err != nil {
 		log.Fatalf("orchestration failed: %v", err)
+	}
+
+	if exportD3 {
+		enc := json.NewEncoder(os.Stdout)
+		enc.SetIndent("", "  ")
+		d3data := o.ExportD3()
+		// Inject result metadata
+		d3data["finalScore"] = result.FinalScore
+		d3data["converged"] = result.Converged
+		d3data["iterations"] = result.Iterations
+		enc.Encode(d3data)
+		return
 	}
 
 	fmt.Printf("Converged: %v\n", result.Converged)

@@ -1,0 +1,220 @@
+{
+  "version": "1.0.0",
+  "description": "Agent template test fixtures for smoke testing",
+  "generated": "2026-04-06",
+  "total_templates": 239,
+  "fixtures": [
+    {
+      "id": "01-lens-pr-reviewer",
+      "name": "Gatekeeper - GitHub PR Reviewer",
+      "input": {
+        "type": "github_pr",
+        "schema": {
+          "pr_url": "string",
+          "repo": "string",
+          "pr_number": "number"
+        }
+      },
+      "expected_output": {
+        "schema": {
+          "review_comments": "string[]",
+          "approval_status": "APPROVED | CHANGES_REQUESTED | COMMENTED"
+        }
+      },
+      "pass_criteria": [
+        "Returns valid JSON",
+        "Contains review_comments array",
+        "Contains approval_status field"
+      ]
+    },
+    {
+      "id": "02-scribe-docs-writer",
+      "name": "Scribe - Technical Documentation Writer",
+      "input": {
+        "type": "code_documentation",
+        "schema": {
+          "target_file": "string",
+          "style": "markdown | jsdoc | openapi"
+        }
+      },
+      "expected_output": {
+        "schema": {
+          "documentation": "string",
+          "format": "markdown | jsdoc | openapi"
+        }
+      },
+      "pass_criteria": [
+        "Returns valid JSON",
+        "Contains documentation string",
+        "Documentation length > 50 chars"
+      ]
+    },
+    {
+      "id": "03-trace-bug-hunter",
+      "name": "Trace - Bug Investigation Agent",
+      "input": {
+        "type": "bug_analysis",
+        "schema": {
+          "error_log": "string",
+          "stack_trace": "string (optional)"
+        }
+      },
+      "expected_output": {
+        "schema": {
+          "root_cause": "string",
+          "confidence": "number (0-1)",
+          "fix_suggestion": "string"
+        }
+      },
+      "pass_criteria": [
+        "Returns valid JSON",
+        "Contains root_cause string",
+        "Contains confidence number 0-1"
+      ]
+    },
+    {
+      "id": "04-test-writer-qa",
+      "name": "QA Test Writer",
+      "input": {
+        "type": "test_generation",
+        "schema": {
+          "source_file": "string",
+          "test_framework": "jest | vitest | pytest | unittest"
+        }
+      },
+      "expected_output": {
+        "schema": {
+          "test_code": "string",
+          "framework": "string",
+          "cases_count": "number"
+        }
+      },
+      "pass_criteria": [
+        "Returns valid JSON",
+        "Contains test_code string",
+        "Contains valid test structure"
+      ]
+    },
+    {
+      "id": "05-dep-scanner",
+      "name": "Dependency Security Scanner",
+      "input": {
+        "type": "security_scan",
+        "schema": {
+          "package_json_path": "string",
+          "scan_depth": "quick | full"
+        }
+      },
+      "expected_output": {
+        "schema": {
+          "vulnerabilities": "Array<{name, severity, version, fix_version}>",
+          "total_vulns": "number",
+          "summary": "string"
+        }
+      },
+      "pass_criteria": [
+        "Returns valid JSON",
+        "Contains vulnerabilities array",
+        "Contains total_vulns number"
+      ]
+    },
+    {
+      "id": "06-incident-responder",
+      "name": "Incident Response Agent",
+      "input": {
+        "type": "incident_response",
+        "schema": {
+          "alert_data": "object",
+          "severity": "critical | high | medium | low"
+        }
+      },
+      "expected_output": {
+        "schema": {
+          "actions_taken": "string[]",
+          "runbook_reference": "string",
+          "escalation_needed": "boolean"
+        }
+      },
+      "pass_criteria": [
+        "Returns valid JSON",
+        "Contains actions_taken array",
+        "Contains escalation_needed boolean"
+      ]
+    },
+    {
+      "id": "07-cost-optimizer",
+      "name": "Cloud Cost Optimizer",
+      "input": {
+        "type": "cost_analysis",
+        "schema": {
+          "provider": "aws | gcp | azure",
+          "billing_data": "string"
+        }
+      },
+      "expected_output": {
+        "schema": {
+          "savings_opportunities": "Array<{resource, current_cost, potential_savings}>",
+          "total_monthly_savings": "number",
+          "roi_months": "number"
+        }
+      },
+      "pass_criteria": [
+        "Returns valid JSON",
+        "Contains savings_opportunities array",
+        "Contains total_monthly_savings number"
+      ]
+    },
+    {
+      "id": "08-inbox-zero",
+      "name": "Inbox Zero Agent",
+      "input": {
+        "type": "email_automation",
+        "schema": {
+          "email_provider": "gmail | outlook",
+          "action": "archive | delete | label | forward"
+        }
+      },
+      "expected_output": {
+        "schema": {
+          "processed_count": "number",
+          "actions_summary": "object",
+          "errors": "string[]"
+        }
+      },
+      "pass_criteria": [
+        "Returns valid JSON",
+        "Contains processed_count number",
+        "Contains actions_summary object"
+      ]
+    },
+    {
+      "id": "09-meeting-notes",
+      "name": "Meeting Notes Summarizer",
+      "input": {
+        "type": "transcription_summary",
+        "schema": {
+          "transcript_text": "string",
+          "meeting_type": "standup | 1on1 | all-hands | design | retro"
+        }
+      },
+      "expected_output": {
+        "schema": {
+          "summary": "string",
+          "action_items": "Array<{owner, task, due_date}>",
+          "decisions": "string[]"
+        }
+      },
+      "pass_criteria": [
+        "Returns valid JSON",
+        "Contains summary string",
+        "Summary length > 100 chars"
+      ]
+    }
+  ],
+  "ci_smoke_test": {
+    "description": "Run smoke tests on agent templates to verify they respond with valid structure",
+    "command": "node test_fixtures_runner.js",
+    "timeout_per_template_ms": 5000,
+    "required_env": []
+  }
+}

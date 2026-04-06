@@ -9,6 +9,7 @@
   import Training from './components/Training.svelte';
   import Profile from './components/Profile.svelte';
   import ArenaPanel from './components/ArenaPanel.svelte';
+  import TournamentTab from './components/TournamentTab.svelte';
   
   let currentTab = 'home';
   let notifications = [];
@@ -95,6 +96,7 @@
     { id: 'battle', icon: '⚔️', label: '战斗' },
     { id: 'training', icon: '💪', label: '训练' },
     { id: 'arena', icon: '⚔️', label: '竞技场' },
+    { id: 'tournament', icon: '🏆', label: '联赛' },
     { id: 'profile', icon: '👤', label: '我的' }
   ];
 </script>
@@ -203,6 +205,9 @@
 
     {:else if currentTab === 'arena'}
       <ArenaPanel />
+
+    {:else if currentTab === 'tournament'}
+      <TournamentTab />
 
     {:else if currentTab === 'profile'}
       <Profile />

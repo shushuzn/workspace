@@ -1,0 +1,1 @@
+import('yaml').then(() => console.log('ok')).catch(() => console.log('no'));

@@ -6,15 +6,15 @@
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
-    "test": "node tests/test-agent.js",
+    "test": "vitest run",
     "dev": "echo \"No dev script\""
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.0",
     "tree-sitter": "^0.21.0",
     "tree-sitter-javascript": "^0.21.0",
-    "tree-sitter-typescript": "^0.21.0",
     "tree-sitter-python": "^0.21.0",
+    "tree-sitter-typescript": "^0.21.0",
     "uuid": "^9.0.0",
     "yaml": "^2.3.0"
   },
@@ -28,5 +28,9 @@
   ],
   "author": "Feishu",
   "license": "MIT",
-  "repository": "https://github.com/shushuzn/code-agent.git"
+  "repository": "https://github.com/shushuzn/code-agent.git",
+  "devDependencies": {
+    "semgrep": "^0.0.1",
+    "vitest": "^4.1.2"
+  }
 }

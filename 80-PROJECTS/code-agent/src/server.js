@@ -11,7 +11,7 @@ import {
   CallToolRequestSchema,
   ListToolsRequestSchema,
 } from '@modelcontextprotocol/sdk/types.js';
-import { CodeAgent } from './agent.js';
+import CodeAgent from './agent.js';
 
 // Create agent instance
 const agent = new CodeAgent();
@@ -144,6 +144,29 @@ const TOOLS = [
       type: 'object',
       properties: {}
     }
+  },
+  {
+    name: 'code_get_ast',
+    description: 'Query AST structure by node type',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        path: {
+          type: 'string',
+          description: 'File path to analyze'
+        },
+        nodeType: {
+          type: 'string',
+          description: 'Node type to query (e.g., function_declaration, class, method_definition)'
+        },
+        language: {
+          type: 'string',
+          enum: ['javascript', 'typescript', 'python'],
+          description: 'Language (auto-detected from extension if omitted)'
+        }
+      },
+      required: ['path', 'nodeType']
+    }
   }
 ];
 
@@ -234,6 +257,18 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
       case 'code_get_status': {
         const result = agent.getStatus();
+        return {
+          content: [
+            {
+              type: 'text',
+              text: JSON.stringify(result, null, 2),
+            },
+          ],
+        };
+      }
+
+      case 'code_get_ast': {
+        const result = await agent.getAst(args.path, args.nodeType, args.language);
         return {
           content: [
             {

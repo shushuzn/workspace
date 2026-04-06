@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>MCP Registry — Billing Dashboard</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: #0d1117; color: #e6edf3; min-height: 100vh; padding: 24px; }
+  header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+  h1 { font-size: 20px; font-weight: 700; color: #22d3ee; }
+  .badge { font-size: 12px; background: #21262d; color: #8b949e; padding: 2px 8px; border-radius: 12px; }
+  button { background: #238636; border: none; color: #fff; font-size: 13px; padding: 7px 14px; border-radius: 6px; cursor: pointer; }
+  button:hover { background: #2ea043; }
+  .err { color: #f85149; font-size: 14px; margin: 20px 0; }
+  .loading { color: #8b949e; font-size: 14px; margin: 20px 0; }
+
+  /* Plan cards */
+  .plans { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin-bottom: 28px; }
+  .plan-card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 14px; }
+  .plan-name { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .plan-price { font-size: 20px; font-weight: 700; color: #22d3ee; margin-bottom: 6px; }
+  .plan-limit { font-size: 11px; color: #8b949e; margin-bottom: 8px; }
+  .plan-feat { font-size: 11px; color: #6e7681; }
+  .plan-card .features { display: flex; flex-direction: column; gap: 3px; margin-top: 8px; }
+  .plan-card .feat { font-size: 11px; color: #8b949e; }
+  .plan-card .feat::before { content: '✓ '; color: #3fb950; }
+
+  /* Tier colors */
+  .tier-free { color: #8b949e; }
+  .tier-starter { color: #58a6ff; }
+  .tier-pro { color: #a371f7; }
+  .tier-enterprise { color: #f0883e; }
+
+  /* Usage table */
+  .section-title { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: #64748b; margin-bottom: 12px; }
+  table { width: 100%; border-collapse: collapse; background: #161b22; border: 1px solid #30363d; border-radius: 8px; overflow: hidden; }
+  th { text-align: left; font-size: 11px; font-weight: 600; text-transform: uppercase; color: #64748b; padding: 10px 14px; border-bottom: 1px solid #21262d; }
+  td { padding: 10px 14px; font-size: 13px; border-bottom: 1px solid #21262d; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #1c2128; }
+  .mono { font-family: 'Consolas', monospace; font-size: 12px; }
+
+  /* Usage bar */
+  .bar-wrap { width: 120px; height: 6px; background: #21262d; border-radius: 3px; overflow: hidden; display: inline-block; vertical-align: middle; }
+  .bar-fill { height: 100%; border-radius: 3px; transition: width 0.3s; }
+  .bar-ok { background: #3fb950; }
+  .bar-warn { background: #f0883e; }
+  .bar-danger { background: #f85149; }
+  .pct { font-size: 11px; color: #8b949e; margin-left: 6px; display: inline-block; vertical-align: middle; }
+  .usage-cell { display: flex; align-items: center; gap: 8px; }
+
+  /* Plan badge */
+  .plan-badge { display: inline-block; font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 4px; text-transform: uppercase; }
+  .pb-free { background: #21262d; color: #8b949e; }
+  .pb-starter { background: #1f3a5f; color: #58a6ff; }
+  .pb-pro { background: #2d2045; color: #a371f7; }
+  .pb-enterprise { background: #3d2500; color: #f0883e; }
+</style>
+</head>
+<body>
+<header>
+  <h1>💰 MCP Registry Billing</h1>
+  <span class="badge">openclaw-mcp-registry</span>
+  <button onclick="load()">↻ Refresh</button>
+</header>
+
+<div id="plans-section">
+  <div class="section-title">Pricing Plans</div>
+  <div class="plans" id="plans"></div>
+</div>
+
+<div id="top-section">
+  <div class="section-title">Top Servers by Usage</div>
+  <div id="top-usage"></div>
+</div>
+
+<div style="margin-top: 28px;">
+  <div class="section-title">All Servers</div>
+  <div id="servers"></div>
+</div>
+
+<script>
+const API = 'http://localhost:3847';
+
+async function api(path) {
+  const r = await fetch(API + path);
+  if (!r.ok) throw new Error(`HTTP ${r.status}`);
+  return r.json();
+}
+
+function barColor(pct) {
+  if (pct >= 90) return 'bar-danger';
+  if (pct >= 70) return 'bar-warn';
+  return 'bar-ok';
+}
+
+function renderPlans(plans) {
+  const el = document.getElementById('plans');
+  el.innerHTML = Object.entries(plans).map(([tier, p]) => `
+    <div class="plan-card">
+      <div class="plan-name tier-${tier}">${tier.charAt(0).toUpperCase() + tier.slice(1)}</div>
+      <div class="plan-price">${p.priceMonthly === 0 ? 'Free' : '$' + (p.priceMonthly / 100).toFixed(2) + '/mo'}</div>
+      <div class="plan-limit">${p.apiCallLimit === -1 ? 'Unlimited' : p.apiCallLimit.toLocaleString() + ' calls/mo'}</div>
+      <div class="features">
+        ${p.features.map(f => `<div class="feat">${f.replace(/_/g, ' ')}</div>`).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderTopUsage(data) {
+  const el = document.getElementById('top-usage');
+  if (!data.top || !data.top.length) {
+    el.innerHTML = '<div class="loading">No usage data yet</div>';
+    return;
+  }
+  el.innerHTML = `<table>
+    <thead><tr><th>Server</th><th>Tier</th><th>API Calls</th><th>Quota</th></tr></thead>
+    <tbody>
+      ${data.top.map(s => {
+        const plan = { free: 1000, starter: 10000, pro: 100000, enterprise: -1 }[s.tier] || 1000;
+        const pct = plan === -1 ? 0 : Math.min(100, Math.round(s.calls / plan * 100));
+        return `<tr>
+          <td class="mono">${s.serverId}</td>
+          <td><span class="plan-badge pb-${s.tier}">${s.tier}</span></td>
+          <td>${s.calls.toLocaleString()}</td>
+          <td>${plan === -1 ? '∞' : `<div class="usage-cell">
+            <div class="bar-wrap"><div class="bar-fill ${barColor(pct)}" style="width:${pct}%"></div></div>
+            <span class="pct">${pct}%</span>
+          </div>`}</td>
+        </tr>`;
+      }).join('')}
+    </tbody>
+  </table>`;
+}
+
+function planBadge(tier) {
+  return `<span class="plan-badge pb-${tier}">${tier}</span>`;
+}
+
+async function load() {
+  const out = document.getElementById('servers');
+  out.innerHTML = '<div class="loading">Loading...</div>';
+  try {
+    const [plansData, topData, serversData] = await Promise.all([
+      api('/plans'),
+      api('/billing/usage'),
+      api('/servers'),
+    ]);
+    renderPlans(plansData.plans);
+    renderTopUsage(topData);
+
+    if (!serversData.servers || !serversData.servers.length) {
+      out.innerHTML = '<div class="loading">No servers registered</div>';
+      return;
+    }
+    out.innerHTML = `<table>
+      <thead><tr><th>Server</th><th>Version</th><th>Tier</th><th>Tags</th><th>Health</th></tr></thead>
+      <tbody>
+        ${serversData.servers.map(s => {
+          const health = s.healthy
+            ? '<span style="color:#3fb950">● healthy</span>'
+            : '<span style="color:#f85149">● stale</span>';
+          return `<tr>
+            <td class="mono">${s.id}</td>
+            <td>${s.version || '—'}</td>
+            <td>${planBadge('free')}</td>
+            <td>${(s.tags || []).map(t => `<span style="background:#1f3a5f;color:#58a6ff;font-size:10px;padding:1px 5px;border-radius:3px;margin-right:3px">${t}</span>`).join('')}</td>
+            <td>${health}</td>
+          </tr>`;
+        }).join('')}
+      </tbody>
+    </table>`;
+  } catch (e) {
+    out.innerHTML = `<div class="err">Failed to load: ${e.message}<br><br>Is the MCP Registry server running?<br><code>cd openclaw-mcp-registry && npx tsx src/index.ts</code></div>`;
+  }
+}
+
+load();
+</script>
+</body>
+</html>

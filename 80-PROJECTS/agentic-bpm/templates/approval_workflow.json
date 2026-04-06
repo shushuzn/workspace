@@ -1,0 +1,35 @@
+{
+  "name": "Approval Workflow",
+  "description": "审批工作流",
+  "version": "1.0",
+  "tasks": [
+    {
+      "id": "submit",
+      "name": "Submit Request",
+      "description": "提交审批请求",
+      "priority": 10,
+      "depends_on": []
+    },
+    {
+      "id": "review",
+      "name": "Review Request",
+      "description": "审核请求",
+      "priority": 8,
+      "depends_on": ["submit"]
+    },
+    {
+      "id": "approve",
+      "name": "Approve/Reject",
+      "description": "审批决定",
+      "priority": 7,
+      "depends_on": ["review"]
+    },
+    {
+      "id": "notify",
+      "name": "Notify Result",
+      "description": "通知结果",
+      "priority": 3,
+      "depends_on": ["approve"]
+    }
+  ]
+}

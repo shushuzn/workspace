@@ -1,0 +1,19 @@
+{
+  "name": "openclaw-mcp-registry",
+  "version": "0.1.0",
+  "description": "Workspace-level MCP server registry and discovery with Web UI",
+  "type": "module",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "node --loader ts-node/esm src/index.ts",
+    "dev": "node --loader ts-node/esm src/index.ts",
+    "build": "tsc",
+    "serve": "node dist/index.js"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "ts-node": "^10.9.0",
+    "typescript": "^5.3.0"
+  }
+}

@@ -10,6 +10,7 @@ import asyncio
 import json
 import logging
 import sys
+import time
 from typing import Any, Optional
 
 try:
@@ -19,6 +20,8 @@ try:
         session_add_message,
         session_commit,
         session_list,
+        session_export,
+        session_import,
         search,
         context_abstract,
         context_overview,
@@ -28,6 +31,7 @@ try:
         resource_tree,
         relation_link,
         relation_list,
+        session_analyze,
     )
 except ImportError:
     from tools import (
@@ -36,6 +40,8 @@ except ImportError:
         session_add_message,
         session_commit,
         session_list,
+        session_export,
+        session_import,
         search,
         context_abstract,
         context_overview,
@@ -45,7 +51,9 @@ except ImportError:
         resource_tree,
         relation_link,
         relation_list,
+        session_analyze,
     )
+from .metrics import track, get_summary
 
 logging.basicConfig(
     level=logging.INFO,
@@ -100,6 +108,8 @@ TOOL_FUNCTIONS = {
     "session_add_message": session_add_message,
     "session_commit": session_commit,
     "session_list": session_list,
+    "session_export": session_export,
+    "session_import": session_import,
     # Context tools
     "search": search,
     "context_abstract": context_abstract,
@@ -111,6 +121,7 @@ TOOL_FUNCTIONS = {
     "resource_tree": resource_tree,
     "relation_link": relation_link,
     "relation_list": relation_list,
+    "session_analyze": session_analyze,
 }
 
 
@@ -190,6 +201,30 @@ def handle_tools_list() -> dict:
             "inputSchema": {
                 "type": "object",
                 "properties": {},
+            },
+        },
+        {
+            "name": "session_export",
+            "description": "Export session state to a portable JSON file for backup or cross-device migration.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "session_id": {"type": "string", "description": "Session ID to export (uses current if not provided)"},
+                    "output_path": {"type": "string", "description": "Output file path (default: session_backup_<sid>.json)"},
+                },
+            },
+        },
+        {
+            "name": "session_import",
+            "description": "Import session state from a portable JSON backup file, recreating the session with all messages.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "input_path": {"type": "string", "description": "Path to the backup JSON file"},
+                    "project": {"type": "string", "description": "Optional project name for the imported session"},
+                    "metadata": {"type": "object", "description": "Optional metadata for the imported session"},
+                },
+                "required": ["input_path"],
             },
         },
         # ── Context Tools ──
@@ -300,9 +335,25 @@ def handle_tools_list() -> dict:
                 "required": ["path"],
             },
         },
+        # ── Analyzer Tools ──
+        {
+            "name": "session_analyze",
+            "description": "Analyze historical sessions to extract topics, outcomes, and behavioral patterns. Generates a capability-gap markdown report identifying opportunities for new agent capabilities.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "limit": {"type": "integer", "description": "Max sessions to analyze (default 20)"},
+                },
+            },
+        },
     ]
 
     return {"tools": tools}
+
+
+def handle_tools_metrics() -> dict:
+    """Handle tools/metrics request - return call stats."""
+    return get_summary()
 
 
 def handle_tools_call(params: dict) -> dict:
@@ -315,7 +366,10 @@ def handle_tools_call(params: dict) -> dict:
 
     try:
         func = TOOL_FUNCTIONS[name]
+        t0 = time.time()
         result = func(**arguments)
+        latency_ms = (time.time() - t0) * 1000
+        track(name, latency_ms)
 
         # Try to parse result as JSON for better display
         try:
@@ -348,6 +402,8 @@ def handle_request(method: str, params: dict, req_id: Any) -> MCPResponse:
         return MCPResponse(id=req_id, result=handle_tools_list())
     elif method == "tools/call":
         return MCPResponse(id=req_id, result=handle_tools_call(params))
+    elif method == "tools/metrics":
+        return MCPResponse(id=req_id, result=handle_tools_metrics())
     elif method in ("initialized", "shutdown"):
         # Notifications - no response needed
         return MCPResponse(id=None, result=None)

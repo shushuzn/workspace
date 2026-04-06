@@ -1,0 +1,28 @@
+# Git attributes for OpenClaw workspace
+
+# Language-specific diff drivers
+*.ts     diff=typescript
+*.tsx    diff=typescript
+*.js     diff=javascript
+*.jsx    diff=javascript
+*.py     diff=python
+*.json   diff=json
+*.yaml   diff=yaml
+*.yml    diff=yaml
+*.md     text=auto
+*.sh     text eol=lf
+
+# Binary files
+*.png     binary
+*.jpg     binary
+*.jpeg    binary
+*.gif     binary
+*.ico     binary
+*.pdf     binary
+*.zip     binary
+*.gz      binary
+*.tar     binary
+*.whl     binary
+
+# Auto-detect text files
+*         text=auto

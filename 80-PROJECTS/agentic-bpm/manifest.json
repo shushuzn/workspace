@@ -1,0 +1,39 @@
+{
+  "version": "1.0.0",
+  "project": {
+    "name": "agentic-bpm",
+    "path": "80-PROJECTS/agentic-bpm",
+    "description": "AI驱动的业务流程管理系统，支持工作流编排、任务依赖管理、AI决策下一步",
+    "keywords": ["bpmn", "workflow", "orchestrate", "agentic", "process", "automation"]
+  },
+  "capabilities": [
+    {
+      "name": "workflow-create",
+      "type": "cli",
+      "description": "创建新工作流",
+      "keywords": ["workflow", "create", "orchestrate"],
+      "inputSlots": ["name", "description"],
+      "outputSlots": ["workflowId"],
+      "adapterType": "task-orchestrator",
+      "examples": ["agentic-bpm create \"My Project\""]
+    },
+    {
+      "name": "workflow-execute",
+      "type": "cli",
+      "description": "AI决策并执行工作流中的下一个任务",
+      "keywords": ["execute", "workflow", "next", "agentic"],
+      "inputSlots": ["workflowId"],
+      "outputSlots": ["taskResult", "nextTask"],
+      "adapterType": "task-orchestrator",
+      "examples": ["agentic-bpm next", "agentic-bpm execute"]
+    }
+  ],
+  "exposes": [
+    "python -m agentic_bpm.cli",
+    "agentic_bpm/orchestrator.py",
+    "agentic_bpm/cli.py"
+  ],
+  "requires": {
+    "OLLAMA_HOST": "http://localhost:11434"
+  }
+}

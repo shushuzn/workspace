@@ -1,0 +1,56 @@
+<!-- OpenClaw Project Status Widget -->
+<!-- Usage: <div id="status-target"></div><script src="/openclaw-dashboard/widgets/project-status.html?project=my-app&status=active"></script> -->
+<template id="oc-status-template">
+  <style>
+    .oc-status { display: flex; align-items: center; gap: 8px; font-family: system-ui, sans-serif; font-size: 13px; }
+    .oc-status-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .oc-status-dot.active { background: #00ff95; box-shadow: 0 0 6px #00ff95; }
+    .oc-status-dot.warning { background: #ffb800; box-shadow: 0 0 6px #ffb800; }
+    .oc-status-dot.error { background: #ff3366; box-shadow: 0 0 6px #ff3366; }
+    .oc-status-dot.idle { background: #6b7280; }
+    .oc-status-name { font-weight: 600; color: #e8eaed; }
+    .oc-status-meta { color: #6b7280; font-size: 11px; }
+  </style>
+  <div class="oc-status">
+    <div class="oc-status-dot" id="oc-status-dot"></div>
+    <div>
+      <div class="oc-status-name" id="oc-status-name"></div>
+      <div class="oc-status-meta" id="oc-status-meta"></div>
+    </div>
+  </div>
+</template>
+<script>
+  (function() {
+    var script = document.currentScript;
+    var src = script ? script.src : window.location.href;
+    var params = new URL(src, location.href).searchParams;
+    var project = params.get('project') || 'unknown';
+    var status = params.get('status') || 'idle';
+    var updated = params.get('updated') || '';
+    window.renderOCProjectStatus = function(targetId, projectName, projectStatus, lastUpdated) {
+      var target = document.getElementById(targetId);
+      if (!target) return;
+      var tmpl = document.getElementById('oc-status-template');
+      if (!tmpl) return;
+      var clone = tmpl.content.cloneNode(true);
+      clone.getElementById('oc-status-dot').className = 'oc-status-dot ' + (projectStatus || 'idle');
+      clone.getElementById('oc-status-name').textContent = projectName || project;
+      clone.getElementById('oc-status-meta').textContent = lastUpdated ? 'Updated ' + lastUpdated : projectStatus || 'idle';
+      target.appendChild(clone);
+    };
+    // Auto-render if element with id="oc-status-auto" exists
+    document.addEventListener('DOMContentLoaded', function() {
+      var autoEl = document.getElementById('oc-status-auto');
+      if (autoEl) {
+        var tmpl = document.getElementById('oc-status-template');
+        if (tmpl) {
+          var clone = tmpl.content.cloneNode(true);
+          clone.getElementById('oc-status-dot').className = 'oc-status-dot ' + status;
+          clone.getElementById('oc-status-name').textContent = project;
+          clone.getElementById('oc-status-meta').textContent = updated || status;
+          autoEl.appendChild(clone);
+        }
+      }
+    });
+  })();
+</script>

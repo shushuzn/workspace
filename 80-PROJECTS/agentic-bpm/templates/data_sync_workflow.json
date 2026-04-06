@@ -1,0 +1,35 @@
+{
+  "name": "Data Sync Workflow",
+  "description": "数据同步工作流",
+  "version": "1.0",
+  "tasks": [
+    {
+      "id": "extract",
+      "name": "Extract Data",
+      "description": "从源系统提取数据",
+      "priority": 10,
+      "depends_on": []
+    },
+    {
+      "id": "transform",
+      "name": "Transform Data",
+      "description": "数据转换处理",
+      "priority": 8,
+      "depends_on": ["extract"]
+    },
+    {
+      "id": "load",
+      "name": "Load to Target",
+      "description": "加载到目标系统",
+      "priority": 7,
+      "depends_on": ["transform"]
+    },
+    {
+      "id": "verify",
+      "name": "Verify Sync",
+      "description": "验证同步结果",
+      "priority": 5,
+      "depends_on": ["load"]
+    }
+  ]
+}

@@ -73,3 +73,61 @@ func (o *Orchestrator) Registry() *PeerRegistry {
 func (o *Orchestrator) SetFastMode(v bool) {
 	o.loop.ranker.SetSkipLLM(v)
 }
+
+// ExportD3 returns strategy pool and evolution history formatted for D3 Gantt visualization.
+// Produces {strategies:[{id,name,granularity,score,rounds}],timeline:[{strategy,iteration,score,converged}]}
+func (o *Orchestrator) ExportD3() map[string]interface{} {
+	history := o.loop.evolver.GetHistory()
+	strategies := o.loop.evolver.GetStrategyPool()
+
+	// Strategy summary: avg score per strategy name across history
+	scoreMap := make(map[string][]float64)
+	for _, rec := range history {
+		name := rec.Strategy.Name
+		scoreMap[name] = append(scoreMap[name], rec.Score)
+	}
+	var strategySummaries []map[string]interface{}
+	round := 0
+	var timeline []map[string]interface{}
+	for _, s := range strategies {
+		scores := scoreMap[s.Name]
+		var avg float64
+		if len(scores) > 0 {
+			for _, sc := range scores {
+				avg += sc
+			}
+			avg /= float64(len(scores))
+		}
+		rounds := len(scores)
+		if rounds > round {
+			round = rounds
+		}
+		strategySummaries = append(strategySummaries, map[string]interface{}{
+			"id":          s.Name,
+			"name":        s.Name,
+			"granularity": s.Granularity.String(),
+			"modelHint":   s.ModelHint,
+			"score":       avg,
+			"rounds":      rounds,
+		})
+		for i, sc := range scores {
+			timeline = append(timeline, map[string]interface{}{
+				"strategy":  s.Name,
+				"iteration":  i + 1,
+				"score":     sc,
+				"converged": i == rounds-1 && avg >= 0.7,
+			})
+		}
+	}
+
+	return map[string]interface{}{
+		"strategies": strategySummaries,
+		"timeline":   timeline,
+		"maxRounds":  round,
+	}
+}
+
+// GetStrategyPool returns the strategy pool from the evolver
+func (o *Orchestrator) GetStrategyPool() []DecomposeStrategy {
+	return o.loop.evolver.GetStrategyPool()
+}

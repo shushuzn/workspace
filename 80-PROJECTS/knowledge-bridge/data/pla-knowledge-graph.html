@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<title>Knowledge Graph — Visualization</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: ui-monospace, monospace; background: #0d1117; color: #e6edf3; overflow: hidden; }
+  #graph { width: 100vw; height: 100vh; }
+  .node circle { stroke: #30363d; stroke-width: 1.5px; cursor: pointer; }
+  .node text { fill: #e6edf3; font-size: 11px; pointer-events: none; }
+  .link { stroke: #30363d; stroke-opacity: 0.6; }
+  #sidebar { position: fixed; top: 0; right: -360px; width: 360px; height: 100vh; background: #161b22; border-left: 1px solid #30363d; padding: 16px; overflow-y: auto; transition: right 0.25s; z-index: 10; display: flex; flex-direction: column; }
+  #sidebar.open { right: 0; }
+  #sidebar h3 { color: #22d3ee; font-size: 13px; margin-bottom: 8px; }
+  #sidebar p { font-size: 12px; color: #8b949e; line-height: 1.5; margin-bottom: 12px; }
+  #sidebar .close { float: right; cursor: pointer; color: #8b949e; font-size: 16px; }
+  #chat-btn { margin-top: 8px; background: #238636; color: #fff; border: none; border-radius: 6px; padding: 8px 14px; font-size: 12px; cursor: pointer; width: 100%; }
+  #chat-btn:hover { background: #2ea043; }
+  #legend { position: fixed; bottom: 16px; left: 16px; background: #161b22; border: 1px solid #30363d; border-radius: 6px; padding: 10px 14px; font-size: 11px; }
+  .legend-item { display: flex; align-items: center; gap: 8px; margin-top: 4px; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+  #stats { position: fixed; top: 16px; left: 16px; font-size: 12px; color: #8b949e; background: #161b22; border: 1px solid #30363d; border-radius: 6px; padding: 8px 14px; }
+  #analogy-panel { position: fixed; bottom: 16px; right: 16px; max-width: 400px; background: #161b22; border: 1px solid #a78bfa; border-radius: 8px; padding: 12px; font-size: 11px; display: none; }
+  #analogy-panel.visible { display: block; }
+  .analogy-source { color: #a78bfa; font-weight: 600; }
+  .analogy-target { color: #22d3ee; font-weight: 600; }
+  /* Chat panel */
+  #chat-panel { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 680px; max-width: 95vw; background: #161b22; border: 1px solid #30363d; border-radius: 12px 12px 0 0; display: none; flex-direction: column; max-height: 60vh; z-index: 20; }
+  #chat-panel.open { display: flex; }
+  #chat-header { padding: 12px 16px; border-bottom: 1px solid #30363d; display: flex; align-items: center; justify-content: space-between; }
+  #chat-header-title { font-size: 13px; color: #22d3ee; font-weight: 600; }
+  #chat-close { background: none; border: none; color: #8b949e; cursor: pointer; font-size: 18px; }
+  #chat-messages { flex: 1; overflow-y: auto; padding: 12px 16px; min-height: 200px; max-height: 40vh; }
+  .chat-msg { margin-bottom: 10px; font-size: 12px; line-height: 1.5; }
+  .chat-msg.user { color: #e6edf3; }
+  .chat-msg.assistant { color: #7ee787; }
+  .chat-msg.system { color: #f0883e; font-size: 11px; }
+  .chat-msg pre { background: #0d1117; border-radius: 6px; padding: 8px; overflow-x: auto; margin-top: 4px; white-space: pre-wrap; }
+  #chat-input-row { padding: 12px 16px; border-top: 1px solid #30363d; display: flex; gap: 8px; }
+  #chat-input { flex: 1; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; color: #e6edf3; font-size: 12px; font-family: inherit; padding: 8px 12px; resize: none; min-height: 38px; max-height: 120px; }
+  #chat-input:focus { outline: none; border-color: #22d3ee; }
+  #chat-send { background: #238636; color: #fff; border: none; border-radius: 6px; padding: 8px 16px; font-size: 12px; cursor: pointer; font-family: inherit; }
+  #chat-send:hover { background: #2ea043; }
+  #chat-send:disabled { background: #30363d; color: #6e7681; cursor: not-allowed; }
+</style>
+</head>
+<body>
+<div id="graph"></div>
+<div id="stats">Loading...</div>
+<div id="legend">
+  <div style="color:#8b949e;margin-bottom:4px;">Domains</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#3fb950"></div>chemistry</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#58a6ff"></div>programming</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#f97316"></div>cooking</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#f85149"></div>medicine</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#e3b341"></div>engineering</div>
+</div>
+<div id="analogy-panel"></div>
+<div id="sidebar">
+  <span class="close" onclick="closeSidebar()">&#x2715;</span>
+  <h3 id="sidebar-title">Node</h3>
+  <p id="sidebar-desc"></p>
+  <h3>Connections</h3>
+  <div id="sidebar-edges"></div>
+  <button id="chat-btn" onclick="openChat()">&#x2709; Chat about this node</button>
+</div>
+<div id="chat-panel">
+  <div id="chat-header">
+    <span id="chat-header-title">Chat</span>
+    <button id="chat-close" onclick="closeChat()">&#x2715;</button>
+  </div>
+  <div id="chat-messages"></div>
+  <div id="chat-input-row">
+    <textarea id="chat-input" placeholder="Ask about this node... (Shift+Enter for newline, Enter to send)" rows="1"></textarea>
+    <button id="chat-send" onclick="sendChat()">Send</button>
+  </div>
+</div>
+<script>
+const nodes = [{"description":""},{"description":""},{"description":""},{"description":""},{"description":""},{"description":""},{"description":""},{"description":""},{"description":""},{"description":""},{"description":""},{"description":""},{"description":""},{"description":""},{"description":""},{"description":""},{"description":""},{"description":""},{"description":""},{"description":""},{"description":""},{"description":""},{"description":""}];
+const links = [{"label":""},{"label":""},{"label":""},{"label":""},{"label":""},{"label":""},{"label":""},{"label":""},{"label":""},{"label":""},{"label":""},{"label":""},{"label":""},{"label":""},{"label":""},{"label":""},{"label":""},{"label":""}];
+const analogies = [{"source":"8dc7e3d0-3d67-40b9-8894-2bfd926a0d92","target":"2299345e-d27b-4b78-9488-473716208549","text":"PLA水解就像内存泄漏：系统（聚合物）持续产生需要清理的东西（短链），但没有垃圾回收（微生物）时，内存（分子量）最终耗尽崩溃。"},{"source":"3e114694-ad3c-4b05-94c5-06b5fbd97450","target":"0f38799f-75be-40bb-bbb1-d61a2e376983","text":"PLA最终被微生物完全分解成CO2和H2O，就像try-catch-finally中的finally块——无论什么情况，finally都会执行，确保清理完成。"},{"source":"715392b0-5f17-46a6-b55c-c456158103aa","target":"996affd4-9968-41a9-a007-bf1cf24c144d","text":"酯键被水切断就像微服务级联崩溃——一个关键服务宕了，依赖它的其他服务也会陆续崩溃（分子链断裂传导）。"},{"source":"0057808c-dfce-4514-97bc-be263490395a","target":"f6e75601-b54a-4b94-b4ff-823c2255e825","text":"一级反应动力学中，降解速率与当前浓度成正比——就像CPU降频：负载（浓度）越高，功耗（反应速率）越大，但效率不变。"},{"source":"fec6be11-60f6-4706-99c0-a5e65ef82846","target":"d97e3bf4-fb7e-42c0-a9c5-6d45c663c541","text":"半衰期是PLA分子量减少一半的时间，就像软件API的弃用周期：到了弃用日期，功能（分子量）减半，再过一个周期，彻底消失。"},{"source":"8d4fa7d2-3043-4c69-8467-e3c3c345bf31","target":"1e31834b-adfb-4266-893c-d52a00508da7","text":"温度升高加速水解，就像炖肉——温度越高，肉（聚合物）软烂（降解）越快。"},{"source":"5ef643ec-83f9-433e-a1d6-d5e326a892c1","target":"bfbe2a85-cc13-45c7-aaef-5bfa7bad5691","text":"PDI大说明分子量分布不均匀，就像代码审查——有些代码质量很高（大分子），有些很烂（小分子），团队（材料）整体质量取决于最弱的那部分。"},{"source":"046a6058-2f1a-406d-88db-c71de4433ed5","target":"d8e5b394-d7a5-4593-b2b6-1ff876a79735","text":"结晶区降解慢就像技术债务——硬的部分（结晶区）很难处理，需要更多时间（高温/强酶）才能降解，但一旦开始，速度会加快。"},{"source":"15e98503-a02b-441f-9410-cedbaddf7d3e","target":"259fa216-e2ea-4887-a248-d0aee5892335","text":"机械性能下降比分子量快，就像药物代谢——只要关键代谢物（长链）减少，疗效（强度）就会急剧下降，即使前体（短链）还在。"}];
+
+const domainColors = {
+  chemistry: '#3fb950',
+  programming: '#58a6ff',
+  cooking: '#f97316',
+  medicine: '#f85149',
+  engineering: '#e3b341'
+};
+
+document.getElementById('stats').textContent =
+  nodes.length + ' nodes · ' + links.length + ' edges · ' + analogies.length + ' analogies';
+
+const width = window.innerWidth;
+const height = window.innerHeight;
+
+const svg = d3.select('#graph').append('svg').attr('width', width).attr('height', height);
+const g = svg.append('g');
+
+svg.call(d3.zoom().scaleExtent([0.1, 4]).on('zoom', e => g.attr('transform', e.transform)));
+
+const simulation = d3.forceSimulation(nodes)
+  .force('link', d3.forceLink(links).id(d => d.id).distance(100))
+  .force('charge', d3.forceManyBody().strength(-300))
+  .force('center', d3.forceCenter(width / 2, height / 2))
+  .force('collision', d3.forceCollide(30));
+
+const link = g.append('g').selectAll('line').data(links).join('line')
+  .attr('class', 'link').attr('stroke-width', 1);
+
+const node = g.append('g').selectAll('g').data(nodes).join('g')
+  .attr('class', 'node')
+  .call(d3.drag().on('start', (e, d) => { if (!e.active) simulation.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+    .on('drag', (e, d) => { d.fx = e.x; d.fy = e.y; })
+    .on('end', (e, d) => { if (!e.active) simulation.alphaTarget(0); d.fx = null; d.fy = null; }))
+  .on('click', (e, d) => showSidebar(d));
+
+node.append('circle').attr('r', 14).attr('fill', d => domainColors[d.domain] || '#8b949e');
+node.append('text').attr('dy', 24).attr('text-anchor', 'middle').text(d => d.label.substring(0, 16));
+
+simulation.on('tick', () => {
+  link.attr('x1', d => d.source.x).attr('y1', d => d.source.y)
+      .attr('x2', d => d.target.x).attr('y2', d => d.target.y);
+  node.attr('transform', d => 'translate(' + d.x + ',' + d.y + ')');
+});
+
+function showSidebar(d) {
+  const panel = document.getElementById('sidebar');
+  document.getElementById('sidebar-title').textContent = d.label + ' (' + d.domain + ')';
+  document.getElementById('sidebar-desc').textContent = d.description || '(no description)';
+  const related = links.filter(l => l.source.id === d.id || l.target.id === d.id);
+  document.getElementById('sidebar-edges').innerHTML = related.map(l => {
+    const other = l.source.id === d.id ? l.target : l.source;
+    return '<div style="margin-top:6px;font-size:11px;"><span style="color:#58a6ff">' + (l.label||'related') + '</span>: ' + other.label + '</div>';
+  }).join('') || '<div style="color:#6e7681;font-size:11px;">No connections</div>';
+  panel.classList.add('open');
+  const analogy = analogies.find(a => a.source === d.label || a.target === d.label);
+  const ap = document.getElementById('analogy-panel');
+  if (analogy) {
+    ap.innerHTML = '<span class="analogy-source">' + analogy.source + '</span> ≈ <span class="analogy-target">' + analogy.target + '</span><br><br>' + analogy.text.substring(0,200);
+    ap.classList.add('visible');
+  } else { ap.classList.remove('visible'); }
+}
+function closeSidebar() { document.getElementById('sidebar').classList.remove('open'); }
+
+// Chat
+let chatNode = null;
+let chatHistory = [];
+
+function openChat() {
+  const title = document.getElementById('sidebar-title').textContent;
+  chatNode = nodes.find(n => title.startsWith(n.label)) || null;
+  chatHistory = [];
+  document.getElementById('chat-messages').innerHTML = '';
+  if (!chatNode) {
+    addMsg('system', 'Select a node first by clicking on it in the graph.');
+    return;
+  }
+  addMsg('system', 'Context loaded for: ' + chatNode.label + '. Ask anything about this node!');
+  document.getElementById('chat-panel').classList.add('open');
+  document.getElementById('chat-input').focus();
+}
+
+function closeChat() { document.getElementById('chat-panel').classList.remove('open'); }
+
+function buildNodeContext(n) {
+  const related = links.filter(l => l.source.id === n.id || l.target.id === n.id);
+  const connNodes = related.map(l => l.source.id === n.id ? l.target.label : l.source.label);
+  const analogy = analogies.find(a => a.source === n.label || a.target === n.label);
+  let ctx = 'Node: ' + n.label + ' (domain: ' + (n.domain||'unknown') + ')
+';
+  if (n.description) ctx += 'Description: ' + n.description + '
+';
+  if (connNodes.length) ctx += 'Connected to: ' + connNodes.join(', ') + '
+';
+  if (analogy) ctx += 'Analogy: ' + analogy.source + ' ≈ ' + analogy.target + ' — ' + analogy.text.substring(0,200) + '
+';
+  return ctx;
+}
+
+function addMsg(role, text) {
+  const div = document.createElement('div');
+  div.className = 'chat-msg ' + role;
+  if (role === 'user') div.textContent = 'You: ' + text;
+  else if (role === 'assistant') div.innerHTML = 'Assistant: ' + text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/
+/g,'<br>');
+  else div.textContent = text;
+  document.getElementById('chat-messages').appendChild(div);
+  document.getElementById('chat-messages').scrollTop = 1e9;
+}
+
+async function sendChat() {
+  const input = document.getElementById('chat-input');
+  const msg = input.value.trim();
+  if (!msg || !chatNode) return;
+  input.value = '';
+  addMsg('user', msg);
+  chatHistory.push({ role: 'user', content: msg });
+  const sendBtn = document.getElementById('chat-send');
+  sendBtn.disabled = true;
+  try {
+    const context = buildNodeContext(chatNode);
+    const systemMsg = 'You are a helpful assistant discussing a knowledge graph node. Answer based ONLY on the provided context.
+
+Context:
+' + context;
+    const conversation = systemMsg + '
+
+' + chatHistory.map(m => m.role + ': ' + m.content).join('
+');
+    const body = JSON.stringify({ model: 'gemma4:e2b', prompt: conversation, stream: false });
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 60000);
+    const resp = await fetch('http://localhost:11434/api/generate', { method: 'POST', headers: {'Content-Type':'application/json'}, body, signal: controller.signal });
+    clearTimeout(timer);
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    const data = JSON.parse(await resp.text());
+    const reply = (data.response || '').trim() || '(no response)';
+    chatHistory.push({ role: 'assistant', content: reply });
+    addMsg('assistant', reply);
+  } catch (e) {
+    addMsg('system', 'Ollama error: ' + e.message + ' — Is Ollama running at localhost:11434?');
+  } finally {
+    sendBtn.disabled = false;
+    input.focus();
+  }
+}
+
+document.getElementById('chat-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendChat(); }
+});
+</script>
+</body>
+</html>

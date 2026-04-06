@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>StarForge Component Playground</title>
+<script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --border: #30363d;
+    --text: #e6edf3;
+    --text-muted: #8b949e;
+    --accent: #58a6ff;
+    --green: #3fb950;
+    --orange: #f0883e;
+  }
+  html, body { height: 100%; background: var(--bg); color: var(--text); font-family: system-ui, sans-serif; }
+  #root { display: flex; height: 100vh; overflow: hidden; }
+  #palette { width: 260px; background: var(--surface); border-right: 1px solid var(--border); overflow-y: auto; padding: 1rem; flex-shrink: 0; }
+  #editor { width: 380px; background: var(--surface); border-right: 1px solid var(--border); display: flex; flex-direction: column; flex-shrink: 0; }
+  #preview { flex: 1; overflow: auto; padding: 1.5rem; }
+  .section-title { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin: 0.75rem 0 0.4rem; }
+  .comp-btn { display: block; width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; color: var(--text); padding: 0.45rem 0.6rem; margin-bottom: 0.4rem; cursor: pointer; font-size: 0.8rem; text-align: left; transition: border-color 0.15s; font-family: inherit; }
+  .comp-btn:hover { border-color: var(--accent); }
+  .comp-btn.active { border-color: var(--accent); background: rgba(88,166,255,0.1); }
+  #code-editor { flex: 1; background: var(--bg); border: none; color: #79c0ff; font-family: 'SF Mono', 'Cascadia Code', monospace; font-size: 0.78rem; padding: 0.75rem; resize: none; outline: none; line-height: 1.6; }
+  .toolbar { display: flex; gap: 0.5rem; padding: 0.5rem 0.75rem; background: var(--surface); border-bottom: 1px solid var(--border); }
+  .toolbar button { background: var(--bg); border: 1px solid var(--border); border-radius: 4px; color: var(--text); cursor: pointer; padding: 0.3rem 0.7rem; font-size: 0.75rem; font-family: inherit; transition: all 0.15s; }
+  .toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+  .toolbar .status { margin-left: auto; font-size: 0.72rem; color: var(--text-muted); align-self: center; }
+  .preview-header { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.75rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  .preview-box { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; min-height: 200px; }
+  .error { color: #f85149; font-size: 0.8rem; background: rgba(248,81,73,0.1); border: 1px solid #f85149; border-radius: 6px; padding: 0.75rem; margin-top: 0.5rem; }
+  .hint { color: var(--text-muted); font-size: 0.75rem; margin: 0.5rem 0; }
+  .share-url { width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: 4px; color: var(--text); padding: 0.35rem 0.5rem; font-size: 0.72rem; margin-top: 0.4rem; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const PRESET_COMPONENTS = {
+  Button: {
+    schema: `{type:'button',label:'Click Me',variant:'primary',onClick:'alert(1)'}`, template:
+`function Button({label, variant, onClick}) {
+  const styles = {
+    primary: {background:'#58a6ff',color:'#fff',border:'none',borderRadius:'6px',padding:'0.5rem 1rem',cursor:'pointer'},
+    secondary: {background:'transparent',color:'#58a6ff',border:'1px solid #58a6ff',borderRadius:'6px',padding:'0.5rem 1rem',cursor:'pointer'},
+    danger: {background:'#f85149',color:'#fff',border:'none',borderRadius:'6px',padding:'0.5rem 1rem',cursor:'pointer'},
+  };
+  return <button style={styles[variant]} onClick={onClick}>{label}</button>;
+}`
+  },
+  Card: {
+    schema: `{type:'card',title:'Card Title',children:'Card content here'}`, template:
+`function Card({title, children}) {
+  return (
+    <div style={{background:'#161b22',border:'1px solid #30363d',borderRadius:'8px',padding:'1rem'}}>
+      <div style={{fontWeight:600,marginBottom:'0.5rem',color:'#58a6ff'}}>{title}</div>
+      <div style={{color:'#8b949e',fontSize:'0.85rem'}}>{children}</div>
+    </div>
+  );
+}`
+  },
+  Badge: {
+    schema: `{type:'badge',label:'NEW',color:'#3fb950'}`, template:
+`function Badge({label, color}) {
+  return (
+    <span style={{background:color+'22',color,border:'1px solid '+color,borderRadius:'4px',padding:'0.15rem 0.4rem',fontSize:'0.7rem',fontWeight:600}}>
+      {label}
+    </span>
+  );
+}`
+  },
+  ProgressBar: {
+    schema: `{type:'progress',value:65,max:100,color:'#3fb950'}`, template:
+`function ProgressBar({value, max, color}) {
+  const pct = Math.min(100, Math.max(0, (value/max)*100));
+  return (
+    <div style={{background:'#21262d',borderRadius:'4px',height:'8px',overflow:'hidden'}}>
+      <div style={{width:pct+'%',height:'100%',background:color,transition:'width 0.3s'}}/>
+    </div>
+  );
+}`
+  },
+  Toggle: {
+    schema: `{type:'toggle',checked:false,label:'Enable feature'}`, template:
+`function Toggle({checked, onChange, label}) {
+  return (
+    <label style={{display:'flex',alignItems:'center',gap:'0.6rem',cursor:'pointer'}}>
+      <div onClick={onChange} style={{width:'36px',height:'20px',borderRadius:'10px',background:checked?'#3fb950':'#30363d',position:'relative',transition:'0.2s'}}>
+        <div style={{width:'16px',height:'16px',borderRadius:'50%',background:'#fff',position:'absolute',top:'2px',left:checked?'18px':'2px',transition:'0.2s'}}/>
+      </div>
+      <span style={{color:'#8b949e',fontSize:'0.85rem'}}>{label}</span>
+    </label>
+  );
+}`
+  },
+  StatCard: {
+    schema: `{type:'stat',label:'Downloads',value:'12.5K',delta:'+5.2%',positive:true}`, template:
+`function StatCard({label, value, delta, positive}) {
+  return (
+    <div style={{background:'#161b22',border:'1px solid #30363d',borderRadius:'8px',padding:'1rem'}}>
+      <div style={{color:'#8b949e',fontSize:'0.75rem',marginBottom:'0.3rem'}}>{label}</div>
+      <div style={{fontSize:'1.5rem',fontWeight:700,color:'#e6edf3'}}>{value}</div>
+      <div style={{color: positive?'#3fb950':'#f85149',fontSize:'0.75rem',marginTop:'0.25rem'}}>{delta}</div>
+    </div>
+  );
+}`
+  },
+};
+
+const PRESET_LIST = Object.entries(PRESET_COMPONENTS).map(([name]) => name);
+
+function Playground() {
+  const [selected, setSelected] = React.useState('Button');
+  const [code, setCode] = React.useState(PRESET_COMPONENTS.Button.template);
+  const [error, setError] = React.useState(null);
+  const [renderKey, setRenderKey] = React.useState(0);
+
+  const compileAndRender = React.useCallback(() => {
+    setError(null);
+    setRenderKey(k => k + 1);
+  }, []);
+
+  const handleCodeChange = React.useCallback((e) => {
+    setCode(e.target.value);
+    setError(null);
+  }, []);
+
+  const shareUrl = React.useCallback(() => {
+    const state = btoa(encodeURIComponent(JSON.stringify({ selected, code })));
+    const url = window.location.origin + window.location.pathname + '?s=' + state;
+    navigator.clipboard.writeText(url);
+    alert('Share URL copied to clipboard!');
+  }, [selected, code]);
+
+  // Load from URL
+  React.useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const s = params.get('s');
+    if (s) {
+      try {
+        const { selected: sel, code: c } = JSON.parse(decodeURIComponent(atob(s)));
+        if (PRESET_COMPONENTS[sel]) { setSelected(sel); setCode(c); }
+      } catch (_) {}
+    }
+  }, []);
+
+  let Comp = null;
+  try {
+    // eslint-disable-next-line no-new-func
+    const fn = new Function('React', code + '\nreturn ' + selected);
+    Comp = fn(React);
+  } catch (e) {
+    setError(e.message);
+  }
+
+  return (
+    <>
+      <div id="palette">
+        <div className="section-title">Components</div>
+        {PRESET_LIST.map(name => (
+          <button key={name} className={'comp-btn' + (selected === name ? ' active' : '')} onClick={() => { setSelected(name); setCode(PRESET_COMPONENTS[name].template); setError(null); }}>
+            {name}
+          </button>
+        ))}
+
+        <div className="section-title" style={{marginTop:'1rem'}}>Schema</div>
+        <pre style={{fontSize:'0.7rem',color:'#8b949e',background:'var(--bg)',padding:'0.4rem',borderRadius:'4px',overflow:'auto'}}>
+          {selected ? PRESET_COMPONENTS[selected].schema : '{}'}
+        </pre>
+        <div className="hint">Paste component code on the left and click Update Preview</div>
+      </div>
+
+      <div id="editor">
+        <div className="toolbar">
+          <button onClick={compileAndRender}>Update Preview</button>
+          <button onClick={shareUrl}>Share</button>
+          <span className="status">{selected}</span>
+        </div>
+        <textarea id="code-editor" value={code} onChange={handleCodeChange} spellCheck={false} wrap={false}/>
+      </div>
+
+      <div id="preview">
+        <div className="preview-header">Preview — {selected} {error ? '(error)' : '(live)'}</div>
+        {error ? (
+          <div className="error">Error: {error}</div>
+        ) : Comp ? (
+          <div className="preview-box" key={renderKey}>
+            <Comp />
+          </div>
+        ) : null}
+      </div>
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<Playground />);
+</script>
+</body>
+</html>

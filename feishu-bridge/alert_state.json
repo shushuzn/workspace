@@ -1,0 +1,30 @@
+{
+  "last_errors": {
+    "bridge:21f3056f18, err: processor not found, type: im.message.message_read_v1 [conn_id=7621823825223486394]": "2026-04-06T06:19:02.910231",
+    "bridge:rocessor not found, type: im.chat.access_event.bot_p2p_chat_entered_v1 [conn_id=7621823825223486394]": "2026-04-06T06:19:02.910920",
+    "bridge:568e2e07fa, err: processor not found, type: im.message.message_read_v1 [conn_id=7621823825223486394]": "2026-04-06T06:19:02.912247",
+    "bridge:e114b6868b, err: processor not found, type: im.message.message_read_v1 [conn_id=7621823825223486394]": "2026-04-06T06:19:02.913740",
+    "bridge:rocessor not found, type: im.chat.access_event.bot_p2p_chat_entered_v1 [conn_id=7621826810624822202]": "2026-04-06T06:19:02.914213",
+    "bridge:5ed6c56b18, err: processor not found, type: im.message.message_read_v1 [conn_id=7621828587465067448]": "2026-04-06T06:19:02.914645",
+    "bridge:rocessor not found, type: im.chat.access_event.bot_p2p_chat_entered_v1 [conn_id=7621828587465067448]": "2026-04-06T06:19:02.915058",
+    "bridge:e4d7391e24, err: processor not found, type: im.message.message_read_v1 [conn_id=7621828587465067448]": "2026-04-06T06:19:02.915674",
+    "bridge:609a4ae8bf, err: processor not found, type: im.message.message_read_v1 [conn_id=7621830410586393531]": "2026-04-06T06:19:02.916348",
+    "bridge:0509ed98a4, err: processor not found, type: im.message.message_read_v1 [conn_id=7621830410586393531]": "2026-04-06T06:19:02.917004",
+    "bridge:e114b6868b, err: processor not found, type: im.message.message_read_v1 [conn_id=7621829523898289086]": "2026-04-06T06:19:02.917650",
+    "bridge:0509ed98a4, err: processor not found, type: im.message.message_read_v1 [conn_id=7621828587465067448]": "2026-04-06T06:19:02.918183",
+    "bridge:0509ed98a4, err: processor not found, type: im.message.message_read_v1 [conn_id=7621829523898289086]": "2026-04-06T06:19:02.918654",
+    "bridge:609a4ae8bf, err: processor not found, type: im.message.message_read_v1 [conn_id=7621826810624822202]": "2026-04-06T06:19:02.919109",
+    "bridge:rocessor not found, type: im.chat.access_event.bot_p2p_chat_entered_v1 [conn_id=7621823712748522431]": "2026-04-06T06:19:02.919614",
+    "bridge:5ed6c56b18, err: processor not found, type: im.message.message_read_v1 [conn_id=7621823771812481980]": "2026-04-06T06:19:02.920138",
+    "telegram:lopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1081)>": "2026-04-06T06:19:02.921216",
+    "telegram:2026-03-28 16:51:17,520 [ERROR] 获取更新失败: Remote end closed connection without response": "2026-04-06T06:19:02.921593",
+    "telegram:2026-03-28 22:40:22,273 [ERROR] 获取更新失败: Remote end closed connection without response": "2026-04-06T06:19:02.921936",
+    "telegram:2026-03-29 09:24:52,055 [ERROR] 获取更新失败: The read operation timed out": "2026-04-06T06:19:02.922274",
+    "telegram:2026-03-29 12:38:56,925 [ERROR] 获取更新失败: [WinError 10054] 远程主机强迫关闭了一个现有的连接。": "2026-04-06T06:19:02.922635",
+    "telegram:2026-03-29 12:38:58,956 [ERROR] 获取更新失败: <urlopen error [WinError 10061] 由于目标计算机积极拒绝，无法连接。>": "2026-04-06T06:19:02.923146",
+    "telegram:2026-03-29 13:43:51,312 [ERROR] 获取更新失败: [WinError 10054] 远程主机强迫关闭了一个现有的连接。": "2026-04-06T06:19:02.923669"
+  },
+  "last_webhook_alerts": {
+    "material-price-tracker:PE:8500:2026-04-10T12:00:00": "2026-04-06T06:19:04.639283"
+  }
+}

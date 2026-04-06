@@ -1,0 +1,48 @@
+{
+  "version": "1.0.0",
+  "description": "Workspace shared modules registry - central documentation of shared utilities",
+  "generated": "2026-04-06",
+  "modules": {
+    "error-middleware.mjs": {
+      "path": "80-PROJECTS/shared/error-middleware.mjs",
+      "type": "middleware",
+      "description": "Standardized error handling middleware for Express/fastify",
+      "fields": {
+        "error": "Error - Original error object",
+        "statusCode": "number - HTTP status code (default: 500)",
+        "message": "string - User-safe error message",
+        "code": "string - Machine-readable error code"
+      },
+      "usage": "import { errorMiddleware } from './error-middleware.mjs'",
+      "dependencies": []
+    },
+    "metrics.js": {
+      "path": "80-PROJECTS/shared/metrics.js",
+      "type": "utility",
+      "description": "Prometheus-compatible metrics collection utility",
+      "fields": {
+        "counter": "Counter - Incremental metric",
+        "gauge": "Gauge - Point-in-time metric",
+        "histogram": "Histogram - Distribution metric",
+        "labels": "Record<string, string> - Metric labels"
+      },
+      "usage": "import { counter, gauge, histogram } from './metrics.js'",
+      "dependencies": ["prom-client"]
+    },
+    "pino.config.ts": {
+      "path": "80-PROJECTS/shared/pino.config.ts",
+      "type": "configuration",
+      "description": "Pino logger configuration with sensible defaults",
+      "fields": {
+        "level": "string - Log level (trace|debug|info|warn|error|fatal)",
+        "transport": "object - Transport configuration",
+        "serializers": "object - Custom serializers for objects"
+      },
+      "usage": "import { pinoConfig } from './pino.config.ts'",
+      "dependencies": ["pino"]
+    }
+  },
+  "usage_example": "import shared from '80-PROJECTS/shared'",
+  "maintainers": ["workspace"],
+  "contributing": "Add new modules to this registry with full field documentation"
+}

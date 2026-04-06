@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<title>Knowledge Graph Explorer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --border: #30363d;
+    --text: #e6edf3;
+    --text-muted: #8b949e;
+    --accent: #58a6ff;
+    --accent2: #22d3ee;
+  }
+  html, body { height: 100%; background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; overflow: hidden; }
+  #layout { display: flex; flex-direction: column; height: 100vh; }
+  #toolbar { display: flex; align-items: center; gap: 0.75rem; padding: 0.6rem 1rem; background: var(--surface); border-bottom: 1px solid var(--border); flex-shrink: 0; }
+  #toolbar h1 { font-size: 0.9rem; color: var(--accent2); font-weight: 600; white-space: nowrap; }
+  #search { flex: 1; max-width: 320px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; color: var(--text); padding: 0.35rem 0.7rem; font-size: 0.8rem; outline: none; }
+  #search:focus { border-color: var(--accent); }
+  #filter-tag { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; color: var(--text); padding: 0.35rem 0.7rem; font-size: 0.8rem; outline: none; max-width: 160px; }
+  #filter-tag:focus { border-color: var(--accent); }
+  .btn { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; color: var(--text-muted); padding: 0.35rem 0.7rem; font-size: 0.8rem; cursor: pointer; transition: all 0.15s; white-space: nowrap; }
+  .btn:hover { color: var(--text); border-color: var(--text-muted); }
+  #main { display: flex; flex: 1; overflow: hidden; }
+  #graph-wrap { flex: 1; position: relative; }
+  #graph { width: 100%; height: 100%; }
+  #sidebar { width: 300px; background: var(--surface); border-left: 1px solid var(--border); overflow-y: auto; display: flex; flex-direction: column; transition: width 0.2s; flex-shrink: 0; }
+  #sidebar.collapsed { width: 0; overflow: hidden; }
+  #sidebar h2 { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em; padding: 0.75rem 1rem 0.5rem; border-bottom: 1px solid var(--border); }
+  #node-detail { padding: 1rem; display: none; }
+  #node-detail.visible { display: block; }
+  #node-detail h3 { font-size: 1rem; margin-bottom: 0.5rem; color: var(--accent2); }
+  #node-detail .meta { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.75rem; }
+  #node-detail p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 0.75rem; }
+  #node-detail .section-title { font-size: 0.7rem; color: var(--accent); text-transform: uppercase; margin: 0.75rem 0 0.4rem; }
+  #conn-list { list-style: none; }
+  #conn-list li { font-size: 0.78rem; padding: 0.3rem 0; border-bottom: 1px solid var(--border); color: var(--text-muted); }
+  #conn-list li span { color: var(--accent); }
+  #empty-msg { padding: 1rem; font-size: 0.8rem; color: var(--text-muted); text-align: center; }
+  #status { font-size: 0.72rem; color: var(--text-muted); margin-left: auto; white-space: nowrap; }
+  #network-legend { padding: 0.75rem 1rem; border-top: 1px solid var(--border); flex-shrink: 0; }
+  #network-legend .title { font-size: 0.7rem; color: var(--text-muted); margin-bottom: 0.4rem; }
+  .legend-row { display: flex; align-items: center; gap: 0.5rem; font-size: 0.72rem; color: var(--text-muted); margin-top: 0.25rem; }
+  .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+  #loading { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-size: 0.85rem; color: var(--text-muted); }
+</style>
+</head>
+<body>
+<div id="layout">
+  <div id="toolbar">
+    <h1>Knowledge Graph</h1>
+    <input id="search" type="text" placeholder="Search nodes..."/>
+    <select id="filter-tag" class="btn">
+      <option value="">All domains</option>
+    </select>
+    <button class="btn" id="fit-btn">Fit</button>
+    <button class="btn" id="toggle-sidebar">Toggle Sidebar</button>
+    <span id="status"></span>
+  </div>
+  <div id="main">
+    <div id="graph-wrap">
+      <div id="graph"></div>
+      <div id="loading">Loading graph data...</div>
+    </div>
+    <div id="sidebar" class="collapsed">
+      <h2>Node Detail</h2>
+      <div id="node-detail">
+        <h3 id="detail-label"></h3>
+        <div class="meta" id="detail-meta"></div>
+        <p id="detail-desc"></p>
+        <div class="section-title">Connections</div>
+        <ul id="conn-list"></ul>
+      </div>
+      <div id="empty-msg">Click a node to see details</div>
+      <div id="network-legend">
+        <div class="title">Domains</div>
+        <div id="legend-items"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+const GRAPH_URL = '../data/pla-knowledge-graph.json';
+
+const domainColors = {
+  chemistry: '#3fb950',
+  programming: '#58a6ff',
+  cooking: '#f97316',
+  medicine: '#f85149',
+  engineering: '#e3b341',
+  science: '#a78bfa',
+  biology: '#34d399',
+  physics: '#fbbf24',
+  default: '#8b949e'
+};
+
+let graphData = null;
+let network = null;
+let allNodes = [];
+let allEdges = [];
+let currentFilter = { text: '', domain: '' };
+
+async function loadGraph() {
+  try {
+    const resp = await fetch(GRAPH_URL);
+    if (!resp.ok) throw new Error('Failed to load ' + GRAPH_URL);
+    graphData = await resp.json();
+    initGraph();
+  } catch (e) {
+    document.getElementById('loading').textContent = 'Error: ' + e.message + ' — place graph.json in data/';
+  }
+}
+
+function getDomainColor(domain) {
+  return domainColors[domain] || domainColors.default;
+}
+
+function initGraph() {
+  document.getElementById('loading').style.display = 'none';
+
+  const nodesRaw = graphData.nodes ? Object.values(graphData.nodes) : [];
+  const edgesRaw = graphData.edges || [];
+
+  // Build domain filter options
+  const domains = [...new Set(nodesRaw.map(n => n.domain).filter(Boolean))];
+  const filterTag = document.getElementById('filter-tag');
+  domains.forEach(d => {
+    const opt = document.createElement('option');
+    opt.value = d;
+    opt.textContent = d.charAt(0).toUpperCase() + d.slice(1);
+    filterTag.appendChild(opt);
+  });
+
+  // Build legend
+  const legend = document.getElementById('legend-items');
+  domains.forEach(d => {
+    const row = document.createElement('div');
+    row.className = 'legend-row';
+    row.innerHTML = '<div class="legend-dot" style="background:' + getDomainColor(d) + '"></div>' + d;
+    legend.appendChild(row);
+  });
+
+  allNodes = nodesRaw.map(n => ({
+    id: n.id || n.label,
+    label: n.label || n.id,
+    title: (n.description || '').substring(0, 200),
+    domain: n.domain || 'default',
+    color: { background: getDomainColor(n.domain), border: getDomainColor(n.domain), highlight: { background: getDomainColor(n.domain), border: '#fff' } },
+    font: { color: '#e6edf3', size: 12 },
+    shape: 'dot',
+    size: 14,
+  }));
+
+  allEdges = edgesRaw.map(e => ({
+    from: typeof e.source === 'object' ? e.source.id : e.source,
+    to: typeof e.target === 'object' ? e.target.id : e.target,
+    label: e.relation || e.label || '',
+    color: { color: '#30363d', highlight: '#58a6ff' },
+    font: { color: '#8b949e', size: 10, strokeWidth: 0 },
+    arrows: 'to',
+  }));
+
+  document.getElementById('status').textContent = allNodes.length + ' nodes · ' + allEdges.length + ' edges';
+
+  buildVisNetwork();
+}
+
+function buildVisNetwork(nodesToShow, edgesToShow) {
+  const nodes = nodesToShow || allNodes;
+  const edges = edgesToShow || allEdges;
+
+  if (network) network.destroy();
+
+  const container = document.getElementById('graph');
+  const data = { nodes: new vis.DataSet(nodes), edges: new vis.DataSet(edges) };
+  const options = {
+    physics: { enabled: true, solver: 'forceAtlas2', forceAtlas2: { gravitationalConstant: -50, springLength: 120 } },
+    interaction: { hover: true, tooltipDelay: 200 },
+    nodes: { borderWidth: 2, shadow: true },
+    edges: { width: 1, smooth: { type: 'continuous' } },
+  };
+
+  network = new vis.Network(container, data, options);
+
+  network.on('click', params => {
+    if (params.nodes.length > 0) {
+      const nodeId = params.nodes[0];
+      showNodeDetail(nodeId);
+    } else {
+      hideNodeDetail();
+    }
+  });
+
+  // Click edge to highlight
+  network.on('click', params => {
+    if (params.edges.length > 0) {
+      const edgeId = params.edges[0];
+      const edge = allEdges.find(e => e.from === edgeId || e.id === edgeId);
+      if (edge) showNodeDetail(edge.from, edge);
+    }
+  });
+}
+
+function filterGraph() {
+  const text = document.getElementById('search').value.toLowerCase().trim();
+  const domain = document.getElementById('filter-tag').value;
+
+  currentFilter = { text, domain };
+
+  const visibleIds = new Set();
+  const filteredNodes = allNodes.filter(n => {
+    const matchText = !text || n.label.toLowerCase().includes(text) || (n.title || '').toLowerCase().includes(text);
+    const matchDomain = !domain || n.domain === domain;
+    if (matchText && matchDomain) { visibleIds.add(n.id); return true; }
+    return false;
+  });
+
+  // Also show connected nodes even if filtered out
+  if (text || domain) {
+    allEdges.forEach(e => {
+      if (visibleIds.has(e.from)) visibleIds.add(e.to);
+      if (visibleIds.has(e.to)) visibleIds.add(e.from);
+    });
+  }
+
+  const nodesToShow = allNodes.filter(n => visibleIds.has(n.id));
+  const edgesToShow = allEdges.filter(e => visibleIds.has(e.from) && visibleIds.has(e.to));
+
+  buildVisNetwork(nodesToShow, edgesToShow);
+  document.getElementById('status').textContent = nodesToShow.length + ' / ' + allNodes.length + ' nodes shown';
+}
+
+function showNodeDetail(nodeId, viaEdge) {
+  const node = allNodes.find(n => n.id === nodeId);
+  if (!node) return;
+
+  document.getElementById('sidebar').classList.remove('collapsed');
+  document.getElementById('node-detail').classList.add('visible');
+  document.getElementById('empty-msg').style.display = 'none';
+
+  document.getElementById('detail-label').textContent = node.label;
+  document.getElementById('detail-meta').textContent = 'Domain: ' + (node.domain || 'unknown');
+  document.getElementById('detail-desc').textContent = node.title || '(no description)';
+
+  const connectedEdges = allEdges.filter(e => e.from === nodeId || e.to === nodeId);
+  const connList = document.getElementById('conn-list');
+  connList.innerHTML = '';
+
+  if (viaEdge) {
+    const otherId = viaEdge.from === nodeId ? viaEdge.to : viaEdge.from;
+    const other = allNodes.find(n => n.id === otherId);
+    if (other) {
+      const li = document.createElement('li');
+      li.innerHTML = '<span>' + (viaEdge.label || 'related') + '</span> → ' + other.label;
+      connList.appendChild(li);
+    }
+  } else {
+    connectedEdges.forEach(e => {
+      const otherId = e.from === nodeId ? e.to : e.from;
+      const other = allNodes.find(n => n.id === otherId);
+      if (other) {
+        const li = document.createElement('li');
+        li.innerHTML = '<span>' + (e.label || 'related') + '</span> → ' + other.label;
+        connList.appendChild(li);
+      }
+    });
+  }
+
+  if (connList.children.length === 0) {
+    const li = document.createElement('li');
+    li.textContent = 'No connections';
+    li.style.color = '#6e7681';
+    connList.appendChild(li);
+  }
+}
+
+function hideNodeDetail() {
+  document.getElementById('sidebar').classList.add('collapsed');
+  document.getElementById('node-detail').classList.remove('visible');
+  document.getElementById('empty-msg').style.display = 'block';
+}
+
+// Events
+document.getElementById('search').addEventListener('input', filterGraph);
+document.getElementById('filter-tag').addEventListener('change', filterGraph);
+document.getElementById('fit-btn').addEventListener('click', () => network && network.fit({ animation: true }));
+document.getElementById('toggle-sidebar').addEventListener('click', () => {
+  const sidebar = document.getElementById('sidebar');
+  sidebar.classList.toggle('collapsed');
+});
+
+loadGraph();
+</script>
+</body>
+</html>

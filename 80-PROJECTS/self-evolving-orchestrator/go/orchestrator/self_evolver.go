@@ -71,6 +71,11 @@ func (s *SelfEvolver) GetHistory() []EvolutionRecord {
     return s.history
 }
 
+// GetStrategyPool returns the current strategy pool
+func (s *SelfEvolver) GetStrategyPool() []DecomposeStrategy {
+    return s.strategyPool
+}
+
 // ResetHistory clears the evolution history
 func (s *SelfEvolver) ResetHistory() {
     s.history = []EvolutionRecord{}

@@ -2,11 +2,17 @@
 /**
  * Initialize Shared Memory Space in OpenViking
  * Creates the directory structure for Multi-Agent Memory Mesh
+ *
+ * Usage:
+ *   node scripts/init-shared-memory.mjs                    # interactive prompts
+ *   node scripts/init-shared-memory.mjs --project my-proj  # named project
+ *   node scripts/init-shared-memory.mjs --list-templates   # show available templates
+ *   node scripts/init-shared-memory.mjs --output-dir /path  # custom output dir
  */
 
 import { execSync } from 'child_process';
-import { writeFileSync, unlinkSync } from 'fs';
-import { join } from 'path';
+import { writeFileSync, unlinkSync, existsSync, mkdirSync } from 'fs';
+import { join, resolve } from 'path';
 import { tmpdir } from 'os';
 
 const VIKING_BASE_URL = process.env.VIKING_BASE_URL || 'http://127.0.0.1:1933';
@@ -14,13 +20,30 @@ const VIKING_API_KEY = process.env.VIKING_API_KEY || 'openviking-local-dev-key-2
 const VIKING_ACCOUNT = process.env.VIKING_ACCOUNT || 'default';
 const VIKING_USER = process.env.VIKING_USER || 'default';
 
-const SHARED_PATHS = [
-  'resources/shared/problems',
-  'resources/shared/solutions',
-  'resources/shared/decisions',
-  'resources/shared/patterns',
-  'resources/shared/agent-comm'
-];
+const TEMPLATES = {
+  'default': [
+    'resources/shared/problems',
+    'resources/shared/solutions',
+    'resources/shared/decisions',
+    'resources/shared/patterns',
+    'resources/shared/agent-comm'
+  ],
+  'minimal': [
+    'resources/shared/patterns',
+    'resources/shared/decisions'
+  ],
+  'full': [
+    'resources/shared/problems',
+    'resources/shared/solutions',
+    'resources/shared/decisions',
+    'resources/shared/patterns',
+    'resources/shared/agent-comm',
+    'resources/shared/memory',
+    'resources/shared/context'
+  ]
+};
+
+let SHARED_PATHS = TEMPLATES['default'];
 
 const SHARED_OVERVIEW = `# Shared Memory Space
 
@@ -129,6 +152,56 @@ async function initSharedMemory() {
   console.log('🎉 Shared Memory Space initialization complete!');
   console.log('\n📍 Access: viking://resources/shared/');
 }
+
+// ─── CLI Argument Parsing ─────────────────────────────────────────────────────
+
+const args = process.argv.slice(2);
+
+if (args.includes('--help') || args.includes('-h')) {
+  console.log(`
+🚀 OpenViking Shared Memory Initializer
+
+Usage:
+  node init-shared-memory.mjs [options]
+
+Options:
+  --project <name>     Project name for shared memory space
+  --template <name>    Template: default, minimal, full (default: default)
+  --output-dir <path>  Custom output directory
+  --list-templates     Show available templates
+  --help, -h          Show this help
+
+Templates:
+  default  5 dirs (problems, solutions, decisions, patterns, agent-comm)
+  minimal  2 dirs (patterns, decisions)
+  full     7 dirs (adds memory, context)
+`);
+  process.exit(0);
+}
+
+if (args.includes('--list-templates')) {
+  console.log('Available templates:');
+  for (const [name, paths] of Object.entries(TEMPLATES)) {
+    console.log('  ' + name.padEnd(8) + ' — ' + paths.join(', '));
+  }
+  process.exit(0);
+}
+
+const projectIdx = args.indexOf('--project');
+const templateIdx = args.indexOf('--template');
+const outputIdx = args.indexOf('--output-dir');
+
+const projectName = projectIdx >= 0 ? args[projectIdx + 1] : 'default';
+const templateName = templateIdx >= 0 ? args[templateIdx + 1] : 'default';
+const outputDir = outputIdx >= 0 ? resolve(args[outputIdx + 1]) : null;
+
+if (!TEMPLATES[templateName]) {
+  console.error('Unknown template: ' + templateName);
+  console.error('Available:', Object.keys(TEMPLATES).join(', '));
+  process.exit(1);
+}
+
+// SHARED_PATHS set above via TEMPLATES[templateName]
 
 initSharedMemory().catch(err => {
   console.error('❌ Initialization failed:', err);

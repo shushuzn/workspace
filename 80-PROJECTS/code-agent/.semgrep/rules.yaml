@@ -1,0 +1,16 @@
+rules:
+  - id: console-log
+    pattern: console.log(...)
+    message: "Remove console.log before production"
+    languages: [javascript, typescript]
+    severity: WARNING
+  - id: todo-comment
+    pattern: "// TODO"
+    message: "TODO comment found"
+    languages: [javascript, typescript]
+    severity: INFO
+  - id: debugger-statement
+    pattern: debugger
+    message: "Remove debugger statement"
+    languages: [javascript, typescript]
+    severity: WARNING

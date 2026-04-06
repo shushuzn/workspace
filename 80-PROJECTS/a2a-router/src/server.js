@@ -1,8 +1,10 @@
 #!/usr/bin/env node
 /**
  * A2A Router MCP Server
- * 
- * Exposes A2A routing capabilities via Model Context Protocol
+ *
+ * Exposes A2A routing capabilities via Model Context Protocol.
+ * Supports: node src/server.js                    — start MCP server (default)
+ *           node src/server.js --export-schema    — output JSON Schema and exit
  */
 
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
@@ -21,6 +23,20 @@ const router = new A2ARouter({
   heartbeatTimeout: 60000,
   maxQueueSize: 1000
 });
+
+// CLI args
+const args = process.argv.slice(2);
+const resumeIdx = args.indexOf('--resume-task-id');
+if (resumeIdx !== -1 && args[resumeIdx + 1]) {
+  const taskId = args[resumeIdx + 1];
+  const task = router.messageStore.findById(taskId);
+  if (task) {
+    router.messageStore.updateTaskStatus(taskId, 'pending');
+    console.log(`[Server] Resumed task ${taskId}`);
+  } else {
+    console.warn(`[Server] Task ${taskId} not found`);
+  }
+}
 
 // Initialize ACP Gateway
 const acpGateway = new ACPGateway(router, {
@@ -863,6 +879,57 @@ router.on('agent:offline', (agent) => {
 router.on('message:deliver', (message, agent) => {
   console.log(`[A2A] Message ${message.id} -> ${agent.id} (${message.type})`);
 });
+
+// CLI: export schema
+if (process.argv.includes('--export-schema')) {
+  const schema = {
+    $schema: 'http://json-schema.org/draft-07/schema#',
+    title: 'A2A Router Capability Registry',
+    description: 'JSON Schema for A2A Router agent capability descriptions',
+    type: 'object',
+    definitions: {
+      tool: {
+        type: 'object',
+        properties: {
+          name: { type: 'string' },
+          description: { type: 'string' },
+          inputSchema: {
+            type: 'object',
+            properties: {
+              type: { const: 'object' },
+              properties: { type: 'object' },
+              required: { type: 'array', items: { type: 'string' } }
+            }
+          }
+        },
+        required: ['name', 'description', 'inputSchema']
+      },
+      agent: {
+        type: 'object',
+        properties: {
+          agentId: { type: 'string' },
+          capabilities: { type: 'array', items: { type: 'string' } },
+          metadata: { type: 'object' }
+        },
+        required: ['agentId', 'capabilities']
+      },
+      message: {
+        type: 'object',
+        properties: {
+          from: { type: 'string' },
+          to: { type: 'string' },
+          type: { enum: ['TASK', 'QUERY', 'EVENT', 'RESPONSE'] },
+          priority: { enum: ['CRITICAL', 'HIGH', 'NORMAL', 'LOW'] },
+          payload: { type: 'object' }
+        },
+        required: ['from', 'to', 'type', 'payload']
+      }
+    },
+    tools: TOOLS
+  };
+  console.log(JSON.stringify(schema, null, 2));
+  process.exit(0);
+}
 
 // Start ACP Gateway
 acpGateway.start();

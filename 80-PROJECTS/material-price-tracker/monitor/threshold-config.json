@@ -1,0 +1,13 @@
+{
+  "serverchan_key": "YOUR_SCKEY_HERE",
+  "thresholds": {
+    "pe":  { "max": 8500, "min": 7500 },
+    "pp":  { "max": 8000, "min": 7000 },
+    "pvc": { "max": 6000, "min": 5000 }
+  },
+  "prices": {
+    "pe": 8200,
+    "pp": 7800,
+    "pvc": 5700
+  }
+}

@@ -109,6 +109,32 @@ node self-evolving-loop.mjs
 - **Governance约束**：预算上限、安全边界、宪法约束
 - **元认知**：发现能力缺口并优先修复
 
+## Embeddable Widgets
+
+This dashboard ships with reusable HTML widget snippets in `widgets/`:
+
+### Badge Widget (`widgets/badge.html`)
+```html
+<div id="my-badge"></div>
+<script src="/path/to/widgets/badge.html"></script>
+<script>renderOCBadge('my-badge', '#science', 'green');</script>
+```
+Colors: `green` `amber` `cyan` `red` `gray`
+
+### Trend Widget (`widgets/trend.html`)
+```html
+<div id="my-trend"></div>
+<script src="/path/to/widgets/trend.html?data=1,3,2,5,4&label=Score&color=cyan"></script>
+```
+Query params: `data` (csv), `label`, `color`
+
+### Project Status Widget (`widgets/project-status.html`)
+```html
+<div id="my-status"></div>
+<script src="/path/to/widgets/project-status.html?project=my-app&status=active"></script>
+```
+Query params: `project`, `status` (active/warning/error/idle), `updated`
+
 ## 版本
 
 - **version**: 1.0.0

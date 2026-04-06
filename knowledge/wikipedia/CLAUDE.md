@@ -137,3 +137,4 @@ Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>
 - 视频文案不得使用"本论文/本文/该论文"等学术腔，用科普讲解腔替代
 - 封面图不得包含简介内容，只需标题
 - 所有图片比例必须统一为 12×8
+- **brainstorm 暂停规则**：用户说"暂停头脑风暴"后，完全停止 brainstorm 空闲循环；下次 session 不自动触发 brainstorm

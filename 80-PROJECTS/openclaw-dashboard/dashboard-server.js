@@ -73,6 +73,33 @@ const server = http.createServer((req, res) => {
   } else if (url === '/api/refresh') {
     require('./generate-dashboard-data.js');
     filePath = path.join(PROJECT_DIR, 'dashboard-data.json');
+  } else if (url.startsWith('/api/git-history') && req.method === 'GET') {
+    const project = url.searchParams.get('project') || '';
+    const safeProject = project.replace(/[^a-zA-Z0-9_-]/g, '');
+    if (!safeProject) {
+      res.writeHead(400);
+      res.end(JSON.stringify({ error: 'project param required' }));
+      return;
+    }
+    const projectPath = path.join(WORKSPACE, '80-PROJECTS', safeProject);
+    try {
+      const { execSync } = require('child_process');
+      const log = execSync(`git log --oneline -30 --format="%H|%an|%ai|%s"`, { cwd: projectPath, encoding: 'utf8', timeout: 5000 });
+      const branches = execSync(`git branch -a --format="%(refname:short)|%(objectname:short)" 2>nul`, { cwd: projectPath, encoding: 'utf8', timeout: 5000 });
+      const commits = log.trim().split('\n').filter(Boolean).map(line => {
+        const [hash, author, date, msg] = line.split('|');
+        return { hash: hash.slice(0, 7), author, date, message: msg };
+      });
+      const branchList = branches.trim().split('\n').filter(Boolean).map(b => {
+        const [name, sha] = b.split('|');
+        return { name, sha };
+      });
+      res.end(JSON.stringify({ project: safeProject, commits, branches: branchList }));
+    } catch (e) {
+      res.writeHead(500);
+      res.end(JSON.stringify({ error: e.message }));
+    }
+    return;
   } else if (url === '/api/events') {
     // SSE endpoint
     res.writeHead(200, {

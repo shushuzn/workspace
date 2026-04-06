@@ -17,6 +17,12 @@ from news_workflow.workflow.manager import WorkflowManager
 from loguru import logger
 
 
+def cmd_sse(args):
+    """Run SSE event server"""
+    from news_workflow.api import sse_server
+    sse_server.run_server(port=args.port, config_path=args.config)
+
+
 def setup_logging():
     """设置日志"""
     logger.remove()
@@ -147,6 +153,12 @@ def main():
     test_parser.add_argument("--integration", action="store_true", help="Run integration tests")
     test_parser.add_argument("--e2e", action="store_true", help="Run end-to-end tests")
     test_parser.set_defaults(func=cmd_test)
+
+    # sse 命令
+    sse_parser = subparsers.add_parser("sse", help="Run SSE event server")
+    sse_parser.add_argument("--port", type=int, default=8080, help="Port to listen on")
+    sse_parser.add_argument("--config", default="config/config.yaml", help="Config file path")
+    sse_parser.set_defaults(func=cmd_sse)
     
     args = parser.parse_args()
     

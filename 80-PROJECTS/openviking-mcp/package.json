@@ -1,15 +1,19 @@
 {
   "name": "openviking-mcp",
   "version": "0.0.1",
-  "description": "A project for openviking-mcp",
+  "description": "Context database MCP server for AI agents — cross-project knowledge sharing, session persistence, and context retrieval",
   "scripts": {
-    "dev": "echo \"No dev script\"",
-    "test": "echo \"No test script\""
+    "dev": "py -m src.server",
+    "test": "echo \"No test script\"",
+    "start": "py -m src.server",
+    "info": "py -c \"from src.tools import session_create, session_info, search, context_abstract, context_overview, context_read, context_write, resource_ls, resource_tree, relation_link; print('Tools available:', [n for n in dir() if n.startswith('session_') or n in ['search','context_abstract','context_overview','context_read','context_write','resource_ls','resource_tree','relation_link','relation_list']])\""
   },
-  "keywords": [
-    "automation",
-    "tool",
-    "automation",
-    "tool"
-  ]
+  "keywords": ["mcp", "context", "knowledge", "ai", "agent", "session", "memory"],
+  "engines": {
+    "node": ">=18"
+  },
+  "funding": {
+    "type": "GitHub",
+    "url": "https://github.com/your-username/openviking-mcp"
+  }
 }

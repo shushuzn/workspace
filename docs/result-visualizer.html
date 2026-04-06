@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Result Schema Visualizer</title>
+<style>
+  body { font-family: monospace; background: #0d0d1a; color: #e0e0e0; padding: 24px; }
+  h1 { color: #4a9fff; font-size: 16px; }
+  textarea { width: 100%; height: 120px; background: #1a1a2e; border: 1px solid #3a3a5a; color: #e0e0e0; padding: 8px; border-radius: 4px; font-family: monospace; box-sizing: border-box; }
+  button { background: #4a9fff; border: none; color: #fff; padding: 8px 16px; border-radius: 4px; cursor: pointer; margin: 8px 0; }
+  #tree { background: #111122; border-radius: 8px; padding: 16px; margin-top: 12px; }
+  .node { padding: 4px 0; }
+  .key { color: #4a9fff; }
+  .string { color: #4aff8a; }
+  .number { color: #ffb84a; }
+  .bool { color: #ff4a8a; }
+  .null { color: #888; }
+  .collapse { cursor: pointer; user-select: none; color: #888; margin-right: 4px; }
+  .collapse.open:before { content: '▼ '; }
+  .collapse.closed:before { content: '▶ '; }
+  .children { padding-left: 20px; border-left: 1px solid #2a2a4a; margin-left: 8px; }
+  .success-box { background: #1a3a2e; border: 1px solid #4aff8a; border-radius: 4px; padding: 8px 12px; margin-bottom: 12px; color: #4aff8a; }
+  .error-box { background: #3a1a1a; border: 1px solid #ff4a4a; border-radius: 4px; padding: 8px 12px; margin-bottom: 12px; color: #ff4a4a; }
+  .summary { font-size: 12px; color: #888; margin-top: 4px; }
+</style>
+</head>
+<body>
+<h1>Result Schema Visualizer</h1>
+<p style="color:#888;font-size:12px">Paste any shared-types Result JSON to visualize its structure</p>
+<textarea id="input" placeholder='{"success":true,"output":"...","artifacts":[],"fatal":false,"durationMs":123}'></textarea>
+<button onclick="render()">Visualize</button>
+<div id="tree"></div>
+
+<script>
+function render() {
+  const input = document.getElementById('input').value.trim();
+  const tree = document.getElementById('tree');
+  if (!input) { tree.innerHTML = '<span style="color:#888">Paste JSON above and click Visualize</span>'; return; }
+  let data;
+  try { data = JSON.parse(input); }
+  catch (e) { tree.innerHTML = '<span style="color:#ff4a4a">Invalid JSON: ' + e.message + '</span>'; return; }
+
+  // Summary banner
+  let banner = '';
+  if (typeof data.success === 'boolean') {
+    banner = data.success
+      ? '<div class="success-box">✓ success: true' + (data.output ? ' — ' + String(data.output).slice(0, 80) : '') + '</div>'
+      : '<div class="error-box">✗ success: false' + (data.error ? ' — ' + data.error : '') + '</div>';
+  }
+
+  tree.innerHTML = banner + renderNode(data, '', true);
+}
+
+function renderValue(val, key, collapsed) {
+  if (val === null) return '<span class="null">null</span>';
+  if (typeof val === 'boolean') return '<span class="bool">' + val + '</span>';
+  if (typeof val === 'number') return '<span class="number">' + val + '</span>';
+  if (typeof val === 'string') {
+    const displayed = val.length > 120 ? val.slice(0, 120) + '…' : val;
+    return '<span class="string">"' + escapeHtml(displayed) + '"</span>';
+  }
+  if (typeof val === 'object') {
+    if (Array.isArray(val)) {
+      if (val.length === 0) return '<span class="null">[]</span>';
+      const preview = collapsed ? ` [${val.length} items]` : '';
+      const inner = val.map((item, i) => renderValue(item, i, true)).join(', ');
+      return `<span class="collapse ${collapsed ? 'closed' : 'open'}" onclick="toggle(this)"></span>[${preview}]${collapsed ? '' : '<div class="children">' + inner + '</div>'}`;
+    } else {
+      const keys = Object.keys(val);
+      if (keys.length === 0) return '<span class="null">{}</span>';
+      const preview = collapsed ? ' {' + keys.join(', ') + '}' : '';
+      return `<span class="collapse ${collapsed ? 'closed' : 'open'}" onclick="toggle(this)"></span>{${preview}}${collapsed ? '' : '<div class="children">' + keys.map(k => '<div class="node"><span class="key">"' + escapeHtml(k) + '":</span> ' + renderValue(val[k], k, true) + '</div>').join('') + '</div>'}`;
+    }
+  }
+  return String(val);
+}
+
+function renderNode(obj, key, root) {
+  if (root) {
+    const keys = Object.keys(obj);
+    return '<div class="children">' + keys.map(k => '<div class="node"><span class="key">"' + escapeHtml(k) + '":</span> ' + renderValue(obj[k], k, false) + '</div>').join('') + '</div>';
+  }
+  return renderValue(obj, key, false);
+}
+
+function toggle(el) {
+  el.classList.toggle('closed');
+  el.classList.toggle('open');
+  const children = el.parentElement.querySelector('.children');
+  if (children) children.style.display = el.classList.contains('closed') ? 'none' : 'block';
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+</script>
+</body>
+</html>

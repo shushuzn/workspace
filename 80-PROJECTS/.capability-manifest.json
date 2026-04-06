@@ -1,0 +1,210 @@
+[
+  {
+    "name": "a2a-router",
+    "description": "Agent-to-Agent Communication Router - MCP Server",
+    "keywords": [
+      "mcp",
+      "a2a",
+      "agent",
+      "communication",
+      "router"
+    ],
+    "path": "80-PROJECTS/a2a-router"
+  },
+  {
+    "name": "agent-arena",
+    "description": "AI Agent 养成竞技游戏",
+    "keywords": [
+      "game",
+      "AI",
+      "agents",
+      "battle",
+      "arena",
+      "svelte"
+    ],
+    "path": "80-PROJECTS/agent-arena"
+  },
+  {
+    "name": "agent-registry",
+    "description": "Cross-repo agent service registry and discovery — like Eureka/Consul for AI agents",
+    "keywords": [
+      "agent",
+      "registry",
+      "discovery",
+      "mcp",
+      "service"
+    ],
+    "path": "80-PROJECTS/agent-registry"
+  },
+  {
+    "name": "agentic-bpm",
+    "description": "项目",
+    "keywords": [],
+    "path": "80-PROJECTS/agentic-bpm"
+  },
+  {
+    "name": "code-agent",
+    "description": "Code Intelligence Agent - Semgrep + Tree-sitter analysis",
+    "keywords": [
+      "mcp",
+      "code-analysis",
+      "semgrep",
+      "tree-sitter",
+      "security",
+      "quality"
+    ],
+    "path": "80-PROJECTS/code-agent"
+  },
+  {
+    "name": "conceptual-distance-explorer",
+    "description": "A project for conceptual-distance-explorer",
+    "keywords": [
+      "automation",
+      "tool",
+      "automation",
+      "tool"
+    ],
+    "path": "80-PROJECTS/conceptual-distance-explorer"
+  },
+  {
+    "name": "crucix",
+    "description": "Local intelligence engine - 27 OSINT sources, live dashboard, public demo at crucix.live, auto-refresh, optional LLM layer.",
+    "keywords": [
+      "osint",
+      "intelligence",
+      "dashboard",
+      "geopolitical"
+    ],
+    "path": "80-PROJECTS/crucix"
+  },
+  {
+    "name": "idle-empire",
+    "description": "Premium idle incremental game built with Svelte 5",
+    "keywords": [
+      "idle",
+      "game",
+      "incremental",
+      "svelte",
+      "svelte5"
+    ],
+    "path": "80-PROJECTS/idle-empire"
+  },
+  {
+    "name": "knowledge-bridge",
+    "description": "",
+    "keywords": [],
+    "path": "80-PROJECTS/knowledge-bridge"
+  },
+  {
+    "name": "material-price-tracker",
+    "description": "原料期货监控 - PE/PP/PVC期货+采购价实时监控网页",
+    "keywords": [
+      "automation",
+      "tool",
+      "automation",
+      "tool"
+    ],
+    "path": "80-PROJECTS/material-price-tracker"
+  },
+  {
+    "name": "multi-agent-discuss",
+    "description": "A project for multi-agent-discuss",
+    "keywords": [
+      "automation",
+      "tool",
+      "automation",
+      "tool"
+    ],
+    "path": "80-PROJECTS/multi-agent-discuss"
+  },
+  {
+    "name": "multi-agent-hub",
+    "description": "Multi-agent orchestration platform - debate, news, code analysis via MCP",
+    "keywords": [
+      "CLI",
+      "multi-agent",
+      "discussion",
+      "AI",
+      "MiniMax"
+    ],
+    "path": "80-PROJECTS/multi-agent-hub"
+  },
+  {
+    "name": "openclaw-dashboard",
+    "description": "OpenClaw Workstation Dashboard",
+    "keywords": [
+      "automation",
+      "tool",
+      "automation",
+      "tool"
+    ],
+    "path": "80-PROJECTS/openclaw-dashboard"
+  },
+  {
+    "name": "opencli",
+    "description": "Make any website or Electron App your CLI. AI-powered.",
+    "keywords": [
+      "cli",
+      "browser",
+      "web",
+      "ai"
+    ],
+    "path": "80-PROJECTS/opencli"
+  },
+  {
+    "name": "openviking-mcp",
+    "description": "A project for openviking-mcp",
+    "keywords": [
+      "automation",
+      "tool",
+      "automation",
+      "tool"
+    ],
+    "path": "80-PROJECTS/openviking-mcp"
+  },
+  {
+    "name": "pla-degradation-research",
+    "description": "",
+    "keywords": [],
+    "path": "80-PROJECTS/pla-degradation-research"
+  },
+  {
+    "name": "rl-trading",
+    "description": "项目",
+    "keywords": [],
+    "path": "80-PROJECTS/rl-trading"
+  },
+  {
+    "name": "star-forge-web",
+    "description": "React 19 web frontend for StarForge with Vite",
+    "keywords": [
+      "react",
+      "vite",
+      "web",
+      "frontend",
+      "react19"
+    ],
+    "path": "80-PROJECTS/star-forge-web"
+  },
+  {
+    "name": "stock-analysis-agent",
+    "description": "A project for stock-analysis-agent",
+    "keywords": [
+      "automation",
+      "tool"
+    ],
+    "path": "80-PROJECTS/stock-analysis-agent"
+  },
+  {
+    "name": "task-orchestrator",
+    "description": "AI-powered task chain orchestrator - browser automation + CLI registry",
+    "keywords": [],
+    "path": "80-PROJECTS/task-orchestrator"
+  },
+  {
+    "name": "tinyspeak",
+    "description": "项目",
+    "keywords": [],
+    "path": "80-PROJECTS/tinyspeak"
+  }
+]

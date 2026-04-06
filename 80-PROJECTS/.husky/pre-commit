@@ -1,19 +1,28 @@
 #!/usr/bin/env sh
 # Workspace-level husky pre-commit hook
-# Usage: in any project under 80-PROJECTS/, run:
-#   git config core.hooksPath ../../.husky
-# This hook runs lint-staged on staged files
+# Smart: only type-checks projects with staged .ts/.js changes
 
 cd "$(git rev-parse --show-toplevel)" || exit 1
 
-# Find workspace root (contains .lintstagedrc.js)
+# Find workspace root
 WORKSPACE_ROOT="$(git rev-parse --show-toplevel)"
 while [ "$WORKSPACE_ROOT" != "/" ] && [ ! -f "$WORKSPACE_ROOT/.lintstagedrc.js" ]; do
   WORKSPACE_ROOT="$(dirname "$WORKSPACE_ROOT")"
 done
 
+# Run lint-staged
 if [ -f "$WORKSPACE_ROOT/.lintstagedrc.js" ]; then
   npx lint-staged --config "$WORKSPACE_ROOT/.lintstagedrc.js"
-else
-  npx lint-staged
+fi
+
+# Smart type-check: only check projects with staged .ts/.js changes
+CHANGED=$(git diff --cached --name-only 2>/dev/null | grep '\.\(ts\|tsx\|js\|mjs\)$' | sed 's|/[^/]*$||' | sort -u)
+
+if [ -n "$CHANGED" ]; then
+  echo "Type-checking changed projects: $CHANGED"
+  for dir in $CHANGED; do
+    if [ -f "$WORKSPACE_ROOT/../$dir/tsconfig.json" ]; then
+      npx tsc --noEmit --project "$WORKSPACE_ROOT/../$dir/tsconfig.json" 2>/dev/null && echo "  ✓ $dir" || echo "  ✗ $dir"
+    fi
+  done
 fi
