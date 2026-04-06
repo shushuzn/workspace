@@ -1,0 +1,266 @@
+{
+  "built": "2026-04-06T20:01:21.961Z",
+  "count": 52,
+  "entries": [
+    {
+      "path": ".claude\\helpers\\README.md",
+      "title": "helpers",
+      "description": "This directory contains helper scripts and utilities for V3 development."
+    },
+    {
+      "path": ".omc\\patrol-agent\\README.md",
+      "title": "patrol-agent",
+      "description": "An autonomous workspace patrol agent that continuously巡逻 workspace:"
+    },
+    {
+      "path": "01-CONFIG\\git-hooks\\README.md",
+      "title": "git-hooks",
+      "description": "These hooks enforce workspace organization rules and coding standards."
+    },
+    {
+      "path": "01-CONFIG\\obsidian\\README.md",
+      "title": "obsidian",
+      "description": "**创建时间:** 2026-03-05 17:30"
+    },
+    {
+      "path": "20-MATH\\quadratic-algebra-fibonacci\\README.md",
+      "title": "quadratic-algebra-fibonacci",
+      "description": "> **来源**: [arXiv:2603.19343v1](https://arxiv.org/abs/2603.19343)"
+    },
+    {
+      "path": "30-AGENTS\\installed\\README.md",
+      "title": "installed",
+      "description": "**来源：** mergisi/awesome-openclaw-agents"
+    },
+    {
+      "path": "40-TOOLS\\crucix-alerts\\README.md",
+      "title": "crucix-alerts",
+      "description": "import { TelegramAlerter } from './index.mjs';"
+    },
+    {
+      "path": "40-TOOLS\\crucix-delta\\README.md",
+      "title": "crucix-delta",
+      "description": "import { computeDelta, MemoryManager } from './index.mjs';"
+    },
+    {
+      "path": "40-TOOLS\\crucix-i18n\\README.md",
+      "title": "crucix-i18n",
+      "description": "import { t, getLocale, getLanguage, getSupportedLocales } from './i18n.mjs';"
+    },
+    {
+      "path": "40-TOOLS\\crucix-llm\\README.md",
+      "title": "crucix-llm",
+      "description": "| Provider | Package | Auth |"
+    },
+    {
+      "path": "80-PROJECTS\\50-ton-hackathon-2026\\README.md",
+      "title": "50-ton-hackathon-2026",
+      "description": "- **路径**: D:\\OpenClaw\\workspace\\80-PROJECTS\\50-ton-hackathon-2026"
+    },
+    {
+      "path": "80-PROJECTS\\a2a-router\\README.md",
+      "title": "a2a-router",
+      "description": "Agent-to-Agent Communication Router — MCP Server 实现，支持多协议、多能力注册、智能路由。"
+    },
+    {
+      "path": "80-PROJECTS\\agent-arena\\README.md",
+      "title": "agent-arena",
+      "description": ""
+    },
+    {
+      "path": "80-PROJECTS\\agent-registry\\README.md",
+      "title": "agent-registry",
+      "description": "> Service registry and discovery for AI agents — like Eureka/Consul, but built for AI."
+    },
+    {
+      "path": "80-PROJECTS\\agentic-bpm\\README.md",
+      "title": "agentic-bpm",
+      "description": "**AI-Driven Business Process Management** — 智能业务流程管理系统"
+    },
+    {
+      "path": "80-PROJECTS\\AI-Scientist-v2\\README.md",
+      "title": "AI-Scientist-v2",
+      "description": "<a href=\"https://github.com/SakanaAI/AI-Scientist_v2/blob/main/docs/logo_v1.jpg\">"
+    },
+    {
+      "path": "80-PROJECTS\\claude-code-main\\README.md",
+      "title": "claude-code-main",
+      "description": "> The primary `src/` tree in this repository is now dedicated to **Python porting work**. The March 31, 2026 Claude Code"
+    },
+    {
+      "path": "80-PROJECTS\\CLI-Anything\\README.md",
+      "title": "CLI-Anything",
+      "description": "<strong>Today's Software Serves Humans👨‍💻. Tomorrow's Users will be Agents🤖.<br>"
+    },
+    {
+      "path": "80-PROJECTS\\code-agent\\README.md",
+      "title": "code-agent",
+      "description": "Code Intelligence Agent - Semgrep + Tree-sitter 代码分析。"
+    },
+    {
+      "path": "80-PROJECTS\\conceptual-distance-explorer\\README.md",
+      "title": "conceptual-distance-explorer",
+      "description": "A project for conceptual-distance-explorer"
+    },
+    {
+      "path": "80-PROJECTS\\crucix\\README.md",
+      "title": "crucix",
+      "description": "**Your own intelligence terminal. 27 sources. One command. Zero cloud.**"
+    },
+    {
+      "path": "80-PROJECTS\\idle-empire\\README.md",
+      "title": "idle-empire",
+      "description": "**Premium挂机放置游戏 - 进化版**"
+    },
+    {
+      "path": "80-PROJECTS\\knowledge-bridge\\README.md",
+      "title": "knowledge-bridge",
+      "description": "- **路径**: D:\\OpenClaw\\workspace\\80-PROJECTS\\knowledge-bridge"
+    },
+    {
+      "path": "80-PROJECTS\\material-price-tracker\\README.md",
+      "title": "material-price-tracker",
+      "description": "> material-price-tracker"
+    },
+    {
+      "path": "80-PROJECTS\\MiroFish\\README.md",
+      "title": "MiroFish",
+      "description": "<img src=\"./static/image/MiroFish_logo_compressed.jpeg\" alt=\"MiroFish Logo\" width=\"75%\"/>"
+    },
+    {
+      "path": "80-PROJECTS\\multi-agent-discuss\\README.md",
+      "title": "multi-agent-discuss",
+      "description": "- **路径**: D:\\OpenClaw\\workspace\\80-PROJECTS\\multi-agent-discuss"
+    },
+    {
+      "path": "80-PROJECTS\\multi-agent-hub\\README.md",
+      "title": "multi-agent-hub",
+      "description": "多人格 AI 圆桌讨论 CLI，通过动态温度调度探索观点多样性。"
+    },
+    {
+      "path": "80-PROJECTS\\news-workflow-engine\\README.md",
+      "title": "news-workflow-engine",
+      "description": "**智能新闻工作流引擎** - 整合 NewsHub + agentic-bpm + patrol-agent"
+    },
+    {
+      "path": "80-PROJECTS\\NewsHub\\README.md",
+      "title": "NewsHub",
+      "description": "- **多源抓取**: 新浪财经、华尔街日报、36氪、虎嗅、TechCrunch 等 7+ 新闻源"
+    },
+    {
+      "path": "80-PROJECTS\\openclaw-dashboard\\README.md",
+      "title": "openclaw-dashboard",
+      "description": "OpenClaw Workstation Dashboard — A Self-Evolving Workspace Optimizer"
+    },
+    {
+      "path": "80-PROJECTS\\opencli\\README.md",
+      "title": "opencli",
+      "description": "> **Make any website, Electron App, or Local Tool your CLI.**"
+    },
+    {
+      "path": "80-PROJECTS\\openviking-mcp\\README.md",
+      "title": "openviking-mcp",
+      "description": "Context database MCP server for AI agents, providing cross-project knowledge sharing, session persistence, and context r"
+    },
+    {
+      "path": "80-PROJECTS\\pla-degradation-research\\README.md",
+      "title": "pla-degradation-research",
+      "description": "- **路径**: D:\\OpenClaw\\workspace\\80-PROJECTS\\pla-degradation-research"
+    },
+    {
+      "path": "80-PROJECTS\\public-apis\\README.md",
+      "title": "public-apis",
+      "description": "The Public APIs repository is manually curated by community members like you and folks working at [APILayer](https://api"
+    },
+    {
+      "path": "80-PROJECTS\\quadratic-algebra-fibonacci\\README.md",
+      "title": "quadratic-algebra-fibonacci",
+      "description": "二次代数与斐波那契数研究 - 验证 Marco Mantovanelli 的论文 arxiv.org/abs/2603.19343v1。"
+    },
+    {
+      "path": "80-PROJECTS\\rl-trading\\README.md",
+      "title": "rl-trading",
+      "description": ""
+    },
+    {
+      "path": "80-PROJECTS\\self-evolving-orchestrator\\README.md",
+      "title": "self-evolving-orchestrator",
+      "description": "A Go-based task orchestration system that self-evolves its decomposition strategy based on execution outcomes. Uses a st"
+    },
+    {
+      "path": "80-PROJECTS\\star-forge-web\\README.md",
+      "title": "star-forge-web",
+      "description": "<!-- COVERAGE_BADGE -->"
+    },
+    {
+      "path": "80-PROJECTS\\stock-analysis-agent\\README.md",
+      "title": "stock-analysis-agent",
+      "description": "ReAct-based AI agent for stock market analysis. Takes natural language queries and produces comprehensive investment ana"
+    },
+    {
+      "path": "80-PROJECTS\\task-orchestrator\\README.md",
+      "title": "task-orchestrator",
+      "description": "Chain opencli (browser) + CLI-Anything (software) via a rule-based task planner."
+    },
+    {
+      "path": "80-PROJECTS\\tinyspeak\\README.md",
+      "title": "tinyspeak",
+      "description": "**Lightweight Local-First TTS Tool** — 隐私优先、离线运行的文字转语音工具。"
+    },
+    {
+      "path": "active_skills\\2slides-skills\\README.md",
+      "title": "2slides-skills",
+      "description": "AI-powered presentation generation using the [2slides API](https://2slides.com). This Claude Code skill enables you to c"
+    },
+    {
+      "path": "active_skills\\adhd-founder-planner\\README.md",
+      "title": "adhd-founder-planner",
+      "description": "**A bullet journal style planner that works WITH your ADHD brain, not against it.** Built by [ADHD-founder.com](https://"
+    },
+    {
+      "path": "active_skills\\README.md",
+      "title": "active_skills",
+      "description": "All skill projects in this directory. Each skill is a standalone Claude Code skill with its own `SKILL.md`."
+    },
+    {
+      "path": "awesome-openclaw-agents\\agents\\README.md",
+      "title": "agents",
+      "description": "177 production-ready `SOUL.md` templates across 24 categories."
+    },
+    {
+      "path": "awesome-openclaw-agents\\quickstart\\README.md",
+      "title": "quickstart",
+      "description": "Get a working AI agent running in under 5 minutes. No account needed."
+    },
+    {
+      "path": "awesome-openclaw-agents\\README.md",
+      "title": "awesome-openclaw-agents",
+      "description": "> A curated collection of **187 production-ready AI agent templates** for the OpenClaw ecosystem. Every template is a co"
+    },
+    {
+      "path": "knowledge\\wikipedia\\README.md",
+      "title": "wikipedia",
+      "description": "维基百科风格知识库，支持 `[[wiki-link]]` 、分类、标签、前向/反向链接追踪。**用 Obsidian 作为编辑器**。"
+    },
+    {
+      "path": "oh-my-openagent\\README.md",
+      "title": "oh-my-openagent",
+      "description": "> [![Sisyphus Labs - Sisyphus is the agent that codes like your team.](./.github/assets/sisyphuslabs.png?v=2)](https://s"
+    },
+    {
+      "path": "openclaude\\README.md",
+      "title": "openclaude",
+      "description": "OpenClaude is an open-source coding-agent CLI that works with more than one model provider."
+    },
+    {
+      "path": "README.md",
+      "title": "workspace",
+      "description": "> OpenClaw AI Workstation — 全能力自进化智能体工作站"
+    },
+    {
+      "path": "worktrees\\newshub-observability\\README.md",
+      "title": "newshub-observability",
+      "description": "- **多源抓取**: 新浪财经、华尔街日报、36氪、虎嗅、TechCrunch 等 7+ 新闻源"
+    }
+  ]
+}
