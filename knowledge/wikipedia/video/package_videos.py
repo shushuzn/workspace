@@ -17,26 +17,22 @@ def get_article_dir(relative_path):
     return ARTICLES_DIR / relative_path
 
 def find_all_video_dirs():
-    """扫描 articles/ 下所有含 .mp4 的子目录，保留路径最深的"""
-    all_dirs = []
-    for mp4 in ARTICLES_DIR.rglob("*.mp4"):
-        if "scene" in mp4.stem:
+    """扫描 articles/ai/*/ 下含 *论文解读.mp4 的目录，排除 dist/"""
+    dirs = []
+    ai_dir = ARTICLES_DIR / "ai"
+    if not ai_dir.is_dir():
+        return dirs
+    for slug_dir in ai_dir.iterdir():
+        if not slug_dir.is_dir():
             continue
-        # Skip packaging outputs: original mp4s are at relative depth ≤3 under articles/
-        rel_parts = mp4.relative_to(ARTICLES_DIR).parts
-        if len(rel_parts) > 3:
+        candidates = list(slug_dir.glob("*论文解读.mp4"))
+        if not candidates:
             continue
-        all_dirs.append(mp4.parent)
-    # Sort by depth (deepest first), then dedupe preferring longer paths
-    all_dirs.sort(key=lambda p: -len(p.parts))
-    seen = set()
-    result = []
-    for d in all_dirs:
-        if d not in seen:
-            result.append(d)
-            for parent in d.parents:
-                seen.add(parent)
-    return result
+        mp4 = candidates[0]
+        if mp4.parent.name == "dist":
+            continue
+        dirs.append(slug_dir)
+    return dirs
 
 def find_intro_md(article_dir):
     """在文章目录下找标题简介.md 或类似文件"""
@@ -57,10 +53,8 @@ def package_video(article_dir, dry_run=False):
         return "SKIP", "无论文解读.mp4"
     mp4 = mp4_files[0]
 
-    # 子文件夹名 = 目录名（如 05-Out-of-Domain-Stress-Test）
-    folder_name = article_dir.name
-    dst = article_dir / folder_name
-
+    # 固定输出目录 dist/，永远不随 run 次数嵌套
+    dst = article_dir / "dist"
     if not dry_run:
         dst.mkdir(exist_ok=True)
 
@@ -68,7 +62,7 @@ def package_video(article_dir, dry_run=False):
     dst_mp4 = dst / mp4.name
     if not dry_run:
         shutil.copy2(mp4, dst_mp4)
-    mp4_status = f"  {mp4.name} → {dst_mp4.relative_to(article_dir)}"
+    mp4_status = f"  {mp4.name} → dist/{dst_mp4.name}"
 
     # 找标题简介
     intro = find_intro_md(article_dir)
@@ -76,7 +70,7 @@ def package_video(article_dir, dry_run=False):
         dst_intro = dst / "标题简介.md"
         if not dry_run:
             shutil.copy2(intro, dst_intro)
-        intro_status = f"  {intro.name} → {dst_intro.relative_to(article_dir)}"
+        intro_status = f"  {intro.name} → dist/{dst_intro.name}"
     else:
         intro_status = "  [WARN] 无标题简介.md，跳过"
 
