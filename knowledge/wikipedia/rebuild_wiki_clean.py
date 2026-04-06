@@ -1,55 +1,68 @@
-import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync } from 'fs';
-import { join, dirname, basename } from 'path';
-import { fileURLToPath } from 'url';
+#!/usr/bin/env python3
+"""Rebuild wiki.mjs cleanly: proper INDEX_HTML, generateSceneCode, all commands."""
+import os, re
 
-const __DIR = dirname(fileURLToPath(import.meta.url));
-const ARTICLES_DIR = join(__DIR, 'articles');
-const INDEX_JSON = join(__DIR, 'index.json');
-const INDEX_HTML = join(__DIR, 'index.html');
+os.chdir(r'D:\OpenClaw\workspace\knowledge\wikipedia')
 
-// ── Helpers ──────────────────────────────────────────────────
-const { execSync: exec } = await import('child_process');
+# ============================================================
+# PART 1: INDEX_HTML constant (fixed, no nested template)
+# ============================================================
+INDEX_HTML = r'''<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wiki</title>
+  <style>
+    body { font-family: sans-serif; max-width: 900px; margin: 2rem auto; padding: 0 1rem; background: #f9f9f9; }
+    h1 { border-bottom: 2px solid #ddd; padding-bottom: .5rem; }
+    .cat { margin: 1.5rem 0; }
+    .cat h2 { color: #333; font-size: 1.2rem; }
+    .art { padding: .4rem 0; border-bottom: 1px solid #eee; }
+    .art.orphan { color: #888; }
+    .art a { text-decoration: none; color: #1a5f7a; }
+    .art.orphan a { color: #aaa; }
+    .tags { font-size: .85rem; color: #666; margin-top: .2rem; }
+    .tag { background: #e8f4f8; padding: .1rem .4rem; border-radius: 3px; margin-right: .3rem; }
+    .orphan-badge { background: #ffe0e0; color: #c00; font-size: .75rem; padding: .1rem .3rem; border-radius: 3px; margin-left: .5rem; }
+    .search-box { width: 100%; padding: .6rem; font-size: 1rem; border: 2px solid #ddd; border-radius: 6px; margin-bottom: 1.5rem; box-sizing: border-box; }
+    .search-box:focus { border-color: #1a5f7a; outline: none; }
+  </style>
+</head>
+<body>
+  <h1>Wiki</h1>
+  <input class="search-box" id="searchBox" placeholder="搜索..." oninput="filter()">
+  <div id="content"></div>
+  <script src="index.json" defer></script>
+  <script>
+    const cats = ['AI','math','security','未分类'];
+    const filtered = idx.articles.slice();
+    function filter() {
+      const q = document.getElementById('searchBox').value.toLowerCase();
+      const filtered = q ? idx.articles.filter(a => a.title.toLowerCase().includes(q) || (a.tags && a.tags.some(t => t.toLowerCase().includes(q)))) : idx.articles.slice();
+      document.getElementById('content').innerHTML = cats.map(cat => {
+        const catArts = filtered.filter(a => a.category === cat);
+        return '<div class="cat"><h2>' + cat + ' (' + catArts.length + ')</h2>' + catArts.map(a =>
+          '<div class="art' + (a.orphan ? ' orphan' : '') + '"><a href="/' + a.id + '">' + a.title + '</a>' +
+          (a.tags && a.tags.length ? '<div class="tags">' + a.tags.map(t => '<span class="tag">' + t + '</span>').join('') + '</div>' : '') + '</div>'
+        ).join('') + '</div>';
+      }).join('');
+    }
+    document.getElementById('content').innerHTML = cats.map(cat => {
+      const catArts = filtered.filter(a => a.category === cat);
+      return '<div class="cat"><h2>' + cat + ' (' + catArts.length + ')</h2>' + catArts.map(a =>
+        '<div class="art' + (a.orphan ? ' orphan' : '') + '"><a href="/' + a.id + '">' + a.title + '</a>' +
+        (a.tags && a.tags.length ? '<div class="tags">' + a.tags.map(t => '<span class="tag">' + t + '</span>').join('') + '</div>' : '') + '</div>'
+      ).join('') + '</div>';
+    }).join('');
+  </script>
+</body>
+</html>'''
 
-function slugify(text) {
-  return text.toLowerCase()
-    .replace(/[^\w\s-]/g, '')
-    .replace(/[\s_]+/g, '-')
-    .replace(/^-+|-+$/g, '');
-}
-
-function loadIndex() {
-  if (!existsSync(INDEX_JSON)) return { articles: [], categories: [] };
-  return JSON.parse(readFileSync(INDEX_JSON, 'utf8'));
-}
-
-function saveIndex(idx) {
-  writeFileSync(INDEX_JSON, JSON.stringify(idx, null, 2));
-}
-
-// ── arXiv API ────────────────────────────────────────────────
-async function fetchArxivMeta(id) {
-  try {
-    const res = await fetch(`http://arxiv.org/abs/${id}`);
-    if (!res.ok) return null;
-    const html = await res.text();
-    const title = (html.match(/<title>([^<]+)<\/title>/i) || [])[1] || '';
-    const authors = (html.match(/<meta name="citation_authors" content="([^"]+)"/i) || [])[1] || '';
-    const abstract = (html.match(/<meta name="citation_abstract" content="([^"]+)"/i) || [])[1] || '';
-    const match = id.match(/(\d+\.\d+)/);
-    const ver = match ? match[1] : id;
-    if (!title) return null;
-    return {
-      title: title.replace(/\s+/g, ' ').trim(),
-      authors: authors.replace(/\s+/g, ' ').trim(),
-      abstract: abstract.replace(/\s+/g, ' ').trim(),
-      arxivId: ver,
-      category: 'AI',
-    };
-  } catch { return null; }
-}
-
-// ── Scene Parse ──────────────────────────────────────────────
-// ── Scene Code Generator ──────────────────────────────────────────────────────
+# ============================================================
+# PART 2: generateSceneCode function
+# ============================================================
+GENERATE_SCENE_CODE = r'''// ── Scene Code Generator ──────────────────────────────────────────────────────
 function generateSceneCode(sceneNum, desc, funcName) {
   const kw = desc.toLowerCase();
   let figType = 'generic';
@@ -136,7 +149,63 @@ function generateSceneCode(sceneNum, desc, funcName) {
            '    ax.text(6, 4, "' + d + '", ha="center", va="center", fontsize=14)';
   }
 }
+'''
 
+# ============================================================
+# PART 3: Main wiki.mjs content
+# ============================================================
+WIKI_MJS = '''import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync, execSync } from 'fs';
+import { join, dirname, basename } from 'path';
+import { fileURLToPath } from 'url';
+
+const __DIR = dirname(fileURLToPath(import.meta.url));
+const ARTICLES_DIR = join(__DIR, 'articles');
+const INDEX_JSON = join(__DIR, 'index.json');
+const INDEX_HTML = join(__DIR, 'index.html');
+
+// ── Helpers ──────────────────────────────────────────────────
+const { execSync: exec } = await import('child_process');
+
+function slugify(text) {
+  return text.toLowerCase()
+    .replace(/[^\\w\\s-]/g, '')
+    .replace(/[\\s_]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+function loadIndex() {
+  if (!existsSync(INDEX_JSON)) return { articles: [], categories: [] };
+  return JSON.parse(readFileSync(INDEX_JSON, 'utf8'));
+}
+
+function saveIndex(idx) {
+  writeFileSync(INDEX_JSON, JSON.stringify(idx, null, 2));
+}
+
+// ── arXiv API ────────────────────────────────────────────────
+async function fetchArxivMeta(id) {
+  try {
+    const res = await fetch(`http://arxiv.org/abs/${id}`);
+    if (!res.ok) return null;
+    const html = await res.text();
+    const title = (html.match(/<title>([^<]+)<\\/title>/i) || [])[1] || '';
+    const authors = (html.match(/<meta name="citation_authors" content="([^"]+)"/i) || [])[1] || '';
+    const abstract = (html.match(/<meta name="citation_abstract" content="([^"]+)"/i) || [])[1] || '';
+    const match = id.match(/(\\d+\\.\\d+)/);
+    const ver = match ? match[1] : id;
+    if (!title) return null;
+    return {
+      title: title.replace(/\\s+/g, ' ').trim(),
+      authors: authors.replace(/\\s+/g, ' ').trim(),
+      abstract: abstract.replace(/\\s+/g, ' ').trim(),
+      arxivId: ver,
+      category: 'AI',
+    };
+  } catch { return null; }
+}
+
+// ── Scene Parse ──────────────────────────────────────────────
+''' + GENERATE_SCENE_CODE + '''
 
 // ── Commands ─────────────────────────────────────────────────
 const cmd = process.argv[2];
@@ -184,7 +253,7 @@ target_audience: 科普观众
     writeFileSync(file, content);
     console.log('[wiki] Video script created:', file);
   } else {
-    const tagLine = tags.length ? `\ntags: [${tags.join(', ')}]` : '';
+    const tagLine = tags.length ? `\\ntags: [${tags.join(', ')}]` : '';
     writeFileSync(file,
 `---
 id: ${id}
@@ -210,7 +279,7 @@ created: ${new Date().toISOString()}
   const url = process.argv[3];
   if (!url) { console.log('Usage: node wiki.mjs ingest <arxiv-url>'); process.exit(1); }
 
-  const idMatch = url.match(/(\d+\.\d+)/);
+  const idMatch = url.match(/(\\d+\\.\\d+)/);
   if (!idMatch) { console.error('[wiki] Invalid arXiv URL'); process.exit(1); }
   const id = idMatch[1];
 
@@ -225,7 +294,7 @@ created: ${new Date().toISOString()}
   const file = join(ARTICLES_DIR, category, slugDir, slug + '.md');
 
   const tags = ['论文解读', meta.arxivId];
-  const tagLine = `\ntags: [${tags.join(', ')}]`;
+  const tagLine = `\\ntags: [${tags.join(', ')}]`;
 
   writeFileSync(file, `---
 id: ${slug}
@@ -289,7 +358,7 @@ ${meta.abstract || '(暂无摘要)'}
   }
   saveIndex(idx);
   writeFileSync(INDEX_HTML, INDEX_HTML);
-  console.log('\n[wiki] Synced', idx.articles.length, 'articles');
+  console.log('\\n[wiki] Synced', idx.articles.length, 'articles');
 
 } else if (cmd === 'search') {
   const query = process.argv[3];
@@ -302,16 +371,16 @@ ${meta.abstract || '(暂无摘要)'}
   );
   if (results.length === 0) { console.log('No results.'); process.exit(0); }
   results.forEach((a, i) => console.log('  ' + (i+1) + '. [' + a.category + '] ' + a.title));
-  console.log('\nTotal:', results.length);
+  console.log('\\nTotal:', results.length);
 
 } else if (cmd === 'list') {
   const idx = loadIndex();
   for (const cat of idx.categories) {
     const arts = idx.articles.filter(a => a.category === cat);
-    console.log('\n# ' + cat + ' (' + arts.length + ')\n');
+    console.log('\\n# ' + cat + ' (' + arts.length + ')\\n');
     arts.forEach(a => console.log('  - ' + a.title));
   }
-  console.log('\nTotal articles:', idx.articles.length);
+  console.log('\\nTotal articles:', idx.articles.length);
 
 } else if (cmd === 'linkcheck') {
   const idx = loadIndex();
@@ -322,14 +391,14 @@ ${meta.abstract || '(暂无摘要)'}
     const file = join(ARTICLES_DIR, a.file);
     if (!existsSync(file)) continue;
     const content = readFileSync(file, 'utf8');
-    const links = [...content.matchAll(/\[\[([^\]]+)\]\]/g)].map(m => m[1]);
+    const links = [...content.matchAll(/\\[\\[([^\\]]+)\\]\\]/g)].map(m => m[1]);
     for (const link of links) {
-      const target = byId[link] || byId[link.replace(/\s+/g, '-').toLowerCase()];
+      const target = byId[link] || byId[link.replace(/\\s+/g, '-').toLowerCase()];
       if (!target) { console.log('  [BROKEN]', link, '-> in', a.title); errors++; }
     }
   }
   if (errors === 0) console.log('All links OK.');
-  else console.log('\nTotal broken:', errors);
+  else console.log('\\nTotal broken:', errors);
 
 } else if (cmd === 'backlinks') {
   const title = process.argv[3];
@@ -375,16 +444,16 @@ ${meta.abstract || '(暂无摘要)'}
   if (!existsSync(scriptFile)) { console.error('[wiki] File not found:', scriptFile); process.exit(1); }
 
   const content = readFileSync(scriptFile, 'utf8');
-  const frontmatterMatch = content.match(/^---\n([\s\S]+?)\n---\n/);
+  const frontmatterMatch = content.match(/^---\\n([\\s\\S]+?)\\n---\\n/);
   if (!frontmatterMatch) { console.error('[wiki] No frontmatter found'); process.exit(1); }
 
   const frontmatter = frontmatterMatch[1];
-  const titleMatch = frontmatter.match(/^title:\s*(.+)$/m);
+  const titleMatch = frontmatter.match(/^title:\\s*(.+)$/m);
   const title = titleMatch ? titleMatch[1].trim() : 'Untitled';
 
   const body = content.slice(frontmatterMatch[0].length);
   const sceneBlocks = [];
-  const sceneRegex = /\[画面：([^\]]+)\]/g;
+  const sceneRegex = /\\[画面：([^\\]]+)\\]/g;
   let match;
   let lastEnd = 0;
   const textBlocks = [];
@@ -417,12 +486,12 @@ ${meta.abstract || '(暂无摘要)'}
 
   // Output
   const slug = slugify(title);
-  console.log('\n# Scene Parse:', title);
-  console.log('\n## Scene Keys (add to SCENE_DRAWERS):\n');
+  console.log('\\n# Scene Parse:', title);
+  console.log('\\n## Scene Keys (add to SCENE_DRAWERS):\\n');
   for (const { key, desc, func } of sceneKeys) {
     console.log("  '" + key + "': " + func + ',');
   }
-  console.log('\n## Generated Code (add to draw_scene.py):\n');
+  console.log('\\n## Generated Code (add to draw_scene.py):\\n');
   for (let i = 0; i < sceneKeys.length; i++) {
     const { key, desc, func, text } = sceneKeys[i];
     const code = generateSceneCode(i + 1, desc, func);
@@ -446,3 +515,10 @@ Commands:
   scene-parse <video-script.md>
 `);
 }
+'''
+
+# Write the complete file
+with open('wiki.mjs', 'w', encoding='utf-8') as f:
+    f.write(WIKI_MJS)
+
+print('wiki.mjs written, lines:', WIKI_MJS.count('\n'))
