@@ -45,18 +45,21 @@ node wiki.mjs edit <标题>           # Obsidian中人工填充"研究动机/核
 node wiki.mjs sync                  # 同步索引，检测wiki-link断链
 ```
 
-### 视频生产流水线（手动）
+### 视频生产流水线（手动，双版本：科普版+专业版）
 
 1. `node wiki.mjs edit <标题>` 编辑带 frontmatter 和 `[画面：]` 标注的视频脚本（01-xxx.md）
 2. **手动**：去掉 frontmatter 和所有 `[画面：...]` 行，保存为 `NN-标题-阅读文案.txt`
 3. **手动**：替换文案中 Unicode 数学符号为可读英文发音（σ₁→sigma 1，λᵢ→lambda i，Yang-Baxter→杨-巴克斯特 等），保存为 `NN-标题-阅读文案-speech.txt`
-4. `python video/check_script.py` 质量门禁（禁用词、术语解释、字数），不通过则修改文案
-5. `python video/generate_speech.py` 生成语音 MP3
-6. `python video/draw_scene.py` 生成封面图和所有配图
+4. **手动**：按上述规则创建英文专业版文案 `NN-标题-阅读文案-speech-en.txt`
+5. `python video/check_script.py` 质量门禁（禁用词、术语解释、字数），不通过则修改文案
+6. `python video/generate_speech.py` 生成语音 MP3（自动识别 -en 文件用 en-US-AriaNeural）
+7. `python video/draw_scene.py` 生成封面图和所有配图
    - 封面图：只显示标题，不显示简介，比例 12×8
    - 配图：与文案中的 `[画面：...]` 标注一一对应，比例统一 12×8
-7. `python video/make_video.py` 合成视频 MP4（多画面按时序切换）
-8. `python video/package_videos.py` 打包视频和简介到 `NN-标题/` 文件夹
+8. `python video/make_video.py` 合成视频 MP4（多画面按时序切换，自动处理双版本）
+9. `python video/package_videos.py` 打包：
+   - 中文版（论文解读.mp4 + 标题简介.md）→ `dist/`
+   - 英文版（论文解读-en.mp4）→ `dist-en/`
 
 ### 配图规范
 
