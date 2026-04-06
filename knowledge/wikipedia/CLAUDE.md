@@ -1,6 +1,6 @@
 # Wikipedia 知识库项目规范
 
-> 版本：v1.4 | 更新日期：2026-04-07
+> 版本：v1.5 | 更新日期：2026-04-07
 
 ## 项目定位
 
@@ -50,12 +50,13 @@ node wiki.mjs sync                  # 同步索引，检测wiki-link断链
 1. `node wiki.mjs edit <标题>` 编辑带 frontmatter 和 `[画面：]` 标注的视频脚本（01-xxx.md）
 2. **手动**：去掉 frontmatter 和所有 `[画面：...]` 行，保存为 `NN-标题-阅读文案.txt`
 3. **手动**：替换文案中 Unicode 数学符号为可读英文发音（σ₁→sigma 1，λᵢ→lambda i，Yang-Baxter→杨-巴克斯特 等），保存为 `NN-标题-阅读文案-speech.txt`
-4. `python video/generate_speech.py` 生成语音 MP3
-5. `python video/draw_scene.py` 生成封面图和所有配图
+4. `python video/check_script.py` 质量门禁（禁用词、术语解释、字数），不通过则修改文案
+5. `python video/generate_speech.py` 生成语音 MP3
+6. `python video/draw_scene.py` 生成封面图和所有配图
    - 封面图：只显示标题，不显示简介，比例 12×8
    - 配图：与文案中的 `[画面：...]` 标注一一对应，比例统一 12×8
-6. `python video/make_video.py` 合成视频 MP4（多画面按时序切换）
-7. `python video/package_videos.py` 打包视频和简介到 `NN-标题/` 文件夹
+7. `python video/make_video.py` 合成视频 MP4（多画面按时序切换）
+8. `python video/package_videos.py` 打包视频和简介到 `NN-标题/` 文件夹
 
 ### 配图规范
 
