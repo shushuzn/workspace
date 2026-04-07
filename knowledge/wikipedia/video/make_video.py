@@ -309,7 +309,7 @@ def make_video_multi(img_paths, audio_path, output_path, bitrate=None, scene_key
 
     size_bytes = output_path.stat().st_size
     trans_str = f"+xfade({trans:.1f}s)" if (use_transitions and n > 1) else ""
-    print(f"  [OK] {output_path.name} ({size_bytes:,} bytes, {n} scenes x {seg_duration:.1f}s, KB{{xfade}}{trans_str}, CRF={crf})")
+    print(f"  [OK] {output_path.name} ({size_bytes:,} bytes, {n} scenes x {seg_duration:.1f}s, KBxfade{trans_str}, CRF={crf})")
     return True
 
 
@@ -354,7 +354,7 @@ def infer_scene_key(mp3_path):
     if any(k in name for k in ['formula', 'le_', 'burau', 'abelian', 'band', ' braid', 'cloud_graph']):
         return 'formula'
     # 封面/标题 → 较高 CRF
-    if 'cover' in name or len(mp3_path.parent.glob("*-scene-*.png")) <= 1:
+    if 'cover' in name or len(list(mp3_path.parent.glob("*-scene-*.png"))) <= 1:
         return 'cover'
     # 图表/流程 → 中等
     return 'scene'
