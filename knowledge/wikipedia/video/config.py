@@ -35,7 +35,7 @@ EDGE_VOICE_ZH = "zh-CN-XiaoyiNeural"
 EDGE_VOICE_EN = "en-US-AriaNeural"
 
 # Kokoro-82M 音色（需先运行 python -m kokoro_kai.generate --install 下载）
-KOKORO_VOICE_ZH = "zf_002"   # 中文女声（温柔）
+KOKORO_VOICE_ZH = "zf_xiaoyi"   # 中文女声（匹配 edge XiaoyiNeural）
 KOKORO_VOICE_EN = "af_sarah"  # 英文女声
 
 # 通用参数
