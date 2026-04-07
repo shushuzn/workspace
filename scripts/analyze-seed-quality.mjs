@@ -46,26 +46,30 @@ while (i < lines.length) {
   if (shippedMatch || killedMatch) { i = j; continue; }
 
   // Extract approach
-  const approachMatch = bodyText.match(/\| approach:\s*(.+?)(?:\s*\| shipped:|\s*\| killed:|$)/s);
+  const approachMatch = bodyText.match(/\|?\s*approach:\s*(.+?)(?:\s*\| shipped:|\s*\| killed:|$)/s);
   const approachText = approachMatch ? approachMatch[1].trim() : '';
 
   // Extract first numbered step
   const firstStepMatch = approachText.match(/(?:^|\n)\s*(\d+)\.\s+(.+?)(?:\n\s*\d+\.|$)/s);
   const firstStep = firstStepMatch ? firstStepMatch[2].replace(/；$/, '').trim() : approachText;
 
-  // Check executability
-  let isExecutable = false;
-  if (firstStep.length === 0) {
-    isExecutable = false;
-  } else {
-    isExecutable = EXECUTABLE_PREFIXES.some(p => firstStep.startsWith(p)) ||
-      firstStep.match(/^[a-zA-Z]:\\/) !== null;
-  }
-
   const scoreMatch = line.match(/\[score:(\d+)x(\d+)\]/);
   const benefit = scoreMatch ? parseInt(scoreMatch[1], 10) : 0;
   const feas = scoreMatch ? parseInt(scoreMatch[2], 10) : 0;
   const score = benefit * feas;
+
+  // Check executability: only f:4/f:5 need executable prefix; f:1-f:3 use milestone format
+  let isExecutable = false;
+  if (firstStep.length === 0) {
+    isExecutable = false;
+  } else if (feas >= 4) {
+    // f:4/f:5 require executable prefix (Gate 4b)
+    isExecutable = EXECUTABLE_PREFIXES.some(p => firstStep.startsWith(p)) ||
+      firstStep.match(/^[a-zA-Z]:\\/) !== null;
+  } else {
+    // f:1-f:3 use milestone format (阶段一(调研)，阶段二(实现))
+    isExecutable = firstStep.length > 0;
+  }
 
   const angleMatch = line.match(/\[angle:([^\]]+)\]/);
   const angle = angleMatch ? angleMatch[1] : 'unknown';
