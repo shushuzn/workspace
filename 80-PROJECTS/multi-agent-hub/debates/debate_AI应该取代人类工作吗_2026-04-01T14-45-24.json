@@ -1,0 +1,67 @@
+{
+  "id": "debate_AI应该取代人类工作吗_2026-04-01T14-45-24",
+  "topic": "AI应该取代人类工作吗",
+  "mode": "debate",
+  "rounds": 1,
+  "timestamp": "2026-04-01T14:45:24.000Z",
+  "summary": "(无有效回答)",
+  "votes": {
+    "pro": 2,
+    "con": 0,
+    "neutral": 3
+  },
+  "avgQuality": 50,
+  "transcript": [
+    {
+      "persona": {
+        "id": "pro_side",
+        "name": "正方",
+        "icon": "✅"
+      },
+      "text": "正因人为不确定，所以AI有更高的准确度和速度。",
+      "temp": 1.2
+    },
+    {
+      "persona": {
+        "id": "con_side",
+        "name": "反方",
+        "icon": "❌"
+      },
+      "text": "然而…实际上，许多工作涉及 creativity 和社会能力，AI不能完全替代这种功能。正方对方面辩说：因为AI具有更好的效率，能够为个人提供高-quality 的服务，有利于个人职业生涯发展。",
+      "temp": 1.2
+    },
+    {
+      "persona": {
+        "id": "analyst",
+        "name": "分析师",
+        "icon": "🔬"
+      },
+      "text": "(无有效回答)",
+      "temp": 1.2
+    },
+    {
+      "persona": {
+        "id": "skeptic",
+        "name": "质疑者",
+        "icon": "🧊"
+      },
+      "text": "(无有效回答)",
+      "temp": 1.2
+    },
+    {
+      "persona": {
+        "id": "synthesizer",
+        "name": "综合者",
+        "icon": "⚖️"
+      },
+      "text": "(无有效回答)",
+      "temp": 1.2
+    }
+  ],
+  "annealing": {
+    "initialTemp": 1.2,
+    "finalTemp": 1.2,
+    "peakDeltaS": 0,
+    "roundsRun": 1
+  }
+}
