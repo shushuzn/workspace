@@ -24,6 +24,7 @@ from video.config import (
 from video.generate_speech import generate_speech as tts_generate
 from video.draw_scene import generate_scenes_for_script
 from video.make_video import make_video_multi
+from video.quality_monitor import check_content_quality, check_audio_quality, check_video_quality
 
 # ── 质量门禁（复用 check_script.py 逻辑） ─────────────────────────
 FORBIDDEN = [
@@ -297,30 +298,95 @@ def run_pipeline(articles_dir: Path, force: bool = False, resume: bool = False, 
     print(f"质量报告: {report_path}")
 
 def process_item(speech_txt: Path, force: bool) -> bool:
-    """单个视频的完整流水线（语音 + 配图 + 视频）"""
+    """单个视频的完整流水线（文案质量 → 语音 → 配图 → 视频 → 质量验收）"""
     print(f"\n处理: {speech_txt.relative_to(ARTICLES_DIR)}")
+    article_dir = speech_txt.parent
+    stem = speech_txt.stem.replace("-speech", "").replace("-en", "")
 
-    # Step 1: 质量门禁前置
-    script_path = speech_txt.parent / speech_txt.stem.replace("-speech", "").replace("-en", "") + ".md"
+    # ========== Step 0: 文案质量检查 ==========
+    script_path = article_dir / f"{stem}.md"
+    speech_txt_path = article_dir / f"{stem}-speech.txt"
+    if speech_txt_path.exists():
+        print(f"  [质检] 文案质量检查...")
+        content_r = check_content_quality(speech_txt_path)
+        if content_r.issues:
+            print(f"  [SKIP] 文案质量不通过 (得分 {content_r.score}):")
+            for issue in content_r.issues:
+                print(f"    - {issue}")
+            return False
+        if content_r.score < 60:
+            print(f"  [WARN] 文案质量偏低 (得分 {content_r.score})，建议优化后重试")
+            return False
+        print(f"  [OK] 文案质量: {content_r.score}/100")
+
+    # ========== Step 1: 脚本质量门禁 (原有) ==========
     if script_path.exists():
         if not check_script_file(str(script_path)):
-            print(f"  [SKIP] 质量门禁不通过: {script_path.name}")
+            print(f"  [SKIP] 脚本质量门禁不通过: {script_path.name}")
             return False
     else:
         print(f"  [WARN] 未找到对应脚本: {script_path.name}")
 
-    # Step 2: 语音合成
+    # ========== Step 2: 语音合成 ==========
     ok, mp3_path = process_speech(speech_txt, force)
     if not ok:
         return False
 
-    # Step 3: 配图生成
+    # ========== Step 2.5: 音频质量检查 ==========
+    if mp3_path.exists():
+        print(f"  [质检] 音频质量检查...")
+        audio_r = check_audio_quality(mp3_path)
+        if audio_r.issues:
+            print(f"  [WARN] 音频质量问题:")
+            for issue in audio_r.issues:
+                print(f"    - {issue}")
+            # 音频问题不阻塞，但记录
+        else:
+            print(f"  [OK] 音频质量: {audio_r.score}/100")
+
+    # ========== Step 3: 配图生成 ==========
     ok, scene_imgs = process_scenes(speech_txt, force)
     if not ok or not scene_imgs:
         return False
 
-    # Step 4: 视频合成
-    return process_video(mp3_path, scene_imgs, force)
+    # ========== Step 4: 视频合成 ==========
+    ok = process_video(mp3_path, scene_imgs, force)
+    if not ok:
+        return False
+
+    # ========== Step 4.5: 视频质量验收 ==========
+    mp4_path = mp3_path.with_suffix('.mp4')
+    if mp4_path.exists():
+        print(f"  [质检] 视频质量验收...")
+        video_r = check_video_quality(mp4_path)
+        if video_r.issues:
+            print(f"  [WARN] 视频质量问题:")
+            for issue in video_r.issues:
+                print(f"    - {issue}")
+            # 严重问题可标记为失败
+            if any("无音频" in i or "编码" in i for i in video_r.issues):
+                return False
+        else:
+            print(f"  [OK] 视频质量: {video_r.score}/100")
+
+        # 生成质量报告文件
+        report = {
+            'article': article_dir.name,
+            'speech_txt': str(speech_txt_path.relative_to(ARTICLES_DIR)) if speech_txt_path.exists() else None,
+            'mp3': str(mp3_path.relative_to(ARTICLES_DIR)),
+            'mp4': str(mp4_path.relative_to(ARTICLES_DIR)),
+            'content': content_r.to_dict() if 'content_r' in locals() else None,
+            'audio': audio_r.to_dict() if 'audio_r' in locals() else None,
+            'video': video_r.to_dict(),
+            'timestamp': datetime.now().isoformat(),
+        }
+        report_dir = CACHE_DIR / "reports"
+        report_dir.mkdir(parents=True, exist_ok=True)
+        report_path = report_dir / f"{article_dir.name}-{datetime.now().strftime('%Y%m%d-%H%M%S')}.json"
+        report_path.write_text(json.dumps(report, indent=2, ensure_ascii=False), encoding='utf-8')
+        print(f"  [报告] {report_path.name}")
+
+    return True
 
 def main():
     global BATCH_SIZE, MAX_WORKERS
