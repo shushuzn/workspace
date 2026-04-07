@@ -228,43 +228,32 @@ def check_audio_quality(mp3_path: Path) -> AudioQualityReport:
         return AudioQualityReport(0, [f"ffmpeg 执行失败: {e}"], [], {})
 
     # 从 stderr 解析元数据
-    # Duration: duration=123.456
+    # Duration: 00:01:50.09 (ffmpeg 格式)
     duration = 0.0
-    m = re.search(r"duration:\s*(\d+\.?\d*)", text, re.IGNORECASE)
+    m = re.search(r"Duration:\s*(\d+):(\d+):(\d+\.?\d*)", text, re.IGNORECASE)
     if m:
-        duration = float(m.group(1))
+        h, mn, s = int(m.group(1)), int(m.group(2)), float(m.group(3))
+        duration = h * 3600 + mn * 60 + s
     metrics['duration'] = duration
 
-    # Bitrate: bitrate= 192 kb/s
+    # Bitrate: 48 kb/s (数字前可能有空格)
     bit_rate = 0
     m = re.search(r"bitrate:\s*(\d+)\s*kb", text, re.IGNORECASE)
     if m:
         bit_rate = int(m.group(1)) * 1000
-    elif m := re.search(r"bit_rate:\s*(\d+)", text):
-        bit_rate = int(m.group(1))
     metrics['bitrate'] = bit_rate
 
-    # Audio stream info
+    # Audio stream: Stream #0:0: Audio: mp3 (mp3float), 24000 Hz, mono, fltp, 48 kb/s
     sample_rate = 0
     channels = 0
     codec = None
-    sr_match = re.search(r"Audio:.*?(\d+)\s*Hz", text)
-    if sr_match:
-        sample_rate = int(sr_match.group(1))
-    ch_match = re.search(r"Audio:.*?(mono|stereo|(\d+)\s*channels?)", text, re.IGNORECASE)
-    if ch_match:
-        ch_str = ch_match.group(1).lower()
-        if 'mono' in ch_str:
-            channels = 1
-        elif 'stereo' in ch_str:
-            channels = 2
-        elif ch_match.lastindex == 2 and ch_match.group(2):
-            channels = int(ch_match.group(2))
-        else:
-            # fallback: extract digit
-            m2 = re.search(r"(\d+)\s*ch", text, re.IGNORECASE)
-            if m2:
-                channels = int(m2.group(1))
+    # 匹配 "Audio: <codec>, <rate> Hz, mono/stereo, ..."
+    audio_line = re.search(r"Audio:\s*(\w+)[^(]*,\s*(\d+)\s*Hz,\s*(\w+)", text, re.IGNORECASE)
+    if audio_line:
+        codec = audio_line.group(1)
+        sample_rate = int(audio_line.group(2))
+        ch_str = audio_line.group(3).lower()
+        channels = 1 if ch_str == 'mono' else (2 if ch_str == 'stereo' else 0)
     metrics['sample_rate'] = sample_rate
     metrics['channels'] = channels
     metrics['codec'] = codec
@@ -322,58 +311,66 @@ def check_video_quality(mp4_path: Path) -> VideoQualityReport:
         return VideoQualityReport(0, [f"ffmpeg 执行失败: {e}"], [], {})
 
     # 从 stderr 解析元数据
-    # Duration
+    # Duration: 00:01:48.00 (ffmpeg 格式)
     duration = 0.0
-    m = re.search(r"duration:\s*(\d+):(\d+):(\d+\.?\d*)", text, re.IGNORECASE)
+    m = re.search(r"Duration:\s*(\d+):(\d+):(\d+\.?\d*)", text)
     if m:
-        h, mn, s = int(m.group(1)), int(m.group(2)), float(m.group(3))
-        duration = h * 3600 + mn * 60 + s
-    elif m := re.search(r"Duration: (\d+):(\d+):(\d+\.?\d*)", text):
         h, mn, s = int(m.group(1)), int(m.group(2)), float(m.group(3))
         duration = h * 3600 + mn * 60 + s
     metrics['duration'] = duration
 
-    # Video stream: resolution, fps, codec
+    # 只解析 Input 部分（避免 Output 流的 codec 干扰）
+    input_section = text.split('Output #0')[0] if 'Output #0' in text else text
+
+    video_codec = None
+    audio_codec = None
     width = height = 0
     fps = 0.0
-    video_codec = None
-    m = re.search(r"Video:\s*(\w+)", text)
-    if m:
-        video_codec = m.group(1)
-    res_match = re.search(r"(\d{3,4})x(\d{3,4})", text)
-    if res_match:
-        width, height = int(res_match.group(1)), int(res_match.group(2))
-    fps_match = re.search(r"(\d+(?:\.\d+)?)\s*fps", text)
-    if fps_match:
-        fps = float(fps_match.group(1))
+    channels = 0
+    has_audio = False
+
+    # 逐行解析每个 Stream
+    for line in input_section.split('\n'):
+        if 'Stream #' not in line:
+            continue
+        if 'Video:' in line:
+            vm = re.search(r"Video:\s*(\w+)", line)
+            if vm:
+                video_codec = vm.group(1)
+            # 分辨率：3-4位数字 x 3-4位数字，后面是非数字
+            rm = re.search(r"(\d{3,4})x(\d{3,4})(?![/\d])", line)
+            if rm:
+                width, height = int(rm.group(1)), int(rm.group(2))
+            # 帧率
+            fm = re.search(r"(\d+(?:\.\d+)?)\s*fps", line)
+            if fm:
+                fps = float(fm.group(1))
+        elif 'Audio:' in line:
+            am = re.search(r"Audio:\s*(\w+)", line)
+            if am:
+                audio_codec = am.group(1)
+            has_audio = True
+            if 'mono' in line.lower():
+                channels = 1
+            elif 'stereo' in line.lower():
+                channels = 2
+
     metrics['resolution'] = f"{width}x{height}"
     metrics['fps'] = round(fps, 2)
     metrics['video_codec'] = video_codec
-
-    # Audio stream: codec, channels, detect presence
-    audio_codec = None
-    channels = 0
-    has_audio = False
-    ac_match = re.search(r"Audio:\s*(\w+)", text)
-    if ac_match:
-        audio_codec = ac_match.group(1)
-        has_audio = True
-    ch_match = re.search(r"Audio:.*?(\d+)\s*channels?", text, re.IGNORECASE)
-    if ch_match:
-        channels = int(ch_match.group(1))
-        has_audio = True
     metrics['audio_codec'] = audio_codec
     metrics['channels'] = channels
     audio_stream = {} if has_audio else {}  # for backward-compatible scoring check
 
-    # File size
+    # 文件大小：从 bitrate 估算
     size = 0
-    size_match = re.search(r"size:\s*(\d+)\s*bytes", text, re.IGNORECASE)
-    if size_match:
-        size = int(size_match.group(1))
+    bitrate_m = re.search(r"bitrate:\s*(\d+)\s*kb", text, re.IGNORECASE)
+    if bitrate_m and duration > 0:
+        # bitrate 是整文件码率 (kb/s) × 时长 = bytes
+        size = int(bitrate_m.group(1)) * 1000 * duration
     metrics['size_bytes'] = size
 
-    # 3. 时长同步与文件大小合理性
+    # 时长同步与文件大小合理性
     expected_size_mb = duration / 60 * 15
     actual_size_mb = size / (1024*1024)
     if actual_size_mb < expected_size_mb * 0.3:
