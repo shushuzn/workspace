@@ -1,0 +1,1920 @@
+{
+  "generated": "2026-03-14T21:56:20.379980",
+  "workspace_dir": "D:\\OpenClaw\\workspace",
+  "config_dir": "C:\\Users\\华为\\.copaw",
+  "statistics": {
+    "total_scanned": 112,
+    "identical": 0,
+    "modified": 0,
+    "unique_workspace": 110,
+    "unique_config": 2,
+    "high_priority": 30,
+    "review_needed": 46
+  },
+  "results": [
+    {
+      "file_path": "15-docs-文档规范\\archive\\DOC_AUTOMATION_IMPLEMENTATION_v1.0.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "high",
+      "review_needed": true,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\15-docs-文档规范\\archive\\DOC_AUTOMATION_IMPLEMENTATION_v1.0.md",
+        "relative_path": "15-docs-文档规范\\archive\\DOC_AUTOMATION_IMPLEMENTATION_v1.0.md",
+        "size": 23172,
+        "size_kb": 22.63,
+        "md5": "6b6d4ecb14bda3f41ebea9adb5ab1695",
+        "lines": 805,
+        "words": 1583,
+        "modified": "2026-03-14T20:27:41.716850"
+      }
+    },
+    {
+      "file_path": "15-docs-文档规范\\archive\\DOC_MATERIALS_DEPLOYMENT_DESIGN_v1.0.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": true,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\15-docs-文档规范\\archive\\DOC_MATERIALS_DEPLOYMENT_DESIGN_v1.0.md",
+        "relative_path": "15-docs-文档规范\\archive\\DOC_MATERIALS_DEPLOYMENT_DESIGN_v1.0.md",
+        "size": 17893,
+        "size_kb": 17.47,
+        "md5": "685e4b1cfebf169b3c6cc47cc88e24f1",
+        "lines": 729,
+        "words": 1436,
+        "modified": "2026-03-14T20:27:41.734206"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\docs\\DOC_Zero_Error_Standards_v1.0.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\docs\\DOC_Zero_Error_Standards_v1.0.md",
+        "relative_path": "30-scripts-tools\\docs\\DOC_Zero_Error_Standards_v1.0.md",
+        "size": 5197,
+        "size_kb": 5.08,
+        "md5": "133d5eb9f14c35639cb7db8565476a94",
+        "lines": 284,
+        "words": 659,
+        "modified": "2026-03-06T23:47:39.983682"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\figure-enhancer\\README.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "high",
+      "review_needed": true,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\figure-enhancer\\README.md",
+        "relative_path": "30-scripts-tools\\figure-enhancer\\README.md",
+        "size": 13648,
+        "size_kb": 13.33,
+        "md5": "f9c612fd359f104205c3d38bc9f86c04",
+        "lines": 661,
+        "words": 1512,
+        "modified": "2026-03-12T07:21:10.109372"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\pdf-extractor\\README.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "high",
+      "review_needed": true,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\pdf-extractor\\README.md",
+        "relative_path": "30-scripts-tools\\pdf-extractor\\README.md",
+        "size": 12642,
+        "size_kb": 12.35,
+        "md5": "28034b4c9f2807ead20bc5c24b8e55a2",
+        "lines": 572,
+        "words": 1574,
+        "modified": "2026-03-12T07:20:04.516589"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\intent-belief-integration\\test_intentkit\\intentkit\\CHANGELOG.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "high",
+      "review_needed": true,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\intent-belief-integration\\test_intentkit\\intentkit\\CHANGELOG.md",
+        "relative_path": "30-scripts-tools\\intent-belief-integration\\test_intentkit\\intentkit\\CHANGELOG.md",
+        "size": 87202,
+        "size_kb": 85.16,
+        "md5": "34af881ca57bbca98a5413e2671b26c7",
+        "lines": 2420,
+        "words": 10668,
+        "modified": "2026-03-07T22:01:15.941497"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\intent-belief-integration\\test_intentkit\\intentkit\\intentkit\\skills\\venice_image\\image_generation\\README.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "high",
+      "review_needed": true,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\intent-belief-integration\\test_intentkit\\intentkit\\intentkit\\skills\\venice_image\\image_generation\\README.md",
+        "relative_path": "30-scripts-tools\\intent-belief-integration\\test_intentkit\\intentkit\\intentkit\\skills\\venice_image\\image_generation\\README.md",
+        "size": 6885,
+        "size_kb": 6.72,
+        "md5": "7b09a3d7f9675126ca2a2133c50e8915",
+        "lines": 144,
+        "words": 810,
+        "modified": "2026-03-07T22:01:17.423819"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\99-ARCHIVE\\README_EN.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\99-ARCHIVE\\README_EN.md",
+        "relative_path": "30-scripts-tools\\99-ARCHIVE\\README_EN.md",
+        "size": 5944,
+        "size_kb": 5.8,
+        "md5": "12296afb63b0b97c4d24c54c50aa9de3",
+        "lines": 282,
+        "words": 647,
+        "modified": "2026-03-07T22:18:29.094608"
+      }
+    },
+    {
+      "file_path": "15-docs-文档规范\\archive\\DOC_PHASE12_QUALITY_REPORT_v1.0.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\15-docs-文档规范\\archive\\DOC_PHASE12_QUALITY_REPORT_v1.0.md",
+        "relative_path": "15-docs-文档规范\\archive\\DOC_PHASE12_QUALITY_REPORT_v1.0.md",
+        "size": 5641,
+        "size_kb": 5.51,
+        "md5": "25b982c6a7ee48a916c1c6335bc80713",
+        "lines": 198,
+        "words": 704,
+        "modified": "2026-03-14T20:27:41.747428"
+      }
+    },
+    {
+      "file_path": "15-docs-文档规范\\archive\\DOC_ROADMAP_v1.0.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\15-docs-文档规范\\archive\\DOC_ROADMAP_v1.0.md",
+        "relative_path": "15-docs-文档规范\\archive\\DOC_ROADMAP_v1.0.md",
+        "size": 7416,
+        "size_kb": 7.24,
+        "md5": "390ecdc6dd31fa0f55e1fcbc977e90dd",
+        "lines": 229,
+        "words": 953,
+        "modified": "2026-03-14T20:27:41.756378"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\01-KNOWLEDGE-CARDS\\docs\\API.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\01-KNOWLEDGE-CARDS\\docs\\API.md",
+        "relative_path": "30-scripts-tools\\01-KNOWLEDGE-CARDS\\docs\\API.md",
+        "size": 7889,
+        "size_kb": 7.7,
+        "md5": "934b262053b6a2b5ca9028cd528007b4",
+        "lines": 411,
+        "words": 849,
+        "modified": "2026-03-11T23:49:20.012729"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\docs\\README-generate_handwritten_formulas.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\docs\\README-generate_handwritten_formulas.md",
+        "relative_path": "30-scripts-tools\\docs\\README-generate_handwritten_formulas.md",
+        "size": 5384,
+        "size_kb": 5.26,
+        "md5": "f07c3f48b4152c5528a83de309435baa",
+        "lines": 222,
+        "words": 595,
+        "modified": "2026-03-10T04:28:15.492689"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\docs\\RELEASE-v1.0.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\docs\\RELEASE-v1.0.md",
+        "relative_path": "30-scripts-tools\\docs\\RELEASE-v1.0.md",
+        "size": 5511,
+        "size_kb": 5.38,
+        "md5": "d146d4448b6c6da62c33fe429dc9427e",
+        "lines": 221,
+        "words": 686,
+        "modified": "2026-03-12T07:27:30.992949"
+      }
+    },
+    {
+      "file_path": "15-docs-文档规范\\Domain-Ranking-System.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": true,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\15-docs-文档规范\\Domain-Ranking-System.md",
+        "relative_path": "15-docs-文档规范\\Domain-Ranking-System.md",
+        "size": 10250,
+        "size_kb": 10.01,
+        "md5": "2105a77c7b376f24bf11ab61f199226f",
+        "lines": 392,
+        "words": 1212,
+        "modified": "2026-03-14T20:27:41.705383"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\feishu-tools\\README.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "high",
+      "review_needed": true,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\feishu-tools\\README.md",
+        "relative_path": "30-scripts-tools\\feishu-tools\\README.md",
+        "size": 8155,
+        "size_kb": 7.96,
+        "md5": "cbd8c6e5ecf5218ae9bd9113497b0ccf",
+        "lines": 353,
+        "words": 935,
+        "modified": "2026-03-14T15:41:39.472103"
+      }
+    },
+    {
+      "file_path": "15-docs-文档规范\\OUTPUT-FORMAT.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\15-docs-文档规范\\OUTPUT-FORMAT.md",
+        "relative_path": "15-docs-文档规范\\OUTPUT-FORMAT.md",
+        "size": 8046,
+        "size_kb": 7.86,
+        "md5": "c637677c044b9155532bbf75d5396499",
+        "lines": 311,
+        "words": 1057,
+        "modified": "2026-03-14T20:27:41.707380"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\intent-belief-integration\\test_intentkit\\intentkit\\docs\\content\\en\\others\\openai_compatible.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\intent-belief-integration\\test_intentkit\\intentkit\\docs\\content\\en\\others\\openai_compatible.md",
+        "relative_path": "30-scripts-tools\\intent-belief-integration\\test_intentkit\\intentkit\\docs\\content\\en\\others\\openai_compatible.md",
+        "size": 5455,
+        "size_kb": 5.33,
+        "md5": "873c0b701a6cdb06314225cdf400b332",
+        "lines": 164,
+        "words": 753,
+        "modified": "2026-03-07T22:01:16.143667"
+      }
+    },
+    {
+      "file_path": "15-docs-文档规范\\archive\\DOC_MATERIALS_API_DESIGN_v1.0.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\15-docs-文档规范\\archive\\DOC_MATERIALS_API_DESIGN_v1.0.md",
+        "relative_path": "15-docs-文档规范\\archive\\DOC_MATERIALS_API_DESIGN_v1.0.md",
+        "size": 7516,
+        "size_kb": 7.34,
+        "md5": "b1ddc4760e7200b232947902b97a2bab",
+        "lines": 400,
+        "words": 792,
+        "modified": "2026-03-14T20:27:41.730958"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\intent-belief-integration\\README_EN.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\intent-belief-integration\\README_EN.md",
+        "relative_path": "30-scripts-tools\\intent-belief-integration\\README_EN.md",
+        "size": 5944,
+        "size_kb": 5.8,
+        "md5": "12296afb63b0b97c4d24c54c50aa9de3",
+        "lines": 282,
+        "words": 647,
+        "modified": "2026-03-07T22:18:29.094608"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\04-collectors\\README.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "high",
+      "review_needed": true,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\04-collectors\\README.md",
+        "relative_path": "30-scripts-tools\\04-collectors\\README.md",
+        "size": 8590,
+        "size_kb": 8.39,
+        "md5": "b049e8e5749ec158af64b3324efc348a",
+        "lines": 442,
+        "words": 1096,
+        "modified": "2026-03-13T22:51:56.808815"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\docs\\DOC_Acceptance_Criteria_v1.0.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\docs\\DOC_Acceptance_Criteria_v1.0.md",
+        "relative_path": "30-scripts-tools\\docs\\DOC_Acceptance_Criteria_v1.0.md",
+        "size": 7695,
+        "size_kb": 7.51,
+        "md5": "d9ce9999263eb12df1c4f558837c7fdd",
+        "lines": 302,
+        "words": 1012,
+        "modified": "2026-03-06T23:38:41.581494"
+      }
+    },
+    {
+      "file_path": "15-docs-文档规范\\archive\\DOC_PAPER_ANALYSIS_PIPELINE_v1.0.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\15-docs-文档规范\\archive\\DOC_PAPER_ANALYSIS_PIPELINE_v1.0.md",
+        "relative_path": "15-docs-文档规范\\archive\\DOC_PAPER_ANALYSIS_PIPELINE_v1.0.md",
+        "size": 6821,
+        "size_kb": 6.66,
+        "md5": "f5760283dd8f131486b639a5628916f4",
+        "lines": 318,
+        "words": 726,
+        "modified": "2026-03-14T20:27:41.738024"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\docs\\DOC_Naming_Conventions_v1.0.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\docs\\DOC_Naming_Conventions_v1.0.md",
+        "relative_path": "30-scripts-tools\\docs\\DOC_Naming_Conventions_v1.0.md",
+        "size": 5454,
+        "size_kb": 5.33,
+        "md5": "285cb1374b63b163391432e1f18616b1",
+        "lines": 279,
+        "words": 564,
+        "modified": "2026-03-07T00:13:41.089732"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\knowledge-template-library.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\knowledge-template-library.md",
+        "relative_path": "30-scripts-tools\\knowledge-template-library.md",
+        "size": 5779,
+        "size_kb": 5.64,
+        "md5": "83327e39ba338492d964565fa01f5450",
+        "lines": 334,
+        "words": 853,
+        "modified": "2026-03-13T11:42:59.541895"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\99-ARCHIVE\\SUBMIT_PR.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\99-ARCHIVE\\SUBMIT_PR.md",
+        "relative_path": "30-scripts-tools\\99-ARCHIVE\\SUBMIT_PR.md",
+        "size": 6523,
+        "size_kb": 6.37,
+        "md5": "0a272a66d0dad087a862a86240149841",
+        "lines": 344,
+        "words": 885,
+        "modified": "2026-03-07T22:27:50.119864"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\docs\\MULTIMODAL-KG-TEST-REPORT.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\docs\\MULTIMODAL-KG-TEST-REPORT.md",
+        "relative_path": "30-scripts-tools\\docs\\MULTIMODAL-KG-TEST-REPORT.md",
+        "size": 5269,
+        "size_kb": 5.15,
+        "md5": "7045f77a2075c6157b2fc5bde0dfcdfb",
+        "lines": 236,
+        "words": 761,
+        "modified": "2026-03-09T18:33:13.375430"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\graph-optimizer\\README.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "high",
+      "review_needed": true,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\graph-optimizer\\README.md",
+        "relative_path": "30-scripts-tools\\graph-optimizer\\README.md",
+        "size": 12498,
+        "size_kb": 12.21,
+        "md5": "08411d27b1cf55c9dc6a4d34a222df4b",
+        "lines": 552,
+        "words": 1213,
+        "modified": "2026-03-12T07:11:39.339269"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\async_executor_README.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "high",
+      "review_needed": true,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\async_executor_README.md",
+        "relative_path": "30-scripts-tools\\async_executor_README.md",
+        "size": 7075,
+        "size_kb": 6.91,
+        "md5": "b2ff15ecd432e7080a86b83cf529d5d8",
+        "lines": 334,
+        "words": 816,
+        "modified": "2026-03-13T11:19:13.067044"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\01-KNOWLEDGE-CARDS\\GITHUB-RELEASE-CHECKLIST.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\01-KNOWLEDGE-CARDS\\GITHUB-RELEASE-CHECKLIST.md",
+        "relative_path": "30-scripts-tools\\01-KNOWLEDGE-CARDS\\GITHUB-RELEASE-CHECKLIST.md",
+        "size": 5755,
+        "size_kb": 5.62,
+        "md5": "2c60c448fd8a2450e881b70954a376b3",
+        "lines": 274,
+        "words": 694,
+        "modified": "2026-03-12T00:03:36.034139"
+      }
+    },
+    {
+      "file_path": "15-docs-文档规范\\archive\\DOC_KUBERNETES_DEPLOYMENT_v1.0.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "high",
+      "review_needed": true,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\15-docs-文档规范\\archive\\DOC_KUBERNETES_DEPLOYMENT_v1.0.md",
+        "relative_path": "15-docs-文档规范\\archive\\DOC_KUBERNETES_DEPLOYMENT_v1.0.md",
+        "size": 25642,
+        "size_kb": 25.04,
+        "md5": "443eae9b8d2f29abff57af4fd22f66e2",
+        "lines": 1055,
+        "words": 1964,
+        "modified": "2026-03-14T20:27:41.729754"
+      }
+    },
+    {
+      "file_path": "15-docs-文档规范\\archive\\DOC_LINK_INDEX_v1.0.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\15-docs-文档规范\\archive\\DOC_LINK_INDEX_v1.0.md",
+        "relative_path": "15-docs-文档规范\\archive\\DOC_LINK_INDEX_v1.0.md",
+        "size": 8153,
+        "size_kb": 7.96,
+        "md5": "bbda47040dfe2cd7c479404e23a997f5",
+        "lines": 296,
+        "words": 664,
+        "modified": "2026-03-14T20:27:41.730453"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\docs\\README-train_lig_stability_model.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\docs\\README-train_lig_stability_model.md",
+        "relative_path": "30-scripts-tools\\docs\\README-train_lig_stability_model.md",
+        "size": 6203,
+        "size_kb": 6.06,
+        "md5": "803c1033b18a4dcdeb2f4968db34381c",
+        "lines": 245,
+        "words": 615,
+        "modified": "2026-03-10T04:27:48.612930"
+      }
+    },
+    {
+      "file_path": "15-docs-文档规范\\archive\\DOC_CGCNN_VS_MEGNET_v1.0.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\15-docs-文档规范\\archive\\DOC_CGCNN_VS_MEGNET_v1.0.md",
+        "relative_path": "15-docs-文档规范\\archive\\DOC_CGCNN_VS_MEGNET_v1.0.md",
+        "size": 6491,
+        "size_kb": 6.34,
+        "md5": "f52cad9f1356965325408bad66b37f35",
+        "lines": 233,
+        "words": 645,
+        "modified": "2026-03-14T20:27:41.718600"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\graph-optimizer\\BENCHMARK-REPORT.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\graph-optimizer\\BENCHMARK-REPORT.md",
+        "relative_path": "30-scripts-tools\\graph-optimizer\\BENCHMARK-REPORT.md",
+        "size": 5935,
+        "size_kb": 5.8,
+        "md5": "f4bd2e8a96631235f804f6123ac825c7",
+        "lines": 225,
+        "words": 792,
+        "modified": "2026-03-12T07:11:16.535219"
+      }
+    },
+    {
+      "file_path": "15-docs-文档规范\\Domain-Ranking-System-v2.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": true,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\15-docs-文档规范\\Domain-Ranking-System-v2.md",
+        "relative_path": "15-docs-文档规范\\Domain-Ranking-System-v2.md",
+        "size": 12089,
+        "size_kb": 11.81,
+        "md5": "8ef68b9caa1ff492d823c36e91d01b6a",
+        "lines": 426,
+        "words": 1396,
+        "modified": "2026-03-14T20:27:41.705383"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\01-KNOWLEDGE-CARDS\\docs\\FAQ.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\01-KNOWLEDGE-CARDS\\docs\\FAQ.md",
+        "relative_path": "30-scripts-tools\\01-KNOWLEDGE-CARDS\\docs\\FAQ.md",
+        "size": 8495,
+        "size_kb": 8.3,
+        "md5": "ba11e0dc504adb62de7a8747aea1a5ac",
+        "lines": 447,
+        "words": 840,
+        "modified": "2026-03-11T23:50:51.435007"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\01-SETUP\\ALINYUN-ECS-INTEGRATION.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\01-SETUP\\ALINYUN-ECS-INTEGRATION.md",
+        "relative_path": "30-scripts-tools\\01-SETUP\\ALINYUN-ECS-INTEGRATION.md",
+        "size": 8102,
+        "size_kb": 7.91,
+        "md5": "d8ed1ad352f567550259c8544c6203e5",
+        "lines": 418,
+        "words": 1048,
+        "modified": "2026-03-14T01:04:14.407920"
+      }
+    },
+    {
+      "file_path": "15-docs-文档规范\\reports\\ROADMAP-PHASE3.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\15-docs-文档规范\\reports\\ROADMAP-PHASE3.md",
+        "relative_path": "15-docs-文档规范\\reports\\ROADMAP-PHASE3.md",
+        "size": 9317,
+        "size_kb": 9.1,
+        "md5": "99164b132d8929fded7cebadef3af3af",
+        "lines": 328,
+        "words": 1330,
+        "modified": "2026-03-14T20:27:41.783522"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\knowledge-card-generator\\README.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "high",
+      "review_needed": true,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\knowledge-card-generator\\README.md",
+        "relative_path": "30-scripts-tools\\knowledge-card-generator\\README.md",
+        "size": 13357,
+        "size_kb": 13.04,
+        "md5": "5a77a696950f0c87bb7f9bfa192af3ce",
+        "lines": 493,
+        "words": 1449,
+        "modified": "2026-03-11T18:47:36.013518"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\01-KNOWLEDGE-CARDS\\docs\\README.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "high",
+      "review_needed": true,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\01-KNOWLEDGE-CARDS\\docs\\README.md",
+        "relative_path": "30-scripts-tools\\01-KNOWLEDGE-CARDS\\docs\\README.md",
+        "size": 13357,
+        "size_kb": 13.04,
+        "md5": "5a77a696950f0c87bb7f9bfa192af3ce",
+        "lines": 493,
+        "words": 1449,
+        "modified": "2026-03-11T18:47:36.013518"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\01-KNOWLEDGE-CARDS\\figures\\README.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "high",
+      "review_needed": true,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\01-KNOWLEDGE-CARDS\\figures\\README.md",
+        "relative_path": "30-scripts-tools\\01-KNOWLEDGE-CARDS\\figures\\README.md",
+        "size": 7137,
+        "size_kb": 6.97,
+        "md5": "5a422c46719d5fd52ab62b2001f1498c",
+        "lines": 349,
+        "words": 738,
+        "modified": "2026-03-11T07:33:57.168706"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\08-AUTOMATION\\auto-pnote\\README.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "high",
+      "review_needed": true,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\08-AUTOMATION\\auto-pnote\\README.md",
+        "relative_path": "30-scripts-tools\\08-AUTOMATION\\auto-pnote\\README.md",
+        "size": 7923,
+        "size_kb": 7.74,
+        "md5": "2e0d2e21ec54bbaf55c5828d03cbddca",
+        "lines": 242,
+        "words": 721,
+        "modified": "2026-03-09T18:16:56.371123"
+      }
+    },
+    {
+      "file_path": "15-docs-文档规范\\archive\\DOC_USAGE_EXAMPLES_v1.0.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\15-docs-文档规范\\archive\\DOC_USAGE_EXAMPLES_v1.0.md",
+        "relative_path": "15-docs-文档规范\\archive\\DOC_USAGE_EXAMPLES_v1.0.md",
+        "size": 6172,
+        "size_kb": 6.03,
+        "md5": "6260b0dc684eea1e2bd6d778e4804926",
+        "lines": 277,
+        "words": 442,
+        "modified": "2026-03-14T20:27:41.760376"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\docs\\README-TEMPLATE.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\docs\\README-TEMPLATE.md",
+        "relative_path": "30-scripts-tools\\docs\\README-TEMPLATE.md",
+        "size": 7090,
+        "size_kb": 6.92,
+        "md5": "beecfd5e4f82a537cdbebd42377c0963",
+        "lines": 379,
+        "words": 738,
+        "modified": "2026-03-12T07:17:48.532400"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\docs\\README-domain_ranker_v2.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\docs\\README-domain_ranker_v2.md",
+        "relative_path": "30-scripts-tools\\docs\\README-domain_ranker_v2.md",
+        "size": 6488,
+        "size_kb": 6.34,
+        "md5": "e5f3641169b98f0de9d23ff9d4c382ce",
+        "lines": 227,
+        "words": 642,
+        "modified": "2026-03-10T04:27:20.770949"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\intent-belief-integration\\test_intentkit\\intentkit\\docs\\content\\en\\others\\discord.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": true,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\intent-belief-integration\\test_intentkit\\intentkit\\docs\\content\\en\\others\\discord.md",
+        "relative_path": "30-scripts-tools\\intent-belief-integration\\test_intentkit\\intentkit\\docs\\content\\en\\others\\discord.md",
+        "size": 10541,
+        "size_kb": 10.29,
+        "md5": "c729aba538bb6cbf4710eec395e731d7",
+        "lines": 346,
+        "words": 1382,
+        "modified": "2026-03-07T22:01:16.141396"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\intent-belief-integration\\test_intentkit\\intentkit\\intentkit\\skills\\dexscreener\\README.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "high",
+      "review_needed": true,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\intent-belief-integration\\test_intentkit\\intentkit\\intentkit\\skills\\dexscreener\\README.md",
+        "relative_path": "30-scripts-tools\\intent-belief-integration\\test_intentkit\\intentkit\\intentkit\\skills\\dexscreener\\README.md",
+        "size": 5144,
+        "size_kb": 5.02,
+        "md5": "52dd286b1645e05a7f9b584cd7653ce8",
+        "lines": 154,
+        "words": 737,
+        "modified": "2026-03-07T22:01:16.887654"
+      }
+    },
+    {
+      "file_path": "15-docs-文档规范\\archive\\DOC_DAILY_REPORT_PHASE12_DAY1_v1.0.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\15-docs-文档规范\\archive\\DOC_DAILY_REPORT_PHASE12_DAY1_v1.0.md",
+        "relative_path": "15-docs-文档规范\\archive\\DOC_DAILY_REPORT_PHASE12_DAY1_v1.0.md",
+        "size": 5679,
+        "size_kb": 5.55,
+        "md5": "43517dbceb1860ab31505adf93ccbe9d",
+        "lines": 226,
+        "words": 619,
+        "modified": "2026-03-14T20:27:41.722876"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\99-ARCHIVE\\intentkit_integration.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": true,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\99-ARCHIVE\\intentkit_integration.md",
+        "relative_path": "30-scripts-tools\\99-ARCHIVE\\intentkit_integration.md",
+        "size": 11998,
+        "size_kb": 11.72,
+        "md5": "8a2409e57f1819cf28728c6d1cc27b0a",
+        "lines": 472,
+        "words": 917,
+        "modified": "2026-03-07T21:51:50.242569"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\intent-belief-integration\\intentkit_integration.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": true,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\intent-belief-integration\\intentkit_integration.md",
+        "relative_path": "30-scripts-tools\\intent-belief-integration\\intentkit_integration.md",
+        "size": 11998,
+        "size_kb": 11.72,
+        "md5": "8a2409e57f1819cf28728c6d1cc27b0a",
+        "lines": 472,
+        "words": 917,
+        "modified": "2026-03-07T21:51:50.242569"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\intent-belief-integration\\SUBMIT_PR.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\intent-belief-integration\\SUBMIT_PR.md",
+        "relative_path": "30-scripts-tools\\intent-belief-integration\\SUBMIT_PR.md",
+        "size": 6523,
+        "size_kb": 6.37,
+        "md5": "0a272a66d0dad087a862a86240149841",
+        "lines": 344,
+        "words": 885,
+        "modified": "2026-03-07T22:27:50.119864"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\01-KNOWLEDGE-CARDS\\pdf\\TODO-031-LAYOUTLM-PLAN.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\01-KNOWLEDGE-CARDS\\pdf\\TODO-031-LAYOUTLM-PLAN.md",
+        "relative_path": "30-scripts-tools\\01-KNOWLEDGE-CARDS\\pdf\\TODO-031-LAYOUTLM-PLAN.md",
+        "size": 5780,
+        "size_kb": 5.64,
+        "md5": "040a854af749772a864bdd72157e8c14",
+        "lines": 245,
+        "words": 574,
+        "modified": "2026-03-10T16:56:31.492258"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\graph-optimizer\\TODO-034-PERFORMANCE-OPTIMIZATION.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": true,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\graph-optimizer\\TODO-034-PERFORMANCE-OPTIMIZATION.md",
+        "relative_path": "30-scripts-tools\\graph-optimizer\\TODO-034-PERFORMANCE-OPTIMIZATION.md",
+        "size": 11064,
+        "size_kb": 10.8,
+        "md5": "451a51320b14ce03a5fde9560ab28a25",
+        "lines": 442,
+        "words": 1226,
+        "modified": "2026-03-11T07:48:46.549130"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\docs\\INDEX.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\docs\\INDEX.md",
+        "relative_path": "30-scripts-tools\\docs\\INDEX.md",
+        "size": 6280,
+        "size_kb": 6.13,
+        "md5": "cba1cb8a34f20f7ddd927d6901dbeda8",
+        "lines": 263,
+        "words": 609,
+        "modified": "2026-03-12T07:23:48.028325"
+      }
+    },
+    {
+      "file_path": "15-docs-文档规范\\reports\\FINAL-SYSTEM-REPORT.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\15-docs-文档规范\\reports\\FINAL-SYSTEM-REPORT.md",
+        "relative_path": "15-docs-文档规范\\reports\\FINAL-SYSTEM-REPORT.md",
+        "size": 8174,
+        "size_kb": 7.98,
+        "md5": "4023d0464b567c274bac523986bc6f5d",
+        "lines": 241,
+        "words": 846,
+        "modified": "2026-03-14T20:27:41.781276"
+      }
+    },
+    {
+      "file_path": "15-docs-文档规范\\archive\\DOC_MATERIALS_TESTING_DESIGN_v1.0.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": true,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\15-docs-文档规范\\archive\\DOC_MATERIALS_TESTING_DESIGN_v1.0.md",
+        "relative_path": "15-docs-文档规范\\archive\\DOC_MATERIALS_TESTING_DESIGN_v1.0.md",
+        "size": 17793,
+        "size_kb": 17.38,
+        "md5": "7f8637520a066d91e2174d684f0a57bb",
+        "lines": 593,
+        "words": 1224,
+        "modified": "2026-03-14T20:27:41.738024"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\docs\\AUTO-PNOTE-TEST-REPORT.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\docs\\AUTO-PNOTE-TEST-REPORT.md",
+        "relative_path": "30-scripts-tools\\docs\\AUTO-PNOTE-TEST-REPORT.md",
+        "size": 5219,
+        "size_kb": 5.1,
+        "md5": "4d6f5004fef4cf9655d51d6010a9f90b",
+        "lines": 213,
+        "words": 773,
+        "modified": "2026-03-09T18:19:36.316585"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\01-KNOWLEDGE-CARDS\\pdf\\README.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "high",
+      "review_needed": true,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\01-KNOWLEDGE-CARDS\\pdf\\README.md",
+        "relative_path": "30-scripts-tools\\01-KNOWLEDGE-CARDS\\pdf\\README.md",
+        "size": 6712,
+        "size_kb": 6.55,
+        "md5": "40690c1bf88ce532cca9c22ac4688311",
+        "lines": 289,
+        "words": 862,
+        "modified": "2026-03-11T07:24:53.505323"
+      }
+    },
+    {
+      "file_path": "15-docs-文档规范\\docs\\CLAWHUB_SKILL_REVIEW_FULL_2026-03-06.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\15-docs-文档规范\\docs\\CLAWHUB_SKILL_REVIEW_FULL_2026-03-06.md",
+        "relative_path": "15-docs-文档规范\\docs\\CLAWHUB_SKILL_REVIEW_FULL_2026-03-06.md",
+        "size": 6180,
+        "size_kb": 6.04,
+        "md5": "0e3e96e522c559f027932e7d8607f413",
+        "lines": 257,
+        "words": 758,
+        "modified": "2026-03-14T20:27:41.777035"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\08-AUTOMATION\\REORGANIZE-PLAN-ULTIMATE.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "high",
+      "review_needed": true,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\08-AUTOMATION\\REORGANIZE-PLAN-ULTIMATE.md",
+        "relative_path": "30-scripts-tools\\08-AUTOMATION\\REORGANIZE-PLAN-ULTIMATE.md",
+        "size": 36232,
+        "size_kb": 35.38,
+        "md5": "7ff2a29ebea944f88f5e52df19e01bfb",
+        "lines": 905,
+        "words": 3587,
+        "modified": "2026-03-11T18:56:45.568720"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\intent-belief-integration\\test_intentkit\\intentkit\\intentkit\\skills\\firecrawl\\README.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "high",
+      "review_needed": true,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\intent-belief-integration\\test_intentkit\\intentkit\\intentkit\\skills\\firecrawl\\README.md",
+        "relative_path": "30-scripts-tools\\intent-belief-integration\\test_intentkit\\intentkit\\intentkit\\skills\\firecrawl\\README.md",
+        "size": 7582,
+        "size_kb": 7.4,
+        "md5": "2583e124d4a55cd307570ea86383c08d",
+        "lines": 217,
+        "words": 1003,
+        "modified": "2026-03-07T22:01:17.030443"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\docs\\LIG-USER-GUIDE.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\docs\\LIG-USER-GUIDE.md",
+        "relative_path": "30-scripts-tools\\docs\\LIG-USER-GUIDE.md",
+        "size": 9136,
+        "size_kb": 8.92,
+        "md5": "22e07b708d50197393faf5f63b729a88",
+        "lines": 402,
+        "words": 1185,
+        "modified": "2026-03-09T12:54:57.548210"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\intent-belief-integration\\test_intentkit\\intentkit\\intentkit\\skills\\carv\\README.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "high",
+      "review_needed": true,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\intent-belief-integration\\test_intentkit\\intentkit\\intentkit\\skills\\carv\\README.md",
+        "relative_path": "30-scripts-tools\\intent-belief-integration\\test_intentkit\\intentkit\\intentkit\\skills\\carv\\README.md",
+        "size": 5327,
+        "size_kb": 5.2,
+        "md5": "078876d2b4365b3ea8a02ee65c50ee6b",
+        "lines": 95,
+        "words": 747,
+        "modified": "2026-03-07T22:01:16.657206"
+      }
+    },
+    {
+      "file_path": "MEMORY.md",
+      "status": "unique_config",
+      "similarity": 0.0,
+      "priority": "high",
+      "review_needed": true,
+      "config": {
+        "path": "C:\\Users\\华为\\.copaw\\MEMORY.md",
+        "relative_path": "MEMORY.md",
+        "size": 15051,
+        "size_kb": 14.7,
+        "md5": "97cf88ac2e0c2597f3e273ce5cb28689",
+        "lines": 440,
+        "words": 1492,
+        "modified": "2026-03-14T21:47:40.963607"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\docs\\DOC_Research_Naming_Standard_v4.1_Complete.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\docs\\DOC_Research_Naming_Standard_v4.1_Complete.md",
+        "relative_path": "30-scripts-tools\\docs\\DOC_Research_Naming_Standard_v4.1_Complete.md",
+        "size": 9341,
+        "size_kb": 9.12,
+        "md5": "d9f3fa400ff3d84b754feb129210036e",
+        "lines": 429,
+        "words": 1179,
+        "modified": "2026-03-07T00:45:13.442549"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\08-AUTOMATION\\REORGANIZE-PLAN-DETAILED.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": true,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\08-AUTOMATION\\REORGANIZE-PLAN-DETAILED.md",
+        "relative_path": "30-scripts-tools\\08-AUTOMATION\\REORGANIZE-PLAN-DETAILED.md",
+        "size": 18130,
+        "size_kb": 17.71,
+        "md5": "61002d0d0e8677e169c2c3942cdd38b5",
+        "lines": 564,
+        "words": 1578,
+        "modified": "2026-03-11T18:53:22.533850"
+      }
+    },
+    {
+      "file_path": "15-docs-文档规范\\archive\\DOC_SYSTEM_ARCHITECTURE_v1.0.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": true,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\15-docs-文档规范\\archive\\DOC_SYSTEM_ARCHITECTURE_v1.0.md",
+        "relative_path": "15-docs-文档规范\\archive\\DOC_SYSTEM_ARCHITECTURE_v1.0.md",
+        "size": 11978,
+        "size_kb": 11.7,
+        "md5": "d30f93da6e76ed514516936115a26517",
+        "lines": 277,
+        "words": 720,
+        "modified": "2026-03-14T20:27:41.758378"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\intent-belief-integration\\INTEGRATION_EN.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": true,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\intent-belief-integration\\INTEGRATION_EN.md",
+        "relative_path": "30-scripts-tools\\intent-belief-integration\\INTEGRATION_EN.md",
+        "size": 11497,
+        "size_kb": 11.23,
+        "md5": "d5e96e5701e4cc0e12d9c6a7646c4462",
+        "lines": 454,
+        "words": 1043,
+        "modified": "2026-03-07T22:20:55.401155"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\01-KNOWLEDGE-CARDS\\figures\\TODO-032-FIGURE-ENHANCEMENT-PLAN.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\01-KNOWLEDGE-CARDS\\figures\\TODO-032-FIGURE-ENHANCEMENT-PLAN.md",
+        "relative_path": "30-scripts-tools\\01-KNOWLEDGE-CARDS\\figures\\TODO-032-FIGURE-ENHANCEMENT-PLAN.md",
+        "size": 9081,
+        "size_kb": 8.87,
+        "md5": "b8f7a3d12bed397af796d98689d843b6",
+        "lines": 362,
+        "words": 857,
+        "modified": "2026-03-11T07:33:29.401926"
+      }
+    },
+    {
+      "file_path": "15-docs-文档规范\\archive\\DOC_DAY1_COMPLETE_REPORT_v1.0.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\15-docs-文档规范\\archive\\DOC_DAY1_COMPLETE_REPORT_v1.0.md",
+        "relative_path": "15-docs-文档规范\\archive\\DOC_DAY1_COMPLETE_REPORT_v1.0.md",
+        "size": 6373,
+        "size_kb": 6.22,
+        "md5": "cc371475b468e49d4d12c31b30c86d5c",
+        "lines": 266,
+        "words": 761,
+        "modified": "2026-03-14T20:27:41.724903"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\docs\\DOC_Weather_README_v1.0.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\docs\\DOC_Weather_README_v1.0.md",
+        "relative_path": "30-scripts-tools\\docs\\DOC_Weather_README_v1.0.md",
+        "size": 7946,
+        "size_kb": 7.76,
+        "md5": "fbecf0aa4dd239cf1714e158a1d87017",
+        "lines": 303,
+        "words": 756,
+        "modified": "2026-03-06T14:12:46.701169"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\02-DAILY-BRIEF\\README.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "high",
+      "review_needed": true,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\02-DAILY-BRIEF\\README.md",
+        "relative_path": "30-scripts-tools\\02-DAILY-BRIEF\\README.md",
+        "size": 11152,
+        "size_kb": 10.89,
+        "md5": "3eb42c51068b12e490031de266d2ba1d",
+        "lines": 622,
+        "words": 1239,
+        "modified": "2026-03-12T07:23:05.749295"
+      }
+    },
+    {
+      "file_path": "15-docs-文档规范\\design\\WEB-UI-PROTOTYPE.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\15-docs-文档规范\\design\\WEB-UI-PROTOTYPE.md",
+        "relative_path": "15-docs-文档规范\\design\\WEB-UI-PROTOTYPE.md",
+        "size": 5421,
+        "size_kb": 5.29,
+        "md5": "cb6d171daa948da0d946464ec7e9bf8c",
+        "lines": 133,
+        "words": 438,
+        "modified": "2026-03-14T20:27:41.775967"
+      }
+    },
+    {
+      "file_path": "15-docs-文档规范\\archive\\DOC_PLUGIN_DEVELOPMENT_v1.0.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\15-docs-文档规范\\archive\\DOC_PLUGIN_DEVELOPMENT_v1.0.md",
+        "relative_path": "15-docs-文档规范\\archive\\DOC_PLUGIN_DEVELOPMENT_v1.0.md",
+        "size": 5900,
+        "size_kb": 5.76,
+        "md5": "6150816f1bea255f3db758157343a78d",
+        "lines": 318,
+        "words": 504,
+        "modified": "2026-03-14T20:27:41.747428"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\PROJECT-INDEX.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\PROJECT-INDEX.md",
+        "relative_path": "30-scripts-tools\\PROJECT-INDEX.md",
+        "size": 6487,
+        "size_kb": 6.33,
+        "md5": "0e88790025ef365bf4852f94b3f28592",
+        "lines": 127,
+        "words": 538,
+        "modified": "2026-03-11T19:17:34.083599"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\README.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "high",
+      "review_needed": true,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\README.md",
+        "relative_path": "30-scripts-tools\\README.md",
+        "size": 5315,
+        "size_kb": 5.19,
+        "md5": "0bea122d4d274789acce0e1782d28c97",
+        "lines": 251,
+        "words": 642,
+        "modified": "2026-03-13T11:40:29.909601"
+      }
+    },
+    {
+      "file_path": "15-docs-文档规范\\archive\\DOC_PHASE12_DAY1_SUMMARY_v1.0.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\15-docs-文档规范\\archive\\DOC_PHASE12_DAY1_SUMMARY_v1.0.md",
+        "relative_path": "15-docs-文档规范\\archive\\DOC_PHASE12_DAY1_SUMMARY_v1.0.md",
+        "size": 7411,
+        "size_kb": 7.24,
+        "md5": "811d7103413cba74dca8d06c8873cf52",
+        "lines": 302,
+        "words": 812,
+        "modified": "2026-03-14T20:27:41.746270"
+      }
+    },
+    {
+      "file_path": "15-docs-文档规范\\archive\\DOC_MATERIALS_SYSTEM_COMPLETE_v1.0.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": true,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\15-docs-文档规范\\archive\\DOC_MATERIALS_SYSTEM_COMPLETE_v1.0.md",
+        "relative_path": "15-docs-文档规范\\archive\\DOC_MATERIALS_SYSTEM_COMPLETE_v1.0.md",
+        "size": 11250,
+        "size_kb": 10.99,
+        "md5": "3347764e803e0aadff5c2e8d56cc967d",
+        "lines": 287,
+        "words": 920,
+        "modified": "2026-03-14T20:27:41.738024"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\04-collectors\\ARXIV-INTEGRATION-ROADMAP.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\04-collectors\\ARXIV-INTEGRATION-ROADMAP.md",
+        "relative_path": "30-scripts-tools\\04-collectors\\ARXIV-INTEGRATION-ROADMAP.md",
+        "size": 6891,
+        "size_kb": 6.73,
+        "md5": "6e49246d180dde3154e1b8d3c9d03c76",
+        "lines": 296,
+        "words": 805,
+        "modified": "2026-03-13T22:31:20.172631"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\feishu-tools\\README-ENHANCED.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\feishu-tools\\README-ENHANCED.md",
+        "relative_path": "30-scripts-tools\\feishu-tools\\README-ENHANCED.md",
+        "size": 7945,
+        "size_kb": 7.76,
+        "md5": "838697623de22b2c774c5e9a935df835",
+        "lines": 330,
+        "words": 910,
+        "modified": "2026-03-14T15:53:40.971294"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\08-AUTOMATION\\REORGANIZE-PLAN.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\08-AUTOMATION\\REORGANIZE-PLAN.md",
+        "relative_path": "30-scripts-tools\\08-AUTOMATION\\REORGANIZE-PLAN.md",
+        "size": 6414,
+        "size_kb": 6.26,
+        "md5": "900790eff7db75237f776647e9d55205",
+        "lines": 233,
+        "words": 586,
+        "modified": "2026-03-11T18:51:09.912340"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\01-KNOWLEDGE-CARDS\\docs\\COMPETITOR-ANALYSIS.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\01-KNOWLEDGE-CARDS\\docs\\COMPETITOR-ANALYSIS.md",
+        "relative_path": "30-scripts-tools\\01-KNOWLEDGE-CARDS\\docs\\COMPETITOR-ANALYSIS.md",
+        "size": 8069,
+        "size_kb": 7.88,
+        "md5": "9c941226cc0be735a800ad632b48869d",
+        "lines": 265,
+        "words": 1246,
+        "modified": "2026-03-12T00:03:19.672684"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\figure-enhancer\\TODO-032-FIGURE-ENHANCEMENT-PLAN.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\figure-enhancer\\TODO-032-FIGURE-ENHANCEMENT-PLAN.md",
+        "relative_path": "30-scripts-tools\\figure-enhancer\\TODO-032-FIGURE-ENHANCEMENT-PLAN.md",
+        "size": 9081,
+        "size_kb": 8.87,
+        "md5": "b8f7a3d12bed397af796d98689d843b6",
+        "lines": 362,
+        "words": 857,
+        "modified": "2026-03-11T07:33:29.401926"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\docs\\DOC_File_Naming_Standard_v2.0.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\docs\\DOC_File_Naming_Standard_v2.0.md",
+        "relative_path": "30-scripts-tools\\docs\\DOC_File_Naming_Standard_v2.0.md",
+        "size": 9075,
+        "size_kb": 8.86,
+        "md5": "2fa77954633a59b83abad799e4ff0a5a",
+        "lines": 506,
+        "words": 891,
+        "modified": "2026-03-07T00:26:39.214930"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\docs\\FORMULA-MODEL-FINETUNE-REPORT.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\docs\\FORMULA-MODEL-FINETUNE-REPORT.md",
+        "relative_path": "30-scripts-tools\\docs\\FORMULA-MODEL-FINETUNE-REPORT.md",
+        "size": 6098,
+        "size_kb": 5.96,
+        "md5": "093a2a459bad7de6e6c7d744baae40d8",
+        "lines": 265,
+        "words": 958,
+        "modified": "2026-03-09T18:39:42.209036"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\multimodal-kg\\README.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "high",
+      "review_needed": true,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\multimodal-kg\\README.md",
+        "relative_path": "30-scripts-tools\\multimodal-kg\\README.md",
+        "size": 11807,
+        "size_kb": 11.53,
+        "md5": "22881e73b3328e19e8c43601ed5737aa",
+        "lines": 557,
+        "words": 1168,
+        "modified": "2026-03-12T07:16:26.170975"
+      }
+    },
+    {
+      "file_path": "15-docs-文档规范\\archive\\DOC_README_v1.0.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\15-docs-文档规范\\archive\\DOC_README_v1.0.md",
+        "relative_path": "15-docs-文档规范\\archive\\DOC_README_v1.0.md",
+        "size": 10226,
+        "size_kb": 9.99,
+        "md5": "b3b8b8f6ae247d464f674dfd52bc1739",
+        "lines": 338,
+        "words": 904,
+        "modified": "2026-03-14T20:27:41.752234"
+      }
+    },
+    {
+      "file_path": "AGENTS.md",
+      "status": "unique_config",
+      "similarity": 0.0,
+      "priority": "high",
+      "review_needed": true,
+      "config": {
+        "path": "C:\\Users\\华为\\.copaw\\AGENTS.md",
+        "relative_path": "AGENTS.md",
+        "size": 20876,
+        "size_kb": 20.39,
+        "md5": "a2cb5dc83359018a48c7857e9eb24d77",
+        "lines": 518,
+        "words": 1704,
+        "modified": "2026-03-14T17:04:30.759799"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\01-KNOWLEDGE-CARDS\\core\\README-WEBUI.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": true,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\01-KNOWLEDGE-CARDS\\core\\README-WEBUI.md",
+        "relative_path": "30-scripts-tools\\01-KNOWLEDGE-CARDS\\core\\README-WEBUI.md",
+        "size": 16245,
+        "size_kb": 15.86,
+        "md5": "64744315a7bb1843bb54c517738c389e",
+        "lines": 729,
+        "words": 1721,
+        "modified": "2026-03-12T07:18:10.420130"
+      }
+    },
+    {
+      "file_path": "15-docs-文档规范\\archive\\DOC_ROADMAP_PHASE12_v1.0.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\15-docs-文档规范\\archive\\DOC_ROADMAP_PHASE12_v1.0.md",
+        "relative_path": "15-docs-文档规范\\archive\\DOC_ROADMAP_PHASE12_v1.0.md",
+        "size": 5609,
+        "size_kb": 5.48,
+        "md5": "a8202cc51c5da38a9a77e6132cfe4f75",
+        "lines": 172,
+        "words": 698,
+        "modified": "2026-03-14T20:27:41.755378"
+      }
+    },
+    {
+      "file_path": "15-docs-文档规范\\reports\\BEST-PRACTICES.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\15-docs-文档规范\\reports\\BEST-PRACTICES.md",
+        "relative_path": "15-docs-文档规范\\reports\\BEST-PRACTICES.md",
+        "size": 5260,
+        "size_kb": 5.14,
+        "md5": "fbfc5055e853fd5125b4b14656419121",
+        "lines": 210,
+        "words": 375,
+        "modified": "2026-03-14T20:27:41.779154"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\01-KNOWLEDGE-CARDS\\README.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "high",
+      "review_needed": true,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\01-KNOWLEDGE-CARDS\\README.md",
+        "relative_path": "30-scripts-tools\\01-KNOWLEDGE-CARDS\\README.md",
+        "size": 6111,
+        "size_kb": 5.97,
+        "md5": "c09edb6a80de4f3c5897a759ec94fe6e",
+        "lines": 241,
+        "words": 771,
+        "modified": "2026-03-11T19:04:42.368552"
+      }
+    },
+    {
+      "file_path": "15-docs-文档规范\\archive\\DOC_AUTOMATED_RESEARCH_SYSTEM_v1.0.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\15-docs-文档规范\\archive\\DOC_AUTOMATED_RESEARCH_SYSTEM_v1.0.md",
+        "relative_path": "15-docs-文档规范\\archive\\DOC_AUTOMATED_RESEARCH_SYSTEM_v1.0.md",
+        "size": 9997,
+        "size_kb": 9.76,
+        "md5": "2e54aeab73c1f342b784da87a0a572ce",
+        "lines": 449,
+        "words": 889,
+        "modified": "2026-03-14T20:27:41.714897"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\99-ARCHIVE\\PR_DESCRIPTION.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\99-ARCHIVE\\PR_DESCRIPTION.md",
+        "relative_path": "30-scripts-tools\\99-ARCHIVE\\PR_DESCRIPTION.md",
+        "size": 5138,
+        "size_kb": 5.02,
+        "md5": "ea99f46935afa7b2d746f70e1d8f7e12",
+        "lines": 212,
+        "words": 590,
+        "modified": "2026-03-07T22:25:20.930510"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\docs\\README.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "high",
+      "review_needed": true,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\docs\\README.md",
+        "relative_path": "30-scripts-tools\\docs\\README.md",
+        "size": 7198,
+        "size_kb": 7.03,
+        "md5": "95c856084b480de618603b5f0f5abf16",
+        "lines": 328,
+        "words": 775,
+        "modified": "2026-03-10T17:18:02.689569"
+      }
+    },
+    {
+      "file_path": "15-docs-文档规范\\archive\\DOC_MATERIALS_DOCKER_DEPLOYMENT_v1.0.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": true,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\15-docs-文档规范\\archive\\DOC_MATERIALS_DOCKER_DEPLOYMENT_v1.0.md",
+        "relative_path": "15-docs-文档规范\\archive\\DOC_MATERIALS_DOCKER_DEPLOYMENT_v1.0.md",
+        "size": 15499,
+        "size_kb": 15.14,
+        "md5": "bcc45f9f84541b98b5610c5ff08b63a2",
+        "lines": 677,
+        "words": 1236,
+        "modified": "2026-03-14T20:27:41.735213"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\intent-belief-integration\\PR_DESCRIPTION.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\intent-belief-integration\\PR_DESCRIPTION.md",
+        "relative_path": "30-scripts-tools\\intent-belief-integration\\PR_DESCRIPTION.md",
+        "size": 5138,
+        "size_kb": 5.02,
+        "md5": "ea99f46935afa7b2d746f70e1d8f7e12",
+        "lines": 212,
+        "words": 590,
+        "modified": "2026-03-07T22:25:20.930510"
+      }
+    },
+    {
+      "file_path": "15-docs-文档规范\\user-guides\\USER-MANUAL.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\15-docs-文档规范\\user-guides\\USER-MANUAL.md",
+        "relative_path": "15-docs-文档规范\\user-guides\\USER-MANUAL.md",
+        "size": 6918,
+        "size_kb": 6.76,
+        "md5": "070314f1d9729e34643cff5746e2445a",
+        "lines": 342,
+        "words": 730,
+        "modified": "2026-03-14T20:27:41.789657"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\01-KNOWLEDGE-CARDS\\docs\\LIMITATIONS.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\01-KNOWLEDGE-CARDS\\docs\\LIMITATIONS.md",
+        "relative_path": "30-scripts-tools\\01-KNOWLEDGE-CARDS\\docs\\LIMITATIONS.md",
+        "size": 8791,
+        "size_kb": 8.58,
+        "md5": "8abc8173159927d0a1429c18e1ca55d5",
+        "lines": 287,
+        "words": 1097,
+        "modified": "2026-03-11T23:51:49.902845"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\intent-belief-integration\\test_intentkit\\intentkit\\intentkit\\skills\\lifi\\README.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "high",
+      "review_needed": true,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\intent-belief-integration\\test_intentkit\\intentkit\\intentkit\\skills\\lifi\\README.md",
+        "relative_path": "30-scripts-tools\\intent-belief-integration\\test_intentkit\\intentkit\\intentkit\\skills\\lifi\\README.md",
+        "size": 8649,
+        "size_kb": 8.45,
+        "md5": "b44ac5b0900be76ed608bf16d72936e2",
+        "lines": 294,
+        "words": 1245,
+        "modified": "2026-03-07T22:01:17.107540"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\03-LIG-KNOWLEDGE-GRAPH\\TODO-034-PERFORMANCE-OPTIMIZATION.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": true,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\03-LIG-KNOWLEDGE-GRAPH\\TODO-034-PERFORMANCE-OPTIMIZATION.md",
+        "relative_path": "30-scripts-tools\\03-LIG-KNOWLEDGE-GRAPH\\TODO-034-PERFORMANCE-OPTIMIZATION.md",
+        "size": 11064,
+        "size_kb": 10.8,
+        "md5": "451a51320b14ce03a5fde9560ab28a25",
+        "lines": 442,
+        "words": 1226,
+        "modified": "2026-03-11T07:48:46.549130"
+      }
+    },
+    {
+      "file_path": "15-docs-文档规范\\archive\\DOC_FOLDER_INDEX_v1.0.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\15-docs-文档规范\\archive\\DOC_FOLDER_INDEX_v1.0.md",
+        "relative_path": "15-docs-文档规范\\archive\\DOC_FOLDER_INDEX_v1.0.md",
+        "size": 6243,
+        "size_kb": 6.1,
+        "md5": "79cc57eeb84e2f54f832f3bc70e1cf2c",
+        "lines": 310,
+        "words": 616,
+        "modified": "2026-03-14T20:27:41.728395"
+      }
+    },
+    {
+      "file_path": "15-docs-文档规范\\reports\\FINAL-PROJECT-REPORT.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\15-docs-文档规范\\reports\\FINAL-PROJECT-REPORT.md",
+        "relative_path": "15-docs-文档规范\\reports\\FINAL-PROJECT-REPORT.md",
+        "size": 7398,
+        "size_kb": 7.22,
+        "md5": "941fe29813f93c06d89dd23d7daed4c8",
+        "lines": 314,
+        "words": 1114,
+        "modified": "2026-03-14T20:27:41.779685"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\auto_signal_extractor_README.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "high",
+      "review_needed": true,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\auto_signal_extractor_README.md",
+        "relative_path": "30-scripts-tools\\auto_signal_extractor_README.md",
+        "size": 5171,
+        "size_kb": 5.05,
+        "md5": "6ec56d3ef132727af44d56540107aa49",
+        "lines": 254,
+        "words": 567,
+        "modified": "2026-03-13T11:39:16.323918"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\intent-belief-integration\\test_intentkit\\intentkit\\intentkit\\skills\\casino\\README.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "high",
+      "review_needed": true,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\intent-belief-integration\\test_intentkit\\intentkit\\intentkit\\skills\\casino\\README.md",
+        "relative_path": "30-scripts-tools\\intent-belief-integration\\test_intentkit\\intentkit\\intentkit\\skills\\casino\\README.md",
+        "size": 6707,
+        "size_kb": 6.55,
+        "md5": "6fab0ec87fee8e6c189001e2e4e21163",
+        "lines": 254,
+        "words": 981,
+        "modified": "2026-03-07T22:01:16.673361"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\docs\\DOC_Research_Naming_Standard_v4.0.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\docs\\DOC_Research_Naming_Standard_v4.0.md",
+        "relative_path": "30-scripts-tools\\docs\\DOC_Research_Naming_Standard_v4.0.md",
+        "size": 7435,
+        "size_kb": 7.26,
+        "md5": "9565fcbc306c8d70221eec4468e6ba76",
+        "lines": 296,
+        "words": 737,
+        "modified": "2026-03-07T00:38:01.024336"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\intent-belief-integration\\test_intentkit\\intentkit\\intentkit\\skills\\moralis\\README.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "high",
+      "review_needed": true,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\intent-belief-integration\\test_intentkit\\intentkit\\intentkit\\skills\\moralis\\README.md",
+        "relative_path": "30-scripts-tools\\intent-belief-integration\\test_intentkit\\intentkit\\intentkit\\skills\\moralis\\README.md",
+        "size": 13742,
+        "size_kb": 13.42,
+        "md5": "7e5087770fe8e297116e710305d4724e",
+        "lines": 490,
+        "words": 1724,
+        "modified": "2026-03-07T22:01:17.126728"
+      }
+    },
+    {
+      "file_path": "15-docs-文档规范\\FOLDER-NAMING-RULES.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\15-docs-文档规范\\FOLDER-NAMING-RULES.md",
+        "relative_path": "15-docs-文档规范\\FOLDER-NAMING-RULES.md",
+        "size": 6530,
+        "size_kb": 6.38,
+        "md5": "ad164787612cdae25a57503dc9cf7695",
+        "lines": 219,
+        "words": 665,
+        "modified": "2026-03-14T20:27:41.706381"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\pdf-extractor\\TODO-031-LAYOUTLM-PLAN.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\pdf-extractor\\TODO-031-LAYOUTLM-PLAN.md",
+        "relative_path": "30-scripts-tools\\pdf-extractor\\TODO-031-LAYOUTLM-PLAN.md",
+        "size": 5780,
+        "size_kb": 5.64,
+        "md5": "040a854af749772a864bdd72157e8c14",
+        "lines": 245,
+        "words": 574,
+        "modified": "2026-03-10T16:56:31.492258"
+      }
+    },
+    {
+      "file_path": "30-scripts-tools\\99-ARCHIVE\\INTEGRATION_EN.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": true,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\30-scripts-tools\\99-ARCHIVE\\INTEGRATION_EN.md",
+        "relative_path": "30-scripts-tools\\99-ARCHIVE\\INTEGRATION_EN.md",
+        "size": 11497,
+        "size_kb": 11.23,
+        "md5": "d5e96e5701e4cc0e12d9c6a7646c4462",
+        "lines": 454,
+        "words": 1043,
+        "modified": "2026-03-07T22:20:55.401155"
+      }
+    },
+    {
+      "file_path": "15-docs-文档规范\\archive\\DOC_CGCNN_CPU_OPTIMIZED_v1.0.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\15-docs-文档规范\\archive\\DOC_CGCNN_CPU_OPTIMIZED_v1.0.md",
+        "relative_path": "15-docs-文档规范\\archive\\DOC_CGCNN_CPU_OPTIMIZED_v1.0.md",
+        "size": 7417,
+        "size_kb": 7.24,
+        "md5": "372ecfa333e562525b7a4273eb6d4c88",
+        "lines": 369,
+        "words": 788,
+        "modified": "2026-03-14T20:27:41.718600"
+      }
+    },
+    {
+      "file_path": "15-docs-文档规范\\archive\\DOC_PHASE12_DAY1_FINAL_v1.0.md",
+      "status": "unique_workspace",
+      "similarity": 0.0,
+      "priority": "low",
+      "review_needed": false,
+      "workspace": {
+        "path": "D:\\OpenClaw\\workspace\\15-docs-文档规范\\archive\\DOC_PHASE12_DAY1_FINAL_v1.0.md",
+        "relative_path": "15-docs-文档规范\\archive\\DOC_PHASE12_DAY1_FINAL_v1.0.md",
+        "size": 5792,
+        "size_kb": 5.66,
+        "md5": "17e8ee97391959c1279727e8afc0d8fa",
+        "lines": 253,
+        "words": 716,
+        "modified": "2026-03-14T20:27:41.744318"
+      }
+    }
+  ]
+}

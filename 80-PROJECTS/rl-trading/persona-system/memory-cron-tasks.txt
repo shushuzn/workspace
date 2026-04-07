@@ -1,0 +1,5 @@
+# Memory System Health Check - Hourly
+# Runs every hour to check memory health and auto-fix issues
+
+0 * * * * cd /d D:\OpenClaw\workspace && python 30-scripts-tools\memory_health_monitor.py --check --report >nul 2>&1
+1 * * * * cd /d D:\OpenClaw\workspace && python 30-scripts-tools\memory_auto_fix.py --check --fix >nul 2>&1

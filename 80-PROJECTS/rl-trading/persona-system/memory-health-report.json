@@ -1,0 +1,29 @@
+{
+  "status": "healthy",
+  "checked_at": "2026-03-16T18:03:17.353976",
+  "workspace_memory": {
+    "exists": true,
+    "size_kb": 49.0,
+    "lines": 1122,
+    "last_modified": "2026-03-14T22:07:19.961504",
+    "md5": "cd285a7d92cfbaf368b370730c92205d"
+  },
+  "config_memory": {
+    "exists": true,
+    "size_kb": 27.66,
+    "lines": 709,
+    "last_modified": "2026-03-15T22:36:20.946092",
+    "md5": "519e12ae7df77dba50f32be518a48929"
+  },
+  "divergence_score": 0.0,
+  "sync_status": "synced",
+  "last_sync_time": null,
+  "issues": [],
+  "recommendations": [
+    {
+      "priority": "info",
+      "action": "记忆系统健康，继续保持",
+      "next_check": "下次自动检查：1 小时后"
+    }
+  ]
+}

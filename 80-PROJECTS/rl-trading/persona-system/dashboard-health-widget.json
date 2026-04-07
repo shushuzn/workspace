@@ -1,0 +1,29 @@
+{
+  "widget": "memory_health",
+  "version": "1.0",
+  "updated_at": "2026-03-16T18:03:17.364713",
+  "status": {
+    "value": "healthy",
+    "emoji": "[OK]",
+    "message": "Memory System Healthy"
+  },
+  "metrics": {
+    "workspace_memory": {
+      "size_kb": 49.0,
+      "lines": 1122,
+      "status": "[OK]"
+    },
+    "config_memory": {
+      "size_kb": 27.66,
+      "lines": 709,
+      "status": "[OK]"
+    }
+  },
+  "issues_count": 0,
+  "next_check": "2026-03-16T18:03:17.353976",
+  "architecture": {
+    "description": "Dual MEMORY.md architecture",
+    "workspace": "Research Insights (49KB)",
+    "config": "Agent Configuration (14KB)"
+  }
+}
