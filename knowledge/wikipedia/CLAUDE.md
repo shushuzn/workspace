@@ -1,6 +1,6 @@
 # Wikipedia 知识库项目规范
 
-> 版本：v1.5 | 更新日期：2026-04-07
+> 版本：v1.6 | 更新日期：2026-04-07
 
 ## 项目定位
 
@@ -45,8 +45,27 @@ node wiki.mjs edit <标题>           # Obsidian中人工填充"研究动机/核
 node wiki.mjs sync                  # 同步索引，检测wiki-link断链
 ```
 
-### 视频生产流水线（手动，双版本：科普版+专业版）
+### 视频生产流水线
 
+### 半自动化模式（批量）
+```bash
+python video/pipeline.py --dir articles --batch 5 --workers 4 --resume
+```
+- 增量缓存：SHA256 hash 跳过未变更的 speech/mp3/scene/mp4
+- 断点续传：失败后可 --resume 从中断处继续
+- 质量门禁前置：文案质检（issues 或 <60分）阻塞生成
+- 批量队列：超过 5 个时分批处理
+- 质量报告：`.video-cache/reports/` 下生成 JSON 报告
+
+### 质量监控（pipeline.py 内置）
+
+| 阶段 | 检查项 | 阻塞 |
+|------|--------|------|
+| Step 0 文案质检 | 数学符号替换、可读性（句长/逗号密度）、学术腔 | BLOCK |
+| Step 2.5 音频质检 | 时长、码率、采样率、声道 | WARN |
+| Step 4.5 视频质检 | 分辨率、帧率、编码器、音频流 | WARN（无音频/编码错误 BLOCK） |
+
+### 手动模式（单篇精修）
 1. `node wiki.mjs edit <标题>` 编辑带 frontmatter 和 `[画面：]` 标注的视频脚本（01-xxx.md）
 2. **手动**：去掉 frontmatter 和所有 `[画面：...]` 行，保存为 `NN-标题-阅读文案.txt`
 3. **手动**：替换文案中 Unicode 数学符号为可读英文发音（σ₁→sigma 1，λᵢ→lambda i，Yang-Baxter→杨-巴克斯特 等），保存为 `NN-标题-阅读文案-speech.txt`
