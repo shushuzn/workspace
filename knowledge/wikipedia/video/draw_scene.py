@@ -11,6 +11,13 @@ import numpy as np
 import argparse
 import re
 from pathlib import Path
+import sys
+sys.path.insert(0, str(Path(__file__).parent.parent))
+from video.config import (
+    T2I_MODEL, T2I_STEPS, T2I_GUIDANCE, T2I_SEED,
+    TTS_ENGINE, KOKORO_VOICE_ZH, KOKORO_VOICE_EN,
+    RATE, PITCH,
+)
 
 plt.style.use('default')
 matplotlib.rcParams['font.family'] = ['Microsoft YaHei', 'DejaVu Sans']
@@ -35,7 +42,7 @@ def _get_sd_pipeline():
 
         print(f"  [SD] 加载模型到 {device} ({dtype})，首次需下载 ~2GB...")
         pipe = StableDiffusionPipeline.from_pretrained(
-            "stabilityai/stable-diffusion-2-1",
+            T2I_MODEL,  # runwayml/stable-diffusion-v1-5 (open, no auth)
             torch_dtype=dtype,
             safety_checker=None,   # 去掉审查加速
         )
