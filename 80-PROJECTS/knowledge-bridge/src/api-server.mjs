@@ -19,7 +19,7 @@ import { fileURLToPath } from 'url';
 import { parseArgs } from 'util';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const DATA_FILE = join(__dirname, '..', 'data', 'pla-knowledge-graph.json');
+const DATA_FILE = join(__dirname, '..', 'data', 'merged-knowledge-graph.json');
 const PORT = parseArgs({ args: process.argv.slice(2), options: { port: { type: 'string', default: '7892' } } }).values.port || 7892;
 
 // ─── Load Knowledge Graph ───────────────────────────────────
@@ -131,6 +131,21 @@ async function handleRequest(req, res) {
     return sendJSON(res, 200, graph);
   }
 
+
+  if (path === '/hub/search' && req.method === 'GET') {
+    const hubQuery = url.searchParams.get('query') || '';
+    if (!hubQuery) return sendJSON(res, 400, { error: 'query required' });
+    const graph = loadGraph();
+    const hubNodes = (graph.nodes || []).filter(n => n.domain === 'multi-agent-debate');
+    const scored = hubNodes.map(n => {
+      const q = hubQuery.toLowerCase();
+      const nameScore = n.name.toLowerCase().includes(q) ? 3 : 0;
+      const descScore = (n.description || '').toLowerCase().includes(q) ? 2 : 0;
+      return { ...n, relevanceScore: nameScore + descScore };
+    }).filter(n => n.relevanceScore > 0)
+      .sort((a, b) => b.relevanceScore - a.relevanceScore);
+    return sendJSON(res, 200, { query: hubQuery, count: scored.length, debates: scored });
+  }
   if (path === '/health' && req.method === 'GET') {
     return sendJSON(res, 200, {
       status: 'ok',
@@ -147,6 +162,7 @@ async function handleRequest(req, res) {
       'GET  /projects              — list indexed projects/domains',
       'GET  /graph                 — full knowledge graph',
       'GET  /health                — server health',
+      'GET  /hub/search?query=X  — search multi-agent debate graph',
     ].join('\n'));
   }
 
@@ -160,4 +176,5 @@ server.listen(PORT, () => {
   console.log(`   GET  /projects       — list indexed projects`);
   console.log(`   GET  /graph          — full knowledge graph`);
   console.log(`   GET  /health          — server health`);
+  console.log('   GET  /hub/search  — search multi-agent debates');
 });

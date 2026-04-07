@@ -1,0 +1,525 @@
+{
+  "nodes": [
+    {
+      "id": "debate_AI应该取代人类工作吗",
+      "name": "AI应该取代人类工作吗",
+      "type": "debate_topic",
+      "description": "辩论话题: AI应该取代人类工作吗 | 模式: debate | 轮次: 1 | 时间: 2026-04-01",
+      "domain": "multi-agent-debate",
+      "tags": [
+        "debate",
+        "debate"
+      ]
+    },
+    {
+      "id": "debate_AI应该取代人类工作吗_claim_0",
+      "name": "正方: 正因人为不确定，所以AI有更高的准确度和速度。...",
+      "type": "debate_claim",
+      "description": "正因人为不确定，所以AI有更高的准确度和速度。",
+      "domain": "multi-agent-debate",
+      "tags": [
+        "正方"
+      ],
+      "source": "AI应该取代人类工作吗"
+    },
+    {
+      "id": "debate_AI应该取代人类工作吗_claim_1",
+      "name": "反方: 然而…实际上，许多工作涉及 creativity 和社会能力，AI不能完全替代这种功能。正方对方面辩...",
+      "type": "debate_claim",
+      "description": "然而…实际上，许多工作涉及 creativity 和社会能力，AI不能完全替代这种功能。正方对方面辩说：因为AI具有更好的效率，能够为个人提供高-quality 的服务，有利于个人职业生涯发展。",
+      "domain": "multi-agent-debate",
+      "tags": [
+        "反方"
+      ],
+      "source": "AI应该取代人类工作吗"
+    },
+    {
+      "id": "debate_AI是否会取代人类工作",
+      "name": "AI是否会取代人类工作",
+      "type": "debate_topic",
+      "description": "辩论话题: AI是否会取代人类工作 | 模式: discuss | 轮次: 1 | 时间: 2026-04-04",
+      "domain": "multi-agent-debate",
+      "tags": [
+        "discuss",
+        "debate"
+      ]
+    },
+    {
+      "id": "debate_AI生成内容应不应该有版权",
+      "name": "AI生成内容应不应该有版权",
+      "type": "debate_topic",
+      "description": "辩论话题: AI生成内容应不应该有版权 | 模式: debate | 轮次: 5 | 时间: 2026-04-01",
+      "domain": "multi-agent-debate",
+      "tags": [
+        "debate",
+        "debate"
+      ]
+    },
+    {
+      "id": "debate_AI生成内容应不应该有版权_claim_0",
+      "name": "正方: 正因为AI生成内容凝结了人类创意劳动和技术投入，所以应当给予版权保护。2018年佳士得拍卖会上，AI...",
+      "type": "debate_claim",
+      "description": "正因为AI生成内容凝结了人类创意劳动和技术投入，所以应当给予版权保护。2018年佳士得拍卖会上，AI创作的艺术品《Edmond de Belamy》以43万美元成交，这证明AI生成内容具有实际经济价值，需要法律保护。",
+      "domain": "multi-agent-debate",
+      "tags": [
+        "正方"
+      ],
+      "source": "AI生成内容应不应该有版权"
+    },
+    {
+      "id": "debate_AI生成内容应不应该有版权_claim_1",
+      "name": "反方: 然而正方所谓\"人类创意劳动\"的漏洞在于：人类使用AI与使用画笔并无本质区别，我们从不因画家使用了颜料...",
+      "type": "debate_claim",
+      "description": "然而正方所谓\"人类创意劳动\"的漏洞在于：人类使用AI与使用画笔并无本质区别，我们从不因画家使用了颜料就赋予颜料版权——实际上版权保护的是创作主体的创造性行为，而AI并非法律意义上的创作主体。",
+      "domain": "multi-agent-debate",
+      "tags": [
+        "反方"
+      ],
+      "source": "AI生成内容应不应该有版权"
+    },
+    {
+      "id": "debate_AI生成内容应不应该有版权_claim_2",
+      "name": "分析师: 反方论据更有支撑：全球尚无任何主要司法管辖区赋予AI本身版权——美国版权局2023年明确裁定AI创作...",
+      "type": "debate_claim",
+      "description": "反方论据更有支撑：全球尚无任何主要司法管辖区赋予AI本身版权——美国版权局2023年明确裁定AI创作内容不受保护，欧盟《数字单一市场版权指令》同样不涵盖AI作品。正方逻辑存在根本性错误：43万美元的经济价值只能证明AI生成内容有市场，与\"应当拥有版权\"之间存在逻辑断层，举证责任在正方。",
+      "domain": "multi-agent-debate",
+      "tags": [
+        "分析师"
+      ],
+      "source": "AI生成内容应不应该有版权"
+    },
+    {
+      "id": "debate_AI生成内容应不应该有版权_claim_3",
+      "name": "质疑者: 正方混淆了工具价值与创作价值——人类投入资本不等于创作行为，而版权保护的核心从来是人的创作意志而非资...",
+      "type": "debate_claim",
+      "description": "正方混淆了工具价值与创作价值——人类投入资本不等于创作行为，而版权保护的核心从来是人的创作意志而非资本投入。更致命的是，一旦承认AI生成内容有版权，将产生无法解决的权利归属困境：开发者、训练数据提供者、使用者三方各执一词，这将在法律层面制造大量无法可依的灰色地带。",
+      "domain": "multi-agent-debate",
+      "tags": [
+        "质疑者"
+      ],
+      "source": "AI生成内容应不应该有版权"
+    },
+    {
+      "id": "debate_AI生成内容应不应该有版权_claim_4",
+      "name": "综合者: 共识点：双方都承认AI生成内容涉及人类投入，市场已赋予其经济价值，需要法律规制。最大分歧在于版权保护...",
+      "type": "debate_claim",
+      "description": "共识点：双方都承认AI生成内容涉及人类投入，市场已赋予其经济价值，需要法律规制。最大分歧在于版权保护的对象是“创作意志”还是“资本投入”——正方强调投入应得回报，反方坚持只有人才能成为权利主体。",
+      "domain": "multi-agent-debate",
+      "tags": [
+        "综合者"
+      ],
+      "source": "AI生成内容应不应该有版权"
+    },
+    {
+      "id": "debate_AI生成内容应不应该有版权_claim_5",
+      "name": "正方: 正因为AI生成内容是人类创意思维与技术能力结合的产物，其本质与摄影师使用相机、作家使用电脑无异，所以...",
+      "type": "debate_claim",
+      "description": "正因为AI生成内容是人类创意思维与技术能力结合的产物，其本质与摄影师使用相机、作家使用电脑无异，所以应当纳入版权保护范畴。联合国教科文组织2023年《人工智能伦理建议书》已明确呼吁建立AI创作内容的知识产权保护框架。",
+      "domain": "multi-agent-debate",
+      "tags": [
+        "正方"
+      ],
+      "source": "AI生成内容应不应该有版权"
+    },
+    {
+      "id": "debate_AI生成内容应不应该有版权_claim_6",
+      "name": "反方: AI生成内容不应有版权保护。版权制度的本质是激励人类创作者，而AI本身无法承担法律责任或拥有权利能力...",
+      "type": "debate_claim",
+      "description": "AI生成内容不应有版权保护。版权制度的本质是激励人类创作者，而AI本身无法承担法律责任或拥有权利能力——2022年美国版权局明确裁定，AI独立生成的作品不具有版权保护资格，因为缺乏人类作者这一核心要件。",
+      "domain": "multi-agent-debate",
+      "tags": [
+        "反方"
+      ],
+      "source": "AI生成内容应不应该有版权"
+    },
+    {
+      "id": "debate_AI生成内容应不应该有版权_claim_7",
+      "name": "分析师: 第1轮核查结果：。正方引用UNESCO建议书，但该文件属于伦理框架建议而非具有强制力的法律文本，证据...",
+      "type": "debate_claim",
+      "description": "第1轮核查结果：。正方引用UNESCO建议书，但该文件属于伦理框架建议而非具有强制力的法律文本，证据效力有限。",
+      "domain": "multi-agent-debate",
+      "tags": [
+        "分析师"
+      ],
+      "source": "AI生成内容应不应该有版权"
+    },
+    {
+      "id": "debate_AI生成内容应不应该有版权_claim_8",
+      "name": "质疑者: AI生成内容不应拥有版权。版权制度存在的根本目的是激励人类创作者的创作意愿，而AI既无情感诉求也无权...",
+      "type": "debate_claim",
+      "description": "AI生成内容不应拥有版权。版权制度存在的根本目的是激励人类创作者的创作意愿，而AI既无情感诉求也无权利能力，给机器赋予法律权利在逻辑上根本无法成立。",
+      "domain": "multi-agent-debate",
+      "tags": [
+        "质疑者"
+      ],
+      "source": "AI生成内容应不应该有版权"
+    },
+    {
+      "id": "debate_AI生成内容应不应该有版权_claim_9",
+      "name": "综合者: 正方立场：AI生成内容应当拥有版权。理由一：创作工具论——人类始终是创作主体。...",
+      "type": "debate_claim",
+      "description": "正方立场：AI生成内容应当拥有版权。理由一：创作工具论——人类始终是创作主体。",
+      "domain": "multi-agent-debate",
+      "tags": [
+        "综合者"
+      ],
+      "source": "AI生成内容应不应该有版权"
+    },
+    {
+      "id": "debate_中国应不应该全面推广电动汽车",
+      "name": "中国应不应该全面推广电动汽车",
+      "type": "debate_topic",
+      "description": "辩论话题: 中国应不应该全面推广电动汽车 | 模式: debate | 轮次: 2 | 时间: 2026-04-01",
+      "domain": "multi-agent-debate",
+      "tags": [
+        "debate",
+        "debate"
+      ]
+    },
+    {
+      "id": "debate_中国应不应该全面推广电动汽车_claim_0",
+      "name": "正方: 2. 说出论据。3. 结尾必须有具体事实、数据或真实案例支撑。...",
+      "type": "debate_claim",
+      "description": "2. 说出论据。3. 结尾必须有具体事实、数据或真实案例支撑。",
+      "domain": "multi-agent-debate",
+      "tags": [
+        "正方"
+      ],
+      "source": "中国应不应该全面推广电动汽车"
+    },
+    {
+      "id": "debate_中国应不应该全面推广电动汽车_claim_1",
+      "name": "反方: 2. 说出反驳。3. 结尾必须指出对方论据漏洞或一个相反的具体事实。...",
+      "type": "debate_claim",
+      "description": "2. 说出反驳。3. 结尾必须指出对方论据漏洞或一个相反的具体事实。",
+      "domain": "multi-agent-debate",
+      "tags": [
+        "反方"
+      ],
+      "source": "中国应不应该全面推广电动汽车"
+    },
+    {
+      "id": "debate_中国应不应该全面推广电动汽车_claim_2",
+      "name": "分析师: 3. 但没有提供具体的辩论内容。考虑到这是一个事实核查的角色，我应该：。...",
+      "type": "debate_claim",
+      "description": "3. 但没有提供具体的辩论内容。考虑到这是一个事实核查的角色，我应该：。",
+      "domain": "multi-agent-debate",
+      "tags": [
+        "分析师"
+      ],
+      "source": "中国应不应该全面推广电动汽车"
+    },
+    {
+      "id": "debate_中国应不应该全面推广电动汽车_claim_3",
+      "name": "质疑者: 1. 找出正方论据的最大弱点。2. 说话要短，2句以内。...",
+      "type": "debate_claim",
+      "description": "1. 找出正方论据的最大弱点。2. 说话要短，2句以内。",
+      "domain": "multi-agent-debate",
+      "tags": [
+        "质疑者"
+      ],
+      "source": "中国应不应该全面推广电动汽车"
+    },
+    {
+      "id": "debate_中国应不应该全面推广电动汽车_claim_4",
+      "name": "综合者: 1. 综合双方观点。2. 指出共识点和最大分歧。...",
+      "type": "debate_claim",
+      "description": "1. 综合双方观点。2. 指出共识点和最大分歧。",
+      "domain": "multi-agent-debate",
+      "tags": [
+        "综合者"
+      ],
+      "source": "中国应不应该全面推广电动汽车"
+    },
+    {
+      "id": "debate_中国应不应该全面推广电动汽车_claim_5",
+      "name": "现场观众: 在这种情况下，我应该：。1. 承认没有看到实际辩论。...",
+      "type": "debate_claim",
+      "description": "在这种情况下，我应该：。1. 承认没有看到实际辩论。",
+      "domain": "multi-agent-debate",
+      "tags": [
+        "现场观众"
+      ],
+      "source": "中国应不应该全面推广电动汽车"
+    },
+    {
+      "id": "debate_中国应不应该全面推广电动汽车_claim_6",
+      "name": "正方: 所以我应该直接回答这个话题，作为正方亮明立场并给出论据。正方立场：中国应该全面推广电动汽车。...",
+      "type": "debate_claim",
+      "description": "所以我应该直接回答这个话题，作为正方亮明立场并给出论据。正方立场：中国应该全面推广电动汽车。",
+      "domain": "multi-agent-debate",
+      "tags": [
+        "正方"
+      ],
+      "source": "中国应不应该全面推广电动汽车"
+    },
+    {
+      "id": "debate_中国应不应该全面推广电动汽车_claim_7",
+      "name": "反方: 但现在观众追问说\"在这种情况下，我应该：1. 承认没有看到实际辩论。作为反方辩手，我的任务是：。...",
+      "type": "debate_claim",
+      "description": "但现在观众追问说\"在这种情况下，我应该：1. 承认没有看到实际辩论。作为反方辩手，我的任务是：。",
+      "domain": "multi-agent-debate",
+      "tags": [
+        "反方"
+      ],
+      "source": "中国应不应该全面推广电动汽车"
+    },
+    {
+      "id": "debate_中国应不应该全面推广电动汽车_claim_8",
+      "name": "分析师: 作为事实核查官的角色，我的回答应该是：如果你没有看到实际辩论，你无法进行事实核查，因为你的职责是核查...",
+      "type": "debate_claim",
+      "description": "作为事实核查官的角色，我的回答应该是：如果你没有看到实际辩论，你无法进行事实核查，因为你的职责是核查辩论中各方提出的论据是否有数据支撑。所以正确的回应是：是的，你应该承认没有看到实际辩论，因此无法进行有效的事实核查。",
+      "domain": "multi-agent-debate",
+      "tags": [
+        "分析师"
+      ],
+      "source": "中国应不应该全面推广电动汽车"
+    },
+    {
+      "id": "debate_中国应不应该全面推广电动汽车_claim_9",
+      "name": "质疑者: The user seems to be confused about their role in ...",
+      "type": "debate_claim",
+      "description": "The user seems to be confused about their role in a debate simulation. They're asking what they should do, and they've listed options:。1. 承认没有看到实际辩论。",
+      "domain": "multi-agent-debate",
+      "tags": [
+        "质疑者"
+      ],
+      "source": "中国应不应该全面推广电动汽车"
+    },
+    {
+      "id": "debate_电动汽车是否应该全面推广",
+      "name": "电动汽车是否应该全面推广",
+      "type": "debate_topic",
+      "description": "辩论话题: 电动汽车是否应该全面推广 | 模式: debate | 轮次: 2 | 时间: 2026-04-01",
+      "domain": "multi-agent-debate",
+      "tags": [
+        "debate",
+        "debate"
+      ]
+    },
+    {
+      "id": "debate_电动汽车是否应该全面推广_claim_0",
+      "name": "反方: 2. 说出反驳，2句以内。3. 结尾指出对方论据的漏洞或一个相反的具体事实。...",
+      "type": "debate_claim",
+      "description": "2. 说出反驳，2句以内。3. 结尾指出对方论据的漏洞或一个相反的具体事实。",
+      "domain": "multi-agent-debate",
+      "tags": [
+        "反方"
+      ],
+      "source": "电动汽车是否应该全面推广"
+    },
+    {
+      "id": "debate_电动汽车是否应该全面推广_claim_1",
+      "name": "分析师: 1. 指出哪一方论据更有数据支撑。2. 指出哪一方存在逻辑漏洞。...",
+      "type": "debate_claim",
+      "description": "1. 指出哪一方论据更有数据支撑。2. 指出哪一方存在逻辑漏洞。",
+      "domain": "multi-agent-debate",
+      "tags": [
+        "分析师"
+      ],
+      "source": "电动汽车是否应该全面推广"
+    },
+    {
+      "id": "debate_电动汽车是否应该全面推广_claim_2",
+      "name": "质疑者: 1. 从反方视角提出质疑。2. 找出正方论据的最大弱点。...",
+      "type": "debate_claim",
+      "description": "1. 从反方视角提出质疑。2. 找出正方论据的最大弱点。",
+      "domain": "multi-agent-debate",
+      "tags": [
+        "质疑者"
+      ],
+      "source": "电动汽车是否应该全面推广"
+    },
+    {
+      "id": "debate_电动汽车是否应该全面推广_claim_3",
+      "name": "综合者: 1. 说话要短，2句以内。2. 结尾必须说出中立但有价值的结论。...",
+      "type": "debate_claim",
+      "description": "1. 说话要短，2句以内。2. 结尾必须说出中立但有价值的结论。",
+      "domain": "multi-agent-debate",
+      "tags": [
+        "综合者"
+      ],
+      "source": "电动汽车是否应该全面推广"
+    },
+    {
+      "id": "debate_电动汽车是否应该全面推广_claim_4",
+      "name": "反方: 1. 明确反对\"电动汽车应该全面推广\"。2. 给出反驳论据。...",
+      "type": "debate_claim",
+      "description": "1. 明确反对\"电动汽车应该全面推广\"。2. 给出反驳论据。",
+      "domain": "multi-agent-debate",
+      "tags": [
+        "反方"
+      ],
+      "source": "电动汽车是否应该全面推广"
+    },
+    {
+      "id": "debate_电动汽车是否应该全面推广_claim_5",
+      "name": "质疑者: 1. 亮明立场：反对电动汽车全面推广。2. 找出正方论据的最大弱点。...",
+      "type": "debate_claim",
+      "description": "1. 亮明立场：反对电动汽车全面推广。2. 找出正方论据的最大弱点。",
+      "domain": "multi-agent-debate",
+      "tags": [
+        "质疑者"
+      ],
+      "source": "电动汽车是否应该全面推广"
+    },
+    {
+      "id": "debate_电动汽车是否应该全面推广_claim_6",
+      "name": "综合者: 1. 综合双方观点。2. 指出共识点和最大分歧。...",
+      "type": "debate_claim",
+      "description": "1. 综合双方观点。2. 指出共识点和最大分歧。",
+      "domain": "multi-agent-debate",
+      "tags": [
+        "综合者"
+      ],
+      "source": "电动汽车是否应该全面推广"
+    }
+  ],
+  "edges": [
+    {
+      "source": "debate_AI应该取代人类工作吗",
+      "target": "debate_AI应该取代人类工作吗_claim_0",
+      "label": "contains_claim"
+    },
+    {
+      "source": "debate_AI应该取代人类工作吗",
+      "target": "debate_AI应该取代人类工作吗_claim_1",
+      "label": "contains_claim"
+    },
+    {
+      "source": "debate_AI生成内容应不应该有版权",
+      "target": "debate_AI生成内容应不应该有版权_claim_0",
+      "label": "contains_claim"
+    },
+    {
+      "source": "debate_AI生成内容应不应该有版权",
+      "target": "debate_AI生成内容应不应该有版权_claim_1",
+      "label": "contains_claim"
+    },
+    {
+      "source": "debate_AI生成内容应不应该有版权",
+      "target": "debate_AI生成内容应不应该有版权_claim_2",
+      "label": "contains_claim"
+    },
+    {
+      "source": "debate_AI生成内容应不应该有版权",
+      "target": "debate_AI生成内容应不应该有版权_claim_3",
+      "label": "contains_claim"
+    },
+    {
+      "source": "debate_AI生成内容应不应该有版权",
+      "target": "debate_AI生成内容应不应该有版权_claim_4",
+      "label": "contains_claim"
+    },
+    {
+      "source": "debate_AI生成内容应不应该有版权",
+      "target": "debate_AI生成内容应不应该有版权_claim_5",
+      "label": "contains_claim"
+    },
+    {
+      "source": "debate_AI生成内容应不应该有版权",
+      "target": "debate_AI生成内容应不应该有版权_claim_6",
+      "label": "contains_claim"
+    },
+    {
+      "source": "debate_AI生成内容应不应该有版权",
+      "target": "debate_AI生成内容应不应该有版权_claim_7",
+      "label": "contains_claim"
+    },
+    {
+      "source": "debate_AI生成内容应不应该有版权",
+      "target": "debate_AI生成内容应不应该有版权_claim_8",
+      "label": "contains_claim"
+    },
+    {
+      "source": "debate_AI生成内容应不应该有版权",
+      "target": "debate_AI生成内容应不应该有版权_claim_9",
+      "label": "contains_claim"
+    },
+    {
+      "source": "debate_中国应不应该全面推广电动汽车",
+      "target": "debate_中国应不应该全面推广电动汽车_claim_0",
+      "label": "contains_claim"
+    },
+    {
+      "source": "debate_中国应不应该全面推广电动汽车",
+      "target": "debate_中国应不应该全面推广电动汽车_claim_1",
+      "label": "contains_claim"
+    },
+    {
+      "source": "debate_中国应不应该全面推广电动汽车",
+      "target": "debate_中国应不应该全面推广电动汽车_claim_2",
+      "label": "contains_claim"
+    },
+    {
+      "source": "debate_中国应不应该全面推广电动汽车",
+      "target": "debate_中国应不应该全面推广电动汽车_claim_3",
+      "label": "contains_claim"
+    },
+    {
+      "source": "debate_中国应不应该全面推广电动汽车",
+      "target": "debate_中国应不应该全面推广电动汽车_claim_4",
+      "label": "contains_claim"
+    },
+    {
+      "source": "debate_中国应不应该全面推广电动汽车",
+      "target": "debate_中国应不应该全面推广电动汽车_claim_5",
+      "label": "contains_claim"
+    },
+    {
+      "source": "debate_中国应不应该全面推广电动汽车",
+      "target": "debate_中国应不应该全面推广电动汽车_claim_6",
+      "label": "contains_claim"
+    },
+    {
+      "source": "debate_中国应不应该全面推广电动汽车",
+      "target": "debate_中国应不应该全面推广电动汽车_claim_7",
+      "label": "contains_claim"
+    },
+    {
+      "source": "debate_中国应不应该全面推广电动汽车",
+      "target": "debate_中国应不应该全面推广电动汽车_claim_8",
+      "label": "contains_claim"
+    },
+    {
+      "source": "debate_中国应不应该全面推广电动汽车",
+      "target": "debate_中国应不应该全面推广电动汽车_claim_9",
+      "label": "contains_claim"
+    },
+    {
+      "source": "debate_电动汽车是否应该全面推广",
+      "target": "debate_电动汽车是否应该全面推广_claim_0",
+      "label": "contains_claim"
+    },
+    {
+      "source": "debate_电动汽车是否应该全面推广",
+      "target": "debate_电动汽车是否应该全面推广_claim_1",
+      "label": "contains_claim"
+    },
+    {
+      "source": "debate_电动汽车是否应该全面推广",
+      "target": "debate_电动汽车是否应该全面推广_claim_2",
+      "label": "contains_claim"
+    },
+    {
+      "source": "debate_电动汽车是否应该全面推广",
+      "target": "debate_电动汽车是否应该全面推广_claim_3",
+      "label": "contains_claim"
+    },
+    {
+      "source": "debate_电动汽车是否应该全面推广",
+      "target": "debate_电动汽车是否应该全面推广_claim_4",
+      "label": "contains_claim"
+    },
+    {
+      "source": "debate_电动汽车是否应该全面推广",
+      "target": "debate_电动汽车是否应该全面推广_claim_5",
+      "label": "contains_claim"
+    },
+    {
+      "source": "debate_电动汽车是否应该全面推广",
+      "target": "debate_电动汽车是否应该全面推广_claim_6",
+      "label": "contains_claim"
+    }
+  ]
+}
