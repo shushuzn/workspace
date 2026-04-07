@@ -64,17 +64,41 @@ function buildIndex() {
   return index;
 }
 
-function searchIndex(query) {
+function fuzzyMatch(text, query) {
+  const t = text.toLowerCase(), q = query.toLowerCase();
+  if (t.includes(q)) return q.length / t.length;
+  let qi = 0, score = 0;
+  for (let ci = 0; ci < t.length && qi < q.length; ci++) {
+    if (t[ci] === q[qi]) { score += 1; qi++; }
+  }
+  return qi === q.length ? score / q.length : 0;
+}
+
+function searchIndex(query, opts = {}) {
   if (!existsSync(INDEX_FILE)) {
     console.error('[wiki-indexer] No index. Run --rebuild first.'); process.exit(1);
   }
   const idx = JSON.parse(readFileSync(INDEX_FILE, 'utf-8'));
-  const q = query.toLowerCase();
-  const results = idx.entries.filter(e =>
-    e.title.toLowerCase().includes(q) ||
-    e.description.toLowerCase().includes(q) ||
-    e.path.toLowerCase().includes(q)
-  ).slice(0, 10);
+  const limit = opts.limit || 10;
+  let results;
+  if (opts.fuzzy) {
+    results = idx.entries
+      .map(e => ({ ...e, _score: Math.max(fuzzyMatch(e.title, query), fuzzyMatch(e.description, query), fuzzyMatch(e.path, query)) }))
+      .filter(e => e._score > 0)
+      .sort((a, b) => b._score - a._score)
+      .slice(0, limit);
+  } else {
+    const q = query.toLowerCase();
+    results = idx.entries.filter(e =>
+      e.title.toLowerCase().includes(q) ||
+      e.description.toLowerCase().includes(q) ||
+      e.path.toLowerCase().includes(q)
+    ).slice(0, limit);
+  }
+  if (opts.json) {
+    console.log(JSON.stringify(results.map(({_score, ...r}) => r)));
+    return;
+  }
   if (!results.length) { console.log('No results.'); return; }
   for (const r of results) {
     console.log(`  [${r.path}]`);
@@ -85,14 +109,22 @@ function searchIndex(query) {
 }
 
 const args = process.argv.slice(2);
+const get = (flag, short) => { const i = args.indexOf(flag); return i !== -1 ? args[i + 1] : short ? args.indexOf(short) !== -1 ? true : undefined : undefined; };
 if (args.includes('--rebuild') || args.includes('-r')) {
   buildIndex();
 } else if (args.includes('--search') || args.includes('-s')) {
-  const q = args[args.indexOf('--search') + 1] || args[args.indexOf('-s') + 1];
-  if (!q) { console.log('Usage: node wiki-indexer.mjs --search <query>'); process.exit(1); }
+  const q = get('--search') || get('-s', true);
+  if (!q || q === true) { console.log('Usage: node wiki-indexer.mjs --search <query>'); process.exit(1); }
   searchIndex(q);
+} else if (args.includes('--query')) {
+  const q = get('--query');
+  const limit = parseInt(get('--limit') || '10', 10);
+  const json = args.includes('--json');
+  if (!q || q === true) { console.log('Usage: node wiki-indexer.mjs --query <term> [--limit N] [--json] [--fuzzy]'); process.exit(1); }
+  searchIndex(q, { json, limit, fuzzy: args.includes('--fuzzy') });
 } else {
   console.log('Usage:');
   console.log('  node shared/wiki-indexer.mjs --rebuild   # Build/update index');
-  console.log('  node shared/wiki-indexer.mjs --search <query>  # Search');
+  console.log('  node shared/wiki-indexer.mjs --search <query>  # Human-readable search');
+  console.log('  node shared/wiki-indexer.mjs --query <term> [--limit N] [--json] [--fuzzy]  # JSON search (for scripts)');
 }
