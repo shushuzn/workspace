@@ -131,7 +131,7 @@ export function createTask<T = unknown>(
   intent: TaskIntent,
   description: string,
   input: T,
-  opts: Partial<OAPTask<T>> & { sourceAgent: string; priority?: TaskPriority } = {} as any
+  opts: Partial<OAPTask<T>> & { sourceAgent: string; priority?: TaskPriority; targetCapability?: string } = {} as any
 ): OAPEnvelope<T> {
   return {
     header: {
@@ -169,6 +169,7 @@ export function createResult<T = unknown>(
       id: generateOAPId(),
       version: '1.0.0',
       intent: 'orchestrate',
+      priority: 'normal',
       sourceAgent: 'local',
     },
     body: {
@@ -197,6 +198,7 @@ export function createError(
       id: generateOAPId(),
       version: '1.0.0',
       intent: 'orchestrate',
+      priority: 'normal',
       sourceAgent: 'local',
     },
     body: {

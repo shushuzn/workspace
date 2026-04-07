@@ -19,11 +19,12 @@ export interface Context {
   env: NodeJS.ProcessEnv;
   interactive: boolean;
   prompt?: string;
+  dryRun?: boolean;
 }
 
 export interface Step {
   adapterId: string;
-  adapterType: 'opencli' | 'cli-anything' | 'multi-agent-hub' | 'swarm';
+  adapterType: 'opencli' | 'cli-anything' | 'multi-agent-hub' | 'swarm' | 'wikipedia';
   command: string;
   args: string[];
   inputSlots: string[];
@@ -74,15 +75,26 @@ export interface Result {
   traceId?: string;
   /** Arbitrary metadata from the adapter */
   metadata?: Record<string, unknown>;
+  /** Sequence number for ordering (stream.ts) */
+  seq?: number;
 }
 
 export interface Adapter {
   id: string;
-  type: 'opencli' | 'cli-anything' | 'multi-agent-hub';
+  type: 'opencli' | 'cli-anything' | 'multi-agent-hub' | 'swarm' | 'wikipedia';
   canHandle(step: Step): boolean;
   execute(step: Step, ctx: Context): Promise<Result>;
   checkAvailable(): Promise<boolean>;
   register?(): AdapterRegistration | null;
+}
+
+/** OAP protocol result envelope */
+export interface OAPResult<T = unknown> {
+  id: string;
+  version: string;
+  status: 'ok' | 'error';
+  result?: T;
+  error?: string;
 }
 
 export interface AdapterRegistration {
@@ -209,3 +221,22 @@ export const HTTP_RESPONSE_SCHEMA = {
   required: ['status', 'statusText', 'headers', 'body'],
   additionalProperties: false,
 } as const;
+
+// ─── Task Dispatch Schema ─────────────────────────────────────────────────────
+
+export interface StepSpec {
+  stepId?: string;
+  adapterType: 'opencli' | 'cli-anything' | 'multi-agent-hub' | 'swarm' | 'wikipedia';
+  command: string;
+  args?: string[];
+  inputSlots?: string[];
+  outputSlots?: string[];
+  timeoutMs?: number;
+  maxRetries?: number;
+}
+
+export interface TaskDispatchExt {
+  taskId: string;
+  prompt?: string;
+  steps?: StepSpec[];
+}
