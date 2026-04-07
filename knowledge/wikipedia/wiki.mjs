@@ -520,6 +520,86 @@ ${meta.abstract || '(暂无摘要)'}
     if (i < sceneKeys.length - 1) console.log('');
   }
 
+} else if (cmd === 'scene-parse') {
+  const scriptFile = process.argv[3];
+  if (!scriptFile) { console.log('Usage: node wiki.mjs scene-parse <video-script.md>'); process.exit(1); }
+  if (!existsSync(scriptFile)) { console.error('[wiki] File not found:', scriptFile); process.exit(1); }
+
+  const content = readFileSync(scriptFile, 'utf8');
+  const frontmatterMatch = content.match(/^---\n([\s\S]+?)\n---\n/);
+  if (!frontmatterMatch) { console.error('[wiki] No frontmatter found'); process.exit(1); }
+
+  const frontmatter = frontmatterMatch[1];
+  const titleMatch = frontmatter.match(/^title:\s*(.+)$/m);
+  const title = titleMatch ? titleMatch[1].trim() : 'Untitled';
+
+  const body = content.slice(frontmatterMatch[0].length);
+  const sceneBlocks = [];
+  const sceneRegex = /\[画面：([^\]]+)\]/g;
+  let match;
+  let lastEnd = 0;
+  const textBlocks = [];
+
+  while ((match = sceneRegex.exec(body)) !== null) {
+    const pos = match.index;
+    if (pos > lastEnd) {
+      const text = body.slice(lastEnd, pos).trim();
+      if (text) textBlocks.push(text);
+    }
+    sceneBlocks.push({ desc: match[1], textBefore: '' });
+    lastEnd = match.index + match[0].length;
+  }
+  const remaining = body.slice(lastEnd).trim();
+  if (remaining) textBlocks.push(remaining);
+
+  // Assign text to scenes
+  for (let i = 0; i < Math.min(sceneBlocks.length, textBlocks.length); i++) {
+    sceneBlocks[i].textBefore = textBlocks[i] || '';
+  }
+
+  // Generate code
+  const sceneKeys = [];
+  for (let i = 0; i < sceneBlocks.length; i++) {
+    const { desc, textBefore } = sceneBlocks[i];
+    const keyName = 'scene_' + String(i + 1).padStart(2, '0');
+    const funcName = 'draw_' + slugify(title).slice(0, 20) + '_' + String(i + 1).padStart(2, '0');
+    sceneKeys.push({ key: keyName, desc, func: funcName, text: textBefore });
+  }
+
+  // Output
+  const slug = slugify(title);
+  console.log('\n# Scene Parse:', title);
+  console.log('\n## Scene Keys (add to SCENE_DRAWERS):\n');
+  for (const { key, desc, func } of sceneKeys) {
+    console.log("  '" + key + "': " + func + ',');
+  }
+  console.log('\n## Generated Code (add to draw_scene.py):\n');
+  for (let i = 0; i < sceneKeys.length; i++) {
+    const { key, desc, func, text } = sceneKeys[i];
+    const code = generateSceneCode(i + 1, desc, func);
+    console.log('# ' + (i + 1) + '. ' + desc);
+    console.log(code);
+    if (i < sceneKeys.length - 1) console.log('');
+  }
+
+} else if (cmd === 'video-pipeline') {
+  // 视频流水线优化版：node wiki.mjs video-pipeline [--force] [--resume] [--workers N] [--batch N]
+  const [_, __, forceFlag, resumeFlag, workersFlag, batchFlag] = process.argv;
+  const force = forceFlag === '--force';
+  const resume = resumeFlag === '--resume';
+  const workers = workersFlag?.startsWith('--workers=') ? parseInt(workersFlag.split('=')[1]) : 4;
+  const batch = batchFlag?.startsWith('--batch=') ? parseInt(batchFlag.split('=')[1]) : 5;
+
+  // 调用 pipeline.py
+  const { spawn } = await import('child_process');
+  const pipelinePy = join(__DIR, 'video', 'pipeline.py');
+  const args = ['--workers', workers, '--batch', batch];
+  if (force) args.push('--force');
+  if (resume) args.push('--resume');
+
+  const py = spawn(sys.executable, [pipelinePy, ...args], { stdio: 'inherit' });
+  py.on('close', code => process.exit(code));
+
 } else {
   console.log(`Usage: node wiki.mjs <command>
 Commands:
@@ -530,8 +610,8 @@ Commands:
   search <query>
   list
   linkcheck
-  backlinks <title>
   orphan
   scene-parse <video-script.md>
+  video-pipeline [--force] [--resume] [--workers=N] [--batch=N]
 `);
 }
