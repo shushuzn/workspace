@@ -1,0 +1,16 @@
+# TTS cache
+.kokoro/
+
+# Video pipeline cache
+.video-cache/
+
+# Auto-generated scene JSON metadata (kept in memory, not tracked)
+*.scene.json
+
+# Generated media
+*.mp3
+*.mp4
+
+# Python cache
+__pycache__/
+*.pyc
