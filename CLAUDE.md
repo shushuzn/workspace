@@ -94,11 +94,12 @@
 - **豁免**：本地调试/原型验证；仅修改注释/日志/文案；紧急 Hotfix（见 §3）
 - **AI 链路冒烟测试**：修 AI 链路（Ollama/MiniMax/OpenAI 等）时，必须用最小输入验证推理通路通断（如 `echo "hi" | ollama run model`），结果不符预期不得跳过；本地 dev 依赖（Ollama 等）必须冒烟测试通过才算验证完成
 
-### §5 回复风格 — 简洁直接
+### §5 回复风格 — 简洁直接 + 规则先行的纪律
 
 - 禁止：客套废话、重复需求复述、与核心目标无关的铺垫
 - 禁止只说不做：优先给出可直接使用的代码、命令或文件
 - 禁止凑字数
+- **禁止口头承诺，必须写进规则**：任何规则类承诺（"以后会做X"、改进方向、流程约定）必须立即写入 CLAUDE.md / SKILL.md / MEMORY.md 等持久化文件；口头承诺不兑现视为违约，记录为 Key Learning
 
 ### §6 不确定时主动说
 
@@ -148,6 +149,20 @@
 
 - **复用感知**：修改代码时如注意到有复用机会（引入新依赖但已有同类 / 代码可抽象为通用能力 / 其他项目有相似实现），可推荐
 - **项目聚焦**：连续多轮聚焦同一项目时，可提示用户切换方向
+
+### 外部创新来源（brainstorm 前必查）
+
+**每次 brainstorm 前**，先从以下来源收集 novel 想法，禁止仅凭现有项目目录名臆想 seed：
+
+| 来源 | 用途 | 频率 |
+|------|------|------|
+| [GitHub Trending](https://github.com/trending) | 发现今天活跃的新项目，获取创新模式 | 每次 brainstorm 前 |
+| [HackerNews](https://news.ycombinator.com/) | 发现业界正在讨论的前沿想法 | 每次 brainstorm 前 |
+| [arXiv cs.AI/cs.LG](https://arxiv.org/list/cs.AI/recent) | 发现学术前沿新方法 | 每次 brainstorm 前 |
+| [awesomo (OSS)](https://github.com/atmdsouza/awesomo) | 跨语言有趣项目索引 | 按需 |
+| [OpenCollectors](https://github.com/opencollectors) | 稀有收藏类项目 | 按需 |
+
+**查找方式**：每次取前10条，提取其中 novelty（别人没想到的做法），记三句话：①这是什么 ②为什么 novel ③可以迁移到哪个已有项目/场景。
 
 ### Knowledge Base（wikipedia 知识库）
 
