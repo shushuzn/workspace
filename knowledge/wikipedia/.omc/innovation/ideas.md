@@ -29,7 +29,7 @@
   description: generate_speech.py --voice 参数传递给所有文件：命令行指定 voice 时，自动判断中英文 speech.txt 并合理选择
   | benefit: 批量处理时不用逐个改文件名指定 voice，一行命令完成所有语音生成
   | reason: 已知资源：generate_speech.py 第122行已有 --voice 参数，第130行根据 -en 判断英文；缺失环节：目前 --voice 参数对中文文件无效（被硬编码 voice 覆盖），批量处理时指定 --voice 无法对英文文件生效。连接方式：修改 main() 的 batch 循环，让 --voice 仅在未指定时回退到默认值，已知英文文件始终用 en-US-AriaNeural
-  | approach: 1. 修改 generate_speech.py batch 循环分支（第141-145行）；2. 当 args.voice 为默认值时，根据 is_english() 判断 voice；3. 非默认 --voice 参数直接透传给 generate_speech()；4. 测试：python generate_speech.py --voice en-US-AriaNeural 对中英文混合目录执行，验证中文用指定 voice 
+  | approach: 1. 修改 generate_speech.py batch 循环分支（第141-145行）；2. 当 args.voice 为默认值时，根据 is_english() 判断 voice；3. 非默认 --voice 参数直接透传给 generate_speech()；4. 测试：python generate_speech.py --voice en-US-AriaNeural 对中英文混合目录执行，验证中文用指定 voice | shipped:20260407
 
 
 - [20260407] seed [brainstorm] [score:5x4] [f:4] [angle:infra] [focus:wikipedia] | shipped:20260407
@@ -43,7 +43,7 @@
   description: make_video.py 过渡帧生成：相邻场景之间插入 0.5s fade-in/out 过渡帧，避免画面跳变突兀
   | benefit: 场景切换更平滑，专业感提升
   | reason: 已知资源：make_video.py 第112-138行片段编码循环，每段固定 1fps；现有视频场景切换是硬切。缺失环节：没有帧间过渡，相邻场景跳变时视觉突兀。连接方式：在片段编码完成后、concat 前，对每个片段首尾各加 0.5 秒 fade 过渡
-  | approach: 1. 在 make_video.py 的 make_video_multi() 片段编码后、concat 前（第140行前后），添加 fade 过渡处理；2. 用 ffmpeg -vf fade 分别为首尾片段加 fade-in/fade-out；3. 过渡时长可配置（默认 0.5s）；4. 添加 --transition 参数控制过渡时长；5. 验证：对比有/无过渡的视频，视觉体验差异 
+  | approach: 1. 在 make_video.py 的 make_video_multi() 片段编码后、concat 前（第140行前后），添加 fade 过渡处理；2. 用 ffmpeg -vf fade 分别为首尾片段加 fade-in/fade-out；3. 过渡时长可配置（默认 0.5s）；4. 添加 --transition 参数控制过渡时长；5. 验证：对比有/无过渡的视频，视觉体验差异 | shipped:20260407
 
 
 - [20260407] seed [brainstorm] [score:4x5] [f:5] [angle:quality] [focus:wikipedia] shipped:20260407
@@ -106,14 +106,14 @@
   description: shared/wiki-indexer.mjs：扫描 workspace 下所有项目的 README.md 建立统一搜索索引，支持 wiki.mjs search --workspace
   | benefit: 在 wiki.mjs search 里跨所有项目搜索，一次找到所有相关项目的笔记和文档
   | reason: 已知资源：wiki.mjs search 支持模糊搜索和 JSON 输出；workspace 下有多个项目各自有 README.md。缺失环节：wiki.mjs search 只搜 articles/，不搜 80-PROJECTS。连接方式：新增 shared/wiki-indexer.mjs 扫描 workspace 下所有 README.md 并建立索引，wiki.mjs search --workspace 调用该索引
-  | approach: 1. 创建 shared/wiki-indexer.mjs；2. 扫描 workspace 下所有 */README.md；3. 提取标题和第一段描述建立 JSON 索引；4. wiki.mjs search 添加 --workspace 参数，从共享索引搜索；5. 添加 --rebuild 强制重建索引 
+  | approach: 1. 创建 shared/wiki-indexer.mjs；2. 扫描 workspace 下所有 */README.md；3. 提取标题和第一段描述建立 JSON 索引；4. wiki.mjs search 添加 --workspace 参数，从共享索引搜索；5. 添加 --rebuild 强制重建索引 | shipped:20260407
 
 
 - [20260407] seed [brainstorm] [score:6x3] [f:3] [angle:commercializable] [focus:wikipedia]
   description: Wikipedia 论文视频知识付费频道：把视频打包成付费订阅产品，提供专业英文版 + 科普中文版双语合集
   | benefit: 目标用户：科研人员、科技爱好者；变现路径：知识付费平台（知乎/少数派）；差异化：每期视频有对应原始论文和知识点笔记，可溯源
   | reason: 已知资源：wikipedia 已有完整视频生产流水线（speech→配图→视频→打包）；双版本（科普+专业）已跑通。缺失环节：没有付费渠道集成、没有视频托管、没有定期更新机制。连接方式：集成到公开的笔记/视频平台（YouTube/知乎），用 wiki.mjs batch-export 批量导出视频到指定目录
-  | approach: 1. 调研知乎/少数派/YouTube 视频上传 API 或手动上传流程；2. 设计视频封面模板（区分科普版/专业版）；3. 制定更新频率（每周1-2篇）和订阅者通知机制；4. wiki.mjs 添加 batch-export 命令，导出 dist/ 视频到上传目录；5. 写 README 说明如何运营和变现 
+  | approach: 1. 调研知乎/少数派/YouTube 视频上传 API 或手动上传流程；2. 设计视频封面模板（区分科普版/专业版）；3. 制定更新频率（每周1-2篇）和订阅者通知机制；4. wiki.mjs 添加 batch-export 命令，导出 dist/ 视频到上传目录；5. 写 README 说明如何运营和变现 | shipped:20260407
 
 
 - [20260407] seed [brainstorm] [score:6x2] [f:2] [angle:ws-level]
@@ -142,7 +142,7 @@
   description: shared/video-editors.mjs：FFmpeg 视频编辑封装，支持剪切/拼接/添加字幕/转码
   | benefit: 对 video-quality-check.mjs 的补充，实现常见视频编辑操作无需记忆 ffmpeg 语法
   | reason: 已知资源：shared/video-quality-check.mjs 已实现质量检查；ffmpeg 在 imageio-ffmpeg 中。缺失环节：只有检查工具，没有编辑工具。连接方式：在 shared/ 下创建 video-editors.mjs，封装 cut/concat/subtitle/transcode 四个子命令
-  | approach: 1. 创建 shared/video-editors.mjs；2. 实现 cut: ffmpeg -ss start -to end；3. 实现 concat: ffmpeg concat demuxer；4. 实现 subtitle burn: ffmpeg -vf subtitles；5. 实现 transcode: 按 --bitrate重新编码 
+  | approach: 1. 创建 shared/video-editors.mjs；2. 实现 cut: ffmpeg -ss start -to end；3. 实现 concat: ffmpeg concat demuxer；4. 实现 subtitle burn: ffmpeg -vf subtitles；5. 实现 transcode: 按 --bitrate重新编码 | shipped:20260407
 
 
 - [20260407] seed [brainstorm] [score:6x4] [f:4] [angle:feature] [focus:wikipedia] | shipped:20260407
@@ -152,7 +152,7 @@
   | approach: 1. 修改 wiki.mjs，添加 batch-export 命令；2. 解析 --from/--to 日期范围参数；3. 扫描 articles/**/*.mp4；4. 按日期或 glob 过滤；5. 用 fs.copyFileSync 复制到 --output 目录；6. 输出汇总：成功数/失败数 
 
 
-- [20260407] seed [brainstorm] [score:10x2] [f:2] [angle:fusion]
+- [20260407] seed [brainstorm] [score:10x2] [f:2] [angle:fusion] | shipped:20260407
   description: task-orchestrator → wikipedia-loader adapter：Wikipedia 知识库作为 RAG 上下文注入任务规划
   | benefit: task-orchestrator 执行任务时可引用 wikipedia 论文知识点作为上下文，决策质量更高
   | reason: 已知资源：task-orchestrator 已支持 CLI registry 和 browser automation；wikipedia/articles/ 下有知识点条目。缺失环节：task-orchestrator 无法访问 wikipedia 知识库作为 RAG 上下文。连接方式：在 task-orchestrator 项目创建 adapters/wikipedia-loader.ts，读取 index.json 提供 search/retrieve 接口
@@ -160,7 +160,7 @@
   阶段二（实现）：4. 用 readFileSync + JSON.parse 读取 wikipedia/index.json；5. 模糊匹配标题；6. 在 pick-next-project 中可选加载 wikipedia 上下文
 
 
-- [20260407] seed [brainstorm] [score:10x2] [f:2] [angle:fusion]
+- [20260407] seed [brainstorm] [score:10x2] [f:2] [angle:fusion] | shipped:20260407
   description: task-orchestrator → opencli adapter：opencli browser automation 集成到 task-orchestrator（已有实现）
   | benefit: task-orchestrator 可以用 opencli 控制浏览器执行复杂网页操作
   | reason: 已知资源：task-orchestrator 已实现 pick-next-project 和 CLI registry adapter；opencli 已实现 browser automation。缺失环节：task-orchestrator 无法调用 opencli 执行浏览器操作。连接方式：在 task-orchestrator 中创建 adapters/opencli-adapter.ts，用 child_process.exec 封装 opencli 命令
@@ -173,13 +173,13 @@
   | benefit: 用户只需说"查 Wikipedia XXX"，task-orchestrator 自动搜索并展示 wikipedia 知识库条目
   | reason: 已知资源：planner.ts BUILT_IN_RULES 第32-48行包含 screenshot/open/obs 等关键词路由；WikipediaLoaderAdapter 已注册，adapterId='wikipedia'。缺失环节：planner 不知道 wikipedia 关键词，没有路由规则。连接方式：在 BUILT_IN_RULES 添加一条 {keywords:['wiki','wikipedia','维基','论文'], adapterId:'wikipedia', adapterType:'wikipedia', command:'search', args:['QUERY']}
   | approach: 1. Edit planner.ts line 48后（screenshot规则块之后）插入新规则对象；2. keywords:['wiki','wikipedia','维基']；3. adapterId:'wikipedia', adapterType:'wikipedia', command:'search' 
-
+ | shipped:20260407
 
 - [20260407] seed [brainstorm] [score:4x4] [f:4] [angle:infra] [focus:task-orchestrator]
   description: executor.ts --dry-run 参数：不真正执行 adapter，只打印将调用的 adapterId/command/args
   | benefit: 调试任务链时无需真正执行耗时的 browser/AI 操作，秒级验证 planning 是否正确
   | reason: 已知资源：executor.ts 第115行 execute(steps, ctx?) 签名已知；adapter 调用发生在第115-150行循环。缺失环节：没有 dry-run 模式，每次修改 planner 规则后必须跑完整流程才能验证。连接方式：在 execute() 入口检查 steps[0].dryRun || ctx.dryRun 标志，若为真则跳过 adapter 调用，只 console.log plan
-  | approach: 1. Read executor.ts:115 查看 execute() 签名；2. 在 Step interface 添加 dryRun?:boolean；3. execute() 开头 if(steps.some(s=>s.dryRun)) { console.log('[DRY]', JSON.stringify(steps)); return ok([]) } 
+  | approach: 1. Read executor.ts:115 查看 execute() 签名；2. 在 Step interface 添加 dryRun?:boolean；3. execute() 开头 if(steps.some(s=>s.dryRun)) { console.log('[DRY]', JSON.stringify(steps)); return ok([]) } | shipped:20260407
 
 
 - [20260407] seed [brainstorm] [score:5x3] [f:3] [angle:quality] [focus:task-orchestrator]
@@ -209,7 +209,7 @@
 - [20260407] seed [brainstorm] [score:4x4] [f:4] [angle:ws-level]
   description: shared/run-seed.mjs：扫描 ideas.md pool，运行最高分未完成 seed，像 CLI pipeline 一样串联执行
   | benefit: 每次 session 开始只需运行一个命令，自动完成所有 seed 实现，不用手动挑选和组织
-  | reason: 已知资源：shared/ 下已有 check-deps/video-quality-check/video-editors/wiki-indexer 等工具；ideas.md 有 seed stage 标记。缺失环节：没有统一的 seed runner，每次需要手动挑 seed、自己执行、自己标记 shipped。连接方式：在 shared/ 创建 run-seed.mjs，读取 ideas.md 找未 shipped seed，执行后写 shipped 标记
+  | reason: 已知资源：shared/ 下已有 check-deps/video-quality-check/video-editors/wiki-indexer 等工具；ideas.md 有 seed stage 标记。缺失环节：没有统一的 seed runner，每次需要手动挑 seed、自己执行、自己标记 shipped。连接方式：在 shared/ 创建 run-seed.mjs，读取 ideas.md 找未 shipped seed，执行后写 shipped 标记 | shipped:20260407
   | approach: 1. 创建 shared/run-seed.mjs；2. 用 grep 解析 ideas.md 找所有未 shipped seed；3. 按 score 降序取最高分；4. 执行 seed 的 approach 第一步（具体命令）；5. 成功后 sed -i 写 shipped:YYYYMMDD；6. 输出汇总报告 
 
 
@@ -255,17 +255,17 @@
   | approach: 1. Read shared/wiki-indexer.mjs 理解现有 --rebuild 逻辑；2. 添加 --query 参数分支；3. 用 fuzzy search 匹配 wiki-index.json 中的 title/description；4. JSON 输出 [{title,path,description}]；5. 添加 --limit 参数控制返回数量 | shipped:20260407
 
 
-- [20260407] seed [brainstorm] [score:6x3] [f:3] [angle:ws-level] description: shared-types TaskResult 添加 reason 字段：记录 planner 为什么选择这个 adapter，帮助理解 agent 决策 | benefit: agent 执行日志可解释，调试时知道为什么选了这个 adapter 而不是另一个 | reason: 已知资源：shared-types/index.ts TaskResult interface；planner.ts 第48-80行 rule matching 逻辑。缺失环节：TaskResult 只有 adapterId 和 command，没有决策原因。连接方式：在 TaskResult 添加 reason?:string，planner 在 rule match 成功后写入匹配到的 rule key
+- [20260407] seed [brainstorm] [score:6x3] [f:3] [angle:ws-level] description: shared-types TaskResult 添加 reason 字段：记录 planner 为什么选择这个 adapter，帮助理解 agent 决策 | benefit: agent 执行日志可解释，调试时知道为什么选了这个 adapter 而不是另一个 | reason: 已知资源：shared-types/index.ts TaskResult interface；planner.ts 第48-80行 rule matching 逻辑。缺失环节：TaskResult 只有 adapterId 和 command，没有决策原因。连接方式：在 TaskResult 添加 reason?:string，planner 在 rule match 成功后写入匹配到的 rule key | shipped:20260407
   | approach: 1. Read shared-types/index.ts TaskResult；2. 添加 reason?:string 字段；3. Read planner.ts rule match 位置；4. 在 match 成功后 result.reason = matchedRule.key；5. 验证 executor 输出含 reason 字段
 
 
 - [20260407] seed [brainstorm] [score:6x3] [f:3] [angle:commercializable] description: task-orchestrator 研究报告 pipeline 产品化：输入研究主题，wiki-indexer search + WikipediaLoaderAdapter retrieve + MiniMax API 生成报告，按主题打包出售 | benefit: 目标用户：研究人员/科技内容创作者；变现路径：研究报告订阅、API 调用计费；差异化：每份报告有原始论文引用可溯源 | reason: 已知资源：task-orchestrator 有 CLI registry 和 executor；shared/wiki-indexer.mjs 支持 --query；WikipediaLoaderAdapter 可 search/retrieve 条目。缺失环节：没有自动研究 pipeline，主题到报告之间需要大量人工协调。连接方式：task-orchestrator 新增 research adapterType，输入查询字符串，调用 wiki-indexer search + wikipedia retrieve，结果拼成报告
-  | approach: 阶段一(design)：1. 设计 research pipeline：query → wiki-indexer search → top-K retrieve → LLM summarize → report.md；2. 确定 wikipedia 条目如何作为 LLM 上下文注入
+  | approach: 阶段一(design)：1. 设计 research pipeline：query → wiki-indexer search → top-K retrieve → LLM summarize → report.md；2. 确定 wikipedia 条目如何作为 LLM 上下文注入 | shipped:20260407
   阶段二(实现)：3. 在 task-orchestrator 新增 src/adapters/research.ts；4. wiki-indexer.mjs --query 返回相关条目 JSON；5. WikipediaLoaderAdapter.execute 支持 'summarize' action；6. 拼接摘要写 report.md；7. 写 README 说明如何运营和变现
 
 
 - [20260407] seed [brainstorm] [score:4x5] [f:5] [angle:infra] [focus:task-orchestrator] description: task-orchestrator executor.ts --dry-run 参数：不执行 adapter，只打印将调用的 adapterId/command/args | benefit: 调试任务链时无需真正执行耗时的 browser/AI 操作，秒级验证 planning 是否正确 | reason: 已知资源：executor.ts:115 execute() 循环；adapter 调用在第115-150行。缺失环节：没有 dry-run 模式，每次改 planner 规则后必须跑完整流程。连接方式：在 execute() 入口检查 steps[0].dryRun || ctx.dryRun，若为真跳过 adapter 调用
-  | approach: 1. Read executor.ts:115 查看 execute() 签名和 Step 接口；2. Edit executor.ts:115 execute() 开头加 if(steps.some(s=>s.dryRun)){console.log('[DRY]',JSON.stringify(steps));return ok([])}
+  | approach: 1. Read executor.ts:115 查看 execute() 签名和 Step 接口；2. Edit executor.ts:115 execute() 开头加 if(steps.some(s=>s.dryRun)){console.log('[DRY]',JSON.stringify(steps));return ok([])} | shipped:20260407
 
 
 - [20260407] seed [brainstorm] [score:6x4] [f:4] [angle:ws-level] description: shared-types Result.metadata 字段：executor 每步写入 durationMs，UI 流输出 [PERF adapterId: Xms] | benefit: 任务执行后立即知道每步耗时，定位慢瓶颈 | reason: 已知资源：shared-types/index.ts Result interface；executor.ts:115 execute() 循环。缺失环节：Result 只有 success/output/logs，无耗时字段。连接方式：在 Result 添加 metadata?:{durationMs?:number}，executor 循环内 start=Date.now() 后写入
@@ -287,7 +287,7 @@
 
 
 - [20260407] seed [brainstorm] [score:6x3] [f:3] [angle:quality] description: shared/video-quality-check.mjs 添加 JSON 输出 + --checklist 参数：输出质量指标摘要列表 | benefit: 视频质量检查结果可直接被其他脚本解析，方便 CI/CD 集成 | reason: 已知资源：shared/videoquality-check.mjs 已实现 ffprobe 元数据提取。缺失环节：只有控制台输出，没有 JSON 格式机器可读输出。连接方式：在 video quality-check.mjs 添加 --json 参数，输出 {width,height,bitrate,duration,status} 对象
-  | approach: 1. Read shared/video-quality-check.mjs；2. 添加 --json 参数分支；3. ffprobe 元数据解析后输出 JSON 对象而非控制台格式；4. 添加 --checklist 参数输出 [{metric,value,pass}] 格式
+  | approach: 1. Read shared/video-quality-check.mjs；2. 添加 --json 参数分支；3. ffprobe 元数据解析后输出 JSON 对象而非控制台格式；4. 添加 --checklist 参数输出 [{metric,value,pass}] 格式 | shipped:20260407
 
 
 - [20260407] seed [brainstorm] [score:7x4] [f:4] [angle:ws-level] description: shared/wiki-indexer.mjs fuzzy 匹配改进：传入 term 名称部分匹配（如 wiki 也能找到 wikipedia），按相关性排序 | benefit: wiki-indexer 查询更鲁棒，模糊匹配能处理拼写错误和部分输入 | reason: 已知资源：wiki-indexer.mjs 已实现 --query 和 --fuzzy；fuzzyMatch() 在第67行。缺失环节：当前 fuzzy 匹配用字符重叠率，对英文词根效果差（如 wiki 匹配不到 wikipedia）。连接方式：改进 fuzzyMatch() 函数，对英文单词做前缀匹配，给前缀匹配更高的权重
@@ -295,7 +295,7 @@
 
 
 - [20260407] seed [brainstorm] [score:6x3] [f:3] [angle:commercializable] description: task-orchestrator → wiki-indexer 研究报告 pipeline：输入研究主题，wiki-indexer search + WikipediaLoader retrieve + MiniMax API 生成报告，按主题打包出售 | benefit: 目标用户：研究人员/科技内容创作者；变现路径：研究报告订阅/按份计费；差异化：每份报告有原始论文引用可溯源 | reason: 已知资源：task-orchestrator executor 已支持 CLI registry；shared/wiki-indexer.mjs 支持 --query JSON 输出；WikipediaLoaderAdapter 可 search/retrieve。缺失环节：没有自动研究 pipeline。连接方式：task-orchestrator 新增 research adapter，调用 wiki-indexer --query + WikipediaLoader retrieve，结果拼成 markdown 报告
-  | approach: 阶段一(design)：1. 设计 pipeline：query → wiki-indexer --query --json → top-K retrieve → LLM summarize → report.md
+  | approach: 阶段一(design)：1. 设计 pipeline：query → wiki-indexer --query --json → top-K retrieve → LLM summarize → report.md | shipped:20260407
   阶段二(实现)：2. 在 task-orchestrator/src/adapters/ 创建 research.ts adapter；3. 实现 ResearchPipeline.execute(searchQuery) → 调用 wiki-indexer.mjs --query JSON → 对每个结果调用 WikipediaLoader → 拼接内容 → 调用 MiniMax API summarize → 写 report.md；4. 写 README 说明如何运营和变现
 
 
