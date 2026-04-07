@@ -61,10 +61,13 @@ def extract_clean_text(md_path: Path) -> str:
 
 def generate_speech_file(article_dir: Path, stem: str, force: bool = False) -> Path | None:
     """生成中文阅读文案（去 frontmatter + 去画面标注 + 换行合并）"""
-    md_path = article_dir / f"{stem}.md"
-    if not md_path.exists():
-        print(f"  [WARN] 脚本不存在: {md_path.name}")
+    # 实际脚本文件名格式：NN-标题.md（带序号前缀）
+    # 扫描目录下第一个 .md 文件
+    md_candidates = list(article_dir.glob("*.md"))
+    if not md_candidates:
+        print(f"  [WARN] 未找到脚本文件: {article_dir}")
         return None
+    md_path = md_candidates[0]  # 取第一个 md 文件
 
     speech_path = article_dir / f"{stem}-阅读文案.txt"
     if speech_path.exists() and not force:
@@ -77,9 +80,10 @@ def generate_speech_file(article_dir: Path, stem: str, force: bool = False) -> P
 
 def generate_speech_en(article_dir: Path, stem: str, force: bool = False) -> Path | None:
     """生成英文阅读文案（符号替换）"""
-    md_path = article_dir / f"{stem}.md"
-    if not md_path.exists():
+    md_candidates = list(article_dir.glob("*.md"))
+    if not md_candidates:
         return None
+    md_path = md_candidates[0]
 
     speech_en_path = article_dir / f"{stem}-阅读文案-speech-en.txt"
     if speech_en_path.exists() and not force:
@@ -139,8 +143,11 @@ def main():
             exit(1)
         process_article(article_dir, force=args.force)
     else:
-        # 批量处理所有含脚本的文章
-        article_dirs = [d for d in base_dir.rglob("*") if d.is_dir() and (d / f"{d.name}.md").exists()]
+        # 批量处理所有含脚本的文章（扫描 articles/ 下所有子目录，找 .md 文件）
+        article_dirs = []
+        for d in base_dir.rglob("*"):
+            if d.is_dir() and any(d.glob("*.md")):
+                article_dirs.append(d)
         print(f"发现 {len(article_dirs)} 篇文章，开始自动化处理...\n")
         for article_dir in article_dirs:
             process_article(article_dir, force=args.force)
