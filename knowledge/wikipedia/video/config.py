@@ -27,7 +27,21 @@ AUDIO_BITRATE = "192k"
 AUDIO_LOUDNORM = "I=-16:LRA=11:tp=-1.5"
 
 # TTS 配置
-VOICE_ZH = "zh-CN-XiaoyiNeural"
-VOICE_EN = "en-US-AriaNeural"
+# 引擎: edge (微软在线) / kokoro (本地)
+TTS_ENGINE = "kokoro"  # 迁移到 Kokoro-82M 本地模型
+
+# Edge TTS 音色
+EDGE_VOICE_ZH = "zh-CN-XiaoyiNeural"
+EDGE_VOICE_EN = "en-US-AriaNeural"
+
+# Kokoro-82M 音色（需先运行 python -m kokoro_kai.generate --install 下载）
+KOKORO_VOICE_ZH = "zf_002"   # 中文女声（温柔）
+KOKORO_VOICE_EN = "af_sarah"  # 英文女声
+
+# 通用参数
 RATE = "+10%"
 PITCH = "+0Hz"
+
+# 向后兼容别名
+VOICE_ZH = EDGE_VOICE_ZH
+VOICE_EN = EDGE_VOICE_EN

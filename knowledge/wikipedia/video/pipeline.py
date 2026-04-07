@@ -20,6 +20,7 @@ from video.config import (
     MIN_WORDS, MAX_WORDS,
     VIDEO_CRF, AUDIO_BITRATE, AUDIO_LOUDNORM,
     VOICE_ZH, VOICE_EN, RATE, PITCH,
+    TTS_ENGINE, KOKORO_VOICE_ZH, KOKORO_VOICE_EN,
 )
 from video.generate_speech import generate_speech as tts_generate
 from video.draw_scene import generate_scenes_for_script
@@ -110,7 +111,7 @@ def mark_failed(state, item_id):
         state['failed'].append(item_id)
 
 # ── 步骤 1: 语音合成 ────────────────────────────────────────────
-def process_speech(speech_txt: Path, force: bool = False) -> tuple[bool, Path]:
+def process_speech(speech_txt: Path, force: bool = False, engine: str = None) -> tuple[bool, Path]:
     """单个 speech.txt → MP3 转换（支持增量）"""
     cache = load_cache()
     stem = speech_txt.stem
@@ -129,9 +130,14 @@ def process_speech(speech_txt: Path, force: bool = False) -> tuple[bool, Path]:
         print(f"  [SKIP] 语音缓存命中: {key}")
         return True, mp3_path
 
-    print(f"  → 生成语音: {key}")
-    voice = VOICE_EN if "-en" in stem else VOICE_ZH
-    ok = tts_generate(speech_txt, mp3_path, voice=voice, rate=RATE, pitch=PITCH)
+    print(f"  → 生成语音: {key} (engine={engine or TTS_ENGINE})")
+    is_en = "-en" in stem
+    if is_en:
+        voice = KOKORO_VOICE_EN if (engine == "kokoro" or (engine is None and TTS_ENGINE == "kokoro")) else VOICE_EN
+    else:
+        voice = KOKORO_VOICE_ZH if (engine == "kokoro" or (engine is None and TTS_ENGINE == "kokoro")) else VOICE_ZH
+    active_engine = engine if engine else TTS_ENGINE
+    ok = tts_generate(speech_txt, mp3_path, voice=voice, rate=RATE, pitch=PITCH, engine=active_engine)
     if ok:
         update_cache(cache, 'speech', key, input_hash, str(mp3_path), duration=get_audio_duration(mp3_path))
         save_cache(cache)
@@ -235,7 +241,7 @@ def get_audio_duration(mp3_path: Path) -> float:
     return 0.0
 
 # ── 主流程 ───────────────────────────────────────────────────────
-def run_pipeline(articles_dir: Path, force: bool = False, resume: bool = False, workers: int = MAX_WORKERS):
+def run_pipeline(articles_dir: Path, force: bool = False, resume: bool = False, workers: int = MAX_WORKERS, engine: str = None):
     """批量视频生产流水线"""
     # 1. 收集所有待处理 speech 文件
     speech_files = sorted(articles_dir.rglob("*-speech.txt"))
@@ -267,7 +273,7 @@ def run_pipeline(articles_dir: Path, force: bool = False, resume: bool = False, 
                     print(f"  [SKIP] 已完成: {item_id}")
                     success_count += 1
                     continue
-                futures[executor.submit(process_item, speech_txt, force)] = speech_txt
+                futures[executor.submit(process_item, speech_txt, force, engine)] = speech_txt
 
             for future in as_completed(futures):
                 speech_txt = futures[future]
@@ -304,7 +310,7 @@ def run_pipeline(articles_dir: Path, force: bool = False, resume: bool = False, 
     report_path.write_text(json.dumps(report, indent=2, ensure_ascii=False), encoding='utf-8')
     print(f"质量报告: {report_path}")
 
-def process_item(speech_txt: Path, force: bool) -> bool:
+def process_item(speech_txt: Path, force: bool, engine: str = None) -> bool:
     """单个视频的完整流水线（文案质量 → 语音 → 配图 → 视频 → 质量验收）"""
     # 确保 speech_txt 是绝对路径，避免相对路径导致的 relative_to 错误
     speech_txt = speech_txt.resolve()
@@ -343,7 +349,7 @@ def process_item(speech_txt: Path, force: bool) -> bool:
         print(f"  [WARN] 未找到对应脚本: {script_path.name}")
 
     # ========== Step 2: 语音合成 ==========
-    ok, mp3_path = process_speech(speech_txt, force)
+    ok, mp3_path = process_speech(speech_txt, force, engine)
     if not ok:
         return False
 
@@ -411,13 +417,15 @@ def main():
     parser.add_argument("--resume", action="store_true", help="从上次中断处继续")
     parser.add_argument("--workers", type=int, default=MAX_WORKERS, help=f"并发数（默认 {MAX_WORKERS}）")
     parser.add_argument("--batch", type=int, default=BATCH_SIZE, help=f"每批数量（默认 {BATCH_SIZE}）")
+    parser.add_argument("--tts", default=None, choices=["kokoro", "edge"],
+                        help=f"TTS 引擎: kokoro(本地) / edge(在线，默认 {TTS_ENGINE})")
     args = parser.parse_args()
 
     BATCH_SIZE = args.batch
     MAX_WORKERS = args.workers
 
     articles_dir = Path(args.dir) if args.dir else ARTICLES_DIR
-    run_pipeline(articles_dir, force=args.force, resume=args.resume, workers=args.workers)
+    run_pipeline(articles_dir, force=args.force, resume=args.resume, workers=args.workers, engine=args.tts)
 
 if __name__ == "__main__":
     main()

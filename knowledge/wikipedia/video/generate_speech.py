@@ -1,11 +1,14 @@
 """
 语音合成：读取阅读文案(speech.txt)，生成MP3
+支持引擎: edge-tts (微软在线) / kokoro (本地-82M)
 依赖: pip install edge-tts
+      pip install kokoro-onnx; python -m kokoro_kai.generate --install
 """
 import argparse
 import re
 import subprocess
 import sys
+import os
 from pathlib import Path
 
 # 查找所有 speech.txt
@@ -68,8 +71,62 @@ def replace_math(text):
         text = re.sub(pattern, replacement, text)
     return text
 
+# ── Kokoro TTS ──────────────────────────────────────────────────────────────
+def generate_kokoro(text: str, output_path: Path, voice: str, speed: float = 1.0) -> bool:
+    """使用 Kokoro-82M 本地生成 MP3"""
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    cmd = [
+        sys.executable, "-m", "kokoro_kai.generate",
+        "--text", text,
+        "--output", str(output_path),
+        "--voice", voice,
+        "--speed", str(speed),
+    ]
+    try:
+        result = subprocess.run(cmd, capture_output=True, encoding='utf-8', errors='ignore',
+                                env={**os.environ, "KOKORO_MODEL_DIR": str(output_path.parent)})
+        if result.returncode != 0:
+            err = result.stderr.strip()[:200]
+            print(f"  [Kokoro WARN] {err}")
+            return False
+        if output_path.exists():
+            size = output_path.stat().st_size
+            print(f"  [OK] {output_path.name} ({size:,} bytes, kokoro)")
+            return True
+        return False
+    except FileNotFoundError:
+        print(f"  [Kokoro] kokoro_kai 未安装，跳过")
+        return False
+    except Exception as e:
+        print(f"  [Kokoro ERROR] {e}")
+        return False
+
+# ── Edge TTS ─────────────────────────────────────────────────────────────────
+def generate_edge(text: str, output_path: Path, voice: str, rate: str, pitch: str) -> bool:
+    """使用 Edge-TTS 在线生成 MP3"""
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    cmd = [
+        sys.executable, "-m", "edge_tts",
+        "-t", text,
+        "-v", voice,
+        "--write-media", str(output_path),
+        "--rate", rate,
+        "--pitch", pitch,
+    ]
+    try:
+        result = subprocess.run(cmd, capture_output=True, encoding='utf-8', errors='ignore')
+        if result.returncode != 0:
+            print(f"  [ERROR] edge-tts failed: {result.stderr[:200]}")
+            return False
+        size = output_path.stat().st_size
+        print(f"  [OK] {output_path.name} ({size:,} bytes, edge)")
+        return True
+    except Exception as e:
+        print(f"  [ERROR] {e}")
+        return False
+
 def generate_speech(speech_txt_path, output_mp3_path, voice="zh-CN-XiaoyiNeural",
-                    rate="+10%", pitch="+0Hz"):
+                    rate="+10%", pitch="+0Hz", engine="auto"):
     with open(speech_txt_path, "r", encoding="utf-8") as f:
         content = f.read().strip()
 
@@ -80,32 +137,24 @@ def generate_speech(speech_txt_path, output_mp3_path, voice="zh-CN-XiaoyiNeural"
     # 替换数学符号
     content = replace_math(content)
 
-    # edge-tts 不能处理换行，合并为单行，用逗号分隔
-    content = content.replace("\n", "，")
+    # Kokoro 支持换行，edge-tts 不能处理换行
+    if engine == "kokoro":
+        # Kokoro: 保留换行（作为自然停顿），用 speed 参数控制
+        kokoro_text = content.replace("\n", " ")
+        speed = 1.1  # 对应 +10% 语速
+        return generate_kokoro(kokoro_text, output_mp3_path, voice, speed)
 
-    output_mp3_path.parent.mkdir(parents=True, exist_ok=True)
+    elif engine == "edge":
+        content = content.replace("\n", "，")
+        return generate_edge(content, output_mp3_path, voice, rate, pitch)
 
-    # edge-tts 命令（+10% 语速使声音更有活力，标准 -0% 太慢太机器）
-    cmd = [
-        sys.executable, "-m", "edge_tts",
-        "-t", content,
-        "-v", voice,
-        "--write-media", str(output_mp3_path),
-        "--rate", rate,
-        "--pitch", pitch,
-    ]
-
-    try:
-        result = subprocess.run(cmd, capture_output=True, encoding='utf-8', errors='ignore')
-        if result.returncode != 0:
-            print(f"  [ERROR] edge-tts failed: {result.stderr[:200]}")
-            return False
-        size = output_mp3_path.stat().st_size
-        print(f"  [OK] {output_mp3_path.name} ({size:,} bytes, rate={rate})")
-        return True
-    except Exception as e:
-        print(f"  [ERROR] {e}")
-        return False
+    else:  # auto: 优先 Kokoro，回退 Edge
+        kokoro_text = content.replace("\n", " ")
+        if generate_kokoro(kokoro_text, output_mp3_path, voice, speed=1.1):
+            return True
+        print(f"  [FALLBACK] 切换到 edge-tts...")
+        content = content.replace("\n", "，")
+        return generate_edge(content, output_mp3_path, voice, rate, pitch)
 
 def stem_to_mp3_name(stem):
     """NN-标题-阅读文案-speech → NN-标题.mp3; -speech-en → -en.mp3"""
@@ -120,9 +169,11 @@ def is_english(stem):
     return "-en" in stem
 
 def main():
-    parser = argparse.ArgumentParser(description="语音合成")
+    parser = argparse.ArgumentParser(description="语音合成 (edge-tts + Kokoro-82M)")
     parser.add_argument("speech_txt", nargs="?", help="speech.txt 路径（不指定则处理所有）")
-    parser.add_argument("--voice", default="zh-CN-XiaoyiNeural", help="声音名称")
+    parser.add_argument("--engine", default="auto", choices=["auto", "kokoro", "edge"],
+                        help="TTS 引擎: auto(优先Kokoro回退Edge) / kokoro / edge")
+    parser.add_argument("--voice", default=None, help="声音名称（kokoro音色名或edge voice名）")
     args = parser.parse_args()
 
     articles_dir = Path(__file__).parent.parent / "articles"
@@ -130,8 +181,8 @@ def main():
     if args.speech_txt:
         speech_path = Path(args.speech_txt)
         mp3_path = speech_path.parent / stem_to_mp3_name(speech_path.stem)
-        voice = "en-US-AriaNeural" if is_english(speech_path.stem) else args.voice
-        generate_speech(speech_path, mp3_path, voice)
+        voice = args.voice or ("en-US-AriaNeural" if is_english(speech_path.stem) else "zh-CN-XiaoyiNeural")
+        generate_speech(speech_path, mp3_path, voice, engine=args.engine)
         return
 
     files = find_speech_files(articles_dir)
@@ -139,13 +190,13 @@ def main():
         print("未找到任何 *-speech.txt 文件")
         return
 
-    print(f"找到 {len(files)} 个 speech.txt，开始生成语音...\n")
+    print(f"找到 {len(files)} 个 speech.txt，引擎={args.engine}...\n")
 
     for speech_path in sorted(files):
         mp3_path = speech_path.parent / stem_to_mp3_name(speech_path.stem)
-        voice = "en-US-AriaNeural" if is_english(speech_path.stem) else args.voice
+        voice = args.voice or ("en-US-AriaNeural" if is_english(speech_path.stem) else "zh-CN-XiaoyiNeural")
         print(f"处理: {speech_path.relative_to(articles_dir)}")
-        generate_speech(speech_path, mp3_path, voice)
+        generate_speech(speech_path, mp3_path, voice, engine=args.engine)
 
 if __name__ == "__main__":
     main()
