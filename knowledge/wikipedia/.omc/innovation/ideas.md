@@ -7,7 +7,7 @@
   description: adaptive-bitrate.py：多编码通道 + 按场景复杂度自动分配码率，质量敏感场景（公式推导/矩阵）用更优 crf，静态场景放宽 crf
   | benefit: 复杂公式场景细节更清晰，整体文件体积不增加
   | reason: 已知资源：make_video.py 第66-67行 libx264 硬编码 CRF=23，无 preset 参数；draw_scene.py SCENE_DRAWERS 已按场景类型分类（formula/graph/cover 等）。缺失环节：所有场景用同一码率，公式等复杂场景质量不足，静态封面浪费码率。连接方式：在 make_video.py 片段编码循环前，根据 scene key 类型查询 SCENE_DRAWERS，推断画面复杂度，动态设置 crf/preset
-  | approach: 阶段一：1. 读 make_video.py 片段编码循环（第121-138行）；2. 定义 SCENE_COMPLEXITY = {'formula':(18,'slow'),'graph':(20,'medium'),'cover':(23,'fast')} 映射；3. 在片段编码 cmd 构造前，根据 img_path 文件名推断 scene key，查询映射表；4. 用 crf/preset 参数替换硬编码值 
+  | approach: 阶段一：1. 读 make_video.py 片段编码循环（第121-138行）；2. 定义 SCENE_COMPLEXITY = {'formula':(18,'slow'),'graph':(20,'medium'),'cover':(23,'fast')} 映射；3. 在片段编码 cmd 构造前，根据 img_path 文件名推断 scene key，查询映射表；4. 用 crf/preset 参数替换硬编码值 | shipped:20260407
   阶段二：5. 添加 --bitrate-profile low/medium/high 参数覆盖默认映射
 
 
@@ -64,7 +64,7 @@
   description: 自动生成英文专业版 speech-en.txt：MiniMax API 翻译 + 术语替换，写入 -speech-en.txt
   | benefit: 只需写中文版文案，英文版自动生成，无需手动翻译和维护两份文案
   | reason: 已知资源：generate_speech.py 已支持 en-US-AriaNeural 英文语音；MINIMAX_API 环境变量已配置；现有中文字幕文案。缺失环节：没有翻译工具，需要手动维护英文文案。连接方式：在 video/ 下新增 translate_script.py，读取中文 speech.txt，调用 MiniMax API 翻译，按 generate_speech.py 的 MATH_REPLACEMENTS 规则替换术语，结果写入同名 -speech-en.txt
-  | approach: 1. 创建 video/translate_script.py；2. 读取中文 *-阅读文案-speech.txt；3. 调用 MiniMax Chat API 翻译为英文；4. 替换术语（Yang-Baxter→杨-巴克斯特，Burau-Lyapunov→Burau-Lyapunov 等）；5. 写入 *-阅读文案-speech-en.txt；6. 支持 --all 批量处理 
+  | approach: 1. 创建 video/translate_script.py；2. 读取中文 *-阅读文案-speech.txt；3. 调用 MiniMax Chat API 翻译为英文；4. 替换术语（Yang-Baxter→杨-巴克斯特，Burau-Lyapunov→Burau-Lyapunov 等）；5. 写入 *-阅读文案-speech-en.txt；6. 支持 --all 批量处理 | shipped:20260407
 
 
 - [20260407] seed [brainstorm] [score:6x2] [f:2] [angle:fusion] [focus:wikipedia] | shipped:20260407
