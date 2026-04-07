@@ -247,7 +247,7 @@
 
 
 - [20260407] seed [brainstorm] [score:5x1] [f:1] [angle:feature] description: task-orchestrator 自主任务分解：当用户给高层目标时，agent 自动拆解为可执行步骤链 | benefit: 用户说"帮我研究这个领域"，task-orchestrator 自动规划搜索→阅读→整理→报告的完整链路 | reason: 已知资源：planner.ts 有 BUILT_IN_RULES 和 YAML 规则加载；executor.ts execute() 循环；shell adapter 执行 shell 命令。缺失环节：没有任务分解能力，所有步骤必须用户显式给出。连接方式：设计 TaskDecomposer 类，接收高层目标，调用 LLM 分解为步骤数组，每个步骤含 adapterId/command/args，注入 executor 执行
-  | approach: 阶段一(architecture)：1. Read planner.ts 理解 BUILT_IN_RULES 结构；2. 设计 TaskDecomposer 接口：decompose(goal:string) -> Step[]；3. 确定是否用 MiniMax API 做分解决策
+  | approach: 阶段一(architecture)：1. Read planner.ts 理解 BUILT_IN_RULES 结构；2. 设计 TaskDecomposer 接口：decompose(goal:string) -> Step[]；3. 确定是否用 MiniMax API 做分解决策 | shipped:20260407
   阶段二(实现)：4. 创建 src/task-decomposer.ts 实现 TaskDecomposer；5. 接收自然语言 goal，调用 LLM 返回结构化步骤；6. 每个 Step 含 adapterId/command/args；7. 在 executor 入口增加 decompose 模式检测；8. 添加 --decompose 参数
 
 
@@ -282,7 +282,7 @@
 
 
 - [20260407] seed [brainstorm] [score:5x1] [f:1] [angle:feature] [focus:task-orchestrator] description: task-orchestrator 自主任务分解：当用户给高层目标时，agent 自动拆解为可执行步骤链 | benefit: 用户说"帮我研究这个领域"，task-orchestrator 自动规划搜索→阅读→整理→报告的完整链路 | reason: 已知资源：planner.ts BUILT_IN_RULES 和 YAML 规则加载；executor.ts execute() 循环；shell adapter。缺失环节：没有任务分解能力，所有步骤必须用户显式给出。连接方式：设计 TaskDecomposer 类，接收高层目标，调用 MiniMax API 分解为步骤数组，注入 executor 执行
-  | approach: 阶段一(architecture)：1. Read planner.ts 理解 BUILT_IN_RULES 结构；2. 设计 TaskDecomposer 接口：decompose(goal:string) -> Step[]
+  | approach: 阶段一(architecture)：1. Read planner.ts 理解 BUILT_IN_RULES 结构；2. 设计 TaskDecomposer 接口：decompose(goal:string) -> Step[] | shipped:20260407
   阶段二(实现)：3. 创建 src/task-decomposer.ts 实现 TaskDecomposer；4. 接收自然语言 goal，调用 MiniMax API 返回结构化步骤；5. 每个 Step 含 adapterId/command/args；6. 在 executor 入口增加 decompose 模式检测；7. 添加 --decompose 参数
 
 
