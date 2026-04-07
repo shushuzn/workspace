@@ -68,7 +68,8 @@ def replace_math(text):
         text = re.sub(pattern, replacement, text)
     return text
 
-def generate_speech(speech_txt_path, output_mp3_path, voice="zh-CN-XiaoyiNeural"):
+def generate_speech(speech_txt_path, output_mp3_path, voice="zh-CN-XiaoyiNeural",
+                    rate="+10%", pitch="+0Hz"):
     with open(speech_txt_path, "r", encoding="utf-8") as f:
         content = f.read().strip()
 
@@ -84,12 +85,14 @@ def generate_speech(speech_txt_path, output_mp3_path, voice="zh-CN-XiaoyiNeural"
 
     output_mp3_path.parent.mkdir(parents=True, exist_ok=True)
 
-    # edge-tts 命令
+    # edge-tts 命令（+10% 语速使声音更有活力，标准 -0% 太慢太机器）
     cmd = [
         sys.executable, "-m", "edge_tts",
         "-t", content,
         "-v", voice,
         "--write-media", str(output_mp3_path),
+        "--rate", rate,
+        "--pitch", pitch,
     ]
 
     try:
@@ -98,7 +101,7 @@ def generate_speech(speech_txt_path, output_mp3_path, voice="zh-CN-XiaoyiNeural"
             print(f"  [ERROR] edge-tts failed: {result.stderr[:200]}")
             return False
         size = output_mp3_path.stat().st_size
-        print(f"  [OK] {output_mp3_path.name} ({size:,} bytes)")
+        print(f"  [OK] {output_mp3_path.name} ({size:,} bytes, rate={rate})")
         return True
     except Exception as e:
         print(f"  [ERROR] {e}")

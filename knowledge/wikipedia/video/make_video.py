@@ -30,6 +30,22 @@ def ensure_even(n):
     """返回最近的偶数"""
     return n if n % 2 == 0 else n + 1
 
+def crf_for_scene(scene_key):
+    """根据场景类型返回合适的 CRF 值（越低越清晰）"""
+    # 公式/图表场景需要更高清晰度，用更低的 CRF
+    low_crf_keys = {'formula', 'le_formula', 'burau_pipeline', 'abelian_proof',
+                    'band_structure', 'braid_group', 'cloud_graph', 'le_flow',
+                    'thermoelectric', 'iv_curve'}
+    # 封面/简单文字用中间值
+    if scene_key in low_crf_keys:
+        return 18  # 高清晰度
+    return 22  # 标准清晰度
+
+def get_x264_preset(complexity='medium'):
+    """根据场景复杂度返回 x264 preset（越慢=压缩效率越高）"""
+    presets = {'low': 'fast', 'medium': 'medium', 'high': 'slow'}
+    return presets.get(complexity, 'medium')
+
 def get_img_size(img_path):
     """用 PIL 读取图片尺寸"""
     try:
@@ -38,8 +54,8 @@ def get_img_size(img_path):
     except Exception:
         return None
 
-def make_video_single(img_path, audio_path, output_path, bitrate=None):
-    """单图片 + 音频 → 视频（原有逻辑）"""
+def make_video_single(img_path, audio_path, output_path, bitrate=None, scene_key='default'):
+    """单图片 + 音频 → 视频（优化版：感知场景类型 + 音频标准化 + fade）"""
     size = get_img_size(img_path)
     if not size:
         print(f"  [ERROR] 无法读取图片尺寸: {img_path}")
@@ -58,25 +74,34 @@ def make_video_single(img_path, audio_path, output_path, bitrate=None):
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     ffmpeg_exe = imageio_ffmpeg.get_ffmpeg_exe()
-    cmd = [
-        ffmpeg_exe, "-y",
-        "-loop", "1", "-framerate", "1",
-        "-i", str(img_path),
-        "-i", str(audio_path),
-        "-c:v", "libx264", "-tune", "stillimage",
-        "-c:a", "aac", "-b:a", "192k",
-    ]
-    if bitrate:
-        cmd.extend(["-b:v", bitrate])
-    cmd.extend([
-        "-pix_fmt", "yuv420p",
-        "-shortest",
-        "-t", str(duration + 0.5),
-    ])
+    crf = crf_for_scene(scene_key)
+    preset = get_x264_preset('medium' if 'cover' in scene_key else 'medium')
+    # fade in/out：时长<3s时跳过，避免掐尾
+    fade_duration = min(0.5, duration * 0.05) if duration >= 3 else 0
+    # 拼装 video filter chain
+    vf_parts = []
     if scale_filter:
-        cmd.insert(-2, "-vf")
-        cmd.insert(-2, scale_filter)
-    cmd.append(str(output_path))
+        vf_parts.append(scale_filter)
+    if fade_duration > 0:
+        vf_parts.append(f"fade=t=in:st=0:d={fade_duration}:alpha=1")
+        vf_parts.append(f"fade=t=out:st={duration - fade_duration}:d={fade_duration}:alpha=1")
+    vf = ",".join(vf_parts) if vf_parts else None
+
+    cmd = [ffmpeg_exe, "-y",
+           "-loop", "1", "-framerate", "1",
+           "-i", str(img_path),
+           "-i", str(audio_path),
+           "-c:v", "libx264", "-preset", preset, "-crf", str(crf),
+           "-tune", "stillimage"]
+    if bitrate:
+        cmd += ["-b:v", bitrate]
+    if vf:
+        cmd += ["-vf", vf]
+    cmd += ["-c:a", "aac", "-b:a", "192k",
+            "-af", "loudnorm=I=-16:LRA=11:tp=-1.5",
+            "-pix_fmt", "yuv420p",
+            "-shortest", "-t", str(duration + 0.5),
+            str(output_path)]
 
     result = subprocess.run(cmd, capture_output=True, encoding='utf-8', errors='ignore')
     if result.returncode != 0:
@@ -87,8 +112,8 @@ def make_video_single(img_path, audio_path, output_path, bitrate=None):
     print(f"  [OK] {output_path.name} ({size_bytes:,} bytes, {duration:.1f}s)")
     return True
 
-def make_video_multi(img_paths, audio_path, output_path, bitrate=None):
-    """多图片按时序切换 + 音频 → 视频
+def make_video_multi(img_paths, audio_path, output_path, bitrate=None, scene_key='default'):
+    """多图片按时序切换 + 音频 → 视频（优化版：crf感知 + fade + 音频标准化）
     img_paths: [(img, start_second), ...] 按时间顺序
     策略：①视频段单独编码(无声) ②concat ③音频与 concat 视频混流
     """
@@ -110,6 +135,7 @@ def make_video_multi(img_paths, audio_path, output_path, bitrate=None):
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     ffmpeg_exe = imageio_ffmpeg.get_ffmpeg_exe()
+    crf = crf_for_scene(scene_key)
 
     seg_files = []
     with tempfile.TemporaryDirectory() as tmpdir:
@@ -117,9 +143,16 @@ def make_video_multi(img_paths, audio_path, output_path, bitrate=None):
             seg_path = Path(tmpdir) / f"seg_{i:02d}.mp4"
             seg_files.append(seg_path)
 
-            scale_filter = None
+            vf_parts = []
             if w != w_even or h != h_even:
-                scale_filter = f"scale={w_even}:{h_even}:force_original_aspect_ratio=decrease,pad={w_even}:{h_even}:(ow-iw)/2:(oh-ih)/2"
+                vf_parts.append(f"scale={w_even}:{h_even}:force_original_aspect_ratio=decrease,pad={w_even}:{h_even}:(ow-iw)/2:(oh-ih)/2")
+            # 每段视频添加淡入（首段）或淡出（末段）
+            fade_in_dur = min(0.5, seg_duration * 0.03) if i == 0 else 0
+            fade_out_dur = min(0.5, seg_duration * 0.03) if i == n - 1 else 0
+            if fade_in_dur > 0:
+                vf_parts.append(f"fade=t=in:st=0:d={fade_in_dur}:alpha=1")
+            if fade_out_dur > 0:
+                vf_parts.append(f"fade=t=out:st={seg_duration - fade_out_dur}:d={fade_out_dur}:alpha=1")
 
             # 视频段无声编码
             cmd = [
@@ -127,18 +160,18 @@ def make_video_multi(img_paths, audio_path, output_path, bitrate=None):
                 "-loop", "1", "-framerate", "1",
                 "-i", str(img_path),
                 "-t", str(seg_duration + 0.05),
-                "-c:v", "libx264", "-tune", "stillimage",
+                "-c:v", "libx264", "-preset", "medium", "-crf", str(crf),
+                "-tune", "stillimage",
             ]
             if bitrate:
                 cmd.extend(["-b:v", bitrate])
+            if vf_parts:
+                cmd.extend(["-vf", ",".join(vf_parts)])
             cmd.extend([
                 "-pix_fmt", "yuv420p",
                 "-an",
                 str(seg_path),
             ])
-            if scale_filter:
-                cmd.insert(-2, "-vf")
-                cmd.insert(-2, scale_filter)
 
             r = subprocess.run(cmd, capture_output=True, encoding='utf-8', errors='ignore')
             if r.returncode != 0:
@@ -156,7 +189,8 @@ def make_video_multi(img_paths, audio_path, output_path, bitrate=None):
             ffmpeg_exe, "-y",
             "-f", "concat", "-safe", "0",
             "-i", str(concat_list),
-            "-c:v", "libx264",
+            "-c:v", "libx264", "-crf", str(crf),
+            "-preset", "medium",
             "-an",
             str(concat_path),
         ], capture_output=True, encoding='utf-8', errors='ignore')
@@ -165,7 +199,7 @@ def make_video_multi(img_paths, audio_path, output_path, bitrate=None):
             return False
 
         # 音频与 concat 视频混流：用 atrim+adelay 将每段音频对齐到正确位置
-        # 构造每段的音频片段
+        # 构造每段的音频片段（带音频标准化）
         audio_seg_files = []
         for i in range(n):
             seg_audio = Path(tmpdir) / f"audio_seg_{i:02d}.aac"
@@ -177,7 +211,7 @@ def make_video_multi(img_paths, audio_path, output_path, bitrate=None):
                 "-ss", str(start_s),
                 "-i", str(audio_path),
                 "-t", str(seg_duration),
-                "-af", f"adelay={delay_ms}|{delay_ms}",
+                "-af", f"adelay={delay_ms}|{delay_ms},loudnorm=I=-16:LRA=11:tp=-1.5",
                 "-c:a", "aac",
                 str(seg_audio),
             ], capture_output=True, encoding='utf-8', errors='ignore')
@@ -208,7 +242,7 @@ def make_video_multi(img_paths, audio_path, output_path, bitrate=None):
             ffmpeg_exe, "-y",
             "-i", str(concat_path),
             "-i", str(concat_audio),
-            "-c:v", "libx264",
+            "-c:v", "libx264", "-crf", str(crf),
             "-c:a", "aac", "-b:a", "192k",
             "-shortest",
             str(output_path),
@@ -218,7 +252,7 @@ def make_video_multi(img_paths, audio_path, output_path, bitrate=None):
             return False
 
     size_bytes = output_path.stat().st_size
-    print(f"  [OK] {output_path.name} ({size_bytes:,} bytes, {n} scenes × {seg_duration:.1f}s)")
+    print(f"  [OK] {output_path.name} ({size_bytes:,} bytes, {n} scenes × {seg_duration:.1f}s, CRF={crf})")
     return True
 
 def find_scene_images(mp3_path):
@@ -249,17 +283,26 @@ def find_scene_images(mp3_path):
         ]
         img = next((p for p in candidates if p.exists()), None)
         if img:
-            return [(cover_path, img) if has_cover else (None, img)]
-        return []
+            return [(cover_path, img) if has_cover else (None, img)], 'cover'
+        return [], 'default'
 
-    imgs = [(p, None) for _, p in scene_imgs]
-    if has_cover:
-        imgs.insert(0, (cover_path, None))
-    return imgs
+    return [(p, None) for _, p in scene_imgs], 'scene'
 
-def make_video(img_path, audio_path, output_path, bitrate=None):
+def infer_scene_key(mp3_path):
+    """从 MP3 文件名推断场景类型，用于 CRF 选择"""
+    name = mp3_path.stem.lower()
+    # 公式/理论类 → 低 CRF
+    if any(k in name for k in ['formula', 'le_', 'burau', 'abelian', 'band', ' braid', 'cloud_graph']):
+        return 'formula'
+    # 封面/标题 → 较高 CRF
+    if 'cover' in name or len(mp3_path.parent.glob("*-scene-*.png")) <= 1:
+        return 'cover'
+    # 图表/流程 → 中等
+    return 'scene'
+
+def make_video(img_path, audio_path, output_path, bitrate=None, scene_key='default'):
     """兼容性别名"""
-    return make_video_single(img_path, audio_path, output_path, bitrate=bitrate)
+    return make_video_single(img_path, audio_path, output_path, bitrate=bitrate, scene_key=scene_key)
 
 def main():
     parser = argparse.ArgumentParser(description="视频合成（支持多画面按时序切换）")
@@ -272,16 +315,17 @@ def main():
 
     if args.mp3_file:
         mp3_path = Path(args.mp3_file)
-        scene_imgs = find_scene_images(mp3_path)
+        scene_imgs, inferred_key = find_scene_images(mp3_path)
         if not scene_imgs:
             print(f"未找到配图: {mp3_path.stem}")
             return
         output = mp3_path.with_suffix(".mp4")
+        scene_key = infer_scene_key(mp3_path)
         if len(scene_imgs) == 1 and scene_imgs[0][0] is not None:
-            make_video_multi([(scene_imgs[0][0], 0.0)], mp3_path, output, bitrate=args.bitrate)
+            make_video_multi([(scene_imgs[0][0], 0.0)], mp3_path, output, bitrate=args.bitrate, scene_key=scene_key)
         else:
             imgs_only = [(p, 0.0) for p, _ in scene_imgs]
-            make_video_multi(imgs_only, mp3_path, output, bitrate=args.bitrate)
+            make_video_multi(imgs_only, mp3_path, output, bitrate=args.bitrate, scene_key=scene_key)
         return
 
     # 处理所有 speech MP3（跳过 speech-tts）
@@ -295,7 +339,7 @@ def main():
         return
 
     for mp3 in sorted(mp3_files):
-        scene_imgs = find_scene_images(mp3)
+        scene_imgs, inferred_key = find_scene_images(mp3)
         if not scene_imgs:
             print(f"  [WARN] 无配图: {mp3.stem}")
             continue
@@ -305,8 +349,9 @@ def main():
         else:
             output = mp3.with_suffix(".mp4")
         imgs_only = [(p, 0.0) for p, _ in scene_imgs]
-        print(f"处理: {mp3.name} → {len(imgs_only)} scenes")
-        make_video_multi(imgs_only, mp3, output, bitrate=args.bitrate)
+        scene_key = infer_scene_key(mp3)
+        print(f"处理: {mp3.name} → {len(imgs_only)} scenes [key={scene_key}]")
+        make_video_multi(imgs_only, mp3, output, bitrate=args.bitrate, scene_key=scene_key)
 
 if __name__ == "__main__":
     main()
