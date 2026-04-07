@@ -1,6 +1,7 @@
 """
 从视频脚本提取 [画面：] 场景描述，生成对应配图
 依赖: pip install matplotlib pillow numpy
+LaTeX支持（可选）: xelatex + pdftocairo (D:/MiKTeX)
 """
 import matplotlib
 matplotlib.use('Agg')
@@ -12,6 +13,9 @@ import argparse
 import re
 from pathlib import Path
 import sys
+import os
+import subprocess
+import tempfile
 sys.path.insert(0, str(Path(__file__).parent.parent))
 from video.config import (
     T2I_MODEL, T2I_STEPS, T2I_GUIDANCE, T2I_SEED,
@@ -56,6 +60,76 @@ def glow_circle(ax, cx, cy, radius, glow_color, n=3):
         alpha = 0.06 * (n - i + 1) / n
         glow = plt.Circle((cx, cy), r, facecolor=glow_color, alpha=alpha, zorder=0)
         ax.add_patch(glow)
+
+# ─── LaTeX 公式渲染（matplotlib 内置 math renderer）─────────────
+def render_latex_to_png(formula: str, out_path: Path, dpi: int = 150) -> bool:
+    """用 matplotlib 渲染 LaTeX 公式为 PNG（抗锯齿，12×8 白板居中）
+
+    formula: LaTeX 公式文本，如 "E = mc^2" 或 "\\frac{-b \\pm \\sqrt{b^2-4ac}}{2a}"
+    out_path: 输出 PNG 路径
+    dpi: 输出分辨率，默认 150
+
+    返回 True（matplotlib 总是可用）
+    """
+    # 预处理：去掉常见包裹符号，还原为纯公式文本
+    f = formula.strip()
+    if f.startswith(r'\[') and f.endswith(r'\]'):
+        f = f[2:-2].strip()
+    elif f.startswith('$$') and f.endswith('$$'):
+        f = f[2:-2].strip()
+    elif f.startswith(r'\(') and f.endswith(r'\)'):
+        f = f[2:-2].strip()
+    elif f.startswith(r'\begin{equation*}') and f.endswith(r'\end{equation*}'):
+        f = f[16:-17].strip()
+    elif f.startswith('$') and f.endswith('$') and f.count('$') == 2:
+        f = f[1:-1].strip()
+
+    # 用 matplotlib text 渲染（支持基本 LaTeX math：分数、平方根、上下标、求和、积分等）
+    fig, ax = plt.subplots(figsize=(12, 8))
+    ax.set_xlim(0, 12); ax.set_ylim(0, 8)
+    ax.axis('off')
+    fig.patch.set_facecolor('white')
+
+    # 使用 Dejavu Sans 字体并开启 math renderer
+    plt.rcParams['font.family'] = 'DejaVu Sans'
+    plt.rcParams['axes.unicode_minus'] = False
+
+    ax.text(6, 4, f'${f}$', ha='center', va='center',
+            fontsize=32, color='#1e3a8a',
+            usetex=False)  # False = 使用 matplotlib 内置 math renderer
+
+    plt.tight_layout(pad=0.5)
+    fig.savefig(str(out_path), dpi=dpi, bbox_inches='tight', facecolor='white',
+                format='png')
+    plt.close(fig)
+    return True
+
+
+def draw_latex_formula(out_path, desc=None, formula=None):
+    """通用 LaTeX 公式场景 — 从 desc 中提取公式或直接传入 formula"""
+    # 优先级：formula > desc 中的 `` `` 包裹内容
+    if not formula:
+        if desc:
+            m = re.search(r'`([^`]+)`', desc)
+            if m:
+                formula = m.group(1)
+            else:
+                formula = desc.strip()
+        else:
+            formula = r'E = mc^2'
+
+    ok = render_latex_to_png(formula, Path(out_path))
+    if not ok:
+        # 回退：用 matplotlib text 渲染（无抗锯齿，但保证可生成）
+        fig, ax = plt.subplots(figsize=(12, 8))
+        ax.set_xlim(0, 12); ax.set_ylim(0, 8)
+        ax.axis('off')
+        ax.text(6, 4, formula, ha='center', va='center', fontsize=20,
+                fontfamily='monospace', color='#1e3a8a')
+        fig.patch.set_facecolor('white')
+        fig.savefig(out_path, dpi=150, bbox_inches='tight', facecolor='white')
+        plt.close(fig)
+
 
 def draw_title_bar(ax, text, y=7.2, fontsize=18, color='#1d4ed8', bold=True):
     """绘制带底部装饰线的标题"""
@@ -806,33 +880,6 @@ def draw_thermoelectric(out_path, desc):
     plt.savefig(out_path, dpi=200, bbox_inches='tight', facecolor=ZH_COLORS['bg'])
     plt.close()
 
-def draw_iv_curve(out_path, desc):
-    """场景5: 电流整流 I-V 曲线"""
-    fig, ax = new_fig((12, 8))
-    ax.set_xlim(0, 12); ax.set_ylim(0, 8)
-    ax.axis('off')
-    ax.text(0.5, 7.5, '[05] ' + desc, fontsize=11, color='#374151')
-    # I-V 曲线示意
-    # 非对称整流曲线
-    v = [i/10 for i in range(-50, 51)]
-    i_vals = [0.3*v_i + 0.05*v_i**2 for v_i in v]  # 非线性非对称
-    ax.plot([i*20+6 for i in v], [i*2+4 for i in i_vals], color=ZH_COLORS['blue'], linewidth=2.5)
-    ax.axhline(y=4, color='#d1d5db', linewidth=1, linestyle='--')
-    ax.axvline(x=6, color='#d1d5db', linewidth=1, linestyle='--')
-    ax.text(6, 2.0, 'V', ha='center', fontsize=12, color='#64748b')
-    ax.text(10.5, 4, 'I', ha='center', fontsize=12, color='#64748b', rotation=90)
-    # 整流标注
-    ax.annotate('整流不对称', xy=(9, 5.5), xytext=(8, 6.5), fontsize=11, color=ZH_COLORS['red'],
-                arrowprops=dict(arrowstyle='->', color=ZH_COLORS['red']))
-    # 公式
-    formula = FancyBboxPatch((0.5, 1.2), 4.5, 1.8, boxstyle="round,pad=0.1", facecolor='#fef2f2', edgecolor=ZH_COLORS['red'], linewidth=1.5)
-    ax.add_patch(formula)
-    ax.text(2.75, 2.5, 'R = (V/I) 非对称', ha='center', fontsize=12, fontweight='bold', color=ZH_COLORS['red'])
-    ax.text(2.75, 1.8, '整流系数 ∝ 谷极化', ha='center', fontsize=11, color='#7f1d1d')
-    plt.tight_layout()
-    plt.savefig(out_path, dpi=200, bbox_inches='tight', facecolor=ZH_COLORS['bg'])
-    plt.close()
-
 def draw_band_structure(out_path, desc):
     """场景6: 能带结构与谷极化示意"""
     _draw_band_structure(out_path, desc, progress=1.0)
@@ -975,6 +1022,9 @@ def scene_to_key(desc):
         return 'iv_curve'
     if '能带' in desc or '谷' in desc:
         return 'band_structure'
+    # LaTeX 公式场景：语法 [画面：公式：`...`]
+    if '公式：' in desc and '`' in desc:
+        return 'math_formula'
     return None
 
 # ─── matplotlib dispatch helpers ─────────────────────────────
@@ -1013,7 +1063,7 @@ T2I_SCENES = {
 # 仅包含 SCENE_DRAWERS 中实际注册的场景（与 T2I_SCENES 互斥）
 MPL_ONLY_SCENES = {
     'iv_curve', 'band_structure', 'burau_pipeline',
-    'abelian_proof', 'le_formula',
+    'abelian_proof', 'le_formula', 'math_formula',
 }
 
 
@@ -1071,6 +1121,8 @@ SCENE_DRAWERS = {
     'cross_domain_effect': draw_cross_domain_effect,
     'attack_disperse': draw_attack_disperse,
     'le_formula': draw_le_formula,
+    # 通用 LaTeX 公式场景
+    'math_formula': draw_latex_formula,
 }
 
 def check_scene_coverage(script_path):
