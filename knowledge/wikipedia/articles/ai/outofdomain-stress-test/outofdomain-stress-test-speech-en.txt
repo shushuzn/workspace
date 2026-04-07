@@ -1,0 +1,108 @@
+Have you ever wondered: can a cloud system detect hidden security vulnerabilities before an attack even happens?
+
+Traditional approach: find known attack signatures, then match.
+
+But here is the problem: hackers always invent new techniques.
+
+Is there a method that can discover hidden dangers without knowing what tricks hackers are using?
+
+Mathematicians say: yes. And it has to do with weaving.
+
+Cloud security engineers face privilege escalation with three paths.
+
+Path one: rule matching.
+You know an attack technique, you write a signature, you match.
+The problem: hackers always invent techniques you have never seen.
+
+Path two: behavioral anomaly detection.
+Define what normal looks like, then detect statistical deviations.
+The problem: attackers can slowly mimic normal behavior and lurk for a long time.
+
+Path three: manual graph analysis.
+Security analysts define rules manually.
+But in large-scale cloud environments, it is impossible to review everything.
+
+Wait. But the more fundamental question is:
+Can a detection method trained on one cloud system still work on a completely different cloud environment?
+
+The most counterintuitive insight of this research:
+
+Permission paths in the cloud are actually a braid.
+
+How to understand this?
+
+You have n permission chains, each with different operation steps.
+When two adjacent permissions swap positions, this corresponds to a crossing in a braid, mathematically called sigma i.
+
+The combination of these permission chains forms a braid group.
+
+Here is the key point: the essence of braid groups is non-Abelian.
+sigma one times sigma two does not equal sigma two times sigma one.
+Different order gives different results.
+
+And this perfectly describes real-world privilege escalation:
+The same step-by-step privilege escalation, with different operation orders, produces completely different outcomes.
+
+Wait. What does this mean?
+It means all traditional statistics fail.
+Because means, variances, and entropy are all Abelian.
+Order does not matter for them, so they cannot detect it.
+
+## LE 指数（2:30-3:30）
+
+How do we quantify the privilege escalation risk of a system?
+
+Step one: map each permission chain to a braid group element.
+Step two: transform this braid group element into a matrix. This process is called the Burau representation.
+Step three: compute eigenvalues of this matrix, take the largest modulus.
+
+This is the Burau-Lyapunov index, abbreviated as LE.
+
+High LE means the system is focused-type dangerous: a few key nodes hold most permissions.
+Low LE means the system is distributed-type: permissions are scattered everywhere, with no obvious single point of weakness.
+
+In short: high LE equals concentrated danger, low LE equals distributed safety.
+
+But this is not even the most extreme part.
+
+The most impressive part of this research provides a rigorous mathematical proof:
+
+No Abelian statistic can replicate the ability of LE to distinguish between focused-type and distributed-type systems.
+
+Wait. How strong is this?
+
+This is not experimental observation, not empirical law.
+This is a proof.
+No combination of means, variances, or entropy can replace LE.
+
+In other words, traditional statistical detection methods fundamentally cannot capture the structural characteristics of privilege escalation.
+
+The most surprising experimental result:
+
+A model trained on Solar Amazon Cloud IAM data, applied directly to Stard Astrophysics, a completely different private cloud, showed almost no change in detection capability.
+
+No parameter tuning.
+No retraining.
+No adaptation whatsoever.
+
+Wait. How is this possible?
+
+Because LE measures structural features of the graph: node count, edge connectivity density, permission propagation topology, not the specific semantics of a particular cloud platform.
+
+IAM graphs of different cloud platforms are topologically isomorphic.
+
+This is the power of topology: abstracting from concrete systems to algebraic structures, structures themselves are universal.
+
+Of course, attack and defense is a game.
+
+If attackers know how LE is calculated, they can deliberately distribute high-risk permissions, from a few key nodes to multiple ordinary nodes, to lower the LE value and hide attack paths.
+
+This is the next research direction: given a security level constraint, how should permissions be allocated to minimize LE?
+
+The Burau-Lyapunov Index: quantifies the structural complexity of cloud IAM graphs through the Burau representation of braid groups.
+
+核心洞察：拓扑结构具有跨平台普遍性，No parameter tuning.
+
+A tool invented by a 19th century mathematician can today be used to discover attackers in the cloud.
+
+Mathematics does not explain the world. Mathematics is part of the world.

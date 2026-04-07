@@ -39,7 +39,7 @@
 这些权限链的组合，就构成一个辫群。
 
 关键点来了：辫群的本质是非阿贝尔的。
-sigma 1 乘以 sigma 2，不等于 sigma 2 乘以 sigma 1。
+sigma one 乘以 sigma two，不等于 sigma two 乘以 sigma one。
 顺序不同，结果不同。
 
 而这恰好描述了现实中的特权升级：
