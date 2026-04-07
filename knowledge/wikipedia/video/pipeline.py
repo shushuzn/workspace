@@ -144,7 +144,7 @@ def process_speech(speech_txt: Path, force: bool = False, engine: str = None) ->
     return ok, mp3_path
 
 # ── 步骤 2: 配图生成 ────────────────────────────────────────────
-def process_scenes(speech_txt: Path, force: bool = False) -> tuple[bool, list]:
+def process_scenes(speech_txt: Path, force: bool = False, use_t2i: bool = True) -> tuple[bool, list]:
     """为单篇文章生成所有配图（增量）"""
     cache = load_cache()
     raw_stem = speech_txt.stem
@@ -172,11 +172,11 @@ def process_scenes(speech_txt: Path, force: bool = False) -> tuple[bool, list]:
     print(f"  → 生成配图: {key}")
     article_dir = speech_txt.parent
     try:
-        # generate_scenes_for_script(script_path, output_prefix, article_name, strict=False)
         generated = generate_scenes_for_script(
             script_path=article_dir / f"{stem}.md",
-            output_prefix=stem,  # 图片前缀：NN-标题
-            article_name=article_dir.name  # 文章目录名
+            output_prefix=stem,
+            article_name=article_dir.name,
+            use_t2i=use_t2i,
         )
         # 收集生成的图片
         nn = stem.split('-')[0]
@@ -241,7 +241,7 @@ def get_audio_duration(mp3_path: Path) -> float:
     return 0.0
 
 # ── 主流程 ───────────────────────────────────────────────────────
-def run_pipeline(articles_dir: Path, force: bool = False, resume: bool = False, workers: int = MAX_WORKERS, engine: str = None):
+def run_pipeline(articles_dir: Path, force: bool = False, resume: bool = False, workers: int = MAX_WORKERS, engine: str = None, use_t2i: bool = True):
     """批量视频生产流水线"""
     # 1. 收集所有待处理 speech 文件
     speech_files = sorted(articles_dir.rglob("*-speech.txt"))
@@ -273,7 +273,7 @@ def run_pipeline(articles_dir: Path, force: bool = False, resume: bool = False, 
                     print(f"  [SKIP] 已完成: {item_id}")
                     success_count += 1
                     continue
-                futures[executor.submit(process_item, speech_txt, force, engine)] = speech_txt
+                futures[executor.submit(process_item, speech_txt, force, engine, use_t2i)] = speech_txt
 
             for future in as_completed(futures):
                 speech_txt = futures[future]
@@ -310,7 +310,7 @@ def run_pipeline(articles_dir: Path, force: bool = False, resume: bool = False, 
     report_path.write_text(json.dumps(report, indent=2, ensure_ascii=False), encoding='utf-8')
     print(f"质量报告: {report_path}")
 
-def process_item(speech_txt: Path, force: bool, engine: str = None) -> bool:
+def process_item(speech_txt: Path, force: bool, engine: str = None, use_t2i: bool = True) -> bool:
     """单个视频的完整流水线（文案质量 → 语音 → 配图 → 视频 → 质量验收）"""
     # 确保 speech_txt 是绝对路径，避免相对路径导致的 relative_to 错误
     speech_txt = speech_txt.resolve()
@@ -366,7 +366,7 @@ def process_item(speech_txt: Path, force: bool, engine: str = None) -> bool:
             print(f"  [OK] 音频质量: {audio_r.score}/100")
 
     # ========== Step 3: 配图生成 ==========
-    ok, scene_imgs = process_scenes(speech_txt, force)
+    ok, scene_imgs = process_scenes(speech_txt, force, use_t2i)
     if not ok or not scene_imgs:
         return False
 
@@ -419,13 +419,15 @@ def main():
     parser.add_argument("--batch", type=int, default=BATCH_SIZE, help=f"每批数量（默认 {BATCH_SIZE}）")
     parser.add_argument("--tts", default=None, choices=["kokoro", "edge"],
                         help=f"TTS 引擎: kokoro(本地) / edge(在线，默认 {TTS_ENGINE})")
+    parser.add_argument("--no-t2i", action="store_true", help="禁用 T2I，配图全部用 matplotlib")
     args = parser.parse_args()
 
     BATCH_SIZE = args.batch
     MAX_WORKERS = args.workers
+    use_t2i = not args.no_t2i
 
     articles_dir = Path(args.dir) if args.dir else ARTICLES_DIR
-    run_pipeline(articles_dir, force=args.force, resume=args.resume, workers=args.workers, engine=args.tts)
+    run_pipeline(articles_dir, force=args.force, resume=args.resume, workers=args.workers, engine=args.tts, use_t2i=use_t2i)
 
 if __name__ == "__main__":
     main()

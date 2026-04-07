@@ -16,6 +16,50 @@ plt.style.use('default')
 matplotlib.rcParams['font.family'] = ['Microsoft YaHei', 'DejaVu Sans']
 matplotlib.rcParams['axes.unicode_minus'] = False
 
+# ─── T2I 引擎（Stable Diffusion 2.1）─────────────────────────
+_SD_PIPELINE = None
+
+def _get_sd_pipeline():
+    """单例 SD 2.1 DiffusersPipeline（FP16，RTX3060 可跑）"""
+    global _SD_PIPELINE
+    if _SD_PIPELINE is not None:
+        return _SD_PIPELINE
+
+    try:
+        from diffusers import StableDiffusionPipeline, DPMSolverMultistepScheduler
+        import torch
+        import imageio_ffmpeg
+
+        device = "cuda" if torch.cuda.is_available() else "cpu"
+        dtype = torch.float16 if device == "cuda" else torch.float32
+
+        print(f"  [SD] 加载模型到 {device} ({dtype})，首次需下载 ~2GB...")
+        pipe = StableDiffusionPipeline.from_pretrained(
+            "stabilityai/stable-diffusion-2-1",
+            torch_dtype=dtype,
+            safety_checker=None,   # 去掉审查加速
+        )
+        pipe.scheduler = DPMSolverMultistepScheduler.from_config(pipe.scheduler.config)
+        pipe = pipe.to(device)
+
+        # VRAM 优化：RTX3060 12G 可同时跑 batch
+        if device == "cuda":
+            pipe.enable_attention_slicing()   # 减少 VRAM 峰值
+            try:
+                pipe.enable_vae_slicing()      # 分片 VAE decode
+            except Exception:
+                pass
+
+        _SD_PIPELINE = pipe
+        print(f"  [SD] 模型加载完成")
+        return pipe
+    except ImportError as e:
+        print(f"  [SD] 缺少依赖: {e}，将使用 matplotlib 渲染")
+        return None
+    except Exception as e:
+        print(f"  [SD] 初始化失败: {e}，将使用 matplotlib 渲染")
+        return None
+
 COLORS = {
     'bg': '#ffffff', 'blue': '#1e40af', 'pink': '#9d174d',
     'green': '#166534', 'yellow': '#92400e', 'red': '#991b1b',
@@ -697,6 +741,87 @@ def scene_to_key(desc):
         return 'band_structure'
     return None
 
+# ─── matplotlib dispatch helpers ─────────────────────────────
+def _mpl_dispatch(key, func, out_path, desc, title):
+    """matplotlib 渲染分发（保留原参数路由逻辑）"""
+    if key == 'valley_cover':
+        func(out_path, title or '')
+    elif key in ('vdw_heterojunction', 'ising_tmdc_junction',
+                  'thermoelectric', 'iv_curve', 'band_structure'):
+        func(out_path, desc)
+    else:
+        func(out_path)
+
+
+def _mpl_fallback(key, func, out_path, desc, title):
+    """T2I 失败后的 matplotlib 回退"""
+    print(f"  [MPL] T2I 回退 → {key}")
+    _mpl_dispatch(key, func, out_path, desc, title)
+
+
+# ─── T2I 场景描述 → prompt 映射 ────────────────────────────
+# 9 个艺术/概念类场景可走 Stable Diffusion
+T2I_SCENES = {
+    'valley_cover':         'Minimalist cover image, bold white typography on clean background, academic journal cover style, no people',
+    'vdw_heterojunction':    'Scientific diagram of van der Waals heterostructure, two layered 2D materials sandwiched together, electron orbitals, glowing purple and blue layers, clean white background, technical illustration style',
+    'ising_tmdc_junction':  'Phase transition diagram between two 2D semiconductor materials, Ising model spins flipping from ordered to disordered state, red and blue arrows, clean scientific illustration on white background',
+    'thermoelectric':        'Thermoelectric effect diagram, temperature gradient with hot and cold sides, electrons flowing, Seebeck coefficient visualization, scientific diagram on white background',
+    'cloud_graph':           'Abstract graph visualization of cloud IAM permissions, nodes connected by curved edges, color-coded by sensitivity level, minimal scientific illustration, white background',
+    'three_methods':         'Three parallel scientific methods diagrams side by side, numbered 1 2 3, clean minimal style, white background, technical illustration',
+    'graph_to_braid':        'Mathematical transformation diagram, a network graph morphing into braided strands, group theory visualization, clean academic illustration on white background',
+    'cross_domain_effect':   'Security vulnerability spreading across domains, interconnected spheres labeled with IAM concepts, arrows showing privilege escalation paths, minimal scientific diagram on white',
+    'attack_disperse':       'Attack vector dispersal pattern, branching diagram from a single entry point to multiple targets, cybersecurity concept, clean minimal style on white background',
+}
+
+# matplotlib 保留场景（数据/公式类，精确控制无法用 T2I 替代）
+MPL_ONLY_SCENES = {
+    # 数据/公式类（numpy 精确绘图，T2I 无法替代）
+    'iv_curve', 'band_structure', 'burau_pipeline',
+    'abelian_proof', 'le_flow', 'le_formula',
+    # 流程/关系图类（精确布局，T2I prompt 难以精确控制）
+    'iam_model', 'braid_group', 'attack_path', 'cross_domain',
+    # dead code: 函数已定义但从未注册到 SCENE_DRAWERS（保持原样）
+    # draw_attack_path, draw_braid_group, draw_cross_domain, draw_iam_model, draw_le_flow
+}
+
+
+def draw_with_t2i(out_path: Path, scene_key: str, desc: str = None) -> bool:
+    """用 Stable Diffusion 生成图片，失败则返回 False"""
+    pipe = _get_sd_pipeline()
+    if pipe is None:
+        return False
+
+    prompt = T2I_SCENES.get(scene_key, desc or scene_key)
+    negative_prompt = (
+        "photorealistic, photograph, 3D render, blurry, low quality, "
+        "text overlay, watermark, logo, signature, deformed, ugly, "
+        "nsfw, nude, violent"
+    )
+
+    import torch
+    seed = int(hash(scene_key) % (2**31))
+    generator = torch.Generator(
+        device="cuda" if torch.cuda.is_available() else "cpu"
+    ).manual_seed(seed)
+
+    try:
+        result = pipe(
+            prompt=prompt,
+            negative_prompt=negative_prompt,
+            num_inference_steps=25,
+            guidance_scale=7.5,
+            generator=generator,
+            height=512,
+            width=768,   # 3:2 ≈ 12:8
+        )
+        img = result.images[0]
+        img.save(str(out_path))
+        return True
+    except Exception as e:
+        print(f"  [SD] 生成失败: {e}")
+        return False
+
+
 SCENE_DRAWERS = {
     # 2604.02427 论文场景
     'valley_cover': draw_valley_cover,
@@ -740,7 +865,7 @@ def report_coverage(script_path, strict=False):
         exit(1)
     return True
 
-def generate_scenes_for_script(script_path, output_prefix, article_name, strict=False):
+def generate_scenes_for_script(script_path, output_prefix, article_name, strict=False, use_t2i=True):
     """为一个脚本生成封面图和所有场景配图"""
     output_dir = Path(script_path).parent
 
@@ -760,6 +885,11 @@ def generate_scenes_for_script(script_path, output_prefix, article_name, strict=
         return []
     print(f"  找到 {len(scenes)} 个场景: {[s[:20] for s in scenes]}")
     output_paths = []
+    # T2I 优先路由
+    t2i_routed = 0
+    mpl_used = 0
+    t2i_fallback = 0
+
     for i, desc in enumerate(scenes, 1):
         key = scene_to_key(desc)
         func = SCENE_DRAWERS.get(key)
@@ -767,28 +897,46 @@ def generate_scenes_for_script(script_path, output_prefix, article_name, strict=
             print(f"  [SKIP] 场景{i} 无对应绘图函数: {desc[:30]}")
             continue
         out_path = output_dir / f"{output_prefix}-scene-{i:02d}.png"
-        if func in (draw_valley_cover,):
-            func(out_path, title if title else '')
-        elif func in (draw_vdw_heterojunction, draw_ising_tmdc_junction, draw_thermoelectric, draw_iv_curve, draw_band_structure):
-            func(out_path, desc)
+
+        # ── 路由策略 ──
+        if use_t2i and key in T2I_SCENES:
+            # 优先 T2I，失败则回退 matplotlib
+            sd_ok = draw_with_t2i(out_path, key, desc)
+            if sd_ok:
+                t2i_routed += 1
+                print(f"  [SD]  场景{i}: {out_path.name}")
+            else:
+                t2i_fallback += 1
+                _mpl_fallback(key, func, out_path, desc, title)
+                mpl_used += 1
+        elif key in MPL_ONLY_SCENES:
+            # 数据/公式类，强制 matplotlib
+            _mpl_dispatch(key, func, out_path, desc, title)
+            mpl_used += 1
         else:
-            func(out_path)
+            # 兜底：按旧逻辑
+            _mpl_dispatch(key, func, out_path, desc, title)
+            mpl_used += 1
+
         if out_path.exists():
-            print(f"  [OK] 场景{i}: {out_path.name}")
             output_paths.append(out_path)
         else:
             print(f"  [SKIP] 场景{i} 文件未生成: {desc[:30]}")
+
+    # 统计报告
+    if t2i_routed or t2i_fallback:
+        print(f"  [路由] T2I {t2i_routed} | T2I回退→MPL {t2i_fallback} | MPL {mpl_used}")
     return output_paths
 
 if __name__ == '__main__':
     import os
     os.makedirs('video', exist_ok=True)
 
-    parser = argparse.ArgumentParser(description="生成视频场景配图")
+    parser = argparse.ArgumentParser(description="生成视频场景配图（SD 2.1 + matplotlib 混合）")
     parser.add_argument("script", nargs="?", help="视频脚本 .md 路径（不指定则处理所有）")
     parser.add_argument("--strict", action="store_true", help="有未覆盖场景时退出（返回码1）")
     parser.add_argument("--check-only", action="store_true", help="仅检查覆盖率，不生成图片")
-    args = parser.parse_args()
+    parser.add_argument("--no-t2i", action="store_true", help="禁用 T2I，全部用 matplotlib 渲染")
 
     if args.script:
         script = Path(args.script)
@@ -800,7 +948,7 @@ if __name__ == '__main__':
             if report_coverage(script, strict=args.strict):
                 print("  [ABORT] 有缺失场景，停止生成。补充绘图函数后重试（或去掉 --strict）")
                 exit(1)
-            generate_scenes_for_script(script, nn, article_name)
+            generate_scenes_for_script(script, nn, article_name, use_t2i=not args.no_t2i)
     else:
         wiki_root = Path(__file__).parent.parent
         scripts = list(wiki_root.glob("articles/**/*.md"))
@@ -814,4 +962,4 @@ if __name__ == '__main__':
                 if report_coverage(script, strict=args.strict):
                     print("  [ABORT] 有缺失场景，停止生成")
                     exit(1)
-                generate_scenes_for_script(script, nn, script.stem)
+                generate_scenes_for_script(script, nn, script.stem, use_t2i=not args.no_t2i)
