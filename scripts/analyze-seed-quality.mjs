@@ -18,8 +18,9 @@ const jsonMode = process.argv.includes('--json');
 const EXECUTABLE_PREFIXES = [
   'python ', 'node ', 'npx ', 'bun ', 'bash ', 'sh ',
   'Edit ', 'Read ', 'Write ', 'Create ', 'Delete ',
-  'Grep ', 'Glob ', 'Bash ', 'Search ', 'List ',
-  '#', '/', '//', 'task '  // task CLI, comments, absolute paths
+  'Grep ', 'Glob ', 'Bash ', 'Search ', 'List ', 'Sed ',
+  'cd ', 'mkdir ', 'task ', '#', '/', '//',
+  '读 ', '写 ', '创建 ', '删除 ', '搜索 ', '执行 '
 ];
 
 const content = readFileSync(IDEAS_PATH, 'utf-8');
@@ -49,26 +50,23 @@ while (i < lines.length) {
   const approachMatch = bodyText.match(/\|?\s*approach:\s*(.+?)(?:\s*\| shipped:|\s*\| killed:|$)/s);
   const approachText = approachMatch ? approachMatch[1].trim() : '';
 
-  // Extract first numbered step
-  const firstStepMatch = approachText.match(/(?:^|\n)\s*(\d+)\.\s+(.+?)(?:\n\s*\d+\.|$)/s);
-  const firstStep = firstStepMatch ? firstStepMatch[2].replace(/；$/, '').trim() : approachText;
+  // Extract first step (handles "1." / "阶段一：" / "阶段一(设计)：" prefixes)
+  const stepPrefixPattern = /^(?:\d+\. |阶段[一二三四五六七八九]?(?:\([^)]+\))?：\s*)(.+?)(?:\n\s*(?:\d+\.|阶段[一二三四五六七八九]?(?:\([^)]+\))?：)|$)/s;
+  const firstStepMatch = approachText.match(stepPrefixPattern);
+  const firstStep = firstStepMatch ? firstStepMatch[1].replace(/；$/, '').trim() : approachText;
 
   const scoreMatch = line.match(/\[score:(\d+)x(\d+)\]/);
   const benefit = scoreMatch ? parseInt(scoreMatch[1], 10) : 0;
   const feas = scoreMatch ? parseInt(scoreMatch[2], 10) : 0;
   const score = benefit * feas;
 
-  // Check executability: only f:4/f:5 need executable prefix; f:1-f:3 use milestone format
+  // Check executability: all seeds require executable prefix (Gate 4b)
   let isExecutable = false;
   if (firstStep.length === 0) {
     isExecutable = false;
-  } else if (feas >= 4) {
-    // f:4/f:5 require executable prefix (Gate 4b)
+  } else {
     isExecutable = EXECUTABLE_PREFIXES.some(p => firstStep.startsWith(p)) ||
       firstStep.match(/^[a-zA-Z]:\\/) !== null;
-  } else {
-    // f:1-f:3 use milestone format (阶段一(调研)，阶段二(实现))
-    isExecutable = firstStep.length > 0;
   }
 
   const angleMatch = line.match(/\[angle:([^\]]+)\]/);
