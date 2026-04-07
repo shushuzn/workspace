@@ -102,7 +102,7 @@ let firstStep = firstStepMatch[2].replace(/；$/, '').trim();
 
 // If firstStep contains no path separators or shebang, it's a description —
 // try to find the script name in description and build the actual command
-if (!firstStep.startsWith('python ') && !firstStep.startsWith('node ') && !firstStep.startsWith('npx ') && !firstStep.startsWith('#') && !firstStep.startsWith('/') && !firstStep.startsWith('Edit ') && !firstStep.startsWith('Read ') && !firstStep.startsWith('Write ') && !firstStep.startsWith('Create ') && !firstStep.match(/^[a-zA-Z]:\\/)) {
+if (!firstStep.startsWith('python ') && !firstStep.startsWith('node ') && !firstStep.startsWith('npx ') && !firstStep.startsWith('#') && !firstStep.startsWith('/') && !firstStep.startsWith('Edit ') && !firstStep.startsWith('Read ') && !firstStep.startsWith('Write ') && !firstStep.startsWith('Create ') && !firstStep.startsWith('Delete ') && !firstStep.startsWith('Grep ') && !firstStep.startsWith('Glob ') && !firstStep.startsWith('Bash ') && !firstStep.startsWith('Search ') && !firstStep.startsWith('List ') && !firstStep.match(/^[a-zA-Z]:\\/)) {
   // Extract script name (e.g. "package_videos.py 添加 --all" → "video/package_videos.py")
   const scriptMatch = top.desc.match(/(?:^|\s)([\w-]+\.(?:py|mjs|js|ts|sh))(?:[\s\[]|$)/);
   if (scriptMatch) {
