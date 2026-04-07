@@ -112,19 +112,81 @@ def make_video_single(img_path, audio_path, output_path, bitrate=None, scene_key
     print(f"  [OK] {output_path.name} ({size_bytes:,} bytes, {duration:.1f}s)")
     return True
 
-def make_video_multi(img_paths, audio_path, output_path, bitrate=None, scene_key='default'):
-    """多图片按时序切换 + 音频 → 视频（优化版：crf感知 + fade + 音频标准化）
-    img_paths: [(img, start_second), ...] 按时间顺序
-    策略：①视频段单独编码(无声) ②concat ③音频与 concat 视频混流
+
+def _encode_scene_ken_burns(img_path, output_path, w_even, h_even, dur, crf, zoom_in=True):
+    """Ken Burns 效果编码单场景（无声）
+    zoom_in=True: 从1.0x放大到1.12x（细节→全景）
+    zoom_in=False: 从1.12x缩小到1.0x（全景→细节）
     """
+    import imageio_ffmpeg, subprocess
+    from pathlib import Path
+    ffmpeg_exe = imageio_ffmpeg.get_ffmpeg_exe()
+
+    scale_pad = (f"scale={w_even}:{h_even}:"
+                 f"force_original_aspect_ratio=decrease,"
+                 f"pad={w_even}:{h_even}:(ow-iw)/2:(oh-ih)/2")
+
+    if zoom_in:
+        z_expr = "min(zoom+0.0004,1.12)"
+    else:
+        z_expr = "max(zoom-0.0004,1.0)"
+    x_expr = "(iw-iw/zoom)/2"
+    y_expr = "(ih-ih/zoom)/2"
+    zoompan = (f"zoompan=z='{z_expr}':x='{x_expr}':y='{y_expr}':"
+               f"d=1:s={w_even}x{h_even}:fps=25")
+
+    n_frames = max(1, int(dur * 25))
+    cmd = [
+        str(ffmpeg_exe), "-y",
+        "-loop", "1", "-i", str(img_path),
+        "-vf", f"{scale_pad},{zoompan}",
+        "-t", str(dur),
+        "-frames:v", str(n_frames),
+        "-c:v", "libx264", "-preset", "fast", "-crf", str(crf),
+        "-tune", "stillimage", "-pix_fmt", "yuv420p", "-an",
+        str(output_path),
+    ]
+    r = subprocess.run(cmd, capture_output=True, text=True, encoding='utf-8', errors='ignore')
+    if r.returncode != 0:
+        # Fallback: 静态图
+        cmd2 = [
+            str(ffmpeg_exe), "-y",
+            "-loop", "1", "-framerate", "1", "-i", str(img_path),
+            "-vf", scale_pad, "-t", str(dur),
+            "-c:v", "libx264", "-preset", "fast", "-crf", str(crf),
+            "-tune", "stillimage", "-pix_fmt", "yuv420p", "-an",
+            str(output_path),
+        ]
+        r2 = subprocess.run(cmd2, capture_output=True, text=True, encoding='utf-8', errors='ignore')
+        return r2.returncode == 0
+    return True
+
+
+def make_video_multi(img_paths, audio_path, output_path, bitrate=None, scene_key='default',
+                    use_transitions=True, transition_dur=0.75):
+    """多图片按时序切换 + 音频 → 视频（Ken Burns + Cross-dissolve 过渡）
+
+    升级版特性：
+    - Ken Burns 效果：每张静态图缓慢缩放（zoom-in/zoom-out 交替）
+    - Cross-dissolve 过渡（xfade）：场景之间淡入淡出
+    - transition_dur: 过渡时长秒（默认 0.75s，每场景最多用22%）
+
+    img_paths: [(img_path, start_second), ...]
+    """
+    import imageio_ffmpeg, subprocess, shutil
+    from pathlib import Path
+
     duration = get_duration(audio_path)
     if duration is None:
         print(f"  [ERROR] 无法读取音频时长: {audio_path}")
         return False
 
     n = len(img_paths)
-    seg_duration = duration / n
+    if n == 0:
+        print(f"  [ERROR] 无场景图片")
+        return False
 
+    seg_duration = duration / n
     sizes = [get_img_size(p) for p, _ in img_paths]
     if any(s is None for s in sizes):
         print(f"  [ERROR] 无法读取某些图片尺寸")
@@ -137,123 +199,120 @@ def make_video_multi(img_paths, audio_path, output_path, bitrate=None, scene_key
     ffmpeg_exe = imageio_ffmpeg.get_ffmpeg_exe()
     crf = crf_for_scene(scene_key)
 
-    seg_files = []
-    with tempfile.TemporaryDirectory() as tmpdir:
-        for i, (img_path, start_t) in enumerate(img_paths):
-            seg_path = Path(tmpdir) / f"seg_{i:02d}.mp4"
+    with tempfile.TemporaryDirectory() as _tmpdir:
+        tmpdir = Path(_tmpdir)
+
+        # ── 1. Ken Burns 编码每个场景（无声） ──────────────────────────
+        seg_files = []
+        for i, (img_path, _start_t) in enumerate(img_paths):
+            seg_path = tmpdir / f"seg_{i:02d}.mp4"
             seg_files.append(seg_path)
-
-            vf_parts = []
-            if w != w_even or h != h_even:
-                vf_parts.append(f"scale={w_even}:{h_even}:force_original_aspect_ratio=decrease,pad={w_even}:{h_even}:(ow-iw)/2:(oh-ih)/2")
-            # 每段视频添加淡入（首段）或淡出（末段）
-            fade_in_dur = min(0.5, seg_duration * 0.03) if i == 0 else 0
-            fade_out_dur = min(0.5, seg_duration * 0.03) if i == n - 1 else 0
-            if fade_in_dur > 0:
-                vf_parts.append(f"fade=t=in:st=0:d={fade_in_dur}:alpha=1")
-            if fade_out_dur > 0:
-                vf_parts.append(f"fade=t=out:st={seg_duration - fade_out_dur}:d={fade_out_dur}:alpha=1")
-
-            # 视频段无声编码
-            cmd = [
-                ffmpeg_exe, "-y",
-                "-loop", "1", "-framerate", "1",
-                "-i", str(img_path),
-                "-t", str(seg_duration + 0.05),
-                "-c:v", "libx264", "-preset", "medium", "-crf", str(crf),
-                "-tune", "stillimage",
-            ]
-            if bitrate:
-                cmd.extend(["-b:v", bitrate])
-            if vf_parts:
-                cmd.extend(["-vf", ",".join(vf_parts)])
-            cmd.extend([
-                "-pix_fmt", "yuv420p",
-                "-an",
-                str(seg_path),
-            ])
-
-            r = subprocess.run(cmd, capture_output=True, encoding='utf-8', errors='ignore')
-            if r.returncode != 0:
-                print(f"  [ERROR] 片段{i} 编码失败: {r.stderr[-200:]}")
+            zoom_in = (i % 2 == 0)  # 奇偶交替：0=放大, 1=缩小
+            ok = _encode_scene_ken_burns(
+                img_path, seg_path, w_even, h_even, seg_duration, crf, zoom_in=zoom_in
+            )
+            if not ok:
+                print(f"  [ERROR] Ken Burns 场景{i} 编码失败")
                 return False
 
-        # concat 所有视频段
-        concat_list = Path(tmpdir) / "concat.txt"
-        with open(concat_list, 'w') as f:
-            for seg in seg_files:
-                f.write(f"file '{seg}'\n")
+        # ── 2. Cross-dissolve 过渡（xfade） ───────────────────────────
+        if use_transitions and n > 1:
+            trans = min(transition_dur, seg_duration * 0.22)
+            # 每段实际输出时长（去掉过渡重叠部分）
+            seg_out = seg_duration - trans          # 末段去掉开头 trans
+            mid_out = seg_duration - 2 * trans      # 中间段去掉首尾各 trans
 
-        concat_path = Path(tmpdir) / "concat_video.mp4"
-        r = subprocess.run([
-            ffmpeg_exe, "-y",
-            "-f", "concat", "-safe", "0",
-            "-i", str(concat_list),
-            "-c:v", "libx264", "-crf", str(crf),
-            "-preset", "medium",
-            "-an",
-            str(concat_path),
-        ], capture_output=True, encoding='utf-8', errors='ignore')
-        if r.returncode != 0:
-            print(f"  [ERROR] concat failed:\n{r.stderr[-300:]}")
-            return False
-
-        # 音频与 concat 视频混流：用 atrim+adelay 将每段音频对齐到正确位置
-        # 构造每段的音频片段（带音频标准化）
-        audio_seg_files = []
-        for i in range(n):
-            seg_audio = Path(tmpdir) / f"audio_seg_{i:02d}.aac"
-            audio_seg_files.append(seg_audio)
-            start_s = seg_duration * i
-            delay_ms = int(start_s * 1000)
+            # 逐个 xfade
+            cur = seg_files[0]
+            # 首段：截掉末尾 trans
+            out = tmpdir / "fade_00.mp4"
             r = subprocess.run([
-                ffmpeg_exe, "-y",
-                "-ss", str(start_s),
-                "-i", str(audio_path),
-                "-t", str(seg_duration),
-                "-af", f"adelay={delay_ms}|{delay_ms},loudnorm=I=-16:LRA=11:tp=-1.5",
-                "-c:a", "aac",
-                str(seg_audio),
-            ], capture_output=True, encoding='utf-8', errors='ignore')
+                str(ffmpeg_exe), "-y", "-i", str(cur),
+                "-t", str(seg_out), "-c:v", "copy", str(out),
+            ], capture_output=True, text=True, encoding='utf-8', errors='ignore')
             if r.returncode != 0:
-                print(f"  [ERROR] 音频片段{i} 失败:\n{r.stderr[-200:]}")
+                shutil.copy(str(cur), str(out))
+
+            for i in range(1, n):
+                nxt = seg_files[i]
+                out = tmpdir / f"fade_{i:02d}.mp4"
+                offset = seg_out + (i - 1) * mid_out - trans
+
+                r = subprocess.run([
+                    str(ffmpeg_exe), "-y",
+                    "-i", str(cur), "-i", str(nxt),
+                    "-filter_complex",
+                    f"[0:v][1:v]xfade=transition=crossfade:"
+                    f"duration={trans:.2f}:offset={offset:.2f}[v]",
+                    "-map", "[v]",
+                    "-c:v", "libx264", "-crf", str(crf), "-preset", "fast",
+                    "-pix_fmt", "yuv420p",
+                    str(out),
+                ], capture_output=True, text=True, encoding='utf-8', errors='ignore')
+                if r.returncode != 0:
+                    # Fallback: 简单 concat
+                    clist = tmpdir / "fc.txt"
+                    with open(clist, 'w', encoding='utf-8') as f:
+                        f.write(f"file '{cur}'\n")
+                        f.write(f"file '{nxt}'\n")
+                    r2 = subprocess.run([
+                        str(ffmpeg_exe), "-y", "-f", "concat", "-safe", "0",
+                        "-i", str(clist), "-c:v", "libx264",
+                        "-crf", str(crf), "-preset", "fast", "-an", str(out),
+                    ], capture_output=True, text=True, encoding='utf-8', errors='ignore')
+                    if r2.returncode != 0:
+                        print(f"  [ERROR] fallback concat failed: {r2.stderr[-100:]}")
+                        return False
+                cur = out
+            final_video = cur
+        else:
+            # 无过渡：简单 concat
+            clist = tmpdir / "concat.txt"
+            with open(clist, 'w', encoding='utf-8') as f:
+                for seg in seg_files:
+                    f.write(f"file '{seg}'\n")
+            final_video = tmpdir / "concat_video.mp4"
+            r = subprocess.run([
+                str(ffmpeg_exe), "-y", "-f", "concat", "-safe", "0",
+                "-i", str(clist),
+                "-c:v", "libx264", "-crf", str(crf), "-preset", "fast", "-an",
+                str(final_video),
+            ], capture_output=True, text=True, encoding='utf-8', errors='ignore')
+            if r.returncode != 0:
+                print(f"  [ERROR] concat failed:\n{r.stderr[-200:]}")
                 return False
 
-        # concat 所有音频段
-        audio_list = Path(tmpdir) / "concat_audio.txt"
-        with open(audio_list, 'w') as f:
-            for af in audio_seg_files:
-                f.write(f"file '{af}'\n")
-
-        concat_audio = Path(tmpdir) / "concat_audio.aac"
-        r = subprocess.run([
-            ffmpeg_exe, "-y",
-            "-f", "concat", "-safe", "0",
-            "-i", str(audio_list),
-            "-c:a", "aac",
-            str(concat_audio),
-        ], capture_output=True, encoding='utf-8', errors='ignore')
-        if r.returncode != 0:
-            print(f"  [ERROR] audio concat failed:\n{r.stderr[-300:]}")
+        # ── 3. 音频标准化 ───────────────────────────────────────────────
+        video_dur = get_duration(str(final_video)) or duration
+        audio_final = tmpdir / "audio_final.aac"
+        r_audio = subprocess.run([
+            str(ffmpeg_exe), "-y", "-i", str(audio_path),
+            "-af", "loudnorm=I=-16:LRA=11:tp=-1.5",
+            "-t", str(video_dur),
+            "-c:a", "aac", "-b:a", "192k",
+            str(audio_final),
+        ], capture_output=True, text=True, encoding='utf-8', errors='ignore')
+        if r_audio.returncode != 0:
+            print(f"  [ERROR] audio failed: {r_audio.stderr[-150:]}")
             return False
 
-        # 最终合并视频+音频
-        r = subprocess.run([
-            ffmpeg_exe, "-y",
-            "-i", str(concat_path),
-            "-i", str(concat_audio),
-            "-c:v", "libx264", "-crf", str(crf),
-            "-c:a", "aac", "-b:a", "192k",
-            "-shortest",
-            str(output_path),
-        ], capture_output=True, encoding='utf-8', errors='ignore')
-        if r.returncode != 0:
-            print(f"  [ERROR] final merge failed:\n{r.stderr[-300:]}")
+        # ── 4. 混流 ──────────────────────────────────────────────────────
+        r_mux = subprocess.run([
+            str(ffmpeg_exe), "-y",
+            "-i", str(final_video), "-i", str(audio_final),
+            "-c:v", "copy", "-c:a", "aac", "-b:a", "192k",
+            "-shortest", str(output_path),
+        ], capture_output=True, text=True, encoding='utf-8', errors='ignore')
+        if r_mux.returncode != 0:
+            print(f"  [ERROR] mux failed:\n{r_mux.stderr[-200:]}")
             return False
 
     size_bytes = output_path.stat().st_size
-    print(f"  [OK] {output_path.name} ({size_bytes:,} bytes, {n} scenes × {seg_duration:.1f}s, CRF={crf})")
+    trans_str = f"+xfade({trans:.1f}s)" if (use_transitions and n > 1) else ""
+    print(f"  [OK] {output_path.name} ({size_bytes:,} bytes, {n} scenes x {seg_duration:.1f}s, KB{{xfade}}{trans_str}, CRF={crf})")
     return True
+
+
 
 def find_scene_images(mp3_path):
     """为 MP3 找封面图和所有场景图片"""

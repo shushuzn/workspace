@@ -27,7 +27,7 @@ wikipedia/
 ├── video/               # 视频生产流水线源码
 │   ├── draw_scene.py    # 配图生成（matplotlib，白板风格）
 │   ├── generate_speech.py  # 语音合成（edge-tts，zh-CN-XiaoyiNeural）
-│   ├── make_video.py   # 视频合成（imageio-ffmpeg + PIL，多画面按时序切换）
+│   ├── make_video.py   # 视频合成（imageio-ffmpeg + PIL，Ken Burns动画 + xfade交叉溶解过渡）
 │   ├── package_videos.py  # 视频打包脚本
 │   └── fig-*.png        # 通用配图
 ├── stubs/               # API/函数存根
@@ -75,7 +75,7 @@ python video/pipeline.py --dir articles --batch 5 --workers 4 --resume
 7. `python video/draw_scene.py` 生成封面图和所有配图
    - 封面图：只显示标题，不显示简介，比例 12×8
    - 配图：与文案中的 `[画面：...]` 标注一一对应，比例统一 12×8
-8. `python video/make_video.py` 合成视频 MP4（多画面按时序切换，自动处理双版本）
+8. `python video/make_video.py` 合成视频 MP4（Ken Burns动画 + xfade交叉溶解过渡，自动处理双版本）
 9. `python video/package_videos.py` 打包：
    - 中文版（论文解读.mp4 + 标题简介.md）→ `dist/`
    - 英文版（论文解读-en.mp4 + Title-Introduction.md）→ `dist-en/`
