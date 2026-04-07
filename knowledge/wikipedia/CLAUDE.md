@@ -86,6 +86,7 @@ python video/pipeline.py --dir articles --batch 5 --workers 4 --resume
 - **封面图**：只显示视频标题，不显示简介
 - **编号规则**：配图编号与视频文案编号一一对应，存放在各知识点目录下，与 MP3 同级
 - **绘制函数**：`draw_scene.py` 中 `SCENE_DRAWERS` 字典映射 scene key 到对应 draw 函数
+- **T2I 混合路由**：9 个艺术/概念类场景优先 Stable Diffusion 2.1（DiffusersPipeline，RTX3060 可跑），失败自动回退 matplotlib；5 个数据/公式类场景（IV 曲线、能带图、Burau 流程图等）强制 matplotlib。安装：`pip install diffusers transformers torch`，首次运行自动下载模型 ~2GB。`--no-t2i` 禁用。
 
 ### 知识条目维护
 
