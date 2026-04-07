@@ -62,7 +62,7 @@ def draw_cover(out_path, title):
         ax.text(6, 4, title, ha='center', va='center', fontsize=30,
                 fontweight='bold', color=COLORS['text'])
     plt.tight_layout()
-    plt.savefig(out_path, dpi=150, bbox_inches='tight', facecolor=COLORS['bg'])
+    plt.savefig(out_path, dpi=200, bbox_inches='tight', facecolor=COLORS['bg'])
     plt.close()
 
 # ─── 配图绘制函数 ─────────────────────────────────────────
@@ -97,7 +97,7 @@ def draw_braid_group(out_path):
     ax.add_patch(rule_box)
     ax.text(5, 0.45, '规则一：局部性（隔着≥1根可换位）  |  规则二：Yang-Baxter方程 σᵢσᵢ₊₁σᵢ = σᵢ₊₁σᵢσᵢ₊₁', ha='center', fontsize=10, color='#374151')
     plt.tight_layout()
-    plt.savefig(out_path, dpi=150, bbox_inches='tight', facecolor=COLORS['bg'])
+    plt.savefig(out_path, dpi=200, bbox_inches='tight', facecolor=COLORS['bg'])
     plt.close()
 
 def draw_iam_model(out_path):
@@ -122,7 +122,7 @@ def draw_iam_model(out_path):
     ax.add_patch(principle_box)
     ax.text(6, 0.5, '核心原则：默认禁止，只显式授予  |  没有明确授权 = 禁止访问', ha='center', fontsize=11, fontweight='bold', color='#60a5fa')
     plt.tight_layout()
-    plt.savefig(out_path, dpi=150, bbox_inches='tight', facecolor=COLORS['bg'])
+    plt.savefig(out_path, dpi=200, bbox_inches='tight', facecolor=COLORS['bg'])
     plt.close()
 
 def draw_attack_path(out_path):
@@ -152,7 +152,7 @@ def draw_attack_path(out_path):
     ax.text(5.5, 1.2, 'CreateAccessKey', ha='center', fontsize=9, color='#991b1b')
     ax.text(9.2, 1.2, 'AttachUserPolicy', ha='center', fontsize=9, color='#991b1b')
     plt.tight_layout()
-    plt.savefig(out_path, dpi=150, bbox_inches='tight', facecolor=COLORS['bg'])
+    plt.savefig(out_path, dpi=200, bbox_inches='tight', facecolor=COLORS['bg'])
     plt.close()
 
 def draw_le_flow(out_path):
@@ -192,7 +192,7 @@ def draw_le_flow(out_path):
     ax.text(6.25, 1.1, 'LE低 → 分散型', ha='center', fontsize=11, color='#166534', fontweight='bold')
     ax.text(6.25, 0.65, '权限分散，无明显单点弱点', ha='center', fontsize=9, color='#374151')
     plt.tight_layout()
-    plt.savefig(out_path, dpi=150, bbox_inches='tight', facecolor=COLORS['bg'])
+    plt.savefig(out_path, dpi=200, bbox_inches='tight', facecolor=COLORS['bg'])
     plt.close()
 
 def draw_cross_domain(out_path):
@@ -231,7 +231,7 @@ def draw_cross_domain(out_path):
     ax.text(7.7, 1.2, '测试集(Stard): AUC 0.89', ha='center', fontsize=10, color='#166534', fontweight='bold')
     ax.text(6.5, 0.7, '无需调参，结构同构 -> 泛化能力强', ha='center', fontsize=10, color=COLORS['muted'])
     plt.tight_layout()
-    plt.savefig(out_path, dpi=150, bbox_inches='tight', facecolor=COLORS['bg'])
+    plt.savefig(out_path, dpi=200, bbox_inches='tight', facecolor=COLORS['bg'])
     plt.close()
 
 def draw_cloud_graph(out_path):
@@ -260,7 +260,7 @@ def draw_cloud_graph(out_path):
         ax.text(x, y, name, ha='center', va='center', fontsize=9, fontweight='bold', color='white')
     ax.text(6, 0.8, '每条边 = 一条权限传递路径 = 黑客可能的提权链路', ha='center', fontsize=11, color=COLORS['muted'])
     plt.tight_layout()
-    plt.savefig(out_path, dpi=150, bbox_inches='tight', facecolor=COLORS['bg'])
+    plt.savefig(out_path, dpi=200, bbox_inches='tight', facecolor=COLORS['bg'])
     plt.close()
 
 def draw_three_methods(out_path):
@@ -281,7 +281,7 @@ def draw_three_methods(out_path):
             ax.text(x + w/2, y + h - 1.0 - i*0.6, line, ha='center', fontsize=11, color=COLORS['text'])
     ax.text(6, 0.5, '共同问题：在这套系统上训练的检测方法，换到另一套云环境还能用吗？', ha='center', fontsize=11, color='#991b1b', fontweight='bold')
     plt.tight_layout()
-    plt.savefig(out_path, dpi=150, bbox_inches='tight', facecolor=COLORS['bg'])
+    plt.savefig(out_path, dpi=200, bbox_inches='tight', facecolor=COLORS['bg'])
     plt.close()
 
 def draw_graph_to_braid(out_path):
@@ -326,7 +326,7 @@ def draw_graph_to_braid(out_path):
     ax.text(9.05, 3.05, 'σ₁', ha='center', fontsize=14, fontweight='bold', color='#9d174d')
     ax.text(9.0, 2.65, '非阿贝尔：σ₁σ₂ ≠ σ₂σ₁', ha='center', fontsize=9, color='#374151')
     plt.tight_layout()
-    plt.savefig(out_path, dpi=150, bbox_inches='tight', facecolor=COLORS['bg'])
+    plt.savefig(out_path, dpi=200, bbox_inches='tight', facecolor=COLORS['bg'])
     plt.close()
 
 def draw_burau_pipeline(out_path):
@@ -355,7 +355,7 @@ def draw_burau_pipeline(out_path):
     ax.text(9.9, 1.2, '= max|λᵢ|', ha='center', fontsize=11, color='#374151')
     ax.annotate('', xy=(9.9, 1.95), xytext=(9.9, 2.75), arrowprops=dict(arrowstyle='->', color='#166534', lw=2))
     plt.tight_layout()
-    plt.savefig(out_path, dpi=150, bbox_inches='tight', facecolor=COLORS['bg'])
+    plt.savefig(out_path, dpi=200, bbox_inches='tight', facecolor=COLORS['bg'])
     plt.close()
 
 def draw_abelian_proof(out_path):
@@ -387,7 +387,7 @@ def draw_abelian_proof(out_path):
     ax.text(6, 1.55, '均值、方差、熵的任意组合均无法替代', ha='center', fontsize=11, color='#93c5fd')
     ax.text(6, 1.0, 'LE 测量的是非阿贝尔结构，无法被交换顺序不变量刻画', ha='center', fontsize=10, color='#60a5fa')
     plt.tight_layout()
-    plt.savefig(out_path, dpi=150, bbox_inches='tight', facecolor=COLORS['bg'])
+    plt.savefig(out_path, dpi=200, bbox_inches='tight', facecolor=COLORS['bg'])
     plt.close()
 
 def draw_cross_domain_effect(out_path):
@@ -424,7 +424,7 @@ def draw_cross_domain_effect(out_path):
     ax.text(7.7, 1.2, '测试 AUC: 0.89', ha='center', fontsize=10, color='#166534', fontweight='bold')
     ax.text(6.5, 0.7, '不需要调参 / 重训练 / 适配', ha='center', fontsize=10, color=COLORS['muted'])
     plt.tight_layout()
-    plt.savefig(out_path, dpi=150, bbox_inches='tight', facecolor=COLORS['bg'])
+    plt.savefig(out_path, dpi=200, bbox_inches='tight', facecolor=COLORS['bg'])
     plt.close()
 
 def draw_attack_disperse(out_path):
@@ -456,7 +456,7 @@ def draw_attack_disperse(out_path):
     ax.text(6, 1.7, '新问题：给定安全级别约束，怎样分配权限才能让 LE 最小化？', ha='center', fontsize=12, fontweight='bold', color='#92400e')
     ax.text(6, 1.1, '这是下一个研究方向', ha='center', fontsize=10, color='#374151')
     plt.tight_layout()
-    plt.savefig(out_path, dpi=150, bbox_inches='tight', facecolor=COLORS['bg'])
+    plt.savefig(out_path, dpi=200, bbox_inches='tight', facecolor=COLORS['bg'])
     plt.close()
 
 def draw_le_formula(out_path):
@@ -483,7 +483,7 @@ def draw_le_formula(out_path):
     ax.text(9.0, 1.75, '权限分散，无明显单点弱点', ha='center', fontsize=10, color='#374151')
     ax.text(9.0, 1.3, '攻击路径难以发现', ha='center', fontsize=10, color='#374151')
     plt.tight_layout()
-    plt.savefig(out_path, dpi=150, bbox_inches='tight', facecolor=COLORS['bg'])
+    plt.savefig(out_path, dpi=200, bbox_inches='tight', facecolor=COLORS['bg'])
     plt.close()
 
 
@@ -506,7 +506,7 @@ def draw_valley_cover(out_path, title):
     ax.plot([1.5, 10.5], [2.8, 2.8], color='#c5d4e8', linewidth=1.5)
     ax.text(6, 1.5, 'arXiv: 2604.02427 | Ising 超导体与谷极化', ha='center', fontsize=10, color='#94a3b8')
     plt.tight_layout()
-    plt.savefig(out_path, dpi=150, bbox_inches='tight', facecolor=fig.get_facecolor())
+    plt.savefig(out_path, dpi=200, bbox_inches='tight', facecolor=fig.get_facecolor())
     plt.close()
 
 def draw_vdw_heterojunction(out_path, desc):
@@ -534,7 +534,7 @@ def draw_vdw_heterojunction(out_path, desc):
     ax.plot([3, 7.5], [2, 2], 'k--', alpha=0.3)
     ax.text(5.25, 1.8, '谷自由度 ↔ 自旋自由度  拓扑关联', ha='center', fontsize=11, color='#6b7280', style='italic')
     plt.tight_layout()
-    plt.savefig(out_path, dpi=150, bbox_inches='tight', facecolor=COLORS['bg'])
+    plt.savefig(out_path, dpi=200, bbox_inches='tight', facecolor=COLORS['bg'])
     plt.close()
 
 def draw_ising_tmdc_junction(out_path, desc):
@@ -563,7 +563,7 @@ def draw_ising_tmdc_junction(out_path, desc):
     ax.text(8.5, 4.4, "谷 K 与 K_prime", ha='center', fontsize=11, color='#22c55e')
     ax.text(8.5, 3.8, '谷极化态', ha='center', fontsize=10, color='#4ade80')
     plt.tight_layout()
-    plt.savefig(out_path, dpi=150, bbox_inches='tight', facecolor=COLORS['bg'])
+    plt.savefig(out_path, dpi=200, bbox_inches='tight', facecolor=COLORS['bg'])
     plt.close()
 
 def draw_thermoelectric(out_path, desc):
@@ -590,7 +590,7 @@ def draw_thermoelectric(out_path, desc):
     ax.text(9.75, 5.0, '热电系数', ha='center', fontsize=11, fontweight='bold', color='#854d0e')
     ax.text(9.75, 4.3, '∝ 谷极化强度', ha='center', fontsize=11, color='#a16207')
     plt.tight_layout()
-    plt.savefig(out_path, dpi=150, bbox_inches='tight', facecolor=COLORS['bg'])
+    plt.savefig(out_path, dpi=200, bbox_inches='tight', facecolor=COLORS['bg'])
     plt.close()
 
 def draw_iv_curve(out_path, desc):
@@ -617,7 +617,7 @@ def draw_iv_curve(out_path, desc):
     ax.text(2.75, 2.5, 'R = (V/I) 非对称', ha='center', fontsize=12, fontweight='bold', color='#dc2626')
     ax.text(2.75, 1.8, '整流系数 ∝ 谷极化', ha='center', fontsize=11, color='#7f1d1d')
     plt.tight_layout()
-    plt.savefig(out_path, dpi=150, bbox_inches='tight', facecolor=COLORS['bg'])
+    plt.savefig(out_path, dpi=200, bbox_inches='tight', facecolor=COLORS['bg'])
     plt.close()
 
 def draw_band_structure(out_path, desc):
@@ -645,7 +645,7 @@ def draw_band_structure(out_path, desc):
     for j, line in enumerate(lines):
         ax.text(7, 4.5 - j*0.65, '✓ ' + line, ha='left', fontsize=10, color='#374151')
     plt.tight_layout()
-    plt.savefig(out_path, dpi=150, bbox_inches='tight', facecolor=COLORS['bg'])
+    plt.savefig(out_path, dpi=200, bbox_inches='tight', facecolor=COLORS['bg'])
     plt.close()
 
 # ─── 主函数：从脚本提取场景并生成 ────────────────────────────
