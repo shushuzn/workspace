@@ -141,7 +141,9 @@ def process_speech(speech_txt: Path, force: bool = False) -> tuple[bool, Path]:
 def process_scenes(speech_txt: Path, force: bool = False) -> tuple[bool, list]:
     """为单篇文章生成所有配图（增量）"""
     cache = load_cache()
-    stem = speech_txt.stem
+    raw_stem = speech_txt.stem
+    # 去除 -speech / -speech-en / -en 后缀，得到裸标题
+    stem = raw_stem.replace("-speech", "").replace("-en", "")
     key = f"{speech_txt.parent.name}/scenes"
     # 用脚本内容 hash 作为输入指纹
     input_hash = file_hash(speech_txt)
@@ -164,7 +166,12 @@ def process_scenes(speech_txt: Path, force: bool = False) -> tuple[bool, list]:
     print(f"  → 生成配图: {key}")
     article_dir = speech_txt.parent
     try:
-        generated = generate_scenes_for_script(speech_txt.parent / f"{stem}.md")
+        # generate_scenes_for_script(script_path, output_prefix, article_name, strict=False)
+        generated = generate_scenes_for_script(
+            script_path=article_dir / f"{stem}.md",
+            output_prefix=stem,  # 图片前缀：NN-标题
+            article_name=article_dir.name  # 文章目录名
+        )
         # 收集生成的图片
         nn = stem.split('-')[0]
         scene_imgs = []
@@ -299,9 +306,17 @@ def run_pipeline(articles_dir: Path, force: bool = False, resume: bool = False, 
 
 def process_item(speech_txt: Path, force: bool) -> bool:
     """单个视频的完整流水线（文案质量 → 语音 → 配图 → 视频 → 质量验收）"""
-    print(f"\n处理: {speech_txt.relative_to(ARTICLES_DIR)}")
+    # 确保 speech_txt 是绝对路径，避免相对路径导致的 relative_to 错误
+    speech_txt = speech_txt.resolve()
     article_dir = speech_txt.parent
     stem = speech_txt.stem.replace("-speech", "").replace("-en", "")
+
+    try:
+        display_path = speech_txt.relative_to(ARTICLES_DIR)
+    except ValueError:
+        # 不在 ARTICLES_DIR 下（如绝对路径传入），回退到文件名
+        display_path = speech_txt.name
+    print(f"\n处理: {display_path}")
 
     # ========== Step 0: 文案质量检查 ==========
     script_path = article_dir / f"{stem}.md"
