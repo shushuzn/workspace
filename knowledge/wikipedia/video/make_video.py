@@ -11,6 +11,26 @@ from pathlib import Path
 import imageio_ffmpeg
 from PIL import Image
 
+# ── 动画场景注册表 ──────────────────────────────────────────────────
+# 格式: {scene_key: (anim_func, (extra_args...))}
+# anim_func 签名: (out_path, *extra_args, progress: float) -> None
+_ANIMATION_SCENES = {}
+
+def register_animation(scene_key, anim_func, *extra_args):
+    """注册可动画化场景"""
+    _ANIMATION_SCENES[scene_key] = (anim_func, extra_args)
+
+# ── 预注册动画场景（从 draw_scene 导入）─────────────────────────────
+try:
+    import sys as _sys
+    _sys.path.insert(0, str(Path(__file__).parent))
+    from draw_scene import _draw_band_structure, _draw_iv_curve
+    register_animation('band_structure', _draw_band_structure)
+    register_animation('iv_curve', _draw_iv_curve)
+    del _sys
+except ImportError:
+    pass  # draw_scene 未安装时静默
+
 def get_duration(file_path):
     """用 ffmpeg -i 读取音频时长（秒）"""
     cmd = [imageio_ffmpeg.get_ffmpeg_exe(), "-i", str(file_path), "-f", "null", "-"]
@@ -29,6 +49,33 @@ def get_duration(file_path):
 def ensure_even(n):
     """返回最近的偶数"""
     return n if n % 2 == 0 else n + 1
+
+def _read_scene_meta(img_path):
+    """读取同目录同名 .scene.json，返回 (desc, key)"""
+    json_path = Path(img_path).with_suffix('.scene.json')
+    if json_path.exists():
+        try:
+            import json
+            data = json.loads(json_path.read_text(encoding='utf-8'))
+            return data.get('desc', ''), data.get('key', '')
+        except Exception:
+            pass
+    return '', ''
+
+
+def _infer_scene_key_from_path(img_path):
+    """从图片路径推断 scene_key"""
+    name = Path(img_path).stem.lower()
+    for key in _ANIMATION_SCENES:
+        if key.lower().replace('_', '') in name.replace('_', '').replace('-', ''):
+            return key
+    low_keys = {'band_structure', 'iv_curve', 'thermoelectric', 'le_formula',
+                'burau_pipeline', 'abelian_proof', 'cloud_graph'}
+    for k in low_keys:
+        if k in name:
+            return k
+    return 'default'
+
 
 def crf_for_scene(scene_key):
     """根据场景类型返回合适的 CRF 值（越低越清晰）"""
@@ -110,6 +157,57 @@ def make_video_single(img_path, audio_path, output_path, bitrate=None, scene_key
 
     size_bytes = output_path.stat().st_size
     print(f"  [OK] {output_path.name} ({size_bytes:,} bytes, {duration:.1f}s)")
+    return True
+
+
+def _encode_scene_animation(anim_func, anim_kwargs, output_path, w_even, h_even, dur, crf, fps=12):
+    """动画帧编码：调用绘图函数生成 N 帧 → FFmpeg 编码为无声 MP4
+
+    Args:
+        anim_func: 绘图函数 (out_path, progress=..., **kw) → None
+        anim_kwargs: dict 传给绘图函数的 kwargs（不含 progress）
+        output_path: 输出 MP4 路径
+        w_even, h_even: 输出分辨率（偶数）
+        dur: 动画时长（秒）
+        crf: 视频质量
+        fps: 帧率
+    """
+    import imageio_ffmpeg, subprocess, tempfile
+    from pathlib import Path
+    ffmpeg_exe = imageio_ffmpeg.get_ffmpeg_exe()
+
+    n_frames = max(2, int(dur * fps))
+    frames_dir = Path(tempfile.mkdtemp(prefix="anim_"))
+
+    for i in range(n_frames):
+        t = i / n_frames
+        frame_path = frames_dir / f"frame_{i:04d}.png"
+        try:
+            anim_func(frame_path, progress=t, **(anim_kwargs or {}))
+        except Exception as e:
+            print(f"  [WARN] 动画帧 {i} 渲染失败: {e}")
+            return False  # fallback handled in caller
+
+    rulfile = frames_dir / "rulfile.txt"
+    with open(rulfile, 'w') as f:
+        for i in range(n_frames):
+            f.write(f"{frames_dir / f'frame_{i:04d}.png'}\n")
+
+    cmd = [
+        str(ffmpeg_exe), "-y",
+        "-f", "concat", "-safe", "0",
+        "-i", str(rulfile),
+        "-vf", f"scale={w_even}:{h_even}:force_original_aspect_ratio=decrease,pad={w_even}:{h_even}:(ow-iw)/2:(oh-ih)/2,fps={fps}",
+        "-c:v", "libx264", "-preset", "fast", "-crf", str(crf),
+        "-tune", "stillimage", "-pix_fmt", "yuv420p", "-an",
+        str(output_path),
+    ]
+    r = subprocess.run(cmd, capture_output=True, text=True, encoding='utf-8', errors='ignore')
+    import shutil as _shutil
+    _shutil.rmtree(frames_dir, ignore_errors=True)
+    if r.returncode != 0:
+        print(f"  [WARN] 动画编码失败，fallback to 静态: {r.stderr[-100:]}")
+        return False
     return True
 
 
@@ -202,18 +300,41 @@ def make_video_multi(img_paths, audio_path, output_path, bitrate=None, scene_key
     with tempfile.TemporaryDirectory() as _tmpdir:
         tmpdir = Path(_tmpdir)
 
-        # ── 1. Ken Burns 编码每个场景（无声） ──────────────────────────
+        # ── 1. 编码每个场景（动画/Ken Burns） ──────────────────────────
         seg_files = []
         for i, (img_path, _start_t) in enumerate(img_paths):
             seg_path = tmpdir / f"seg_{i:02d}.mp4"
             seg_files.append(seg_path)
-            zoom_in = (i % 2 == 0)  # 奇偶交替：0=放大, 1=缩小
-            ok = _encode_scene_ken_burns(
-                img_path, seg_path, w_even, h_even, seg_duration, crf, zoom_in=zoom_in
-            )
-            if not ok:
-                print(f"  [ERROR] Ken Burns 场景{i} 编码失败")
-                return False
+            # 从路径推断 scene_key（兼容 "NN-scene-XX.png" 命名）
+            scene_key_for_anim = _infer_scene_key_from_path(img_path)
+            anim_entry = _ANIMATION_SCENES.get(scene_key_for_anim)
+
+            if anim_entry is not None:
+                # 动画场景：生成帧序列
+                anim_func, extra_args = anim_entry
+                desc, key_from_meta = _read_scene_meta(img_path)
+                anim_key = key_from_meta or scene_key_for_anim
+                print(f"  [ANIM] 场景{i}: {anim_key} ({seg_duration:.1f}s, 12fps)")
+                ok = _encode_scene_animation(
+                    anim_func,
+                    {'desc': desc},  # kwargs passed to draw func
+                    seg_path, w_even, h_even, seg_duration, crf, fps=12
+                )
+                if not ok:
+                    print(f"  [WARN] 动画场景{i} 失败，fallback to Ken Burns")
+            else:
+                # Ken Burns 静态图
+                pass
+
+            # Ken Burns 兜底（动画失败或非动画场景）
+            if not seg_path.exists() or seg_path.stat().st_size < 1000:
+                zoom_in = (i % 2 == 0)
+                ok = _encode_scene_ken_burns(
+                    img_path, seg_path, w_even, h_even, seg_duration, crf, zoom_in=zoom_in
+                )
+                if not ok:
+                    print(f"  [ERROR] Ken Burns 场景{i} 编码失败")
+                    return False
 
         # ── 2. Cross-dissolve 过渡（xfade） ───────────────────────────
         if use_transitions and n > 1:

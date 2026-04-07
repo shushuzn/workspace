@@ -791,28 +791,95 @@ def draw_iv_curve(out_path, desc):
 
 def draw_band_structure(out_path, desc):
     """场景6: 能带结构与谷极化示意"""
+    _draw_band_structure(out_path, desc, progress=1.0)
+
+
+def _draw_band_structure(out_path, desc, progress=1.0):
+    """能带结构（支持进度动画，0.0→1.0）"""
     fig, ax = new_fig((12, 8))
     ax.set_xlim(0, 12); ax.set_ylim(0, 8)
     ax.axis('off')
     ax.text(0.5, 7.5, '[06] ' + desc, fontsize=11, color='#374151')
-    # 能带示意 - K谷
-    ax.plot([1, 5], [3, 5], color=ZH_COLORS['green'], linewidth=2.5, label='K 谷')
-    ax.plot([1, 5], [3, 1], color=ZH_COLORS['blue'], linewidth=2.5, label="K_prime 谷")
+
+    # 谷极化程度随 progress 变化（0→max_split）
+    max_split = 2.0
+    split_frac = progress  # 0=无分裂, 1=最大分裂
+
+    # K 谷（始终完整）
+    ax.plot([1, 5], [3, 5], color=ZH_COLORS['green'], linewidth=2.5)
+    # K' 谷随 progress 从中间分裂
+    mid_y = 3.0
+    kp_top = mid_y + (5 - mid_y) * split_frac
+    kp_bot = mid_y - (mid_y - 1) * split_frac
+    ax.plot([1, 5], [mid_y, kp_top if progress < 0.5 else kp_top],
+            color=ZH_COLORS['blue'], linewidth=2.5,
+            alpha=max(0.3, progress))
+    if progress > 0.3:
+        ax.plot([1, 5], [mid_y, kp_bot],
+                color=ZH_COLORS['blue'], linewidth=2.5, linestyle='--',
+                alpha=max(0.3, min(1, (progress - 0.3) / 0.3)))
+
     ax.text(1, 2.4, "K'", ha='center', fontsize=11, color=ZH_COLORS['blue'], fontweight='bold')
     ax.text(1, 5.2, "K", ha='center', fontsize=11, color=ZH_COLORS['green'], fontweight='bold')
-    # 谷极化分裂
-    ax.annotate('', xy=(3.5, 4.2), xytext=(3.5, 1.8), arrowprops=dict(arrowstyle='<->', color='#94a3b8', lw=1.5))
-    ax.text(3.8, 3.0, "谷极化", ha='left', fontsize=9, color='#64748b')
-    # 谷极化标签
+
+    # 分裂标注随 progress 出现
+    if progress > 0.5:
+        split_h = (kp_top - kp_bot) * (progress - 0.5) / 0.5
+        ax.annotate('', xy=(3.5, mid_y + split_h / 2 + 0.1), xytext=(3.5, mid_y - split_h / 2 - 0.1),
+                    arrowprops=dict(arrowstyle='<->', color='#94a3b8', lw=1.5))
+        ax.text(3.8, 3.0, "谷极化", ha='left', fontsize=9, color='#64748b')
+
     ax.text(2.5, 6.5, '谷极化态', ha='center', fontsize=14, fontweight='bold', color='#16a34a')
     ax.text(2.5, 5.8, '↑ 自旋', ha='center', fontsize=11, color=ZH_COLORS['green'])
-    # 右侧说明
+
     box = FancyBboxPatch((6.5, 2), 5, 4, boxstyle="round,pad=0.15", facecolor='#f0fdf4', edgecolor='#16a34a', linewidth=2)
     ax.add_patch(box)
     ax.text(9, 5.3, '谷极化探测结果', ha='center', fontsize=13, fontweight='bold', color=ZH_COLORS['green'])
     lines = ['热电效应 → 电压信号', '电流整流 → I-V 非对称', '零磁场下可分辨', '无需光学测量']
     for j, line in enumerate(lines):
         ax.text(7, 4.5 - j*0.65, '✓ ' + line, ha='left', fontsize=10, color=ZH_COLORS['muted'])
+
+    plt.tight_layout()
+    plt.savefig(out_path, dpi=200, bbox_inches='tight', facecolor=ZH_COLORS['bg'])
+    plt.close()
+
+
+def draw_iv_curve(out_path, desc):
+    """场景5: 电流整流 I-V 曲线"""
+    _draw_iv_curve(out_path, desc, progress=1.0)
+
+
+def _draw_iv_curve(out_path, desc, progress=1.0):
+    """I-V 曲线（支持进度动画）"""
+    fig, ax = new_fig((12, 8))
+    ax.set_xlim(0, 12); ax.set_ylim(0, 8)
+    ax.axis('off')
+    ax.text(0.5, 7.5, '[05] ' + desc, fontsize=11, color='#374151')
+
+    v = [i/10 for i in range(-50, 51)]
+    i_vals = [0.3*v_i + 0.05*v_i**2 for v_i in v]
+
+    # 随 progress 逐渐绘制曲线
+    n_pts = max(2, int(len(v) * progress))
+    pts_x = [i*20+6 for i in v[:n_pts]]
+    pts_y = [i*2+4 for i in i_vals[:n_pts]]
+    ax.plot(pts_x, pts_y, color=ZH_COLORS['blue'], linewidth=2.5)
+
+    ax.axhline(y=4, color='#d1d5db', linewidth=1, linestyle='--')
+    ax.axvline(x=6, color='#d1d5db', linewidth=1, linestyle='--')
+    ax.text(6, 2.0, 'V', ha='center', fontsize=12, color='#64748b')
+    ax.text(10.5, 4, 'I', ha='center', fontsize=12, color='#64748b', rotation=90)
+
+    if progress > 0.6:
+        ax.annotate('整流不对称', xy=(9, 5.5), xytext=(8, 6.5), fontsize=11, color=ZH_COLORS['red'],
+                    arrowprops=dict(arrowstyle='->', color=ZH_COLORS['red']))
+
+    if progress > 0.8:
+        formula = FancyBboxPatch((0.5, 1.2), 4.5, 1.8, boxstyle="round,pad=0.1", facecolor='#fef2f2', edgecolor=ZH_COLORS['red'], linewidth=1.5)
+        ax.add_patch(formula)
+        ax.text(2.75, 2.5, 'R = (V/I) 非对称', ha='center', fontsize=12, fontweight='bold', color=ZH_COLORS['red'])
+        ax.text(2.75, 1.8, '整流系数 ∝ 谷极化', ha='center', fontsize=11, color='#7f1d1d')
+
     plt.tight_layout()
     plt.savefig(out_path, dpi=200, bbox_inches='tight', facecolor=ZH_COLORS['bg'])
     plt.close()
@@ -1040,6 +1107,10 @@ def generate_scenes_for_script(script_path, output_prefix, article_name, strict=
             mpl_used += 1
 
         if out_path.exists():
+            # 生成 companion .scene.json（供 make_video.py 动画帧生成使用）
+            import json
+            scene_json = output_dir / f"{output_prefix}-scene-{i:02d}.scene.json"
+            scene_json.write_text(json.dumps({'desc': desc, 'key': key}, ensure_ascii=False), encoding='utf-8')
             output_paths.append(out_path)
         else:
             print(f"  [SKIP] 场景{i} 文件未生成: {desc[:30]}")
