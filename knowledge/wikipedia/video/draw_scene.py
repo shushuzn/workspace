@@ -899,14 +899,10 @@ T2I_SCENES = {
 }
 
 # matplotlib 保留场景（数据/公式类，精确控制无法用 T2I 替代）
+# 仅包含 SCENE_DRAWERS 中实际注册的场景（与 T2I_SCENES 互斥）
 MPL_ONLY_SCENES = {
-    # 数据/公式类（numpy 精确绘图，T2I 无法替代）
     'iv_curve', 'band_structure', 'burau_pipeline',
-    'abelian_proof', 'le_flow', 'le_formula',
-    # 流程/关系图类（精确布局，T2I prompt 难以精确控制）
-    'iam_model', 'braid_group', 'attack_path', 'cross_domain',
-    # dead code: 函数已定义但从未注册到 SCENE_DRAWERS（保持原样）
-    # draw_attack_path, draw_braid_group, draw_cross_domain, draw_iam_model, draw_le_flow
+    'abelian_proof', 'le_formula',
 }
 
 
@@ -1062,6 +1058,7 @@ if __name__ == '__main__':
     parser.add_argument("--strict", action="store_true", help="有未覆盖场景时退出（返回码1）")
     parser.add_argument("--check-only", action="store_true", help="仅检查覆盖率，不生成图片")
     parser.add_argument("--no-t2i", action="store_true", help="禁用 T2I，全部用 matplotlib 渲染")
+    args = parser.parse_args()
 
     if args.script:
         script = Path(args.script)
