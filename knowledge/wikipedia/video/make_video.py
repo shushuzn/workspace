@@ -24,9 +24,10 @@ def register_animation(scene_key, anim_func, *extra_args):
 try:
     import sys as _sys
     _sys.path.insert(0, str(Path(__file__).parent))
-    from draw_scene import _draw_band_structure, _draw_iv_curve
+    from draw_scene import _draw_band_structure, _draw_iv_curve, _draw_burau_pipeline
     register_animation('band_structure', _draw_band_structure)
     register_animation('iv_curve', _draw_iv_curve)
+    register_animation('burau_pipeline', _draw_burau_pipeline)
     del _sys
 except ImportError:
     pass  # draw_scene 未安装时静默

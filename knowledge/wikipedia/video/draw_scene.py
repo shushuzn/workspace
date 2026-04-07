@@ -527,6 +527,50 @@ def draw_burau_pipeline(out_path):
     plt.savefig(out_path, dpi=200, bbox_inches='tight', facecolor=ZH_COLORS['bg'])
     plt.close()
 
+
+def _draw_burau_pipeline(out_path, progress=1.0):
+    """Burau流水线动画版：进度驱动的流程图绘制"""
+    fig, ax = new_fig((12, 8))
+    ax.set_xlim(0, 12); ax.set_ylim(0, 7)
+    ax.axis('off')
+    if progress < 0.05:
+        plt.savefig(out_path, dpi=150, bbox_inches='tight', facecolor=ZH_COLORS['bg'])
+        plt.close(); return
+    ax.text(6, 6.6, 'Burau-Lyapunov 指数计算', ha='center', fontsize=16, fontweight='bold', color=ZH_COLORS['text'])
+    steps = [
+        (0.2, 2.8, 2.2, 2.5, '#dbeafe', ZH_COLORS['blue'], '辫群元素', ['σ₁·σ₂⁻¹·σ₃', '权限链序列']),
+        (3.0, 2.8, 2.2, 2.5, '#fce7f3', ZH_COLORS['red'], 'Burau表示', ['→ n×n矩阵', 't变量记录缠绕']),
+        (5.8, 2.8, 2.2, 2.5, '#dcfce7', ZH_COLORS['green'], '求特征值', ['|λ₁|, |λ₂|...', '取最大模']),
+        (8.6, 2.8, 2.6, 2.5, '#fef3c7', ZH_COLORS['orange'], 'LE 指数', ['LE = max|λᵢ|', '量化危险程度']),
+    ]
+    # 逐个绘制box和箭头
+    visible = min(4, max(1, int(progress * 5.5)))
+    for idx, (x, y, w, h, fc, ec, title, lines) in enumerate(steps):
+        if idx >= visible: break
+        box = FancyBboxPatch((x, y), w, h, boxstyle="round,pad=0.08", facecolor=fc, edgecolor=ec, linewidth=2.5)
+        ax.add_patch(box)
+        ax.text(x + w/2, y + h - 0.3, title, ha='center', fontsize=11, fontweight='bold', color=ec)
+        for i, line in enumerate(lines):
+            ax.text(x + w/2, y + h - 0.9 - i*0.6, line, ha='center', fontsize=10, color=ZH_COLORS['text'])
+    # 箭头：每个箭头在对应box之后绘制
+    arrow_thresh = [0.22, 0.46, 0.70]
+    for ai, thresh in enumerate(arrow_thresh):
+        if progress >= thresh and visible > ai + 1:
+            xi = steps[ai][0] + steps[ai][2]
+            ax.annotate('', xy=(steps[ai+1][0], 4.05), xytext=(xi+0.05, 4.05),
+                        arrowprops=dict(arrowstyle='->', color=ZH_COLORS['muted'], lw=2))
+    # LE公式区（最后出现）
+    if progress >= 0.82:
+        le_box = FancyBboxPatch((8.6, 0.8), 2.6, 1.2, boxstyle="round,pad=0.08", facecolor='#dcfce7', edgecolor=ZH_COLORS['green'], linewidth=2.5)
+        ax.add_patch(le_box)
+        ax.text(9.9, 1.7, 'LE', ha='center', fontsize=20, fontweight='bold', color=ZH_COLORS['green'])
+        ax.text(9.9, 1.2, '= max|λᵢ|', ha='center', fontsize=11, color=ZH_COLORS['muted'])
+        ax.annotate('', xy=(9.9, 1.95), xytext=(9.9, 2.75), arrowprops=dict(arrowstyle='->', color=ZH_COLORS['green'], lw=2))
+    plt.tight_layout()
+    plt.savefig(out_path, dpi=150, bbox_inches='tight', facecolor=ZH_COLORS['bg'])
+    plt.close()
+
+
 def draw_abelian_proof(out_path):
     """场景5: 数学公式——不存在任何阿贝尔统计量能复制 LE 的区分能力"""
     fig, ax = new_fig((12, 8))
