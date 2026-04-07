@@ -66,7 +66,14 @@ function buildIndex() {
 
 function fuzzyMatch(text, query) {
   const t = text.toLowerCase(), q = query.toLowerCase();
+  // Prefix match: query at start of text (weight ×2)
+  if (t.startsWith(q)) return 2 * q.length / t.length;
+  // Word boundary match: query as complete word (weight ×1.5)
+  const wordBoundaries = t.match(new RegExp(`\\b${q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i'));
+  if (wordBoundaries) return 1.5 * q.length / t.length;
+  // Substring match
   if (t.includes(q)) return q.length / t.length;
+  // Character overlap (original logic)
   let qi = 0, score = 0;
   for (let ci = 0; ci < t.length && qi < q.length; ci++) {
     if (t[ci] === q[qi]) { score += 1; qi++; }
