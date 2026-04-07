@@ -315,6 +315,37 @@ ${meta.abstract || '(暂无摘要)'}
   writeFileSync(INDEX_HTML, INDEX_HTML);
   console.log('\n[wiki] Synced', idx.articles.length, 'articles');
 
+} else if (cmd === 'batch-export') {
+  const args = process.argv.slice(3);
+  const fromIdx = args.indexOf('--from');
+  const toIdx = args.indexOf('--to');
+  const outIdx = args.indexOf('--output');
+  const from = fromIdx >= 0 ? args[fromIdx + 1] : null;
+  const to = toIdx >= 0 ? args[toIdx + 1] : null;
+  const outputDir = outIdx >= 0 ? args[outIdx + 1] : null;
+  if (!outputDir) { console.log('Usage: node wiki.mjs batch-export --from YYYY-MM-DD --to YYYY-MM-DD --output DIR'); process.exit(1); }
+  const { copyFileSync, mkdirSync, existsSync, readdirSync, statSync } = await import('fs');
+  const { join, basename } = await import('path');
+  function walkVideos(dir, results) {
+    for (const entry of readdirSync(dir, { withFileTypes: true })) {
+      const full = join(dir, entry.name);
+      if (entry.isFile() && entry.name.endsWith('.mp4')) results.push(full);
+      else if (entry.isDirectory()) walkVideos(full, results);
+    }
+  }
+  const videos = []; walkVideos(join(__DIR, 'articles'), videos);
+  const fromMs = from ? new Date(from).getTime() : 0;
+  const toMs = to ? new Date(to + 'T23:59:59').getTime() : Infinity;
+  if (!existsSync(outputDir)) mkdirSync(outputDir, { recursive: true });
+  let copied = 0, skipped = 0;
+  for (const v of videos) {
+    const st = statSync(v);
+    if (st.mtimeMs < fromMs || st.mtimeMs > toMs) { skipped++; continue; }
+    try { copyFileSync(v, join(outputDir, basename(v))); console.log('[+] ' + basename(v)); copied++; }
+    catch { skipped++; }
+  }
+  console.log('\nDone: copied=' + copied + ', skipped=' + skipped);
+
 } else if (cmd === 'search') {
   const query = process.argv[3];
   if (!query) { console.log('Usage: node wiki.mjs search <query>'); process.exit(1); }
@@ -336,6 +367,40 @@ ${meta.abstract || '(暂无摘要)'}
     arts.forEach(a => console.log('  - ' + a.title));
   }
   console.log('\nTotal articles:', idx.articles.length);
+
+} else if (cmd === 'recent') {
+  const limit = parseInt(process.argv[3]) || 20;
+  const idx = loadIndex();
+  const { readdirSync, statSync } = await import('fs');
+  const { join, relative } = await import('path');
+  const vaultDir = 'C:/Users/adm/Documents/Obsidian Vault';
+  let files = [];
+  try {
+    function walk(dir) {
+      const entries = readdirSync(dir, { withFileTypes: true });
+      for (const e of entries) {
+        const full = join(dir, e.name);
+        if (e.isFile() && e.name.endsWith('.md')) files.push(full);
+        else if (e.isDirectory() && !e.name.startsWith('.')) walk(full);
+      }
+    }
+    walk(vaultDir);
+  } catch {
+    console.error('[wiki] Cannot read Obsidian vault directory');
+    process.exit(1);
+  }
+  const withMtime = files.map(f => {
+    try {
+      const s = statSync(f);
+      return { name: String(f), mtime: s.mtimeMs };
+    } catch { return null; }
+  }).filter(Boolean).sort((a, b) => b.mtime - a.mtime).slice(0, limit);
+  withMtime.forEach((f, i) => {
+    const date = new Date(f.mtime).toISOString().slice(0, 16).replace('T', ' ');
+    const rel = relative(vaultDir, f.name);
+    console.log((i+1) + '. [' + date + '] ' + rel);
+  });
+  console.log('\nTotal: ' + withMtime.length);
 
 } else if (cmd === 'linkcheck') {
   const idx = loadIndex();

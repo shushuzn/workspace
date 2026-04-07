@@ -38,7 +38,7 @@ def get_img_size(img_path):
     except Exception:
         return None
 
-def make_video_single(img_path, audio_path, output_path):
+def make_video_single(img_path, audio_path, output_path, bitrate=None):
     """单图片 + 音频 → 视频（原有逻辑）"""
     size = get_img_size(img_path)
     if not size:
@@ -65,10 +65,14 @@ def make_video_single(img_path, audio_path, output_path):
         "-i", str(audio_path),
         "-c:v", "libx264", "-tune", "stillimage",
         "-c:a", "aac", "-b:a", "192k",
+    ]
+    if bitrate:
+        cmd.extend(["-b:v", bitrate])
+    cmd.extend([
         "-pix_fmt", "yuv420p",
         "-shortest",
         "-t", str(duration + 0.5),
-    ]
+    ])
     if scale_filter:
         cmd.insert(-2, "-vf")
         cmd.insert(-2, scale_filter)
@@ -83,7 +87,7 @@ def make_video_single(img_path, audio_path, output_path):
     print(f"  [OK] {output_path.name} ({size_bytes:,} bytes, {duration:.1f}s)")
     return True
 
-def make_video_multi(img_paths, audio_path, output_path):
+def make_video_multi(img_paths, audio_path, output_path, bitrate=None):
     """多图片按时序切换 + 音频 → 视频
     img_paths: [(img, start_second), ...] 按时间顺序
     策略：①视频段单独编码(无声) ②concat ③音频与 concat 视频混流
@@ -124,10 +128,14 @@ def make_video_multi(img_paths, audio_path, output_path):
                 "-i", str(img_path),
                 "-t", str(seg_duration + 0.05),
                 "-c:v", "libx264", "-tune", "stillimage",
+            ]
+            if bitrate:
+                cmd.extend(["-b:v", bitrate])
+            cmd.extend([
                 "-pix_fmt", "yuv420p",
                 "-an",
                 str(seg_path),
-            ]
+            ])
             if scale_filter:
                 cmd.insert(-2, "-vf")
                 cmd.insert(-2, scale_filter)
@@ -249,14 +257,15 @@ def find_scene_images(mp3_path):
         imgs.insert(0, (cover_path, None))
     return imgs
 
-def make_video(img_path, audio_path, output_path):
+def make_video(img_path, audio_path, output_path, bitrate=None):
     """兼容性别名"""
-    return make_video_single(img_path, audio_path, output_path)
+    return make_video_single(img_path, audio_path, output_path, bitrate=bitrate)
 
 def main():
     parser = argparse.ArgumentParser(description="视频合成（支持多画面按时序切换）")
     parser.add_argument("mp3_file", nargs="?", help="MP3 路径（不指定则处理所有）")
     parser.add_argument("--dir", default=None, help="articles 目录")
+    parser.add_argument("--bitrate", default=None, help="视频码率，如 1M/2M/5M，默认用 libx264 internal default")
     args = parser.parse_args()
 
     articles_dir = Path(args.dir) if args.dir else Path(__file__).parent.parent / "articles"
@@ -269,10 +278,10 @@ def main():
             return
         output = mp3_path.with_suffix(".mp4")
         if len(scene_imgs) == 1 and scene_imgs[0][0] is not None:
-            make_video_multi([(scene_imgs[0][0], 0.0)], mp3_path, output)
+            make_video_multi([(scene_imgs[0][0], 0.0)], mp3_path, output, bitrate=args.bitrate)
         else:
             imgs_only = [(p, 0.0) for p, _ in scene_imgs]
-            make_video_multi(imgs_only, mp3_path, output)
+            make_video_multi(imgs_only, mp3_path, output, bitrate=args.bitrate)
         return
 
     # 处理所有 speech MP3（跳过 speech-tts）
@@ -297,7 +306,7 @@ def main():
             output = mp3.with_suffix(".mp4")
         imgs_only = [(p, 0.0) for p, _ in scene_imgs]
         print(f"处理: {mp3.name} → {len(imgs_only)} scenes")
-        make_video_multi(imgs_only, mp3, output)
+        make_video_multi(imgs_only, mp3, output, bitrate=args.bitrate)
 
 if __name__ == "__main__":
     main()

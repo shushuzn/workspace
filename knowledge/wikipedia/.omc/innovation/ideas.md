@@ -32,7 +32,7 @@
   | approach: 1. 修改 generate_speech.py batch 循环分支（第141-145行）；2. 当 args.voice 为默认值时，根据 is_english() 判断 voice；3. 非默认 --voice 参数直接透传给 generate_speech()；4. 测试：python generate_speech.py --voice en-US-AriaNeural 对中英文混合目录执行，验证中文用指定 voice 
 
 
-- [20260407] seed [brainstorm] [score:5x4] [f:4] [angle:infra] [focus:wikipedia]
+- [20260407] seed [brainstorm] [score:5x4] [f:4] [angle:infra] [focus:wikipedia] | shipped:20260407
   description: make_video.py --bitrate 参数：新增 --bitrate 覆盖默认码率设置，支持 1M/2M/5M 等预设
   | benefit: 按发布平台需要调整码率，YouTube 用 5M，文件大小敏感场景用 1M
   | reason: 已知资源：make_video.py 第61-75行 ffmpeg 编码参数硬编码；现有视频固定 192k audio bitrate。缺失环节：没有视频码率控制，输出的视频不适合不同平台。连接方式：在 main() 添加 --bitrate 参数，解析后注入到 ffmpeg cmd 的 -b:v 值
@@ -131,7 +131,7 @@
   | approach: 1. Edit: video/check_script.py main() 添加 --glossary 参数；2. 读取 speech.txt 内容；3. 用 TERMS 字典匹配所有出现的术语；4. 去重后按行输出"术语 → 解释"；5. 无匹配时输出"无术语" 
 
 
-- [20260407] seed [brainstorm] [score:6x4] [f:4] [angle:feature] [focus:wikipedia]
+- [20260407] seed [brainstorm] [score:6x4] [f:4] [angle:feature] [focus:wikipedia] | shipped:20260407
   description: wiki.mjs recent 命令：列出最近编辑的 Obsidian 条目（按修改时间排序）
   | benefit: 快速查看最近更新的知识点，不用在 Obsidian 手动翻找
   | reason: 已知资源：wiki.mjs obsidian 命令已封装 obsidian CLI；wiki.mjs sync 已读 index.json。缺失环节：无 --recent 参数，无法列出最近条目。连接方式：在 wiki.mjs 添加 --recent 参数，读取 Obsidian vault 下所有 .md 文件的 mtime 排序
@@ -145,7 +145,7 @@
   | approach: 1. 创建 shared/video-editors.mjs；2. 实现 cut: ffmpeg -ss start -to end；3. 实现 concat: ffmpeg concat demuxer；4. 实现 subtitle burn: ffmpeg -vf subtitles；5. 实现 transcode: 按 --bitrate重新编码 
 
 
-- [20260407] seed [brainstorm] [score:6x4] [f:4] [angle:feature] [focus:wikipedia]
+- [20260407] seed [brainstorm] [score:6x4] [f:4] [angle:feature] [focus:wikipedia] | shipped:20260407
   description: wiki.mjs batch-export 命令：批量导出 articles/ 下指定日期范围的视频到目标目录
   | benefit: 一次导出多个视频到上传目录，不用逐个手动复制
   | reason: 已知资源：wiki.mjs 已封装 wiki.mjs CLI；articles/ 下视频已按 NN-标题.mp4 命名。缺失环节：无批量导出命令。连接方式：在 wiki.mjs 添加 batch-export 命令，扫描 articles/ 下所有 .mp4，按日期或标题过滤
