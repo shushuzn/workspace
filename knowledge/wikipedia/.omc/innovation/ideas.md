@@ -3,7 +3,7 @@
 ---
 
 
-- [20260407] seed [brainstorm] [score:5x2] [f:2] [angle:feature] [focus:wikipedia] killed:20260407 non-executable approach
+- [20260407] seed [brainstorm] [score:5x2] [f:2] [angle:feature] [focus:wikipedia]
   description: adaptive-bitrate.py：多编码通道 + 按场景复杂度自动分配码率，质量敏感场景（公式推导/矩阵）用更优 crf，静态场景放宽 crf
   | benefit: 复杂公式场景细节更清晰，整体文件体积不增加
   | reason: 已知资源：make_video.py 第66-67行 libx264 硬编码 CRF=23，无 preset 参数；draw_scene.py SCENE_DRAWERS 已按场景类型分类（formula/graph/cover 等）。缺失环节：所有场景用同一码率，公式等复杂场景质量不足，静态封面浪费码率。连接方式：在 make_video.py 片段编码循环前，根据 scene key 类型查询 SCENE_DRAWERS，推断画面复杂度，动态设置 crf/preset
@@ -11,35 +11,35 @@
   阶段二：5. 添加 --bitrate-profile low/medium/high 参数覆盖默认映射
 
 
-- [20260407] seed [brainstorm] [score:5x3] [f:3] [angle:quality] [focus:wikipedia] killed:20260407 non-executable approach
+- [20260407] seed [brainstorm] [score:5x3] [f:3] [angle:quality] [focus:wikipedia]
   description: make_video.py 硬字幕烧录：用 ffmpeg subtitles filter 将文字内容直接烧入视频，不用图形覆盖层
   | benefit: 字幕永久内嵌，播放时不依赖播放器支持，不丢字幕
   | reason: 已知资源：make_video.py 第198-210行 concat+混流逻辑已知；scripts/ 下无字幕工具。缺失环节：目前所有画面是静态图，字幕通过播放器渲染；播放器不兼容时丢字幕。连接方式：在最终视频段写入后，用 ffmpeg -vf subtitles 将字幕 ASS 文件烧入
   | approach: 1. 修改 make_video.py，在 concat 视频段后、最终混流前，添加字幕烧录步骤；2. 读取 article_dir 下的 NN-标题.ass 字幕文件；3. ffmpeg -vf subtitles=filename 将字幕硬编码进视频流；4. 同时保留原有音轨；5. 写 test：跑一次完整流程，验证输出 MP4 包含内嵌字幕 
 
 
-- [20260407] seed [brainstorm] [score:5x3] [f:3] [angle:quality] [focus:wikipedia] killed:20260407 non-executable approach
+- [20260407] seed [brainstorm] [score:5x3] [f:3] [angle:quality] [focus:wikipedia]
   description: draw_scene.py 配图升级：所有 plt.savefig 加 dpi=200（现有150）+ facecolor='white'，消除 matplotlib 抗锯齿毛边
   | benefit: 配图更锐利，专业感提升，学术场合可直接使用
   | reason: 已知资源：draw_scene.py 第65行 savefig dpi=150，plt.style.use('default') 第15行；现有图偏糊，边缘有锯齿感。缺失环节：dpi 150 对 1920×1080 视频来说偏小，matplotlib 默认抗锯齿未开启。连接方式：修改所有 plt.savefig 调用，将 dpi=150 升级到 dpi=200，添加 aa 级设置
   | approach: 1. 搜索 draw_scene.py 所有 plt.savefig 调用（共约 817 行需检查）；2. 统一替换 dpi=150→dpi=200；3. matplotlib.rcParams 添加 'axes.antialiased': True, 'lines.antialiased': True；4. 验证：对比升级前后 fig 文件大小和清晰度；5. 如效果不足，改用 dpi=300 封面 + dpi=200 配图 
 
 
-- [20260407] seed [brainstorm] [score:4x4] [f:4] [angle:quality] [focus:wikipedia] killed:20260407 non-executable approach
+- [20260407] seed [brainstorm] [score:4x4] [f:4] [angle:quality] [focus:wikipedia]
   description: generate_speech.py --voice 参数传递给所有文件：命令行指定 voice 时，自动判断中英文 speech.txt 并合理选择
   | benefit: 批量处理时不用逐个改文件名指定 voice，一行命令完成所有语音生成
   | reason: 已知资源：generate_speech.py 第122行已有 --voice 参数，第130行根据 -en 判断英文；缺失环节：目前 --voice 参数对中文文件无效（被硬编码 voice 覆盖），批量处理时指定 --voice 无法对英文文件生效。连接方式：修改 main() 的 batch 循环，让 --voice 仅在未指定时回退到默认值，已知英文文件始终用 en-US-AriaNeural
   | approach: 1. 修改 generate_speech.py batch 循环分支（第141-145行）；2. 当 args.voice 为默认值时，根据 is_english() 判断 voice；3. 非默认 --voice 参数直接透传给 generate_speech()；4. 测试：python generate_speech.py --voice en-US-AriaNeural 对中英文混合目录执行，验证中文用指定 voice 
 
 
-- [20260407] seed [brainstorm] [score:5x4] [f:4] [angle:infra] [focus:wikipedia] killed:20260407 non-executable approach
+- [20260407] seed [brainstorm] [score:5x4] [f:4] [angle:infra] [focus:wikipedia]
   description: make_video.py --bitrate 参数：新增 --bitrate 覆盖默认码率设置，支持 1M/2M/5M 等预设
   | benefit: 按发布平台需要调整码率，YouTube 用 5M，文件大小敏感场景用 1M
   | reason: 已知资源：make_video.py 第61-75行 ffmpeg 编码参数硬编码；现有视频固定 192k audio bitrate。缺失环节：没有视频码率控制，输出的视频不适合不同平台。连接方式：在 main() 添加 --bitrate 参数，解析后注入到 ffmpeg cmd 的 -b:v 值
   | approach: 1. 在 make_video.py main() 的 argparse 添加 --bitrate 参数（如 '1M'/'2M'/'5M'/'10M'）；2. 新增函数 parse_bitrate() 将字符串转为 ffmpeg -b:v 参数值；3. 在 ffmpeg cmd 列表构建时注入 -b:v 参数；4. 测试：python make_video.py --bitrate 5M 处理一个 MP3，验证输出码率 
 
 
-- [20260407] seed [brainstorm] [score:4x4] [f:4] [angle:feature] [focus:wikipedia] killed:20260407 non-executable approach
+- [20260407] seed [brainstorm] [score:4x4] [f:4] [angle:feature] [focus:wikipedia]
   description: make_video.py 过渡帧生成：相邻场景之间插入 0.5s fade-in/out 过渡帧，避免画面跳变突兀
   | benefit: 场景切换更平滑，专业感提升
   | reason: 已知资源：make_video.py 第112-138行片段编码循环，每段固定 1fps；现有视频场景切换是硬切。缺失环节：没有帧间过渡，相邻场景跳变时视觉突兀。连接方式：在片段编码完成后、concat 前，对每个片段首尾各加 0.5 秒 fade 过渡
@@ -53,21 +53,21 @@
   | approach: 1. Edit: draw_scene.py 第65行 dpi=150 改为 dpi=200；2. 立即运行 make_video.py 处理一篇论文验证无副作用 
 
 
-- [20260407] seed [brainstorm] [score:4x3] [f:3] [angle:quality] [focus:wikipedia] killed:20260407 non-executable approach
+- [20260407] seed [brainstorm] [score:4x3] [f:3] [angle:quality] [focus:wikipedia]
   description: shared/video-quality-check.mjs：用 ffprobe 检测输出 MP4 的 video/audio bitrate、分辨率、时长，写入 JSON 报告
   | benefit: 每次生成视频后自动检查质量指标是否符合预期，发现问题及时告警
   | reason: 已知资源：shared/wiki-indexer.mjs 已实现扫描和 JSON 输出；ffprobe 是 imageio-ffmpeg 自带工具。缺失环节：目前视频质量靠人工检查，无自动化验证。连接方式：在 package_videos.py 完成后运行 ffprobe 检查，写入 JSON，指标异常输出 WARNING
   | approach: 1. 创建 shared/video-quality-check.mjs；2. 用 ffprobe -v quiet -print_format json -show_format -show_streams 读取 MP4 元数据；3. 解析 json 输出，提取 width/height/video_bitrate/audio_bitrate/duration；4. 定义质量阈值：min_width=1920, min_bitrate=500k, max_bitrate=10M；5. 在 package_videos.py 完成后调用该检查脚本；6. 异常时输出 [WARN] 并附具体指标 
 
 
-- [20260407] seed [brainstorm] [score:4x2] [f:2] [angle:feature] [focus:wikipedia] killed:20260407 non-executable approach
+- [20260407] seed [brainstorm] [score:4x2] [f:2] [angle:feature] [focus:wikipedia]
   description: 自动生成英文专业版 speech-en.txt：MiniMax API 翻译 + 术语替换，写入 -speech-en.txt
   | benefit: 只需写中文版文案，英文版自动生成，无需手动翻译和维护两份文案
   | reason: 已知资源：generate_speech.py 已支持 en-US-AriaNeural 英文语音；MINIMAX_API 环境变量已配置；现有中文字幕文案。缺失环节：没有翻译工具，需要手动维护英文文案。连接方式：在 video/ 下新增 translate_script.py，读取中文 speech.txt，调用 MiniMax API 翻译，按 generate_speech.py 的 MATH_REPLACEMENTS 规则替换术语，结果写入同名 -speech-en.txt
   | approach: 1. 创建 video/translate_script.py；2. 读取中文 *-阅读文案-speech.txt；3. 调用 MiniMax Chat API 翻译为英文；4. 替换术语（Yang-Baxter→杨-巴克斯特，Burau-Lyapunov→Burau-Lyapunov 等）；5. 写入 *-阅读文案-speech-en.txt；6. 支持 --all 批量处理 
 
 
-- [20260407] seed [brainstorm] [score:6x2] [f:2] [angle:fusion] [focus:wikipedia] killed:20260407 non-executable approach
+- [20260407] seed [brainstorm] [score:6x2] [f:2] [angle:fusion] [focus:wikipedia]
   description: Wikipedia 知识库作为 task-orchestrator 的 RAG 上下文：articles 条目自动注册为可查询知识源
   | benefit: task-orchestrator 执行任务时可引用 wikipedia 论文知识点作为上下文，决策质量更高
   | reason: 已知资源：task-orchestrator 已支持 CLI registry 和 browser automation；articles/ 下有知识点条目和 arXiv 论文笔记。缺失环节：task-orchestrator 无法访问 wikipedia 知识库作为 RAG 上下文。连接方式：在 task-orchestrator 中创建 adapters/wikipedia-loader.ts，读取 index.json 提供 search/retrieve 接口
@@ -102,21 +102,21 @@
   | approach: 1. 修改 wiki.mjs edit 命令，支持 --fuzzy 参数；2. 调用 wiki.mjs search 模糊匹配，返回前 5 个候选；3. 如果候选 > 1，输出编号列表让用户选；4. 用户选好后调用 obsidian edit 打开对应条目；5. 添加 --exact 参数强制精确匹配（默认行为） | shipped:20260407
 
 
-- [20260407] seed [brainstorm] [score:4x4] [f:4] [angle:ws-level] [focus:wikipedia] killed:20260407 non-executable approach
+- [20260407] seed [brainstorm] [score:4x4] [f:4] [angle:ws-level] [focus:wikipedia]
   description: shared/wiki-indexer.mjs：扫描 workspace 下所有项目的 README.md 建立统一搜索索引，支持 wiki.mjs search --workspace
   | benefit: 在 wiki.mjs search 里跨所有项目搜索，一次找到所有相关项目的笔记和文档
   | reason: 已知资源：wiki.mjs search 支持模糊搜索和 JSON 输出；workspace 下有多个项目各自有 README.md。缺失环节：wiki.mjs search 只搜 articles/，不搜 80-PROJECTS。连接方式：新增 shared/wiki-indexer.mjs 扫描 workspace 下所有 README.md 并建立索引，wiki.mjs search --workspace 调用该索引
   | approach: 1. 创建 shared/wiki-indexer.mjs；2. 扫描 workspace 下所有 */README.md；3. 提取标题和第一段描述建立 JSON 索引；4. wiki.mjs search 添加 --workspace 参数，从共享索引搜索；5. 添加 --rebuild 强制重建索引 
 
 
-- [20260407] seed [brainstorm] [score:6x3] [f:3] [angle:commercializable] [focus:wikipedia] killed:20260407 non-executable approach
+- [20260407] seed [brainstorm] [score:6x3] [f:3] [angle:commercializable] [focus:wikipedia]
   description: Wikipedia 论文视频知识付费频道：把视频打包成付费订阅产品，提供专业英文版 + 科普中文版双语合集
   | benefit: 目标用户：科研人员、科技爱好者；变现路径：知识付费平台（知乎/少数派）；差异化：每期视频有对应原始论文和知识点笔记，可溯源
   | reason: 已知资源：wikipedia 已有完整视频生产流水线（speech→配图→视频→打包）；双版本（科普+专业）已跑通。缺失环节：没有付费渠道集成、没有视频托管、没有定期更新机制。连接方式：集成到公开的笔记/视频平台（YouTube/知乎），用 wiki.mjs batch-export 批量导出视频到指定目录
   | approach: 1. 调研知乎/少数派/YouTube 视频上传 API 或手动上传流程；2. 设计视频封面模板（区分科普版/专业版）；3. 制定更新频率（每周1-2篇）和订阅者通知机制；4. wiki.mjs 添加 batch-export 命令，导出 dist/ 视频到上传目录；5. 写 README 说明如何运营和变现 
 
 
-- [20260407] seed [brainstorm] [score:6x2] [f:2] [angle:ws-level] killed:20260407 non-executable approach
+- [20260407] seed [brainstorm] [score:6x2] [f:2] [angle:ws-level]
   description: shared/check-deps.mjs：扫描 workspace 下所有项目的 package.json，建立依赖健康度报告
   | benefit: 一次检查所有项目的依赖状态（过期/缺失/版本冲突），发现潜在安全风险
   | reason: 已知资源：workspace 下有 80-PROJECTS/ 和 shared/ 目录，package.json 格式已知。缺失环节：目前无统一依赖检查工具，各项目独立管理。连接方式：在 shared/ 下创建 check-deps.mjs，扫描所有 package.json，用 npm view --json 检测最新版本
@@ -131,28 +131,28 @@
   | approach: 1. Edit: video/check_script.py main() 添加 --glossary 参数；2. 读取 speech.txt 内容；3. 用 TERMS 字典匹配所有出现的术语；4. 去重后按行输出"术语 → 解释"；5. 无匹配时输出"无术语" 
 
 
-- [20260407] seed [brainstorm] [score:6x4] [f:4] [angle:feature] [focus:wikipedia] killed:20260407 non-executable approach
+- [20260407] seed [brainstorm] [score:6x4] [f:4] [angle:feature] [focus:wikipedia]
   description: wiki.mjs recent 命令：列出最近编辑的 Obsidian 条目（按修改时间排序）
   | benefit: 快速查看最近更新的知识点，不用在 Obsidian 手动翻找
   | reason: 已知资源：wiki.mjs obsidian 命令已封装 obsidian CLI；wiki.mjs sync 已读 index.json。缺失环节：无 --recent 参数，无法列出最近条目。连接方式：在 wiki.mjs 添加 --recent 参数，读取 Obsidian vault 下所有 .md 文件的 mtime 排序
   | approach: 1. 修改 wiki.mjs obsidian 命令，支持 --recent 参数；2. 用 obsidian vault list 或直接扫描 vault 目录；3. 按 mtime 倒序取前 20 条；4. 输出 序号 | 标题 | 修改时间 
 
 
-- [20260407] seed [brainstorm] [score:6x3] [f:3] [angle:ws-level] killed:20260407 non-executable approach
+- [20260407] seed [brainstorm] [score:6x3] [f:3] [angle:ws-level]
   description: shared/video-editors.mjs：FFmpeg 视频编辑封装，支持剪切/拼接/添加字幕/转码
   | benefit: 对 video-quality-check.mjs 的补充，实现常见视频编辑操作无需记忆 ffmpeg 语法
   | reason: 已知资源：shared/video-quality-check.mjs 已实现质量检查；ffmpeg 在 imageio-ffmpeg 中。缺失环节：只有检查工具，没有编辑工具。连接方式：在 shared/ 下创建 video-editors.mjs，封装 cut/concat/subtitle/transcode 四个子命令
   | approach: 1. 创建 shared/video-editors.mjs；2. 实现 cut: ffmpeg -ss start -to end；3. 实现 concat: ffmpeg concat demuxer；4. 实现 subtitle burn: ffmpeg -vf subtitles；5. 实现 transcode: 按 --bitrate重新编码 
 
 
-- [20260407] seed [brainstorm] [score:6x4] [f:4] [angle:feature] [focus:wikipedia] killed:20260407 non-executable approach
+- [20260407] seed [brainstorm] [score:6x4] [f:4] [angle:feature] [focus:wikipedia]
   description: wiki.mjs batch-export 命令：批量导出 articles/ 下指定日期范围的视频到目标目录
   | benefit: 一次导出多个视频到上传目录，不用逐个手动复制
   | reason: 已知资源：wiki.mjs 已封装 wiki.mjs CLI；articles/ 下视频已按 NN-标题.mp4 命名。缺失环节：无批量导出命令。连接方式：在 wiki.mjs 添加 batch-export 命令，扫描 articles/ 下所有 .mp4，按日期或标题过滤
   | approach: 1. 修改 wiki.mjs，添加 batch-export 命令；2. 解析 --from/--to 日期范围参数；3. 扫描 articles/**/*.mp4；4. 按日期或 glob 过滤；5. 用 fs.copyFileSync 复制到 --output 目录；6. 输出汇总：成功数/失败数 
 
 
-- [20260407] seed [brainstorm] [score:10x2] [f:2] [angle:fusion] killed:20260407 non-executable approach
+- [20260407] seed [brainstorm] [score:10x2] [f:2] [angle:fusion]
   description: task-orchestrator → wikipedia-loader adapter：Wikipedia 知识库作为 RAG 上下文注入任务规划
   | benefit: task-orchestrator 执行任务时可引用 wikipedia 论文知识点作为上下文，决策质量更高
   | reason: 已知资源：task-orchestrator 已支持 CLI registry 和 browser automation；wikipedia/articles/ 下有知识点条目。缺失环节：task-orchestrator 无法访问 wikipedia 知识库作为 RAG 上下文。连接方式：在 task-orchestrator 项目创建 adapters/wikipedia-loader.ts，读取 index.json 提供 search/retrieve 接口
@@ -160,7 +160,7 @@
   阶段二（实现）：4. 用 readFileSync + JSON.parse 读取 wikipedia/index.json；5. 模糊匹配标题；6. 在 pick-next-project 中可选加载 wikipedia 上下文
 
 
-- [20260407] seed [brainstorm] [score:10x2] [f:2] [angle:fusion] killed:20260407 non-executable approach
+- [20260407] seed [brainstorm] [score:10x2] [f:2] [angle:fusion]
   description: task-orchestrator → opencli adapter：opencli browser automation 集成到 task-orchestrator（已有实现）
   | benefit: task-orchestrator 可以用 opencli 控制浏览器执行复杂网页操作
   | reason: 已知资源：task-orchestrator 已实现 pick-next-project 和 CLI registry adapter；opencli 已实现 browser automation。缺失环节：task-orchestrator 无法调用 opencli 执行浏览器操作。连接方式：在 task-orchestrator 中创建 adapters/opencli-adapter.ts，用 child_process.exec 封装 opencli 命令
@@ -168,28 +168,28 @@
   阶段二（实现）：3. 用 execSync 封装 opencli 命令行；4. 实现命令链执行；5. 在 task-orchestrator 的 execute-step 中调用 BrowserAdapter
 
 
-- [20260407] seed [brainstorm] [score:5x5] [f:5] [angle:feature] [focus:task-orchestrator] killed:20260407 non-executable approach
+- [20260407] seed [brainstorm] [score:5x5] [f:5] [angle:feature] [focus:task-orchestrator]
   description: planner.ts 添加 wikipedia 关键词路由：说"查 wiki 论文"自动触发 WikipediaLoaderAdapter search
   | benefit: 用户只需说"查 Wikipedia XXX"，task-orchestrator 自动搜索并展示 wikipedia 知识库条目
   | reason: 已知资源：planner.ts BUILT_IN_RULES 第32-48行包含 screenshot/open/obs 等关键词路由；WikipediaLoaderAdapter 已注册，adapterId='wikipedia'。缺失环节：planner 不知道 wikipedia 关键词，没有路由规则。连接方式：在 BUILT_IN_RULES 添加一条 {keywords:['wiki','wikipedia','维基','论文'], adapterId:'wikipedia', adapterType:'wikipedia', command:'search', args:['QUERY']}
   | approach: 1. Edit planner.ts line 48后（screenshot规则块之后）插入新规则对象；2. keywords:['wiki','wikipedia','维基']；3. adapterId:'wikipedia', adapterType:'wikipedia', command:'search' 
 
 
-- [20260407] seed [brainstorm] [score:4x4] [f:4] [angle:infra] [focus:task-orchestrator] killed:20260407 non-executable approach
+- [20260407] seed [brainstorm] [score:4x4] [f:4] [angle:infra] [focus:task-orchestrator]
   description: executor.ts --dry-run 参数：不真正执行 adapter，只打印将调用的 adapterId/command/args
   | benefit: 调试任务链时无需真正执行耗时的 browser/AI 操作，秒级验证 planning 是否正确
   | reason: 已知资源：executor.ts 第115行 execute(steps, ctx?) 签名已知；adapter 调用发生在第115-150行循环。缺失环节：没有 dry-run 模式，每次修改 planner 规则后必须跑完整流程才能验证。连接方式：在 execute() 入口检查 steps[0].dryRun || ctx.dryRun 标志，若为真则跳过 adapter 调用，只 console.log plan
   | approach: 1. Read executor.ts:115 查看 execute() 签名；2. 在 Step interface 添加 dryRun?:boolean；3. execute() 开头 if(steps.some(s=>s.dryRun)) { console.log('[DRY]', JSON.stringify(steps)); return ok([]) } 
 
 
-- [20260407] seed [brainstorm] [score:5x3] [f:3] [angle:quality] [focus:task-orchestrator] killed:20260407 non-executable approach
+- [20260407] seed [brainstorm] [score:5x3] [f:3] [angle:quality] [focus:task-orchestrator]
   description: executor 每步记录耗时写入 Result.metadata（startTime/endTime/durationMs），并在 UI 流输出perf行
   | benefit: 任务执行后立即知道每步耗时，定位慢瓶颈步骤，优化任务链
   | reason: 已知资源：executor.ts:115 execute() 方法，第150-200行有循环执行 adapter；Result 类型来自 shared-types。缺失环节：Result 只有 success/output/logs，没有执行耗时字段，无法定位慢步骤。连接方式：在 executor 的步骤循环前后记录 Date.now()，结果写入 result.metadata = {durationMs}；UI stream 输出 [PERF adapterId: Xms]
   | approach: 阶段一：1. 在 executor.ts:115 execute() 循环内，adapter 调用前后记录 start=Date.now()；2. result.metadata = {durationMs: Date.now()-start}；3. stream 输出 [PERF ${step.adapterId}: ${durationMs}ms] 
 
 
-- [20260407] seed [brainstorm] [score:4x2] [f:2] [angle:fusion] [focus:task-orchestrator] killed:20260407 non-executable approach
+- [20260407] seed [brainstorm] [score:4x2] [f:2] [angle:fusion] [focus:task-orchestrator]
   description: shared-types Result 添加可选 metadata 字段：{durationMs?, retries?, adapterId?}，所有 adapter 执行结果自动附带执行信息
   | benefit: 所有 adapter 的执行元数据统一格式，方便 audit/replay/performance 分析，跨项目复用
   | reason: 已知资源：shared-types/index.ts:57 Result interface；executor.ts 已为每个 adapter 调用计时。缺失环节：Result 接口没有 metadata 字段，各 adapter 返回值格式不统一，无法做统一性能分析。连接方式：在 Result 接口添加 metadata?: {durationMs?:number, retries?:number, adapterId?:string}，executor.ts 在包装 adapter 结果时自动写入 metadata
@@ -206,14 +206,14 @@
   阶段三（验证）：7. 用 task-orchestrator CLI 跑一个会失败两次后成功的 adapter，验证退避行为
 
 
-- [20260407] seed [brainstorm] [score:4x4] [f:4] [angle:ws-level] killed:20260407 non-executable approach
+- [20260407] seed [brainstorm] [score:4x4] [f:4] [angle:ws-level]
   description: shared/run-seed.mjs：扫描 ideas.md pool，运行最高分未完成 seed，像 CLI pipeline 一样串联执行
   | benefit: 每次 session 开始只需运行一个命令，自动完成所有 seed 实现，不用手动挑选和组织
   | reason: 已知资源：shared/ 下已有 check-deps/video-quality-check/video-editors/wiki-indexer 等工具；ideas.md 有 seed stage 标记。缺失环节：没有统一的 seed runner，每次需要手动挑 seed、自己执行、自己标记 shipped。连接方式：在 shared/ 创建 run-seed.mjs，读取 ideas.md 找未 shipped seed，执行后写 shipped 标记
   | approach: 1. 创建 shared/run-seed.mjs；2. 用 grep 解析 ideas.md 找所有未 shipped seed；3. 按 score 降序取最高分；4. 执行 seed 的 approach 第一步（具体命令）；5. 成功后 sed -i 写 shipped:YYYYMMDD；6. 输出汇总报告 
 
 
-- [20260407] seed [brainstorm] [score:5x3] [f:3] [angle:commercializable] [focus:task-orchestrator] killed:20260407 non-executable approach
+- [20260407] seed [brainstorm] [score:5x3] [f:3] [angle:commercializable] [focus:task-orchestrator]
   description: task-orchestrator → wiki-indexer → Wikipedia 知识库自动研究 pipeline：输入主题，自动从 wikipedia 知识库抓取相关论文笔记作为上下文，生成研究报告
   | benefit: 目标用户：研究人员、科技内容创作者；变现路径：研究报告订阅、API 调用计费；差异化：每份报告有原始论文引用，可溯源
   | reason: 已知资源：task-orchestrator 有 CLI registry 和 executor；shared/wiki-indexer.mjs 已扫描 workspace 下所有 README；wikipedia loader adapter 可 search/retrieve 条目。缺失环节：没有自动研究 pipeline，主题到报告之间需要大量人工协调。连接方式：task-orchestrator 新增 'research' adapterType，输入查询字符串，调用 wiki-indexer search + wikipedia retrieve，结果拼成报告
@@ -221,7 +221,7 @@
   阶段二（实现）：3. 在 task-orchestrator 新增 research.ts adapter；4. wiki-indexer.mjs 添加 --query 参数返回相关条目列表；5. WikipediaLoaderAdapter.execute 支持 'summarize' action；6. 写 README 说明如何运营和变现
 
 
-- [20260407] seed [brainstorm] [score:5x2] [f:2] [angle:fusion|project-fusion] [focus:task-orchestrator] killed:20260407 non-executable approach
+- [20260407] seed [brainstorm] [score:5x2] [f:2] [angle:fusion|project-fusion] [focus:task-orchestrator]
   description: task-orchestrator shell adapter：把 task-orchestrator 本身变成一个可用自然语言驱动的 agent，自动发现和注册 PATH 上的 CLI 工具
   | benefit: 用户说"用 tree 显示目录结构"，task-orchestrator 自动找到 tree 命令并执行；零配置，PATH 上有什么工具就能用什么
   | reason: 已知资源：shell.ts:13 shell adapter 可执行任意 shell 命令；registry-loader.ts:38 从 registry.json 提取 keywords。缺失环节：没有自动发现 PATH 上新 CLI 工具的机制；BUILT_IN_RULES 是手写静态的。连接方式：启动时扫描 PATH（which 命令），提取所有可执行文件作为 keywords；每个 keyword 对应 shell:<cmd> 步骤
@@ -241,12 +241,12 @@
   | approach: 1. Edit executor.ts:363 将 '[RETRY attempt' 改为 '[RETRY ${step.adapterId} attempt'；2. 跑 task-orchestrator 验证格式正确 | shipped:20260407
 
 
-- [20260407] seed [brainstorm] [score:8x2] [f:2] [angle:fusion|project-fusion] description: task-orchestrator shell adapter PATH 命令自动发现：启动时扫描 PATH 上可执行文件作为 keywords | benefit: 用户说"用 tree 显示目录"自动找到 tree 命令执行，零配置 | reason: 已知资源：shell.ts:13 shell adapter；registry-loader.ts:38 从 registry.json 提取 keywords；planner.ts BUILT_IN_RULES 静态配置。缺失环节：没有启动时 PATH 扫描，所有 keywords 需手写。连接方式：在 registry.ts load() 后调用 scanPathCommands()，用 which -a 列出所有可执行文件，过滤内置命令后追加到内存 rules killed:20260407 non-executable approach
+- [20260407] seed [brainstorm] [score:8x2] [f:2] [angle:fusion|project-fusion] description: task-orchestrator shell adapter PATH 命令自动发现：启动时扫描 PATH 上可执行文件作为 keywords | benefit: 用户说"用 tree 显示目录"自动找到 tree 命令执行，零配置 | reason: 已知资源：shell.ts:13 shell adapter；registry-loader.ts:38 从 registry.json 提取 keywords；planner.ts BUILT_IN_RULES 静态配置。缺失环节：没有启动时 PATH 扫描，所有 keywords 需手写。连接方式：在 registry.ts load() 后调用 scanPathCommands()，用 which -a 列出所有可执行文件，过滤内置命令后追加到内存 rules
   | approach: 阶段一：1. Read task-orchestrator/src/registry.ts 查看 load() 位置；2. Read shell.ts 查看 commandBuilder 格式
   阶段二：3. 在 registry.ts load() 末尾添加 scanPathCommands()；4. 用 execSync('which -a') 扫描 PATH；5. 过滤 node/npm/git 等内置；6. 对每个命令生成内嵌 KeywordRule 映射到 shell:<cmd>；7. 输出 [DISCOVERED N commands]
 
 
-- [20260407] seed [brainstorm] [score:5x1] [f:1] [angle:feature] description: task-orchestrator 自主任务分解：当用户给高层目标时，agent 自动拆解为可执行步骤链 | benefit: 用户说"帮我研究这个领域"，task-orchestrator 自动规划搜索→阅读→整理→报告的完整链路 | reason: 已知资源：planner.ts 有 BUILT_IN_RULES 和 YAML 规则加载；executor.ts execute() 循环；shell adapter 执行 shell 命令。缺失环节：没有任务分解能力，所有步骤必须用户显式给出。连接方式：设计 TaskDecomposer 类，接收高层目标，调用 LLM 分解为步骤数组，每个步骤含 adapterId/command/args，注入 executor 执行 killed:20260407 non-executable approach
+- [20260407] seed [brainstorm] [score:5x1] [f:1] [angle:feature] description: task-orchestrator 自主任务分解：当用户给高层目标时，agent 自动拆解为可执行步骤链 | benefit: 用户说"帮我研究这个领域"，task-orchestrator 自动规划搜索→阅读→整理→报告的完整链路 | reason: 已知资源：planner.ts 有 BUILT_IN_RULES 和 YAML 规则加载；executor.ts execute() 循环；shell adapter 执行 shell 命令。缺失环节：没有任务分解能力，所有步骤必须用户显式给出。连接方式：设计 TaskDecomposer 类，接收高层目标，调用 LLM 分解为步骤数组，每个步骤含 adapterId/command/args，注入 executor 执行
   | approach: 阶段一(architecture)：1. Read planner.ts 理解 BUILT_IN_RULES 结构；2. 设计 TaskDecomposer 接口：decompose(goal:string) -> Step[]；3. 确定是否用 MiniMax API 做分解决策
   阶段二(实现)：4. 创建 src/task-decomposer.ts 实现 TaskDecomposer；5. 接收自然语言 goal，调用 LLM 返回结构化步骤；6. 每个 Step 含 adapterId/command/args；7. 在 executor 入口增加 decompose 模式检测；8. 添加 --decompose 参数
 
@@ -255,16 +255,16 @@
   | approach: 1. Read shared/wiki-indexer.mjs 理解现有 --rebuild 逻辑；2. 添加 --query 参数分支；3. 用 fuzzy search 匹配 wiki-index.json 中的 title/description；4. JSON 输出 [{title,path,description}]；5. 添加 --limit 参数控制返回数量 | shipped:20260407
 
 
-- [20260407] seed [brainstorm] [score:6x3] [f:3] [angle:ws-level] description: shared-types TaskResult 添加 reason 字段：记录 planner 为什么选择这个 adapter，帮助理解 agent 决策 | benefit: agent 执行日志可解释，调试时知道为什么选了这个 adapter 而不是另一个 | reason: 已知资源：shared-types/index.ts TaskResult interface；planner.ts 第48-80行 rule matching 逻辑。缺失环节：TaskResult 只有 adapterId 和 command，没有决策原因。连接方式：在 TaskResult 添加 reason?:string，planner 在 rule match 成功后写入匹配到的 rule key killed:20260407 non-executable approach
+- [20260407] seed [brainstorm] [score:6x3] [f:3] [angle:ws-level] description: shared-types TaskResult 添加 reason 字段：记录 planner 为什么选择这个 adapter，帮助理解 agent 决策 | benefit: agent 执行日志可解释，调试时知道为什么选了这个 adapter 而不是另一个 | reason: 已知资源：shared-types/index.ts TaskResult interface；planner.ts 第48-80行 rule matching 逻辑。缺失环节：TaskResult 只有 adapterId 和 command，没有决策原因。连接方式：在 TaskResult 添加 reason?:string，planner 在 rule match 成功后写入匹配到的 rule key
   | approach: 1. Read shared-types/index.ts TaskResult；2. 添加 reason?:string 字段；3. Read planner.ts rule match 位置；4. 在 match 成功后 result.reason = matchedRule.key；5. 验证 executor 输出含 reason 字段
 
 
-- [20260407] seed [brainstorm] [score:6x3] [f:3] [angle:commercializable] description: task-orchestrator 研究报告 pipeline 产品化：输入研究主题，wiki-indexer search + WikipediaLoaderAdapter retrieve + MiniMax API 生成报告，按主题打包出售 | benefit: 目标用户：研究人员/科技内容创作者；变现路径：研究报告订阅、API 调用计费；差异化：每份报告有原始论文引用可溯源 | reason: 已知资源：task-orchestrator 有 CLI registry 和 executor；shared/wiki-indexer.mjs 支持 --query；WikipediaLoaderAdapter 可 search/retrieve 条目。缺失环节：没有自动研究 pipeline，主题到报告之间需要大量人工协调。连接方式：task-orchestrator 新增 research adapterType，输入查询字符串，调用 wiki-indexer search + wikipedia retrieve，结果拼成报告 killed:20260407 non-executable approach
+- [20260407] seed [brainstorm] [score:6x3] [f:3] [angle:commercializable] description: task-orchestrator 研究报告 pipeline 产品化：输入研究主题，wiki-indexer search + WikipediaLoaderAdapter retrieve + MiniMax API 生成报告，按主题打包出售 | benefit: 目标用户：研究人员/科技内容创作者；变现路径：研究报告订阅、API 调用计费；差异化：每份报告有原始论文引用可溯源 | reason: 已知资源：task-orchestrator 有 CLI registry 和 executor；shared/wiki-indexer.mjs 支持 --query；WikipediaLoaderAdapter 可 search/retrieve 条目。缺失环节：没有自动研究 pipeline，主题到报告之间需要大量人工协调。连接方式：task-orchestrator 新增 research adapterType，输入查询字符串，调用 wiki-indexer search + wikipedia retrieve，结果拼成报告
   | approach: 阶段一(design)：1. 设计 research pipeline：query → wiki-indexer search → top-K retrieve → LLM summarize → report.md；2. 确定 wikipedia 条目如何作为 LLM 上下文注入
   阶段二(实现)：3. 在 task-orchestrator 新增 src/adapters/research.ts；4. wiki-indexer.mjs --query 返回相关条目 JSON；5. WikipediaLoaderAdapter.execute 支持 'summarize' action；6. 拼接摘要写 report.md；7. 写 README 说明如何运营和变现
 
 
-- [20260407] seed [brainstorm] [score:4x5] [f:5] [angle:infra] [focus:task-orchestrator] description: task-orchestrator executor.ts --dry-run 参数：不执行 adapter，只打印将调用的 adapterId/command/args | benefit: 调试任务链时无需真正执行耗时的 browser/AI 操作，秒级验证 planning 是否正确 | reason: 已知资源：executor.ts:115 execute() 循环；adapter 调用在第115-150行。缺失环节：没有 dry-run 模式，每次改 planner 规则后必须跑完整流程。连接方式：在 execute() 入口检查 steps[0].dryRun || ctx.dryRun，若为真跳过 adapter 调用 killed:20260407 non-executable approach
+- [20260407] seed [brainstorm] [score:4x5] [f:5] [angle:infra] [focus:task-orchestrator] description: task-orchestrator executor.ts --dry-run 参数：不执行 adapter，只打印将调用的 adapterId/command/args | benefit: 调试任务链时无需真正执行耗时的 browser/AI 操作，秒级验证 planning 是否正确 | reason: 已知资源：executor.ts:115 execute() 循环；adapter 调用在第115-150行。缺失环节：没有 dry-run 模式，每次改 planner 规则后必须跑完整流程。连接方式：在 execute() 入口检查 steps[0].dryRun || ctx.dryRun，若为真跳过 adapter 调用
   | approach: 1. Read executor.ts:115 查看 execute() 签名和 Step 接口；2. Edit executor.ts:115 execute() 开头加 if(steps.some(s=>s.dryRun)){console.log('[DRY]',JSON.stringify(steps));return ok([])}
 
 
@@ -276,17 +276,17 @@
   | approach: 1. Write D:/OpenClaw/workspace/.claude/hookify.prevent-node-modules-rf.local.md，内容：--- name: prevent-node-modules-rf enabled: true event: bash pattern:rm\s+-rf\s+.*node_modules --- Danger: rm -rf on node_modules detected | shipped:20260407
 
 
-- [20260407] seed [brainstorm] [score:8x2] [f:2] [angle:fusion|project-fusion] [focus:task-orchestrator] description: task-orchestrator shell adapter PATH 命令自动发现：启动时扫描 PATH 上可执行文件作为 keywords | benefit: 用户说"用 tree 显示目录"自动找到 tree 命令执行，零配置 | reason: 已知资源：shell.ts:13 shell adapter；registry-loader.ts:38 从 registry.json 提取 keywords；planner.ts BUILT_IN_RULES。缺失环节：没有启动时 PATH 扫描，所有 keywords 需手写。连接方式：在 registry.ts load() 后调用 scanPathCommands()，用 which -a 列出所有可执行文件，过滤内置命令后追加到内存 rules killed:20260407 non-executable approach
+- [20260407] seed [brainstorm] [score:8x2] [f:2] [angle:fusion|project-fusion] [focus:task-orchestrator] description: task-orchestrator shell adapter PATH 命令自动发现：启动时扫描 PATH 上可执行文件作为 keywords | benefit: 用户说"用 tree 显示目录"自动找到 tree 命令执行，零配置 | reason: 已知资源：shell.ts:13 shell adapter；registry-loader.ts:38 从 registry.json 提取 keywords；planner.ts BUILT_IN_RULES。缺失环节：没有启动时 PATH 扫描，所有 keywords 需手写。连接方式：在 registry.ts load() 后调用 scanPathCommands()，用 which -a 列出所有可执行文件，过滤内置命令后追加到内存 rules
   | approach: 阶段一：1. Read task-orchestrator/src/registry.ts 查看 load() 位置；2. Read shell.ts 查看 commandBuilder 格式
   阶段二：3. 在 registry.ts load() 末尾添加 scanPathCommands()；4. 用 execSync('which -a') 扫描 PATH；5. 过滤 node/npm/git 等内置；6. 对每个命令生成内嵌 KeywordRule 映射到 shell:<cmd>；7. 输出 [DISCOVERED N commands]
 
 
-- [20260407] seed [brainstorm] [score:5x1] [f:1] [angle:feature] [focus:task-orchestrator] description: task-orchestrator 自主任务分解：当用户给高层目标时，agent 自动拆解为可执行步骤链 | benefit: 用户说"帮我研究这个领域"，task-orchestrator 自动规划搜索→阅读→整理→报告的完整链路 | reason: 已知资源：planner.ts BUILT_IN_RULES 和 YAML 规则加载；executor.ts execute() 循环；shell adapter。缺失环节：没有任务分解能力，所有步骤必须用户显式给出。连接方式：设计 TaskDecomposer 类，接收高层目标，调用 MiniMax API 分解为步骤数组，注入 executor 执行 killed:20260407 non-executable approach
+- [20260407] seed [brainstorm] [score:5x1] [f:1] [angle:feature] [focus:task-orchestrator] description: task-orchestrator 自主任务分解：当用户给高层目标时，agent 自动拆解为可执行步骤链 | benefit: 用户说"帮我研究这个领域"，task-orchestrator 自动规划搜索→阅读→整理→报告的完整链路 | reason: 已知资源：planner.ts BUILT_IN_RULES 和 YAML 规则加载；executor.ts execute() 循环；shell adapter。缺失环节：没有任务分解能力，所有步骤必须用户显式给出。连接方式：设计 TaskDecomposer 类，接收高层目标，调用 MiniMax API 分解为步骤数组，注入 executor 执行
   | approach: 阶段一(architecture)：1. Read planner.ts 理解 BUILT_IN_RULES 结构；2. 设计 TaskDecomposer 接口：decompose(goal:string) -> Step[]
   阶段二(实现)：3. 创建 src/task-decomposer.ts 实现 TaskDecomposer；4. 接收自然语言 goal，调用 MiniMax API 返回结构化步骤；5. 每个 Step 含 adapterId/command/args；6. 在 executor 入口增加 decompose 模式检测；7. 添加 --decompose 参数
 
 
-- [20260407] seed [brainstorm] [score:6x3] [f:3] [angle:quality] description: shared/video-quality-check.mjs 添加 JSON 输出 + --checklist 参数：输出质量指标摘要列表 | benefit: 视频质量检查结果可直接被其他脚本解析，方便 CI/CD 集成 | reason: 已知资源：shared/videoquality-check.mjs 已实现 ffprobe 元数据提取。缺失环节：只有控制台输出，没有 JSON 格式机器可读输出。连接方式：在 video quality-check.mjs 添加 --json 参数，输出 {width,height,bitrate,duration,status} 对象 killed:20260407 non-executable approach
+- [20260407] seed [brainstorm] [score:6x3] [f:3] [angle:quality] description: shared/video-quality-check.mjs 添加 JSON 输出 + --checklist 参数：输出质量指标摘要列表 | benefit: 视频质量检查结果可直接被其他脚本解析，方便 CI/CD 集成 | reason: 已知资源：shared/videoquality-check.mjs 已实现 ffprobe 元数据提取。缺失环节：只有控制台输出，没有 JSON 格式机器可读输出。连接方式：在 video quality-check.mjs 添加 --json 参数，输出 {width,height,bitrate,duration,status} 对象
   | approach: 1. Read shared/video-quality-check.mjs；2. 添加 --json 参数分支；3. ffprobe 元数据解析后输出 JSON 对象而非控制台格式；4. 添加 --checklist 参数输出 [{metric,value,pass}] 格式
 
 
@@ -294,7 +294,7 @@
   | approach: 1. Edit wiki-indexer.mjs fuzzyMatch() 函数；2. 检测 query 是否为连续英文字符，若是则检查 entry.title 是否以 query 开头或包含 query 作为完整单词；3. 前词边界匹配 *1.5，单词重叠保持原逻辑 | shipped:20260407
 
 
-- [20260407] seed [brainstorm] [score:6x3] [f:3] [angle:commercializable] description: task-orchestrator → wiki-indexer 研究报告 pipeline：输入研究主题，wiki-indexer search + WikipediaLoader retrieve + MiniMax API 生成报告，按主题打包出售 | benefit: 目标用户：研究人员/科技内容创作者；变现路径：研究报告订阅/按份计费；差异化：每份报告有原始论文引用可溯源 | reason: 已知资源：task-orchestrator executor 已支持 CLI registry；shared/wiki-indexer.mjs 支持 --query JSON 输出；WikipediaLoaderAdapter 可 search/retrieve。缺失环节：没有自动研究 pipeline。连接方式：task-orchestrator 新增 research adapter，调用 wiki-indexer --query + WikipediaLoader retrieve，结果拼成 markdown 报告 killed:20260407 non-executable approach
+- [20260407] seed [brainstorm] [score:6x3] [f:3] [angle:commercializable] description: task-orchestrator → wiki-indexer 研究报告 pipeline：输入研究主题，wiki-indexer search + WikipediaLoader retrieve + MiniMax API 生成报告，按主题打包出售 | benefit: 目标用户：研究人员/科技内容创作者；变现路径：研究报告订阅/按份计费；差异化：每份报告有原始论文引用可溯源 | reason: 已知资源：task-orchestrator executor 已支持 CLI registry；shared/wiki-indexer.mjs 支持 --query JSON 输出；WikipediaLoaderAdapter 可 search/retrieve。缺失环节：没有自动研究 pipeline。连接方式：task-orchestrator 新增 research adapter，调用 wiki-indexer --query + WikipediaLoader retrieve，结果拼成 markdown 报告
   | approach: 阶段一(design)：1. 设计 pipeline：query → wiki-indexer --query --json → top-K retrieve → LLM summarize → report.md
   阶段二(实现)：2. 在 task-orchestrator/src/adapters/ 创建 research.ts adapter；3. 实现 ResearchPipeline.execute(searchQuery) → 调用 wiki-indexer.mjs --query JSON → 对每个结果调用 WikipediaLoader → 拼接内容 → 调用 MiniMax API summarize → 写 report.md；4. 写 README 说明如何运营和变现
 

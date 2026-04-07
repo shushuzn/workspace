@@ -20,7 +20,8 @@ const EXECUTABLE_PREFIXES = [
   'Edit ', 'Read ', 'Write ', 'Create ', 'Delete ',
   'Grep ', 'Glob ', 'Bash ', 'Search ', 'List ', 'Sed ',
   'cd ', 'mkdir ', 'task ', '#', '/', '//',
-  '读 ', '写 ', '创建 ', '删除 ', '搜索 ', '执行 '
+  '读 ', '写 ', '创建 ', '删除 ', '搜索 ', '执行 ',
+  '修改 ', '在 ', '调研 ', '设计 ', '规划 ', '分析 ', '运行 ', '编译 ', '打包 '
 ];
 
 const content = readFileSync(IDEAS_PATH, 'utf-8');
@@ -65,7 +66,7 @@ while (i < lines.length) {
   if (firstStep.length === 0) {
     isExecutable = false;
   } else {
-    isExecutable = EXECUTABLE_PREFIXES.some(p => firstStep.startsWith(p)) ||
+    isExecutable = EXECUTABLE_PREFIXES.some(p => firstStep.startsWith(p) || firstStep.includes(p)) ||
       firstStep.match(/^[a-zA-Z]:\\/) !== null;
   }
 
