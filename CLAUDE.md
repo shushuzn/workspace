@@ -187,6 +187,14 @@
 - `boulder never stops`：ralph/ultrawork 激活状态标识，不可主动中断
 - `boulder` 出现时：持续执行直到任务完成或用户主动 `/cancel`
 
+### 自我触发规则（自学习闭环）
+
+每次 session 启动时：
+1. `hook-session-start-inject.mjs` 自动读取 `session-insights.md` 中未标记 ✅ EXECUTED 的条目，注入为待执行 insight
+2. `hook-session-start-inject.mjs` 读取 `insight-verifications.md` 中的最近验证结果，展示上轮执行效果
+3. agent 发现 unexecuted insight 时，必须生成执行计划并执行，不得忽略
+4. 执行完成后用 `omc-insight-action.mjs --done <id>` 或 `--done all` 标记完成并验证
+
 ### §10 idea scoring 公式
 
 `[score: Benefit × Feasibility]`
