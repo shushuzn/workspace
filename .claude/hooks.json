@@ -1,0 +1,49 @@
+{
+  "description": "OMC Hooks — Insight auto-trigger via UserPromptSubmit polling",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node D:/OpenClaw/workspace/.omc/scripts/hook-audit-log-mcp.mjs --check",
+            "timeout": 5000
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node D:/OpenClaw/workspace/.omc/scripts/hook-auto-seed.mjs --check",
+            "timeout": 3000
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node D:/OpenClaw/workspace/.omc/scripts/hook-session-start-inject.mjs",
+            "timeout": 3000
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node D:/OpenClaw/workspace/.omc/scripts/hook-session-end-drain.mjs",
+            "timeout": 30000
+          }
+        ]
+      }
+    ]
+  }
+}

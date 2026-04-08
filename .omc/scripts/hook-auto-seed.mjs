@@ -35,8 +35,8 @@ const readStdin = () => new Promise(resolve => {
   process.stdin.on('data', chunk => data += chunk);
   process.stdin.on('end', () => resolve(data));
   process.stdin.on('error', () => resolve(''));
-  // Timeout: give up after 100ms
-  setTimeout(() => resolve(data || ''), 100);
+  // No timeout - resolve immediately if stdin is already exhausted
+  setImmediate(() => resolve(data));
 });
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
