@@ -1,0 +1,36 @@
+{
+  "name": "unified-agent-cli",
+  "version": "1.0.0",
+  "description": "Chain opencli + CLI-Anything via a rule-based task planner",
+  "type": "module",
+  "main": "dist/task-orchestrator/src/index.js",
+  "bin": {
+    "task": "dist/task-orchestrator/src/index.js"
+  },
+  "scripts": {
+    "build": "vite build",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit --skipLibCheck"
+  },
+  "dependencies": {
+    "ai": "^6.0.141",
+    "ai-elements": "^1.9.0",
+    "chokidar": "^4.0.0",
+    "chalk": "^5.4.1",
+    "commander": "^13.1.0",
+    "dequal": "^2.0.3",
+    "eventsource-parser": "^3.0.6",
+    "json-schema": "^0.4.0",
+    "react": "^19.2.4",
+    "swr": "^2.4.1",
+    "throttleit": "^2.1.0",
+    "use-sync-external-store": "^1.6.0",
+    "yaml": "^2.7.1",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5",
+    "vitest": "^3.1.4"
+  }
+}
