@@ -4,7 +4,7 @@
  * Reads all critical state files → outputs single dashboard line.
  * Replaces: ls/cat/tail/wc/node --stats for 10 separate state files.
  */
-import { existsSync, readFileSync, readdirSync, statSync } from 'fs';
+import { existsSync, readFileSync, writeFileSync, readdirSync, statSync } from 'fs';
 import { resolve, dirname } from 'path';
 
 const __dirname = dirname(process.argv[1]);
