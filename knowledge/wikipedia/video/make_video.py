@@ -463,10 +463,10 @@ def make_video_multi(img_paths, audio_path, output_path, bitrate=None, scene_key
                     str(ffmpeg_exe), "-y",
                     "-i", str(final_video), "-i", str(audio_final), "-i", str(bg_music_path),
                     "-filter_complex",
-                    f"[1:a][2:a]amix=inputs=2:duration=first:weights=1 {bg_music_vol}[mix];"
-                    f"[mix]afade=t=in:st=0:d=0.5:alpha=1",
-                    f"subtitles=filename='{subtitle_path}':si=0[v-sub];[v-sub]",
-                    "-map", "[v-sub]", "-map", "[mix]",
+                    f"[1:a][2:a]amix=inputs=2:duration=first:weights=1.0:{bg_music_vol}[mix];"
+                    f"[mix]afade=t=in:st=0:d=0.5:alpha=1[mix-out];",
+                    f"subtitles=filename='{subtitle_path}':si=0[v-sub-out];[v-sub-out]",
+                    "-map", "[v-sub-out]", "-map", "[mix-out]",
                     "-c:v", "libx264", "-crf", str(crf), "-preset", "medium",
                     "-c:a", "aac", "-b:a", "256k",
                     "-shortest", str(output_path),
@@ -476,9 +476,9 @@ def make_video_multi(img_paths, audio_path, output_path, bitrate=None, scene_key
                     str(ffmpeg_exe), "-y",
                     "-i", str(final_video), "-i", str(audio_final), "-i", str(bg_music_path),
                     "-filter_complex",
-                    f"[1:a][2:a]amix=inputs=2:duration=first:weights=1 {bg_music_vol}[mix];"
-                    f"[mix]afade=t=in:st=0:d=0.5:alpha=1",
-                    "-map", "0:v", "-map", "[mix]",
+                    f"[1:a][2:a]amix=inputs=2:duration=first:weights=1.0:{bg_music_vol}[mix];"
+                    f"[mix]afade=t=in:st=0:d=0.5:alpha=1[mix-out];",
+                    "-map", "0:v", "-map", "[mix-out]",
                     "-c:v", "copy",
                     "-c:a", "aac", "-b:a", "256k",
                     "-shortest", str(output_path),
