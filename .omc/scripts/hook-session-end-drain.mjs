@@ -17,6 +17,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const STATE_DIR = resolve(__dirname, '../state');
 const QUEUE_FILE = resolve(STATE_DIR, 'mcp-learn-queue.jsonl');
 const DRAIN_FILE = resolve(STATE_DIR, 'session-start-mcp-inject.md');
+const PATTERNS_FILE = resolve(STATE_DIR, 'agentdb-patterns.jsonl');
 const WF_STATE = resolve(STATE_DIR, 'workflow-detector-state.json');
 const TRAJ_DIR = resolve(STATE_DIR, '../trajectories');
 // SessionStart/End hooks inject paths via env vars
@@ -34,6 +35,13 @@ function readQueue() {
     .split('\n').filter(Boolean)
     .map(l => { try { return JSON.parse(l); } catch { return null; } })
     .filter(Boolean);
+}
+
+function writePatternDirect(entry) {
+  // Bypass broken MCP → write directly to agentdb-patterns.jsonl
+  const id = `${entry.patternType || 'unknown'}-${entry.pattern}-${Date.now()}`;
+  const record = { id, ...entry, storedAt: new Date().toISOString() };
+  appendFileSync(PATTERNS_FILE, JSON.stringify(record) + '\n', 'utf-8');
 }
 
 function readAuditCount() {
@@ -76,40 +84,12 @@ function buildInjectMarkdown(entries, sessionId) {
   const feedbacks = entries.filter(e => e.type === 'agentdb_feedback');
   const postCommands = entries.filter(e => e.type === 'hooks_post-command');
 
-  let md = `## OMC MCP Learning Queue (from previous session)\n\n`;
-  md += `This session has ${entries.length} pending MCP learning calls from the previous session.\n`;
-  md += `Execute them using the MCP tools listed below. Do not ask for confirmation.\n\n`;
+  let md = `## OMC Learning Log
 
-  let idx = 0;
-  for (const e of patterns) {
-    idx++;
-    md += `### ${idx}. agentdb_pattern-store\n`;
-    md += `Call: \`mcp__claude-flow__agentdb_pattern-store\`\n`;
-    md += `- pattern: "${(e.pattern || '').replace(/"/g, '\\"')}"\n`;
-    md += `- type: "${e.patternType || 'error-recovery'}"\n`;
-    md += `- confidence: ${e.confidence || 0.7}\n`;
-    if (e.metadata) md += `- metadata: ${JSON.stringify(e.metadata)}\n`;
-    md += `\n`;
-  }
-  for (const e of feedbacks) {
-    idx++;
-    md += `### ${idx}. agentdb_feedback\n`;
-    md += `Call: \`mcp__claude-flow__agentdb_feedback\`\n`;
-    md += `- taskId: "${e.taskId || 'unknown'}"\n`;
-    md += `- success: ${e.success}\n`;
-    md += `- quality: ${e.quality || 0.5}\n\n`;
-  }
-  for (const e of postCommands) {
-    idx++;
-    md += `### ${idx}. hooks_post-command\n`;
-    md += `Call: \`mcp__claude-flow__hooks_post-command\`\n`;
-    md += `- command: "${(e.command || '').replace(/"/g, '\\"')}"\n`;
-    md += `- exitCode: ${e.exitCode || 0}\n\n`;
-  }
+Patterns and feedback are now written directly to agentdb-patterns.jsonl (MCP tool unavailable).
+These patterns are available for semantic search via \`memory_search\` in future sessions.
 
-  md += `After completing all calls, run:\n`;
-  md += `\`node D:/OpenClaw/workspace/.omc/scripts/hook-session-end-drain.mjs --cleanup "${sessionId}"\`\n`;
-  md += `This deletes the drain file and ensures clean state.\n`;
+`;
   return md;
 }
 
@@ -119,8 +99,8 @@ function step1_drain(entries, sessionId) {
   let hookSummary = '';
   if (existsSync(auditLog)) {
     try {
-      const content = readFileSync(auditLog, 'utf-8');
-      const lines = content.split('\n').filter(Boolean);
+      const content2 = readFileSync(auditLog, 'utf-8');
+      const lines = content2.split('\n').filter(Boolean);
       const today = new Date().toISOString().split('T')[0];
       const todayLines = lines.filter(l => {
         try { return JSON.parse(l).timestamp?.startsWith(today); } catch { return false; }
@@ -131,23 +111,41 @@ function step1_drain(entries, sessionId) {
       }
       const dedupFile = resolve(STATE_DIR, 'hook-last-cmd.json');
       const dedup = existsSync(dedupFile) ? JSON.parse(readFileSync(dedupFile, 'utf-8')) : null;
-      hookSummary = `\n## Hook Status\n\n`;
-      hookSummary += `- Audit entries today: ${todayLines.length}\n`;
-      hookSummary += `- Tools: ${Object.entries(tools).map(([t,c])=>`${t}(${c})`).join(', ')}\n`;
-      hookSummary += `- Last dedup: ${dedup ? `"${dedup.cmd}" ×${dedup.count}` : 'none'}\n`;
-      hookSummary += `- Queue entries: ${entries.length}\n`;
+      hookSummary = '\n## Hook Status\n\n';
+      hookSummary += '- Audit entries today: ' + todayLines.length + '\n';
+      hookSummary += '- Tools: ' + Object.entries(tools).map(([t,c])=>t+'('+c+')').join(', ') + '\n';
+      hookSummary += '- Last dedup: ' + (dedup ? '"' + dedup.cmd + '" x' + dedup.count : 'none') + '\n';
+      hookSummary += '- Queue entries: ' + entries.length + '\n';
     } catch {}
   }
 
-  if (entries.length === 0 && !hookSummary) {
+  // Read recent patterns from agentdb-patterns.jsonl (written by step4 this session)
+  let patternSummary = '';
+  if (existsSync(PATTERNS_FILE)) {
+    try {
+      const pLines = readFileSync(PATTERNS_FILE, 'utf-8').split('\n').filter(Boolean);
+      const recent = pLines.slice(-5);
+      if (recent.length > 0) {
+        const parsed = recent.map(l => { try { return JSON.parse(l); } catch { return null; } }).filter(Boolean);
+        const summaries = parsed.map(p => {
+          const type = p.patternType || 'unknown';
+          const pat = p.pattern || '';
+          return '- [' + type + '] ' + pat.slice(0, 80) + (pat.length > 80 ? '...' : '');
+        });
+        patternSummary = '\n## Recent Learned Patterns\n\n' + summaries.join('\n') + '\n';
+      }
+    } catch {}
+  }
+
+  const md = buildInjectMarkdown(entries, sessionId);
+  if (!md && !hookSummary && !patternSummary) {
     if (existsSync(DRAIN_FILE)) { try { unlinkSync(DRAIN_FILE); } catch {} }
     log('step1: queue-empty');
     return;
   }
-  const md = buildInjectMarkdown(entries, sessionId);
-  writeFileSync(DRAIN_FILE, md + hookSummary, 'utf-8');
+  writeFileSync(DRAIN_FILE, md + patternSummary + hookSummary, 'utf-8');
   writeFileSync(QUEUE_FILE, '', 'utf-8');
-  log(`step1: ${entries.length} entries drained → next session`);
+  log('step1: ' + entries.length + ' entries drained -> next session');
 }
 
 // ── Step 2: Self-improve ───────────────────────────────────────────────────
@@ -391,13 +389,12 @@ async function step4_trajectory() {
       metadata: { sessionId, date: today, callCount: toolCalls.length },
     });
   }
-  // Write to MCP queue
-  const QUEUE_FILE = resolve(STATE_DIR, 'mcp-learn-queue.jsonl');
+  // Write directly to agentdb-patterns.jsonl (bypass broken MCP tool)
   for (const entry of mcpPatterns) {
-    appendFileSync(QUEUE_FILE, JSON.stringify({ ...entry, queuedAt: now }) + '\n', 'utf-8');
+    writePatternDirect(entry);
   }
   if (mcpPatterns.length > 0) {
-    log(`step4: ${mcpPatterns.length} patterns queued for MCP`);
+    log(`step4: ${mcpPatterns.length} patterns written to agentdb-patterns.jsonl`);
   }
 }
 
