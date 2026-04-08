@@ -6,10 +6,22 @@
  */
 import { existsSync, readFileSync, readdirSync, statSync } from 'fs';
 import { resolve, dirname } from 'path';
-import { fileURLToPath } from 'url';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
+const __dirname = dirname(process.argv[1]);
 const STATE_DIR = resolve(__dirname, '../state');
+const CACHE_FILE = resolve(STATE_DIR, 'hook-stats-cache.json');
+
+function readCache() {
+  try {
+    const c = JSON.parse(readFileSync(CACHE_FILE, 'utf-8'));
+    // valid 60s
+    if (Date.now() - c.ts < 60000) return c.data;
+  } catch {}
+  return null;
+}
+function writeCache(data) {
+  writeFileSync(CACHE_FILE, JSON.stringify({ ts: Date.now(), data }), 'utf-8');
+}
 
 function getSize(p) {
   try { return statSync(p).size; } catch { return 0; }
@@ -26,8 +38,10 @@ function stat(file, size, lines, age) {
 }
 
 async function main() {
+  const cached = readCache();
+  if (cached) { console.log(`[omc-stats] ${new Date().toISOString().slice(11,19)} (cached)`); return; }
+
   const d = STATE_DIR;
-  const entries = {};
 
   // Core state files (always present)
   const files = [
@@ -61,7 +75,9 @@ async function main() {
     return acc + (m ? parseInt(m[1]) : 0);
   }, 0);
 
-  console.log(`[omc-stats] ${new Date().toISOString().slice(11, 19)} | ${lines.join(' | ')} | total:${totalSize}B`);
+  const out = `[omc-stats] ${new Date().toISOString().slice(11, 19)} | ${lines.join(' | ')} | total:${totalSize}B`;
+  writeCache(out);
+  console.log(out);
 }
 
 main().catch(() => {});

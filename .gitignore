@@ -48,6 +48,8 @@ node_modules/
 !.omc/scripts/hook-test-rules.mjs
 !.omc/scripts/hook-self-improve.mjs
 !.omc/scripts/omc-insight-generator.mjs
+!.omc/scripts/omc-insight-action.mjs
+!.omc/scripts/hook-stats.mjs
 .omc/
 .swarm/
 .ruff_cache/

@@ -116,7 +116,11 @@ function readLiveStats() {
       } catch {}
     }
     // Deduplicate bash commands, keep top 10
-    const topBash = [...new Set(bashCommands)].slice(0, 10);
+    // Exclude self-diagnostic commands to avoid false-positive insight loops
+    const selfScripts = ['hook-stats.mjs', 'omc-insight-action.mjs', 'omc-insight-generator.mjs', 'hook-audit-log-mcp.mjs'];
+    const topBash = [...new Set(bashCommands)]
+      .filter(cmd => !selfScripts.some(s => cmd.includes(s)))
+      .slice(0, 10);
     return { events, toolCalls, tools, seeds, userPrompts, lines: lines.length, topBash };
   } catch { return null; }
 }
