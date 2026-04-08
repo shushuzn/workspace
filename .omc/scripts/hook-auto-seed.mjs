@@ -133,8 +133,7 @@ function writeInsightTrigger(state, toolStats) {
 }
 
 // Read tool stats from current transcript (live stats)
-function readLiveToolStats() {
-  const sessionId = process.env.OMC_SESSION_ID;
+function readLiveToolStats(sessionId) {
   if (!sessionId) return null;
   const transcriptPath = `C:/Users/adm/.claude/projects/D--OpenClaw-workspace/${sessionId}.jsonl`;
   if (!existsSync(transcriptPath)) return null;
@@ -236,46 +235,54 @@ async function main() {
     return;
   }
 
-  // --check: increment + evaluate
+  // --check: read transcript total tool calls, trigger if >= THRESHOLD
   if (args.check) {
-    const state = readState();
     const currentSession = getCurrentSessionId(hookSessionId);
-    const LEGACY_RE = /^\d{10,14}$/;
-    const prevIsLegacy = state.sessionId && LEGACY_RE.test(state.sessionId);
-    const sameSession = !state.sessionId || state.sessionId === currentSession;
-    const effectiveCount = (!sameSession && !prevIsLegacy) ? 0 : state.count;
-    const newState = { ...state, count: effectiveCount + 1, sessionId: currentSession };
-    writeState(newState);
+    const state = readState();
+    const sameSession = state.sessionId === currentSession;
 
-    // Check threshold
-    if (newState.count >= THRESHOLD && !newState.fired) {
+    // Read live tool count from transcript
+    const toolStats = readLiveToolStats(currentSession) || { totalToolCalls: 0, tools: {}, topBash: [] };
+    const totalCalls = toolStats.totalToolCalls || 0;
+
+    // Only reset if session changed
+    if (!sameSession) {
+      writeState({ count: 0, fired: false, sessionId: currentSession });
+    }
+
+    // Read current state fresh
+    const freshState = readState();
+    if (totalCalls >= THRESHOLD && !freshState.fired) {
       if (hasRecentAutoSeed()) {
         console.log('auto-seed: recent entry already exists, skipping duplicate');
       } else {
         try {
-          const toolStats = readLiveToolStats();
-          // Write trigger file (AI will read on next prompt)
-          writeInsightTrigger(newState, toolStats);
+          const trigger = {
+            sessionId: currentSession,
+            count: totalCalls,
+            threshold: THRESHOLD,
+            toolStats,
+            triggeredAt: new Date().toISOString(),
+          };
+          writeFileSync(TRIGGER_FILE, JSON.stringify(trigger, null, 2), 'utf-8');
 
-          // Also append to ideas.md as backup
-          const today = new Date().toISOString().split('T')[0];
-          const entry = `- [${today}] STAGE [AUTO:auto-insight] [score:3×4=12] [f:4] 原生insight生成 | benefit: AI在会话中实时生成带Fix的insight | reason: 工具调用已达${newState.count}次，触发实时insight | approach: hook触发→AI生成→session-insights.md→step7执行 | AUTO:${Date.now()}`;
+          const today = new Date().toLocaleDateString('en-CA');
+          const entry = `- [${today}] STAGE [AUTO:auto-insight] [score:3×4=12] [f:4] 原生insight生成 | benefit: AI在会话中实时生成带Fix的insight | reason: 工具调用已达${totalCalls}次，触发实时insight | approach: hook触发→AI生成→session-insights.md→step7执行 | AUTO:${Date.now()}`;
           appendIdea(entry);
 
-          // Build and print insight prompt for in-session AI
-          const prompt = buildInsightPrompt({ ...newState, toolStats });
+          const prompt = buildInsightPrompt({ count: totalCalls, toolStats });
           console.log('INSIGHT_TRIGGER');
           console.log(prompt);
 
-          newState.fired = true;
+          const newState = { ...freshState, fired: true };
           writeState(newState);
-          console.log(`AUTO:insight-triggered (count:${newState.count})`);
+          console.log(`AUTO:insight-triggered (totalCalls:${totalCalls})`);
         } catch (e) {
           console.error('failed to trigger insight:', e.message);
         }
       }
     } else {
-      console.log(`count:${newState.count}/${THRESHOLD}`);
+      console.log(`totalToolCalls:${totalCalls}/${THRESHOLD}`);
     }
     return;
   }
