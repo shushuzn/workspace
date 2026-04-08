@@ -444,6 +444,11 @@
 **Rule**: Sustained heavy bash usage (60%+) often signals task-execution mode without generative output — track as efficiency signal.
 **Fix**: N/A
 
+### 29. [PostToolUse hook 未触发导致计数器失效]
+**Observation**: 当前 session 的 PostToolUse hook 未触发，audit log 无当前 session 记录，计数器始终为 0。hook 配置正确但执行层失效，导致 auto-insight 管道断路。
+**Rule**: hook 失效时应触发 AI 端主动检测，而非静默失败
+**Fix**: 在 `hook-session-start-inject.mjs` 中增加计数器检查，若 `count>0 且 fired=false`，注入提醒让 AI 主动完成 insight 生成
+
 ### 28. [实时insight生成管道打通] [in-session]
 **Observation**: 本 session 修改了 `hook-auto-seed.mjs`（seed→insight）和 `hook-session-start-inject.mjs`（注入 trigger），实现了10次工具调用触发 in-session insight 生成，而非事后分析 trajectory。测试确认 trigger 正确注入到 session-start hook 输出中。
 **Rule**: insight 应在会话中实时生成，不依赖 drain 后的 trajectory 分析

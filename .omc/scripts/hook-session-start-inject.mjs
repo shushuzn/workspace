@@ -22,8 +22,15 @@ const INSIGHTS_FILE = resolve(STATE_DIR, 'session-insights.md');
 const VERIFY_FILE = resolve(STATE_DIR, 'insight-verifications.md');
 const MID_FILE = resolve(STATE_DIR, 'mid-session-inject.md');
 const TRIGGER_FILE = resolve(STATE_DIR, 'auto-insight-trigger.json');
+const COUNTER_FILE = resolve(STATE_DIR, 'auto-seed-counter.json');
 
 function log(...a) { console.error('[inject]', ...a); }
+
+// Check counter for interrupted insight generation
+function readCounter() {
+  if (!existsSync(COUNTER_FILE)) return null;
+  try { return JSON.parse(readFileSync(COUNTER_FILE, 'utf-8')); } catch { return null; }
+}
 
 // Read last trajectory for mid-session context
 function readLastTrajectory() {
@@ -41,7 +48,29 @@ function readLastTrajectory() {
 async function main() {
   const parts = [];
 
-  // 0. Auto-insight trigger (highest priority — in-session insight generation)
+  // 0. Counter check: if count>0 but trigger not fired, AI should complete insight
+  const counter = readCounter();
+  if (counter && counter.count > 0 && !counter.fired && !existsSync(TRIGGER_FILE)) {
+    const prompt = `## COUNTER INTERRUPTED
+
+上次数调用未完成 insight 生成（计数器=${counter.count}，fired=${counter.fired}）。
+
+请立即生成一条 insight，基于以下上下文：
+- 当前工具统计可通过读取 transcript 分析
+- 或直接基于近期工作内容生成
+
+格式：
+### N. [标题]
+**Observation**: [具体观察]
+**Rule**: [规则]
+**Fix**: [可执行动作或 N/A]
+
+写完追加到 .omc/state/session-insights.md，若 Fix 非 N/A 则同步追加到 .omc/state/pending-actions.md
+`;
+    parts.push(prompt);
+  }
+
+  // 1. Auto-insight trigger (highest priority — in-session insight generation)
   if (existsSync(TRIGGER_FILE)) {
     try {
       const trigger = JSON.parse(readFileSync(TRIGGER_FILE, 'utf-8'));
