@@ -18,6 +18,7 @@ const DRAIN_FILE = resolve(STATE_DIR, 'session-start-mcp-inject.md');
 const NUDGE_FILE = resolve(STATE_DIR, 'session-nudge.md');
 const WF_PATTERNS_FILE = resolve(__dirname, '../innovation/workflow-patterns.md');
 const INSIGHTS_FILE = resolve(STATE_DIR, 'session-insights.md');
+const VERIFY_FILE = resolve(STATE_DIR, 'insight-verifications.md');
 
 async function main() {
   const parts = [];
@@ -65,6 +66,14 @@ async function main() {
     }
     if (unexecuted.length > 0) {
       parts.push(`## Unexecuted Insights (auto-detected)\n\n${unexecuted.map((t, i) => `${i + 1}. **${t}**`).join('\n')}\n\nGenerate execution plan for each unexecuted insight.`);
+    }
+  }
+
+  // 6. Recent verification results (feedback loop)
+  if (existsSync(VERIFY_FILE)) {
+    const content = readFileSync(VERIFY_FILE, 'utf-8').trim();
+    if (content) {
+      parts.push(`## Recent Insight Verification Results\n\n${content}`);
     }
   }
 

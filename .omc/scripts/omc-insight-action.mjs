@@ -14,7 +14,9 @@ import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const PENDING_FILE = resolve(__dirname, '../state/pending-actions.md');
+const STATE_DIR = resolve(__dirname, '../state');
+const PENDING_FILE = resolve(STATE_DIR, 'pending-actions.md');
+const VERIFY_FILE = resolve(STATE_DIR, 'insight-verifications.md');
 
 function log(...a) { console.log('[insight]', ...a); }
 
@@ -65,6 +67,24 @@ function doneAction(id) {
   log(`completed: ${id}`);
 }
 
+function verifyAction(id, result) {
+  // Write verification record
+  const record = {
+    id,
+    result: result || 'executed',
+    verifiedAt: new Date().toISOString(),
+  };
+  const existing = existsSync(VERIFY_FILE) ? readFileSync(VERIFY_FILE, 'utf-8') : '';
+  const entry = `## ${id}\n\n- **Result**: ${result || 'executed'}\n- **Verified**: ${record.verifiedAt}\n\n`;
+  writeFileSync(VERIFY_FILE, existing + entry, 'utf-8');
+  log(`verified: ${id}`);
+}
+
+function listVerified() {
+  if (!existsSync(VERIFY_FILE)) { console.log('no verifications yet'); return; }
+  console.log(readFileSync(VERIFY_FILE, 'utf-8'));
+}
+
 // ── CLI ─────────────────────────────────────────────────────────────────────
 const args = process.argv.slice(2);
 if (args.includes('--add')) {
@@ -82,7 +102,28 @@ if (args.includes('--add')) {
   if (out) console.log(out);
 } else if (args.includes('--done')) {
   const idx = args.indexOf('--done') + 1;
-  if (idx) doneAction(args[idx]);
+  if (idx) {
+    const idArg = args[idx];
+    if (idArg === 'all') {
+      const items = readPending();
+      for (const item of items) verifyAction(item.id, 'executed');
+      writePending([]);
+      log('all actions verified and cleared');
+    } else {
+      doneAction(idArg);
+    }
+  }
+} else if (args.includes('--verify')) {
+  const idx = args.indexOf('--verify') + 1;
+  const result = args[idx + 1] && !args[idx + 1].startsWith('--') ? args[idx + 1] : 'executed';
+  const idArg = args[idx];
+  if (idArg && !idArg.startsWith('--')) {
+    verifyAction(idArg, result);
+  } else {
+    listVerified();
+  }
+} else if (args.includes('--list-verified')) {
+  listVerified();
 }
 
 export { addAction, readPending, pickup, doneAction };
