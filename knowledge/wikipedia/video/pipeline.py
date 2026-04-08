@@ -210,12 +210,17 @@ def process_video(mp3_path: Path, scene_imgs: list, force: bool = False) -> bool
         return True
 
     print(f"  → 合成视频: {key} ({len(scene_imgs)} 场景)")
+    srt_path = mp3_path.with_suffix(".srt")
     try:
         if len(scene_imgs) == 1:
-            ok = make_video_multi([(scene_imgs[0], 0.0)], mp3_path, output_path, bitrate=AUDIO_BITRATE, scene_key='scene')
+            ok = make_video_multi([(scene_imgs[0], 0.0)], mp3_path, output_path, bitrate=None, scene_key='scene',
+                                  bg_music_path=args.bg_music, bg_music_vol=args.bg_music_vol,
+                                  subtitle_path=str(srt_path) if srt_path.exists() else None)
         else:
             imgs_with_time = [(p, 0.0) for p in scene_imgs]
-            ok = make_video_multi(imgs_with_time, mp3_path, output_path, bitrate=AUDIO_BITRATE, scene_key='scene')
+            ok = make_video_multi(imgs_with_time, mp3_path, output_path, bitrate=None, scene_key='scene',
+                                  bg_music_path=args.bg_music, bg_music_vol=args.bg_music_vol,
+                                  subtitle_path=str(srt_path) if srt_path.exists() else None)
         if ok:
             update_cache(cache, 'videos', key, input_hash, str(output_path), size=output_path.stat().st_size)
             save_cache(cache)
@@ -241,7 +246,7 @@ def get_audio_duration(mp3_path: Path) -> float:
     return 0.0
 
 # ── 主流程 ───────────────────────────────────────────────────────
-def run_pipeline(articles_dir: Path, force: bool = False, resume: bool = False, workers: int = MAX_WORKERS, engine: str = None, use_t2i: bool = True):
+def run_pipeline(articles_dir: Path, force: bool = False, resume: bool = False, workers: int = MAX_WORKERS, engine: str = None, use_t2i: bool = True, bg_music_path: str = None, bg_music_vol: float = 0.18):
     """批量视频生产流水线"""
     # 1. 收集所有待处理 speech 文件
     speech_files = sorted(articles_dir.rglob("*-speech.txt"))
@@ -420,6 +425,8 @@ def main():
     parser.add_argument("--tts", default=None, choices=["kokoro", "edge"],
                         help=f"TTS 引擎: kokoro(本地) / edge(在线，默认 {TTS_ENGINE})")
     parser.add_argument("--no-t2i", action="store_true", help="禁用 T2I，配图全部用 matplotlib")
+    parser.add_argument("--bg-music", default=None, help="背景音乐文件路径（如 .mp3）")
+    parser.add_argument("--bg-music-vol", type=float, default=0.18, help="BGM 音量 0.0-1.0（默认0.18）")
     args = parser.parse_args()
 
     BATCH_SIZE = args.batch
