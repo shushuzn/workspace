@@ -12,3 +12,6 @@
 - [2026-04-09] STAGE [github-trending] [score:3×3=9] [f:3] MegaTrain单卡训千亿参数→rl-trading | benefit: 突破GPU显存限制，在有限硬件上训更大模型 | reason: rl-trading当前受限于单卡显存 | approach: 研究MegaTrain的gradient checkpoint+offload策略→应用到RL训练循环 | shipped:2026-04-09
 - [2026-04-08] STAGE [AUTO:auto-insight] [score:3×4=12] [f:4] 原生insight生成 | benefit: AI在会话中实时生成带Fix的insight | reason: 工具调用已达10次，触发实时insight | approach: hook触发→AI生成→session-insights.md→step7执行 | AUTO:1775665225464 | shipped:2026-04-09
 - [2026-04-08] STAGE [AUTO:auto-insight] [score:3×4=12] [f:4] 原生insight生成 | benefit: AI在会话中实时生成带Fix的insight | reason: 工具调用已达10次，触发实时insight | approach: hook触发→AI生成→session-insights.md→step7执行 | AUTO:1775666620816 | killed:2026-04-09 DUPLICATE of shipped:2026-04-09
+- [2026-04-08] STAGE [AUTO:auto-insight] [score:3×4=12] [f:4] 原生insight生成 | benefit: AI在会话中实时生成带Fix的insight | reason: 工具调用已达10次，触发实时insight | approach: hook触发→AI生成→session-insights.md→step7执行 | AUTO:1775667527618
+- [2026-04-08] STAGE [AUTO:auto-insight] [score:3×4=12] [f:4] 原生insight生成 | benefit: AI在会话中实时生成带Fix的insight | reason: 工具调用已达10次，触发实时insight | approach: hook触发→AI生成→session-insights.md→step7执行 | AUTO:1775667693275
+- [2026-04-09] STAGE [AUTO:auto-insight] [score:3×4=12] [f:4] 原生insight生成 | benefit: AI在会话中实时生成带Fix的insight | reason: 工具调用已达1809次，触发实时insight | approach: hook触发→AI生成→session-insights.md→step7执行 | AUTO:1775668799384
