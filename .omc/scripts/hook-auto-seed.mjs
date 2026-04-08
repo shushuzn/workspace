@@ -91,8 +91,13 @@ function hasRecentAutoSeed() {
   if (!existsSync(IDEAS_FILE)) return false;
   const content = readFileSync(IDEAS_FILE, 'utf-8');
   const lines = content.split('\n');
-  const recent = lines.slice(-10);
-  return recent.some(l => l.includes('[AUTO:') && !l.includes('shipped:') && !l.includes('killed:'));
+  const recent = lines.slice(-30); // look back 30 lines for today's entries
+  const todayLocal = new Date().toLocaleDateString('en-CA'); // YYYY-MM-DD local timezone
+  return recent.some(l => {
+    if (!l.includes('[AUTO:') || l.includes('shipped:') || l.includes('killed:')) return false;
+    const dateMatch = l.match(/^\- \[(\d{4}-\d{2}-\d{2})\]/);
+    return dateMatch && dateMatch[1] === todayLocal;
+  });
 }
 
 // ── Generate trigger for in-session insight ──────────────────────────────────
