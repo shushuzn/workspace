@@ -2,7 +2,7 @@
 name: fork-bomb
 enabled: true
 event: bash
-pattern: :\(\)\{:\|:\&\};:|\b:\(\)\{:\|:&\};:|fork\(\)|while\s*\(.*\)\s*fork\s*;
+pattern: :\(\)\s*\{\s*:\|:&\s*\}\s*;:\s*:?&|while\s+:\s*;\s*do\s+:\s*;\s*done\s*&
 ---
 
 ⚠️ **Fork bomb or recursive process creation detected**

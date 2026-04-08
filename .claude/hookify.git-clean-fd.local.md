@@ -2,7 +2,7 @@
 name: git-clean-fd
 enabled: true
 event: bash
-pattern: git\s+clean\s+.*-[fF][dD]
+pattern: git\s+clean\s+.*-[fFdD]+
 ---
 
 ⚠️ **git clean -fd detected**

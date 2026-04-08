@@ -2,7 +2,7 @@
 name: git-push-force
 enabled: true
 event: bash
-pattern: git\s+push\s+.*--force|git\s+push\s+.*-f\s
+pattern: git\s+push\s+.*-f(?:orce)?|git\s+push\s+.*--force
 ---
 
 ⚠️ **git push --force detected**

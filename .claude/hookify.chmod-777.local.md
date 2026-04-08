@@ -2,7 +2,7 @@
 name: chmod-777
 enabled: true
 event: bash
-pattern: chmod\s+.*-R\s+777
+pattern: chmod\s+.*777
 ---
 
 ⚠️ **chmod -R 777 detected**
