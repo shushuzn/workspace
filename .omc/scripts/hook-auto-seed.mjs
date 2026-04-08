@@ -46,6 +46,7 @@ const TRIGGER_FILE = resolve(STATE_DIR, 'auto-insight-trigger.json');
 const INSIGHTS_FILE = resolve(STATE_DIR, 'session-insights.md');
 const IDEAS_FILE = resolve(__dirname, '../innovation/ideas.md');
 const NUDGE_FILE = resolve(STATE_DIR, 'session-nudge.md');
+const NOTPAD_FILE = resolve(__dirname, '../notepad.md');
 
 // ── Config ──────────────────────────────────────────────────────────────────
 const THRESHOLD = 10; // 10+ tool calls triggers insight generation
@@ -271,6 +272,24 @@ async function main() {
         // Also append trigger to nudge file so AI sees it on next prompt
         const nudgeLine = `⚡ INSIGHT TRIGGER: ${totalCalls} tool calls reached — generate insight now: .omc/state/session-insights.md`;
         appendFileSync(NUDGE_FILE, nudgeLine + '\n', 'utf-8');
+
+        // Write to notepad Priority Context for immediate AI visibility
+        const notepadContent = `# Notepad
+<!-- Auto-managed by OMC. Manual edits preserved in MANUAL section. -->
+
+## Priority Context
+<!-- ALWAYS loaded. Keep under 500 chars. Critical discoveries only. -->
+⚡ INSIGHT TRIGGER: ${totalCalls} tool calls (threshold ${THRESHOLD}) — generate insight: .omc/state/session-insights.md | Read trigger: .omc/state/auto-insight-trigger.json
+
+DESIGN.md pattern (VoltAgent/awesome-design-md): 9 sections — Visual Theme, Colors, Typography, Components, Layout, Depth, Do's/Don'ts, Responsive, Agent Prompts. Key: dark themes use bg luminance stepping + semi-transparent white borders. Light themes use shadow-as-border technique. All use variable fonts with negative tracking at display sizes. REF: memory/design-systems-learned.md
+
+## Working Memory
+<!-- Session notes. Auto-pruned after 7 days. -->
+
+## MANUAL
+<!-- User content. Never auto-pruned. -->
+`;
+        writeFileSync(NOTPAD_FILE, notepadContent, 'utf-8');
 
         const prompt = buildInsightPrompt({ count: totalCalls, toolStats });
         console.log('INSIGHT_TRIGGER');
