@@ -39,6 +39,36 @@ function readState() {
   }
 }
 
+// Detect session continuity by comparing sessionId from transcript path.
+// Hookify injects session_id in hook env vars; fallback to matching state file sessionId.
+// If sessionId changed (compaction continuation), PRESERVE count — don't reset to 0.
+function getCurrentSessionId() {
+  // Try OMC session state files first — format: sessions/{sessionId}/state.json
+  const sessionsDir = resolve(__dirname, '../state/sessions');
+  if (existsSync(sessionsDir)) {
+    try {
+      const entries = require('fs').readdirSync(sessionsDir);
+      // Find the most recent session directory
+      let latestSession = null;
+      let latestMtime = 0;
+      for (const entry of entries) {
+        if (entry.startsWith('.')) continue;
+        const fullPath = resolve(sessionsDir, entry);
+        const stat = require('fs').statSync(fullPath);
+        if (stat.mtimeMs > latestMtime) {
+          latestMtime = stat.mtimeMs;
+          latestSession = entry;
+        }
+      }
+      if (latestSession) return latestSession;
+    } catch { /* fall through */ }
+  }
+  // Fallback: environment variable set by hook system
+  if (process.env.OMC_SESSION_ID) return process.env.OMC_SESSION_ID;
+  // Fallback: Date.now (reliable for single session run)
+  return Date.now().toString();
+}
+
 function writeState(state) {
   if (!existsSync(STATE_DIR)) mkdirSync(STATE_DIR, { recursive: true });
   writeFileSync(STATE_FILE, JSON.stringify(state, null, 2), 'utf-8');
@@ -112,9 +142,10 @@ function generateSeedEntry(state, context) {
 async function main() {
   const args = parseArgs(process.argv.slice(2));
 
-  // --reset: fresh session
+  // --reset: fresh session (use same sessionId detection as --check)
   if (args.reset) {
-    writeState({ count: 0, fired: false, sessionId: Date.now().toString() });
+    const sid = getCurrentSessionId();
+    writeState({ count: 0, fired: false, sessionId: sid });
     console.log('counter reset');
     return;
   }
@@ -122,7 +153,17 @@ async function main() {
   // --check: increment + evaluate
   if (args.check) {
     const state = readState();
-    const newState = { ...state, count: state.count + 1 };
+    const currentSession = getCurrentSessionId();
+    // Check if sessionId changed:
+    // - Legacy: previous ran with Date.now() timestamp, new uses real session dir.
+    //   Treat as same logical session → preserve count (don't reset on format change).
+    // - Real change: same format AND different value → compaction continuation.
+    //   Reset count so the resumed session gets a fresh 5-call window.
+    const LEGACY_RE = /^\d{10,14}$/; // Date.now() timestamps look like 10-14 digits
+    const prevIsLegacy = state.sessionId && LEGACY_RE.test(state.sessionId);
+    const sameSession = !state.sessionId || state.sessionId === currentSession;
+    const effectiveCount = (!sameSession && !prevIsLegacy) ? 0 : state.count;
+    const newState = { ...state, count: effectiveCount + 1, sessionId: currentSession };
     writeState(newState);
 
     // Check threshold (and not already fired this session)
