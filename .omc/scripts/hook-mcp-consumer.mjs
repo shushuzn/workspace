@@ -21,8 +21,8 @@ const STATE_DIR = resolve(__dirname, '../state');
 const QUEUE_FILE = resolve(STATE_DIR, 'mcp-learn-queue.jsonl');
 const PATTERN_STORE = resolve(STATE_DIR, 'agentdb-patterns.jsonl');
 const DRAIN_FILE = resolve(STATE_DIR, 'session-start-mcp-inject.md');
-const OLLAMA_URL = 'http://127.0.0.1:11434/api/generate';
-const MODEL = 'gemma4:e2b';
+const MINIMAX_URL = 'https://api.minimaxi.com/v1/text/chatcompletion_v2';
+const MODEL = 'MiniMax-Text-01';
 
 // ── Queue management ──────────────────────────────────────────────────────────
 function readQueue() {
@@ -37,21 +37,18 @@ function clearQueue() {
   writeFileSync(QUEUE_FILE, '', 'utf-8');
 }
 
-// ── Ollama call ───────────────────────────────────────────────────────────────
-async function callOllama(prompt, maxTokens = 256) {
-  const res = await fetch(OLLAMA_URL, {
+// ── MiniMax call ───────────────────────────────────────────────────────────────
+async function callMinimax(prompt, maxTokens = 256) {
+  const apiKey = process.env.MINIMAX_API_KEY;
+  if (!apiKey) throw new Error('MINIMAX_API_KEY not set');
+  const res = await fetch(MINIMAX_URL, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      model: MODEL,
-      prompt,
-      options: { num_predict: maxTokens },
-      stream: false,
-    }),
+    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
+    body: JSON.stringify({ model: MODEL, messages: [{ role: 'user', content: prompt }], max_tokens: maxTokens }),
   });
-  if (!res.ok) throw new Error(`Ollama ${res.status}: ${await res.text()}`);
+  if (!res.ok) throw new Error(`MiniMax ${res.status}: ${await res.text()}`);
   const json = await res.json();
-  return json.response?.trim() || '';
+  return json.choices?.[0]?.message?.content?.trim() || '';
 }
 
 // ── Store patterns locally ───────────────────────────────────────────────────
@@ -123,7 +120,7 @@ async function processWithLLM(entries) {
     ).join('\n');
 
     try {
-      const insight = await callOllama(
+      const insight = await callMinimax(
         `You are an OMC learning summarizer. Given these learning entries, respond with a 1-line insight.\n\n${summary}\n\nInsight:`,
         64
       );
