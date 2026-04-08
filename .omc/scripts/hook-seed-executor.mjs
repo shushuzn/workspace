@@ -200,25 +200,19 @@ async function main() {
   };
   writeFileSync(STATE_FILE, JSON.stringify(state, null, 2), 'utf-8');
 
-  // Write state and mark shipped
-  const newContent = markShipped(content, target.raw, today);
-  writeFileSync(IDEAS_FILE, newContent, 'utf-8');
-  writeFileSync(STATE_FILE, JSON.stringify(state, null, 2), 'utf-8');
-
   // If OMC_SEED_PROMPT_FILE is set (from hook-auto-seed.mjs), write prompt there
   const promptFile = process.env.OMC_SEED_PROMPT_FILE;
   const prompt = buildAgentPrompt(target);
   if (promptFile) {
     writeFileSync(promptFile, prompt, 'utf-8');
-    console.log(`\n  ✅ Seed marked shipped:${today}`);
+    console.log(`\n  ✅ Seed selected (agent will mark shipped after execution)`);
     console.log(`  Prompt written: ${promptFile}`);
     console.log(`  State: ${STATE_FILE}\n`);
   } else {
     console.log('\n---AGENT-PROMPT-BEGIN---');
     console.log(prompt);
     console.log('---AGENT-PROMPT-END---');
-    console.log(`\n  ✅ Seed marked shipped:${today}`);
-    console.log(`  State: ${STATE_FILE}\n`);
+    console.log(`\n  ✅ Seed selected (agent will mark shipped after execution)\n`);
   }
 }
 

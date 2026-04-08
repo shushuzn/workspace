@@ -17,7 +17,7 @@
  *     3. Executor parses ideas.md, picks highest-score un-shipped seed, executes, marks shipped
  *   Anti-recursion: OMC_SKIP_HOOKS env var prevents re-triggering this hook
  */
-import { existsSync, readFileSync, writeFileSync, mkdirSync, readdirSync, statSync } from 'fs';
+import { existsSync, readFileSync, writeFileSync, mkdirSync, appendFileSync, readdirSync, statSync } from 'fs';
 import { spawn } from 'child_process';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
@@ -75,6 +75,11 @@ function writeState(state) {
   writeFileSync(STATE_FILE, JSON.stringify(state, null, 2), 'utf-8');
 }
 
+function appendIdea(line) {
+  mkdirSync(dirname(IDEAS_FILE), { recursive: true });
+  appendFileSync(IDEAS_FILE, line + '\n', 'utf-8');
+}
+
 function hasRecentAutoSeed() {
   if (!existsSync(IDEAS_FILE)) return false;
   const content = readFileSync(IDEAS_FILE, 'utf-8');
@@ -95,9 +100,11 @@ function parseArgs(argv) {
   return args;
 }
 
-// ── Extract context from recent audit log ────────────────────────────────────
-// (kept for future use: context-aware seed generation)
-// function extractRecentContext() { ... }
+// ── Generate seed suggestion ─────────────────────────────────────────────────
+function generateSeedEntry(state) {
+  const today = new Date().toISOString().split('T')[0];
+  return `- [${today}] STAGE [AUTO:auto-seed-generator] [score:3×4=12] [f:4] 自动化工具调用模式识别 | benefit: 从${state.count}次调用中提取工作流模式并固化 | reason: 工具调用已达${state.count}次，存在可复用的工作流 | approach: 分析调用链→识别高频模式→生成可复用skill或adapter | AUTO:${Date.now()}`;
+}
 
 // ── Spawn executor agent ──────────────────────────────────────────────────────
 function spawnExecutor() {
@@ -133,23 +140,21 @@ function spawnExecutor() {
       return;
     }
 
-    // Step 2: spawn claude CLI with the prompt file
+    // Step 2: spawn claude CLI with prompt piped via heredoc
     const env2 = {
       ...process.env,
       OMC_SKIP_HOOKS: 'PostToolUse,PreToolUse',
     };
     const prompt = readFileSync(PROMPT_FILE, 'utf-8');
-    const claude = spawn(CLAUDE_BIN, [
-      '--add-mcp-tools',
-      '--dangerously-skip-permissions',
+    const claude = spawn('bash', [
+      '-c',
+      `printf '%s' ${JSON.stringify(prompt)} | "${CLAUDE_BIN.replace(/\\/g, '\\\\')}" --add-mcp-tools --dangerously-skip-permissions`,
     ], {
       env: env2,
-      stdio: ['pipe', 'inherit', 'inherit'],
+      stdio: 'inherit',
       detached: true,
       cwd: 'D:/OpenClaw/workspace',
     });
-    claude.stdin.write(prompt);
-    claude.stdin.end();
     claude.unref();
     console.log(`AUTO:claude-spawned (pid ${claude.pid})`);
   });
@@ -184,12 +189,14 @@ async function main() {
     writeState(newState);
 
     // Check threshold (and not already fired this session)
-    if (newState.count >= THRESHOLD && !newState.fired && !hasRecentAutoSeed()) {
+    if (newState.count >= THRESHOLD && !newState.fired) {
       try {
+        const entry = generateSeedEntry(newState);
+        appendIdea(entry);
         spawnExecutor();
         newState.fired = true;
         writeState(newState);
-        console.log(`AUTO:spawning-seed-executor`);
+        console.log(`AUTO:${entry}`);
       } catch (e) {
         console.error('failed to spawn executor:', e.message);
       }
