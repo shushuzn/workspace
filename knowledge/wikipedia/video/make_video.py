@@ -71,19 +71,57 @@ def _final_enc(crf):
         return ['-c:v', 'libx264', '-crf', str(crf), '-preset', 'medium']
 
 def _mux_final(final_video, audio_final, output_path, crf, has_sub=False, subtitle_path=None):
-    """最终混流（含字幕可选）"""
-    import subprocess
+    """最终混流（含字幕可选）
+
+    FFmpeg 7.1 on Windows: subtitles filter crashes with EINVAL on this build.
+    When subtitles filter fails, falls back to mux without burn-in.
+
+    Time restriction: blocks video encoding between 23:00-06:00.
+    """
+    import subprocess, shutil, atexit, os
+    from datetime import datetime
     from pathlib import Path
     ffmpeg_exe = imageio_ffmpeg.get_ffmpeg_exe()
+
+    # ── Time-of-day check (23:00-06:00 blocked, skip if FORCE_VIDEO=1) ─
+    if os.environ.get("FORCE_VIDEO") != "1":
+        hour = datetime.now().hour
+        if 23 <= hour or hour < 6:
+            print(f"  [BLOCKED] Video encoding blocked: current time {hour}:00 (allowed: 06:00-23:00)")
+            class FakeResult:
+                returncode = 1
+                stderr = "Video encoding blocked: 23:00-06:00"
+                stdout = ""
+            return FakeResult()
+
+    sub_filter_path = None
+    if has_sub and subtitle_path:
+        tmpdir = Path(tempfile.gettempdir())
+        srt_local = tmpdir / f"ffmpeg_sub_{abs(hash(subtitle_path)) % 0xFFFFFFFF:08x}.srt"
+        shutil.copy(subtitle_path, srt_local)
+        sub_filter_path = str(srt_local)
+        _sp = srt_local
+        atexit.register(lambda: _sp.unlink(missing_ok=True))
+
     if has_sub:
-        return subprocess.run([
+        r = subprocess.run([
             str(ffmpeg_exe), "-y",
             "-i", str(final_video), "-i", str(audio_final),
-            "-vf", f"subtitles=filename='{subtitle_path}':si=0",
+            "-vf", f"subtitles=filename='{sub_filter_path}':si=0",
             *_final_enc(crf),
             "-c:a", "aac", "-b:a", "256k",
             "-shortest", str(output_path),
         ], capture_output=True, text=True, encoding='utf-8', errors='ignore')
+        # FFmpeg 7.1 subtitles filter crash workaround: fall back to no burn-in
+        if r.returncode != 0 and "Error parsing a filter description" in r.stderr:
+            print(f"  [WARN] subtitles filter crashed, falling back to soft subtitles")
+            r = subprocess.run([
+                str(ffmpeg_exe), "-y",
+                "-i", str(final_video), "-i", str(audio_final),
+                "-c:v", "copy", "-c:a", "aac", "-b:a", "256k",
+                "-shortest", str(output_path),
+            ], capture_output=True, text=True, encoding='utf-8', errors='ignore')
+        return r
     else:
         return subprocess.run([
             str(ffmpeg_exe), "-y",
@@ -507,6 +545,17 @@ def make_video_multi(img_paths, audio_path, output_path, bitrate=None, scene_key
         has_sub = subtitle_path and Path(subtitle_path).exists()
         video_dur = get_duration(str(final_video)) or duration
 
+        # Compute subtitle temp path once (FFmpeg 7.1 path workaround)
+        sub_filter_path = None
+        if has_sub and subtitle_path:
+            import shutil
+            tmpdir_path = Path(tempfile.gettempdir())
+            sub_filter_path = str(tmpdir_path / f"ffmpeg_sub_{abs(hash(subtitle_path)) % 0xFFFFFFFF:08x}.srt")
+            shutil.copy(subtitle_path, sub_filter_path)
+            import atexit as _atexit
+            _sp = sub_filter_path
+            _atexit.register(lambda: __import__('pathlib').Path(_sp).unlink(missing_ok=True))
+
         if bg_music_path and Path(bg_music_path).exists():
             # BGM 混音方案
             tmp_audio = tmpdir / "audio_with_bgm.aac"
@@ -517,7 +566,7 @@ def make_video_multi(img_paths, audio_path, output_path, bitrate=None, scene_key
                     "-filter_complex",
                     f"[1:a][2:a]amix=inputs=2:duration=first:weights=1.0:{bg_music_vol}[mix];"
                     f"[mix]afade=t=in:st=0:d=0.5:alpha=1[mix-out];",
-                    f"subtitles=filename='{subtitle_path}':si=0[v-sub-out];",
+                    f"subtitles=filename='{sub_filter_path}':si=0[v-sub-out];",
                     "-map", "[v-sub-out]", "-map", "[mix-out]",
                     *_final_enc(crf),
                     "-c:a", "aac", "-b:a", "256k",
@@ -537,7 +586,17 @@ def make_video_multi(img_paths, audio_path, output_path, bitrate=None, scene_key
                 ], capture_output=True, text=True, encoding='utf-8', errors='ignore')
             if r_mux.returncode != 0:
                 print(f"  [WARN] BGM mux failed, fallback: {r_mux.stderr[-100:]}")
-                r_mux = _mux_final(final_video, audio_final, output_path, crf, has_sub, subtitle_path)
+                r_mux = subprocess.run([
+                    str(ffmpeg_exe), "-y",
+                    "-i", str(final_video), "-i", str(audio_final), "-i", str(bg_music_path),
+                    "-filter_complex",
+                    f"[1:a][2:a]amix=inputs=2:duration=first:weights=1.0:{bg_music_vol}[mix];"
+                    f"[mix]afade=t=in:st=0:d=0.5:alpha=1[mix-out];",
+                    "-map", "0:v", "-map", "[mix-out]",
+                    "-c:v", "copy",
+                    "-c:a", "aac", "-b:a", "256k",
+                    "-shortest", str(output_path),
+                ], capture_output=True, text=True, encoding='utf-8', errors='ignore')
         else:
             r_mux = _mux_final(final_video, audio_final, output_path, crf, has_sub, subtitle_path)
         if r_mux.returncode != 0:

@@ -1,6 +1,6 @@
 # Wikipedia 知识库项目规范
 
-> 版本：v1.6 | 更新日期：2026-04-07
+> 版本：v1.7 | 更新日期：2026-04-08
 
 ## 项目定位
 
@@ -162,3 +162,4 @@ Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>
 - 封面图不得包含简介内容，只需标题
 - 所有图片比例必须统一为 12×8
 - **brainstorm 暂停规则**：用户说"暂停头脑风暴"后，完全停止 brainstorm 空闲循环；下次 session 不自动触发 brainstorm
+- **视频制作时间限制**：每日 23:00 至次日 6:00 禁止执行 FFmpeg 视频编码（CPU 占用高，影响休息）；pipeline 和 make_video 均受此约束
