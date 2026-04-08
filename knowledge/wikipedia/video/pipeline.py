@@ -198,7 +198,7 @@ def process_scenes(speech_txt: Path, force: bool = False, use_t2i: bool = True) 
         return False, []
 
 # ── 步骤 3: 视频合成 ────────────────────────────────────────────
-def process_video(mp3_path: Path, scene_imgs: list, force: bool = False) -> bool:
+def process_video(mp3_path: Path, scene_imgs: list, force: bool = False, bg_music_path: str = None, bg_music_vol: float = 0.18) -> bool:
     """单个视频合成（支持增量）"""
     cache = load_cache()
     key = f"{mp3_path.parent.name}/{mp3_path.name}"
@@ -214,12 +214,12 @@ def process_video(mp3_path: Path, scene_imgs: list, force: bool = False) -> bool
     try:
         if len(scene_imgs) == 1:
             ok = make_video_multi([(scene_imgs[0], 0.0)], mp3_path, output_path, bitrate=None, scene_key='scene',
-                                  bg_music_path=args.bg_music, bg_music_vol=args.bg_music_vol,
+                                  bg_music_path=bg_music_path, bg_music_vol=bg_music_vol,
                                   subtitle_path=str(srt_path) if srt_path.exists() else None)
         else:
             imgs_with_time = [(p, 0.0) for p in scene_imgs]
             ok = make_video_multi(imgs_with_time, mp3_path, output_path, bitrate=None, scene_key='scene',
-                                  bg_music_path=args.bg_music, bg_music_vol=args.bg_music_vol,
+                                  bg_music_path=bg_music_path, bg_music_vol=bg_music_vol,
                                   subtitle_path=str(srt_path) if srt_path.exists() else None)
         if ok:
             update_cache(cache, 'videos', key, input_hash, str(output_path), size=output_path.stat().st_size)
@@ -278,7 +278,7 @@ def run_pipeline(articles_dir: Path, force: bool = False, resume: bool = False, 
                     print(f"  [SKIP] 已完成: {item_id}")
                     success_count += 1
                     continue
-                futures[executor.submit(process_item, speech_txt, force, engine, use_t2i)] = speech_txt
+                futures[executor.submit(process_item, speech_txt, force, engine, use_t2i, bg_music_path, bg_music_vol)] = speech_txt
 
             for future in as_completed(futures):
                 speech_txt = futures[future]
@@ -315,7 +315,7 @@ def run_pipeline(articles_dir: Path, force: bool = False, resume: bool = False, 
     report_path.write_text(json.dumps(report, indent=2, ensure_ascii=False), encoding='utf-8')
     print(f"质量报告: {report_path}")
 
-def process_item(speech_txt: Path, force: bool, engine: str = None, use_t2i: bool = True) -> bool:
+def process_item(speech_txt: Path, force: bool, engine: str = None, use_t2i: bool = True, bg_music_path: str = None, bg_music_vol: float = 0.18) -> bool:
     """单个视频的完整流水线（文案质量 → 语音 → 配图 → 视频 → 质量验收）"""
     # 确保 speech_txt 是绝对路径，避免相对路径导致的 relative_to 错误
     speech_txt = speech_txt.resolve()
@@ -376,7 +376,7 @@ def process_item(speech_txt: Path, force: bool, engine: str = None, use_t2i: boo
         return False
 
     # ========== Step 4: 视频合成 ==========
-    ok = process_video(mp3_path, scene_imgs, force)
+    ok = process_video(mp3_path, scene_imgs, force, bg_music_path, bg_music_vol)
     if not ok:
         return False
 
