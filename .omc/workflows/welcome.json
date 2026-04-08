@@ -1,0 +1,8 @@
+{
+  "id": "welcome",
+  "name": "Welcome Workflow",
+  "trigger": { "type": "manual" },
+  "steps": [
+    { "id": "notify", "action": "notify", "params": { "title": "OMC Workflow", "body": "Welcome to the OMC Workflow Engine!" } }
+  ]
+}
