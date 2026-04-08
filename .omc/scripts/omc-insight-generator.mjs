@@ -82,7 +82,7 @@ ${rawInsights}
   });
 }
 
-// Read current transcript and extract live stats for mid-session insight
+// Read current transcript and extract live stats + command samples for mid-session insight
 function readLiveStats() {
   const sessionId = process.env.OMC_SESSION_ID;
   const transcriptPath = sessionId
@@ -92,28 +92,32 @@ function readLiveStats() {
   try {
     const lines = readFileSync(transcriptPath, 'utf-8').split('\n').filter(Boolean);
     const tools = { Bash: 0, Read: 0, Write: 0, Edit: 0, Grep: 0, TaskCreate: 0, TaskUpdate: 0 };
+    const bashCommands = []; // top bash commands
     let events = 0, toolCalls = 0, seeds = 0, userPrompts = 0;
     for (const line of lines) {
       try {
         const entry = JSON.parse(line);
         events++;
         if (entry.type === 'user' || entry.message?.role === 'user') userPrompts++;
-        // Modern JSONL: message.content is array of blocks
         const content = entry.message?.content;
         if (Array.isArray(content)) {
           for (const block of content) {
             if (block.type === 'tool_use' && block.name) {
               toolCalls++;
               for (const t of Object.keys(tools)) { if (block.name.includes(t)) tools[t]++; }
+              if (block.name === 'Bash' && block.input?.command) {
+                bashCommands.push(block.input.command.slice(0, 80));
+              }
             }
             if (block.type === 'text' && block.text?.includes('ideas.md')) seeds++;
           }
         }
-        // Fallback: tool_result at entry level
         if (entry.type === 'tool_result' && entry.content?.includes('ideas.md')) seeds++;
       } catch {}
     }
-    return { events, toolCalls, tools, seeds, userPrompts, lines: lines.length };
+    // Deduplicate bash commands, keep top 10
+    const topBash = [...new Set(bashCommands)].slice(0, 10);
+    return { events, toolCalls, tools, seeds, userPrompts, lines: lines.length, topBash };
   } catch { return null; }
 }
 
@@ -191,15 +195,34 @@ async function main() {
   if (liveIdx >= 0) {
     const stats = readLiveStats();
     if (!stats) { log('no live stats available'); return; }
-    const prompt = buildPrompt(`[MID-SESSION LIVE STATS]\n${JSON.stringify(stats, null, 2)}`);
-    const rawOutput = await generateInsightsClaude(prompt);
+    const livePrompt = `You are an OMC self-learning insight generator. Analyze this mid-session data and generate 1-3 high-value insights with concrete, executable fixes.
+
+Output format — write ONLY the insights, nothing else. Each insight as:
+### N. [title]
+**Problem**: [specific bad pattern observed in the data]
+**RootCause**: [why this is happening]
+**Fix**: [concrete action to fix — specific file, script, or code change; write "N/A" if no executable fix]
+
+Rules:
+- Look for: tool imbalances, missing seeds, debugging loops, workflow inefficiencies, repeated bash commands that could be scripts
+- Top Bash commands are shown — if a command repeats 3+ times, suggest extracting it to a script
+- Generate 1-3 insights max — quality over quantity
+- **Fix**: Must be a specific executable action (e.g. "Extract repeated git grep to a reusable script", "Add 500ms dedup in hook-audit-log-mcp"). If only a tracking rule, write "N/A"
+- Do NOT invent fixes — only use what the data clearly points to
+
+---
+MID-SESSION DATA:
+${JSON.stringify(stats, null, 2)}
+---`;
+    const rawOutput = await generateInsightsClaude(livePrompt);
     if (!rawOutput?.trim()) { log('no insights generated'); return; }
     log('live analysis:', stats.events, 'events,', stats.toolCalls, 'tool calls');
-    // Write insights with special header
     const existing = existsSync(INSIGHTS_FILE) ? readFileSync(INSIGHTS_FILE, 'utf-8') : '';
     const entry = `\n## Mid-Session Live Insight\n\n${rawOutput.trim()}\n`;
     writeFileSync(INSIGHTS_FILE, existing + entry, 'utf-8');
     log('live insight appended to session-insights.md');
+    // Also extract pending actions
+    await extractPendingActionsViaAgent(rawOutput);
     return;
   }
 
