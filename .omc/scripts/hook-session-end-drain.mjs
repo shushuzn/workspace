@@ -525,6 +525,24 @@ function cleanup(sessionIdHint) {
   } catch {}
 }
 
+// ── Step 6: Auto-generate insights from trajectory ──────────────────────────
+async function step6_insightGenerator() {
+  return new Promise((resolve) => {
+    const script = resolve(__dirname, 'omc-insight-generator.mjs');
+    const proc = spawn(process.execPath, [script], {
+      stdio: ['ignore', 'pipe', 'pipe'],
+      cwd: __dirname, windowsHide: true,
+    });
+    let out = '';
+    proc.stdout.on('data', d => { out += d.toString(); });
+    proc.on('close', () => {
+      if (out.trim()) log('step6: ' + out.trim().replace(/\n/g, ' ').slice(0, 120));
+      resolve();
+    });
+    proc.on('error', () => resolve());
+  });
+}
+
 // ── Main ──────────────────────────────────────────────────────────────────
 async function main() {
   const args = parseArgs(process.argv.slice(2));
@@ -553,6 +571,9 @@ async function main() {
 
   // Step 5: Honcho-lite
   step5_honchoLite();
+
+  // Step 6: Auto-generate insights
+  await step6_insightGenerator();
 
   log(`=== drain complete ===`);
 }
