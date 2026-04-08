@@ -109,7 +109,7 @@ def crf_for_scene(scene_key):
     # 封面/简单文字用中间值
     if scene_key in low_crf_keys:
         return 16  # 高清晰度（从18提升）
-    return 20  # 标准清晰度（从22提升）
+    return 18  # 标准清晰度（从22→20→18）
 
 def get_x264_preset(complexity='medium'):
     """根据场景复杂度返回 x264 preset（越慢=压缩效率越高）"""
@@ -157,6 +157,8 @@ def make_video_single(img_path, audio_path, output_path, bitrate=None, scene_key
         vf_parts.append(f"fade=t=out:st={duration - fade_duration}:d={fade_duration}:alpha=1")
     # 色彩校正：略微提升饱和度+亮度，视频更通透
     vf_parts.append("eq=saturation=1.1:brightness=0.03:contrast=1.05")
+    # 锐化：提升边缘清晰度
+    vf_parts.append("unsharp=5:5:1.0:3:3:0.5")
     vf = ",".join(vf_parts) if vf_parts else None
 
     cmd = [ffmpeg_exe, "-y",
@@ -256,7 +258,9 @@ def _encode_scene_ken_burns(img_path, output_path, w_even, h_even, dur, crf, zoo
     x_expr = "(iw-iw/zoom)/2"
     y_expr = "(ih-ih/zoom)/2"
     zoompan = (f"zoompan=z='{z_expr}':x='{x_expr}':y='{y_expr}':"
-               f"d=1:s={w_even}x{h_even}:fps=25")
+               f"d=1:s={w_even}x{h_even}:fps=25,"
+               f"eq=saturation=1.1:brightness=0.03:contrast=1.05,"
+               f"unsharp=5:5:1.0:3:3:0.5")
 
     n_frames = max(1, int(dur * 25))
     cmd = [
@@ -275,7 +279,7 @@ def _encode_scene_ken_burns(img_path, output_path, w_even, h_even, dur, crf, zoo
         cmd2 = [
             str(ffmpeg_exe), "-y",
             "-loop", "1", "-framerate", "1", "-i", str(img_path),
-            "-vf", scale_pad, "-t", str(dur),
+            "-vf", f"{scale_pad},eq=saturation=1.1:brightness=0.03:contrast=1.05,unsharp=5:5:1.0:3:3:0.5", "-t", str(dur),
             "-c:v", "libx264", "-preset", "medium", "-crf", str(crf),
             "-tune", "stillimage", "-pix_fmt", "yuv420p", "-an",
             str(output_path),
@@ -393,7 +397,7 @@ def make_video_multi(img_paths, audio_path, output_path, bitrate=None, scene_key
                     f"[0:v][1:v]xfade=transition=crossfade:"
                     f"duration={trans:.2f}:offset={offset:.2f}[v]",
                     "-map", "[v]",
-                    "-vf", "eq=saturation=1.1:brightness=0.03:contrast=1.05",
+                    "-vf", "eq=saturation=1.1:brightness=0.03:contrast=1.05,unsharp=5:5:1.0:3:3:0.5",
                     "-c:v", "libx264", "-crf", str(crf), "-preset", "medium",
                     "-pix_fmt", "yuv420p",
                     str(out),
@@ -424,7 +428,7 @@ def make_video_multi(img_paths, audio_path, output_path, bitrate=None, scene_key
             r = subprocess.run([
                 str(ffmpeg_exe), "-y", "-f", "concat", "-safe", "0",
                 "-i", str(clist),
-                "-vf", "eq=saturation=1.1:brightness=0.03:contrast=1.05",
+                "-vf", "eq=saturation=1.1:brightness=0.03:contrast=1.05,unsharp=5:5:1.0:3:3:0.5",
                 "-c:v", "libx264", "-crf", str(crf), "-preset", "medium", "-an",
                 "-pix_fmt", "yuv420p",
                 str(final_video),
