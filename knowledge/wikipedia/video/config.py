@@ -38,11 +38,14 @@ EDGE_VOICE_EN = "en-US-AriaNeural"
 KOKORO_VOICE_ZH = "zf_xiaoyi"   # 中文女声（匹配 edge XiaoyiNeural）
 KOKORO_VOICE_EN = "af_sarah"  # 英文女声
 
-# T2I 配置（Stable Diffusion 2.1）
-T2I_ENGINE = "diffusers"   # engines: diffusers
-T2I_MODEL = "stabilityai/stable-diffusion-2-1-base"  # open model, no auth required
-T2I_STEPS = 25             # 推理步数
-T2I_GUIDANCE = 7.5          # CFG guidance scale
+# T2I 配置（无本地 LLM — 严格禁止本地 SD/diffusers）
+# 云端 API: "replicate"/"together"/"openai" 或 "matplotlib"（默认，回退）
+# 未来接入 cloud API 时设置 T2I_ENGINE="replicate" + T2I_API_KEY
+T2I_ENGINE = "matplotlib"  # 严格默认 matplotlib，本地 SD 已禁用
+T2I_MODEL = ""             # cloud model name（待配置）
+T2I_API_KEY = ""            # cloud API key（待配置）
+T2I_STEPS = 25             # 推理步数（云端用）
+T2I_GUIDANCE = 7.5         # CFG guidance scale
 T2I_SEED = 42              # 固定种子（可复现）
 
 # 通用参数

@@ -18,7 +18,7 @@ import subprocess
 import tempfile
 sys.path.insert(0, str(Path(__file__).parent.parent))
 from video.config import (
-    T2I_MODEL, T2I_STEPS, T2I_GUIDANCE, T2I_SEED,
+    T2I_ENGINE, T2I_MODEL, T2I_STEPS, T2I_GUIDANCE, T2I_SEED,
     TTS_ENGINE, KOKORO_VOICE_ZH, KOKORO_VOICE_EN,
     RATE, PITCH,
 )
@@ -195,8 +195,11 @@ def _check_sd_weights(model_id: str) -> bool:
         return False
 
 def _get_sd_pipeline():
-    """单例 SD 2.1 DiffusersPipeline（FP16，RTX3060 可跑）"""
+    """单例 SD 2.1 DiffusersPipeline（FP16，RTX3060 可跑）
+    本地 SD 已禁用 — 严格规则：禁止本地部署模型"""
     global _SD_PIPELINE, _SD_FAILED
+    if T2I_ENGINE == "matplotlib":
+        return None  # 严格禁止本地 SD
     if _SD_FAILED:
         return None
     if _SD_PIPELINE is not None:
