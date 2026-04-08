@@ -24,3 +24,14 @@
 **Principle**: I am responsible for generating insights, not external LLMs
 **Wrong pattern**: hook calling MiniMax/Ollama for insight generation
 **Correct pattern**: hook stores raw data → drain → next session agent analyzes
+
+### 6. Hook问题需要明确的验证反馈
+**Observation**: session 899884e0中用户反复问"hook启用了吗"共106次
+**Root cause**: hook状态不透明，用户无法从行为感知hook是否工作
+**Improvement**: hook执行后应在审计日志中留下可读标记，或在 drain 文件中附带hook活跃状态摘要
+**Result**: hook问题导致该session无任何seed产出
+
+### 7. 大型调试session的特征
+**Data**: 1419次工具调用，857次Bash（60%），191次Read，129次Edit
+**Pattern**: Read+Edit+Bash密集混合，说明在修复而非创造
+**Opportunity**: 此类session的trajectory应标记为"debugging"而非"generating"，用于区分不同工作模式
