@@ -410,3 +410,18 @@
 **Observation**: seeds: 0 — despite 780 tool calls and 851 user prompts, no seeds were generated or worked. This session appears to be pure OMC maintenance (hook-audit, mcp-learn-queue, workflow-detection) with no idea generation or execution.
 **Rule**: If session tools are all .omc/scripts/hook-*.mjs and seeds=0, consider whether session should be classified as "maintenance" rather than "productive".
 **Fix**: N/A
+
+### 23. Bash占62.7%工具调用但无insight产出 [auto-generated]
+
+**Observation**: 32次Bash调用占总工具调用51次的62.7%，但整个session无任何insight记录；用户首尾prompt均质疑insight缺失，说明insight生成管道对此类Bash密集型session失效。
+
+**Rule**: 工具调用密集型session（Bash>20次或任意单一工具>40%）必须触发insight提取，不依赖seed生成。
+
+
+
+### 24. [Bash 64% - 脚本应直接执行而非派生子进程] [auto-generated] ✅ EXECUTED
+**Observation**: 29/45 tool calls (64%) 是 Bash，子 agent 执行 insight fix 时通过 shell 派生，而非直接在当前上下文执行。轨迹显示用户明确要求"先让insight生成就立刻执行"但执行路径仍然绕道 subagent。
+**Rule**: insight generator 执行阶段必须直接在当前 agent 执行，不应派生 subagent 绕路
+**Fix**: 修改 `omc-insight-generator.mjs` 的执行路径：当检测到 fix 为可执行 action 时，直接通过 Edit/Write/Bash 原生工具执行，禁止 spawn subagent 执行
+
+

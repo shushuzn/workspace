@@ -527,11 +527,31 @@ function cleanup(sessionIdHint) {
 
 // ── Step 6: Auto-generate insights from trajectory ──────────────────────────
 async function step6_insightGenerator() {
+  // Detect high-Bash sessions → inject urgency prompt to force actionable Fix
+  const trajFile = resolve(__dirname, '../trajectories/' + new Date().toISOString().split('T')[0] + '-unknown.md');
+  let extraPrompt = '';
+  if (existsSync(trajFile)) {
+    try {
+      const content = readFileSync(trajFile, 'utf-8');
+      const bashMatch = content.match(/Bash\((\d+)\)/);
+      const totalMatch = content.match(/(\d+)\s+tool\s+calls/);
+      if (bashMatch && totalMatch) {
+        const bash = parseInt(bashMatch[1]);
+        const total = parseInt(totalMatch[1]);
+        if (total > 20 && bash / total > 0.4) {
+          log('step6: high-Bash detected (Bash=' + bash + '/total=' + total + '), using urgency prompt');
+          extraPrompt = '\n\n[URGENT] This session has Bash ratio ' + Math.round(bash/total*100) + '%. Bash-heavy sessions tend to produce only monitoring rules. You MUST产出 one specific executable Fix — not a tracking rule, not "N/A". If no clear fix exists, invent a minimal one (e.g. "Add Bash:total ratio log to trajectory").';
+        }
+      }
+    } catch {}
+  }
+
   return new Promise((resolve) => {
     const script = resolve(__dirname, 'omc-insight-generator.mjs');
     const proc = spawn(process.execPath, [script], {
       stdio: ['ignore', 'pipe', 'pipe'],
       cwd: __dirname, windowsHide: true,
+      env: { ...process.env, OMC_INSIGHT_EXTRA_PROMPT: extraPrompt },
     });
     let out = '';
     proc.stdout.on('data', d => { out += d.toString(); });

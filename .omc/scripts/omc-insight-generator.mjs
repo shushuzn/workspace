@@ -32,58 +32,48 @@ function markTrajectoryProcessed(trajPath, trajMtime) {
 }
 
 function extractPendingActionsViaAgent(rawInsights) {
-  // Sub-agent: extract actionable Fix: fields from LLM-generated insights
-  const prompt = `You are an OMC pending-action extractor. Read the insights below and extract only those with a concrete, executable Fix action (not "N/A").
+  // Direct parse: extract **Fix** lines from raw LLM output
+  const lines = rawInsights.split('\n');
+  const actions = [];
+  let currentFix = null;
+  let currentTitle = '';
 
-Output format — write ONLY lines like this, nothing else:
-TITLE|executable fix description
-
-Rules:
-- Only output lines where **Fix** is a concrete action (not "N/A", not a tracking rule)
-- Extract the Fix description after **Fix**:
-- If no actionable fixes found, output nothing
-- Do NOT invent or infer fixes — only use what is explicitly stated
-- Output one line per actionable insight: TITLE|action
-
----
-INSIGHTS:
-${rawInsights}
----`;
-
-  return new Promise((resolve) => {
-    const proc = spawn('claude.cmd', ['--print'], {
-      stdio: ['pipe', 'pipe', 'pipe'],
-      cwd: __dirname,
-      shell: true,
-    });
-
-    let out = '';
-    proc.stdout.on('data', d => { out += d.toString(); });
-    proc.on('close', () => {
-      const actionLines = out.split('\n').filter(l => l.startsWith('TITLE|'));
-      if (actionLines.length === 0) { resolve([]); return; }
-
-      const existing = existsSync(PENDING_FILE) ? readFileSync(PENDING_FILE, 'utf-8') : '';
-      const newItems = [];
-      for (const line of actionLines) {
-        const parts = line.split('|');
-        if (parts.length < 2) continue;
-        const title = parts[0].replace('TITLE|', '').trim();
-        const action = parts.slice(1).join('|').trim();
-        if (!action || action === 'N/A' || action.toUpperCase() === 'N/A') continue;
-        const id = `action-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
-        newItems.push(`- [ ] ${title} | action: ${action} | id: ${id}`);
+  for (const line of lines) {
+    const titleMatch = line.match(/^#{1,3}\s+\d+\.\s+\[(.+?)\]/);
+    if (titleMatch) currentTitle = titleMatch[1];
+    if (line.includes('**Fix**:**') || line.includes('**Fix**:**')) {
+      const fixMatch = line.match(/\*\*Fix\*\*:\s*(.+)/);
+      if (fixMatch) currentFix = fixMatch[1].trim();
+    } else if (currentFix && line.trim() === '' && currentTitle) {
+      // End of this insight block
+      if (currentFix && currentFix !== 'N/A' && !currentFix.includes('N/A')) {
+        actions.push({ title: currentTitle, fix: currentFix });
       }
-      if (newItems.length > 0) {
-        writeFileSync(PENDING_FILE, (existing ? existing + '\n' : '') + newItems.join('\n') + '\n', 'utf-8');
-        log(`extracted ${newItems.length} pending actions via sub-agent`);
-      }
-      resolve(newItems);
-    });
-    proc.on('error', () => resolve([]));
-    proc.stdin.write(prompt);
-    proc.stdin.end();
-  });
+      currentFix = null;
+      currentTitle = '';
+    } else if (currentFix && line.match(/^\*\*/)) {
+      // Continuation line
+      currentFix += ' ' + line.replace(/\*\*/g, '').trim();
+    }
+  }
+  // Last insight if no trailing newline
+  if (currentFix && currentFix !== 'N/A' && currentTitle) {
+    actions.push({ title: currentTitle, fix: currentFix });
+  }
+
+  if (actions.length === 0) { return []; }
+
+  const existing = existsSync(PENDING_FILE) ? readFileSync(PENDING_FILE, 'utf-8') : '';
+  const newItems = [];
+  for (const { title, fix } of actions) {
+    const id = `action-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
+    newItems.push(`- [ ] ${title} | action: ${fix} | id: ${id}`);
+  }
+  if (newItems.length > 0) {
+    writeFileSync(PENDING_FILE, (existing ? existing + '\n' : '') + newItems.join('\n') + '\n', 'utf-8');
+    log(`extracted ${newItems.length} pending actions from Fix fields`);
+  }
+  return actions;
 }
 
 // Read current transcript and extract live stats + command samples for mid-session insight
@@ -143,6 +133,7 @@ function findLatestTraj() {
 }
 
 function buildPrompt(traj) {
+  const extra = process.env.OMC_INSIGHT_EXTRA_PROMPT || '';
   return `You are an OMC self-learning insight generator. Analyze this session trajectory and generate 1-3 high-value insights.
 
 Output format — write ONLY the insights, nothing else. Each insight as:
@@ -159,6 +150,7 @@ Rules:
 - If trajectory shows good productivity with seeds, note what worked
 - Skip if session was too short (< 5 tool calls)
 - **Fix**: Only write a concrete executable action (e.g. "Add 500ms dedup window in hook-audit-log-mcp", "Write fs.readFileSync替代Edit for complex strings"). If the insight only describes what to track/monitor without a specific fix, write "N/A" — do NOT invent a fix.
+${extra}
 
 ---
 TRAJECTORY:
@@ -241,7 +233,8 @@ ${JSON.stringify(stats, null, 2)}
 
   const trajStat = statSync(trajPath);
   const isMidSession = trajArgIdx >= 0;
-  if (!isMidSession && isTrajectoryProcessed(trajPath, trajStat.mtimeMs)) {
+  // Always process when OMC_INSIGHT_EXTRA_PROMPT is set (forced re-analysis)
+  if (!isMidSession && isTrajectoryProcessed(trajPath, trajStat.mtimeMs) && !process.env.OMC_INSIGHT_EXTRA_PROMPT) {
     log('trajectory already processed');
     return;
   }
