@@ -158,9 +158,8 @@ function extractSnippet(text, queryTokens, contextLen = 150) {
   return snippet;
 }
 
-// ── LLM Summarization (via external call) ───────────────────────────────────
+// ── Session Summary ────────────────────────────────────────────────────────
 function summarizeWithLLM(query, results) {
-  // Placeholder: in practice, would call local Ollama or MiniMax API
   // Returns a synthesized summary of matching sessions
   const top3 = results.slice(0, 3);
   return `Based on ${results.length} matching sessions (top 3 shown):

@@ -1,10 +1,9 @@
 #!/usr/bin/env node
 /**
  * OMC MCP Queue Consumer
- * Reads .omc/state/mcp-learn-queue.jsonl → stores to AgentDB via Ollama API + drain-inject.
+ * Reads .omc/state/mcp-learn-queue.jsonl → stores to local file + drain-inject.
  *
  * Architecture:
- *   - Calls Ollama directly to generate structured pattern summaries
  *   - Writes results to drain file for session-start-inject to pick up
  *   - Also writes directly to a local store the main agent can reference
  *
@@ -103,7 +102,7 @@ async function processQueue() {
 
   console.log(`[consumer] processing ${entries.length} entries...`);
 
-  // Step 1: Ollama-powered analysis + local storage
+  // Step 1: Local pattern analysis + storage
   const stored = await processWithLLM(entries);
   console.log(`[consumer] stored ${stored} patterns locally`);
 
