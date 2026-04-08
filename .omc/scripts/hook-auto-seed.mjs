@@ -29,6 +29,16 @@ import { existsSync, readFileSync, writeFileSync, mkdirSync, appendFileSync, rea
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
+const readStdin = () => new Promise(resolve => {
+  let data = '';
+  process.stdin.setEncoding('utf8');
+  process.stdin.on('data', chunk => data += chunk);
+  process.stdin.on('end', () => resolve(data));
+  process.stdin.on('error', () => resolve(''));
+  // Timeout: give up after 100ms
+  setTimeout(() => resolve(data || ''), 100);
+});
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const STATE_DIR = resolve(__dirname, '../state');
 const STATE_FILE = resolve(STATE_DIR, 'auto-seed-counter.json');
@@ -50,28 +60,38 @@ function readState() {
 }
 
 // Detect session continuity by comparing sessionId from transcript path.
-// Hookify injects session_id in hook env vars; fallback to matching state file sessionId.
+// Hook injects session_id via stdin; env vars also checked as fallback.
 // If sessionId changed (compaction continuation), PRESERVE count — don't reset to 0.
-function getCurrentSessionId() {
+function getCurrentSessionId(hookSessionId) {
+  // stdin from hook has highest priority
+  if (hookSessionId) return hookSessionId;
   // OMC_SESSION_ID env var is the current session — always prefer it
   if (process.env.OMC_SESSION_ID) return process.env.OMC_SESSION_ID;
-  // Fallback: find latest session directory
-  const sessionsDir = resolve(__dirname, '../state/sessions');
-  if (existsSync(sessionsDir)) {
+  // Transcript path contains session ID: .../{sessionId}.jsonl
+  if (process.env.OMC_TRANSCRIPT_PATH) {
+    const match = process.env.OMC_TRANSCRIPT_PATH.match(/([a-f0-9-]{36})\.jsonl$/);
+    if (match) return match[1];
+  }
+  // Fallback: find latest transcript file (most recently modified .jsonl = current session)
+  const transcriptsDir = 'C:/Users/adm/.claude/projects/D--OpenClaw-workspace';
+  if (existsSync(transcriptsDir)) {
     try {
-      const entries = readdirSync(sessionsDir);
-      let latestSession = null;
+      const entries = readdirSync(transcriptsDir);
+      let latestTranscript = null;
       let latestMtime = 0;
       for (const entry of entries) {
-        if (entry.startsWith('.')) continue;
-        const fullPath = resolve(sessionsDir, entry);
+        if (!entry.endsWith('.jsonl')) continue;
+        const fullPath = resolve(transcriptsDir, entry);
         const stat = statSync(fullPath);
         if (stat.mtimeMs > latestMtime) {
           latestMtime = stat.mtimeMs;
-          latestSession = entry;
+          latestTranscript = entry;
         }
       }
-      if (latestSession) return latestSession;
+      if (latestTranscript) {
+        const match = latestTranscript.match(/^([a-f0-9-]+)\.jsonl$/);
+        if (match) return match[1];
+      }
     } catch { /* fall through */ }
   }
   return Date.now().toString();
@@ -195,9 +215,22 @@ function parseArgs(argv) {
 async function main() {
   const args = parseArgs(process.argv.slice(2));
 
+  // Read session_id: from --session arg, then stdin (PostToolUse passes JSON via stdin)
+  let hookSessionId = null;
+  if (args.session) hookSessionId = args.session;
+  if (!hookSessionId) {
+    try {
+      const stdin = await readStdin();
+      if (stdin && stdin.trim()) {
+        const event = JSON.parse(stdin);
+        if (event.session_id) hookSessionId = event.session_id;
+      }
+    } catch {}
+  }
+
   // --reset: fresh session
   if (args.reset) {
-    const sid = getCurrentSessionId();
+    const sid = getCurrentSessionId(hookSessionId);
     writeState({ count: 0, fired: false, sessionId: sid });
     console.log('counter reset');
     return;
@@ -206,7 +239,7 @@ async function main() {
   // --check: increment + evaluate
   if (args.check) {
     const state = readState();
-    const currentSession = getCurrentSessionId();
+    const currentSession = getCurrentSessionId(hookSessionId);
     const LEGACY_RE = /^\d{10,14}$/;
     const prevIsLegacy = state.sessionId && LEGACY_RE.test(state.sessionId);
     const sameSession = !state.sessionId || state.sessionId === currentSession;
