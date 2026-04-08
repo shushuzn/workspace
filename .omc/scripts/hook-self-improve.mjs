@@ -8,6 +8,7 @@
  *   node hook-self-improve.mjs --auto-apply (fully automatic, apply all suggestions)
  */
 import { existsSync, readFileSync, writeFileSync, mkdirSync } from 'fs';
+import { spawn } from 'child_process';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -70,27 +71,11 @@ Generate hookify rules (one per pattern).`;
   const suggestions = [];
   for (const cluster of clusterList) {
     try {
-      const result = await callLLM(prompt, cluster);
-      if (result) suggestions.push({ cluster, rule: result });
-    } catch {
-      // LLM failed — skip this cluster
-    }
-  }
-  return suggestions;
-}
-
-async function callLLM(clusterInfo, maxTokens = 512) {
-  // Try gemma4:e2b (known working) or minimax API
-  const url = 'http://127.0.0.1:11434/api/generate';
-  const model = 'gemma4:e2b';
-
-  const payload = {
-    model,
-    prompt: `Generate a hookify rule YAML for this repeated pattern.
-Tool: ${clusterInfo.tool}
-Pattern: "${clusterInfo.pattern}"
-Occurrences: ${clusterInfo.count}
-Example commands: ${clusterInfo.uniqueCmds.join(', ')}
+      const clusterPrompt = `Generate a hookify rule YAML for this repeated pattern.
+Tool: ${cluster.tool}
+Pattern: "${cluster.pattern}"
+Occurrences: ${cluster.count}
+Example commands: ${cluster.uniqueCmds.join(', ') || cluster.uniqueFiles.join(', ')}
 
 Return ONLY valid YAML like:
 ---
@@ -99,28 +84,34 @@ enabled: true
 event: bash
 pattern: some-regex
 ---
-Message text here.`,
-    options: { num_predict: maxTokens },
-    stream: false,
-  };
-
-  try {
-    const { default: fetch } = await import('fetch');
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 10000);
-    const res = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-      signal: controller.signal,
-    });
-    clearTimeout(timer);
-    if (!res.ok) return null;
-    const json = await res.json();
-    return json.response?.trim() || null;
-  } catch {
-    return null;
+Message text here.`;
+      const result = await callLLM_viaClaude(clusterPrompt);
+      if (result) suggestions.push({ cluster, rule: result });
+    } catch {
+      // LLM failed — skip this cluster
+    }
   }
+  return suggestions;
+}
+
+function callLLM_viaClaude(prompt) {
+  return new Promise((resolve) => {
+    const proc = spawn('claude.cmd', ['--print'], {
+      stdio: ['pipe', 'pipe', 'pipe'],
+      shell: true,
+      windowsHide: true,
+    });
+
+    let out = '', err = '';
+    proc.stdout.on('data', d => { out += d.toString(); });
+    proc.stderr.on('data', d => { err += d.toString(); });
+
+    proc.on('close', () => resolve(out.trim()));
+    proc.on('error', () => resolve(''));
+
+    proc.stdin.write(prompt);
+    proc.stdin.end();
+  });
 }
 
 // ── Dangerous pattern detection ──────────────────────────────────────────────
