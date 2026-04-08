@@ -460,3 +460,18 @@
 **Fix**: 验证：下次工具调用≥10次时，`auto-insight-trigger.json` 应存在且被 hook 正确读取
 
 
+
+### 31. [Self-inspection loop wastes 50%+ tool calls] [auto-generated] ✅ EXECUTED
+**Observation**: Top 5 Bash commands are all OMC self-monitoring: `ls hook-*.mjs + wc -l audit+queue + node hook-self-improve --stats + node hook-test-rules + cat mcp-learn-queue`. 1079 Bash calls out of 1992 total (54%). Repeated self-inspection wastes capacity.
+**Rule**: Self-monitoring commands should be batched into a single script, not scattered across multiple manual calls.
+**Fix**: Create `.omc/scripts/hook-dashboard.mjs` that outputs hook-audit lines, queue depth, stats, test results, and session state in ONE invocation. Replace topBash with `node .omc/scripts/hook-dashboard.mjs`.
+
+### 32. [hook-stats.mjs cache works but not replacing manual inspection] [auto-generated]
+**Observation**: hook-stats.mjs outputs a complete dashboard in one line, but topBash still shows repeated manual commands (`ls hook-*.mjs`, `wc -l *.jsonl`, `node hook-self-improve --stats`). The script exists and works but isn't being used instead of the manual inspection cycle.
+**Rule**: If a script exists that replaces a repeated workflow but isn't being used, the workflow is惯性大于效率.
+**Fix**: Execute `node .omc/scripts/hook-stats.mjs` once and use its output for all state inspection needs instead of the 5 separate commands.
+
+### 33. TaskCreate/TaskUpdate Completely Unused ✅ EXECUTED Across 2022 Tool Calls [auto-generated]
+**Observation**: 2022 total tool calls with TaskCreate: 0 and TaskUpdate: 0 across the entire session — zero task management infrastructure used despite massive volume. Top 5 Bash commands are all OMC self-monitoring (ls/wc/cat/tail/node on state files).
+**Rule**: Sessions exceeding 500 tool calls without a single TaskCreate/TaskUpdate are operating without structured progress tracking — all work is invisible to the task system.
+**Fix**: Add task creation to the auto-insight trigger: when count > threshold, also create a tracking task via TaskCreate before running diagnostics. Append `node .omc/scripts/hook-stats.mjs` to pending-actions as the single replacement for all topBash inspection commands.

@@ -292,9 +292,21 @@ DESIGN.md pattern (VoltAgent/awesome-design-md): 9 sections — Visual Theme, Co
         writeFileSync(NOTPAD_FILE, notepadContent, 'utf-8');
 
         const prompt = buildInsightPrompt({ count: totalCalls, toolStats });
-        console.log('INSIGHT_TRIGGER');
-        console.log(prompt);
-        console.log(`AUTO:insight-triggered (totalCalls:${totalCalls})`);
+
+        // Spawn subagent to generate insight — avoids compact session output trap
+        const { spawn } = await import('child_process');
+        const insightsFile = INSIGHTS_FILE;
+        const triggerFile = TRIGGER_FILE;
+        const agentCmd = `claude.cmd --print "Analyze the trigger at ${triggerFile} and generate one insight in the format: ### N. [title]\\n**Observation**: ...\\n**Rule**: ...\\n**Fix**: [concrete action or N/A]. Write the insight to ${insightsFile}. If Fix is not N/A, also append to pending-actions.md."`;
+
+        spawn(agentCmd, {
+          shell: true,
+          cwd: resolve(__dirname, '../..'),
+          detached: true,
+          stdio: 'ignore'
+        }).unref();
+
+        console.log(`AUTO:insight-spawned (totalCalls:${totalCalls})`);
       } catch (e) {
         console.error('failed to trigger insight:', e.message);
       }
