@@ -133,6 +133,8 @@ def make_video_single(img_path, audio_path, output_path, bitrate=None, scene_key
     if fade_duration > 0:
         vf_parts.append(f"fade=t=in:st=0:d={fade_duration}:alpha=1")
         vf_parts.append(f"fade=t=out:st={duration - fade_duration}:d={fade_duration}:alpha=1")
+    # 色彩校正：略微提升饱和度+亮度，视频更通透
+    vf_parts.append("eq=saturation=1.1:brightness=0.03:contrast=1.05")
     vf = ",".join(vf_parts) if vf_parts else None
 
     cmd = [ffmpeg_exe, "-y",
@@ -145,7 +147,7 @@ def make_video_single(img_path, audio_path, output_path, bitrate=None, scene_key
         cmd += ["-b:v", bitrate]
     if vf:
         cmd += ["-vf", vf]
-    cmd += ["-c:a", "aac", "-b:a", "192k",
+    cmd += ["-c:a", "aac", "-b:a", "256k",
             "-af", "loudnorm=I=-16:LRA=11:tp=-1.5",
             "-pix_fmt", "yuv420p",
             "-shortest", "-t", str(duration + 0.5),
@@ -262,7 +264,8 @@ def _encode_scene_ken_burns(img_path, output_path, w_even, h_even, dur, crf, zoo
 
 
 def make_video_multi(img_paths, audio_path, output_path, bitrate=None, scene_key='default',
-                    use_transitions=True, transition_dur=0.75):
+                    use_transitions=True, transition_dur=0.75,
+                    bg_music_path=None, bg_music_vol=0.18):
     """多图片按时序切换 + 音频 → 视频（Ken Burns + Cross-dissolve 过渡）
 
     升级版特性：
@@ -367,6 +370,7 @@ def make_video_multi(img_paths, audio_path, output_path, bitrate=None, scene_key
                     f"[0:v][1:v]xfade=transition=crossfade:"
                     f"duration={trans:.2f}:offset={offset:.2f}[v]",
                     "-map", "[v]",
+                    "-vf", "eq=saturation=1.1:brightness=0.03:contrast=1.05",
                     "-c:v", "libx264", "-crf", str(crf), "-preset", "medium",
                     "-pix_fmt", "yuv420p",
                     str(out),
@@ -397,7 +401,9 @@ def make_video_multi(img_paths, audio_path, output_path, bitrate=None, scene_key
             r = subprocess.run([
                 str(ffmpeg_exe), "-y", "-f", "concat", "-safe", "0",
                 "-i", str(clist),
+                "-vf", "eq=saturation=1.1:brightness=0.03:contrast=1.05",
                 "-c:v", "libx264", "-crf", str(crf), "-preset", "medium", "-an",
+                "-pix_fmt", "yuv420p",
                 str(final_video),
             ], capture_output=True, text=True, encoding='utf-8', errors='ignore')
             if r.returncode != 0:
@@ -411,20 +417,47 @@ def make_video_multi(img_paths, audio_path, output_path, bitrate=None, scene_key
             str(ffmpeg_exe), "-y", "-i", str(audio_path),
             "-af", "loudnorm=I=-16:LRA=11:tp=-1.5",
             "-t", str(video_dur),
-            "-c:a", "aac", "-b:a", "192k",
+            "-c:a", "aac", "-b:a", "256k",
             str(audio_final),
         ], capture_output=True, text=True, encoding='utf-8', errors='ignore')
         if r_audio.returncode != 0:
             print(f"  [ERROR] audio failed: {r_audio.stderr[-150:]}")
             return False
 
-        # ── 4. 混流 ──────────────────────────────────────────────────────
-        r_mux = subprocess.run([
-            str(ffmpeg_exe), "-y",
-            "-i", str(final_video), "-i", str(audio_final),
-            "-c:v", "copy", "-c:a", "aac", "-b:a", "256k",
-            "-shortest", str(output_path),
-        ], capture_output=True, text=True, encoding='utf-8', errors='ignore')
+        # ── 4. 混流（含BGM） ──────────────────────────────────────────────
+        if bg_music_path and Path(bg_music_path).exists():
+            video_dur = get_duration(str(final_video)) or duration
+            # BGM 循环+淡入(0.5s)+音量
+            tmp_audio = tmpdir / "audio_with_bgm.aac"
+            r_mux = subprocess.run([
+                str(ffmpeg_exe), "-y",
+                "-i", str(final_video),
+                "-i", str(audio_final),
+                "-i", str(bg_music_path),
+                "-filter_complex",
+                f"[1:a][2:a]amix=inputs=2:duration=first:weights=1 {bg_music_vol}[mix];"
+                f"[mix]afade=t=in:st=0:d=0.5:alpha=1",
+                "-map", "0:v", "-map", "[mix]",
+                "-c:v", "copy",
+                "-c:a", "aac", "-b:a", "256k",
+                "-shortest", str(output_path),
+            ], capture_output=True, text=True, encoding='utf-8', errors='ignore')
+            if r_mux.returncode != 0:
+                print(f"  [WARN] BGM mux failed, fallback to no-BGM: {r_mux.stderr[-100:]}")
+                # Fallback: 无BGM
+                r_mux = subprocess.run([
+                    str(ffmpeg_exe), "-y",
+                    "-i", str(final_video), "-i", str(audio_final),
+                    "-c:v", "copy", "-c:a", "aac", "-b:a", "256k",
+                    "-shortest", str(output_path),
+                ], capture_output=True, text=True, encoding='utf-8', errors='ignore')
+        else:
+            r_mux = subprocess.run([
+                str(ffmpeg_exe), "-y",
+                "-i", str(final_video), "-i", str(audio_final),
+                "-c:v", "copy", "-c:a", "aac", "-b:a", "256k",
+                "-shortest", str(output_path),
+            ], capture_output=True, text=True, encoding='utf-8', errors='ignore')
         if r_mux.returncode != 0:
             print(f"  [ERROR] mux failed:\n{r_mux.stderr[-200:]}")
             return False
@@ -490,6 +523,8 @@ def main():
     parser.add_argument("mp3_file", nargs="?", help="MP3 路径（不指定则处理所有）")
     parser.add_argument("--dir", default=None, help="articles 目录")
     parser.add_argument("--bitrate", default=None, help="视频码率，如 1M/2M/5M，默认用 libx264 internal default")
+    parser.add_argument("--bg-music", default=None, help="背景音乐文件路径（如 .mp3）")
+    parser.add_argument("--bg-music-vol", type=float, default=0.18, help="BGM 音量 0.0-1.0（默认0.18）")
     args = parser.parse_args()
 
     articles_dir = Path(args.dir) if args.dir else Path(__file__).parent.parent / "articles"
@@ -503,10 +538,12 @@ def main():
         output = mp3_path.with_suffix(".mp4")
         scene_key = infer_scene_key(mp3_path)
         if len(scene_imgs) == 1 and scene_imgs[0][0] is not None:
-            make_video_multi([(scene_imgs[0][0], 0.0)], mp3_path, output, bitrate=args.bitrate, scene_key=scene_key)
+            make_video_multi([(scene_imgs[0][0], 0.0)], mp3_path, output, bitrate=args.bitrate, scene_key=scene_key,
+                            bg_music_path=args.bg_music, bg_music_vol=args.bg_music_vol)
         else:
             imgs_only = [(p, 0.0) for p, _ in scene_imgs]
-            make_video_multi(imgs_only, mp3_path, output, bitrate=args.bitrate, scene_key=scene_key)
+            make_video_multi(imgs_only, mp3_path, output, bitrate=args.bitrate, scene_key=scene_key,
+                            bg_music_path=args.bg_music, bg_music_vol=args.bg_music_vol)
         return
 
     # 处理所有 speech MP3（跳过 speech-tts）
@@ -532,7 +569,8 @@ def main():
         imgs_only = [(p, 0.0) for p, _ in scene_imgs]
         scene_key = infer_scene_key(mp3)
         print(f"处理: {mp3.name} → {len(imgs_only)} scenes [key={scene_key}]")
-        make_video_multi(imgs_only, mp3, output, bitrate=args.bitrate, scene_key=scene_key)
+        make_video_multi(imgs_only, mp3, output, bitrate=args.bitrate, scene_key=scene_key,
+                        bg_music_path=args.bg_music, bg_music_vol=args.bg_music_vol)
 
 if __name__ == "__main__":
     main()
