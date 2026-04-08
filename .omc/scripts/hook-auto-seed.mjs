@@ -140,21 +140,23 @@ function spawnExecutor() {
       return;
     }
 
-    // Step 2: spawn claude CLI with prompt piped via heredoc
+    // Step 2: spawn claude CLI with prompt piped via bash cat
     const env2 = {
       ...process.env,
       OMC_SKIP_HOOKS: 'PostToolUse,PreToolUse',
     };
-    const prompt = readFileSync(PROMPT_FILE, 'utf-8');
     const claude = spawn('bash', [
       '-c',
-      `printf '%s' ${JSON.stringify(prompt)} | "${CLAUDE_BIN.replace(/\\/g, '\\\\')}" --add-mcp-tools --dangerously-skip-permissions`,
+      'cat <&0 | claude.cmd --print --dangerously-skip-permissions',
     ], {
       env: env2,
-      stdio: 'inherit',
+      stdio: ['pipe', 'inherit', 'inherit'],
       detached: true,
       cwd: 'D:/OpenClaw/workspace',
     });
+    const prompt = readFileSync(PROMPT_FILE, 'utf-8');
+    claude.stdin.write(prompt);
+    claude.stdin.end();
     claude.unref();
     console.log(`AUTO:claude-spawned (pid ${claude.pid})`);
   });
@@ -190,15 +192,20 @@ async function main() {
 
     // Check threshold (and not already fired this session)
     if (newState.count >= THRESHOLD && !newState.fired) {
-      try {
-        const entry = generateSeedEntry(newState);
-        appendIdea(entry);
-        spawnExecutor();
-        newState.fired = true;
-        writeState(newState);
-        console.log(`AUTO:${entry}`);
-      } catch (e) {
-        console.error('failed to spawn executor:', e.message);
+      // Guard: don't spam duplicate seeds — skip if AUTO: entry was just appended
+      if (hasRecentAutoSeed()) {
+        console.log('auto-seed: recent entry already exists, skipping duplicate');
+      } else {
+        try {
+          const entry = generateSeedEntry(newState);
+          appendIdea(entry);
+          spawnExecutor();
+          newState.fired = true;
+          writeState(newState);
+          console.log(`AUTO:${entry}`);
+        } catch (e) {
+          console.error('failed to spawn executor:', e.message);
+        }
       }
     } else {
       console.log(`count:${newState.count}/${THRESHOLD}`);
