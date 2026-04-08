@@ -27,8 +27,8 @@ AUDIO_BITRATE = "192k"
 AUDIO_LOUDNORM = "I=-16:LRA=11:tp=-1.5"
 
 # TTS 配置
-# 引擎: edge (微软在线) / kokoro (本地)
-TTS_ENGINE = "kokoro"  # 迁移到 Kokoro-82M 本地模型
+# 引擎: edge (微软在线) / kokoro (本地-已禁用)
+TTS_ENGINE = "edge"  # 严格默认 edge 在线API，禁止本地 TTS 模型
 
 # Edge TTS 音色
 EDGE_VOICE_ZH = "zh-CN-XiaoyiNeural"
