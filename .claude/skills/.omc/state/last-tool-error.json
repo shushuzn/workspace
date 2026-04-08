@@ -1,0 +1,7 @@
+{
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"ls -la \\\".claude/skills/\\\" 2>&1\",\"description\":\"List skills directory with details\"}",
+  "error": "Exit code 2\nls: cannot access '.claude/skills/': No such file or directory",
+  "timestamp": "2026-04-08T02:54:48.112Z",
+  "retry_count": 4
+}
