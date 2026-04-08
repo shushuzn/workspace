@@ -198,7 +198,7 @@ def process_scenes(speech_txt: Path, force: bool = False, use_t2i: bool = True) 
         return False, []
 
 # ── 步骤 3: 视频合成 ────────────────────────────────────────────
-def process_video(mp3_path: Path, scene_imgs: list, force: bool = False, bg_music_path: str = None, bg_music_vol: float = 0.18) -> bool:
+def process_video(mp3_path: Path, scene_imgs: list, force: bool = False, bg_music_path: str = None, bg_music_vol: float = 0.18, encoder: str = 'libx264') -> bool:
     """单个视频合成（支持增量）"""
     cache = load_cache()
     key = f"{mp3_path.parent.name}/{mp3_path.name}"
@@ -215,12 +215,14 @@ def process_video(mp3_path: Path, scene_imgs: list, force: bool = False, bg_musi
         if len(scene_imgs) == 1:
             ok = make_video_multi([(scene_imgs[0], 0.0)], mp3_path, output_path, bitrate=None, scene_key='scene',
                                   bg_music_path=bg_music_path, bg_music_vol=bg_music_vol,
-                                  subtitle_path=str(srt_path) if srt_path.exists() else None)
+                                  subtitle_path=str(srt_path) if srt_path.exists() else None,
+                                  encoder=encoder)
         else:
             imgs_with_time = [(p, 0.0) for p in scene_imgs]
             ok = make_video_multi(imgs_with_time, mp3_path, output_path, bitrate=None, scene_key='scene',
                                   bg_music_path=bg_music_path, bg_music_vol=bg_music_vol,
-                                  subtitle_path=str(srt_path) if srt_path.exists() else None)
+                                  subtitle_path=str(srt_path) if srt_path.exists() else None,
+                                  encoder=encoder)
         if ok:
             update_cache(cache, 'videos', key, input_hash, str(output_path), size=output_path.stat().st_size)
             save_cache(cache)
@@ -246,7 +248,7 @@ def get_audio_duration(mp3_path: Path) -> float:
     return 0.0
 
 # ── 主流程 ───────────────────────────────────────────────────────
-def run_pipeline(articles_dir: Path, force: bool = False, resume: bool = False, workers: int = MAX_WORKERS, engine: str = None, use_t2i: bool = True, bg_music_path: str = None, bg_music_vol: float = 0.18):
+def run_pipeline(articles_dir: Path, force: bool = False, resume: bool = False, workers: int = MAX_WORKERS, engine: str = None, use_t2i: bool = True, bg_music_path: str = None, bg_music_vol: float = 0.18, encoder: str = 'libx264'):
     """批量视频生产流水线"""
     # 1. 收集所有待处理 speech 文件
     speech_files = sorted(articles_dir.rglob("*-speech.txt"))
@@ -278,7 +280,7 @@ def run_pipeline(articles_dir: Path, force: bool = False, resume: bool = False, 
                     print(f"  [SKIP] 已完成: {item_id}")
                     success_count += 1
                     continue
-                futures[executor.submit(process_item, speech_txt, force, engine, use_t2i, bg_music_path, bg_music_vol)] = speech_txt
+                futures[executor.submit(process_item, speech_txt, force, engine, use_t2i, bg_music_path, bg_music_vol, encoder)] = speech_txt
 
             for future in as_completed(futures):
                 speech_txt = futures[future]
@@ -315,7 +317,7 @@ def run_pipeline(articles_dir: Path, force: bool = False, resume: bool = False, 
     report_path.write_text(json.dumps(report, indent=2, ensure_ascii=False), encoding='utf-8')
     print(f"质量报告: {report_path}")
 
-def process_item(speech_txt: Path, force: bool, engine: str = None, use_t2i: bool = True, bg_music_path: str = None, bg_music_vol: float = 0.18) -> bool:
+def process_item(speech_txt: Path, force: bool, engine: str = None, use_t2i: bool = True, bg_music_path: str = None, bg_music_vol: float = 0.18, encoder: str = 'libx264') -> bool:
     """单个视频的完整流水线（文案质量 → 语音 → 配图 → 视频 → 质量验收）"""
     # 确保 speech_txt 是绝对路径，避免相对路径导致的 relative_to 错误
     speech_txt = speech_txt.resolve()
@@ -376,7 +378,7 @@ def process_item(speech_txt: Path, force: bool, engine: str = None, use_t2i: boo
         return False
 
     # ========== Step 4: 视频合成 ==========
-    ok = process_video(mp3_path, scene_imgs, force, bg_music_path, bg_music_vol)
+    ok = process_video(mp3_path, scene_imgs, force, bg_music_path, bg_music_vol, encoder)
     if not ok:
         return False
 
@@ -427,6 +429,9 @@ def main():
     parser.add_argument("--no-t2i", action="store_true", help="禁用 T2I，配图全部用 matplotlib")
     parser.add_argument("--bg-music", default=None, help="背景音乐文件路径（如 .mp3）")
     parser.add_argument("--bg-music-vol", type=float, default=0.18, help="BGM 音量 0.0-1.0（默认0.18）")
+    parser.add_argument("--encoder", default='libx264',
+                        choices=['libx264', 'qsv', 'nvenc', 'vaapi'],
+                        help="视频编码器（默认 libx264；qsv=Intel核显加速，nvenc=NVIDIA加速，vaapi=Linux VAAPI）")
     args = parser.parse_args()
 
     BATCH_SIZE = args.batch
@@ -434,7 +439,7 @@ def main():
     use_t2i = not args.no_t2i
 
     articles_dir = Path(args.dir) if args.dir else ARTICLES_DIR
-    run_pipeline(articles_dir, force=args.force, resume=args.resume, workers=args.workers, engine=args.tts, use_t2i=use_t2i)
+    run_pipeline(articles_dir, force=args.force, resume=args.resume, workers=args.workers, engine=args.tts, use_t2i=use_t2i, encoder=args.encoder)
 
 if __name__ == "__main__":
     main()

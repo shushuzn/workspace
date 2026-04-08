@@ -32,6 +32,44 @@ try:
 except ImportError:
     pass  # draw_scene 未安装时静默
 
+# ── 全局编码器配置 ─────────────────────────────────────────────────
+_ACTIVE_ENCODER = 'libx264'  # 'libx264' | 'qsv' | 'nvenc' | 'vaapi'
+
+def set_encoder(encoder):
+    """切换视频编码器（libx264=CPU慢高质量，qsv=Intel核显，nvenc=NVIDIA，vaapi=Linux）"""
+    global _ACTIVE_ENCODER
+    _ACTIVE_ENCODER = encoder
+
+def _enc_args(crf):
+    """返回当前编码器的视频Codec参数列表"""
+
+def _segment_enc(crf):
+    """片段编码参数：QSV+zoompan 在 Windows 上存在已知卡死，片段统一用 libx264 加速"""
+    return ['-c:v', 'libx264', '-crf', str(crf), '-preset', 'veryfast']
+
+def _final_enc(crf):
+    """最终混流参数：使用配置的编码器（QSV 等）"""
+    enc = _ACTIVE_ENCODER
+    if enc == 'qsv':
+        cqp = max(1, min(51, crf + 2))
+        return ['-c:v', 'h264_qsv', '-global_quality', str(cqp), '-preset', 'veryfast']
+    elif enc == 'nvenc':
+        return ['-c:v', 'h264_nvenc', '-cq', str(crf), '-preset', 'p4']
+    elif enc == 'vaapi':
+        return ['-c:v', 'h264_vaapi', '-quality', 'quality']
+    else:
+        return ['-c:v', 'libx264', '-crf', str(crf), '-preset', 'medium']
+    enc = _ACTIVE_ENCODER
+    if enc == 'qsv':
+        cqp = max(1, min(51, crf + 2))
+        return ['-c:v', 'h264_qsv', '-global_quality', str(cqp), '-preset', 'veryfast']
+    elif enc == 'nvenc':
+        return ['-c:v', 'h264_nvenc', '-cq', str(crf), '-preset', 'p4']
+    elif enc == 'vaapi':
+        return ['-c:v', 'h264_vaapi', '-quality', 'quality']
+    else:
+        return ['-c:v', 'libx264', '-crf', str(crf), '-preset', 'medium']
+
 def _mux_final(final_video, audio_final, output_path, crf, has_sub=False, subtitle_path=None):
     """最终混流（含字幕可选）"""
     import subprocess
@@ -42,7 +80,7 @@ def _mux_final(final_video, audio_final, output_path, crf, has_sub=False, subtit
             str(ffmpeg_exe), "-y",
             "-i", str(final_video), "-i", str(audio_final),
             "-vf", f"subtitles=filename='{subtitle_path}':si=0",
-            "-c:v", "libx264", "-crf", str(crf), "-preset", "medium",
+            *_final_enc(crf),
             "-c:a", "aac", "-b:a", "256k",
             "-shortest", str(output_path),
         ], capture_output=True, text=True, encoding='utf-8', errors='ignore')
@@ -165,7 +203,7 @@ def make_video_single(img_path, audio_path, output_path, bitrate=None, scene_key
            "-loop", "1", "-framerate", "1",
            "-i", str(img_path),
            "-i", str(audio_path),
-           "-c:v", "libx264", "-preset", preset, "-crf", str(crf),
+           *_final_enc(crf),
            "-tune", "stillimage"]
     if bitrate:
         cmd += ["-b:v", bitrate]
@@ -225,7 +263,7 @@ def _encode_scene_animation(anim_func, anim_kwargs, output_path, w_even, h_even,
         "-f", "concat", "-safe", "0",
         "-i", str(rulfile),
         "-vf", f"scale={w_even}:{h_even}:force_original_aspect_ratio=decrease,pad={w_even}:{h_even}:(ow-iw)/2:(oh-ih)/2,fps={fps}",
-        "-c:v", "libx264", "-preset", "medium", "-crf", str(crf),
+        *_segment_enc(crf),
         "-tune", "stillimage", "-pix_fmt", "yuv420p", "-an",
         str(output_path),
     ]
@@ -240,59 +278,74 @@ def _encode_scene_animation(anim_func, anim_kwargs, output_path, w_even, h_even,
 
 def _encode_scene_ken_burns(img_path, output_path, w_even, h_even, dur, crf, zoom_in=True):
     """Ken Burns 效果编码单场景（无声）
-    zoom_in=True: 从1.0x放大到1.15x（细节→全景）
-    zoom_in=False: 从1.15x缩小到1.0x（全景→细节）
+
+    使用 zoompan 的连续模式（无 -frames:v 限制），配合 fps=25 限制输出帧率。
+    Ken Burns 效果：通过 zoompan 的 zoom 表达式在整段时间内缓慢改变缩放比例。
     """
     import imageio_ffmpeg, subprocess
     from pathlib import Path
     ffmpeg_exe = imageio_ffmpeg.get_ffmpeg_exe()
 
-    scale_pad = (f"scale={w_even}:{h_even}:"
-                 f"force_original_aspect_ratio=decrease,"
-                 f"pad={w_even}:{h_even}:(ow-iw)/2:(oh-ih)/2")
-
+    # zoompan 连续模式：d=0 表示一直运行到输入结束（-t 控制时长）
     if zoom_in:
+        # 从 1.0x 缓慢放大到 1.15x
         z_expr = "min(zoom+0.0007,1.15)"
     else:
+        # 从 1.15x 缓慢缩小到 1.0x
         z_expr = "max(zoom-0.0007,1.0)"
     x_expr = "(iw-iw/zoom)/2"
     y_expr = "(ih-ih/zoom)/2"
-    zoompan = (f"zoompan=z='{z_expr}':x='{x_expr}':y='{y_expr}':"
-               f"d=1:s={w_even}x{h_even}:fps=25,"
-               f"eq=saturation=1.1:brightness=0.03:contrast=1.05,"
-               f"unsharp=5:5:1.0:3:3:0.5")
 
-    n_frames = max(1, int(dur * 25))
+    # scale+pad 到目标分辨率，再用 zoompan 做 Ken Burns 效果
+    vf = (
+        f"scale={w_even}:{h_even}:force_original_aspect_ratio=decrease,"
+        f"pad={w_even}:{h_even}:(ow-iw)/2:(oh-ih)/2,"
+        f"zoompan=z='{z_expr}':x='{x_expr}':y='{y_expr}':"
+        f"d=0:s={w_even}x{h_even}:fps=25,"
+        f"eq=saturation=1.1:brightness=0.03:contrast=1.05,"
+        f"unsharp=5:5:1.0:3:3:0.5"
+    )
+
     cmd = [
         str(ffmpeg_exe), "-y",
-        "-loop", "1", "-i", str(img_path),
-        "-vf", f"{scale_pad},{zoompan}",
+        "-loop", "1", "-framerate", "1",
+        "-i", str(img_path),
+        "-vf", vf,
         "-t", str(dur),
-        "-frames:v", str(n_frames),
-        "-c:v", "libx264", "-preset", "medium", "-crf", str(crf),
-        "-tune", "stillimage", "-pix_fmt", "yuv420p", "-an",
+        *_segment_enc(crf),
+        "-pix_fmt", "yuv420p", "-an",
         str(output_path),
     ]
     r = subprocess.run(cmd, capture_output=True, text=True, encoding='utf-8', errors='ignore')
     if r.returncode != 0:
-        # Fallback: 静态图
+        # Fallback: 静态图（无 Ken Burns）
+        scale_only = (
+            f"scale={w_even}:{h_even}:force_original_aspect_ratio=decrease,"
+            f"pad={w_even}:{h_even}:(ow-iw)/2:(oh-ih)/2,"
+            f"eq=saturation=1.1:brightness=0.03:contrast=1.05,"
+            f"unsharp=5:5:1.0:3:3:0.5"
+        )
         cmd2 = [
             str(ffmpeg_exe), "-y",
-            "-loop", "1", "-framerate", "1", "-i", str(img_path),
-            "-vf", f"{scale_pad},eq=saturation=1.1:brightness=0.03:contrast=1.05,unsharp=5:5:1.0:3:3:0.5", "-t", str(dur),
-            "-c:v", "libx264", "-preset", "medium", "-crf", str(crf),
-            "-tune", "stillimage", "-pix_fmt", "yuv420p", "-an",
+            "-loop", "1", "-framerate", "25",
+            "-i", str(img_path),
+            "-vf", scale_only,
+            "-t", str(dur),
+            *_segment_enc(crf),
+            "-pix_fmt", "yuv420p", "-an",
             str(output_path),
         ]
         r2 = subprocess.run(cmd2, capture_output=True, text=True, encoding='utf-8', errors='ignore')
-        return r2.returncode == 0
+        if r2.returncode != 0:
+            print(f"  [WARN] KB fallback failed: {r2.stderr[-100:]}")
+            return False
     return True
 
 
 def make_video_multi(img_paths, audio_path, output_path, bitrate=None, scene_key='default',
                     use_transitions=True, transition_dur=0.75,
                     bg_music_path=None, bg_music_vol=0.18,
-                    subtitle_path=None):
+                    subtitle_path=None, encoder='libx264'):
     """多图片按时序切换 + 音频 → 视频（Ken Burns + Cross-dissolve 过渡）
 
     升级版特性：
@@ -398,7 +451,7 @@ def make_video_multi(img_paths, audio_path, output_path, bitrate=None, scene_key
                     f"duration={trans:.2f}:offset={offset:.2f}[v]",
                     "-map", "[v]",
                     "-vf", "eq=saturation=1.1:brightness=0.03:contrast=1.05,unsharp=5:5:1.0:3:3:0.5",
-                    "-c:v", "libx264", "-crf", str(crf), "-preset", "medium",
+                    *_segment_enc(crf),
                     "-pix_fmt", "yuv420p",
                     str(out),
                 ], capture_output=True, text=True, encoding='utf-8', errors='ignore')
@@ -410,8 +463,7 @@ def make_video_multi(img_paths, audio_path, output_path, bitrate=None, scene_key
                         f.write(f"file '{nxt}'\n")
                     r2 = subprocess.run([
                         str(ffmpeg_exe), "-y", "-f", "concat", "-safe", "0",
-                        "-i", str(clist), "-c:v", "libx264",
-                        "-crf", str(crf), "-preset", "medium", "-an", str(out),
+                        "-i", str(clist), *_segment_enc(crf), "-an", str(out),
                     ], capture_output=True, text=True, encoding='utf-8', errors='ignore')
                     if r2.returncode != 0:
                         print(f"  [ERROR] fallback concat failed: {r2.stderr[-100:]}")
@@ -429,7 +481,7 @@ def make_video_multi(img_paths, audio_path, output_path, bitrate=None, scene_key
                 str(ffmpeg_exe), "-y", "-f", "concat", "-safe", "0",
                 "-i", str(clist),
                 "-vf", "eq=saturation=1.1:brightness=0.03:contrast=1.05,unsharp=5:5:1.0:3:3:0.5",
-                "-c:v", "libx264", "-crf", str(crf), "-preset", "medium", "-an",
+                *_segment_enc(crf), "-an",
                 "-pix_fmt", "yuv420p",
                 str(final_video),
             ], capture_output=True, text=True, encoding='utf-8', errors='ignore')
@@ -467,7 +519,7 @@ def make_video_multi(img_paths, audio_path, output_path, bitrate=None, scene_key
                     f"[mix]afade=t=in:st=0:d=0.5:alpha=1[mix-out];",
                     f"subtitles=filename='{subtitle_path}':si=0[v-sub-out];",
                     "-map", "[v-sub-out]", "-map", "[mix-out]",
-                    "-c:v", "libx264", "-crf", str(crf), "-preset", "medium",
+                    *_final_enc(crf),
                     "-c:a", "aac", "-b:a", "256k",
                     "-shortest", str(output_path),
                 ], capture_output=True, text=True, encoding='utf-8', errors='ignore')
@@ -550,15 +602,32 @@ def make_video(img_path, audio_path, output_path, bitrate=None, scene_key='defau
     """兼容性别名"""
     return make_video_single(img_path, audio_path, output_path, bitrate=bitrate, scene_key=scene_key)
 
+def get_encoder_params(encoder='libx264', crf=18):
+    """返回 (video_codec_args, preset_args) 元组，支持 QSV/NVENC/VAAPI 硬件加速"""
+    if encoder == 'qsv':
+        # Intel Quick Sync Video: CQP 模式 (q=20 约等于 CRF 18)
+        cqp = max(1, min(51, crf + 2))
+        return (['-c:v', 'h264_qsv', '-global_quality', str(cqp), '-preset', 'veryfast'], [])
+    elif encoder == 'nvenc':
+        return (['-c:v', 'h264_nvenc', '-cq', str(crf)], ['-preset', 'p4'])
+    elif encoder == 'vaapi':
+        return (['-c:v', 'h264_vaapi'], ['-quality', 'quality'])
+    else:
+        return (['-c:v', 'libx264', '-crf', str(crf), '-preset', 'medium'], [])
+
 def main():
     parser = argparse.ArgumentParser(description="视频合成（支持多画面按时序切换）")
     parser.add_argument("mp3_file", nargs="?", help="MP3 路径（不指定则处理所有）")
     parser.add_argument("--dir", default=None, help="articles 目录")
     parser.add_argument("--bitrate", default=None, help="视频码率，如 1M/2M/5M，默认用 libx264 internal default")
+    parser.add_argument("--encoder", default='libx264',
+                        choices=['libx264', 'qsv', 'nvenc', 'vaapi'],
+                        help="视频编码器（默认 libx264；qsv=Intel核显加速，nvenc=NVIDIA加速，vaapi=Linux VAAPI）")
     parser.add_argument("--bg-music", default=None, help="背景音乐文件路径（如 .mp3）")
     parser.add_argument("--bg-music-vol", type=float, default=0.18, help="BGM 音量 0.0-1.0（默认0.18）")
     parser.add_argument("--subtitle", default=None, help="SRT 字幕文件路径（不指定则自动查找同名 .srt）")
     args = parser.parse_args()
+    set_encoder(args.encoder)
 
     articles_dir = Path(args.dir) if args.dir else Path(__file__).parent.parent / "articles"
 
@@ -575,12 +644,14 @@ def main():
         if len(scene_imgs) == 1 and scene_imgs[0][0] is not None:
             make_video_multi([(scene_imgs[0][0], 0.0)], mp3_path, output, bitrate=args.bitrate, scene_key=scene_key,
                             bg_music_path=args.bg_music, bg_music_vol=args.bg_music_vol,
-                            subtitle_path=str(srt_path) if srt_path.exists() else None)
+                            subtitle_path=str(srt_path) if srt_path.exists() else None,
+                            encoder=args.encoder)
         else:
             imgs_only = [(p, 0.0) for p, _ in scene_imgs]
             make_video_multi(imgs_only, mp3_path, output, bitrate=args.bitrate, scene_key=scene_key,
                             bg_music_path=args.bg_music, bg_music_vol=args.bg_music_vol,
-                            subtitle_path=str(srt_path) if srt_path.exists() else None)
+                            subtitle_path=str(srt_path) if srt_path.exists() else None,
+                            encoder=args.encoder)
         return
 
     # 处理所有 speech MP3（跳过 speech-tts）
