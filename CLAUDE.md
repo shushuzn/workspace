@@ -195,10 +195,19 @@
 3. agent 发现 unexecuted insight 时，必须生成执行计划并执行，不得忽略
 4. 执行完成后用 `omc-insight-action.mjs --done <id>` 或 `--done all` 标记完成并验证
 
-**LLM 调用规则**：所有 LLM 调用必须通过 `claude.cmd --print` 子 agent，禁止直接调用 Ollama/Minimax/OpenAI 等外部 API。适用场景：
-- `hook-self-improve.mjs` 中的规则生成
-- `omc-insight-generator.mjs` 中的 trajectory 分析
-- 其他任何需要 LLM 的 OMC 组件
+**LLM 调用规则**：所有创意性 LLM 调用必须通过 `claude.cmd --print` 子 agent，禁止直接调用 Ollama/Minimax/OpenAI 等外部 API。**机械性操作（文件读写、路径解析、状态管理、去重判断）无需 LLM，直接执行即可**。
+
+必须用子 agent 的创意性场景：
+- `omc-insight-generator.mjs`：trajectory → insight 生成
+- `omc-insight-generator.mjs`：insight → 可执行 fix 提取（`extractPendingActionsViaAgent`）
+- `hook-self-improve.mjs`：危险 pattern → 规则 YAML 生成
+- `hook-session-start-inject.mjs`：mid-session trajectory 分析
+
+豁免（机械性操作，无需 LLM）：
+- mtime 去重检查、manifest 读写
+- drain/pending-actions 文件拼接写入
+- 计数器状态读写
+- 文件存在性检查、路径解析
 
 ### §10 idea scoring 公式
 
