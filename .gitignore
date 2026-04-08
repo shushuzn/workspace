@@ -47,6 +47,7 @@ node_modules/
 !.omc/scripts/hook-session-start-inject.mjs
 !.omc/scripts/hook-test-rules.mjs
 !.omc/scripts/hook-self-improve.mjs
+!.omc/scripts/omc-insight-generator.mjs
 .omc/
 .swarm/
 .ruff_cache/

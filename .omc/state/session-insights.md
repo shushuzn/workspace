@@ -55,3 +55,25 @@
 
 
 
+### 11. Heavy bash usage detected [auto-generated]
+**Observation**: Bash calls (26) in session — review if commands can be consolidated
+**Rule**: Track this pattern in future sessions
+
+
+### 14. Zero-Seed Production Despite 55 Tool Calls [auto-generated]
+**Observation**: 200 events, 55 tool calls, 4 user prompts — yet 0 seeds generated. Heavy Bash(26) + Read(13) + Write(9) workflow consumed the session with no idea output.
+**Rule**: Every session that processes 4+ user prompts must produce at least 1 seed or explicitly document why none apply. Add seed output check to session-close checklist.
+
+### 15. Grep Underutilization (1 call) Signals Reactive Not Preventive Debugging [auto-generated]
+**Observation**: Only 1 Grep call across 55 tools. Heavy Bash(26) suggests debugging via command execution rather than code search/analysis. Likely chasing symptoms instead of finding root cause.
+**Rule**: Before running Bash to debug, always Grep first to understand code structure. Target: minimum 3 Grep calls per debugging session.
+
+
+
+### 16. 55工具调用却0 seeds——会话未留下任何可执行种子 [auto-generated]
+
+**Observation**: 55次工具调用、4轮用户交互、200 events的session，ideas.md写入0条。工具产出完全丢失在临时对话中，无任何seed沉淀。
+
+**Rule**: 任何超过20次工具调用的session，必须在结束时向`.omc/innovation/ideas.md`写入至少1条seed（哪怕是dormant低分项），将工作成果固化为可追踪资产。
+
+
