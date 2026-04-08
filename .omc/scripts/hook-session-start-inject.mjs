@@ -41,6 +41,15 @@ async function main() {
     }
   }
 
+  // 4. Pending insight actions (from omc-insight-action --pickup)
+  const PENDING_FILE = resolve(STATE_DIR, 'pending-actions.md');
+  if (existsSync(PENDING_FILE)) {
+    const content = readFileSync(PENDING_FILE, 'utf-8').trim();
+    if (content) {
+      parts.push(`## Pending Insight Actions\n\n${content}\n\nRun each action and mark done with:\n\`node D:/OpenClaw/workspace/.omc/scripts/omc-insight-action.mjs --done <id>\``);
+    }
+  }
+
   if (parts.length === 0) return; // Nothing to inject
 
   const combined = parts.join('\n\n---\n\n');
