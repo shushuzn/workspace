@@ -30,6 +30,11 @@ matplotlib.rcParams['axes.unicode_minus'] = False
 matplotlib.rcParams['axes.spines.top'] = False
 matplotlib.rcParams['axes.spines.right'] = False
 matplotlib.rcParams['figure.edgecolor'] = 'none'
+# 渲染质量提升
+matplotlib.rcParams['figure.dpi'] = 200
+matplotlib.rcParams['text.antialiased'] = True
+matplotlib.rcParams['lines.antialiased'] = True
+matplotlib.rcParams['patch.antialiased'] = True
 
 # 渐变色工厂
 def hex_to_rgb(hex_color):
@@ -95,7 +100,7 @@ def render_latex_to_png(formula: str, out_path: Path, dpi: int = 200) -> bool:
     plt.rcParams['axes.unicode_minus'] = False
 
     ax.text(6, 4, f'${f}$', ha='center', va='center',
-            fontsize=32, color='#1e3a8a',
+            fontsize=40, color='#1e3a8a',
             usetex=False)  # False = 使用 matplotlib 内置 math renderer
 
     plt.tight_layout(pad=0.5)
@@ -124,14 +129,14 @@ def draw_latex_formula(out_path, desc=None, formula=None):
         fig, ax = plt.subplots(figsize=(12, 8))
         ax.set_xlim(0, 12); ax.set_ylim(0, 8)
         ax.axis('off')
-        ax.text(6, 4, formula, ha='center', va='center', fontsize=20,
+        ax.text(6, 4, formula, ha='center', va='center', fontsize=26,
                 fontfamily='monospace', color='#1e3a8a')
         fig.patch.set_facecolor('white')
         fig.savefig(out_path, dpi=200, bbox_inches='tight', facecolor='white')
         plt.close(fig)
 
 
-def draw_title_bar(ax, text, y=7.2, fontsize=18, color='#1d4ed8', bold=True):
+def draw_title_bar(ax, text, y=7.2, fontsize=24, color='#1d4ed8', bold=True):
     """绘制带底部装饰线的标题"""
     ax.text(6, y, text, ha='center', va='center', fontsize=fontsize,
             fontweight='bold' if bold else 'normal', color=color, zorder=5)
@@ -159,7 +164,7 @@ def card(ax, x, y, w, h, facecolor, edgecolor, linewidth=2, label=None,
     # 标签
     if label:
         ax.text(x + w/2, y + h - 0.3, label,
-                ha='center', fontsize=11, fontweight='bold', color=edgecolor, zorder=5)
+                ha='center', fontsize=13, fontweight='bold', color=edgecolor, zorder=5)
     return box
 
 def styled_arrow(ax, x0, y0, x1, y1, color='#64748b', lw=2.5, style='->',
@@ -171,7 +176,7 @@ def styled_arrow(ax, x0, y0, x1, y1, color='#64748b', lw=2.5, style='->',
                  zorder=4)
     if label:
         mx, my = (x0+x1)/2 + label_offset[0], (y0+y1)/2 + label_offset[1]
-        ax.text(mx, my, label, ha='center', fontsize=9, color=color, alpha=0.8, zorder=5)
+        ax.text(mx, my, label, ha='center', fontsize=12, color=color, alpha=0.8, zorder=5)
 
 # ─── T2I 引擎（Stable Diffusion 2.1）─────────────────────────
 _SD_PIPELINE = None
@@ -327,10 +332,10 @@ def draw_cover(out_path, title):
     ax.axhline(y=2.5, xmin=0.1, xmax=0.9, color=c['border'], linewidth=1.2, alpha=0.5)
     # 主标题
     if len(title) > 20:
-        ax.text(6, 4.5, title, ha='center', va='center', fontsize=22,
+        ax.text(6, 4.5, title, ha='center', va='center', fontsize=26,
                 fontweight='bold', color=c['text'], linespacing=1.8, zorder=5)
     else:
-        ax.text(6, 4.5, title, ha='center', va='center', fontsize=28,
+        ax.text(6, 4.5, title, ha='center', va='center', fontsize=32,
                 fontweight='bold', color=c['text'], linespacing=1.8, zorder=5)
     # 底部标注
     ax.text(6, 2.2, 'Wikipedia · 论文解读', ha='center', fontsize=11,
