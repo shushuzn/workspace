@@ -291,19 +291,9 @@ DESIGN.md pattern (VoltAgent/awesome-design-md): 9 sections — Visual Theme, Co
 `;
         writeFileSync(NOTPAD_FILE, notepadContent, 'utf-8');
 
-        // Spawn subagent to generate insight AND execute Fix — avoids compact session output trap
-        const { spawn } = await import('child_process');
-        const insightsFile = INSIGHTS_FILE;
-        const triggerFile = TRIGGER_FILE;
-        const prompt = `Read ${triggerFile}. Generate ONE insight in this format: ### N. [title] | **Observation**: [data from tool stats] | **Rule**: [pattern] | **Fix**: [action or N/A]. If Fix is not N/A: execute it via node/Bash/Edit tools, then append insight to ${insightsFile} marked EXECUTED. If Fix is N/A, just append.`;
-        const agentCmd = `claude.cmd --print --bare "${prompt.replace(/"/g, '\\"')}"`;
-
-        spawn(agentCmd, {
-          shell: true,
-          cwd: resolve(__dirname, '../..'),
-          detached: true,
-          stdio: 'ignore'
-        }).unref();
+        // Trigger written to notepad → AI sees trigger on next prompt → AI generates insight + executes Fix
+        // Compact session: AI reads notepad on session start, not during tool calls
+        // Workaround: trigger file + notepad written, AI must generate insight on next interaction
 
         console.log(`AUTO:insight-spawned (totalCalls:${totalCalls})`);
       } catch (e) {

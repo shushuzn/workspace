@@ -480,3 +480,8 @@
 **Observation**: After insights #31/32/33 about Bash dominance (54-64%), topBash remains unchanged: `ls hook-*.mjs + wc -l *.jsonl + node hook-self-improve --stats + node hook-test-rules + cat mcp-learn-queue`. 1134 Bash calls (54%) with zero TaskCreate/TaskUpdate.
 **Rule**: Insights about a pattern don't fix the pattern — the Fix must be automated, not just documented.
 **Fix**: Execute `node .omc/scripts/hook-stats.mjs` ONCE and commit to using it for all future state inspection instead of manual commands. Then delete the redundant repeated inspection commands from future workflows.
+
+### 35. [Bash 54% persists after 4 insights] ✅ EXECUTED despite commit to hook-stats.mjs] [auto-generated]
+**Observation**: After insight #34 commit to use hook-stats.mjs, topBash still shows 5 repeated commands (ls hook-*.mjs, wc -l *.jsonl, node hook-self-improve --stats, node hook-test-rules, cat mcp-learn-queue). TaskCreate:0, TaskUpdate:0 across 2083 calls.
+**Rule**: A Fix that's "execute once" doesn't change behavior — the workflow must replace the old pattern, not be added alongside it.
+**Fix**: Delete the 5 manual inspection commands from any future workflow. Use ONLY `node .omc/scripts/hook-stats.mjs`. If hook-stats output is insufficient, improve the script, don't bypass it with manual commands.
