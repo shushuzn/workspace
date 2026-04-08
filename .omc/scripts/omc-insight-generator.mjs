@@ -82,6 +82,41 @@ ${rawInsights}
   });
 }
 
+// Read current transcript and extract live stats for mid-session insight
+function readLiveStats() {
+  const sessionId = process.env.OMC_SESSION_ID;
+  const transcriptPath = sessionId
+    ? `C:/Users/adm/.claude/projects/D--OpenClaw-workspace/${sessionId}.jsonl`
+    : null;
+  if (!transcriptPath || !existsSync(transcriptPath)) return null;
+  try {
+    const lines = readFileSync(transcriptPath, 'utf-8').split('\n').filter(Boolean);
+    const tools = { Bash: 0, Read: 0, Write: 0, Edit: 0, Grep: 0, TaskCreate: 0, TaskUpdate: 0 };
+    let events = 0, toolCalls = 0, seeds = 0, userPrompts = 0;
+    for (const line of lines) {
+      try {
+        const entry = JSON.parse(line);
+        events++;
+        if (entry.type === 'user' || entry.message?.role === 'user') userPrompts++;
+        // Modern JSONL: message.content is array of blocks
+        const content = entry.message?.content;
+        if (Array.isArray(content)) {
+          for (const block of content) {
+            if (block.type === 'tool_use' && block.name) {
+              toolCalls++;
+              for (const t of Object.keys(tools)) { if (block.name.includes(t)) tools[t]++; }
+            }
+            if (block.type === 'text' && block.text?.includes('ideas.md')) seeds++;
+          }
+        }
+        // Fallback: tool_result at entry level
+        if (entry.type === 'tool_result' && entry.content?.includes('ideas.md')) seeds++;
+      } catch {}
+    }
+    return { events, toolCalls, tools, seeds, userPrompts, lines: lines.length };
+  } catch { return null; }
+}
+
 function findLatestTraj() {
   if (!existsSync(TRAJ_DIR)) return null;
   let latest = null;
@@ -148,11 +183,34 @@ function generateInsightsClaude(traj) {
 }
 
 async function main() {
-  const trajPath = findLatestTraj();
+  const args = process.argv.slice(2);
+  const liveIdx = args.indexOf('--live');
+  const trajArgIdx = args.indexOf('--transcript');
+
+  // --live: mid-session analysis from current transcript (no trajectory file needed)
+  if (liveIdx >= 0) {
+    const stats = readLiveStats();
+    if (!stats) { log('no live stats available'); return; }
+    const prompt = buildPrompt(`[MID-SESSION LIVE STATS]\n${JSON.stringify(stats, null, 2)}`);
+    const rawOutput = await generateInsightsClaude(prompt);
+    if (!rawOutput?.trim()) { log('no insights generated'); return; }
+    log('live analysis:', stats.events, 'events,', stats.toolCalls, 'tool calls');
+    // Write insights with special header
+    const existing = existsSync(INSIGHTS_FILE) ? readFileSync(INSIGHTS_FILE, 'utf-8') : '';
+    const entry = `\n## Mid-Session Live Insight\n\n${rawOutput.trim()}\n`;
+    writeFileSync(INSIGHTS_FILE, existing + entry, 'utf-8');
+    log('live insight appended to session-insights.md');
+    return;
+  }
+
+  const trajPath = trajArgIdx >= 0 && args[trajArgIdx + 1]
+    ? resolve(args[trajArgIdx + 1])
+    : findLatestTraj();
   if (!trajPath) { log('no trajectory found'); return; }
 
   const trajStat = statSync(trajPath);
-  if (isTrajectoryProcessed(trajPath, trajStat.mtimeMs)) {
+  const isMidSession = trajArgIdx >= 0;
+  if (!isMidSession && isTrajectoryProcessed(trajPath, trajStat.mtimeMs)) {
     log('trajectory already processed');
     return;
   }
