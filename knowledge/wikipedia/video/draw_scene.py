@@ -127,7 +127,7 @@ def draw_latex_formula(out_path, desc=None, formula=None):
         ax.text(6, 4, formula, ha='center', va='center', fontsize=20,
                 fontfamily='monospace', color='#1e3a8a')
         fig.patch.set_facecolor('white')
-        fig.savefig(out_path, dpi=150, bbox_inches='tight', facecolor='white')
+        fig.savefig(out_path, dpi=200, bbox_inches='tight', facecolor='white')
         plt.close(fig)
 
 
