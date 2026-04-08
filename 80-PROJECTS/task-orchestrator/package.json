@@ -13,13 +13,15 @@
     "typecheck": "tsc --noEmit --skipLibCheck"
   },
   "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
     "ai": "^6.0.141",
     "ai-elements": "^1.9.0",
-    "chokidar": "^4.0.0",
     "chalk": "^5.4.1",
+    "chokidar": "^4.0.0",
     "commander": "^13.1.0",
     "dequal": "^2.0.3",
     "eventsource-parser": "^3.0.6",
+    "execa": "^9.6.1",
     "json-schema": "^0.4.0",
     "react": "^19.2.4",
     "swr": "^2.4.1",
@@ -29,6 +31,8 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@babel/cli": "^7.28.6",
+    "@babel/preset-typescript": "^7.28.5",
     "typescript": "^5.8.3",
     "vite": "^6.3.5",
     "vitest": "^3.1.4"
