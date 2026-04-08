@@ -319,7 +319,7 @@ def make_video_multi(img_paths, audio_path, output_path, bitrate=None, scene_key
                 ok = _encode_scene_animation(
                     anim_func,
                     {'desc': desc},  # kwargs passed to draw func
-                    seg_path, w_even, h_even, seg_duration, crf, fps=12
+                    seg_path, w_even, h_even, seg_duration, crf, fps=18
                 )
                 if not ok:
                     print(f"  [WARN] 动画场景{i} 失败，fallback to Ken Burns")
@@ -422,7 +422,7 @@ def make_video_multi(img_paths, audio_path, output_path, bitrate=None, scene_key
         r_mux = subprocess.run([
             str(ffmpeg_exe), "-y",
             "-i", str(final_video), "-i", str(audio_final),
-            "-c:v", "copy", "-c:a", "aac", "-b:a", "192k",
+            "-c:v", "copy", "-c:a", "aac", "-b:a", "256k",
             "-shortest", str(output_path),
         ], capture_output=True, text=True, encoding='utf-8', errors='ignore')
         if r_mux.returncode != 0:
