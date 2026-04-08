@@ -86,8 +86,8 @@ def crf_for_scene(scene_key):
                     'thermoelectric', 'iv_curve'}
     # 封面/简单文字用中间值
     if scene_key in low_crf_keys:
-        return 18  # 高清晰度
-    return 22  # 标准清晰度
+        return 16  # 高清晰度（从18提升）
+    return 20  # 标准清晰度（从22提升）
 
 def get_x264_preset(complexity='medium'):
     """根据场景复杂度返回 x264 preset（越慢=压缩效率越高）"""
@@ -161,7 +161,7 @@ def make_video_single(img_path, audio_path, output_path, bitrate=None, scene_key
     return True
 
 
-def _encode_scene_animation(anim_func, anim_kwargs, output_path, w_even, h_even, dur, crf, fps=12):
+def _encode_scene_animation(anim_func, anim_kwargs, output_path, w_even, h_even, dur, crf, fps=18):
     """动画帧编码：调用绘图函数生成 N 帧 → FFmpeg 编码为无声 MP4
 
     Args:
@@ -226,9 +226,9 @@ def _encode_scene_ken_burns(img_path, output_path, w_even, h_even, dur, crf, zoo
                  f"pad={w_even}:{h_even}:(ow-iw)/2:(oh-ih)/2")
 
     if zoom_in:
-        z_expr = "min(zoom+0.0004,1.12)"
+        z_expr = "min(zoom+0.00056,1.12)"
     else:
-        z_expr = "max(zoom-0.0004,1.0)"
+        z_expr = "max(zoom-0.00056,1.0)"
     x_expr = "(iw-iw/zoom)/2"
     y_expr = "(ih-ih/zoom)/2"
     zoompan = (f"zoompan=z='{z_expr}':x='{x_expr}':y='{y_expr}':"
