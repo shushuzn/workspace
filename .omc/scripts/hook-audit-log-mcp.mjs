@@ -32,13 +32,49 @@ const DANGEROUS_PATTERNS = [
   { pattern: /git\s+push\s+.*--force/i, name: 'git-push-force' },
 ];
 
+// ── Deduplication: collapse rapid repeated commands ────────────────────────────
+const LAST_CMD_FILE = resolve(STATE_DIR, 'hook-last-cmd.json');
+const DEDUP_WINDOW_MS = 500; // Collapse if same cmd within 500ms
+
+function readLastCmd() {
+  if (!existsSync(LAST_CMD_FILE)) return null;
+  try { return JSON.parse(readFileSync(LAST_CMD_FILE, 'utf-8')); }
+  catch { return null; }
+}
+
+function writeLastCmd(cmd, preview, count) {
+  writeFileSync(LAST_CMD_FILE, JSON.stringify({ cmd, preview, count, ts: Date.now() }), 'utf-8');
+}
+
+function isDuplicate(cmd) {
+  const last = readLastCmd();
+  if (!last) return false;
+  const sameCmd = last.cmd === cmd;
+  const recent = (Date.now() - last.ts) < DEDUP_WINDOW_MS;
+  return sameCmd && recent;
+}
+
+function getDupCount() {
+  const last = readLastCmd();
+  return last?.count || 1;
+}
+
 // ── Write to files ─────────────────────────────────────────────────────────────
 function ensureDir() {
   if (!existsSync(STATE_DIR)) mkdirSync(STATE_DIR, { recursive: true });
 }
 
-function appendAudit(entry) {
+function appendAudit(entry, skipDup) {
   ensureDir();
+  // Collapsed duplicate: write count as suffix instead of new line
+  if (skipDup) {
+    const last = readLastCmd();
+    if (last) {
+      writeLastCmd(entry.tool_input_preview, entry.tool_input_preview?.slice(0, 40), last.count + 1);
+    }
+    return;
+  }
+  writeLastCmd(entry.tool_input_preview, entry.tool_input_preview?.slice(0, 40), 1);
   appendFileSync(AUDIT_LOG, JSON.stringify(entry) + '\n', 'utf-8');
 }
 
@@ -113,7 +149,7 @@ function buildAuditEntry(input) {
     outcome: input.outcome || 'unknown',
     error: input.error || null,
     hook_event_name: input.hook_event_name || 'PostToolUse',
-    sessionId: process.env.OMC_SESSION_ID || 'unknown',
+    sessionId: input.session_id || process.env.OMC_SESSION_ID || 'unknown',
     timestamp: new Date().toISOString(),
   };
 }
@@ -186,7 +222,9 @@ async function mainStdin() {
   if (!input) return; // No stdin data
 
   const entry = buildAuditEntry(input);
-  appendAudit(entry);
+  const cmd = entry.tool_input_preview || '';
+  const skipDup = isDuplicate(cmd);
+  appendAudit(entry, skipDup);
   tickNudge(); // Periodic nudge every N calls
 
   // Always report command via MCP
@@ -221,7 +259,9 @@ function mainCLI(args) {
     timestamp: new Date().toISOString(),
   };
 
-  appendAudit(entry);
+  const cmd = entry.tool_input_preview || '';
+  const skipDup = isDuplicate(cmd);
+  appendAudit(entry, skipDup);
 
   const mcpEntries = buildMCPEntries(entry);
   for (const e of mcpEntries) appendMCP(e);

@@ -205,32 +205,25 @@ async function step4_trajectory() {
   // Extract tool calls
   const toolCalls = [];
   for (const e of events) {
-    if (e.type === 'assistant' && e.message?.content) {
-      const raw = e.message.content;
-      // Handle content as string or array (modern Claude format)
-      const text = Array.isArray(raw)
-        ? (raw.find(i => i.type === 'text')?.text || '')
-        : String(raw || '');
-      if (!text) continue;
-      // Look for tool_use blocks
-      const toolUseMatch = text.match(/using tools?:?\s*([A-Z][a-zA-Z]+)/g);
-      if (toolUseMatch) {
-        for (const m of toolUseMatch) {
-          const tool = m.replace(/using tools?:?\s*/i, '').trim();
-          if (tool) toolCalls.push({ tool, ts: e.timestamp });
+    if (e.type !== 'assistant') continue;
+    const raw = e.message?.content;
+    // Modern format: content is array of blocks with type: 'tool_use'
+    if (Array.isArray(raw)) {
+      for (const block of raw) {
+        if (block?.type === 'tool_use' && block?.name) {
+          toolCalls.push({ tool: block.name, ts: e.timestamp });
         }
       }
-      // Also check for bash commands in text
-      if (text.includes('Bash') || text.includes('Bash')) {
-        const bashMatch = text.match(/(?:run|execute|call).*?(?:bash|command|shell).*?[`"']{1}(.+?)[`"']{1}/gi);
-        if (bashMatch) {
-          for (const m of bashMatch) {
-            const cmd = m.match(/[`"']?([^`"'\n]+)[`"']?$/)?.[1] || m;
-            if (cmd && cmd.length > 1 && cmd.length < 200) {
-              toolCalls.push({ tool: 'Bash', detail: cmd.trim().slice(0, 80), ts: e.timestamp });
-            }
-          }
-        }
+      continue;
+    }
+    // Legacy format: content is string — look for tool references
+    const text = String(raw || '');
+    if (!text) continue;
+    const toolUseMatch = text.match(/using tools?:?\s*([A-Z][a-zA-Z]+)/g);
+    if (toolUseMatch) {
+      for (const m of toolUseMatch) {
+        const tool = m.replace(/using tools?:?\s*/i, '').trim();
+        if (tool) toolCalls.push({ tool, ts: e.timestamp });
       }
     }
   }
