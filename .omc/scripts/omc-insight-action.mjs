@@ -4,19 +4,22 @@
  * Manages pending actions from insights.
  *
  * Usage:
- *   node omc-insight-action.mjs --add "description" --action "node script.js"
+ *   node omc-insight-action.mjs --add "description" --action "command"
  *   node omc-insight-action.mjs --list   Show pending actions
  *   node omc-insight-action.mjs --pickup  Read for injection
- *   node omc-insight-action.mjs --done <id>  Mark complete
+ *   node omc-insight-action.mjs --done <id>  Mark complete + mark insight EXECUTED
+ *   node omc-insight-action.mjs --execute <id>  Run action then mark done
  */
 import { existsSync, readFileSync, writeFileSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
+import { spawn } from 'child_process';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const STATE_DIR = resolve(__dirname, '../state');
 const PENDING_FILE = resolve(STATE_DIR, 'pending-actions.md');
 const VERIFY_FILE = resolve(STATE_DIR, 'insight-verifications.md');
+const INSIGHTS_FILE = resolve(__dirname, '../state/session-insights.md');
 
 function log(...a) { console.log('[insight]', ...a); }
 
@@ -61,9 +64,35 @@ function pickup() {
   return items.map(i => `## Action Item\n\n- **${i.desc}**\n- Run: \`${i.action}\`\n- ID: ${i.id}`).join('\n\n');
 }
 
+function markInsightExecuted(desc) {
+  // Find the insight in session-insights.md matching this action's description and mark EXECUTED
+  if (!existsSync(INSIGHTS_FILE)) return;
+  let content = readFileSync(INSIGHTS_FILE, 'utf-8');
+  const lines = content.split('\n');
+  let found = false;
+  for (let i = 0; i < lines.length; i++) {
+    if (lines[i].includes('### ') && lines[i].includes(desc.slice(0, 40))) {
+      // Check if already marked
+      if (lines[i].includes('✅ EXECUTED')) break;
+      // Append EXECUTED marker on same line
+      lines[i] = lines[i].replace(/\s*$/, '') + ' ✅ EXECUTED';
+      found = true;
+      break;
+    }
+  }
+  if (found) {
+    writeFileSync(INSIGHTS_FILE, lines.join('\n'), 'utf-8');
+    log(`marked insight: ${desc.slice(0, 40)}`);
+  }
+}
+
 function doneAction(id) {
-  const items = readPending().filter(i => i.id !== id);
-  writePending(items);
+  const items = readPending();
+  const item = items.find(i => i.id === id);
+  if (!item) { log(`not found: ${id}`); return; }
+  markInsightExecuted(item.desc);
+  verifyAction(id, 'executed');
+  writePending(items.filter(i => i.id !== id));
   log(`completed: ${id}`);
 }
 
@@ -124,6 +153,28 @@ if (args.includes('--add')) {
   }
 } else if (args.includes('--list-verified')) {
   listVerified();
+} else if (args.includes('--execute')) {
+  const idx = args.indexOf('--execute') + 1;
+  if (idx && args[idx] && !args[idx].startsWith('--')) {
+    const idArg = args[idx];
+    const items = readPending();
+    const item = items.find(i => i.id === idArg);
+    if (!item) { log(`not found: ${idArg}`); }
+    else {
+      log(`executing: ${item.action}`);
+      const [cmd, ...args2] = item.action.split(' ');
+      const proc = spawn(cmd, args2, { shell: true, cwd: __dirname + '/../../..' });
+      let err = '';
+      proc.stderr.on('data', d => { err += d.toString(); });
+      proc.on('close', (code) => {
+        if (code !== 0) log(`action failed (${code}): ${err.slice(0, 200)}`);
+        doneAction(idArg);
+      });
+      proc.on('error', e => { log(`spawn error: ${e.message}`); doneAction(idArg); });
+    }
+  } else {
+    log('Usage: --execute <id>');
+  }
 }
 
 export { addAction, readPending, pickup, doneAction };
