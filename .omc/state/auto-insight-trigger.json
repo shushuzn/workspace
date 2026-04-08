@@ -1,25 +1,7 @@
 {
   "sessionId": "7f0f400f-6043-444b-943b-2760b0a745c6",
-  "count": 1948,
+  "count": 2172,
+  "incrementalCount": 11,
   "threshold": 10,
-  "toolStats": {
-    "tools": {
-      "Bash": 1038,
-      "Read": 409,
-      "Write": 37,
-      "Edit": 264,
-      "Grep": 147,
-      "TaskCreate": 0,
-      "TaskUpdate": 0
-    },
-    "totalToolCalls": 1948,
-    "topBash": [
-      "ls -la .omc/scripts/hook-*.mjs .omc/state/hook-audit.jsonl .omc/state/mcp-learn-",
-      "wc -l .omc/state/hook-audit.jsonl .omc/state/mcp-learn-queue.jsonl 2>/dev/null",
-      "node .omc/scripts/hook-self-improve.mjs --stats 2>&1 | head -20",
-      "node .omc/scripts/hook-test-rules.mjs 2>&1 | head -30",
-      "cat .omc/state/mcp-learn-queue.jsonl 2>/dev/null"
-    ]
-  },
-  "triggeredAt": "2026-04-08T17:54:13.610Z"
+  "triggeredAt": "2026-04-08T19:39:28.092Z"
 }

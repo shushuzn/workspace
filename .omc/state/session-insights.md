@@ -490,3 +490,8 @@
 **Observation**: 20 hook-*.mjs scripts exist: hook-stats, hook-dashboard, hook-self-improve, hook-test-rules, hook-workflow-detector, etc. Insights #31-35 repeatedly suggest creating "hook-stats-dashboard" or "hook-stats.mjs" when both already exist. Agent doesn't read existing scripts before suggesting new ones.
 **Rule**: Before suggesting a new script, read .omc/scripts/hook-*.mjs to check if it already exists. Repeated suggestions to create existing tools waste insight cycles.
 **Fix**: Audit all 20 hook scripts, document each one's purpose, remove duplicates. For this session: use existing hook-stats.mjs for state inspection instead of 5 manual commands.
+
+### 37. [Active learning hook triggers on meaningless test output]
+**Observation**: hook-active-learn.mjs triggered on test Write ("hello world" to test.txt) — no real work was done, but system still generated a trigger. The trigger file contains meaningless content because the "work" was just a test.
+**Rule**: Active learning should filter out test/debug operations. A test file write is not learning material.
+**Fix**: In isMeaningfulWork(), add: reject if file_path ends in .txt, .test.*, .spec.*, or contains "test" in path.

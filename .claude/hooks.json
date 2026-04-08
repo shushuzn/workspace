@@ -1,18 +1,13 @@
 {
-  "description": "OMC Hooks — Insight auto-trigger via PostToolUse",
+  "description": "OMC Hooks — Session lifecycle + active learning",
   "hooks": {
-    "PostToolUse": [
+    "PreToolUse": [
       {
         "hooks": [
           {
             "type": "command",
-            "command": "node D:/OpenClaw/workspace/.omc/scripts/hook-audit-log-mcp.mjs --check",
-            "timeout": 5000
-          },
-          {
-            "type": "command",
-            "command": "node D:/OpenClaw/workspace/.omc/scripts/hook-auto-seed.mjs --check",
-            "timeout": 3000
+            "command": "node D:/OpenClaw/workspace/.omc/scripts/hook-active-learn.mjs",
+            "timeout": 1000
           }
         ]
       }

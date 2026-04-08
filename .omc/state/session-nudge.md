@@ -28,3 +28,11 @@ Fix 执行完成后，必须向 `insight-verifications.md` 追加验证结果：
 - **原因**: [判断依据]
 ```
 ⚡ INSIGHT TRIGGER: 1917 tool calls reached — generate insight now: .omc/state/session-insights.md
+⚡ INSIGHT TRIGGER: 1992 tool calls reached — generate insight now: .omc/state/session-insights.md
+⚡ INSIGHT TRIGGER: 2015 tool calls reached — generate insight now: .omc/state/session-insights.md
+⚡ INSIGHT TRIGGER: 2022 tool calls reached — generate insight now: .omc/state/session-insights.md
+⚡ INSIGHT TRIGGER: 2052 tool calls reached — generate insight now: .omc/state/session-insights.md
+⚡ INSIGHT TRIGGER: 2071 tool calls reached — generate insight now: .omc/state/session-insights.md
+⚡ INSIGHT TRIGGER: 2074 tool calls reached — generate insight now: .omc/state/session-insights.md
+⚡ INSIGHT TRIGGER: 2083 tool calls reached — generate insight now: .omc/state/session-insights.md
+⚡ INSIGHT TRIGGER: 2146 tool calls reached — generate insight now: .omc/state/session-insights.md

@@ -17,3 +17,11 @@
 - [2026-04-09] STAGE [AUTO:auto-insight] [score:3×4=12] [f:4] 原生insight生成 | benefit: AI在会话中实时生成带Fix的insight | reason: 工具调用已达1809次，触发实时insight | approach: hook触发→AI生成→session-insights.md→step7执行 | AUTO:1775668799384
 - [2026-04-09] STAGE [AUTO:auto-insight] [score:3×4=12] [f:4] 原生insight生成 | benefit: AI在会话中实时生成带Fix的insight | reason: 工具调用已达1885次，触发实时insight | approach: hook触发→AI生成→session-insights.md→step7执行 | AUTO:1775669943680
 - [2026-04-09] STAGE [AUTO:auto-insight] [score:3×4=12] [f:4] 原生insight生成 | benefit: AI在会话中实时生成带Fix的insight | reason: 工具调用已达1917次，触发实时insight | approach: hook触发→AI生成→session-insights.md→step7执行 | AUTO:1775670483712
+- [2026-04-09] STAGE [AUTO:auto-insight] [score:3×4=12] [f:4] 原生insight生成 | benefit: AI在会话中实时生成带Fix的insight | reason: 工具调用已达1992次，触发实时insight | approach: hook触发→AI生成→session-insights.md→step7执行 | AUTO:1775672043491
+- [2026-04-09] STAGE [AUTO:auto-insight] [score:3×4=12] [f:4] 原生insight生成 | benefit: AI在会话中实时生成带Fix的insight | reason: 工具调用已达2015次，触发实时insight | approach: hook触发→AI生成→session-insights.md→step7执行 | AUTO:1775672424980
+- [2026-04-09] STAGE [AUTO:auto-insight] [score:3×4=12] [f:4] 原生insight生成 | benefit: AI在会话中实时生成带Fix的insight | reason: 工具调用已达2022次，触发实时insight | approach: hook触发→AI生成→session-insights.md→step7执行 | AUTO:1775672555213
+- [2026-04-09] STAGE [AUTO:auto-insight] [score:3×4=12] [f:4] 原生insight生成 | benefit: AI在会话中实时生成带Fix的insight | reason: 工具调用已达2052次，触发实时insight | approach: hook触发→AI生成→session-insights.md→step7执行 | AUTO:1775673233590
+- [2026-04-09] STAGE [AUTO:auto-insight] [score:3×4=12] [f:4] 原生insight生成 | benefit: AI在会话中实时生成带Fix的insight | reason: 工具调用已达2071次，触发实时insight | approach: hook触发→AI生成→session-insights.md→step7执行 | AUTO:1775673532989
+- [2026-04-09] STAGE [AUTO:auto-insight] [score:3×4=12] [f:4] 原生insight生成 | benefit: AI在会话中实时生成带Fix的insight | reason: 工具调用已达2074次，触发实时insight | approach: hook触发→AI生成→session-insights.md→step7执行 | AUTO:1775673586665
+- [2026-04-09] STAGE [AUTO:auto-insight] [score:3×4=12] [f:4] 原生insight生成 | benefit: AI在会话中实时生成带Fix的insight | reason: 工具调用已达2083次，触发实时insight | approach: hook触发→AI生成→session-insights.md→step7执行 | AUTO:1775673670519
+- [2026-04-09] STAGE [AUTO:auto-insight] [score:3×4=12] [f:4] 原生insight生成 | benefit: AI在会话中实时生成带Fix的insight | reason: 工具调用已达2146次，触发实时insight | approach: hook触发→AI生成→session-insights.md→step7执行 | AUTO:1775676274445
