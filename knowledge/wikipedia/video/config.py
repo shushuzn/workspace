@@ -23,7 +23,7 @@ VIDEO_CRF = {  # 场景类型 → CRF
     'cover': 22,      # 封面：标准
     'scene': 22,      # 配图：标准
 }
-AUDIO_BITRATE = "192k"
+AUDIO_BITRATE = "256k"
 AUDIO_LOUDNORM = "I=-16:LRA=11:tp=-1.5"
 
 # TTS 配置
