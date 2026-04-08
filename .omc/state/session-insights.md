@@ -449,6 +449,11 @@
 **Rule**: hook 失效时应触发 AI 端主动检测，而非静默失败
 **Fix**: 在 `hook-session-start-inject.mjs` 中增加计数器检查，若 `count>0 且 fired=false`，注入提醒让 AI 主动完成 insight 生成
 
+### 30. [insight验证缺失闭环]
+**Observation**: insight-verifications.md 只有 `Result: executed`，无实际效果验证。所有 Fix 执行后没有客观标准判断是否有效。
+**Rule**: 每个 executable insight 执行后必须验证，并记录：预期效果 vs 实际效果
+**Fix**: 在 pending-actions 执行后，要求输出验证结果（有效/无效/部分有效），写入 insight-verifications.md
+
 ### 28. [实时insight生成管道打通] [in-session]
 **Observation**: 本 session 修改了 `hook-auto-seed.mjs`（seed→insight）和 `hook-session-start-inject.mjs`（注入 trigger），实现了10次工具调用触发 in-session insight 生成，而非事后分析 trajectory。测试确认 trigger 正确注入到 session-start hook 输出中。
 **Rule**: insight 应在会话中实时生成，不依赖 drain 后的 trajectory 分析
