@@ -214,8 +214,8 @@ def _encode_scene_animation(anim_func, anim_kwargs, output_path, w_even, h_even,
 
 def _encode_scene_ken_burns(img_path, output_path, w_even, h_even, dur, crf, zoom_in=True):
     """Ken Burns 效果编码单场景（无声）
-    zoom_in=True: 从1.0x放大到1.12x（细节→全景）
-    zoom_in=False: 从1.12x缩小到1.0x（全景→细节）
+    zoom_in=True: 从1.0x放大到1.15x（细节→全景）
+    zoom_in=False: 从1.15x缩小到1.0x（全景→细节）
     """
     import imageio_ffmpeg, subprocess
     from pathlib import Path
@@ -226,9 +226,9 @@ def _encode_scene_ken_burns(img_path, output_path, w_even, h_even, dur, crf, zoo
                  f"pad={w_even}:{h_even}:(ow-iw)/2:(oh-ih)/2")
 
     if zoom_in:
-        z_expr = "min(zoom+0.00056,1.12)"
+        z_expr = "min(zoom+0.0007,1.15)"
     else:
-        z_expr = "max(zoom-0.00056,1.0)"
+        z_expr = "max(zoom-0.0007,1.0)"
     x_expr = "(iw-iw/zoom)/2"
     y_expr = "(ih-ih/zoom)/2"
     zoompan = (f"zoompan=z='{z_expr}':x='{x_expr}':y='{y_expr}':"
