@@ -44,6 +44,9 @@ node_modules/
 .clawhub/
 .gstack/
 .claude-flow/
+!.omc/scripts/hook-session-start-inject.mjs
+!.omc/scripts/hook-test-rules.mjs
+!.omc/scripts/hook-self-improve.mjs
 .omc/
 .swarm/
 .ruff_cache/
