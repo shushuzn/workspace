@@ -199,7 +199,7 @@ def _encode_scene_animation(anim_func, anim_kwargs, output_path, w_even, h_even,
         "-f", "concat", "-safe", "0",
         "-i", str(rulfile),
         "-vf", f"scale={w_even}:{h_even}:force_original_aspect_ratio=decrease,pad={w_even}:{h_even}:(ow-iw)/2:(oh-ih)/2,fps={fps}",
-        "-c:v", "libx264", "-preset", "fast", "-crf", str(crf),
+        "-c:v", "libx264", "-preset", "medium", "-crf", str(crf),
         "-tune", "stillimage", "-pix_fmt", "yuv420p", "-an",
         str(output_path),
     ]
@@ -241,7 +241,7 @@ def _encode_scene_ken_burns(img_path, output_path, w_even, h_even, dur, crf, zoo
         "-vf", f"{scale_pad},{zoompan}",
         "-t", str(dur),
         "-frames:v", str(n_frames),
-        "-c:v", "libx264", "-preset", "fast", "-crf", str(crf),
+        "-c:v", "libx264", "-preset", "medium", "-crf", str(crf),
         "-tune", "stillimage", "-pix_fmt", "yuv420p", "-an",
         str(output_path),
     ]
@@ -252,7 +252,7 @@ def _encode_scene_ken_burns(img_path, output_path, w_even, h_even, dur, crf, zoo
             str(ffmpeg_exe), "-y",
             "-loop", "1", "-framerate", "1", "-i", str(img_path),
             "-vf", scale_pad, "-t", str(dur),
-            "-c:v", "libx264", "-preset", "fast", "-crf", str(crf),
+            "-c:v", "libx264", "-preset", "medium", "-crf", str(crf),
             "-tune", "stillimage", "-pix_fmt", "yuv420p", "-an",
             str(output_path),
         ]
@@ -367,7 +367,7 @@ def make_video_multi(img_paths, audio_path, output_path, bitrate=None, scene_key
                     f"[0:v][1:v]xfade=transition=crossfade:"
                     f"duration={trans:.2f}:offset={offset:.2f}[v]",
                     "-map", "[v]",
-                    "-c:v", "libx264", "-crf", str(crf), "-preset", "fast",
+                    "-c:v", "libx264", "-crf", str(crf), "-preset", "medium",
                     "-pix_fmt", "yuv420p",
                     str(out),
                 ], capture_output=True, text=True, encoding='utf-8', errors='ignore')
@@ -380,7 +380,7 @@ def make_video_multi(img_paths, audio_path, output_path, bitrate=None, scene_key
                     r2 = subprocess.run([
                         str(ffmpeg_exe), "-y", "-f", "concat", "-safe", "0",
                         "-i", str(clist), "-c:v", "libx264",
-                        "-crf", str(crf), "-preset", "fast", "-an", str(out),
+                        "-crf", str(crf), "-preset", "medium", "-an", str(out),
                     ], capture_output=True, text=True, encoding='utf-8', errors='ignore')
                     if r2.returncode != 0:
                         print(f"  [ERROR] fallback concat failed: {r2.stderr[-100:]}")
@@ -397,7 +397,7 @@ def make_video_multi(img_paths, audio_path, output_path, bitrate=None, scene_key
             r = subprocess.run([
                 str(ffmpeg_exe), "-y", "-f", "concat", "-safe", "0",
                 "-i", str(clist),
-                "-c:v", "libx264", "-crf", str(crf), "-preset", "fast", "-an",
+                "-c:v", "libx264", "-crf", str(crf), "-preset", "medium", "-an",
                 str(final_video),
             ], capture_output=True, text=True, encoding='utf-8', errors='ignore')
             if r.returncode != 0:
