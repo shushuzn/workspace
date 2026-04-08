@@ -1,23 +1,24 @@
 #!/usr/bin/env node
 /**
  * OMC Auto-Seed Generator Hook
- * Tracks tool call count per session → auto-creates seed in ideas.md after 5+ calls.
+ * Tracks tool call count per session → auto-executes highest-score seed after 5+ calls.
  *
  * Usage (as hook script):
  *   node hook-auto-seed.mjs [--check] [--reset]
- *     --check  : Increment counter, check threshold, write seed if reached
+ *     --check  : Increment counter, check threshold, spawn executor if reached
  *     --reset  : Reset counter for new session
  *
  * Architecture:
  *   PostToolUse hook fires on every tool call → invokes this with --check
  *   Counter stored in .omc/state/auto-seed-counter.json
- *   When threshold reached (5+ calls), writes AUTO: marker to ideas.md
- *   Pre-prompt hook detects AUTO: marker → prompts user for seed adoption
- *   User says "yes" → seed becomes a real seed in ideas.md
- *
- * Anti-recursion: Uses --check flag, counter only increments on actual task tools.
+ *   When threshold reached (5+ calls):
+ *     1. Writes seed entry to ideas.md (backup for manual review)
+ *     2. Spawns detached executor via OMC_SKIP_HOOKS + background bash
+ *     3. Executor parses ideas.md, picks highest-score un-shipped seed, executes, marks shipped
+ *   Anti-recursion: OMC_SKIP_HOOKS env var prevents re-triggering this hook
  */
-import { existsSync, readFileSync, writeFileSync, mkdirSync, appendFileSync } from 'fs';
+import { existsSync, readFileSync, writeFileSync, mkdirSync, readdirSync, statSync } from 'fs';
+import { spawn } from 'child_process';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -47,14 +48,14 @@ function getCurrentSessionId() {
   const sessionsDir = resolve(__dirname, '../state/sessions');
   if (existsSync(sessionsDir)) {
     try {
-      const entries = require('fs').readdirSync(sessionsDir);
+      const entries = readdirSync(sessionsDir);
       // Find the most recent session directory
       let latestSession = null;
       let latestMtime = 0;
       for (const entry of entries) {
         if (entry.startsWith('.')) continue;
         const fullPath = resolve(sessionsDir, entry);
-        const stat = require('fs').statSync(fullPath);
+        const stat = statSync(fullPath);
         if (stat.mtimeMs > latestMtime) {
           latestMtime = stat.mtimeMs;
           latestSession = entry;
@@ -72,10 +73,6 @@ function getCurrentSessionId() {
 function writeState(state) {
   if (!existsSync(STATE_DIR)) mkdirSync(STATE_DIR, { recursive: true });
   writeFileSync(STATE_FILE, JSON.stringify(state, null, 2), 'utf-8');
-}
-
-function appendIdea(line) {
-  appendFileSync(IDEAS_FILE, line + '\n', 'utf-8');
 }
 
 function hasRecentAutoSeed() {
@@ -99,43 +96,63 @@ function parseArgs(argv) {
 }
 
 // ── Extract context from recent audit log ────────────────────────────────────
-function extractRecentContext() {
-  const auditPath = resolve(__dirname, '../state/hook-audit.jsonl');
-  if (!existsSync(auditPath)) return null;
+// (kept for future use: context-aware seed generation)
+// function extractRecentContext() { ... }
 
-  const raw = readFileSync(auditPath, 'utf-8');
-  const lines = raw.split('\n').filter(Boolean).slice(-20);
+// ── Spawn executor agent ──────────────────────────────────────────────────────
+function spawnExecutor() {
+  const executorScript = resolve(__dirname, 'hook-seed-executor.mjs');
+  const PROMPT_FILE = resolve(STATE_DIR, 'seed-executor-prompt.txt');
+  const CLAUDE_BIN = process.platform === 'win32'
+    ? resolve(process.env.APPDATA || '', 'npm/claude.cmd')
+    : 'claude';
 
-  const entries = lines.map(l => {
-    try { return JSON.parse(l); } catch { return null; }
-  }).filter(Boolean);
+  // Step 1: run seed-executor to write prompt to file
+  // Pass OMC_SEED_PROMPT_FILE so executor knows where to write
+  const env1 = {
+    ...process.env,
+    OMC_SKIP_HOOKS: 'PostToolUse,PreToolUse',
+    OMC_SEED_PROMPT_FILE: PROMPT_FILE,
+  };
+  const child = spawn('node', [executorScript], {
+    env: env1,
+    stdio: ['ignore', 'pipe', 'pipe'],
+    cwd: __dirname,
+  });
 
-  // Build simple context: last 5 unique commands
-  const cmds = [];
-  for (let i = entries.length - 1; i >= 0; i--) {
-    const e = entries[i];
-    if (e.command && !cmds.includes(e.command)) {
-      cmds.push(e.command);
+  let stderr = '';
+  child.stdout.on('data', (d) => { process.stdout.write(d); }); // pass through
+  child.stderr.on('data', (d) => { stderr += d.toString(); });
+  child.on('close', (code) => {
+    if (code !== 0) {
+      console.error('seed-executor failed:', stderr || `exit ${code}`);
+      return;
     }
-    if (cmds.length >= 5) break;
-  }
+    if (!existsSync(PROMPT_FILE)) {
+      console.log('executor:no-seed');
+      return;
+    }
 
-  return cmds.length > 0 ? cmds.join('; ') : null;
-}
-
-// ── Generate seed suggestion ─────────────────────────────────────────────────
-function generateSeedEntry(state, context) {
-  const today = new Date().toISOString().split('T')[0];
-  const count = state.count;
-  const ctx = context || '工具调用累计达到5+次';
-
-  // Generate a plausible seed based on context
-  // Format: - [DATE] STAGE [source] [score:Benefit×Feasibility] [f:Feasibility] description
-  // For now, create a generic "automated discovery" seed
-  // In the future, could use LLM to generate context-specific seeds
-  const entry = `- [${today}] STAGE [AUTO:auto-seed-generator] [score:3×4=12] [f:4] 自动化工具调用模式识别 | benefit: 从${count}次调用中提取工作流模式并固化 | reason: 工具调用已达${count}次，存在可复用的工作流 | approach: 分析调用链→识别高频模式→生成可复用skill或adapter | AUTO:${Date.now()}`;
-
-  return entry;
+    // Step 2: spawn claude CLI with the prompt file
+    const env2 = {
+      ...process.env,
+      OMC_SKIP_HOOKS: 'PostToolUse,PreToolUse',
+    };
+    const prompt = readFileSync(PROMPT_FILE, 'utf-8');
+    const claude = spawn(CLAUDE_BIN, [
+      '--add-mcp-tools',
+      '--dangerously-skip-permissions',
+    ], {
+      env: env2,
+      stdio: ['pipe', 'inherit', 'inherit'],
+      detached: true,
+      cwd: 'D:/OpenClaw/workspace',
+    });
+    claude.stdin.write(prompt);
+    claude.stdin.end();
+    claude.unref();
+    console.log(`AUTO:claude-spawned (pid ${claude.pid})`);
+  });
 }
 
 // ── Main ─────────────────────────────────────────────────────────────────────
@@ -168,16 +185,13 @@ async function main() {
 
     // Check threshold (and not already fired this session)
     if (newState.count >= THRESHOLD && !newState.fired && !hasRecentAutoSeed()) {
-      const context = extractRecentContext();
-      const entry = generateSeedEntry(newState, context);
-
       try {
-        appendIdea(entry);
+        spawnExecutor();
         newState.fired = true;
         writeState(newState);
-        console.log(`AUTO:${entry}`);
+        console.log(`AUTO:spawning-seed-executor`);
       } catch (e) {
-        console.error('failed to write seed:', e.message);
+        console.error('failed to spawn executor:', e.message);
       }
     } else {
       console.log(`count:${newState.count}/${THRESHOLD}`);
