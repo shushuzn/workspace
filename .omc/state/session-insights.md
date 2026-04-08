@@ -47,3 +47,11 @@
 **Root cause**: JS 模板字符串内的模板字符串需要双转义；bash heredoc `$()` 会被 shell 展开；Node.js -e 的字符串在 Windows CRLF 下行为异常
 **Fix**: 写 `.js` 或 `.mjs` 文件用 fs.readFileSync/writeFileSync 替代 Edit 工具处理复杂字符串替换；避免 heredoc 和 -e 字符串
 **Pattern**: 复杂字符串替换优先用脚本文件，Edit 工具仅适用于简单单行或已知格式内容
+### 10. Heavy bash usage detected [auto-generated]
+**Observation**: Bash calls (11) in session — review if commands can be consolidated
+**Rule**: Track this pattern in future sessions
+
+
+
+
+

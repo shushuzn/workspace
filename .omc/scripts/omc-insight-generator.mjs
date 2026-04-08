@@ -63,21 +63,88 @@ function generateInsights(traj) {
     });
   }
 
+  // Extract individual tool counts
+  const toolCounts = {};
+  const toolLines = lines.filter(l => l.trim().startsWith('- '));
+  for (const tl of toolLines) {
+    const m = tl.match(/^- ([^(]+)\((\d+)\)$/);
+    if (m) toolCounts[m[1].trim()] = parseInt(m[2]);
+  }
+
+  // Insight: Edit + Write + 0 seeds = modifying without creating
+  if ((toolCounts['Edit'] || 0) >= 3 && (toolCounts['Write'] || 0) >= 3 && summary.includes('0 seeds')) {
+    insights.push({
+      title: 'Modifying without creating',
+      obs: `Edit(${toolCounts['Edit']}) + Write(${toolCounts['Write']}) but 0 seeds — working on existing code, not generating new ideas`,
+    });
+  }
+
+  // Insight: Read-dominant workflow
+  const readCount = toolCounts['Read'] || 0;
+  const editCount = toolCounts['Edit'] || 0;
+  if (readCount > editCount * 3 && readCount > 10) {
+    insights.push({
+      title: 'Read-heavy workflow',
+      obs: `Read(${readCount}) vs Edit(${editCount}) — reading far more than editing, possible research or review mode`,
+    });
+  }
+
+  // Insight: Shell-only session (high Bash, minimal code tools)
+  const bashCount = toolCounts['Bash'] || 0;
+  const codeTools = (toolCounts['Edit'] || 0) + (toolCounts['Write'] || 0) + (toolCounts['Grep'] || 0);
+  if (bashCount > 20 && codeTools < 5) {
+    insights.push({
+      title: 'Shell-only session',
+      obs: `Bash(${bashCount}) with minimal code tools — check if work could be scripted instead of manual commands`,
+    });
+  }
+
+  // Insight: Many tools but 0 seeds = no idea generation
+  const totalTools = Object.values(toolCounts).reduce((s, v) => s + v, 0);
+  const promptMatch = summary.match(/(\d+) user prompts/);
+  const prompts = promptMatch ? parseInt(promptMatch[1]) : 0;
+  if (totalTools > 30 && prompts > 0 && summary.includes('0 seeds')) {
+    insights.push({
+      title: 'Productive session but no seeds',
+      obs: `${totalTools} tool calls, ${prompts} prompts, 0 seeds — ideas未被记录，应检查是否需要 brainstorm`,
+    });
+  }
+
+  // Insight: High Write = creating new files
+  if ((toolCounts['Write'] || 0) >= 10) {
+    insights.push({
+      title: 'High file creation activity',
+      obs: `Write(${toolCounts['Write']}) — many new files created, good candidate for seed if project-scoped`,
+    });
+  }
+
   if (insights.length === 0) return '';
+
+  // Read existing insights for deduplication and counter
+  let existing = '';
+  if (existsSync(INSIGHTS_FILE)) {
+    existing = readFileSync(INSIGHTS_FILE, 'utf-8');
+  }
+
+  // Deduplicate: skip if title AND observation both already exist
+  const newInsights = [];
+  for (const ins of insights) {
+    if (!existing.includes(ins.title) || !existing.includes(ins.obs)) {
+      newInsights.push(ins);
+    }
+  }
+  if (newInsights.length === 0) return '';
 
   // Count existing insights to get next number
   let counter = 1;
-  if (existsSync(INSIGHTS_FILE)) {
-    const existing = readFileSync(INSIGHTS_FILE, 'utf-8');
-    const matches = existing.match(/### (\d+)\./g);
-    if (matches) {
-      const nums = matches.map(m => parseInt(m.match(/\d+/)[0]));
-      counter = Math.max(...nums) + 1;
-    }
+  const matches = existing.match(/### (\d+)\./g);
+  if (matches) {
+    const nums = matches.map(m => parseInt(m.match(/\d+/)[0]));
+    counter = Math.max(...nums) + 1;
   }
 
   let md = '';
-  for (const ins of insights) {
+  for (const ins of newInsights) {
     md += `### ${counter}. ${ins.title} [auto-generated]\n`;
     md += `**Observation**: ${ins.obs}\n`;
     md += `**Rule**: Track this pattern in future sessions\n\n`;
