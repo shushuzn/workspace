@@ -15,21 +15,21 @@
 **Fix**: parse `type: 'tool_use'` blocks with `.name` field
 **Format**: modern Claude Code JSONL has array content with block types
 
-### 4. Workflow Consolidation Opportunity
+### 4. Workflow Consolidation Opportunity ✅ EXECUTED
 **Observation**: Bash→Bash→Bash pattern occurs 56× in single session
 **Root cause**: diagnostic scripts run --stats + read queue + --emit in sequence
-**Improvement**: consolidate into single multi-command script
+**Fix**: `omc-diagnose.mjs` 合并了三个诊断命令为一条
 
 ### 5. Agent is the Analysis Engine
 **Principle**: I am responsible for generating insights, not external LLMs
 **Wrong pattern**: hook calling MiniMax/Ollama for insight generation
 **Correct pattern**: hook stores raw data → drain → next session agent analyzes
 
-### 6. Hook问题需要明确的验证反馈
+### 6. Hook问题需要明确的验证反馈 ✅ EXECUTED
 **Observation**: session 899884e0中用户反复问"hook启用了吗"共106次
 **Root cause**: hook状态不透明，用户无法从行为感知hook是否工作
-**Improvement**: hook执行后应在审计日志中留下可读标记，或在 drain 文件中附带hook活跃状态摘要
-**Result**: hook问题导致该session无任何seed产出
+**Fix**: drain文件现在包含Hook Status段落（entries today、tools、dedup、queue depth）
+**Result**: 下个session用户可从drain文件直接看到hook活跃状态
 
 ### 7. 大型调试session的特征
 **Data**: 1419次工具调用，857次Bash（60%），191次Read，129次Edit
