@@ -1,0 +1,268 @@
+#!/usr/bin/env node
+/**
+ * OMC Tool Pattern Analyzer
+ * Scans session transcripts → identifies high-frequency tool call chains
+ * → generates reusable skill/adapter recommendations.
+ *
+ * Usage:
+ *   node tool-pattern-analyzer.mjs [--verbose]
+ */
+import { existsSync, readFileSync, readdirSync, writeFileSync, mkdirSync } from 'fs';
+import { resolve, dirname, join } from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const PROJECTS_DIR = resolve(process.env.HOME || process.env.USERPROFILE, '.claude/projects/D--OpenClaw-workspace');
+const OUTPUT_DIR = resolve(__dirname, '../patterns');
+const OUTPUT_FILE = resolve(OUTPUT_DIR, 'tool-patterns.json');
+const SKILLS_DIR = resolve(__dirname, '../../.claude/skills/omc-workflows');
+
+const TOP_N = 5;
+
+// ── Tool Chain Extractor ───────────────────────────────────────────────────────
+
+function extractChainsFromTranscript(filePath) {
+  const chains = [];
+  let currentChain = [];
+
+  try {
+    const content = readFileSync(filePath, 'utf-8');
+    const lines = content.split('\n').filter(l => l.trim());
+
+    for (const line of lines) {
+      try {
+        const entry = JSON.parse(line);
+        if (entry.type === 'assistant') {
+          const content = entry.message?.content;
+          if (!content) continue;
+          const blocks = Array.isArray(content) ? content : [content];
+
+          for (const block of blocks) {
+            if (block?.type === 'tool_use') {
+              currentChain.push(block.name);
+            } else if (block?.type === 'text' || block?.type === 'text_blocks') {
+              if (currentChain.length >= 2) {
+                chains.push([...currentChain]);
+              }
+              currentChain = [];
+            }
+          }
+        } else if (entry.type === 'user') {
+          if (currentChain.length >= 2) {
+            chains.push([...currentChain]);
+          }
+          currentChain = [];
+        }
+      } catch {
+        // Skip malformed lines
+      }
+    }
+    if (currentChain.length >= 2) chains.push(currentChain);
+  } catch { /* skip */ }
+  return chains;
+}
+
+function countNgrams(chains, maxLen = 5) {
+  const freq = new Map();
+  for (const chain of chains) {
+    for (let len = 2; len <= Math.min(chain.length, maxLen); len++) {
+      for (let i = 0; i <= chain.length - len; i++) {
+        const ngram = chain.slice(i, i + len).join('→');
+        freq.set(ngram, (freq.get(ngram) || 0) + 1);
+      }
+    }
+  }
+  return freq;
+}
+
+// Filter: skip chains where all tools are the same (Read→Read, etc.)
+function isBoringChain(chain) {
+  return chain.every(t => t === chain[0]);
+}
+
+// Skip chains starting with MCP tools (external)
+function isMCPChain(chain) {
+  return chain[0].startsWith('mcp__');
+}
+
+// ── Pattern Classification ─────────────────────────────────────────────────────
+
+function classifyChain(chain) {
+  const tools = chain;
+  const set = [...new Set(tools)];
+
+  // code-search: Glob/Grep followed by Read
+  if ((tools.includes('Glob') || tools.includes('Grep')) && tools.includes('Read') && !tools.includes('Edit')) {
+    return { type: 'code-search', name: 'Code Search Pipeline', priority: 1 };
+  }
+  // read-edit: Read + Edit (the classic edit cycle)
+  if (tools.includes('Read') && tools.includes('Edit')) {
+    return { type: 'read-edit', name: 'Read-Edit Cycle', priority: 2 };
+  }
+  // bash-analysis: Bash for discovery + Read for analysis
+  if (tools.includes('Bash') && tools.includes('Read') && !tools.includes('Edit') && !tools.includes('Write')) {
+    return { type: 'bash-read', name: 'Bash + Read Analysis', priority: 3 };
+  }
+  // write-verify: Write + (optional Read) + Write (multi-file writes)
+  if (tools.includes('Write') && tools.filter(t => t === 'Write').length >= 2) {
+    return { type: 'write-pipeline', name: 'Multi-File Write Pipeline', priority: 4 };
+  }
+  // glob-discovery: Glob repeated for finding files across patterns
+  if (tools.filter(t => t === 'Glob').length >= 2 && set.every(t => t === 'Glob' || t === 'Grep')) {
+    return { type: 'glob-discovery', name: 'Glob Discovery Pattern', priority: 5 };
+  }
+  // bash-only: pure bash chains
+  if (set.every(t => t === 'Bash')) {
+    return { type: 'bash-chain', name: 'Bash Command Chain', priority: 6 };
+  }
+  return null;
+}
+
+// ── Skill Stub Generator ────────────────────────────────────────────────────────
+
+function generateSkillStub(pattern) {
+  const skillId = pattern.type;
+  const skillName = pattern.name;
+  const chain = pattern.chain;
+
+  return `---
+name: ${skillId}
+description: Automated workflow pattern: ${chain} (${pattern.count}x observed)
+trigger: "${chain.replace(/→/g, ' → ')}"
+---
+
+# ${skillName}
+
+**Observed frequency**: ${pattern.count}x across session history
+**Tool chain**: \`${chain}\`
+
+## When to Use
+
+Use this skill when you recognize the "${chain.replace(/→/g, ' → ')}" pattern in the current task.
+
+## Implementation Notes
+
+This skill was auto-generated by OMC tool-pattern-analyzer.
+
+## Anti-Patterns
+
+- Do NOT apply this pattern when the workflow is only 1-2 steps (overhead not worth it)
+- Do NOT apply when the tools in the chain are not actually needed in sequence
+`;
+}
+
+// ── Main ─────────────────────────────────────────────────────────────────────
+
+function main() {
+  const args = process.argv.slice(2);
+  const verbose = args.includes('--verbose');
+
+  if (!existsSync(PROJECTS_DIR)) {
+    console.error(`Projects dir not found: ${PROJECTS_DIR}`);
+    process.exit(1);
+  }
+
+  // Scan transcripts
+  let allChains = [];
+  let filesScanned = 0;
+
+  try {
+    const entries = readdirSync(PROJECTS_DIR);
+    for (const entry of entries) {
+      if (!entry.endsWith('.jsonl')) continue;
+      const filePath = join(PROJECTS_DIR, entry);
+      const chains = extractChainsFromTranscript(filePath);
+      if (chains.length > 0) {
+        allChains.push(...chains);
+        filesScanned++;
+      }
+    }
+  } catch (e) {
+    console.error(`Scan error: ${e.message}`);
+    process.exit(1);
+  }
+
+  if (allChains.length === 0) {
+    console.log('No tool chains found.');
+    return;
+  }
+
+  // Filter out boring chains
+  const meaningful = allChains.filter(c => !isBoringChain(c) && !isMCPChain(c));
+  if (verbose) console.error(`Filtered ${allChains.length - meaningful.length} boring chains`);
+
+  // Count ngrams
+  const ngrams = countNgrams(meaningful);
+  const sorted = [...ngrams.entries()].sort((a, b) => b[1] - a[1]);
+
+  // Group by pattern type (3+ tool chains only for skill-worthy patterns)
+  const byType = new Map();
+  for (const [chain, count] of sorted) {
+    const tools = chain.split('→');
+    if (tools.length < 3) continue; // Skip 2-step chains for skill generation
+    const classification = classifyChain(tools);
+    if (!classification) continue;
+    const key = classification.type;
+    if (!byType.has(key) || byType.get(key).count < count) {
+      byType.set(key, { chain, count, classification });
+    }
+  }
+
+  const topPatterns = [...byType.values()]
+    .sort((a, b) => a.classification.priority - b.classification.priority)
+    .slice(0, TOP_N);
+
+  // Tool frequency
+  const toolFreq = new Map();
+  for (const chain of meaningful) {
+    for (const tool of chain) {
+      toolFreq.set(tool, (toolFreq.get(tool) || 0) + 1);
+    }
+  }
+  const topTools = [...toolFreq.entries()].sort((a, b) => b[1] - a[1]).slice(0, 10);
+
+  // Build result
+  const result = {
+    scanned: filesScanned,
+    totalChains: allChains.length,
+    meaningfulChains: meaningful.length,
+    topTools,
+    topPatterns: topPatterns.map(p => ({
+      count: p.count,
+      chain: p.chain,
+      type: p.classification.type,
+      name: p.classification.name,
+    })),
+    generatedAt: new Date().toISOString(),
+  };
+
+  mkdirSync(OUTPUT_DIR, { recursive: true });
+  writeFileSync(OUTPUT_FILE, JSON.stringify(result, null, 2), 'utf-8');
+
+  // Generate skill stubs
+  mkdirSync(SKILLS_DIR, { recursive: true });
+  for (const pattern of topPatterns) {
+    const skillFile = resolve(SKILLS_DIR, `${pattern.classification.type}.md`);
+    const stub = generateSkillStub({ ...pattern, name: pattern.classification.name });
+    writeFileSync(skillFile, stub, 'utf-8');
+    if (verbose) console.error(`Wrote: ${skillFile}`);
+  }
+
+  // Console output
+  console.log(`\n=== OMC Tool Pattern Analysis ===`);
+  console.log(`Scanned: ${filesScanned} files, ${allChains.length} chains (${meaningful.length} meaningful)\n`);
+  console.log(`Top Tools:`);
+  for (const [tool, count] of topTools) {
+    console.log(`  ${tool}: ${count}`);
+  }
+  console.log(`\nTop Workflow Patterns (3+ tools, skill-worthy):`);
+  for (const p of topPatterns) {
+    console.log(`\n  [${p.count}x] ${p.classification.name}`);
+    console.log(`    Chain: ${p.chain}`);
+    console.log(`    Skill: .claude/skills/omc-workflows/${p.classification.type}.md`);
+  }
+  console.log(`\nFull report: ${OUTPUT_FILE}`);
+  console.log(`Skill stubs: ${SKILLS_DIR}/`);
+}
+
+main();

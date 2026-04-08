@@ -1,0 +1,80 @@
+{
+  "scanned": 89,
+  "totalChains": 2354,
+  "meaningfulChains": 676,
+  "topTools": [
+    [
+      "Read",
+      511
+    ],
+    [
+      "Bash",
+      456
+    ],
+    [
+      "Glob",
+      261
+    ],
+    [
+      "Grep",
+      153
+    ],
+    [
+      "TaskUpdate",
+      47
+    ],
+    [
+      "Agent",
+      21
+    ],
+    [
+      "WebFetch",
+      18
+    ],
+    [
+      "Edit",
+      12
+    ],
+    [
+      "TaskOutput",
+      11
+    ],
+    [
+      "Write",
+      9
+    ]
+  ],
+  "topPatterns": [
+    {
+      "count": 9,
+      "chain": "Read→Glob→Glob",
+      "type": "code-search",
+      "name": "Code Search Pipeline"
+    },
+    {
+      "count": 18,
+      "chain": "Bash→Read→Read",
+      "type": "bash-read",
+      "name": "Bash + Read Analysis"
+    },
+    {
+      "count": 1,
+      "chain": "Edit→Write→Write",
+      "type": "write-pipeline",
+      "name": "Multi-File Write Pipeline"
+    },
+    {
+      "count": 3,
+      "chain": "Glob→Glob→Grep",
+      "type": "glob-discovery",
+      "name": "Glob Discovery Pattern"
+    },
+    {
+      "count": 5,
+      "chain": "Bash→Bash→Bash",
+      "type": "bash-chain",
+      "name": "Bash Command Chain"
+    }
+  ],
+  "generatedAt": "2026-04-08T05:28:29.676Z"
+}
