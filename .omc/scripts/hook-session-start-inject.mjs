@@ -17,6 +17,7 @@ const STATE_DIR = resolve(__dirname, '../state');
 const DRAIN_FILE = resolve(STATE_DIR, 'session-start-mcp-inject.md');
 const NUDGE_FILE = resolve(STATE_DIR, 'session-nudge.md');
 const WF_PATTERNS_FILE = resolve(__dirname, '../innovation/workflow-patterns.md');
+const INSIGHTS_FILE = resolve(STATE_DIR, 'session-insights.md');
 
 async function main() {
   const parts = [];
@@ -47,6 +48,23 @@ async function main() {
     const content = readFileSync(PENDING_FILE, 'utf-8').trim();
     if (content) {
       parts.push(`## Pending Insight Actions\n\n${content}\n\nRun each action and mark done with:\n\`node D:/OpenClaw/workspace/.omc/scripts/omc-insight-action.mjs --done <id>\``);
+    }
+  }
+
+  // 5. Unexecuted insights from session-insights.md (auto-trigger)
+  if (existsSync(INSIGHTS_FILE)) {
+    const content = readFileSync(INSIGHTS_FILE, 'utf-8');
+    const lines = content.split('\n');
+    const unexecuted = [];
+    for (const line of lines) {
+      if (!line.includes('✅ EXECUTED') && line.includes('### ')) {
+        // Extract insight title
+        const match = line.match(/^#{3}\s+\d+\.\s+(.+?)(\s+⚠|\s+✅|$)/);
+        if (match) unexecuted.push(match[1].trim());
+      }
+    }
+    if (unexecuted.length > 0) {
+      parts.push(`## Unexecuted Insights (auto-detected)\n\n${unexecuted.map((t, i) => `${i + 1}. **${t}**`).join('\n')}\n\nGenerate execution plan for each unexecuted insight.`);
     }
   }
 
