@@ -485,3 +485,8 @@
 **Observation**: After insight #34 commit to use hook-stats.mjs, topBash still shows 5 repeated commands (ls hook-*.mjs, wc -l *.jsonl, node hook-self-improve --stats, node hook-test-rules, cat mcp-learn-queue). TaskCreate:0, TaskUpdate:0 across 2083 calls.
 **Rule**: A Fix that's "execute once" doesn't change behavior — the workflow must replace the old pattern, not be added alongside it.
 **Fix**: Delete the 5 manual inspection commands from any future workflow. Use ONLY `node .omc/scripts/hook-stats.mjs`. If hook-stats output is insufficient, improve the script, don't bypass it with manual commands.
+
+### 36. [20 hook scripts with overlapping functionality] ✅ EXECUTED - redundant wheel reinvention] [auto-generated]
+**Observation**: 20 hook-*.mjs scripts exist: hook-stats, hook-dashboard, hook-self-improve, hook-test-rules, hook-workflow-detector, etc. Insights #31-35 repeatedly suggest creating "hook-stats-dashboard" or "hook-stats.mjs" when both already exist. Agent doesn't read existing scripts before suggesting new ones.
+**Rule**: Before suggesting a new script, read .omc/scripts/hook-*.mjs to check if it already exists. Repeated suggestions to create existing tools waste insight cycles.
+**Fix**: Audit all 20 hook scripts, document each one's purpose, remove duplicates. For this session: use existing hook-stats.mjs for state inspection instead of 5 manual commands.
