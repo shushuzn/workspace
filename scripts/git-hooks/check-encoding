@@ -1,0 +1,211 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+Git Pre-Commit Hook - 禁止编码错误
+运营者原则：所有文件必须使用 UTF-8 编码，禁止中文文件名
+
+安装：
+  将此文件保存为 .git/hooks/check-encoding
+  
+使用：
+  python .git/hooks/check-encoding
+  或在 pre-commit 中调用
+  
+功能：
+  1. 检查文件编码（必须 UTF-8）
+  2. 检查中文文件名（建议英文）
+  3. 检查 BOM 头（禁止）
+  4. 检查行尾符（建议 LF）
+"""
+
+import subprocess
+import sys
+import os
+
+# 文件扩展名白名单（跳过二进制文件）
+BINARY_EXTENSIONS = [
+    '.png', '.jpg', '.jpeg', '.gif', '.ico', '.svg',
+    '.pdf', '.zip', '.tar', '.gz', '.rar',
+    '.pyc', '.pyo', '.so', '.dll', '.exe',
+    '.db', '.sqlite', '.sqlite3',
+    '.tiff', '.tif', '.bmp',
+]
+
+# 允许中文文件名的目录（研究数据等）
+ALLOW_CHINESE_PATH = [
+    '10-RESEARCH/',
+    '99-archive/',
+    '90-TESTS/',
+]
+
+# 检查的文件类型（文本文件）
+TEXT_EXTENSIONS = [
+    '.py', '.md', '.txt', '.json', '.yaml', '.yml',
+    '.js', '.ts', '.tsx', '.jsx', '.vue', '.html', '.css',
+    '.sh', '.bat', '.cmd', '.ps1',
+    '.sql', '.xml', '.ini', '.cfg', '.conf',
+    '.log', '.csv',
+]
+
+def get_staged_files():
+    """获取暂存区文件列表"""
+    try:
+        result = subprocess.run(
+            ['git', 'diff', '--cached', '--name-only'],
+            capture_output=True,
+            text=True,
+            cwd=os.getcwd()
+        )
+        return [f.strip() for f in result.stdout.strip().split('\n') if f.strip()]
+    except Exception as e:
+        print(f"❌ 获取暂存文件失败：{e}")
+        return []
+
+def is_binary_file(file_path):
+    """判断是否为二进制文件"""
+    ext = os.path.splitext(file_path)[1].lower()
+    return ext in BINARY_EXTENSIONS
+
+def is_text_file(file_path):
+    """判断是否为文本文件"""
+    ext = os.path.splitext(file_path)[1].lower()
+    return ext in TEXT_EXTENSIONS or os.path.splitext(file_path)[1] == ''
+
+def check_encoding(file_path):
+    """检查文件编码（不使用 chardet，用纯 Python）"""
+    if not os.path.exists(file_path):
+        return 'OK', None
+    
+    if is_binary_file(file_path):
+        return 'SKIP', '二进制文件'
+    
+    if not is_text_file(file_path):
+        return 'SKIP', '非文本文件'
+    
+    try:
+        # 检查 BOM 头
+        with open(file_path, 'rb') as f:
+            bom = f.read(3)
+            if bom == b'\xef\xbb\xbf':
+                return 'ERROR', f'BOM 头 detected (应使用 UTF-8 without BOM)'
+        
+        # 尝试用 UTF-8 读取
+        try:
+            with open(file_path, 'r', encoding='utf-8') as f:
+                f.read()
+            return 'OK', 'UTF-8 验证通过'
+        except UnicodeDecodeError as e:
+            return 'ERROR', f'编码错误：无法用 UTF-8 读取 ({str(e)})'
+        
+    except Exception as e:
+        return 'ERROR', f'检查失败：{str(e)}'
+
+def check_chinese_filename(file_path):
+    """检查中文文件名"""
+    # 检查路径是否在允许目录
+    for allowed_path in ALLOW_CHINESE_PATH:
+        if file_path.startswith(allowed_path):
+            return 'OK', '允许目录'
+    
+    # 检查是否包含中文字符
+    has_chinese = any('\u4e00' <= char <= '\u9fff' for char in file_path)
+    
+    if has_chinese:
+        return 'WARNING', f'中文文件名：{file_path} (建议英文)'
+    
+    return 'OK', None
+
+def check_line_endings(file_path):
+    """检查行尾符"""
+    if not os.path.exists(file_path) or is_binary_file(file_path):
+        return 'OK', None
+    
+    try:
+        with open(file_path, 'rb') as f:
+            content = f.read()
+        
+        # 检查 CRLF
+        if b'\r\n' in content:
+            return 'WARNING', 'CRLF 行尾符 (建议 LF)'
+        
+        return 'OK', 'LF 行尾符'
+    
+    except Exception as e:
+        return 'ERROR', f'检查失败：{str(e)}'
+
+def main():
+    print("🔍 运营者检查：文件编码...")
+    print()
+    
+    staged_files = get_staged_files()
+    
+    errors = []
+    warnings = []
+    skipped = []
+    
+    for file_path in staged_files:
+        # 检查编码
+        status, message = check_encoding(file_path)
+        if status == 'ERROR':
+            errors.append(f"[编码] {file_path}: {message}")
+        elif status == 'SKIP':
+            skipped.append(file_path)
+        
+        # 检查中文文件名
+        status, message = check_chinese_filename(file_path)
+        if status == 'WARNING':
+            warnings.append(message)
+        
+        # 检查行尾符
+        status, message = check_line_endings(file_path)
+        if status == 'WARNING':
+            warnings.append(f"[行尾] {file_path}: {message}")
+    
+    # 显示错误
+    if errors:
+        print()
+        print("=" * 60)
+        print("❌ 编码错误：必须修复后才能提交")
+        print("=" * 60)
+        print()
+        for error in errors:
+            print(f"  - {error}")
+        print()
+        print("解决方案:")
+        print("  1. 用 VSCode 打开文件，右下角选择 'UTF-8' 保存")
+        print("  2. 或用 Notepad++ → 编码 → 转为 UTF-8 无 BOM")
+        print("  3. 然后重新添加：git add <file>")
+        print()
+        print("=" * 60)
+        sys.exit(1)
+    
+    # 显示警告
+    if warnings:
+        print()
+        print("=" * 60)
+        print("⚠️  编码警告：建议修复，但可强制提交")
+        print("=" * 60)
+        print()
+        for warning in warnings[:10]:  # 最多显示 10 个
+            print(f"  - {warning}")
+        if len(warnings) > 10:
+            print(f"  ... 还有 {len(warnings) - 10} 个警告")
+        print()
+        print("解决方案:")
+        print("  1. 中文文件名 → 改为英文")
+        print("  2. CRLF 行尾 → VSCode 右下角选择 LF")
+        print()
+        print("强制提交：git commit --no-verify")
+        print("=" * 60)
+        print()
+    
+    # 显示跳过文件
+    if skipped:
+        print(f"⊘ 跳过 {len(skipped)} 个二进制文件")
+    
+    print()
+    print("✅ 编码检查通过")
+    sys.exit(0)
+
+if __name__ == '__main__':
+    main()

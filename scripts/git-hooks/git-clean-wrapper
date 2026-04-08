@@ -1,0 +1,90 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Git Clean Wrapper with Confirmation
+Place this as: .git/hooks/git-clean-wrapper
+Usage: git-clean-wrapper [args...]
+
+This is NOT a standard git hook — it's a wrapper script.
+Set alias in git config:
+  git config --local alias.clean '!/path/to/.git/hooks/git-clean-wrapper'
+"""
+import subprocess
+import sys
+import os
+import shutil
+
+GIT_CLEAN_WRAPPER = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'git-clean-wrapper')
+
+def main():
+    args = sys.argv[1:]
+
+    # --dry-run/-n are always safe
+    if '-n' in args or '--dry-run' in args:
+        sys.exit(0)
+
+    # Expand combined flags (e.g. -fd → -f -d, -fdx → -f -d -x)
+    expanded = []
+    for arg in args:
+        if arg.startswith('-') and not arg.startswith('--'):
+            expanded.append(arg)  # keep as-is, check later
+        else:
+            expanded.append(arg)
+    args = expanded
+
+    # Check for dangerous flags (handle combined flags like -fd, -df, -fdx)
+    def has_flag(flag, args):
+        flag = flag.lstrip('-')
+        return any(
+            flag.lstrip('-') in a.lstrip('-') and
+            a.startswith('-') and
+            not a.startswith('--')
+            for a in args
+        )
+
+    # Dry-run is always safe — check -n / --dry-run (standalone or within combined flags like -fnd)
+    has_dryrun = any(
+        a == '-n' or a == '--dry-run' or
+        (a.startswith('-') and not a.startswith('--') and 'n' in a.lstrip('-'))
+        for a in args
+    )
+
+    has_force = any(a.startswith('-') and 'f' in a.lstrip('-') for a in args)
+    has_recursive = any(a.startswith('-') and 'd' in a.lstrip('-') for a in args)
+    has_all = any(a.startswith('-') and ('x' in a.lstrip('-') or 'X' in a.lstrip('-')) for a in args)
+
+    if has_dryrun:
+        sys.exit(0)
+
+    if not (has_force and has_recursive):
+        sys.exit(0)
+
+    # Dangerous: git clean -fd (with or without -x)
+    print()
+    print("=" * 60)
+    print("⚠️  DANGEROUS COMMAND DETECTED")
+    print("=" * 60)
+    print(f"  git clean -f{'d' if has_recursive else ''}{'x' if has_all else ''}")
+    print()
+    print("  This will PERMANENTLY DELETE untracked files:")
+    print("    - Uncommitted files in ALL submodules")
+    print("    - All untracked files in this directory")
+    print("    - Build artifacts, cache files, node_modules (if not ignored)")
+    print()
+    print("  Recent incidents: task-orchestrator source files DELETED")
+    print("  by 'git clean -fd' running in workspace root.")
+    print()
+    print("  Safe alternatives:")
+    print("    git clean -fd --dry-run   # Preview only")
+    print("    git clean -fd -n         # Preview only (shorthand)")
+    print("    git clean -f -d path/     # Clean specific directory only")
+    print()
+    response = input("  Continue with PERMANENT deletion? (type 'YES' to confirm): ").strip()
+    if response != 'YES':
+        print("\n✗ Aborted.")
+        sys.exit(1)
+    print("\n✓ Proceeding with deletion.")
+    sys.exit(0)
+
+if __name__ == '__main__':
+    main()

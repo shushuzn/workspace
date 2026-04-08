@@ -26,3 +26,5 @@
 
 # Auto-detect text files
 *         text=auto
+scripts/git-hooks/* text eol=lf
+knowledge/learned/* text eol=lf
