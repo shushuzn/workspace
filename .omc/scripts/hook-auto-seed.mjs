@@ -45,6 +45,7 @@ const STATE_FILE = resolve(STATE_DIR, 'auto-seed-counter.json');
 const TRIGGER_FILE = resolve(STATE_DIR, 'auto-insight-trigger.json');
 const INSIGHTS_FILE = resolve(STATE_DIR, 'session-insights.md');
 const IDEAS_FILE = resolve(__dirname, '../innovation/ideas.md');
+const NUDGE_FILE = resolve(STATE_DIR, 'session-nudge.md');
 
 // ── Config ──────────────────────────────────────────────────────────────────
 const THRESHOLD = 10; // 10+ tool calls triggers insight generation
@@ -252,34 +253,31 @@ async function main() {
 
     // Read current state fresh
     const freshState = readState();
-    if (totalCalls >= THRESHOLD && !freshState.fired) {
-      if (hasRecentAutoSeed()) {
-        console.log('auto-seed: recent entry already exists, skipping duplicate');
-      } else {
-        try {
-          const trigger = {
-            sessionId: currentSession,
-            count: totalCalls,
-            threshold: THRESHOLD,
-            toolStats,
-            triggeredAt: new Date().toISOString(),
-          };
-          writeFileSync(TRIGGER_FILE, JSON.stringify(trigger, null, 2), 'utf-8');
+    if (totalCalls >= THRESHOLD) {
+      try {
+        const trigger = {
+          sessionId: currentSession,
+          count: totalCalls,
+          threshold: THRESHOLD,
+          toolStats,
+          triggeredAt: new Date().toISOString(),
+        };
+        writeFileSync(TRIGGER_FILE, JSON.stringify(trigger, null, 2), 'utf-8');
 
-          const today = new Date().toLocaleDateString('en-CA');
-          const entry = `- [${today}] STAGE [AUTO:auto-insight] [score:3×4=12] [f:4] 原生insight生成 | benefit: AI在会话中实时生成带Fix的insight | reason: 工具调用已达${totalCalls}次，触发实时insight | approach: hook触发→AI生成→session-insights.md→step7执行 | AUTO:${Date.now()}`;
-          appendIdea(entry);
+        const today = new Date().toLocaleDateString('en-CA');
+        const entry = `- [${today}] STAGE [AUTO:auto-insight] [score:3×4=12] [f:4] 原生insight生成 | benefit: AI在会话中实时生成带Fix的insight | reason: 工具调用已达${totalCalls}次，触发实时insight | approach: hook触发→AI生成→session-insights.md→step7执行 | AUTO:${Date.now()}`;
+        appendIdea(entry);
 
-          const prompt = buildInsightPrompt({ count: totalCalls, toolStats });
-          console.log('INSIGHT_TRIGGER');
-          console.log(prompt);
+        // Also append trigger to nudge file so AI sees it on next prompt
+        const nudgeLine = `⚡ INSIGHT TRIGGER: ${totalCalls} tool calls reached — generate insight now: .omc/state/session-insights.md`;
+        appendFileSync(NUDGE_FILE, nudgeLine + '\n', 'utf-8');
 
-          const newState = { ...freshState, fired: true };
-          writeState(newState);
-          console.log(`AUTO:insight-triggered (totalCalls:${totalCalls})`);
-        } catch (e) {
-          console.error('failed to trigger insight:', e.message);
-        }
+        const prompt = buildInsightPrompt({ count: totalCalls, toolStats });
+        console.log('INSIGHT_TRIGGER');
+        console.log(prompt);
+        console.log(`AUTO:insight-triggered (totalCalls:${totalCalls})`);
+      } catch (e) {
+        console.error('failed to trigger insight:', e.message);
       }
     } else {
       console.log(`totalToolCalls:${totalCalls}/${THRESHOLD}`);

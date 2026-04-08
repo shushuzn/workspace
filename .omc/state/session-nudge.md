@@ -27,3 +27,4 @@ Fix 执行完成后，必须向 `insight-verifications.md` 追加验证结果：
 - **有效性**: 有效 / 无效 / 部分有效
 - **原因**: [判断依据]
 ```
+⚡ INSIGHT TRIGGER: 1917 tool calls reached — generate insight now: .omc/state/session-insights.md
