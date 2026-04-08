@@ -84,9 +84,9 @@ function hasRecentAutoSeed() {
   if (!existsSync(IDEAS_FILE)) return false;
   const content = readFileSync(IDEAS_FILE, 'utf-8');
   const lines = content.split('\n');
-  // Check last 10 lines for AUTO: marker
+  // Check last 10 lines for un-shipped AUTO: marker
   const recent = lines.slice(-10);
-  return recent.some(l => l.includes('[AUTO:'));
+  return recent.some(l => l.includes('[AUTO:') && !l.includes('shipped:') && !l.includes('killed:'));
 }
 
 function parseArgs(argv) {
