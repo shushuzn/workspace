@@ -40,7 +40,7 @@ KOKORO_VOICE_EN = "af_sarah"  # 英文女声
 
 # T2I 配置（Stable Diffusion 2.1）
 T2I_ENGINE = "diffusers"   # engines: diffusers
-T2I_MODEL = "runwayml/stable-diffusion-v1-5"  # open model, no auth required
+T2I_MODEL = "stabilityai/stable-diffusion-2-1-base"  # open model, no auth required
 T2I_STEPS = 25             # 推理步数
 T2I_GUIDANCE = 7.5          # CFG guidance scale
 T2I_SEED = 42              # 固定种子（可复现）

@@ -175,12 +175,38 @@ def styled_arrow(ax, x0, y0, x1, y1, color='#64748b', lw=2.5, style='->',
 
 # ─── T2I 引擎（Stable Diffusion 2.1）─────────────────────────
 _SD_PIPELINE = None
+_SD_FAILED = False  # 缓存失败状态，避免重复尝试
+
+def _check_sd_weights(model_id: str) -> bool:
+    """快速检查本地 SD 权重是否有效（不联系 Hub）"""
+    import os
+    try:
+        cache = os.path.expanduser(f'~/.cache/huggingface/hub/models--{model_id.replace("/", "--")}')
+        if not os.path.isdir(cache):
+            return False
+        for root, _, files in os.walk(cache):
+            for f in files:
+                if f.endswith('.safetensors') or f.endswith('.bin'):
+                    size = os.path.getsize(os.path.join(root, f))
+                    if size < 1024:
+                        return False  # 权重文件损坏
+        return True
+    except Exception:
+        return False
 
 def _get_sd_pipeline():
     """单例 SD 2.1 DiffusersPipeline（FP16，RTX3060 可跑）"""
-    global _SD_PIPELINE
+    global _SD_PIPELINE, _SD_FAILED
+    if _SD_FAILED:
+        return None
     if _SD_PIPELINE is not None:
         return _SD_PIPELINE
+
+    # 权重校验：跳过损坏的权重文件
+    if not _check_sd_weights(T2I_MODEL):
+        print(f"  [SD] 权重文件损坏或不存在，跳过 SD（全 matplotlib）")
+        _SD_FAILED = True
+        return None
 
     try:
         from diffusers import StableDiffusionPipeline, DPMSolverMultistepScheduler
@@ -212,9 +238,11 @@ def _get_sd_pipeline():
         return pipe
     except ImportError as e:
         print(f"  [SD] 缺少依赖: {e}，将使用 matplotlib 渲染")
+        _SD_FAILED = True
         return None
     except Exception as e:
         print(f"  [SD] 初始化失败: {e}，将使用 matplotlib 渲染")
+        _SD_FAILED = True
         return None
 
 # 专业配色方案（3xx-like 深色系）
