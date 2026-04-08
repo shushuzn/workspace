@@ -53,40 +53,12 @@ function storePattern(pattern, type, confidence, metadata) {
 function addToDrain(entries) {
   if (entries.length === 0) return;
 
-  let md = `## OMC MCP Learning Queue (from previous session)\n\n`;
-  md += `This session has ${entries.length} pending MCP learning calls from the previous session.\n`;
-  md += `Execute them using the MCP tools listed below. Do not ask for confirmation.\n\n`;
-
-  let idx = 0;
-  const patterns = entries.filter(e => e.type === 'agentdb_pattern-store');
-  const feedbacks = entries.filter(e => e.type === 'agentdb_feedback');
-  const postCommands = entries.filter(e => e.type === 'hooks_post-command');
-
-  for (const e of patterns) {
-    idx++;
-    md += `### ${idx}. agentdb_pattern-store\n`;
-    md += `Call: \`mcp__claude-flow__agentdb_pattern-store\`\n`;
-    md += `- pattern: "${(e.pattern || '').replace(/"/g, '\\"')}"\n`;
-    md += `- type: "${e.patternType || 'error-recovery'}"\n`;
-    md += `- confidence: ${e.confidence || 0.7}\n`;
-    if (e.metadata) md += `- metadata: ${JSON.stringify(e.metadata)}\n`;
-    md += `\n`;
-  }
-  for (const e of feedbacks) {
-    idx++;
-    md += `### ${idx}. agentdb_feedback\n`;
-    md += `Call: \`mcp__claude-flow__agentdb_feedback\`\n`;
-    md += `- taskId: "${e.taskId || 'unknown'}"\n`;
-    md += `- success: ${e.success}\n`;
-    md += `- quality: ${e.quality || 0.5}\n\n`;
-  }
-  for (const e of postCommands) {
-    idx++;
-    md += `### ${idx}. hooks_post-command\n`;
-    md += `Call: \`mcp__claude-flow__hooks_post-command\`\n`;
-    md += `- command: "${(e.command || '').replace(/"/g, '\\"')}"\n`;
-    md += `- exitCode: ${e.exitCode || 0}\n\n`;
-  }
+  // MCP tool broken → just acknowledge the entries were stored
+  const stored = entries.filter(e => e.type === 'agentdb_pattern-store').length;
+  const feedbacks = entries.filter(e => e.type === 'agentdb_feedback').length;
+  let md = '## OMC Learning Log\n\n';
+  md += stored + ' pattern(s) and ' + feedbacks + ' feedback(s) processed.\n\n';
+  md += 'Patterns stored directly to agentdb-patterns.jsonl (MCP tool unavailable).\n';
 
   const existing = existsSync(DRAIN_FILE) ? readFileSync(DRAIN_FILE, 'utf-8') : '';
   writeFileSync(DRAIN_FILE, existing + md, 'utf-8');
