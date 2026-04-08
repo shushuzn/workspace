@@ -329,9 +329,16 @@ async function step4_trajectory() {
 
   md += `## Patterns Detected\n\n`;
   const patterns = [];
-  if (toolCalls.filter(t => t.tool === 'Bash').length > 3) patterns.push('heavy bash usage');
+  const bashCount = toolCalls.filter(t => t.tool === 'Bash').length;
+  const readCount = toolCalls.filter(t => t.tool === 'Read').length;
+  const editCount = toolCalls.filter(t => t.tool === 'Edit').length;
+  if (bashCount > 3) patterns.push('heavy bash usage');
   if (seeds.length > 5) patterns.push('idea generation active');
-  if (toolCalls.filter(t => t.tool === 'Read').length > toolCalls.filter(t => t.tool === 'Edit').length * 2) patterns.push('read-heavy workflow');
+  if (readCount > editCount * 2) patterns.push('read-heavy workflow');
+  // Insight #7: detect debugging mode (high Bash+Read+Edit, no seeds)
+  if (bashCount > 30 && readCount > 20 && editCount > 10 && seeds.length === 0) {
+    patterns.push('debugging mode (fixing, not creating)');
+  }
   if (patterns.length > 0) {
     md += patterns.map(p => `- ${p}`).join('\n') + '\n\n';
   } else {
