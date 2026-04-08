@@ -7,6 +7,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const TRAJ_DIR = resolve(__dirname, '../trajectories');
 const INSIGHTS_FILE = resolve(__dirname, '../state/session-insights.md');
 const MANIFEST_FILE = resolve(__dirname, '../state/insight-gen-manifest.json');
+const PENDING_FILE = resolve(__dirname, '../state/pending-actions.md');
 
 function log(...a) { console.log('[insight-gen]', ...a); }
 
@@ -30,6 +31,57 @@ function markTrajectoryProcessed(trajPath, trajMtime) {
   saveManifest(m);
 }
 
+function extractPendingActionsViaAgent(rawInsights) {
+  // Sub-agent: extract actionable Fix: fields from LLM-generated insights
+  const prompt = `You are an OMC pending-action extractor. Read the insights below and extract only those with a concrete, executable Fix action (not "N/A").
+
+Output format — write ONLY lines like this, nothing else:
+ACTION|insight title|executable fix description
+
+Rules:
+- Only output lines where Fix: is a concrete action (not "N/A", not a tracking rule)
+- If no actionable fixes found, output nothing
+- Do NOT invent or infer fixes — only use what is explicitly stated
+
+---
+INSIGHTS:
+${rawInsights}
+---`;
+
+  return new Promise((resolve) => {
+    const proc = spawn('claude.cmd', ['--print'], {
+      stdio: ['pipe', 'pipe', 'pipe'],
+      cwd: __dirname,
+      shell: true,
+    });
+
+    let out = '';
+    proc.stdout.on('data', d => { out += d.toString(); });
+    proc.on('close', () => {
+      const actionLines = out.split('\n').filter(l => l.startsWith('ACTION|'));
+      if (actionLines.length === 0) { resolve([]); return; }
+
+      const existing = existsSync(PENDING_FILE) ? readFileSync(PENDING_FILE, 'utf-8') : '';
+      const newItems = [];
+      for (const line of actionLines) {
+        const parts = line.split('|');
+        if (parts.length < 3) continue;
+        const [, title, action] = parts;
+        const id = `action-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
+        newItems.push(`- [ ] ${title.trim()} | action: ${action.trim()} | id: ${id}`);
+      }
+      if (newItems.length > 0) {
+        writeFileSync(PENDING_FILE, (existing ? existing + '\n' : '') + newItems.join('\n') + '\n', 'utf-8');
+        log(`extracted ${newItems.length} pending actions via sub-agent`);
+      }
+      resolve(newItems);
+    });
+    proc.on('error', () => resolve([]));
+    proc.stdin.write(prompt);
+    proc.stdin.end();
+  });
+}
+
 function findLatestTraj() {
   if (!existsSync(TRAJ_DIR)) return null;
   let latest = null;
@@ -50,6 +102,7 @@ Output format — write ONLY the insights, nothing else. Each insight as:
 ### N. [title]
 **Observation**: [specific observation from the data]
 **Rule**: [what to track/change in future sessions]
+**Fix**: [concrete action to implement this fix, if directly executable; otherwise write "N/A"]
 
 Rules:
 - Look for patterns: tool usage imbalances, missing seed generation, debugging loops, workflow inefficiencies
@@ -58,6 +111,7 @@ Rules:
 - Generate 1-3 insights max — quality over quantity
 - If trajectory shows good productivity with seeds, note what worked
 - Skip if session was too short (< 5 tool calls)
+- **Fix**: Only write a concrete executable action (e.g. "Add 500ms dedup window in hook-audit-log-mcp", "Write fs.readFileSync替代Edit for complex strings"). If the insight only describes what to track/monitor without a specific fix, write "N/A" — do NOT invent a fix.
 
 ---
 TRAJECTORY:
@@ -157,6 +211,7 @@ async function main() {
 
   writeFileSync(INSIGHTS_FILE, existing + '\n' + md + '\n', 'utf-8');
   markTrajectoryProcessed(trajPath, trajStat.mtimeMs);
+  await extractPendingActionsViaAgent(rawOutput);
   log('generated insights:', insightLines.filter(l => l.startsWith('###')).join(', '));
 }
 
