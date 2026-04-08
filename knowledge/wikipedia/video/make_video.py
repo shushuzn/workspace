@@ -32,6 +32,28 @@ try:
 except ImportError:
     pass  # draw_scene 未安装时静默
 
+def _mux_final(final_video, audio_final, output_path, crf, has_sub=False, subtitle_path=None):
+    """最终混流（含字幕可选）"""
+    import subprocess
+    from pathlib import Path
+    ffmpeg_exe = imageio_ffmpeg.get_ffmpeg_exe()
+    if has_sub:
+        return subprocess.run([
+            str(ffmpeg_exe), "-y",
+            "-i", str(final_video), "-i", str(audio_final),
+            "-vf", f"subtitles=filename='{subtitle_path}':si=0",
+            "-c:v", "libx264", "-crf", str(crf), "-preset", "medium",
+            "-c:a", "aac", "-b:a", "256k",
+            "-shortest", str(output_path),
+        ], capture_output=True, text=True, encoding='utf-8', errors='ignore')
+    else:
+        return subprocess.run([
+            str(ffmpeg_exe), "-y",
+            "-i", str(final_video), "-i", str(audio_final),
+            "-c:v", "copy", "-c:a", "aac", "-b:a", "256k",
+            "-shortest", str(output_path),
+        ], capture_output=True, text=True, encoding='utf-8', errors='ignore')
+
 def get_duration(file_path):
     """用 ffmpeg -i 读取音频时长（秒）"""
     cmd = [imageio_ffmpeg.get_ffmpeg_exe(), "-i", str(file_path), "-f", "null", "-"]
@@ -265,7 +287,8 @@ def _encode_scene_ken_burns(img_path, output_path, w_even, h_even, dur, crf, zoo
 
 def make_video_multi(img_paths, audio_path, output_path, bitrate=None, scene_key='default',
                     use_transitions=True, transition_dur=0.75,
-                    bg_music_path=None, bg_music_vol=0.18):
+                    bg_music_path=None, bg_music_vol=0.18,
+                    subtitle_path=None):
     """多图片按时序切换 + 音频 → 视频（Ken Burns + Cross-dissolve 过渡）
 
     升级版特性：
@@ -424,47 +447,52 @@ def make_video_multi(img_paths, audio_path, output_path, bitrate=None, scene_key
             print(f"  [ERROR] audio failed: {r_audio.stderr[-150:]}")
             return False
 
-        # ── 4. 混流（含BGM） ──────────────────────────────────────────────
+        # ── 4. 混流（含BGM+字幕） ──────────────────────────────────────────
+        has_sub = subtitle_path and Path(subtitle_path).exists()
+        video_dur = get_duration(str(final_video)) or duration
+
         if bg_music_path and Path(bg_music_path).exists():
-            video_dur = get_duration(str(final_video)) or duration
-            # BGM 循环+淡入(0.5s)+音量
+            # BGM 混音方案
             tmp_audio = tmpdir / "audio_with_bgm.aac"
-            r_mux = subprocess.run([
-                str(ffmpeg_exe), "-y",
-                "-i", str(final_video),
-                "-i", str(audio_final),
-                "-i", str(bg_music_path),
-                "-filter_complex",
-                f"[1:a][2:a]amix=inputs=2:duration=first:weights=1 {bg_music_vol}[mix];"
-                f"[mix]afade=t=in:st=0:d=0.5:alpha=1",
-                "-map", "0:v", "-map", "[mix]",
-                "-c:v", "copy",
-                "-c:a", "aac", "-b:a", "256k",
-                "-shortest", str(output_path),
-            ], capture_output=True, text=True, encoding='utf-8', errors='ignore')
-            if r_mux.returncode != 0:
-                print(f"  [WARN] BGM mux failed, fallback to no-BGM: {r_mux.stderr[-100:]}")
-                # Fallback: 无BGM
+            if has_sub:
                 r_mux = subprocess.run([
                     str(ffmpeg_exe), "-y",
-                    "-i", str(final_video), "-i", str(audio_final),
-                    "-c:v", "copy", "-c:a", "aac", "-b:a", "256k",
+                    "-i", str(final_video), "-i", str(audio_final), "-i", str(bg_music_path),
+                    "-filter_complex",
+                    f"[1:a][2:a]amix=inputs=2:duration=first:weights=1 {bg_music_vol}[mix];"
+                    f"[mix]afade=t=in:st=0:d=0.5:alpha=1",
+                    f"subtitles=filename='{subtitle_path}':si=0[v-sub];[v-sub]",
+                    "-map", "[v-sub]", "-map", "[mix]",
+                    "-c:v", "libx264", "-crf", str(crf), "-preset", "medium",
+                    "-c:a", "aac", "-b:a", "256k",
                     "-shortest", str(output_path),
                 ], capture_output=True, text=True, encoding='utf-8', errors='ignore')
+            else:
+                r_mux = subprocess.run([
+                    str(ffmpeg_exe), "-y",
+                    "-i", str(final_video), "-i", str(audio_final), "-i", str(bg_music_path),
+                    "-filter_complex",
+                    f"[1:a][2:a]amix=inputs=2:duration=first:weights=1 {bg_music_vol}[mix];"
+                    f"[mix]afade=t=in:st=0:d=0.5:alpha=1",
+                    "-map", "0:v", "-map", "[mix]",
+                    "-c:v", "copy",
+                    "-c:a", "aac", "-b:a", "256k",
+                    "-shortest", str(output_path),
+                ], capture_output=True, text=True, encoding='utf-8', errors='ignore')
+            if r_mux.returncode != 0:
+                print(f"  [WARN] BGM mux failed, fallback: {r_mux.stderr[-100:]}")
+                r_mux = _mux_final(final_video, audio_final, output_path, crf, has_sub, subtitle_path)
         else:
-            r_mux = subprocess.run([
-                str(ffmpeg_exe), "-y",
-                "-i", str(final_video), "-i", str(audio_final),
-                "-c:v", "copy", "-c:a", "aac", "-b:a", "256k",
-                "-shortest", str(output_path),
-            ], capture_output=True, text=True, encoding='utf-8', errors='ignore')
+            r_mux = _mux_final(final_video, audio_final, output_path, crf, has_sub, subtitle_path)
         if r_mux.returncode != 0:
             print(f"  [ERROR] mux failed:\n{r_mux.stderr[-200:]}")
             return False
 
     size_bytes = output_path.stat().st_size
     trans_str = f"+xfade({trans:.1f}s)" if (use_transitions and n > 1) else ""
-    print(f"  [OK] {output_path.name} ({size_bytes:,} bytes, {n} scenes x {seg_duration:.1f}s, KBxfade{trans_str}, CRF={crf})")
+    sub_str = "+srt" if subtitle_path and Path(subtitle_path).exists() else ""
+    bgm_str = "+bgm" if bg_music_path and Path(bg_music_path).exists() else ""
+    print(f"  [OK] {output_path.name} ({size_bytes:,} bytes, {n} scenes x {seg_duration:.1f}s, KBxfade{sub_str}{bgm_str}{trans_str}, CRF={crf})")
     return True
 
 
@@ -525,6 +553,7 @@ def main():
     parser.add_argument("--bitrate", default=None, help="视频码率，如 1M/2M/5M，默认用 libx264 internal default")
     parser.add_argument("--bg-music", default=None, help="背景音乐文件路径（如 .mp3）")
     parser.add_argument("--bg-music-vol", type=float, default=0.18, help="BGM 音量 0.0-1.0（默认0.18）")
+    parser.add_argument("--subtitle", default=None, help="SRT 字幕文件路径（不指定则自动查找同名 .srt）")
     args = parser.parse_args()
 
     articles_dir = Path(args.dir) if args.dir else Path(__file__).parent.parent / "articles"
@@ -537,13 +566,17 @@ def main():
             return
         output = mp3_path.with_suffix(".mp4")
         scene_key = infer_scene_key(mp3_path)
+        # 自动查找同名 .srt
+        srt_path = Path(args.subtitle) if args.subtitle else mp3_path.with_suffix(".srt")
         if len(scene_imgs) == 1 and scene_imgs[0][0] is not None:
             make_video_multi([(scene_imgs[0][0], 0.0)], mp3_path, output, bitrate=args.bitrate, scene_key=scene_key,
-                            bg_music_path=args.bg_music, bg_music_vol=args.bg_music_vol)
+                            bg_music_path=args.bg_music, bg_music_vol=args.bg_music_vol,
+                            subtitle_path=str(srt_path) if srt_path.exists() else None)
         else:
             imgs_only = [(p, 0.0) for p, _ in scene_imgs]
             make_video_multi(imgs_only, mp3_path, output, bitrate=args.bitrate, scene_key=scene_key,
-                            bg_music_path=args.bg_music, bg_music_vol=args.bg_music_vol)
+                            bg_music_path=args.bg_music, bg_music_vol=args.bg_music_vol,
+                            subtitle_path=str(srt_path) if srt_path.exists() else None)
         return
 
     # 处理所有 speech MP3（跳过 speech-tts）
@@ -568,9 +601,11 @@ def main():
             output = mp3.with_suffix(".mp4")
         imgs_only = [(p, 0.0) for p, _ in scene_imgs]
         scene_key = infer_scene_key(mp3)
+        srt_path = Path(args.subtitle) if args.subtitle else mp3.with_suffix(".srt")
         print(f"处理: {mp3.name} → {len(imgs_only)} scenes [key={scene_key}]")
         make_video_multi(imgs_only, mp3, output, bitrate=args.bitrate, scene_key=scene_key,
-                        bg_music_path=args.bg_music, bg_music_vol=args.bg_music_vol)
+                        bg_music_path=args.bg_music, bg_music_vol=args.bg_music_vol,
+                        subtitle_path=str(srt_path) if srt_path.exists() else None)
 
 if __name__ == "__main__":
     main()

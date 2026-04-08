@@ -152,11 +152,13 @@ def generate_kokoro(text: str, output_path: Path, voice: str, speed: float = 1.0
 def generate_edge(text: str, output_path: Path, voice: str, rate: str, pitch: str) -> bool:
     """使用 Edge-TTS 在线生成 MP3"""
     output_path.parent.mkdir(parents=True, exist_ok=True)
+    srt_path = output_path.with_suffix(".srt")
     cmd = [
         sys.executable, "-m", "edge_tts",
         "-t", text,
         "-v", voice,
         "--write-media", str(output_path),
+        "--write-subtitles", str(srt_path),
         "--rate", rate,
         "--pitch", pitch,
     ]
