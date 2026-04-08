@@ -1,16 +1,16 @@
 ## Insights from 2026-04-08 session
 
-### 1. Hook Responsibility Boundary
+### 1. Hook Responsibility Boundary ✅ EXECUTED
 **Rule**: hooks = collect + store only; agent generates insights
 **Violation fixed**: hook-mcp-consumer once called Ollama → removed
 **Key**: no LLM calls in hooks, ever
 
-### 2. Deduplication Required for Audit Spam
+### 2. Deduplication Required for Audit Spam ✅ EXECUTED
 **Problem**: `ls 34~50` (16 calls at 20ms intervals) flooded audit log
 **Fix**: 500ms dedup window in hook-audit-log-mcp
 **Pattern**: debug loops can generate rapid repeated commands
 
-### 3. Modern JSONL Uses tool_use Blocks
+### 3. Modern JSONL Uses tool_use Blocks ✅ EXECUTED
 **Problem**: trajectory extractor used text regex for tool names
 **Fix**: parse `type: 'tool_use'` blocks with `.name` field
 **Format**: modern Claude Code JSONL has array content with block types
@@ -20,7 +20,7 @@
 **Root cause**: diagnostic scripts run --stats + read queue + --emit in sequence
 **Fix**: `omc-diagnose.mjs` 合并了三个诊断命令为一条
 
-### 5. Agent is the Analysis Engine
+### 5. Agent is the Analysis Engine ✅ EXECUTED
 **Principle**: I am responsible for generating insights, not external LLMs
 **Wrong pattern**: hook calling MiniMax/Ollama for insight generation
 **Correct pattern**: hook stores raw data → drain → next session agent analyzes
@@ -31,7 +31,7 @@
 **Fix**: drain文件现在包含Hook Status段落（entries today、tools、dedup、queue depth）
 **Result**: 下个session用户可从drain文件直接看到hook活跃状态
 
-### 7. 大型调试session的特征
+### 7. 大型调试session的特征 ✅ EXECUTED
 **Data**: 1419次工具调用，857次Bash（60%），191次Read，129次Edit
 **Pattern**: Read+Edit+Bash密集混合，说明在修复而非创造
-**Opportunity**: 此类session的trajectory应标记为"debugging"而非"generating"，用于区分不同工作模式
+**Fix**: trajectory现在检测Bash>30 + Read>20 + Edit>10 + 0 seeds → 标记为"debugging mode"
