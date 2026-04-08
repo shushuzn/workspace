@@ -291,13 +291,12 @@ DESIGN.md pattern (VoltAgent/awesome-design-md): 9 sections — Visual Theme, Co
 `;
         writeFileSync(NOTPAD_FILE, notepadContent, 'utf-8');
 
-        const prompt = buildInsightPrompt({ count: totalCalls, toolStats });
-
-        // Spawn subagent to generate insight — avoids compact session output trap
+        // Spawn subagent to generate insight AND execute Fix — avoids compact session output trap
         const { spawn } = await import('child_process');
         const insightsFile = INSIGHTS_FILE;
         const triggerFile = TRIGGER_FILE;
-        const agentCmd = `claude.cmd --print "Analyze the trigger at ${triggerFile} and generate one insight in the format: ### N. [title]\\n**Observation**: ...\\n**Rule**: ...\\n**Fix**: [concrete action or N/A]. Write the insight to ${insightsFile}. If Fix is not N/A, also append to pending-actions.md."`;
+        const prompt = `Read ${triggerFile}. Generate ONE insight in this format: ### N. [title] | **Observation**: [data from tool stats] | **Rule**: [pattern] | **Fix**: [action or N/A]. If Fix is not N/A: execute it via node/Bash/Edit tools, then append insight to ${insightsFile} marked EXECUTED. If Fix is N/A, just append.`;
+        const agentCmd = `claude.cmd --print --bare "${prompt.replace(/"/g, '\\"')}"`;
 
         spawn(agentCmd, {
           shell: true,

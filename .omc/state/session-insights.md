@@ -475,3 +475,8 @@
 **Observation**: 2022 total tool calls with TaskCreate: 0 and TaskUpdate: 0 across the entire session — zero task management infrastructure used despite massive volume. Top 5 Bash commands are all OMC self-monitoring (ls/wc/cat/tail/node on state files).
 **Rule**: Sessions exceeding 500 tool calls without a single TaskCreate/TaskUpdate are operating without structured progress tracking — all work is invisible to the task system.
 **Fix**: Add task creation to the auto-insight trigger: when count > threshold, also create a tracking task via TaskCreate before running diagnostics. Append `node .omc/scripts/hook-stats.mjs` to pending-actions as the single replacement for all topBash inspection commands.
+
+### 34. [Repeated self-inspection commands still dominant after 3 insights] ✅ EXECUTED [auto-generated]
+**Observation**: After insights #31/32/33 about Bash dominance (54-64%), topBash remains unchanged: `ls hook-*.mjs + wc -l *.jsonl + node hook-self-improve --stats + node hook-test-rules + cat mcp-learn-queue`. 1134 Bash calls (54%) with zero TaskCreate/TaskUpdate.
+**Rule**: Insights about a pattern don't fix the pattern — the Fix must be automated, not just documented.
+**Fix**: Execute `node .omc/scripts/hook-stats.mjs` ONCE and commit to using it for all future state inspection instead of manual commands. Then delete the redundant repeated inspection commands from future workflows.
