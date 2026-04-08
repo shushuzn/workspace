@@ -21,8 +21,6 @@ const STATE_DIR = resolve(__dirname, '../state');
 const QUEUE_FILE = resolve(STATE_DIR, 'mcp-learn-queue.jsonl');
 const PATTERN_STORE = resolve(STATE_DIR, 'agentdb-patterns.jsonl');
 const DRAIN_FILE = resolve(STATE_DIR, 'session-start-mcp-inject.md');
-const MINIMAX_URL = 'https://api.minimaxi.com/v1/text/chatcompletion_v2';
-const MODEL = 'MiniMax-Text-01';
 
 // ── Queue management ──────────────────────────────────────────────────────────
 function readQueue() {
@@ -35,20 +33,6 @@ function readQueue() {
 
 function clearQueue() {
   writeFileSync(QUEUE_FILE, '', 'utf-8');
-}
-
-// ── MiniMax call ───────────────────────────────────────────────────────────────
-async function callMinimax(prompt, maxTokens = 256) {
-  const apiKey = process.env.MINIMAX_API_KEY;
-  if (!apiKey) throw new Error('MINIMAX_API_KEY not set');
-  const res = await fetch(MINIMAX_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
-    body: JSON.stringify({ model: MODEL, messages: [{ role: 'user', content: prompt }], max_tokens: maxTokens }),
-  });
-  if (!res.ok) throw new Error(`MiniMax ${res.status}: ${await res.text()}`);
-  const json = await res.json();
-  return json.choices?.[0]?.message?.content?.trim() || '';
 }
 
 // ── Store patterns locally ───────────────────────────────────────────────────
@@ -108,27 +92,10 @@ function addToDrain(entries) {
   writeFileSync(DRAIN_FILE, existing + md, 'utf-8');
 }
 
-// ── Ollama-powered summarization + storage ─────────────────────────────────────
+// ── Store patterns locally ─────────────────────────────────────────────────────
 async function processWithLLM(entries) {
   const patterns = entries.filter(e => e.type === 'agentdb_pattern-store');
   const feedbacks = entries.filter(e => e.type === 'agentdb_feedback');
-
-  // Summarize patterns with LLM for deduplication / quality check
-  if (patterns.length > 0) {
-    const summary = patterns.map(e =>
-      `type=${e.patternType || 'unknown'} pattern="${e.pattern.slice(0, 100)}" conf=${e.confidence}`
-    ).join('\n');
-
-    try {
-      const insight = await callMinimax(
-        `You are an OMC learning summarizer. Given these learning entries, respond with a 1-line insight.\n\n${summary}\n\nInsight:`,
-        64
-      );
-      console.log(`[consumer] LLM insight: ${insight}`);
-    } catch (e) {
-      console.log(`[consumer] LLM skipped: ${e.message}`);
-    }
-  }
 
   // Store each pattern locally
   let stored = 0;
