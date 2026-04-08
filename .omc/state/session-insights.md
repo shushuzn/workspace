@@ -425,3 +425,11 @@
 **Fix**: 修改 `omc-insight-generator.mjs` 的执行路径：当检测到 fix 为可执行 action 时，直接通过 Edit/Write/Bash 原生工具执行，禁止 spawn subagent 执行
 
 
+
+### 25. 54 tool calls, 0 seeds — self-improvement loop broken [auto-generated]
+
+**Observation**: 200 events, 54 tool calls, 1 user prompt, 0 seeds generated. Heavy Bash(34) skews tool balance; no new ideas created despite active session. Start and end both "解决未解决的" suggests working on existing items without generating new seeds.
+
+**Rule**: Every active session should produce at least 1 seed or mark existing seeds as shipped/killed; zero-seed sessions indicate reactive vs. generative mode.
+
+

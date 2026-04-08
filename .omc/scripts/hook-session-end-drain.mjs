@@ -602,26 +602,32 @@ function step7_executePendingActions() {
     const match = line.match(/^\- \[ \] (.*?) \| action: (.+?) \| id: (\S+)/);
     if (!match) continue;
     const [, desc, action, id] = match;
-    log(`step7: executing [${id}] ${desc.slice(0, 60)}`);
-    log(`        cmd: ${action.slice(0, 80)}`);
-    // Execute via shell — action may contain pipes/args
-    const child = spawn(action, [], { shell: true, cwd: __dirname + '/../../..' });
-    let err = '';
-    child.stderr.on('data', d => { err += d.toString(); });
-    child.on('close', (code) => {
-      if (code !== 0) {
-        log(`step7: action failed (${code}): ${err.slice(0, 120)}`);
-        verifyAction(id, `failed:${code}`);
-      } else {
-        log(`step7: action succeeded`);
-        verifyAction(id, 'executed');
-      }
-      markExecuted(desc);
-    });
-    child.on('error', e => {
-      log(`step7: spawn error: ${e.message}`);
-      verifyAction(id, `error:${e.message}`);
-    });
+    // Shell commands: execute via spawn; code modifications: call patcher
+    const isShellCmd = action.includes('node ') || action.includes('npm ') || action.includes('git ') || action.includes('python') || action.includes('pip ');
+    if (isShellCmd) {
+      log(`step7: executing [${id}] ${desc.slice(0, 60)}`);
+      log(`        cmd: ${action.slice(0, 80)}`);
+      const child = spawn(action, [], { shell: true, cwd: __dirname + '/../../..' });
+      let err = '';
+      child.stderr.on('data', d => { err += d.toString(); });
+      child.on('close', (code) => {
+        if (code !== 0) { log(`step7: action failed (${code}): ${err.slice(0, 120)}`); verifyAction(id, `failed:${code}`); }
+        else { log(`step7: action succeeded`); verifyAction(id, 'executed'); }
+        markExecuted(desc);
+      });
+      child.on('error', e => { log(`step7: spawn error: ${e.message}`); verifyAction(id, `error:${e.message}`); });
+    } else {
+      log(`step7: code mod — calling patcher for [${id}]: ${action.slice(0, 60)}`);
+      const patcher = spawn('python', [resolve(__dirname, 'insight-patcher.py')], { shell: false, cwd: __dirname });
+      let err = '';
+      patcher.stderr.on('data', d => { err += d.toString(); });
+      patcher.on('close', (code) => {
+        if (code !== 0) { log(`step7: patcher failed: ${err.slice(0, 120)}`); verifyAction(id, `patcher-failed`); }
+        else { log(`step7: patcher succeeded`); verifyAction(id, 'patched'); }
+        markExecuted(desc);
+      });
+      patcher.on('error', e => { log(`step7: patcher error: ${e.message}`); verifyAction(id, `patcher-error`); });
+    }
   }
 
   // Clear pending after firing all
