@@ -130,7 +130,10 @@ function step1_drain(entries, sessionId) {
         const summaries = parsed.map(p => {
           const type = p.patternType || 'unknown';
           const pat = p.pattern || '';
-          return '- [' + type + '] ' + pat.slice(0, 80) + (pat.length > 80 ? '...' : '');
+          // Pattern string starts with "[type]" — strip it to avoid display duplication
+          const bracketPat = '[' + type + '] ';
+          const clean = pat.startsWith(bracketPat) ? pat.slice(bracketPat.length) : pat;
+          return '- [' + type + '] ' + clean.slice(0, 80) + (clean.length > 80 ? '...' : '');
         });
         patternSummary = '\n## Recent Learned Patterns\n\n' + summaries.join('\n') + '\n';
       }
