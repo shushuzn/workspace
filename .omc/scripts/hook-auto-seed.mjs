@@ -53,6 +53,9 @@ function readState() {
 // Hookify injects session_id in hook env vars; fallback to matching state file sessionId.
 // If sessionId changed (compaction continuation), PRESERVE count — don't reset to 0.
 function getCurrentSessionId() {
+  // OMC_SESSION_ID env var is the current session — always prefer it
+  if (process.env.OMC_SESSION_ID) return process.env.OMC_SESSION_ID;
+  // Fallback: find latest session directory
   const sessionsDir = resolve(__dirname, '../state/sessions');
   if (existsSync(sessionsDir)) {
     try {
@@ -71,7 +74,6 @@ function getCurrentSessionId() {
       if (latestSession) return latestSession;
     } catch { /* fall through */ }
   }
-  if (process.env.OMC_SESSION_ID) return process.env.OMC_SESSION_ID;
   return Date.now().toString();
 }
 
