@@ -39,7 +39,14 @@
       "mcp__plugin_oh-my-claudecode_t__state_clear",
       "mcp__claude-flow__agentdb_semantic-route",
       "mcp__plugin_chrome-devtools-mcp_chrome-devtools__get_console_message",
-      "mcp__plugin_oh-my-claudecode_t__project_memory_add_directive"
+      "mcp__plugin_oh-my-claudecode_t__project_memory_add_directive",
+      "mcp__claude-flow__agentdb_pattern-search",
+      "mcp__claude-flow__memory_bridge_status",
+      "mcp__claude-flow__agentdb_pattern-store",
+      "mcp__claude-flow__memory_store",
+      "mcp__claude-flow__embeddings_status",
+      "mcp__claude-flow__embeddings_init",
+      "mcp__claude-flow__hooks_intelligence_pattern-search"
     ]
   },
   "enableAllProjectMcpServers": true,
