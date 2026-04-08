@@ -543,6 +543,72 @@ async function step6_insightGenerator() {
   });
 }
 
+// ── Step 7: Execute pending actions immediately ─────────────────────────────
+function step7_executePendingActions() {
+  const PENDING = resolve(__dirname, '../state/pending-actions.md');
+  if (!existsSync(PENDING)) return;
+
+  let content;
+  try { content = readFileSync(PENDING, 'utf-8'); } catch { return; }
+
+  const lines = content.split('\n').filter(l => l.startsWith('- [ ]'));
+  if (lines.length === 0) return;
+
+  const PENDING_FILE = PENDING;
+  const VERIFY_FILE = resolve(__dirname, '../state/insight-verifications.md');
+  const INSIGHTS_FILE = resolve(__dirname, '../state/session-insights.md');
+
+  function markExecuted(desc) {
+    if (!existsSync(INSIGHTS_FILE)) return;
+    let c = readFileSync(INSIGHTS_FILE, 'utf-8');
+    const ls = c.split('\n');
+    for (let i = 0; i < ls.length; i++) {
+      if (ls[i].includes('### ') && ls[i].includes(desc.slice(0, 40))) {
+        if (ls[i].includes('✅ EXECUTED')) break;
+        ls[i] = ls[i].replace(/\s*$/, '') + ' ✅ EXECUTED';
+        writeFileSync(INSIGHTS_FILE, ls.join('\n'), 'utf-8');
+        break;
+      }
+    }
+  }
+
+  function verifyAction(id, result) {
+    const record = { id, result, verifiedAt: new Date().toISOString() };
+    const existing = existsSync(VERIFY_FILE) ? readFileSync(VERIFY_FILE, 'utf-8') : '';
+    writeFileSync(VERIFY_FILE, existing + `## ${id}\n\n- **Result**: ${result}\n- **Verified**: ${record.verifiedAt}\n\n`, 'utf-8');
+  }
+
+  for (const line of lines) {
+    const match = line.match(/^\- \[ \] (.*?) \| action: (.+?) \| id: (\S+)/);
+    if (!match) continue;
+    const [, desc, action, id] = match;
+    log(`step7: executing [${id}] ${desc.slice(0, 60)}`);
+    log(`        cmd: ${action.slice(0, 80)}`);
+    // Execute via shell — action may contain pipes/args
+    const child = spawn(action, [], { shell: true, cwd: __dirname + '/../../..' });
+    let err = '';
+    child.stderr.on('data', d => { err += d.toString(); });
+    child.on('close', (code) => {
+      if (code !== 0) {
+        log(`step7: action failed (${code}): ${err.slice(0, 120)}`);
+        verifyAction(id, `failed:${code}`);
+      } else {
+        log(`step7: action succeeded`);
+        verifyAction(id, 'executed');
+      }
+      markExecuted(desc);
+    });
+    child.on('error', e => {
+      log(`step7: spawn error: ${e.message}`);
+      verifyAction(id, `error:${e.message}`);
+    });
+  }
+
+  // Clear pending after firing all
+  writeFileSync(PENDING_FILE, '', 'utf-8');
+  log(`step7: cleared pending-actions.md (${lines.length} actions fired)`);
+}
+
 // ── Main ──────────────────────────────────────────────────────────────────
 async function main() {
   const args = parseArgs(process.argv.slice(2));
@@ -574,6 +640,9 @@ async function main() {
 
   // Step 6: Auto-generate insights
   await step6_insightGenerator();
+
+  // Step 7: Execute pending actions immediately
+  step7_executePendingActions();
 
   log(`=== drain complete ===`);
 }

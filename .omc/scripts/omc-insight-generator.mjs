@@ -36,12 +36,14 @@ function extractPendingActionsViaAgent(rawInsights) {
   const prompt = `You are an OMC pending-action extractor. Read the insights below and extract only those with a concrete, executable Fix action (not "N/A").
 
 Output format — write ONLY lines like this, nothing else:
-ACTION|insight title|executable fix description
+TITLE|executable fix description
 
 Rules:
-- Only output lines where Fix: is a concrete action (not "N/A", not a tracking rule)
+- Only output lines where **Fix** is a concrete action (not "N/A", not a tracking rule)
+- Extract the Fix description after **Fix**:
 - If no actionable fixes found, output nothing
 - Do NOT invent or infer fixes — only use what is explicitly stated
+- Output one line per actionable insight: TITLE|action
 
 ---
 INSIGHTS:
@@ -58,17 +60,19 @@ ${rawInsights}
     let out = '';
     proc.stdout.on('data', d => { out += d.toString(); });
     proc.on('close', () => {
-      const actionLines = out.split('\n').filter(l => l.startsWith('ACTION|'));
+      const actionLines = out.split('\n').filter(l => l.startsWith('TITLE|'));
       if (actionLines.length === 0) { resolve([]); return; }
 
       const existing = existsSync(PENDING_FILE) ? readFileSync(PENDING_FILE, 'utf-8') : '';
       const newItems = [];
       for (const line of actionLines) {
         const parts = line.split('|');
-        if (parts.length < 3) continue;
-        const [, title, action] = parts;
+        if (parts.length < 2) continue;
+        const title = parts[0].replace('TITLE|', '').trim();
+        const action = parts.slice(1).join('|').trim();
+        if (!action || action === 'N/A' || action.toUpperCase() === 'N/A') continue;
         const id = `action-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
-        newItems.push(`- [ ] ${title.trim()} | action: ${action.trim()} | id: ${id}`);
+        newItems.push(`- [ ] ${title} | action: ${action} | id: ${id}`);
       }
       if (newItems.length > 0) {
         writeFileSync(PENDING_FILE, (existing ? existing + '\n' : '') + newItems.join('\n') + '\n', 'utf-8');
