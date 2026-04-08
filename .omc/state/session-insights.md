@@ -433,3 +433,20 @@
 **Rule**: Every active session should produce at least 1 seed or mark existing seeds as shipped/killed; zero-seed sessions indicate reactive vs. generative mode.
 
 
+
+### 26. [Zero seeds in full session] [auto-generated]
+**Observation**: 200 events, 54 tool calls, 1 user prompt — yet 0 seeds generated. The entire session ran without any brainstorming or idea pool activity despite being a full-length session.
+**Rule**: Every session that completes task work should still feed the idea pipeline; seed generation is not optional even during task execution.
+**Fix**: N/A
+
+### 27. [Heavy Bash dominance 63%] [auto-generated]
+**Observation**: Bash(34) = 63% of all tool calls (34/54). Edit(9) + Read(9) + Write(2) = 20 combined. The session was overwhelmingly bash-driven with minimal code/file edits.
+**Rule**: Sustained heavy bash usage (60%+) often signals task-execution mode without generative output — track as efficiency signal.
+**Fix**: N/A
+
+### 28. [实时insight生成管道打通] [in-session]
+**Observation**: 本 session 修改了 `hook-auto-seed.mjs`（seed→insight）和 `hook-session-start-inject.mjs`（注入 trigger），实现了10次工具调用触发 in-session insight 生成，而非事后分析 trajectory。测试确认 trigger 正确注入到 session-start hook 输出中。
+**Rule**: insight 应在会话中实时生成，不依赖 drain 后的 trajectory 分析
+**Fix**: 验证：下次工具调用≥10次时，`auto-insight-trigger.json` 应存在且被 hook 正确读取
+
+

@@ -21,6 +21,7 @@ const WF_PATTERNS_FILE = resolve(__dirname, '../innovation/workflow-patterns.md'
 const INSIGHTS_FILE = resolve(STATE_DIR, 'session-insights.md');
 const VERIFY_FILE = resolve(STATE_DIR, 'insight-verifications.md');
 const MID_FILE = resolve(STATE_DIR, 'mid-session-inject.md');
+const TRIGGER_FILE = resolve(STATE_DIR, 'auto-insight-trigger.json');
 
 function log(...a) { console.error('[inject]', ...a); }
 
@@ -39,6 +40,37 @@ function readLastTrajectory() {
 
 async function main() {
   const parts = [];
+
+  // 0. Auto-insight trigger (highest priority — in-session insight generation)
+  if (existsSync(TRIGGER_FILE)) {
+    try {
+      const trigger = JSON.parse(readFileSync(TRIGGER_FILE, 'utf-8'));
+      const today = new Date().toISOString().split('T')[0];
+      const prompt = `## IN-SESSION INSIGHT TRIGGER
+
+检测到 ${trigger.count} 次工具调用（阈值 ${trigger.threshold}），请立即生成一条 insight。
+
+当前工具统计：
+${trigger.toolStats ? `工具统计: Bash=${trigger.toolStats.tools?.Bash || 0}, Read=${trigger.toolStats.tools?.Read || 0}, Edit=${trigger.toolStats.tools?.Edit || 0}, Write=${trigger.toolStats.tools?.Write || 0}, Grep=${trigger.toolStats.tools?.Grep || 0}` : `${trigger.count} 次工具调用`}
+${trigger.toolStats?.topBash?.length ? `Top Bash 命令：\n${trigger.toolStats.topBash.map((c, i) => `${i + 1}. ${c}`).join('\n')}` : ''}
+
+请分析上述数据，生成一条 insight，格式：
+
+### N. [标题]
+**Observation**: [具体观察，数据驱动]
+**Rule**: [规则/模式识别]
+**Fix**: [如果可以执行的具体修复动作，写具体命令/文件/代码；否则写 N/A]
+
+要求：
+- Fix 必须是可执行的（具体文件、具体改动）
+- 如果观察到的模式只有 tracking 价值，写 Fix: N/A
+- 生成 1 条高质量 insight 即可
+- 写完后将 insight 追加到 .omc/state/session-insights.md
+- 如果 Fix 不是 N/A，同时追加到 .omc/state/pending-actions.md，格式："- [ ] title | action: Fix内容 | id: auto-[timestamp]"
+`;
+      parts.push(prompt);
+    } catch { /* invalid JSON, ignore */ }
+  }
 
   // 1. MCP drain (highest priority — patterns to store)
   if (existsSync(DRAIN_FILE)) {
