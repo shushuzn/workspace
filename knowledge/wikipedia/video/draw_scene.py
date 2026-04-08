@@ -62,12 +62,12 @@ def glow_circle(ax, cx, cy, radius, glow_color, n=3):
         ax.add_patch(glow)
 
 # ─── LaTeX 公式渲染（matplotlib 内置 math renderer）─────────────
-def render_latex_to_png(formula: str, out_path: Path, dpi: int = 150) -> bool:
+def render_latex_to_png(formula: str, out_path: Path, dpi: int = 200) -> bool:
     """用 matplotlib 渲染 LaTeX 公式为 PNG（抗锯齿，12×8 白板居中）
 
     formula: LaTeX 公式文本，如 "E = mc^2" 或 "\\frac{-b \\pm \\sqrt{b^2-4ac}}{2a}"
     out_path: 输出 PNG 路径
-    dpi: 输出分辨率，默认 150
+    dpi: 输出分辨率，默认 200（提升清晰度）
 
     返回 True（matplotlib 总是可用）
     """
