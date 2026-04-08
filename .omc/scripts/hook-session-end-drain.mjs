@@ -114,13 +114,38 @@ function buildInjectMarkdown(entries, sessionId) {
 }
 
 function step1_drain(entries, sessionId) {
-  if (entries.length === 0) {
+  // Build hook status summary for transparency
+  const auditLog = resolve(STATE_DIR, 'hook-audit.jsonl');
+  let hookSummary = '';
+  if (existsSync(auditLog)) {
+    try {
+      const content = readFileSync(auditLog, 'utf-8');
+      const lines = content.split('\n').filter(Boolean);
+      const today = new Date().toISOString().split('T')[0];
+      const todayLines = lines.filter(l => {
+        try { return JSON.parse(l).timestamp?.startsWith(today); } catch { return false; }
+      });
+      const tools = {};
+      for (const l of todayLines) {
+        try { const e = JSON.parse(l); tools[e.tool] = (tools[e.tool]||0) + 1; } catch {}
+      }
+      const dedupFile = resolve(STATE_DIR, 'hook-last-cmd.json');
+      const dedup = existsSync(dedupFile) ? JSON.parse(readFileSync(dedupFile, 'utf-8')) : null;
+      hookSummary = `\n## Hook Status\n\n`;
+      hookSummary += `- Audit entries today: ${todayLines.length}\n`;
+      hookSummary += `- Tools: ${Object.entries(tools).map(([t,c])=>`${t}(${c})`).join(', ')}\n`;
+      hookSummary += `- Last dedup: ${dedup ? `"${dedup.cmd}" ×${dedup.count}` : 'none'}\n`;
+      hookSummary += `- Queue entries: ${entries.length}\n`;
+    } catch {}
+  }
+
+  if (entries.length === 0 && !hookSummary) {
     if (existsSync(DRAIN_FILE)) { try { unlinkSync(DRAIN_FILE); } catch {} }
     log('step1: queue-empty');
     return;
   }
   const md = buildInjectMarkdown(entries, sessionId);
-  writeFileSync(DRAIN_FILE, md, 'utf-8');
+  writeFileSync(DRAIN_FILE, md + hookSummary, 'utf-8');
   writeFileSync(QUEUE_FILE, '', 'utf-8');
   log(`step1: ${entries.length} entries drained → next session`);
 }
