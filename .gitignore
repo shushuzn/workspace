@@ -50,6 +50,7 @@ node_modules/
 !.omc/scripts/omc-insight-generator.mjs
 !.omc/scripts/omc-insight-action.mjs
 !.omc/scripts/hook-stats.mjs
+!.omc/scripts/hook-auto-seed.mjs
 .omc/
 .swarm/
 .ruff_cache/

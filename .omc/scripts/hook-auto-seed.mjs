@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * OMC Auto-Seed Generator Hook
- * Tracks tool call count per session → auto-executes highest-score seed after 5+ calls.
+ * Tracks tool call count per session → auto-executes highest-score seed after 10+ calls.
  *
  * Usage (as hook script):
  *   node hook-auto-seed.mjs [--check] [--reset]
@@ -11,7 +11,7 @@
  * Architecture:
  *   PostToolUse hook fires on every tool call → invokes this with --check
  *   Counter stored in .omc/state/auto-seed-counter.json
- *   When threshold reached (5+ calls):
+ *   When threshold reached (10+ calls):
  *     1. Writes seed entry to ideas.md (backup for manual review)
  *     2. Spawns detached executor via OMC_SKIP_HOOKS + background bash
  *     3. Executor parses ideas.md, picks highest-score un-shipped seed, executes, marks shipped
@@ -28,7 +28,7 @@ const STATE_FILE = resolve(STATE_DIR, 'auto-seed-counter.json');
 const IDEAS_FILE = resolve(__dirname, '../innovation/ideas.md');
 
 // ── Config ──────────────────────────────────────────────────────────────────
-const THRESHOLD = 5; // 5+ tool calls triggers seed auto-creation
+const THRESHOLD = 10; // 10+ tool calls triggers seed auto-creation
 
 // ── State ───────────────────────────────────────────────────────────────────
 function readState() {
