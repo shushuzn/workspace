@@ -5,7 +5,9 @@
  * Scans ideas.md pool, picks the highest-score unshipped seed,
  * executes its approach's first step, then marks it shipped.
  *
- * Usage: node run-seed.mjs [--dry-run] [--limit N] [--focus PROJECT] [--skip LINEIDX]
+ * Usage:
+ *   node run-seed.mjs [--dry-run] [--limit N] [--focus PROJECT] [--skip LINEIDX]
+ *   node run-seed.mjs --validate-approach "1. python wiki.mjs --rebuild"
  */
 import { readFileSync, writeFileSync } from 'fs';
 import { join, dirname } from 'path';
@@ -15,6 +17,8 @@ const __DIR = dirname(fileURLToPath(import.meta.url));
 const IDEAS_PATH = join(__DIR, '..', '.omc', 'innovation', 'ideas.md');
 
 const dryRun = process.argv.includes('--dry-run');
+const validateApproachIdx = process.argv.indexOf('--validate-approach');
+const validateApproach = validateApproachIdx !== -1 ? process.argv[validateApproachIdx + 1] : null;
 const limitIdx = process.argv.indexOf('--limit');
 const showLimit = limitIdx !== -1 ? parseInt(process.argv[limitIdx + 1], 10) : 1;
 const focusIdx = process.argv.indexOf('--focus');
@@ -22,6 +26,50 @@ const focusProject = focusIdx !== -1 ? process.argv[focusIdx + 1] : null;
 const skipIdxs = process.argv.includes('--skip')
   ? (() => { const i = process.argv.indexOf('--skip') + 1; return process.argv.slice(i, i + 2).map(n => parseInt(n, 10)).filter(n => !isNaN(n)); })()
   : [];
+
+// ── Gate 4c: Validate approach text without writing to pool ────────────────────
+if (validateApproach !== null) {
+  // Extract first step from approach text (shared logic with main flow)
+  const firstStepMatch = validateApproach.match(/(?:^|\n)\s*(\d+)\.\s+(.+?)(?:\n\s*\d+\.|[；;]\d+\.|$)/s);
+  if (!firstStepMatch) {
+    console.error('[VALIDATE] FAIL: No numbered step found in approach');
+    process.exit(1);
+  }
+  const stepNum = firstStepMatch[1];
+  let firstStep = firstStepMatch[2].replace(/[；;]$/, '').trim();
+
+  // Check for tool-name prefixes (Edit/Read/Grep etc.) — these require Claude Code
+  const TOOL_PREFIXES = ['Edit ', 'Read ', 'Write ', 'Grep ', 'Glob ', 'Bash ', 'Search ', 'List ', 'Delete ', 'Create '];
+  const isToolCommand = TOOL_PREFIXES.some(p => firstStep.startsWith(p));
+  if (isToolCommand) {
+    console.error(`[VALIDATE] FAIL: approach step is a tool-name command (requires Claude Code): ${firstStep}`);
+    process.exit(1);
+  }
+
+  // Check for executable prefix
+  const EXEC_PREFIXES = ['python ', 'node ', 'npx ', 'bun ', 'bash ', 'sh ', 'cd ', 'mkdir ', '//', '#', '/'];
+  const isExecCommand = EXEC_PREFIXES.some(p => firstStep.startsWith(p)) || firstStep.match(/^[a-zA-Z]:\\/);
+  if (!isExecCommand) {
+    console.error(`[VALIDATE] FAIL: approach step has no executable prefix: ${firstStep}`);
+    process.exit(1);
+  }
+
+  // Check for script-name pattern that can be resolved
+  if (!firstStep.startsWith('python ') && !firstStep.startsWith('node ') && !firstStep.startsWith('npx ') &&
+      !firstStep.startsWith('bun ') && !firstStep.startsWith('bash ') && !firstStep.startsWith('sh ') &&
+      !firstStep.startsWith('cd ') && !firstStep.startsWith('mkdir ') && !firstStep.startsWith('#') &&
+      !firstStep.startsWith('/') && !firstStep.match(/^[a-zA-Z]:\\/)) {
+    // Script-name based step — check if scriptMeta can resolve it
+    const scriptMatch = validateApproach.match(/(?:^|\s)([\w-]+\.(?:py|mjs|js|ts|sh))(?:[\s\[]|$)/);
+    if (!scriptMatch) {
+      console.error(`[VALIDATE] FAIL: cannot resolve script name from: ${firstStep}`);
+      process.exit(1);
+    }
+  }
+
+  console.log(`[VALIDATE] PASS: approach step ${stepNum} is executable — ${firstStep.slice(0, 80)}`);
+  process.exit(0);
+}
 
 // ── Parse ideas.md ───────────────────────────────────────────────────────────
 const content = readFileSync(IDEAS_PATH, 'utf-8');

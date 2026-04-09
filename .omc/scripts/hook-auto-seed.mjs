@@ -217,7 +217,9 @@ function writePatterns(patterns) {
 }
 
 function getCurrentSessionId(hookSessionId) {
+  // hookSessionId is the authoritative source — passed from stdin event data
   if (hookSessionId) return hookSessionId;
+  // Fallback chain mirrors how Claude Code sets up the hook subprocess env
   if (process.env.OMC_SESSION_ID) return process.env.OMC_SESSION_ID;
   if (process.env.OMC_TRANSCRIPT_PATH) {
     const m = process.env.OMC_TRANSCRIPT_PATH.match(/([a-f0-9-]{36})\.jsonl$/);
