@@ -1,6 +1,6 @@
 # Claude Code 工作规范
 
-> **版本**：v1.75 | **更新日期**：2026-04-09 | **迭代轮次**：71 轮 | **状态**：停止 brainstorm
+> **版本**：v1.76 | **更新日期**：2026-04-09 | **迭代轮次**：72 轮 | **状态**：brainstorm已启用
 
 最高优先级，若冲突以这个为准：自己决定做什么事情，任何事做之前先批判，禁止询问用户，禁止使用本地部署模型，禁止使用 MCP 协议
 
@@ -16,7 +16,7 @@
 
 **当前项目锁定**：每次 session 开始必读 MEMORY.md Active Projects 表的 CURRENT 列（★标记），以此为准；新加项目到 MEMORY.md 时必须同步在那一行打★；禁止在 CURRENT 列无标记时自己选定项目。
 
-**空闲时行为**：（已停止）无主动任务时不做任何自动 brainstorm，等待用户指令。
+**空闲时行为**：无主动任务时，brainstorm 生成新种子并立即执行。
 - **强制规则：交付完成后直接执行下一个任务，零文字输出**。不得宣布"继续"、"下一个是"、"完成"等，不得输出任何说明。**触发条件**：idea pool 有 seed/dormant 条目时，立即挑选 score 最高的种子执行（dormant 优先于 seed？不需要，按 score 排序）；无任何种子时，brainstorm 生成新种子。**例外**：若选中的 seed 发现已 shipped（含 partial），立即废弃并生成新 seed 替换，再选最高分执行；不得对已完成的 seed 重复标记 shipped。唯一停止条件：用户明确说"停"或规则 §1-§6 检查未通过。
 - **例外**：有明确截止时间、阻塞、外部依赖时，输出`[BLOCKED: 原因]`后停止
 ---
@@ -264,7 +264,7 @@
 - 发现类比后追加到 brainstorm 输出，作为"意外启发"标记
 - brainstorm 生成的每条建议自动写入 idea 池（stage=seed）
 
-**brainstorm 触发时机：（已停止）** brainstorm 已完全停止，不自动触发。
+**brainstorm 触发时机**：空闲时自动触发，生成 seeds 并立即执行。
 - 调用 brainstorming skill → 生成 seeds 写入 idea pool → 立即返回
 - brainstorming skill 内部控制所有行为，CLAUDE.md 不重复描述
 - **brainstorm 后不停顿**：seeds 写入 idea pool 后，立即选 score 最高项直接实现，**禁止在此阶段询问用户任何问题**；所有交互（clarifying question、design approval）发生在 brainstorming 技能内部，不外溢到主对话
