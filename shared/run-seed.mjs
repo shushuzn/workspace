@@ -5,18 +5,20 @@
  * Scans ideas.md pool, picks the highest-score unshipped seed,
  * executes its approach's first step, then marks it shipped.
  *
- * Usage: node run-seed.mjs [--dry-run] [--limit N]
+ * Usage: node run-seed.mjs [--dry-run] [--limit N] [--focus PROJECT]
  */
 import { readFileSync, writeFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 const __DIR = dirname(fileURLToPath(import.meta.url));
-const IDEAS_PATH = join(__DIR, '..', 'knowledge', 'wikipedia', '.omc', 'innovation', 'ideas.md');
+const IDEAS_PATH = join(__DIR, '..', '.omc', 'innovation', 'ideas.md');
 
 const dryRun = process.argv.includes('--dry-run');
 const limitIdx = process.argv.indexOf('--limit');
 const showLimit = limitIdx !== -1 ? parseInt(process.argv[limitIdx + 1], 10) : 1;
+const focusIdx = process.argv.indexOf('--focus');
+const focusProject = focusIdx !== -1 ? process.argv[focusIdx + 1] : null;
 
 // ── Parse ideas.md ───────────────────────────────────────────────────────────
 const content = readFileSync(IDEAS_PATH, 'utf-8');
@@ -27,13 +29,15 @@ const results = [];
 let i = 0;
 while (i < lines.length) {
   const line = lines[i];
-  const headerMatch = line.match(/^- \[(\d{8})\] seed \[brainstorm\] \[score:(\d+)x(\d+)\] \[f:(\d+)\] \[angle:([^\]]+)\]/);
+  const headerMatch = line.match(/^- \[(\d{8})\] seed \[brainstorm\] \[score:(\d+x\d+=\d+)\] \[f:(\d+)\] \[angle:([^\]]+)\](?: \[focus:([^\]]+)\])?/);
   if (!headerMatch) { i++; continue; }
 
-  const [, date, benefitS, feasS, feasEntry, angle] = headerMatch;
-  const benefit = parseInt(benefitS, 10);
-  const feas = parseInt(feasS, 10);
-  const score = benefit * feas;
+  const [, date, scoreStr, feasEntry, angle, focus] = headerMatch;
+  // scoreStr format: "3x4=12"
+  const scoreMatch = scoreStr.match(/(\d+)x(\d+)=(\d+)/);
+  const benefit = scoreMatch ? parseInt(scoreMatch[1], 10) : 0;
+  const feas = scoreMatch ? parseInt(scoreMatch[2], 10) : 0;
+  const score = scoreMatch ? parseInt(scoreMatch[3], 10) : 0;
 
   // Collect continuation lines (indented lines following header)
   const bodyLines = [];
@@ -54,19 +58,23 @@ while (i < lines.length) {
   const descMatch = bodyText.match(/description:\s*(.+?)(?:\s*\| benefit:|$)/s);
   const desc = descMatch ? descMatch[1].trim() : line.replace(/^\s*/, '').split('|')[0].trim();
 
-  // Extract approach (numbered steps)
-  const approachMatch = bodyText.match(/\| approach:\s*(.+?)(?:\s*\| shipped:|$)/s);
+  // Extract approach (numbered steps) — from body or fallback to header line
+  const approachMatch = bodyText.match(/\| approach:\s*(.+?)(?:\s*\| shipped:|$)/s)
+    || line.match(/\| approach:\s*(.+?)(?:\s*\| shipped:|$)/s);
   const approachText = approachMatch ? approachMatch[1].trim() : '';
 
-  results.push({ date, score, benefit, feas, feasEntry, angle, shipped, killed, desc, approachText, lineIdx: i, bodyLines });
+  results.push({ date, score, benefit, feas, feasEntry, angle, focus, shipped, killed, desc, approachText, lineIdx: i, bodyLines });
 
   i = j;
 }
 
-const unshipped = results.filter(s => !s.shipped && !s.killed).sort((a, b) => b.score - a.score);
+const unshipped = results
+  .filter(s => !s.shipped && !s.killed)
+  .filter(s => !focusProject || s.focus === focusProject)
+  .sort((a, b) => b.score - a.score);
 
 console.log(`\n=== Seed Runner ===`);
-console.log(`Total seeds: ${results.length} | Unshipped: ${unshipped.length}`);
+console.log(`Total seeds: ${results.length} | Unshipped: ${unshipped.length}${focusProject ? ` | focus: ${focusProject}` : ''}`);
 console.log(`Mode: ${dryRun ? 'DRY RUN' : 'LIVE'}`);
 console.log('');
 
@@ -92,13 +100,13 @@ console.log(`  approach: ${top.approachText.slice(0, 80)}...`);
 
 // Extract first numbered step from approach
 // Handle both "1. Do X" and "1. Do X；2. Do Y" (semicolon-separated compound steps)
-const firstStepMatch = top.approachText.match(/(?:^|\n)\s*(\d+)\.\s+(.+?)(?:\n\s*\d+\.|$)/s);
+const firstStepMatch = top.approachText.match(/(?:^|\n)\s*(\d+)\.\s+(.+?)(?:\n\s*\d+\.|[；;]\d+\.|$)/s);
 if (!firstStepMatch) {
   console.error('[ERROR] No numbered step found in approach');
   process.exit(1);
 }
 const stepNum = firstStepMatch[1];
-let firstStep = firstStepMatch[2].replace(/；$/, '').trim();
+let firstStep = firstStepMatch[2].replace(/[；;]$/, '').trim();
 
 // If firstStep contains no path separators or shebang, it's a description —
 // try to find the script name in description and build the actual command
