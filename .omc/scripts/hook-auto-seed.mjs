@@ -31,12 +31,169 @@ const INSIGHTS_FILE = resolve(STATE_DIR, 'session-insights.md');
 const IDEAS_FILE = resolve(__dirname, '../innovation/ideas.md');
 const NUDGE_FILE = resolve(STATE_DIR, 'session-nudge.md');
 const NOTPAD_FILE = resolve(__dirname, '../notepad.md');
+const RECURRENCE_FLAG_FILE = resolve(STATE_DIR, 'insight-recurrence-flag.md');
+const INSIGHT_EFFECTIVENESS_FILE = resolve(STATE_DIR, 'insight-effectiveness.json');
 
 const THRESHOLD = 10;
 const PATTERN_WINDOW = 20;   // Track last N commands
 const PATTERN_REPEAT = 3;    // Trigger after 3x repetition
 const DEBUG_LOOP_THRESHOLD = 3; // Edit+Bash same-target cycle count
 const ERROR_REPEAT_THRESHOLD = 2; // Same error message repeat count
+
+const ERROR_CLASS_FILE = resolve(STATE_DIR, 'error-frequency.json');
+const RECURRENCE_THRESHOLD = 3; // Same class error 3x → past insight not working
+
+// Error class patterns
+const ERROR_CLASS_PATTERNS = [
+  { cls: 'regex-bug',       patterns: [/\bregex\b.*(?:error|invalid|failed)/i, /invalid.*regex/i, /pattern.*match.*fail/i, /regexp/i, /regular.*expression/i, /unterminated.*regex/i] },
+  { cls: 'permission',      patterns: [/\b(?:EACCES|PERMISSION DENIED|denied|readonly|eperm)\b/i, /permission\b.*denied/i, /cannot.*write.*readonly/i] },
+  { cls: 'path-error',       patterns: [/\b(?:ENOENT|NO SUCH FILE|not found|no such file|path.*not.*exist)\b/i, /cannot.*find.*file/i, /directory.*not.*found/i] },
+  { cls: 'git-conflict',     patterns: [/\b(?:CONFLICT|MERGE CONFLICT|unmerged|conflict)\b/i, /git.*conflict/i, /<<<<<|>>>>>/i] },
+  { cls: 'bash-syntax',      patterns: [/\b(?:syntax error|unexpected token|parse error|shellcheck|invalid shell)\b/i, /bash:.*:.*error/i, /sh:.*\s+error/i] },
+  { cls: 'hook-broken',      patterns: [/\b(?:JSON parse|syntax error.*\.mjs|cannot find module|module.*not found|failed to load)\b/i, /require.*module.*not.*found/i, /import.*error/i] },
+  { cls: 'network-fail',     patterns: [/\b(?:ECONNREFUSED|connection refused|timeout|network.*error|etimedout|enotfound)\b/i, /fetch.*fail/i, /request.*timeout/i] },
+  { cls: 'null-undefined',   patterns: [/\bcannot read propert.*null\b/i, /null.*is not a function\b/i, /undefined.*is not\b/i, /cannot read.*undefined\b/i] },
+  { cls: 'git-clean-fd',    patterns: [/clean.*fetch.*failed.*fd/i, /git.*clean.*fatal/i, /lf.*will.*replace.*crlf/i, /hook.*declined.*update/i] },
+];
+
+function classifyError(err) {
+  for (const { cls, patterns } of ERROR_CLASS_PATTERNS) {
+    for (const p of patterns) {
+      if (p.test(err)) return cls;
+    }
+  }
+  return 'unknown';
+}
+
+function readErrorFreq() {
+  if (!existsSync(ERROR_CLASS_FILE)) return { classes: {}, sessionId: null };
+  try { return JSON.parse(readFileSync(ERROR_CLASS_FILE, 'utf-8')); }
+  catch { return { classes: {}, sessionId: null }; }
+}
+
+function writeErrorFreq(data) {
+  writeFileSync(ERROR_CLASS_FILE, JSON.stringify(data, null, 2), 'utf-8');
+}
+
+// Check if error class is recurring (past insight may not be working)
+function checkRecurrence(errorClass, sessionId) {
+  const freq = readErrorFreq();
+  const now = new Date().toISOString().split('T')[0];
+  if (!freq.classes[errorClass]) {
+    freq.classes[errorClass] = { sessions: [], totalCount: 0 };
+  }
+  const clsData = freq.classes[errorClass];
+  // Add this session's occurrence
+  clsData.sessions.push({ id: sessionId.slice(0, 8), count: 1, date: now });
+  clsData.totalCount++;
+  // Keep only last 10 sessions
+  clsData.sessions = clsData.sessions.slice(-10);
+  writeErrorFreq(freq);
+  return clsData.totalCount;
+}
+
+// ── Insight Effectiveness Scoring ─────────────────────────────────────────────────
+// Track if executing an insight's Fix actually reduces error class recurrence
+function recordInsightExecuted(errorClass, insightTitle, fixAction) {
+  try {
+    const data = existsSync(INSIGHT_EFFECTIVENESS_FILE)
+      ? JSON.parse(readFileSync(INSIGHT_EFFECTIVENESS_FILE, 'utf-8'))
+      : { classes: {} };
+    if (!data.classes[errorClass]) data.classes[errorClass] = { insights: [], recurrenceAfter: [] };
+    const cls = data.classes[errorClass];
+    cls.insights.push({
+      title: insightTitle.slice(0, 80),
+      fix: fixAction || '',
+      executedAt: new Date().toISOString(),
+      recurrenceAfter: [], // filled later when recurrence checked
+    });
+    writeFileSync(INSIGHT_EFFECTIVENESS_FILE, JSON.stringify(data, null, 2), 'utf-8');
+  } catch {}
+}
+
+// Called when an error of this class recurs AFTER an insight was executed
+function recordRecurrenceAfterInsight(errorClass, sessionId) {
+  try {
+    const data = existsSync(INSIGHT_EFFECTIVENESS_FILE)
+      ? JSON.parse(readFileSync(INSIGHT_EFFECTIVENESS_FILE, 'utf-8'))
+      : { classes: {} };
+    if (!data.classes[errorClass]) return;
+    const cls = data.classes[errorClass];
+    const lastInsight = cls.insights[cls.insights.length - 1];
+    if (lastInsight && lastInsight.recurrenceAfter.length < 10) {
+      lastInsight.recurrenceAfter.push({ sessionId: sessionId.slice(0, 8), at: new Date().toISOString() });
+    }
+    writeFileSync(INSIGHT_EFFECTIVENESS_FILE, JSON.stringify(data, null, 2), 'utf-8');
+  } catch {}
+}
+
+// Get effectiveness score for an error class: how many recurrences after last insight
+function getInsightEffectiveness(errorClass) {
+  try {
+    const data = existsSync(INSIGHT_EFFECTIVENESS_FILE)
+      ? JSON.parse(readFileSync(INSIGHT_EFFECTIVENESS_FILE, 'utf-8'))
+      : { classes: {} };
+    if (!data.classes[errorClass]) return null;
+    const cls = data.classes[errorClass];
+    if (cls.insights.length === 0) return null;
+    const last = cls.insights[cls.insights.length - 1];
+    return {
+      totalInsights: cls.insights.length,
+      recurrencesAfterLast: last.recurrenceAfter.length,
+      firstExecuted: last.executedAt,
+    };
+  } catch { return null; }
+}
+
+// When recurrence threshold exceeded, mark past insights about this error class as ineffective
+function markInsightIneffective(errorClass, eff) {
+  if (!existsSync(INSIGHTS_FILE)) return;
+  try {
+    let content = readFileSync(INSIGHTS_FILE, 'utf-8');
+    const lines = content.split('\n');
+    let found = false;
+    // Error class keywords to match against insight titles/bodies
+    const classKeywords = {
+      'regex-bug': ['regex', '正则'],
+      'permission': ['permission', '权限', 'denied', 'readonly'],
+      'path-error': ['path', 'ENOENT', 'not found', '文件'],
+      'git-conflict': ['git', 'conflict', 'MERGE'],
+      'bash-syntax': ['syntax', 'shell', 'bash'],
+      'hook-broken': ['hook', 'module', 'import'],
+      'network-fail': ['network', 'connection', 'timeout'],
+      'null-undefined': ['null', 'undefined'],
+      'git-clean-fd': ['git clean', 'lf.*crlf', 'hook declined'],
+    };
+    const kwList = classKeywords[errorClass] || [errorClass];
+
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
+      if (!line.includes('### ') || line.includes('⚠️ INEFFECTIVE')) continue;
+      // Check if this insight mentions the error class keywords
+      const isMatch = kwList.some(kw => line.toLowerCase().includes(kw.toLowerCase()));
+      if (isMatch) {
+        lines[i] = line.replace(/\s*$/, '') + ' ⚠️ INEFFECTIVE (recurring error)';
+        found = true;
+        break; // Only mark the most recent one
+      }
+    }
+    if (found) {
+      writeFileSync(INSIGHTS_FILE, lines.join('\n'), 'utf-8');
+      // Write flag for next session injection
+      const effNote = eff
+        ? `**已生成 ${eff.totalInsights} 条 insight，仍复发 ${eff.recurrencesAfterLast} 次** — 说明之前的 Fix 不够根本。`
+        : '';
+      const flag = `## ⚠️ Past Insight Ineffective: ${errorClass}
+
+Error class **${errorClass}** has triggered ≥${RECURRENCE_THRESHOLD} times — the insight above may not be working.
+请重新生成一个**更强力的修复**（不只是 tracking，要具体可执行的动作）。
+若 Fix 已存在但仍复发，说明 Fix 不够根本，需要找到 root cause。
+${effNote}
+`;
+      writeFileSync(RECURRENCE_FLAG_FILE, flag, 'utf-8');
+    }
+  } catch {}
+}
 
 function readState() {
   if (!existsSync(STATE_FILE)) return { count: 0, fired: false, sessionId: null };
@@ -189,7 +346,16 @@ function detectErrorRepeat(sessionId) {
     const repeated = Object.entries(freq).find(([, c]) => c >= ERROR_REPEAT_THRESHOLD);
     // Persist: errors from this scan + new errors, track line count
     writeErrorPatterns({ errors: [...prevErrors, ...newErrors].slice(-30), sessionId, lastSeen: lines.length });
-    if (repeated) return { pattern: repeated[0], count: repeated[1] };
+    if (repeated) {
+      const cls = classifyError(repeated[0]);
+      const recurrence = checkRecurrence(cls, sessionId);
+      // Flag past insight as ineffective if this class keeps recurring
+      if (recurrence >= RECURRENCE_THRESHOLD) {
+        const eff = getInsightEffectiveness(cls);
+        markInsightIneffective(cls, eff);
+      }
+      return { pattern: repeated[0], count: repeated[1], cls, recurrence };
+    }
   } catch {}
   return null;
 }
@@ -308,7 +474,16 @@ function appendIdea(line) {
   appendFileSync(IDEAS_FILE, line + '\n', 'utf-8');
 }
 
-function writeTrigger(sessionId, count, toolStats, workOutput, activePattern) {
+function writeTrigger(sessionId, count, toolStats, workOutput, activePattern, errorClass, recurrence) {
+  // Extract error class from activePattern like "error-repeat:regex-bug ⚠️ RECURRING:regex-bug×3"
+  let errCls = errorClass || null;
+  let recurCount = recurrence || 0;
+  if (activePattern?.startsWith('error-repeat:')) {
+    const match = activePattern.match(/error-repeat:(\S+)/);
+    if (match) errCls = match[1];
+    const recurMatch = activePattern.match(/RECURRING:(\S+)×(\d+)/);
+    if (recurMatch) { errCls = recurMatch[1]; recurCount = parseInt(recurMatch[2]); }
+  }
   const trigger = {
     sessionId,
     count,
@@ -316,6 +491,8 @@ function writeTrigger(sessionId, count, toolStats, workOutput, activePattern) {
     toolStats,
     workOutput: workOutput || null,
     activePattern: activePattern || null,
+    errorClass: errCls,
+    recurrence: recurCount,
     triggeredAt: new Date().toISOString(),
   };
   writeFileSync(TRIGGER_FILE, JSON.stringify(trigger, null, 2), 'utf-8');
@@ -423,7 +600,7 @@ async function main() {
     for (const [pattern, count] of Object.entries(freq)) {
       if (count >= PATTERN_REPEAT) {
         const workOutput = extractWorkOutput(currentSession, 0, 99999);
-        const msg = writeTrigger(currentSession, count, null, workOutput, pattern);
+        const msg = writeTrigger(currentSession, count, null, workOutput, pattern, null, 0);
         console.log(msg);
         return;
       }
@@ -451,7 +628,7 @@ async function main() {
       const gitCommit = detectGitCommit(currentSession);
       if (gitCommit) {
         writeState({ ...freshState, count: newCount, fired: true });
-        const msg = writeTrigger(currentSession, newCount, null, `git commit: ${gitCommit.msg}`, `git:${gitCommit.cmd.slice(0, 40)}`);
+        const msg = writeTrigger(currentSession, newCount, null, `git commit: ${gitCommit.msg}`, `git:${gitCommit.cmd.slice(0, 40)}`, null, 0);
         console.log(msg);
         return;
       }
@@ -462,7 +639,9 @@ async function main() {
         writeState({ ...freshState, count: newCount, fired: true });
         const toolStats = readLiveToolStats(currentSession);
         const workOutput = extractWorkOutput(currentSession, 0, newCount);
-        const msg = writeTrigger(currentSession, newCount, toolStats, workOutput, `error-repeat:${errRepeat.pattern}`);
+        const recurrenceNote = errRepeat.recurrence >= RECURRENCE_THRESHOLD
+          ? ` ⚠️ RECURRING:${errRepeat.cls}×${errRepeat.recurrence}` : '';
+        const msg = writeTrigger(currentSession, newCount, toolStats, workOutput, `error-repeat:${errRepeat.cls}${recurrenceNote}`, errRepeat.cls, errRepeat.recurrence);
         console.log(msg);
         return;
       }
@@ -473,7 +652,7 @@ async function main() {
         writeState({ ...freshState, count: newCount, fired: true });
         const toolStats = readLiveToolStats(currentSession);
         const workOutput = extractWorkOutput(currentSession, 0, newCount);
-        const msg = writeTrigger(currentSession, newCount, toolStats, workOutput, `debug-loop:${debugLoop.file}`);
+        const msg = writeTrigger(currentSession, newCount, toolStats, workOutput, `debug-loop:${debugLoop.file}`, null, 0);
         console.log(msg);
         return;
       }
@@ -483,7 +662,7 @@ async function main() {
       writeState({ ...freshState, count: newCount, fired: true });
       const toolStats = readLiveToolStats(currentSession);
       const workOutput = extractWorkOutput(currentSession, 0, newCount);
-      const msg = writeTrigger(currentSession, newCount, toolStats, workOutput, null);
+      const msg = writeTrigger(currentSession, newCount, toolStats, workOutput, null, null, 0);
       console.log(msg);
     } else {
       console.log(`count:${newCount}/${THRESHOLD}`);

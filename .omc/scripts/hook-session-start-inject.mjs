@@ -25,6 +25,8 @@ const MID_FILE = resolve(STATE_DIR, 'mid-session-inject.md');
 const TRIGGER_FILE = resolve(STATE_DIR, 'auto-insight-trigger.json');
 const ACTIVE_LEARN_FILE = resolve(STATE_DIR, 'active-learn-trigger.json');
 const COUNTER_FILE = resolve(STATE_DIR, 'auto-seed-counter.json');
+const RECURRENCE_FLAG_FILE = resolve(STATE_DIR, 'insight-recurrence-flag.md');
+const FIX_HOOKS_FILE = resolve(STATE_DIR, 'auto-fix-hooks.md');
 
 function log(...a) { console.error('[inject]', ...a); }
 
@@ -92,9 +94,25 @@ async function main() {
         // Stale trigger from previous session, clear it
         writeFileSync(TRIGGER_FILE, '', 'utf-8');
       } else {
+      let recurrenceNote = '';
+  if (trigger.errorClass && trigger.recurrence > 0) {
+    let effNote = '';
+    try {
+      if (existsSync(INSIGHT_EFFECTIVENESS_FILE)) {
+        const effData = JSON.parse(readFileSync(INSIGHT_EFFECTIVENESS_FILE, 'utf-8'));
+        const cls = effData?.classes?.[trigger.errorClass];
+        if (cls) {
+          const total = cls.insights.length;
+          const recurrencesAfter = cls.insights.filter(i => i.recurrenceAfter && i.recurrenceAfter.length > 0).length;
+          effNote = ` | past insights: ${total}, effective: ${total - recurrencesAfter}/${total}`;
+        }
+      }
+    } catch {}
+    recurrenceNote = `\n⚠️ **RECURRING ERROR**: "${trigger.errorClass}" ×${trigger.recurrence} — past insight may not be working${effNote}`;
+  }
       const prompt = `## IN-SESSION INSIGHT TRIGGER
 
-检测到 ${trigger.count} 次工具调用（阈值 ${trigger.threshold}），请立即生成一条 insight。
+检测到 ${trigger.count} 次工具调用（阈值 ${trigger.threshold}），请立即生成一条 insight。${recurrenceNote}
 
 当前工具统计：
 ${trigger.toolStats ? `工具统计: Bash=${trigger.toolStats.tools?.Bash || 0}, Read=${trigger.toolStats.tools?.Read || 0}, Edit=${trigger.toolStats.tools?.Edit || 0}, Write=${trigger.toolStats.tools?.Write || 0}, Grep=${trigger.toolStats.tools?.Grep || 0}` : `${trigger.count} 次工具调用`}
@@ -252,7 +270,25 @@ ${trigger.prompt || trigger.work?.tool}
     }
   }
 
-  // 8. Relevant past insights (semantic-style retrieval via keyword expansion)
+  // 8b. Recurrence flag — past insight ineffective, generate stronger fix
+  if (existsSync(RECURRENCE_FLAG_FILE)) {
+    const content = readFileSync(RECURRENCE_FLAG_FILE, 'utf-8').trim();
+    if (content) {
+      parts.push(content);
+      try { writeFileSync(RECURRENCE_FLAG_FILE, '', 'utf-8'); } catch {} // consume after reading
+    }
+  }
+
+  // 8c. hooks.json auto-fix notification
+  if (existsSync(FIX_HOOKS_FILE)) {
+    const content = readFileSync(FIX_HOOKS_FILE, 'utf-8').trim();
+    if (content) {
+      parts.push(content);
+      try { writeFileSync(FIX_HOOKS_FILE, '', 'utf-8'); } catch {} // consume after reading
+    }
+  }
+
+  // 9. Relevant past insights (semantic-style retrieval via keyword expansion)
   const cwd = process.env.OMC_CWD || process.env.PWD || '';
   if (cwd) {
     try {

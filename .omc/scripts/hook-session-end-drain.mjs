@@ -704,6 +704,20 @@ function step8_healthCheck() {
     } catch {}
   }
 
+  // 5b. Recurrence check: error class appeared ≥3 times across sessions → past insight may not be working
+  const ERROR_FREQ_FILE = resolve(STATE_DIR_S, 'error-frequency.json');
+  if (existsSync(ERROR_FREQ_FILE)) {
+    try {
+      const freq = JSON.parse(readFileSync(ERROR_FREQ_FILE, 'utf-8'));
+      const RECURRENCE_THRESHOLD_DRAIN = 3;
+      for (const [cls, data] of Object.entries(freq.classes || {})) {
+        if (data.totalCount >= RECURRENCE_THRESHOLD_DRAIN) {
+          issues.push(`⚠️ RECURRING ERROR CLASS: "${cls}" ×${data.totalCount} — past insight may not be effective`);
+        }
+      }
+    } catch {}
+  }
+
   // 6. Hook call chain verification: counter not incrementing (PostToolUse not calling --check)
   // Compare transcript tool count vs counter count to detect hook failure
   const transcriptPath = resolve(_TRANSCRIPT_BASE, `${SESSION_ID}.jsonl`);
@@ -790,6 +804,60 @@ function step8_healthCheck() {
         }
       } catch {}
     }
+  }
+
+  // Heal 5: Hook call chain dead — counter=0 but transcript has tools
+  // Check hooks.json for missing/broken PostToolUse config and auto-fix
+  if (existsSync(COUNTER_FILE)) {
+    try {
+      const counter = JSON.parse(readFileSync(COUNTER_FILE, 'utf-8'));
+      if (counter.count === 0 && transcriptToolCount > 10) {
+        const HOOKS_FILE = resolve(__dirname, '../../.claude/hooks.json');
+        const FIX_HOOKS_FILE = resolve(STATE_DIR_S, 'auto-fix-hooks.md');
+        if (existsSync(HOOKS_FILE)) {
+          try {
+            const hooks = JSON.parse(readFileSync(HOOKS_FILE, 'utf-8'));
+            const ptHooks = hooks?.hooks?.PostToolUse || [];
+            // Check for duplicate PostToolUse entries (same script called multiple times)
+            const seenCmds = new Set();
+            const duplicates = [];
+            for (const entry of ptHooks) {
+              if (!entry?.hooks) continue;
+              for (const h of entry.hooks) {
+                if (h?.command && seenCmds.has(h.command)) duplicates.push(h.command);
+                else if (h?.command) seenCmds.add(h.command);
+              }
+            }
+            // Check for missing PostToolUse entirely
+            if (ptHooks.length === 0 || duplicates.length > 0) {
+              const correctConfig = {
+                description: 'OMC Hooks — Session lifecycle + active learning',
+                hooks: {
+                  PostToolUse: [{ hooks: [{ type: 'command', command: 'node D:/OpenClaw/workspace/.omc/scripts/hook-auto-seed.mjs --check', timeout: 1000 }, { type: 'command', command: 'node D:/OpenClaw/workspace/.omc/scripts/hook-active-learn.mjs', timeout: 1000 }] }],
+                  PreToolUse: [],
+                  SessionStart: [{ hooks: [{ type: 'command', command: 'node D:/OpenClaw/workspace/.omc/scripts/hook-session-start-inject.mjs', timeout: 3000 }] }],
+                  SessionEnd: [{ hooks: [{ type: 'command', command: 'node D:/OpenClaw/workspace/.omc/scripts/hook-session-end-drain.mjs', timeout: 30000 }] }],
+                },
+              };
+              writeFileSync(HOOKS_FILE, JSON.stringify(correctConfig, null, 2), 'utf-8');
+              autoFixed.push('fixed hooks.json: removed duplicate PostToolUse entries + added active-learn hook');
+              const flag = `## ⚠️ hooks.json Auto-Fixed
+
+检测到 PostToolUse 配置损坏（重复定义或缺少条目），已自动修复。
+请验证下次 session 中工具调用计数器是否正常递增（观察 notepad 中 "INSIGHT TRIGGER" 是否出现）。
+
+修复内容：
+- 移除了重复的 PostToolUse 条目
+- 添加了 hook-active-learn.mjs 到 PostToolUse
+`;
+              writeFileSync(FIX_HOOKS_FILE, flag, 'utf-8');
+            }
+          } catch (e) {
+            issues.push(`🔴 hooks.json 修复失败: ${e.message}`);
+          }
+        }
+      }
+    } catch {}
   }
 
   if (issues.length === 0 && autoFixed.length === 0) {

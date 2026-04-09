@@ -20,6 +20,45 @@ const STATE_DIR = resolve(__dirname, '../state');
 const PENDING_FILE = resolve(STATE_DIR, 'pending-actions.md');
 const VERIFY_FILE = resolve(STATE_DIR, 'insight-verifications.md');
 const INSIGHTS_FILE = resolve(__dirname, '../state/session-insights.md');
+const INSIGHT_EFFECTIVENESS_FILE = resolve(STATE_DIR, 'insight-effectiveness.json');
+
+// Error class keywords for matching action → error class
+const ERROR_CLASS_MAP = [
+  { cls: 'regex-bug', kws: ['regex', '正则'] },
+  { cls: 'permission', kws: ['permission', '权限', 'denied', 'readonly'] },
+  { cls: 'path-error', kws: ['path', 'ENOENT', 'not found', '文件'] },
+  { cls: 'git-conflict', kws: ['git', 'conflict', 'MERGE'] },
+  { cls: 'bash-syntax', kws: ['syntax', 'shell', 'bash'] },
+  { cls: 'hook-broken', kws: ['hook', 'module', 'import'] },
+  { cls: 'network-fail', kws: ['network', 'connection', 'timeout'] },
+  { cls: 'null-undefined', kws: ['null', 'undefined'] },
+  { cls: 'git-clean-fd', kws: ['git clean', 'lf.*crlf', 'hook declined'] },
+];
+
+function detectErrorClass(text) {
+  for (const { cls, kws } of ERROR_CLASS_MAP) {
+    if (kws.some(kw => text.toLowerCase().includes(kw.toLowerCase()))) return cls;
+  }
+  return null;
+}
+
+function recordInsightExecuted(errorClass, insightTitle, fixAction) {
+  if (!errorClass) return;
+  try {
+    const data = existsSync(INSIGHT_EFFECTIVENESS_FILE)
+      ? JSON.parse(readFileSync(INSIGHT_EFFECTIVENESS_FILE, 'utf-8'))
+      : { classes: {} };
+    if (!data.classes[errorClass]) data.classes[errorClass] = { insights: [], recurrenceAfter: [] };
+    const cls2 = data.classes[errorClass];
+    cls2.insights.push({
+      title: insightTitle.slice(0, 80),
+      fix: fixAction || '',
+      executedAt: new Date().toISOString(),
+      recurrenceAfter: [],
+    });
+    writeFileSync(INSIGHT_EFFECTIVENESS_FILE, JSON.stringify(data, null, 2), 'utf-8');
+  } catch {}
+}
 
 function log(...a) { console.log('[insight]', ...a); }
 
@@ -91,6 +130,7 @@ function doneAction(id, expected, actual) {
   const item = items.find(i => i.id === id);
   if (!item) { log(`not found: ${id}`); return; }
   markInsightExecuted(item.desc);
+  recordInsightExecuted(detectErrorClass(item.desc), item.desc, item.action);
   verifyAction(id, 'executed', expected, actual);
   writePending(items.filter(i => i.id !== id));
   log(`completed: ${id}`);
