@@ -280,6 +280,25 @@ writeFileSync(IDEAS_PATH, newLines.join('\n'), 'utf-8');
 
 console.log(`\n[SHIPPED] ${top.desc.slice(0, 60)}... → shipped:${today}`);
 
+// Auto-generate insight: write to trigger file after each shipped seed
+try {
+  const { writeFileSync: wf, existsSync: ex } = await import('fs');
+  const { join: j2, dirname: dn2 } = await import('path');
+  const { fileURLToPath: fu2 } = await import('url');
+  const stateDir = dn2(fu2(import.meta.url)) + '/../.omc/state';
+  const triggerFile = j2(stateDir, 'auto-insight-trigger.json');
+  const trigger = {
+    sessionId: String(Date.now()),
+    work: { tool: 'seed-shipped', input: { seed: top.desc.slice(0, 80), score: top.score, angle: top.angle, focus: top.focus } },
+    prompt: `从 seed 执行经验生成 insight：${top.desc.slice(0, 60)} | angle:${top.angle} | score:${top.score}`,
+    triggeredAt: new Date().toISOString(),
+  };
+  wf(triggerFile, JSON.stringify(trigger, null, 2), 'utf-8');
+  console.log(`[INSIGHT] Generated trigger: ${triggerFile}`);
+} catch (e) {
+  console.error(`[INSIGHT] Warning: could not generate trigger: ${e.message}`);
+}
+
 // Auto-skillify: if angle contains 'skill-file', generate .claude/skills/ entry
 if (top.angle && top.angle.includes('skill-file')) {
   try {
