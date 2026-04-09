@@ -663,10 +663,34 @@ async function main() {
       const toolStats = readLiveToolStats(currentSession);
       const workOutput = extractWorkOutput(currentSession, 0, newCount);
       writeTrigger(currentSession, newCount, toolStats, workOutput, null, null, 0);
+
+      // BLOCKING: Check for pending actions before generating insight
+      const PENDING_FILE = resolve(__dirname, '../state/pending-actions.md');
+      let pendingBlock = '';
+      if (existsSync(PENDING_FILE)) {
+        const pendingContent = readFileSync(PENDING_FILE, 'utf-8').trim();
+        if (pendingContent) {
+          pendingBlock = `
+🚫 **阻塞：待执行的 Insight Actions 未完成**
+
+在生成新 insight 之前，必须先执行以下 pending actions：
+
+${pendingContent}
+
+执行步骤：
+1. 对每条 pending action，使用 Edit/Write/Bash 直接执行
+2. 执行完成后运行：\`node .omc/scripts/omc-insight-action.mjs --done <id>\`
+3. 完成后才能继续
+
+**禁止**：跳过 pending actions 直接生成新 insight。
+`;
+        }
+      }
+
       // IMMEDIATE INSIGHT PROMPT - output directly to stdout for current session
       const topBash = toolStats?.topBash?.map((c, i) => `${i + 1}. ${c}`).join('\n') || '';
       const insightPrompt = `
-
+${pendingBlock}
 ## IN-SESSION INSIGHT TRIGGER (immediate)
 
 检测到 ${newCount} 次工具调用已达阈值，请立即生成 insight。
