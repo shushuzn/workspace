@@ -183,6 +183,8 @@ async function main() {
         .option('--output-dir <path>', 'Directory for artifacts and temp state (default: system temp)', undefined)
         .option('--adapter-dir <path>', 'Extra directory to scan for third-party adapters', undefined)
         .option('--verbose', 'Show step-by-step logs', false)
+        .option('--no-review', 'Disable two-stage review gate (spec + code)', false)
+        .option('--no-self-audit', 'Disable meta-cognitive self-audit after execution', false)
         .option('--check', 'Check adapter availability', false)
         .option('--stream-to <port>', 'Start WebSocket server on port and stream step events as JSON Lines to connected clients', undefined)
         .option('--metrics [port]', 'Start Prometheus /metrics server on port (default 9090)', undefined)
@@ -1454,6 +1456,8 @@ setInterval(refresh, 1000);
             defaultTimeoutMs: options.defaultTimeoutMs ? Number(options.defaultTimeoutMs) : undefined,
             adapterTimeoutMs: { opencli: 30000, 'cli-anything': 60000 },
             workingDir: options.outputDir,
+            enableReview: !options.noReview,
+            enableSelfAudit: !options.noSelfAudit,
             verbose: options.verbose,
             explain: options.explain,
             cascadeOnError: options.cascadeOnError,

@@ -1,8 +1,9 @@
 import { mkdirSync, writeFileSync, readFileSync, rmSync, appendFileSync, existsSync } from 'fs';
-import { join } from 'path';
+import { join, dirname } from 'path';
 import os from 'os';
 import { randomUUID } from 'crypto';
 import chalk from 'chalk';
+import { spawn } from 'child_process';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const adapterTypeColors = {
     swarm: chalk.cyan,
@@ -184,6 +185,34 @@ export class Executor {
                     resultMap.set(stepIdx, err);
                     return;
                 }
+                // ── Two-stage review gate ────────────────────────────────────────
+                // Skip review if step already has a passed review, or if reviewers are disabled globally
+                if (!resolvedStep.review && this.options.enableReview !== false) {
+                    if (this.options.verbose) {
+                        process.stderr.write(`[review] two-stage review: ${resolvedStep.adapterId}:${resolvedStep.command}\n`);
+                    }
+                    const reviewResult = await this.runTwoStageReview(resolvedStep, fullCtx);
+                    resolvedStep.review = reviewResult;
+                    const specFailed = !reviewResult.spec.passed;
+                    const codeFailed = !reviewResult.code.passed;
+                    if (specFailed || codeFailed) {
+                        const allIssues = [
+                            ...(specFailed ? reviewResult.spec.issues.map(i => `SPEC: ${i}`) : []),
+                            ...(codeFailed ? reviewResult.code.issues.map(i => `CODE: ${i}`) : []),
+                        ];
+                        const reviewErr = {
+                            success: false, output: '', logs: '', artifacts: [],
+                            error: `Review failed: ${allIssues.join('; ')}`,
+                            code: 'REVIEW_FAILED', fatal: false,
+                        };
+                        results[stepIdx] = reviewErr;
+                        resultMap.set(stepIdx, reviewErr);
+                        return;
+                    }
+                    if (this.options.verbose) {
+                        process.stderr.write(`[review] ✓ spec + code both passed\n`);
+                    }
+                }
                 // Execute with optional timeout + retry logic
                 if (this.options.verbose) {
                     process.stderr.write(`[step] ${stepColor(resolvedStep.adapterType)(resolvedStep.adapterId)} ${resolvedStep.command} ${resolvedStep.args.join(' ')}\n`);
@@ -340,6 +369,11 @@ export class Executor {
         await this.recordAuditLog(runId, steps, results, causalityInfo, fullCtx.prompt);
         // Persist per-step stdout/stderr logs
         this.persistLogs(runId, results);
+        // ── Meta-cognitive self-audit ─────────────────────────────────────
+        // After execution, scan for "未审视自己" patterns and generate seeds
+        if (this.options.enableSelfAudit !== false) {
+            this.runSelfAudit(steps, results, fullCtx.prompt).catch(() => {});
+        }
         return results;
     }
     /** Build a dependency graph: for each step index, which other step indices it depends on */
@@ -499,6 +533,168 @@ export class Executor {
         }
         return results;
     }
+    /**
+     * Two-stage review pipeline:
+     *   Stage 1 — Spec reviewer: does the step spec (adapter+command+args) match the task goal?
+     *   Stage 2 — Code reviewer: is the implementation correct and safe?
+     * Each stage runs a fresh subagent. Both must pass before the step proceeds.
+     * Review result is stamped on the step: { spec: { passed, issues }, code: { passed, issues } }
+     */
+    async runTwoStageReview(step, ctx) {
+        const reviewers = [
+            {
+                name: 'spec',
+                prompt: `You are a spec compliance reviewer.
+Given this step:
+  adapterId: ${step.adapterId}
+  adapterType: ${step.adapterType}
+  command: ${step.command}
+  args: ${JSON.stringify(step.args)}
+  inputSlots: ${JSON.stringify(step.inputSlots)}
+  outputSlots: ${JSON.stringify(step.outputSlots)}
+
+Task goal: ${ctx.prompt || '(none)'}
+
+Critically evaluate:
+1. Does this adapter+command correctly address the task goal?
+2. Are the args correct and complete?
+3. Are the inputSlots/outputSlots wired correctly?
+4. Is there any spec-level issue (wrong tool, missing params, wrong data flow)?
+
+Respond ONLY with a JSON object:
+{"passed": true/false, "issues": ["issue1", "issue2", ...]}
+
+If you find NO issues, set passed=true with an empty issues array.
+Do not add explanations outside the JSON.`,
+            },
+            {
+                name: 'code',
+                prompt: `You are a code quality reviewer.
+Given this step:
+  adapterId: ${step.adapterId}
+  adapterType: ${step.adapterType}
+  command: ${step.command}
+  args: ${JSON.stringify(step.args)}
+  inputSlots: ${JSON.stringify(step.inputSlots)}
+  outputSlots: ${JSON.stringify(step.outputSlots)}
+
+Evaluate implementation quality:
+1. Are there potential runtime errors (null checks, type errors)?
+2. Are there security concerns (injection, credential exposure)?
+3. Is the error handling adequate?
+4. Are there race conditions or concurrency issues?
+
+Respond ONLY with a JSON object:
+{"passed": true/false, "issues": ["issue1", "issue2", ...]}
+
+If you find NO issues, set passed=true with an empty issues array.
+Do not add explanations outside the JSON.`,
+            },
+        ];
+
+        const result = { spec: { passed: false, issues: [] }, code: { passed: false, issues: [] } };
+
+        for (const reviewer of reviewers) {
+            const done = await new Promise((resolve) => {
+                const promptFile = join(os.tmpdir(), `review-${randomUUID()}.txt`);
+                writeFileSync(promptFile, reviewer.prompt, 'utf-8');
+                const child = spawn('claude.cmd', ['--print', '--dangerously-skip-permissions', `--system-prompt-file=${promptFile}`], {
+                    shell: true,
+                    stdio: ['pipe', 'pipe', 'pipe'],
+                    windowsHide: true,
+                });
+                let stdout = '';
+                let stderr = '';
+                child.stdout.on('data', (d) => { stdout += d.toString(); });
+                child.stderr.on('data', (d) => { stderr += d.toString(); });
+                child.on('close', () => {
+                    try { rmSync(promptFile); } catch {}
+                    let parsed = null;
+                    try {
+                        // Extract JSON from response (may have markdown code blocks)
+                        const cleaned = stdout.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
+                        parsed = JSON.parse(cleaned);
+                    } catch {
+                        // If JSON parse fails, treat as failure
+                        parsed = { passed: false, issues: [`reviewer parse error: ${stderr || stdout || 'no output'}`.slice(0, 200)] };
+                    }
+                    result[reviewer.name] = { passed: parsed.passed === true, issues: Array.isArray(parsed.issues) ? parsed.issues : [] };
+                    resolve();
+                });
+                child.on('error', () => {
+                    try { rmSync(promptFile); } catch {}
+                    result[reviewer.name] = { passed: false, issues: ['reviewer spawn error'] };
+                    resolve();
+                });
+                // 30s timeout per reviewer
+                setTimeout(() => {
+                    child.kill();
+                    result[reviewer.name] = { passed: false, issues: ['reviewer timeout (30s)'] };
+                    resolve();
+                }, 30000);
+            });
+        }
+
+        return result;
+    }
+
+    /**
+     * Meta-cognitive self-audit: scan execution results for "未审视自己" patterns.
+     * Detects:
+     *   - Steps that failed with REVIEW_FAILED (self-check skipped or failed)
+     *   - Steps that required retries (first attempt was wrong → didn't self-verify before acting)
+     *   - Steps with cascade-stop (downstream hit an error that upstream should have caught)
+     *   - Steps with no artifacts despite being non-trivial (assumed success without verifying output)
+     *
+     * For each detected pattern, append a seed to ~/.unified-agent-cli/self-audit-seeds.md
+     * so the next session can reflect on it.
+     */
+    async runSelfAudit(steps, results, prompt) {
+        const SEEDS_FILE = join(os.homedir(), '.unified-agent-cli', 'self-audit-seeds.md');
+        const selfReflectPatterns = [];
+        const now = new Date().toISOString().slice(0, 10);
+
+        for (let i = 0; i < results.length; i++) {
+            const r = results[i];
+            const s = steps[i];
+
+            // Pattern 1: review failed — step was not checked before acting
+            if (r.code === 'REVIEW_FAILED') {
+                selfReflectPatterns.push(`[${now}] REVIEW_FAILED | step ${i + 1}: ${s.adapterId}:${s.command} | reason: step proceeded without self-check | fix: before executing, ask "am I using the right adapter and args?"`);
+            }
+
+            // Pattern 2: required retry — first attempt was wrong
+            if ((r.attempts ?? 1) > 1 && r.success) {
+                selfReflectPatterns.push(`[${now}] RETRY_SUCCESS | step ${i + 1}: ${s.adapterId}:${s.command} | reason: needed ${r.attempts - 1} retries — first attempt was wrong | fix: before acting, ask "is my first attempt correct? what might be wrong?"`);
+            }
+
+            // Pattern 3: cascade-stop — upstream should have caught the error
+            if (r.code === 'CASCADE_STOP' && i > 0) {
+                selfReflectPatterns.push(`[${now}] CASCADE_STOP | step ${i + 1}: ${s.adapterId}:${s.command} | reason: downstream error indicates upstream didn't validate contract | fix: after each step, ask "what can go wrong downstream?"`);
+            }
+
+            // Pattern 4: no artifacts on non-trivial step (command ≠ empty, no output checked)
+            if (r.success && r.artifacts.length === 0 && s.command !== '' && s.outputSlots.length > 0 && !r.output) {
+                selfReflectPatterns.push(`[${now}] NO_OUTPUT_VERIFY | step ${i + 1}: ${s.adapterId}:${s.command} | reason: produced no artifacts despite declared outputSlots | fix: after execution, ask "did I get the expected output?"`);
+            }
+        }
+
+        if (selfReflectPatterns.length === 0) return;
+
+        // Append to seeds file
+        mkdirSync(dirname(SEEDS_FILE), { recursive: true });
+        const header = `\n## Self-Audit Seeds (${now})\n`;
+        const existing = existsSync(SEEDS_FILE) ? readFileSync(SEEDS_FILE, 'utf-8') : '';
+        const entry = header + selfReflectPatterns.map(p => `- ${p}`).join('\n') + '\n';
+        appendFileSync(SEEDS_FILE, entry, 'utf-8');
+
+        if (this.options.verbose) {
+            for (const p of selfReflectPatterns) {
+                process.stderr.write(`[self-audit] ${p}\n`);
+            }
+        }
+    }
+
     async recordAuditLog(runId, steps, results, causalityInfo, prompt) {
         try {
             const dir = join(os.homedir(), '.unified-agent-cli');
@@ -535,6 +731,7 @@ export class Executor {
                     cached: result?.cached ?? false,
                     fatal: result?.fatal ?? false,
                     prompt: prompt ?? '',
+                    review: step.review ?? null,
                 };
                 appendFileSync(logPath, JSON.stringify(entry) + '\n', 'utf-8');
             }
