@@ -156,15 +156,18 @@ function detectGitCommit(sessionId) {
 }
 
 // Detect repeated Bash errors in transcript (returns error pattern if repeated)
+// Only count errors from NEW transcript lines since last call to avoid false positives
 function detectErrorRepeat(sessionId) {
   const path = `C:/Users/adm/.claude/projects/D--OpenClaw-workspace/${sessionId}.jsonl`;
   if (!existsSync(path)) return null;
   const p = readErrorPatterns();
-  const recent = p.sessionId !== sessionId ? [] : p.errors;
+  const lastSeen = p.sessionId !== sessionId ? 0 : (p.lastSeen || 0);
   try {
     const lines = readFileSync(path, 'utf-8').split('\n').filter(Boolean);
+    // Only scan new lines since last check
+    const newLines = lines.slice(lastSeen);
     const newErrors = [];
-    for (const line of lines.slice(-100)) {
+    for (const line of newLines) {
       try {
         const entry = JSON.parse(line);
         const content = entry.message?.content;
@@ -179,26 +182,31 @@ function detectErrorRepeat(sessionId) {
         }
       } catch {}
     }
-    const allErrs = [...recent, ...newErrors];
+    const prevErrors = p.sessionId === sessionId ? p.errors : [];
+    const allErrs = [...prevErrors, ...newErrors];
     const freq = {};
     for (const e of allErrs) { if (e) freq[e] = (freq[e] || 0) + 1; }
     const repeated = Object.entries(freq).find(([, c]) => c >= ERROR_REPEAT_THRESHOLD);
-    writeErrorPatterns({ errors: allErrs.slice(-30), sessionId });
+    // Persist: errors from this scan + new errors, track line count
+    writeErrorPatterns({ errors: [...prevErrors, ...newErrors].slice(-30), sessionId, lastSeen: lines.length });
     if (repeated) return { pattern: repeated[0], count: repeated[1] };
   } catch {}
   return null;
 }
 
 // Detect Edit+Bash same-target debug loop (same file path cycled > N times)
+// Only count cycles from NEW lines since last call
 function detectDebugLoop(sessionId) {
   const path = `C:/Users/adm/.claude/projects/D--OpenClaw-workspace/${sessionId}.jsonl`;
   if (!existsSync(path)) return null;
   const p = readDebugLoop();
-  const recent = p.sessionId !== sessionId ? [] : p.cycles;
+  const lastSeen = p.sessionId !== sessionId ? 0 : (p.lastSeen || 0);
   try {
     const lines = readFileSync(path, 'utf-8').split('\n').filter(Boolean);
+    // Only scan new lines since last check
+    const newLines = lines.slice(lastSeen);
     const edits = [];
-    for (const line of lines.slice(-100)) {
+    for (const line of newLines) {
       try {
         const entry = JSON.parse(line);
         const content = entry.message?.content;
@@ -223,10 +231,12 @@ function detectDebugLoop(sessionId) {
         cycles.push(edits[i].file);
       }
     }
+    const prevCycles = p.sessionId === sessionId ? p.cycles : [];
+    const allCycles = [...prevCycles, ...cycles];
     const freq = {};
-    for (const f of cycles) { freq[f] = (freq[f] || 0) + 1; }
+    for (const f of allCycles) { freq[f] = (freq[f] || 0) + 1; }
     const repeated = Object.entries(freq).find(([, c]) => c >= DEBUG_LOOP_THRESHOLD);
-    writeDebugLoop({ cycles: [...recent, ...cycles].slice(-20), sessionId });
+    writeDebugLoop({ cycles: allCycles.slice(-20), sessionId, lastSeen: lines.length });
     if (repeated) return { file: repeated[0], count: repeated[1] };
   } catch {}
   return null;
