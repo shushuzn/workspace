@@ -239,6 +239,34 @@ export class Planner {
             issues.push(`RUSH_TO_ACTION: prompt has action language but no self-question phrases → may not have asked "is this the right problem?"`);
         }
 
+        // Dynamic self-question: read last self-audit seed to generate context-aware question
+        const SEEDS_FILE = join(homedir(), '.unified-agent-cli', 'self-audit-seeds.md');
+        if (existsSync(SEEDS_FILE)) {
+            try {
+                const content = readFileSync(SEEDS_FILE, 'utf-8');
+                const lines = content.split('\n').filter(l => l.trim() && !l.startsWith('#'));
+                if (lines.length > 0) {
+                    const lastSeed = lines[lines.length - 1].replace(/^-\s*/, '').trim();
+                    const seedType = lastSeed.includes('RETRY_SUCCESS') ? 'RETRY_SUCCESS'
+                        : lastSeed.includes('RUSH_TO_ACTION') ? 'RUSH_TO_ACTION'
+                        : lastSeed.includes('REVIEW_FAILED') ? 'REVIEW_FAILED'
+                        : lastSeed.includes('CASCADE_STOP') ? 'CASCADE_STOP'
+                        : lastSeed.includes('NO_OUTPUT_VERIFY') ? 'NO_OUTPUT_VERIFY'
+                        : null;
+                    const dynamicQuestions = {
+                        'RUSH_TO_ACTION': '"我要解决的是正确的问题吗？有没有更简单的方案？"',
+                        'RETRY_SUCCESS': '"我的第一次尝试是否正确？有什么可能会出错？"',
+                        'REVIEW_FAILED': '"我使用的 adapter 和 args 是否正确？outputSlots 正确吗？"',
+                        'CASCADE_STOP': '"上游是否验证了与下游的契约？有什么可能会破坏？"',
+                        'NO_OUTPUT_VERIFY': '"我是否获得了预期的输出？outputSlots 正确吗？"',
+                    };
+                    if (seedType && !hasSelfReflect) {
+                        issues.push(`DYNAMIC_SELF_QUESTION [from last seed]: ${dynamicQuestions[seedType]}`);
+                    }
+                }
+            } catch {}
+        }
+
         return { issues, blocked: hasSelfReflect };
     }
 
