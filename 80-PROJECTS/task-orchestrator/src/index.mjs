@@ -1475,6 +1475,7 @@ setInterval(refresh, 1000);
             verbose: options.verbose,
             explain: options.explain,
             cascadeOnError: options.cascadeOnError,
+            outputJson: options.outputFormat === 'json',
             ...Object.fromEntries(Object.entries(envOpts).filter(([, v]) => v !== undefined)),
         };
         if (options.jsonLines) {

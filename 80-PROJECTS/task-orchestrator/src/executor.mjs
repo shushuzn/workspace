@@ -385,6 +385,12 @@ export class Executor {
         if (this.options.enableSelfAudit !== false) {
             this.runSelfAudit(steps, results, fullCtx.prompt).catch(e => { console.error('[self-audit] error:', e.message); });
         }
+        // JSON output export
+        if (this.options.outputJson) {
+            const outPath = join(fullCtx.workingDir || process.cwd(), `run-${runId}.json`);
+            writeFileSync(outPath, JSON.stringify({ runId, steps: results }, null, 2), 'utf-8');
+            console.log(`[executor] JSON output written to ${outPath}`);
+        }
         return results;
     }
     /** Build a dependency graph: for each step index, which other step indices it depends on */
