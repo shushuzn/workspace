@@ -516,3 +516,15 @@
 **Observation**: Hook 系统（hook-active-learn、hook-auto-seed）在 Write/Edit/10calls 时触发，写 trigger 文件、更新计数器——但这些都是机械的数据记录，没有任何模式提取或认知抽象发生。真正的"学习"发生在 agent 读取这些数据之后。
 **Rule**: Hook = 事件检测 + 状态记录，无认知；Agent 读取分析 = 主动学习。两者不是同一件事。
 **Fix**: N/A — 这是认知澄清，不是 bug。OMC 的 auto-insight 正确描述应为"Hook 检测有意义工作并通知 agent 去分析"，而非"Hook 在学习"。
+
+### 41. Self-learning triggered but zero seeds generated [auto-generated]
+**Observation**: Session ended with "开始自学习" yet produced 0 seeds. The self-learning system activated at session end but failed to generate any seed despite 200 events and 54 tool calls indicating active work occurred.
+**Rule**: Track self-learning seed generation rate per session; self-learning trigger must produce seeds when session was active.
+**Fix**: N/A
+
+### 42. Bash dominates tool usage (83%) [auto-generated]
+**Observation**: 45 Bash calls out of 54 total tool calls (83%). This heavy Bash usage suggests mechanical operations dominated, potentially at the expense of higher-value seed generation or creative work.
+**Rule**: Monitor Bash-to-other-tool ratio; sessions with >80% Bash should prompt review of whether work was appropriately paced.
+**Fix**: N/A
+
+

@@ -86,27 +86,33 @@ function markInsightExecuted(desc) {
   }
 }
 
-function doneAction(id) {
+function doneAction(id, expected, actual) {
   const items = readPending();
   const item = items.find(i => i.id === id);
   if (!item) { log(`not found: ${id}`); return; }
   markInsightExecuted(item.desc);
-  verifyAction(id, 'executed');
+  verifyAction(id, 'executed', expected, actual);
   writePending(items.filter(i => i.id !== id));
   log(`completed: ${id}`);
 }
 
-function verifyAction(id, result) {
-  // Write verification record
-  const record = {
-    id,
-    result: result || 'executed',
-    verifiedAt: new Date().toISOString(),
-  };
+function verifyAction(id, result, expected, actual) {
+  // Write verification record with expected vs actual
   const existing = existsSync(VERIFY_FILE) ? readFileSync(VERIFY_FILE, 'utf-8') : '';
-  const entry = `## ${id}\n\n- **Result**: ${result || 'executed'}\n- **Verified**: ${record.verifiedAt}\n\n`;
+  const judgment = (expected && actual)
+    ? '✅ 有效 / ❌ 无效（人工判定）'
+    : '⚠️ 未验证';
+  const entry = `## ${id}
+
+- **Result**: ${result || 'executed'}
+- **判定**: ${judgment}
+- **预期效果**: ${expected || '未记录'}
+- **实际效果**: ${actual || '未记录'}
+- **Verified**: ${new Date().toISOString()}
+
+`;
   writeFileSync(VERIFY_FILE, existing + entry, 'utf-8');
-  log(`verified: ${id}`);
+  log(`verified: ${id} → ${judgment}`);
 }
 
 function listVerified() {
@@ -133,21 +139,29 @@ if (args.includes('--add')) {
   const idx = args.indexOf('--done') + 1;
   if (idx) {
     const idArg = args[idx];
+    const expIdx = args.indexOf('--expected') + 1;
+    const actIdx = args.indexOf('--actual') + 1;
+    const expected = expIdx && args[expIdx] ? args[expIdx] : '';
+    const actual = actIdx && args[actIdx] ? args[actIdx] : '';
     if (idArg === 'all') {
       const items = readPending();
       for (const item of items) verifyAction(item.id, 'executed');
       writePending([]);
       log('all actions verified and cleared');
     } else {
-      doneAction(idArg);
+      doneAction(idArg, expected, actual);
     }
   }
 } else if (args.includes('--verify')) {
   const idx = args.indexOf('--verify') + 1;
-  const result = args[idx + 1] && !args[idx + 1].startsWith('--') ? args[idx + 1] : 'executed';
   const idArg = args[idx];
+  const expIdx = args.indexOf('--expected') + 1;
+  const actIdx = args.indexOf('--actual') + 1;
+  const expected = expIdx && args[expIdx] ? args[expIdx] : '';
+  const actual = actIdx && args[actIdx] ? args[actIdx] : '';
+  const result = args[idx + 1] && !args[idx + 1].startsWith('--') ? args[idx + 1] : 'executed';
   if (idArg && !idArg.startsWith('--')) {
-    verifyAction(idArg, result);
+    verifyAction(idArg, result, expected, actual);
   } else {
     listVerified();
   }

@@ -31,34 +31,66 @@ function markTrajectoryProcessed(trajPath, trajMtime) {
   saveManifest(m);
 }
 
+function isQualityInsight(rawInsights, title) {
+  // Quality gates — reject if any are true
+  if (rawInsights.includes(`**Fix**:** N/A`) || rawInsights.includes('**Fix**: N/A')) return false;
+  if (rawInsights.includes('[auto-generated]') && !rawInsights.includes('Observation')) return false;
+  // Reject if Rule contains only tracking language without pattern
+  if (rawInsights.match(/\*\*Rule\*\*:\s*Track/i)) return false;
+  // Reject if Fix is vague/impossible
+  const fixLines = rawInsights.match(/\*\*Fix\*\*:\s*(.+)/g) || [];
+  for (const fl of fixLines) {
+    if (fl.includes('N/A') || fl.includes('写完后追加') || fl.includes('生成一条')) return false;
+  }
+  return true;
+}
+
 function extractPendingActionsViaAgent(rawInsights) {
   // Direct parse: extract **Fix** lines from raw LLM output
   const lines = rawInsights.split('\n');
   const actions = [];
   let currentFix = null;
   let currentTitle = '';
+  let currentObs = '';
+
+  // Collect full insight block for quality check
+  let insightBlock = '';
+  let titleForBlock = '';
 
   for (const line of lines) {
     const titleMatch = line.match(/^#{1,3}\s+\d+\.\s+\[(.+?)\]/);
-    if (titleMatch) currentTitle = titleMatch[1];
+    if (titleMatch) { currentTitle = titleMatch[1]; titleForBlock = line; insightBlock = ''; }
+    if (line.includes('**Observation**')) currentObs = line;
     if (line.includes('**Fix**:**') || line.includes('**Fix**:**')) {
       const fixMatch = line.match(/\*\*Fix\*\*:\s*(.+)/);
       if (fixMatch) currentFix = fixMatch[1].trim();
     } else if (currentFix && line.trim() === '' && currentTitle) {
       // End of this insight block
       if (currentFix && currentFix !== 'N/A' && !currentFix.includes('N/A')) {
-        actions.push({ title: currentTitle, fix: currentFix });
+        // Quality gate
+        const blockForCheck = insightBlock + ' ' + titleForBlock + ' ' + currentObs;
+        if (isQualityInsight(blockForCheck, currentTitle)) {
+          actions.push({ title: currentTitle, fix: currentFix });
+        } else {
+          log(`filtered low-quality: ${currentTitle.slice(0, 50)}`);
+        }
       }
       currentFix = null;
       currentTitle = '';
+      currentObs = '';
+      insightBlock = '';
     } else if (currentFix && line.match(/^\*\*/)) {
       // Continuation line
       currentFix += ' ' + line.replace(/\*\*/g, '').trim();
     }
+    insightBlock += ' ' + line;
   }
   // Last insight if no trailing newline
   if (currentFix && currentFix !== 'N/A' && currentTitle) {
-    actions.push({ title: currentTitle, fix: currentFix });
+    const blockForCheck = insightBlock + ' ' + titleForBlock;
+    if (isQualityInsight(blockForCheck, currentTitle)) {
+      actions.push({ title: currentTitle, fix: currentFix });
+    }
   }
 
   if (actions.length === 0) { return []; }
