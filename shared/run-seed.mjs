@@ -145,6 +145,19 @@ if (!firstStep.startsWith('python ') && !firstStep.startsWith('node ') && !first
     }
   }
 }
+const TOOL_PREFIXES = ['Edit ', 'Read ', 'Write ', 'Grep ', 'Glob ', 'Bash ', 'Search ', 'List ', 'Delete ', 'Create '];
+const isToolCommand = TOOL_PREFIXES.some(p => firstStep.startsWith(p));
+
+if (isToolCommand) {
+  // Tool-name step requires Claude Code to execute — output as next-session instruction
+  console.log(`\n[TOOL STEP] Seed requires Claude Code to execute:`);
+  console.log(`  ${firstStep}`);
+  console.log(`\n  → Execute this step manually, then run:`);
+  console.log(`    node ${join(__DIR, 'run-seed.mjs')} --skip ${top.lineIdx + 1}`);
+  console.log(`  to mark shipped and continue.\n`);
+  process.exit(0);
+}
+
 console.log(`\n[ACTION] ${dryRun ? 'Would execute step ' + stepNum + ': ' : 'Executing step ' + stepNum + ': '}${firstStep}`);
 
 if (dryRun) {
