@@ -4,6 +4,7 @@ import { MultiAgentHubAdapter } from './adapters/multi-agent-hub.mjs';
 import { ShellAdapter } from './adapters/shell.mjs';
 import { WikipediaLoaderAdapter } from './adapters/wikipedia-loader.mjs';
 import { loadRegistry } from './adapters/registry-loader.mjs';
+import { getBestAdapter } from '../bin/exec-history.mjs';
 export class Registry {
     adapters = new Map();
     registrations = [];
@@ -187,16 +188,24 @@ export class Registry {
     list() {
         return Array.from(this.adapters.values());
     }
-    /** Find all adapters that can handle this step, available ones first */
+    /** Find all adapters that can handle this step, weighted by historical success rate */
     async findAdapters(step) {
         const candidates = Array.from(this.adapters.values()).filter(a => a.canHandle(step));
+        const taskType = step.taskType || step.command?.split(' ')[0] || 'default';
+        const histBest = getBestAdapter(taskType);
         // Check availability in parallel, available adapters sort first
+        // Tie-break by historical success rate if available
         const results = await Promise.all(candidates.map(async (a) => ({ adapter: a, available: await a.checkAvailable() })));
         results.sort((a, b) => {
-            if (a.available && !b.available)
-                return -1;
-            if (!a.available && b.available)
-                return 1;
+            if (a.available && !b.available) return -1;
+            if (!a.available && b.available) return 1;
+            // Tie-break: prefer historically successful adapter
+            if (histBest) {
+                const aId = a.adapter.id;
+                const bId = b.adapter.id;
+                if (aId === histBest.adapterId && bId !== histBest.adapterId) return -1;
+                if (bId === histBest.adapterId && aId !== histBest.adapterId) return 1;
+            }
             return 0;
         });
         return results.map(r => r.adapter);

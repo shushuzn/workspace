@@ -17,7 +17,17 @@
         ]
       }
     ],
-    "PreToolUse": [],
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node D:/OpenClaw/workspace/.omc/scripts/hook-pretool-brainstorm-verify.mjs",
+            "timeout": 2000
+          }
+        ]
+      }
+    ],
     "SessionStart": [
       {
         "hooks": [
