@@ -4,6 +4,8 @@
  * Scans ideas.md unshipped seeds, validates approach executability.
  * Usage:
  *   node scripts/analyze-seed-quality.mjs [--auto-kill] [--json]
+ *   node scripts/analyze-seed-quality.mjs --days N      # filter to last N days
+ *   node scripts/analyze-seed-quality.mjs --source X    # filter by source tag
  */
 import { readFileSync, writeFileSync } from 'fs';
 import { join, dirname } from 'path';
@@ -16,6 +18,10 @@ const autoKill = process.argv.includes('--auto-kill');
 const jsonMode = process.argv.includes('--json');
 const cleanDaysIdx = process.argv.indexOf('--clean-shipped-days');
 const cleanDays = cleanDaysIdx !== -1 ? parseInt(process.argv[cleanDaysIdx + 1], 10) : 0;
+const daysIdx = process.argv.indexOf('--days');
+const daysLimit = daysIdx !== -1 ? parseInt(process.argv[daysIdx + 1], 10) : 0;
+const sourceIdx = process.argv.indexOf('--source');
+const sourceFilter = sourceIdx !== -1 ? process.argv[sourceIdx + 1] : null;
 
 const EXECUTABLE_PREFIXES = [
   'python ', 'node ', 'npx ', 'bun ', 'bash ', 'sh ',
@@ -43,9 +49,20 @@ while (i < lines.length) {
   }
   const bodyText = bodyLines.join('\n').replace(/^\s{2}/gm, '');
 
-  const shippedMatch = line.match(/\| shipped:(\d{8})/) || bodyText.match(/\| shipped:(\d{8})/);
-  const killedMatch = line.match(/killed:(\d{8})/) || bodyText.match(/killed:(\d{8})/);
+  const shippedMatch = line.match(/shipped:(\d{4}-\d{2}-\d{2}|\d{8})/) || bodyText.match(/shipped:(\d{4}-\d{2}-\d{2}|\d{8})/);
+  const killedMatch = line.match(/killed:(\d{4}-\d{2}-\d{2}|\d{8})/) || bodyText.match(/killed:(\d{4}-\d{2}-\d{2}|\d{8})/);
   if (shippedMatch || killedMatch) { i = j; continue; }
+
+  // Source filter
+  if (sourceFilter && !line.includes(`[${sourceFilter}]`)) { i = j; continue; }
+
+  // Date filter (YYYYMMDD or YYYY-MM-DD)
+  const dateStr = headerMatch[1];
+  if (daysLimit > 0) {
+    const dateInt = parseInt(dateStr.replace(/-/g, ''), 10);
+    const cutoff = parseInt(new Date(Date.now() - daysLimit * 24 * 60 * 60 * 1000).toISOString().slice(0, 10).replace(/-/g, ''), 10);
+    if (dateInt < cutoff) { i = j; continue; }
+  }
 
   // Extract approach — from body or fallback to header line
   const approachMatch = bodyText.match(/\|?\s*approach:\s*(.+?)(?:\s*\| shipped:|\s*\| killed:|$)/s)
