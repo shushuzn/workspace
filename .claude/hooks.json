@@ -6,12 +6,12 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node D:/OpenClaw/workspace/.omc/scripts/hook-auto-seed.mjs --check",
+            "command": "node D:/OpenClaw/workspace/.omc/scripts/skill-eval.mjs auto-seed && node D:/OpenClaw/workspace/.omc/scripts/hook-auto-seed.mjs --check",
             "timeout": 1000
           },
           {
             "type": "command",
-            "command": "node D:/OpenClaw/workspace/.omc/scripts/hook-active-learn.mjs",
+            "command": "node D:/OpenClaw/workspace/.omc/scripts/skill-eval.mjs active-learn && node D:/OpenClaw/workspace/.omc/scripts/hook-active-learn.mjs",
             "timeout": 1000
           }
         ]
