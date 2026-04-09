@@ -304,8 +304,19 @@ export class Executor {
                         await new Promise(r => setTimeout(r, delay));
                     }
                 }
-                if (!result)
-                    throw new Error('Unexpected: result is null after retry loop');
+                if (!result) {
+                    result = {
+                        success: false,
+                        output: '',
+                        logs: '',
+                        artifacts: [],
+                        error: 'Unexpected: result is null after retry loop',
+                        code: 'NULL_RESULT',
+                        fatal: true,
+                    };
+                    if (this.options.cascadeOnError)
+                        cascadeStop = true;
+                }
                 result.attempts = attempt + (result.success ? 1 : 0);
                 result.durationMs = Date.now() - (stepStartTimes.get(stepIdx) ?? Date.now());
                 results[stepIdx] = result;
@@ -372,7 +383,7 @@ export class Executor {
         // ── Meta-cognitive self-audit ─────────────────────────────────────
         // After execution, scan for "未审视自己" patterns and generate seeds
         if (this.options.enableSelfAudit !== false) {
-            this.runSelfAudit(steps, results, fullCtx.prompt).catch(() => {});
+            this.runSelfAudit(steps, results, fullCtx.prompt).catch(e => { console.error('[self-audit] error:', e.message); });
         }
         return results;
     }
@@ -676,6 +687,11 @@ Do not add explanations outside the JSON.`,
             // Pattern 4: no artifacts on non-trivial step (command ≠ empty, no output checked)
             if (r.success && r.artifacts.length === 0 && s.command !== '' && s.outputSlots.length > 0 && !r.output) {
                 selfReflectPatterns.push(`[${now}] NO_OUTPUT_VERIFY | step ${i + 1}: ${s.adapterId}:${s.command} | reason: produced no artifacts despite declared outputSlots | fix: after execution, ask "did I get the expected output?"`);
+            }
+
+            // Pattern 5: null result after retry loop — adapter returned nothing
+            if (r.code === 'NULL_RESULT') {
+                selfReflectPatterns.push(`[${now}] NULL_RESULT | step ${i + 1}: ${s.adapterId}:${s.command} | reason: adapter returned null after all retries | fix: before acting, ask "is the adapter available and is the args correct?"`);
             }
         }
 

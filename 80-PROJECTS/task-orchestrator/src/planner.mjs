@@ -252,6 +252,7 @@ export class Planner {
                         : lastSeed.includes('REVIEW_FAILED') ? 'REVIEW_FAILED'
                         : lastSeed.includes('CASCADE_STOP') ? 'CASCADE_STOP'
                         : lastSeed.includes('NO_OUTPUT_VERIFY') ? 'NO_OUTPUT_VERIFY'
+                        : lastSeed.includes('NULL_RESULT') ? 'NULL_RESULT'
                         : null;
                     const dynamicQuestions = {
                         'RUSH_TO_ACTION': '"我要解决的是正确的问题吗？有没有更简单的方案？"',
@@ -259,6 +260,7 @@ export class Planner {
                         'REVIEW_FAILED': '"我使用的 adapter 和 args 是否正确？outputSlots 正确吗？"',
                         'CASCADE_STOP': '"上游是否验证了与下游的契约？有什么可能会破坏？"',
                         'NO_OUTPUT_VERIFY': '"我是否获得了预期的输出？outputSlots 正确吗？"',
+                        'NULL_RESULT': '"adapter 是否可用？参数是否正确？"',
                     };
                     if (seedType && !hasSelfReflect) {
                         issues.push(`DYNAMIC_SELF_QUESTION [from last seed]: ${dynamicQuestions[seedType]}`);
