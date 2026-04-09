@@ -123,6 +123,8 @@ ${trigger.prompt || trigger.work?.tool}
 写完后追加到 .omc/state/session-insights.md`;
       parts.push(prompt);
     } catch { /* invalid JSON, ignore */ }
+    // Consume the trigger so it doesn't re-fire next session
+    try { writeFileSync(ACTIVE_LEARN_FILE, '', 'utf-8'); } catch {}
   }
 
   // 1. MCP drain (highest priority — patterns to store)
