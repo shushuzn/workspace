@@ -886,6 +886,132 @@ function step8_healthCheck() {
 }
 
 
+// ── Step 9: Meta-cognitive Self-Audit ──────────────────────────────────────────
+function step9_selfAudit() {
+  const IDEA_FILE = resolve(__dirname, '../innovation/ideas.md');
+  const EFF_FILE = resolve(STATE_DIR, 'insight-effectiveness.json');
+  const FREQ_FILE = resolve(STATE_DIR, 'error-frequency.json');
+  const RECOMMEND_FILE = resolve(STATE_DIR, 'meta-cognitive-recommend.md');
+  const today = new Date().toISOString().split('T')[0];
+
+  const recommendations = [];
+
+  // 1. Ineffective insights: recurrenceAfter > 0 means past fix didn't work
+  if (existsSync(EFF_FILE)) {
+    try {
+      const eff = JSON.parse(readFileSync(EFF_FILE, 'utf-8'));
+      for (const [cls, data] of Object.entries(eff.classes || {})) {
+        const insights = data.insights || [];
+        for (const insight of insights) {
+          const rec = insight.recurrenceAfter || [];
+          if (rec.length > 0) {
+            recommendations.push({
+              type: 'ineffective-insight',
+              severity: rec.length >= 2 ? 'high' : 'medium',
+              cls,
+              title: insight.title,
+              recurrence: rec.length,
+              suggestion: `insight "${insight.title.slice(0, 40)}" for ${cls} recurred ${rec.length}× after execution — current fix is insufficient`,
+            });
+          }
+        }
+      }
+    } catch {}
+  }
+
+  // 2. Rising error class trends: 3+ occurrences with no effective insight
+  if (existsSync(FREQ_FILE)) {
+    try {
+      const freq = JSON.parse(readFileSync(FREQ_FILE, 'utf-8'));
+      for (const [cls, data] of Object.entries(freq.classes || {})) {
+        if (data.totalCount >= 3) {
+          let hasEffectiveInsight = false;
+          if (existsSync(EFF_FILE)) {
+            try {
+              const eff = JSON.parse(readFileSync(EFF_FILE, 'utf-8'));
+              const insights = eff.classes?.[cls]?.insights || [];
+              hasEffectiveInsight = insights.some(i => !(i.recurrenceAfter && i.recurrenceAfter.length > 0));
+            } catch {}
+          }
+          if (!hasEffectiveInsight && data.totalCount >= 3) {
+            recommendations.push({
+              type: 'rising-error',
+              severity: data.totalCount >= 5 ? 'high' : 'medium',
+              cls,
+              count: data.totalCount,
+              suggestion: `error class "${cls}" has ${data.totalCount} occurrences but no effective insight — needs root cause analysis`,
+            });
+          }
+        }
+      }
+    } catch {}
+  }
+
+  if (recommendations.length === 0) {
+    // No issues found — still generate a proactive seed
+    recommendations.push({
+      type: 'proactive',
+      severity: 'low',
+      suggestion: 'system healthy — consider: 1) review oldest unexecuted insights, 2) prune stale patterns from agentdb',
+    });
+  }
+
+  // Write recommendation to file for next session injection
+  let recommendMd = `## Meta-Cognitive Self-Audit (Step 9)\n\n`;
+  recommendMd += `**Audited**: ${today}  \n`;
+  recommendMd += `**Issues found**: ${recommendations.filter(r => r.type !== 'proactive').length}  \n\n`;
+
+  const highSeverity = recommendations.filter(r => r.severity === 'high');
+  const mediumSeverity = recommendations.filter(r => r.severity === 'medium');
+  const lowSeverity = recommendations.filter(r => r.severity === 'low');
+
+  if (highSeverity.length > 0) {
+    recommendMd += `### 🔴 High Priority\n\n`;
+    for (const r of highSeverity) {
+      recommendMd += `- **${r.cls || 'system'}**: ${r.suggestion}\n`;
+    }
+    recommendMd += '\n';
+  }
+  if (mediumSeverity.length > 0) {
+    recommendMd += `### 🟡 Medium Priority\n\n`;
+    for (const r of mediumSeverity) {
+      recommendMd += `- **${r.cls || 'system'}**: ${r.suggestion}\n`;
+    }
+    recommendMd += '\n';
+  }
+  if (lowSeverity.length > 0) {
+    recommendMd += `### 🟢 Proactive\n\n`;
+    for (const r of lowSeverity) {
+      recommendMd += `- ${r.suggestion}\n`;
+    }
+    recommendMd += '\n';
+  }
+
+  // Generate 1 minimal seed from highest priority issue
+  const topIssue = recommendations.find(r => r.type !== 'proactive') || recommendations[0];
+  if (topIssue && topIssue.type !== 'proactive') {
+    const seedAction = generateSeedAction(topIssue);
+    if (seedAction) {
+      recommendMd += `### Generated Seed (f:4)\n\n`;
+      recommendMd += `- [${today}] STAGE [AUTO:meta-audit] ${seedAction}\n`;
+    }
+  }
+
+  writeFileSync(RECOMMEND_FILE, recommendMd, 'utf-8');
+  log(`step9: self-audit → ${recommendations.length} findings, ${highSeverity.length} high`);
+}
+
+function generateSeedAction(issue) {
+  const { type, cls, title, suggestion } = issue;
+  if (type === 'ineffective-insight') {
+    return `[score:3×4=12] [f:4] 改进${cls} insight | benefit: 修复失效的fix，重新设计解决方案 | reason: 现有fix在${issue.recurrence}次recurrence后仍未生效 | approach: 分析recurrence原因→重新设计fix→测试验证`;
+  }
+  if (type === 'rising-error') {
+    return `[score:3×3=9] [f:3] ${cls}根因分析 | benefit: 找到反复出现的${cls}错误根源 | reason: ${issue.count}次出现说明系统性而非偶发性 | approach: 收集${cls}的所有错误日志→归纳模式→建立防御规则`;
+  }
+  return null;
+}
+
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   if (args.cleanup) { cleanup(args.cleanup); return; }
@@ -922,6 +1048,9 @@ async function main() {
 
   // Step 8: Hook system health check
   step8_healthCheck();
+
+  // Step 9: Meta-cognitive self-audit
+  step9_selfAudit();
 
   log(`=== drain complete ===`);
 }

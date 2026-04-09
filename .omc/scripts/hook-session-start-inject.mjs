@@ -27,6 +27,7 @@ const ACTIVE_LEARN_FILE = resolve(STATE_DIR, 'active-learn-trigger.json');
 const COUNTER_FILE = resolve(STATE_DIR, 'auto-seed-counter.json');
 const RECURRENCE_FLAG_FILE = resolve(STATE_DIR, 'insight-recurrence-flag.md');
 const FIX_HOOKS_FILE = resolve(STATE_DIR, 'auto-fix-hooks.md');
+const META_RECOMMEND_FILE = resolve(STATE_DIR, 'meta-cognitive-recommend.md');
 
 function log(...a) { console.error('[inject]', ...a); }
 
@@ -285,6 +286,15 @@ ${trigger.prompt || trigger.work?.tool}
     if (content) {
       parts.push(content);
       try { writeFileSync(FIX_HOOKS_FILE, '', 'utf-8'); } catch {} // consume after reading
+    }
+  }
+
+  // 8d. Meta-cognitive self-audit (Step 9 findings)
+  if (existsSync(META_RECOMMEND_FILE)) {
+    const content = readFileSync(META_RECOMMEND_FILE, 'utf-8').trim();
+    if (content) {
+      parts.push(content);
+      try { writeFileSync(META_RECOMMEND_FILE, '', 'utf-8'); } catch {} // consume after reading
     }
   }
 
