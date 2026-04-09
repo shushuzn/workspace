@@ -7,7 +7,7 @@ import { execSync } from 'child_process';
 
 let output;
 try {
-  output = execSync('node shared/check-deps-health.mjs', { cwd: '/d/OpenClaw/workspace', encoding: 'utf8', timeout: 15000 });
+  output = execSync('node "D:/OpenClaw/workspace/shared/check-deps-health.mjs"', { encoding: 'utf8', timeout: 15000 });
 } catch (e) {
   output = (e.stdout || '') + (e.stderr || '');
 }

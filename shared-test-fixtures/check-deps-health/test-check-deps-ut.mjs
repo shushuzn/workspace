@@ -37,12 +37,17 @@ const ok1 = results.length === 2;
 const ok2 = withNm.length === 1 && withNm[0].proj === 'proj-with-nm';
 const ok3 = withoutNm.length === 1 && withoutNm[0].proj === 'proj-without';
 
+// Test auto-fix flag detection
+const AUTO_FIX = process.argv.includes('--auto-fix');
+const ok4 = AUTO_FIX === false;
+
 console.log(`[UT] project_count: ${results.length} ${ok1 ? 'PASS' : 'FAIL'} (expect 2)`);
 console.log(`[UT] with_nm: ${ok2 ? 'PASS' : 'FAIL'} (expect 1)`);
 console.log(`[UT] without_nm: ${ok3 ? 'PASS' : 'FAIL'} (expect 1)`);
+console.log(`[UT] auto_fix_default_false: ${ok4 ? 'PASS' : 'FAIL'}`);
 
 try { rmSync(TMP, { recursive: true }); } catch {}
 
-const allPass = ok1 && ok2 && ok3;
+const allPass = ok1 && ok2 && ok3 && ok4;
 console.log(allPass ? '\n[UT ALL PASS]' : '\n[UT FAIL]');
 process.exit(allPass ? 0 : 1);
