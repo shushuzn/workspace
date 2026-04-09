@@ -22,6 +22,7 @@ const INSIGHTS_FILE = resolve(STATE_DIR, 'session-insights.md');
 const VERIFY_FILE = resolve(STATE_DIR, 'insight-verifications.md');
 const MID_FILE = resolve(STATE_DIR, 'mid-session-inject.md');
 const TRIGGER_FILE = resolve(STATE_DIR, 'auto-insight-trigger.json');
+const ACTIVE_LEARN_FILE = resolve(STATE_DIR, 'active-learn-trigger.json');
 const COUNTER_FILE = resolve(STATE_DIR, 'auto-seed-counter.json');
 
 function log(...a) { console.error('[inject]', ...a); }
@@ -97,6 +98,29 @@ ${trigger.toolStats?.topBash?.length ? `Top Bash 命令：\n${trigger.toolStats.
 - 写完后将 insight 追加到 .omc/state/session-insights.md
 - 如果 Fix 不是 N/A，同时追加到 .omc/state/pending-actions.md，格式："- [ ] title | action: Fix内容 | id: auto-[timestamp]"
 `;
+      parts.push(prompt);
+    } catch { /* invalid JSON, ignore */ }
+  }
+
+  // 0b. Active-learn trigger (PreToolUse hook detected meaningful work)
+  if (existsSync(ACTIVE_LEARN_FILE)) {
+    try {
+      const trigger = JSON.parse(readFileSync(ACTIVE_LEARN_FILE, 'utf-8'));
+      const prompt = `## ACTIVE LEARN TRIGGER (PreToolUse)
+
+检测到有意义的工作完成：${trigger.work?.tool} — ${(trigger.work?.input?.file_path || trigger.work?.input?.command || '').slice(0, 60)}
+
+请基于这个工作产出生成一条 insight：
+
+${trigger.prompt || trigger.work?.tool}
+
+格式：
+### N. [标题]
+**Observation**: [具体观察]
+**Rule**: [可复用模式]
+**Fix**: N/A
+
+写完后追加到 .omc/state/session-insights.md`;
       parts.push(prompt);
     } catch { /* invalid JSON, ignore */ }
   }

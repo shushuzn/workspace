@@ -26,6 +26,7 @@ const STATE_DIR = resolve(__dirname, '../state');
 const STATE_FILE = resolve(STATE_DIR, 'auto-seed-counter.json');
 const PATTERN_FILE = resolve(STATE_DIR, 'auto-seed-patterns.json');
 const TRIGGER_FILE = resolve(STATE_DIR, 'auto-insight-trigger.json');
+const ACTIVE_LEARN_FILE = resolve(STATE_DIR, 'active-learn-trigger.json');
 const INSIGHTS_FILE = resolve(STATE_DIR, 'session-insights.md');
 const IDEAS_FILE = resolve(__dirname, '../innovation/ideas.md');
 const NUDGE_FILE = resolve(STATE_DIR, 'session-nudge.md');
@@ -381,6 +382,7 @@ async function main() {
     writeState({ count: 0, fired: false, sessionId: currentSession });
     writePatterns({ cmds: [], sessionId: currentSession });
     if (existsSync(TRIGGER_FILE)) writeFileSync(TRIGGER_FILE, '', 'utf-8'); // clear stale trigger
+    if (existsSync(ACTIVE_LEARN_FILE)) writeFileSync(ACTIVE_LEARN_FILE, '', 'utf-8'); // clear active-learn
     console.log('counter + patterns reset');
     return;
   }
@@ -391,6 +393,7 @@ async function main() {
       writeState({ count: 0, fired: false, sessionId: currentSession });
       writePatterns({ cmds: [], sessionId: currentSession });
       if (existsSync(TRIGGER_FILE)) writeFileSync(TRIGGER_FILE, '', 'utf-8'); // clear stale trigger
+      if (existsSync(ACTIVE_LEARN_FILE)) writeFileSync(ACTIVE_LEARN_FILE, '', 'utf-8'); // clear active-learn
     }
     const cmd = args.cmd || '';
     if (!cmd) return;
@@ -420,6 +423,7 @@ async function main() {
       writeState({ count: 0, fired: false, sessionId: currentSession });
       writePatterns({ cmds: [], sessionId: currentSession });
       if (existsSync(TRIGGER_FILE)) writeFileSync(TRIGGER_FILE, '', 'utf-8'); // clear stale trigger
+      if (existsSync(ACTIVE_LEARN_FILE)) writeFileSync(ACTIVE_LEARN_FILE, '', 'utf-8'); // clear active-learn
     }
     const freshState = readState();
     const newCount = freshState.count + 1;
