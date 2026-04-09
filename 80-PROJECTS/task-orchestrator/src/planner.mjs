@@ -190,7 +190,9 @@ function registrationToRule(reg) {
 }
 export class Planner {
     rules;
+    registry;
     constructor(registry) {
+        this.registry = registry;
         const userRules = loadUserRules();
         const builtInRules = BUILT_IN_RULES.map(ruleDataToRule);
         const userRuleObjects = userRules.map(ruleDataToRule);
@@ -203,6 +205,26 @@ export class Planner {
         }
         // Order: built-in < user < dynamic
         this.rules = [...builtInRules, ...userRuleObjects, ...dynamicRules];
+        // Self-audit: validate rule graph consistency
+        const issues = this.validateRuleGraph();
+        if (issues.length > 0) {
+            console.warn('[planner] Rule graph issues detected:');
+            issues.forEach(i => console.warn('  -', i));
+        }
+    }
+    /**
+     * Validate that all rules reference registered adapterIds.
+     * Returns array of issue strings (empty = all valid).
+     */
+    validateRuleGraph() {
+        if (!this.registry) return [];
+        const issues = [];
+        for (const rule of this.rules) {
+            if (!this.registry.get(rule.adapterId)) {
+                issues.push(`Rule "${rule.keywords}": adapterId "${rule.adapterId}" not found in registry`);
+            }
+        }
+        return issues;
     }
     /**
      * Meta-cognitive pre-audit: before parsing, ask "am I solving the right problem?"
