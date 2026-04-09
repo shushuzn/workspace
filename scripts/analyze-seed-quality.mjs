@@ -19,8 +19,6 @@ const cleanDays = cleanDaysIdx !== -1 ? parseInt(process.argv[cleanDaysIdx + 1],
 
 const EXECUTABLE_PREFIXES = [
   'python ', 'node ', 'npx ', 'bun ', 'bash ', 'sh ',
-  'Edit ', 'Read ', 'Write ', 'Create ', 'Delete ',
-  'Grep ', 'Glob ', 'Bash ', 'Search ', 'List ', 'Sed ',
   'cd ', 'mkdir ', 'task ', '#', '/', '//',
   '读 ', '写 ', '创建 ', '删除 ', '搜索 ', '执行 ',
   '修改 ', '在 ', '调研 ', '设计 ', '规划 ', '分析 ', '运行 ', '编译 ', '打包 '
@@ -33,7 +31,7 @@ const results = [];
 let i = 0;
 while (i < lines.length) {
   const line = lines[i];
-  const headerMatch = line.match(/^- \[(\d{8})\] seed \[brainstorm\]/);
+  const headerMatch = line.match(/^- \[(\d{4}-\d{2}-\d{2}|\d{8})\] (?:STAGE|seed) \[brainstorm\]/);
   if (!headerMatch) { i++; continue; }
 
   // Collect body lines

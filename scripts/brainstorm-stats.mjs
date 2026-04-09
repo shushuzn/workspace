@@ -15,6 +15,8 @@ const META_PATH = join(__DIR, '..', '.omc', 'innovation', 'brainstorm-metacognit
 // Fixed path: was incorrectly reading knowledge/wikipedia/.omc/... which was the old location
 
 const recommendMode = process.argv.includes('--recommend');
+const daysIdx = process.argv.indexOf('--days');
+const daysLimit = daysIdx !== -1 ? parseInt(process.argv[daysIdx + 1], 10) : 0;
 
 const content = readFileSync(META_PATH, 'utf-8');
 const lines = content.trim().split('\n').filter(Boolean);
@@ -23,6 +25,14 @@ const records = lines.map(l => {
   try { return JSON.parse(l); } catch { return null; }
 }).filter(Boolean);
 
+// Filter by days if --days specified (e.g., --days 30 = last 30 days only)
+const cutoffDate = daysLimit > 0
+  ? new Date(Date.now() - daysLimit * 24 * 60 * 60 * 1000).toISOString().slice(0, 10).replace(/-/g, '')
+  : null;
+const filteredRecords = cutoffDate
+  ? records.filter(r => r.date >= cutoffDate)
+  : records;
+
 if (records.length === 0) {
   console.log('No metacognition data yet.');
   process.exit(0);
@@ -30,17 +40,18 @@ if (records.length === 0) {
 
 // ── Trend Table ────────────────────────────────────────────────────────────────
 console.log('\n=== Brainstorm Metacognition Stats ===\n');
+if (cutoffDate) console.log(`(last ${daysLimit} days, from ${cutoffDate})\n`);
 console.log('Batch Trend:');
 console.log('Date       | Seeds | AvgScore | SelfAss | TopIssues');
 console.log('-'.repeat(65));
-records.forEach(r => {
+filteredRecords.forEach(r => {
   const issues = Object.entries(r.gate_failures || {}).slice(0, 2).map(([k, v]) => `${k}:${v}`).join(',') || '-';
   console.log(`${r.date} | ${String(r.batch_seed_count).padStart(5)} | ${String(r.batch_avg_score).padStart(8)} | ${String(r.self_assessment).padStart(8)} | ${issues}`);
 });
 
 // ── Gate Failure Frequency ───────────────────────────────────────────────────
 const gateFreq = {};
-records.forEach(r => {
+filteredRecords.forEach(r => {
   Object.entries(r.gate_failures || {}).forEach(([gate, count]) => {
     gateFreq[gate] = (gateFreq[gate] || 0) + count;
   });
@@ -52,15 +63,15 @@ gateSorted.forEach(([gate, count]) => {
 });
 
 // ── Self-Assessment Rate ──────────────────────────────────────────────────────
-const passCount = records.filter(r => r.self_assessment === 'pass').length;
-console.log(`\nSelf-Assessment Pass Rate: ${passCount}/${records.length} (${Math.round(passCount / records.length * 100)}%)`);
+const passCount = filteredRecords.filter(r => r.self_assessment === 'pass').length;
+console.log(`\nSelf-Assessment Pass Rate: ${passCount}/${filteredRecords.length} (${Math.round(passCount / filteredRecords.length * 100)}%)`);
 
 // ── --recommend: Actionable Recommendations ────────────────────────────────────
 if (recommendMode) {
   console.log('\n=== Brainstorm Recommendations ===\n');
 
-  const recent5 = records.slice(-5);
-  const recent3 = records.slice(-3);
+  const recent5 = filteredRecords.slice(-5);
+  const recent3 = filteredRecords.slice(-3);
 
   // 1. Gate failure patterns
   const failingGates = new Set();
@@ -71,7 +82,7 @@ if (recommendMode) {
   // 2. Low-score angle detection
   const angleScoreSum = {};
   const angleCount = {};
-  records.forEach(r => {
+  filteredRecords.forEach(r => {
     (r.low_score_angles || []).forEach(a => {
       const score = parseFloat(r.batch_avg_score) || 0;
       angleScoreSum[a] = (angleScoreSum[a] || 0) + score;
@@ -85,7 +96,7 @@ if (recommendMode) {
   // 3. High-performing project detection
   const projectScoreSum = {};
   const projectCount = {};
-  records.forEach(r => {
+  filteredRecords.forEach(r => {
     (r.high_score_projects || []).forEach(p => {
       const score = parseFloat(r.batch_avg_score) || 0;
       if (score >= 12) {
