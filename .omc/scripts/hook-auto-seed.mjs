@@ -702,7 +702,7 @@ ${topBash ? `Top Bash:\n${topBash}` : ''}
 ### N. [标题]
 **Observation**: [具体观察]
 **Rule**: [规则]
-**Fix**: [必须是可直接运行的 shell 命令，如 `node --check` 或 `node .omc/scripts/fix-hook.mjs`；禁止写"修改文件"、"添加配置"等描述，必须是可执行的命令]
+**Fix**: [必须是可直接运行的 shell 命令，如 node --check 或 node .omc/scripts/fix-hook.mjs；禁止写"修改文件"、"添加配置"等描述，必须是可执行的命令]
 **Verification**: [如何客观验证效果]
 
 要求：
