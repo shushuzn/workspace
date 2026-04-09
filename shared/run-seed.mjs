@@ -222,6 +222,24 @@ if (isToolCommand) {
   process.exit(0);
 }
 
+// Gate4c: validate approach before executing (Windows bash compatibility check)
+if (firstStep.startsWith('node -')) {
+  console.error(`\n[Gate4c FAIL] "node -e/p/c" inline code not allowed on Windows Git Bash:`);
+  console.error(`  ${firstStep.slice(0, 80)}`);
+  // Skip this seed and pick the next one
+  console.error(`Skipping seed, picking next...`);
+  // Mark current as killed and pick next
+  const today = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+  const newLines = [...lines];
+  const lastBodyIdx = top.lineIdx + top.bodyLines.length;
+  const lastBodyLine = newLines[lastBodyIdx];
+  newLines[lastBodyIdx] = lastBodyLine.replace(/(\s*)$/, ` | killed:${today} Gate4c: node -e blocked`);
+  writeFileSync(IDEAS_PATH, newLines.join('\n'), 'utf-8');
+  console.log(`[KILLED] ${top.desc.slice(0, 60)}...`);
+  // Re-run to pick next seed
+  process.exit(2); // 2 = skip and continue
+}
+
 console.log(`\n[ACTION] ${dryRun ? 'Would execute step ' + stepNum + ': ' : 'Executing step ' + stepNum + ': '}${firstStep}`);
 
 if (dryRun) {

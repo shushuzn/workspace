@@ -4,7 +4,12 @@ import { readFileSync } from 'fs';
 
 const lines = readFileSync('.omc/innovation/brainstorm-metacognition.jsonl', 'utf8')
   .split('\n').filter(Boolean);
-const batches = lines.map(l => JSON.parse(l));
+const batches = [];
+for (const l of lines) {
+  if (!l.trim()) continue;
+  try { batches.push(JSON.parse(l)); }
+  catch (e) { console.warn('Skipping bad line:', e.message); }
+}
 const avg = batches.reduce((a, b) => a + b.batch_avg_score, 0) / batches.length;
 
 console.log('=== Brainstorm Metacognition ===');
