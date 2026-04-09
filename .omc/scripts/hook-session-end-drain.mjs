@@ -635,7 +635,89 @@ function step7_executePendingActions() {
   log(`step7: cleared pending-actions.md (${lines.length} actions fired)`);
 }
 
-// ── Main ──────────────────────────────────────────────────────────────────
+// ── Step 8: Hook system health check ──────────────────────────────────────────
+function step8_healthCheck() {
+  const STATE_DIR_S = STATE_DIR;
+  const COUNTER_FILE = resolve(STATE_DIR_S, 'auto-seed-counter.json');
+  const TRIGGER_FILE = resolve(STATE_DIR_S, 'auto-insight-trigger.json');
+  const ACTIVE_LEARN_FILE = resolve(STATE_DIR_S, 'active-learn-trigger.json');
+  const PATTERN_FILE = resolve(STATE_DIR_S, 'auto-seed-patterns.json');
+  const ERROR_FILE = resolve(STATE_DIR_S, 'auto-seed-errors.json');
+  const DEBUG_FILE = resolve(STATE_DIR_S, 'auto-seed-debugloop.json');
+  const SESSION_ID = process.env.OMC_SESSION_ID || 'unknown';
+
+  const VERIFY_FILE_S = resolve(STATE_DIR_S, 'hook-health-check.md');
+
+  const issues = [];
+
+  // 1. Check counter fired but no trigger file (should have been consumed)
+  if (existsSync(COUNTER_FILE)) {
+    try {
+      const counter = JSON.parse(readFileSync(COUNTER_FILE, 'utf-8'));
+      if (counter.fired && counter.sessionId === SESSION_ID && existsSync(TRIGGER_FILE)) {
+        issues.push('⚠️ counter.fired=true but trigger file still exists (not consumed)');
+      }
+      // Counter not reset for this session
+      if (counter.sessionId && counter.sessionId !== SESSION_ID && counter.count > 0) {
+        issues.push(`⚠️ counter belongs to different session (${counter.sessionId.slice(0,8)}≠${SESSION_ID.slice(0,8)})`);
+      }
+    } catch {}
+  }
+
+  // 2. Check active-learn trigger orphaned (should be consumed next session)
+  if (existsSync(ACTIVE_LEARN_FILE)) {
+    try {
+      const trigger = JSON.parse(readFileSync(ACTIVE_LEARN_FILE, 'utf-8'));
+      if (trigger.sessionId && trigger.sessionId !== SESSION_ID) {
+        issues.push(`⚠️ active-learn trigger stale (${trigger.sessionId.slice(0,8)}≠${SESSION_ID.slice(0,8)})`);
+      }
+    } catch { issues.push('⚠️ active-learn trigger file corrupted (invalid JSON)'); }
+  }
+
+  // 3. Check patterns accumulated but no insights generated
+  if (existsSync(PATTERN_FILE)) {
+    try {
+      const patterns = JSON.parse(readFileSync(PATTERN_FILE, 'utf-8'));
+      if (patterns.sessionId !== SESSION_ID) {
+        issues.push(`⚠️ patterns belong to different session (${patterns.sessionId?.slice(0,8) || 'null'})`);
+      }
+    } catch {}
+  }
+
+  // 4. High tool count but no trigger fired
+  if (existsSync(COUNTER_FILE)) {
+    try {
+      const counter = JSON.parse(readFileSync(COUNTER_FILE, 'utf-8'));
+      if (counter.count > 15 && !counter.fired && counter.sessionId === SESSION_ID) {
+        issues.push(`⚠️ ${counter.count} tool calls but fired=false (threshold=${counter.threshold || 10})`);
+      }
+    } catch {}
+  }
+
+  // 5. Error patterns accumulating but no insight
+  if (existsSync(ERROR_FILE)) {
+    try {
+      const errData = JSON.parse(readFileSync(ERROR_FILE, 'utf-8'));
+      if (errData.errors && errData.errors.length > 5 && errData.sessionId === SESSION_ID) {
+        issues.push(`⚠️ ${errData.errors.length} error patterns stored, no insight triggered`);
+      }
+    } catch {}
+  }
+
+  if (issues.length === 0) {
+    log('step8: hook-health OK');
+    return;
+  }
+
+  log('step8: hook-health ISSUES: ' + issues.length);
+  for (const issue of issues) { log('  ' + issue); }
+
+  // Write health report for next session injection
+  const report = `## Hook System Health Check\n\n${issues.map(i => `- ${i}`).join('\n')}\n\n_Caught by step8_healthCheck at session end._\n`;
+  writeFileSync(VERIFY_FILE_S, report, 'utf-8');
+}
+
+
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   if (args.cleanup) { cleanup(args.cleanup); return; }
@@ -669,6 +751,9 @@ async function main() {
 
   // Step 7: Execute pending actions immediately
   step7_executePendingActions();
+
+  // Step 8: Hook system health check
+  step8_healthCheck();
 
   log(`=== drain complete ===`);
 }

@@ -20,6 +20,7 @@ const NUDGE_FILE = resolve(STATE_DIR, 'session-nudge.md');
 const WF_PATTERNS_FILE = resolve(__dirname, '../innovation/workflow-patterns.md');
 const INSIGHTS_FILE = resolve(STATE_DIR, 'session-insights.md');
 const VERIFY_FILE = resolve(STATE_DIR, 'insight-verifications.md');
+const HEALTH_FILE = resolve(STATE_DIR, 'hook-health-check.md');
 const MID_FILE = resolve(STATE_DIR, 'mid-session-inject.md');
 const TRIGGER_FILE = resolve(STATE_DIR, 'auto-insight-trigger.json');
 const ACTIVE_LEARN_FILE = resolve(STATE_DIR, 'active-learn-trigger.json');
@@ -234,7 +235,16 @@ ${trigger.prompt || trigger.work?.tool}
     }
   }
 
-  // 7. Recent verification results (feedback loop)
+  // 7. Hook system health check (from previous session)
+  if (existsSync(HEALTH_FILE)) {
+    const content = readFileSync(HEALTH_FILE, 'utf-8').trim();
+    if (content) {
+      parts.push(`## Hook System Health Report\n\n${content}`);
+      try { writeFileSync(HEALTH_FILE, '', 'utf-8'); } catch {} // consume after reading
+    }
+  }
+
+  // 8. Recent verification results (feedback loop)
   if (existsSync(VERIFY_FILE)) {
     const content = readFileSync(VERIFY_FILE, 'utf-8').trim();
     if (content) {
