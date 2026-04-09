@@ -99,9 +99,11 @@ function doneAction(id, expected, actual) {
 function verifyAction(id, result, expected, actual) {
   // Write verification record with expected vs actual
   const existing = existsSync(VERIFY_FILE) ? readFileSync(VERIFY_FILE, 'utf-8') : '';
-  const judgment = (expected && actual)
-    ? '✅ 有效 / ❌ 无效（人工判定）'
-    : '⚠️ 未验证';
+  const judgment = (!expected && !actual)
+    ? '⚠️ 未验证'
+    : expected === actual
+      ? '✅ 有效'
+      : '❌ 无效（人工判定）';
   const entry = `## ${id}
 
 - **Result**: ${result || 'executed'}
