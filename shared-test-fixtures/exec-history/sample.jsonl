@@ -1,0 +1,5 @@
+{"taskType":"browse","adapterId":"opencli","success":true,"durationMs":1200,"timestamp":1775656151757}
+{"taskType":"browse","adapterId":"cli-anything","success":false,"durationMs":800,"timestamp":1775569751757}
+{"taskType":"search","adapterId":"opencli","success":true,"durationMs":950,"timestamp":1775483351757}
+{"taskType":"browse","adapterId":"opencli","success":true,"durationMs":1100,"timestamp":1775396951757}
+{"taskType":"task","adapterId":"cli-anything","success":true,"durationMs":2000,"timestamp":1775310551757}
