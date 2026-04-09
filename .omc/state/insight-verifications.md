@@ -124,3 +124,11 @@
 - **实际效果**: 未记录
 - **Verified**: 2026-04-09T06:29:28.984Z
 
+
+## action-XXX (20260409)
+
+- **Insight**: Seed kill判断错误：f:2=architecture design不是f:1
+- **Fix**: skill文件新增"kill前自检"规则，对照两条kill条件逐字确认
+- **Result**: FIXED
+- **Evidence**: grep确认skill文件line303新增了Kill前自检规则
+- **Verified**: 2026-04-09

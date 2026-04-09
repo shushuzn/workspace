@@ -23,35 +23,43 @@
 - [20260412] seed [brainstorm] [score:3x3=9] [f:3] [angle:quality] [focus:multi-agent-hub] multi-agent-hub annealing CSV导出 | benefit: 将annealing过程的温度/能量数据导出为CSV便于分析 | reason: 已知资源：cognitiveAnnealing.mjs已有annealing数据 | approach: 1. node 80-PROJECTS/multi-agent-hub/bin/export-annealing.mjs | shipped:20260409
 
 
-- [20260413] seed [brainstorm] [score:3x4=12] [f:4] [angle:ws-level] ideas pool效果统计报告 | benefit: 快速了解pool整体状态：ship率/kill率/各项目分布 | reason: 已知资源：.omc/innovation/ideas.md已有完整条目；缺失环节：无统计脚本；连接方式：解析ideas.md→计算ship/kill/active→CSV输出 | approach: 1. node shared/insight-stats.mjs | shipped:20260409
-
-- [20260413] seed [brainstorm] [score:3x4=12] [f:4] [angle:ws-level] ideas pool重复检测工具 | benefit: 发现并清理pool中重复的seed，防止浪费执行资源 | reason: 已知资源：.omc/innovation/ideas.md已有完整条目；缺失环节：无重复检测；连接方式：按描述规范化→哈希去重→输出重复项 | approach: 1. node shared/pool-dedup.mjs | shipped:20260409
-
-- [20260413] seed [brainstorm] [score:3x3=9] [f:3] [angle:feature] [focus:task-orchestrator] task-orchestrator规则图可视化 | benefit: 规则关系可视化，便于审查规则依赖 | reason: 已知资源：D:/OpenClaw/workspace/80-PROJECTS/task-orchestrator/src/planner.mjs已有RuleGraph；缺失环节：无可视化；连接方式：RuleGraph导出为DOT格式→graphviz渲染 | approach: 1. node -e "const fs=require('fs');const c=fs.readFileSync('80-PROJECTS/task-orchestrator/src/planner.mjs','utf8');const rules=[];const re=/new Rule\(([^)]+)\)/g;let m;while(m=re.exec(c))rules.push(m[1]);console.log('Rules found:',rules.length);const dot='digraph rules { rankdir=LR; ';rules.forEach((r,i)=>dot+=i+' [label="'+r.replace(/"/g,'')+'"]; ');console.log(dot+'}');fs.writeFileSync('task-rules.dot',dot)" 2. node -e "const fs=require('fs');const c=fs.readFileSync('80-PROJECTS/task-orchestrator/src/planner.mjs','utf8');const rules=[...c.matchAll(/new Rule\(\s*keywords:\s*['"]([^'"]+)['"]/g)].map(m=>m[1]);console.log('Rules:',rules.length);fs.writeFileSync('task-rules.json',JSON.stringify(rules,null,2));console.log('Exported to task-rules.json')" | killed:20260413 Gate4c: node -e blocked
-
-- [20260413] seed [brainstorm] [score:3x4=12] [f:4] [angle:feature] [focus:CLI-Anything] CLI-Anything registry CSV导出 | benefit: registry导出为CSV便于CI集成和文档生成 | reason: 已知资源：D:/OpenClaw/workspace/80-PROJECTS/CLI-Anything/registry.json已存在；缺失环节：无CSV导出；连接方式：registry.json解析→CSV格式化→写入registry.csv | approach: 1. node -e "const fs=require('fs');const r=JSON.parse(fs.readFileSync('80-PROJECTS/CLI-Anything/registry.json','utf8'));let csv='name,version,description\n';for(const c of r.clis||[])csv+=c.name+',,'+(c.description||'')+'\n';fs.writeFileSync('80-PROJECTS/CLI-Anything/registry.csv',csv);console.log('Exported',r.clis?.length||0,'entries')" | killed:20260413 Gate4c: node -e blocked on Windows
-
-- [20260413] seed [brainstorm] [score:3x3=9] [f:3] [angle:new-project] [focus:opencli] opencli daemon一键重连脚本 | benefit: daemon崩溃后一键重连，无需手动kill+start | reason: 已知资源：opencli有daemon启动脚本；缺失环节：无重连脚本；连接方式：检测daemon进程→kill→restart | approach: 1. node -e "const fs=require('fs');fs.writeFileSync('80-PROJECTS/opencli/bin/reconnect.sh','#!/bin/bash\ncd "$(dirname \$0)/.."\npkill -f opencli-daemon 2>/dev/null||true\nsleep 1\nnpx opencli daemon &\necho "Daemon restarted"')" 2. node -e "const fs=require('fs');fs.chmodSync('80-PROJECTS/opencli/bin/reconnect.sh',0o755);console.log('reconnect.sh created')" | killed:20260413 Gate4c: node -e blocked
-
-- [20260413] seed [brainstorm] [score:3x3=9] [f:3] [angle:feature] [focus:wikipedia] wikipedia过期条目批量刷新 | benefit: 超过30天未更新的条目批量检查是否还有效 | reason: 已知资源：knowledge/wikipedia/index.json已有条目列表；缺失环节：无批量刷新机制；连接方式：遍历过期条目→检查源URL是否存活→更新mtime或标记dead | approach: 1. node -e "const fs=require('fs');const https=require('https');const http=require('http');const data=JSON.parse(fs.readFileSync('knowledge/wikipedia/index.json','utf8'));const entries=data.entries||data;const now=Date.now()/1000;const old=entries.filter(e=>now-e.mtime>30*86400);console.log('Checking',old.length,'stale entries');old.slice(0,3).forEach(e=>{const url=e.url||'';const mod=url.startsWith('https')?https:http;mod.get(url,r=>{console.log(e.title,'->',r.statusCode);r.resume()}).on('error',err=>{console.log(e.title,'DEAD:',err.message)})})" | killed:20260413 Gate4c: node -e blocked
-
-- [20260413] seed [brainstorm] [score:3x4=12] [f:4] [angle:quality] [focus:multi-agent-hub] multi-agent-hub annealing进度条 | benefit: CLI显示annealing进度，实时观察温度变化 | reason: 已知资源：cognitiveAnnealing.mjs已有温度记录；缺失环节：无进度条显示；连接方式：读取温度历史→ASCII进度条输出 | approach: 1. node -e "const fs=require('fs');const data=JSON.parse(fs.readFileSync('.omc/state/annealing-temp.json','utf8')||'{"temps":[]}');const temps=data.temps||[];if(!temps.length){console.log('No annealing data yet');process.exit(0)}const min=Math.min(...temps);const max=Math.max(...temps);temps.forEach((t,i)=>{const bar=Math.round((t-min)/(max-min)*40).toString().padEnd(40,'-');console.log(i.toString().padStart(3,' '),t.toFixed(2),'|'+bar+'|')})" | killed:20260413 Gate4c: node -e blocked
-
-- [20260413] seed [brainstorm] [score:3x4=12] [f:4] [angle:ws-level] brainstorm种子质量自动评分 | benefit: 批量对pool中未评分种子打分，辅助优先级决策 | reason: 已知资源：.omc/innovation/ideas.md已有完整条目；缺失环节：无自动评分；连接方式：提取desc→按score=Benefit×Feasibility公式计算 | approach: 1. node -e "const fs=require('fs');const c=fs.readFileSync('.omc/innovation/ideas.md','utf8');const lines=c.split('\n');let unscored=0;for(const l of lines){if(l.match(/shipped:|killed:/)||!l.match(/seed.*score:/))continue;const score=l.match(/score:(\d+x\d+)/);if(!score){console.log(l.slice(0,80));unscored++}}console.log('Unscored seeds:',unscored)" | killed:20260409 Gate4c: node -e blocked
 
 
-- [20260413] seed [brainstorm] [score:3x3=9] [f:3] [angle:feature] [focus:task-orchestrator] task-orchestrator规则图导出JSON | benefit: 规则关键词导出为JSON，便于分析和可视化 | reason: 已知资源：D:/OpenClaw/workspace/80-PROJECTS/task-orchestrator/src/planner.mjs已有规则定义；缺失环节：无法导出；连接方式：正则提取keywords数组→JSON文件 | approach: 1. node 80-PROJECTS/task-orchestrator/bin/rule-graph.mjs | shipped:20260409
 
-- [20260413] seed [brainstorm] [score:3x4=12] [f:4] [angle:ws-level] ideas pool未评分种子检测 | benefit: 快速发现pool中未评分的种子 | reason: 已知资源：.omc/innovation/ideas.md已有完整条目；缺失环节：无未评分检测；连接方式：正则匹配score字段→输出缺失项 | approach: 1. node shared/seed-quality-scorer.mjs | shipped:20260409
 
-- [20260413] seed [brainstorm] [score:3x4=12] [f:4] [angle:ws-level] ideas pool重复检测工具v2 | benefit: 发现描述重复的seed，防止重复执行 | reason: 已知资源：.omc/innovation/ideas.md已有完整条目；缺失环节：无重复检测；连接方式：描述规范化→哈希去重→输出重复项 | approach: 1. node shared/pool-dedup-v2.mjs | shipped:20260409
 
-- [20260413] seed [brainstorm] [score:3x4=12] [f:4] [angle:feature] [focus:wikipedia] wiki-indexer模糊搜索增强 | benefit: 输入近似词也能搜到相关条目 | reason: 已知资源：D:/OpenClaw/workspace/shared/wiki-indexer.mjs已有索引；缺失环节：无模糊匹配；连接方式：fuzzy库→搜索时容错匹配 | approach: 1. python shared/wiki-indexer-fuzzy.py test | shipped:20260409
 
-- [20260413] seed [brainstorm] [score:3x4=12] [f:4] [angle:ws-level] hookify规则regex验证 | benefit: 创建hookify规则前先验证regex语法正确性 | reason: 已知资源：D:/OpenClaw/workspace/.claude/hookify.warn-rm.local.md已有规则；缺失环节：无regex验证；连接方式：读取pattern→new RegExp验证 | approach: 1. node shared/hookify-validate.mjs | shipped:20260409
 
-- [20260413] seed [brainstorm] [score:3x4=12] [f:4] [angle:ws-level] brainstorm批次效果分析报告 | benefit: 批次质量一目了然：ship率/Gate失败率 | reason: 已知资源：brainstorm-metacognition.jsonl已有批次记录；缺失环节：无自动报告；连接方式：读取JSONL→统计→输出 | approach: 1. node shared/brainstorm-report.mjs | shipped:20260409
 
-- [20260413] seed [brainstorm] [score:3x4=12] [f:4] [angle:feature] [focus:wikipedia] wikipedia过期条目检测 | benefit: 快速发现超过30天未更新的条目 | reason: 已知资源：knowledge/wikipedia/index.json已有条目；缺失环节：无新鲜度检测；连接方式：对比mtime→输出过期列表 | approach: 1. python shared/wiki-fresh-check.py | shipped:20260409
 
-- [20260413] seed [brainstorm] [score:3x3=9] [f:3] [angle:feature] [focus:task-orchestrator] task-orchestrator超时wrapper | benefit: 外层wrapper控制总超时，防止任务挂起 | reason: 已知资源：task-orchestrator/src/executor.mjs已有run()；缺失环节：无外层超时控制；连接方式：wrapper调用executor→超时kill进程树 | approach: 1. node 80-PROJECTS/task-orchestrator/bin/run-with-timeout.mjs 2 node --version | shipped:20260409
+
+
+
+
+
+
+
+
+
+- [20260409] seed [brainstorm] [score:2x1=2] [f:1] [angle:feature] [focus:task-orchestrator] task-orchestrator自适应执行策略 | benefit: 根据历史成功率自动切换adapter，显著提升任务完成率 | reason: 已知资源：D:/OpenClaw/workspace/80-PROJECTS/task-orchestrator/src/executor.mjs已有execute()方法；D:/OpenClaw/workspace/80-PROJECTS/task-orchestrator/src/registry.mjs已有adapter注册；缺失环节：无策略选择机制；连接方式：executor记录每次adapter成功率→planner下次选择最优adapter | approach: 1. node 80-PROJECTS/task-orchestrator/bin/adaptive-executor.mjs | shipped:20260409
+
+- [20260409] seed [brainstorm] [score:3x2=6] [f:2] [angle:feature] [focus:opencli] opencli CDP daemon健康度监控 | benefit: 实时显示daemon状态、页面池、连接数，排查连接问题 | reason: 已知资源：D:/OpenClaw/workspace/80-PROJECTS/opencli/src/browser/daemon-client.ts已有fetchDaemonStatus()；缺失环节：无daemon状态可视化；连接方式：定时轮询daemon-client→输出实时dashboard | approach: 1. node 80-PROJECTS/opencli/bin/daemon-health.mjs | shipped:20260409
+
+- [20260409] seed [brainstorm] [score:3x3=9] [f:3] [angle:feature] [focus:multi-agent-hub] annealing过程CSV导出 | benefit: 把annealing每轮温度/能量/概念跳跃记录到CSV，便于后续分析 | reason: 已知资源：D:/OpenClaw/workspace/80-PROJECTS/multi-agent-hub/index.js已有TemperatureScheduler和round数据；缺失环节：无法导出CSV；连接方式：在index.js的round循环中插入CSV写入→保存到results/ | approach: 1. node 80-PROJECTS/multi-agent-hub/bin/export-annealing-csv.mjs | shipped:20260409
+
+- [20260409] seed [brainstorm] [score:3x4=12] [f:4] [angle:feature] [focus:wikipedia] wiki页面关系图生成器 | benefit: 根据wiki-link生成页面之间的关系图，便于理解知识结构 | reason: 已知资源：D:/OpenClaw/workspace/knowledge/wikipedia/index.mjs已有索引和wikilink提取逻辑；缺失环节：无关系图生成；连接方式：解析index.mjs的wikilink数据→输出Graphviz或Mermaid图 | approach: 1. node shared/wiki-graph.mjs | shipped:20260409
+
+- [20260409] seed [brainstorm] [score:3x4=12] [f:4] [angle:ws-level] session操作轨迹回放 | benefit: 从transcript文件重放一系列操作步骤，便于调试和复现 | reason: 已知资源：D:/OpenClaw/workspace/.claude/projects/有transcript.jsonl文件；缺失环节：无回放引擎；连接方式：读取transcript→解析tool call序列→逐条重放 | approach: 1. node shared/session-replay.mjs | shipped:20260409
+
+- [20260409] seed [brainstorm] [score:3x4=12] [f:4] [angle:feature] [focus:CLI-Anything] CLI-Anything adapter参数补全生成 | benefit: 根据已有adapter自动生成shell completion脚本 | reason: 已知资源：D:/OpenClaw/workspace/80-PROJECTS/CLI-Anything/registry.json已有adapter列表；缺失环节：无completion生成；连接方式：读取registry.json→解析命令参数→输出bash/zsh completion脚本 | approach: 1. node 80-PROJECTS/CLI-Anything/bin/gen-completions.mjs | shipped:20260409
+
+- [20260409] seed [brainstorm] [score:4x5=20] [f:5] [angle:feature] [focus:task-orchestrator] task-orchestrator规则关键词高亮 | benefit: 输入文本时高亮匹配的关键词，快速判断适用规则 | reason: 已知资源：D:/OpenClaw/workspace/80-PROJECTS/task-orchestrator/src/planner.mjs已有keywords数组；缺失环节：无线上高亮工具；连接方式：读取planner.mjs的keywords→ANSI高亮输出 | approach: 1. node 80-PROJECTS/task-orchestrator/bin/rule-highlight.mjs | shipped:20260409
+
+- [20260409] seed [brainstorm] [score:3x3=9] [f:3] [angle:ws-level] notepad自动过期清理 | benefit: 自动删除超过7天的priority区entry，保持notepad整洁 | reason: 已知资源：D:/OpenClaw/workspace/.omc/notepad.md已有notepad数据结构；缺失环节：无自动清理；连接方式：读取notepad→解析priority区→删除超过7天的entry→写回 | approach: 1. node shared/notepad-prune.mjs | shipped:20260409
+
+
+
+- [20260413] seed [brainstorm] [score:2x2] [f:2] [angle:feature] [focus:task-orchestrator] task-orchestrator添加adapter成功率加权选择——根据exec-history.jsonl历史数据自动选最优adapter | benefit: 减少人工干预，提升任务完成率 | reason: 已知资源：bin/exec-history.mjs已实现recordResult()+getBestAdapter()，返回{adapterId,score,successRate}；缺失环节：无调用方；连接方式：在executor.mjs的adapter选择逻辑中调用getBestAdapter(taskType)替代硬编码顺序 | approach: 1) Read bin/exec-history.mjs确认API 2) Read src/executor.mjs找到adapter选择位置 3) Edit用getBestAdapter()替换硬编码adapter链 4) 测试：分别用browse/search/task类型验证最优adapter被选中 | shipped:20260413
+- [20260413] seed [brainstorm] [score:2x2] [f:2] [angle:ws-level] shared/添加CRC校验脚本——计算文件CRC32并在文件名中追加校验和后缀 | benefit: 全workspace复用，确保文件传输完整性 | reason: 已知资源：shared/目录存在但无文件校验工具；缺失环节：无CRC计算工具；连接方式：创建shared/crc32-file.mjs供各项目调用 | approach: 1) Write shared/crc32-file.mjs用Node.js内置crypto计算CRC32 2) 命令：node shared/crc32-file.mjs <file> 输出"filename_crc32.ext" 3) 各项目可通过exec调用此脚本 | shipped:20260413
+- [20260413] seed [brainstorm] [score:2x2] [f:2] [angle:fusion] opencli+CLI-Anything融合——opencli的BrowserBridge能力嫁接到CLI-Anything作为新adapter | benefit: CLI-Anything获得browser automation能力，opencli获得更多CLI工具 | reason: 已知资源：opencli/src/browser/有BrowserBridge；CLI-Anything/bin/有adapter注册逻辑；缺失环节：无跨项目adapter共享机制；连接方式：在CLI-Anything的adapter注册表引用opencli的BrowserBridge模块 | approach: 1) Read opencli/src/browser/index.ts确认BrowserBridge导出 2) Read CLI-Anything/bin/registry-dashboard.mjs研究adapter注册格式 3) 在CLI-Anything中添加opencli-browser adapter 4) 测试：CLI-Anything调用opencli执行browser任务 | shipped:20260413
+

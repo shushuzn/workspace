@@ -581,3 +581,20 @@
 **Rule**: 有 Fix 必须执行 + 记录到 pending-actions + 下次 session 验证效果
 **Fix**: 在 hook-auto-seed.mjs 的 insight prompt 中追加："执行 Fix 后，用 `node .omc/scripts/omc-insight-action.mjs --add` 将 Fix 注册为待验证 action"
 **Verification**: 检查 pending-actions.md 是否有新增条目
+
+### N. [Session summary缓存失效——必须读skill文件验证量化参数]
+**Observation**: 错误生成了8个种子而非3个，因为session summary缓存了旧的"8个"描述，但skill文件早已更新为3个。Session summary在compact后的context中，skill文件在插件目录——两者独立，summary不自动同步。
+**Rule**: 对于任何影响任务执行的量化参数（batch_size、threshold、limit等），**必须读取skill文件顶部常量进行实时验证**。Session summary和MEMORY.md都是缓存，skill文件才是source of truth。缓存不能覆盖源头。
+**Fix**: Write D:/OpenClaw/workspace/.omc/state/insight-verifications.md
+- 已添加 BATCH_SIZE=3 到skill文件顶部
+- 已添加规则2b强制生成前验证
+
+### [PreToolUse] 认知偏差检测：BATCH_SIZE mismatch
+**Observation**: 意图生成8个种子，但skill文件BATCH_SIZE=3。Session summary缓存过期导致参数不匹配。
+**Rule**: 量化参数必须读取skill文件顶部常量实时验证，session summary不能覆盖source of truth。
+**Fix**: Write BATCH_SIZE=3 + 规则2b已添加到skill文件。
+
+### N. [Seed kill判断错误：f:2=architecture design不是f:1]
+**Observation**: 错误kill了opencli+CLI-Anything融合seed，理由是"复杂度需要f:1"。但f:2定义本身就是"需architecture design或跨模块调研"——这个seed正好属于f:2范畴，不需要升到f:1。
+**Rule**: Kill只适用于：连续2次不满足quality gates、或实验失败。f:2 seed复杂度评估错误不属于kill条件。误kill=浪费已生成的种子。
+**Fix**: Write skill文件新增规则：kill前必须对照两条kill条件逐字确认，不允许主观理由kill。复杂度问题走re-score。
