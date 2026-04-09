@@ -10,10 +10,12 @@ import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 const __DIR = dirname(fileURLToPath(import.meta.url));
-const IDEAS_PATH = join(__DIR, '..', 'knowledge', 'wikipedia', '.omc', 'innovation', 'ideas.md');
+const IDEAS_PATH = join(__DIR, '..', '.omc', 'innovation', 'ideas.md');
 
 const autoKill = process.argv.includes('--auto-kill');
 const jsonMode = process.argv.includes('--json');
+const cleanDaysIdx = process.argv.indexOf('--clean-shipped-days');
+const cleanDays = cleanDaysIdx !== -1 ? parseInt(process.argv[cleanDaysIdx + 1], 10) : 0;
 
 const EXECUTABLE_PREFIXES = [
   'python ', 'node ', 'npx ', 'bun ', 'bash ', 'sh ',
@@ -47,8 +49,9 @@ while (i < lines.length) {
   const killedMatch = line.match(/killed:(\d{8})/) || bodyText.match(/killed:(\d{8})/);
   if (shippedMatch || killedMatch) { i = j; continue; }
 
-  // Extract approach
-  const approachMatch = bodyText.match(/\|?\s*approach:\s*(.+?)(?:\s*\| shipped:|\s*\| killed:|$)/s);
+  // Extract approach — from body or fallback to header line
+  const approachMatch = bodyText.match(/\|?\s*approach:\s*(.+?)(?:\s*\| shipped:|\s*\| killed:|$)/s)
+    || line.match(/\| approach:\s*(.+?)(?:\s*\| shipped:|\s*\| killed:|$)/s);
   const approachText = approachMatch ? approachMatch[1].trim() : '';
 
   // Extract first step (handles "1." / "阶段一：" / "阶段一(设计)：" prefixes)
@@ -114,5 +117,32 @@ if (jsonMode) {
     }
   } else {
     console.log('[OK] All unshipped seeds have executable approaches.');
+  }
+
+  // Clean old shipped seeds
+  if (cleanDays > 0) {
+    const cutoff = new Date();
+    cutoff.setDate(cutoff.getDate() - cleanDays);
+    const cutoffStr = cutoff.toISOString().slice(0, 10).replace(/-/g, '');
+    const cutoffNum = parseInt(cutoffStr, 10);
+    const newLines = [...lines];
+    let cleaned = 0;
+    for (let k = newLines.length - 1; k >= 0; k--) {
+      const line = newLines[k];
+      const shippedMatch = line.match(/\| shipped:(\d{8})/);
+      if (shippedMatch) {
+        const shippedDate = parseInt(shippedMatch[1], 10);
+        if (shippedDate < cutoffNum) {
+          newLines.splice(k, 1);
+          cleaned++;
+        }
+      }
+    }
+    if (cleaned > 0) {
+      writeFileSync(IDEAS_PATH, newLines.join('\n'), 'utf-8');
+      console.log(`[CLEAN] Removed ${cleaned} shipped seeds older than ${cleanDays} days.`);
+    } else {
+      console.log(`[CLEAN] No shipped seeds older than ${cleanDays} days.`);
+    }
   }
 }
