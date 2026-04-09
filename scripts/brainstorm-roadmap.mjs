@@ -17,6 +17,8 @@ const IDEAS_PATH = join(__DIR, '..', '.omc', 'innovation', 'ideas.md');
 const args = process.argv.slice(2);
 const projectFilter = args.includes('--project') ? args[args.indexOf('--project') + 1] : null;
 const jsonMode = args.includes('--json');
+const daysIdx = args.indexOf('--days');
+const daysLimit = daysIdx !== -1 ? parseInt(args[daysIdx + 1], 10) : 0;
 
 const content = readFileSync(IDEAS_PATH, 'utf-8');
 const lines = content.split('\n');
@@ -89,21 +91,29 @@ if (projectFilter) {
   shipped.filter(s => s.focus === projectFilter);
 }
 
+// Filter by days if --days specified (compare YYYYMMDD integers)
+const cutoffDate = daysLimit > 0
+  ? parseInt(new Date(Date.now() - daysLimit * 24 * 60 * 60 * 1000).toISOString().slice(0, 10).replace(/-/g, ''), 10)
+  : null;
+const dateFiltered = cutoffDate !== null
+  ? shipped.filter(s => parseInt(s.date.replace(/-/g, ''), 10) >= cutoffDate)
+  : shipped;
+
 if (jsonMode) {
-  console.log(JSON.stringify(shipped, null, 2));
+  console.log(JSON.stringify(dateFiltered, null, 2));
   process.exit(0);
 }
 
 // ── Build Project Timeline ───────────────────────────────────────────────────
 const byProject = {};
-for (const s of shipped) {
+for (const s of dateFiltered) {
   const proj = s.project || 'ws-level';
   if (!byProject[proj]) byProject[proj] = [];
   byProject[proj].push(s);
 }
 
 console.log('\n=== Brainstorm Roadmap ===\n');
-console.log('Shipped seeds: ' + shipped.length + ' | Projects: ' + Object.keys(byProject).length + '\n');
+console.log('Shipped seeds: ' + dateFiltered.length + ' | Projects: ' + Object.keys(byProject).length + '\n');
 
 // Per-project roadmap
 for (const [project, projectSeeds] of Object.entries(byProject).sort((a, b) => b[1].length - a[1].length)) {
@@ -131,7 +141,7 @@ for (const [project, projectSeeds] of Object.entries(byProject).sort((a, b) => b
 // Find seeds that enabled other seeds (reason references previous work)
 console.log('## Capability Chains (reason referencing other projects)\n');
 const chains = [];
-for (const s of shipped) {
+for (const s of dateFiltered) {
   const refs = [];
   // Check if reason mentions another project
   for (const [proj] of Object.entries(byProject)) {
@@ -155,7 +165,7 @@ if (chains.length === 0) {
 // ── Stats ───────────────────────────────────────────────────────────────────
 console.log('\n## Roadmap Stats\n');
 const scoreBuckets = { '16+': 0, '12-15': 0, '9-11': 0, '6-8': 0, '<6': 0 };
-for (const s of shipped) {
+for (const s of dateFiltered) {
   if (s.score >= 16) scoreBuckets['16+']++;
   else if (s.score >= 12) scoreBuckets['12-15']++;
   else if (s.score >= 9) scoreBuckets['9-11']++;
