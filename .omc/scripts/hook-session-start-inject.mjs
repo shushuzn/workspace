@@ -247,8 +247,7 @@ ${trigger.prompt || trigger.work?.tool}
   if (cwd) {
     try {
       const { retrieve } = await import('./insight-semantic-retrieve.mjs');
-      const ctxKw = cwd.split(/[\/\\_\-\.\:]/).filter(Boolean).slice(-3).join(',');
-      const results = retrieve(ctxKw, []);
+      const results = retrieve(cwd, []);
       if (results.length > 0) {
         const formatted = results.map(r => {
           const fix = (r.fix.match(/Fix:\s*(.+?)(?:\n|$)/i)?.[1] || 'N/A').trim().slice(0, 120);
