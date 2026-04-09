@@ -6,7 +6,7 @@
  * executes its approach's first step, then marks it shipped.
  *
  * Usage:
- *   node run-seed.mjs [--dry-run] [--limit N] [--focus PROJECT] [--skip LINEIDX]
+ *   node run-seed.mjs [--dry-run] [--limit N] [--focus PROJECT] [--skip LINEIDX] [--warm-all]
  *   node run-seed.mjs --validate-approach "1. python wiki.mjs --rebuild"
  */
 import { readFileSync, writeFileSync } from 'fs';
@@ -26,6 +26,7 @@ const focusProject = focusIdx !== -1 ? process.argv[focusIdx + 1] : null;
 const skipIdxs = process.argv.includes('--skip')
   ? (() => { const i = process.argv.indexOf('--skip') + 1; return process.argv.slice(i, i + 2).map(n => parseInt(n, 10)).filter(n => !isNaN(n)); })()
   : [];
+const warmAll = process.argv.includes('--warm-all');
 
 // ── Gate 4c: Validate approach text without writing to pool ────────────────────
 if (validateApproach !== null) {
@@ -139,6 +140,15 @@ if (showLimit > 1) {
   console.log(`Top ${showLimit} unshipped seeds:`);
   for (const s of unshipped.slice(0, showLimit)) {
     console.log(`  [score:${s.score}] f:${s.feas} angle:${s.angle} | ${s.desc.slice(0, 60)}`);
+  }
+  process.exit(0);
+}
+
+if (warmAll) {
+  console.log(`\n=== Warm Pool — All Candidates (${unshipped.length}) ===\n`);
+  for (let i = 0; i < unshipped.length; i++) {
+    const s = unshipped[i];
+    console.log(`  ${String(i + 1).padStart(2)}. [score:${s.score}] f:${s.feas} [${s.angle || 'none'}]${s.focus ? ` focus:${s.focus}` : ''} ${s.desc.slice(0, 55)}`);
   }
   process.exit(0);
 }

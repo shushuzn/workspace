@@ -48,7 +48,7 @@ const BUILT_IN_RULES = [
         keywords: ['gimp', 'GIMP'],
         adapterId: 'cli-anything-gimp',
         adapterType: 'cli-anything',
-        command: 'export',
+        command: 'function detectCycle(rules){const visited=new Set();const stack=new Set();for(const r of rules){if(dfs(r.keywords,{},stack,visited))return true;}return false;}function dfs(key,graph,stack,visited){if(stack.has(key))return true;if(visited.has(key))return false;stack.add(key);visited.add(key);return false;}export',
         args: [],
         outputSlots: [],
     },
