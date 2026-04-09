@@ -1,26 +1,31 @@
 #!/usr/bin/env node
-/** Export annealing process to CSV */
-import { writeFileSync, existsSync, mkdirSync } from 'fs';
+/**
+ * Export annealing process to CSV via --export-csv flag
+ * Usage: node index.js --export-csv "topic" --rounds 3
+ */
+import { spawn } from 'child_process';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 const __DIR = dirname(fileURLToPath(import.meta.url));
-const INDEX = join(__DIR, '..', 'index.js');
-const OUT_DIR = join(__DIR, '..', 'results');
+const INDEX_JS = join(__DIR, '..', 'index.js');
 
-mkdirSync(OUT_DIR, { recursive: true });
+const topic = process.argv[2] || '测试讨论';
+const rounds = process.argv.includes('--rounds')
+  ? process.argv[process.argv.indexOf('--rounds') + 1] || '3'
+  : '3';
 
-const csv = `round,temperature,energy,concept_jumps,accepted
-1,1.0,0.85,false,true
-2,0.9,0.78,false,true
-3,0.8,0.72,true,true
-4,0.7,0.68,false,true
-5,0.6,0.65,false,true
-`;
+console.log('=== Annealing CSV Export ===');
+console.log('Topic:', topic);
+console.log('Rounds:', rounds);
+console.log('Flag: --export-csv');
+console.log('\n[RUN] node index.js --export-csv --rounds', rounds, '"' + topic + '"');
 
-writeFileSync(join(OUT_DIR, 'annealing.csv'), csv);
-console.log('=== Annealing CSV Exporter ===');
-console.log('Index:', existsSync(INDEX) ? 'found' : 'not found');
-console.log('Output: results/annealing.csv');
-console.log('\n[PROTOTYPE] Generated sample CSV');
-console.log('Full: integrate with TemperatureScheduler in index.js');
+const child = spawn('node', [INDEX_JS, '--export-csv', '--rounds', rounds, topic], {
+  stdio: 'inherit',
+  cwd: __DIR
+});
+
+child.on('exit', code => {
+  console.log('\n[EXIT] Code:', code);
+});
