@@ -204,6 +204,44 @@ export class Planner {
         // Order: built-in < user < dynamic
         this.rules = [...builtInRules, ...userRuleObjects, ...dynamicRules];
     }
+    /**
+     * Meta-cognitive pre-audit: before parsing, ask "am I solving the right problem?"
+     * Returns { issues: string[], blocked: boolean }
+     *   issues: things to reflect on before proceeding
+     *   blocked: true → execution should not proceed
+     *
+     * The agent (not an external LLM) performs this check by examining the prompt
+     * for self-reflect error class patterns (未测试/未验证/未接入/未修复/没检查/没问自己).
+     */
+    preAudit(prompt) {
+        const issues = [];
+        const lower = prompt.toLowerCase();
+
+        // Pattern: no self-question phrases detected before taking action
+        const selfQuestionPhrases = ['这个问题', '我要解决', '正确的问题', '有没有', '是否正确', '是否合理', '会不会有问题', '风险是什么', '什么会出错', '遗漏了什么'];
+        const hasSelfQuestion = selfQuestionPhrases.some(p => lower.includes(p));
+
+        // Pattern: rush to action without verification markers
+        const actionPhrases = ['立刻', '马上', '直接', '先做', '先执行'];
+        const hasAction = actionPhrases.some(p => lower.includes(p));
+        const verifyPhrases = ['验证', '检查', '确认', '思考', '分析'];
+        const hasVerify = verifyPhrases.some(p => lower.includes(p));
+
+        // Pattern: self-reflect keywords in prompt (user explicitly writing them)
+        const selfReflectMarkers = ['没检查', '没问自己', '未测试', '未验证', '未接入', '未修复', '不确定', '没把握'];
+        const hasSelfReflect = selfReflectMarkers.some(p => lower.includes(p));
+
+        if (hasSelfReflect) {
+            issues.push(`PROMPT_CONTAINS_SELF_REFLECT: prompt includes self-reflect marker → "${selfReflectMarkers.find(p => lower.includes(p))}"`);
+        }
+
+        if (hasAction && !hasSelfQuestion && !hasVerify) {
+            issues.push(`RUSH_TO_ACTION: prompt has action language but no self-question phrases → may not have asked "is this the right problem?"`);
+        }
+
+        return { issues, blocked: hasSelfReflect };
+    }
+
     /** Parse a natural language prompt into ordered Steps */
     parse(prompt) {
         const steps = [];

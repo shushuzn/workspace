@@ -185,6 +185,7 @@ async function main() {
         .option('--verbose', 'Show step-by-step logs', false)
         .option('--no-review', 'Disable two-stage review gate (spec + code)', false)
         .option('--no-self-audit', 'Disable meta-cognitive self-audit after execution', false)
+        .option('--no-pre-audit', 'Disable meta-cognitive pre-audit before execution', false)
         .option('--check', 'Check adapter availability', false)
         .option('--stream-to <port>', 'Start WebSocket server on port and stream step events as JSON Lines to connected clients', undefined)
         .option('--metrics [port]', 'Start Prometheus /metrics server on port (default 9090)', undefined)
@@ -1385,6 +1386,19 @@ setInterval(refresh, 1000);
         }
         // Full execution
         const planner = new Planner(registry);
+        // Meta-cognitive pre-audit: ask "am I solving the right problem?" before parsing
+        if (!options.noPreAudit) {
+            const audit = planner.preAudit(prompt);
+            if (audit.blocked) {
+                console.error(chalk.red('[pre-audit] BLOCKED: ' + audit.issues.join('; ')));
+                process.exit(1);
+            }
+            if (audit.issues.length > 0) {
+                for (const issue of audit.issues) {
+                    console.error(chalk.yellow('[pre-audit] ' + issue));
+                }
+            }
+        }
         const { steps, errors } = planner.parse(prompt);
         if (errors.length > 0 && steps.length === 0) {
             console.error(chalk.red(`Error: ${errors[0]}`));
