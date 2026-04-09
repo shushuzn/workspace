@@ -5,7 +5,7 @@
  * Scans ideas.md pool, picks the highest-score unshipped seed,
  * executes its approach's first step, then marks it shipped.
  *
- * Usage: node run-seed.mjs [--dry-run] [--limit N] [--focus PROJECT]
+ * Usage: node run-seed.mjs [--dry-run] [--limit N] [--focus PROJECT] [--skip LINEIDX]
  */
 import { readFileSync, writeFileSync } from 'fs';
 import { join, dirname } from 'path';
@@ -19,6 +19,9 @@ const limitIdx = process.argv.indexOf('--limit');
 const showLimit = limitIdx !== -1 ? parseInt(process.argv[limitIdx + 1], 10) : 1;
 const focusIdx = process.argv.indexOf('--focus');
 const focusProject = focusIdx !== -1 ? process.argv[focusIdx + 1] : null;
+const skipIdxs = process.argv.includes('--skip')
+  ? (() => { const i = process.argv.indexOf('--skip') + 1; return process.argv.slice(i, i + 2).map(n => parseInt(n, 10)).filter(n => !isNaN(n)); })()
+  : [];
 
 // ── Parse ideas.md ───────────────────────────────────────────────────────────
 const content = readFileSync(IDEAS_PATH, 'utf-8');
@@ -71,6 +74,7 @@ while (i < lines.length) {
 const unshipped = results
   .filter(s => !s.shipped && !s.killed)
   .filter(s => !focusProject || s.focus === focusProject)
+  .filter(s => skipIdxs.length === 0 || !skipIdxs.includes(s.lineIdx))
   .sort((a, b) => b.score - a.score);
 
 console.log(`\n=== Seed Runner ===`);
