@@ -164,6 +164,16 @@ if (args.includes('--add')) {
   const result = args[idx + 1] && !args[idx + 1].startsWith('--') ? args[idx + 1] : 'executed';
   if (idArg && !idArg.startsWith('--')) {
     verifyAction(idArg, result, expected, actual);
+    // If expected and actual match, also mark done (remove from pending)
+    if (expected && actual && expected === actual) {
+      const items = readPending();
+      const item = items.find(i => i.id === idArg);
+      if (item) {
+        markInsightExecuted(item.desc);
+        writePending(items.filter(i => i.id !== idArg));
+        console.log(`auto-marked done: ${idArg} (expected === actual)`);
+      }
+    }
   } else {
     listVerified();
   }
