@@ -245,4 +245,15 @@ newLines[lastBodyIdx] = lastBodyLine.replace(/(\s*)$/, ` | shipped:${today}`);
 writeFileSync(IDEAS_PATH, newLines.join('\n'), 'utf-8');
 
 console.log(`\n[SHIPPED] ${top.desc.slice(0, 60)}... → shipped:${today}`);
+
+// Auto-skillify: if angle contains 'skill-file', generate .claude/skills/ entry
+if (top.angle && top.angle.includes('skill-file')) {
+  try {
+    const { skillifyOne } = await import('./skillify-shipped.mjs');
+    await skillifyOne(top);
+  } catch (e) {
+    console.error(`[SKILLIFY] Warning: could not skillify: ${e.message}`);
+  }
+}
+
 console.log(`=== Run complete ===\n`);
