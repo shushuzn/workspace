@@ -1,6 +1,17 @@
 {
   "description": "OMC Hooks — Session lifecycle + active learning",
   "hooks": {
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node D:/OpenClaw/workspace/.omc/scripts/hook-auto-seed.mjs --check",
+            "timeout": 1000
+          }
+        ]
+      }
+    ],
     "PreToolUse": [
       {
         "hooks": [
