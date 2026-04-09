@@ -36,3 +36,16 @@ Fix 执行完成后，必须向 `insight-verifications.md` 追加验证结果：
 ⚡ INSIGHT TRIGGER: 2074 tool calls reached — generate insight now: .omc/state/session-insights.md
 ⚡ INSIGHT TRIGGER: 2083 tool calls reached — generate insight now: .omc/state/session-insights.md
 ⚡ INSIGHT TRIGGER: 2146 tool calls reached — generate insight now: .omc/state/session-insights.md
+⚡ INSIGHT TRIGGER: 10 tool calls (threshold 10) — generate insight: .omc/state/session-insights.md
+⚡ INSIGHT TRIGGER: 10 tool calls (threshold 10) — generate insight: .omc/state/session-insights.md
+⚡ INSIGHT TRIGGER: 10 tool calls (threshold 10) — generate insight: .omc/state/session-insights.md
+⚡ INSIGHT TRIGGER: 10 tool calls (threshold 10) — generate insight: .omc/state/session-insights.md
+⚡ INSIGHT TRIGGER: 10 tool calls (threshold 10) — generate insight: .omc/state/session-insights.md
+⚡ INSIGHT TRIGGER: 10 tool calls (threshold 10) — generate insight: .omc/state/session-insights.md
+⚡ ACTIVE LEARN: "git:cd "D:/OpenClaw/workspace" && git add -f" repeated 3x — generate reusable script: .omc/state/session-insights.md
+⚡ INSIGHT TRIGGER: 10 tool calls (threshold 10) — generate insight: .omc/state/session-insights.md
+⚡ INSIGHT TRIGGER: 10 tool calls (threshold 10) — generate insight: .omc/state/session-insights.md
+⚡ INSIGHT TRIGGER: 10 tool calls (threshold 10) — generate insight: .omc/state/session-insights.md
+⚡ INSIGHT TRIGGER: 10 tool calls (threshold 10) — generate insight: .omc/state/session-insights.md
+⚡ INSIGHT TRIGGER: 10 tool calls (threshold 10) — generate insight: .omc/state/session-insights.md
+⚡ INSIGHT TRIGGER: 10 tool calls (threshold 10) — generate insight: .omc/state/session-insights.md

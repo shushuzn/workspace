@@ -7,11 +7,11 @@
       "trigger": "PostToolUse",
       "description": "Count tool calls → fire when threshold reached",
       "conditions": {
-        "minToolCount": 10,
-        "minToolVelocity": 2,
-        "minErrorFreq": 3,
-        "minBashRatio": 0.3,
-        "minRecurrence": 2
+        "minToolCount": 1,
+        "minToolVelocity": 0,
+        "minErrorFreq": 0,
+        "minBashRatio": 0,
+        "minRecurrence": 0
       },
       "priority": 10,
       "blocks": ["active-learn"],

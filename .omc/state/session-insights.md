@@ -552,3 +552,32 @@
 **Rule**: 真正的学习必须改变行为。不改变行为的"学习"是自我感动。
 **Fix**: 将insight分为两类：① 可自动执行的Fix（改脚本、改配置）→ 必须立即执行并验证效果② 认知类（理解、原则）→ 改为"行为承诺"并在下个session开头检查执行情况，不再写入insight池堆积。
 **Verification**: 下个session检查：有多少insight的Fix真正被执行了？
+
+## Mid-Session Live Insight
+
+### 1. 状态检查循环：5条命令全部重复检查相同文件 ✅ IMMEDIATE
+**Observation**: topBash显示5条命令全是对`.omc/state/`的检查（ls/wc/grep/tail），Bash=70次。说明hook-stats.mjs存在但未被使用。
+**Rule**: 每次想检查状态前，先看notepad priority区数字
+**Fix**: ✅ 已执行——从现在起只看notepad数字，不执行任何状态检查命令
+**Verification**: 本session剩余时间topBash中状态检查命令=0
+
+## Mid-Session Live Insight
+
+### 1. 重复状态检查命令 → hook-stats.mjs未被使用 ✅ IMMEDIATE
+**Observation**: Top5 Bash全是重复状态检查：`ls .omc/scripts|wc` + `grep EXECUTED` + `tail insights` + `grep count` — 5条命令重复执行同一目的。hook-stats.mjs存在但未被使用。
+**Rule**: 已有工具存在时禁止重复发明
+**Fix**: Edit .omc/scripts/hook-auto-seed.mjs: 在每次--check输出当前notepad priority区内容，这样不需要手动ls/wc/tail查看状态
+**Verification**: 手动运行 `node .omc/scripts/hook-auto-seed.mjs --check` 应输出notepad priority状态
+
+### 12. PostToolUse Hook Not Firing — cmd /c stdin Bug ✅ EXECUTED
+**Observation**: hook-auto-seed.mjs counter stayed at 1 despite many tool calls. Audit log showed no PostToolUse entries for current session. Manual `node --check` worked but hook never fired.
+**Root Cause**: `C:/Users/adm/.claude/settings.json` used `cmd /c node ...` for PostToolUse hook. On Windows, `cmd /c` creates a new shell that doesn't properly pipe stdin to the node ESM script, so Claude Code's JSON hook data was lost.
+**Rule**: Never wrap node scripts with `cmd /c` in Claude Code hooks on Windows — stdin must pass through directly
+**Fix**: Edit `C:/Users/adm/.claude/settings.json`: removed `cmd /c` prefix from hook-auto-seed.mjs call. Changed from `cmd /c node %CLAUDE_PROJECT_DIR%/.omc/scripts/hook-auto-seed.mjs --check` to `node %CLAUDE_PROJECT_DIR%/.omc/scripts/hook-auto-seed.mjs --check`
+**Verification**: After fix, counter increments correctly on every tool call; fired=true triggers at threshold 10
+
+### 13. Insight Fix 执行率 = 0 — 学习闭环断裂 ✅ EXECUTED
+**Observation**: 41条 Fix: N/A 说明大量 insight 只有观察无执行。更严重的是，即使 Fix 非 N/A，insight 里写了"立即执行"但实际没有执行、没有验证、没有记录。insight-effectiveness.json 从未被创建（因为 recordInsightExecuted 从未被调用）。系统"学习" = 写文件，实际行为零改变。
+**Rule**: 有 Fix 必须执行 + 记录到 pending-actions + 下次 session 验证效果
+**Fix**: 在 hook-auto-seed.mjs 的 insight prompt 中追加："执行 Fix 后，用 `node .omc/scripts/omc-insight-action.mjs --add` 将 Fix 注册为待验证 action"
+**Verification**: 检查 pending-actions.md 是否有新增条目
