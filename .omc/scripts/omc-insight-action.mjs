@@ -33,6 +33,7 @@ const ERROR_CLASS_MAP = [
   { cls: 'network-fail', kws: ['network', 'connection', 'timeout'] },
   { cls: 'null-undefined', kws: ['null', 'undefined'] },
   { cls: 'git-clean-fd', kws: ['git clean', 'lf.*crlf', 'hook declined'] },
+  { cls: 'self-reflect', kws: ['require(', '未测试', '未验证', '未接入', '未修复', '没检查', '没问自己'] },
 ];
 
 function detectErrorClass(text) {

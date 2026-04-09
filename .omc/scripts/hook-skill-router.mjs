@@ -173,7 +173,7 @@ async function route(event, trigger) {
 }
 
 // ── Fire skills ───────────────────────────────────────────────────────────────
-function fireSkills(skillNames, event) {
+async function fireSkills(skillNames, event) {
   const SCRIPTS_DIR = __dirname;
   const scriptMap = {
     'auto-seed': { script: 'hook-auto-seed.mjs', args: ['--check'] },
@@ -182,7 +182,7 @@ function fireSkills(skillNames, event) {
     'meta-audit': { script: 'hook-session-end-drain.mjs', args: ['--step9-only'] },
   };
 
-  const { spawn } = require('child_process');
+  const { spawn } = await import('child_process');
 
   for (const name of skillNames) {
     const cfg = scriptMap[name];
@@ -216,7 +216,7 @@ async function main() {
       const trigger = event.hook_event_name || 'PostToolUse';
       const skills = await route(event, trigger);
       if (skills.length > 0) {
-        fireSkills(skills, event);
+        await fireSkills(skills, event);
         console.log(`[skill-router] triggered: ${skills.join(', ')}`);
       }
     });
