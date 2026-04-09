@@ -33,7 +33,9 @@ const NOTPAD_FILE = resolve(__dirname, '../notepad.md');
 
 const THRESHOLD = 10;
 const PATTERN_WINDOW = 20;   // Track last N commands
-const PATTERN_REPEAT = 3;   // Trigger after 3x repetition
+const PATTERN_REPEAT = 3;    // Trigger after 3x repetition
+const DEBUG_LOOP_THRESHOLD = 3; // Edit+Bash same-target cycle count
+const ERROR_REPEAT_THRESHOLD = 2; // Same error message repeat count
 
 function readState() {
   if (!existsSync(STATE_FILE)) return { count: 0, fired: false, sessionId: null };
@@ -91,6 +93,142 @@ function normalizeCmd(cmd) {
     .replace(/\/c\/Users\/[^\/]+/g, '<HOME>')
     .replace(/\/[^/\s]+(?:\/[^/\s]+){2,}/g, '<PATH>')
     .slice(0, 80);
+}
+
+// Normalize error message for pattern matching
+function normalizeError(err) {
+  if (!err) return '';
+  return err
+    .replace(/\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}:\d{2}/g, '<TS>')
+    .replace(/\b\d{5,}\b/g, '<N>')
+    .replace(/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}/g, '<UUID>')
+    .replace(/\/c\/Users\/[^\/]+/g, '<HOME>')
+    .replace(/\/[^:\/\s]+:\d+/g, '<FILE:LINE>')
+    .replace(/Error:\s*.+/, 'Error: <MSG>')
+    .replace(/Exception in thread.+/, 'Exception: <THREAD>')
+    .slice(0, 120);
+}
+
+const ERROR_PATTERN_FILE = resolve(STATE_DIR, 'auto-seed-errors.json');
+const DEBUG_LOOP_FILE = resolve(STATE_DIR, 'auto-seed-debugloop.json');
+
+function readErrorPatterns() {
+  if (!existsSync(ERROR_PATTERN_FILE)) return { errors: [], sessionId: null };
+  try { return JSON.parse(readFileSync(ERROR_PATTERN_FILE, 'utf-8')); }
+  catch { return { errors: [], sessionId: null }; }
+}
+
+function writeErrorPatterns(p) { writeFileSync(ERROR_PATTERN_FILE, JSON.stringify(p), 'utf-8'); }
+
+function readDebugLoop() {
+  if (!existsSync(DEBUG_LOOP_FILE)) return { cycles: [], sessionId: null };
+  try { return JSON.parse(readFileSync(DEBUG_LOOP_FILE, 'utf-8')); }
+  catch { return { cycles: [], sessionId: null }; }
+}
+
+function writeDebugLoop(p) { writeFileSync(DEBUG_LOOP_FILE, JSON.stringify(p), 'utf-8'); }
+
+// Detect git commit from bash commands in transcript
+function detectGitCommit(sessionId) {
+  const path = `C:/Users/adm/.claude/projects/D--OpenClaw-workspace/${sessionId}.jsonl`;
+  if (!existsSync(path)) return null;
+  try {
+    const lines = readFileSync(path, 'utf-8').split('\n').filter(Boolean);
+    for (const line of lines.slice(-50)) {
+      try {
+        const entry = JSON.parse(line);
+        const content = entry.message?.content;
+        if (!Array.isArray(content)) continue;
+        for (const b of content) {
+          if (b.type === 'tool_use' && b.name === 'Bash' && b.input?.command) {
+            const cmd = b.input.command;
+            if (/^git\s+(commit|push|add)\s+/.test(cmd) || cmd.includes('git commit')) {
+              const msg = cmd.match(/-m\s+["'](.+?)["']/)?.[1] || cmd.slice(0, 60);
+              return { cmd: cmd.slice(0, 80), msg };
+            }
+          }
+        }
+      } catch {}
+    }
+  } catch {}
+  return null;
+}
+
+// Detect repeated Bash errors in transcript (returns error pattern if repeated)
+function detectErrorRepeat(sessionId) {
+  const path = `C:/Users/adm/.claude/projects/D--OpenClaw-workspace/${sessionId}.jsonl`;
+  if (!existsSync(path)) return null;
+  const p = readErrorPatterns();
+  const recent = p.sessionId !== sessionId ? [] : p.errors;
+  try {
+    const lines = readFileSync(path, 'utf-8').split('\n').filter(Boolean);
+    const newErrors = [];
+    for (const line of lines.slice(-100)) {
+      try {
+        const entry = JSON.parse(line);
+        const content = entry.message?.content;
+        if (!Array.isArray(content)) continue;
+        for (const b of content) {
+          if (b.type === 'tool_use' && b.name === 'Bash' && b.output) {
+            const out = b.output || '';
+            if (/error|exception|failed|cannot|unable|not found/i.test(out)) {
+              newErrors.push(normalizeError(out));
+            }
+          }
+        }
+      } catch {}
+    }
+    const allErrs = [...recent, ...newErrors];
+    const freq = {};
+    for (const e of allErrs) { if (e) freq[e] = (freq[e] || 0) + 1; }
+    const repeated = Object.entries(freq).find(([, c]) => c >= ERROR_REPEAT_THRESHOLD);
+    writeErrorPatterns({ errors: allErrs.slice(-30), sessionId });
+    if (repeated) return { pattern: repeated[0], count: repeated[1] };
+  } catch {}
+  return null;
+}
+
+// Detect Edit+Bash same-target debug loop (same file path cycled > N times)
+function detectDebugLoop(sessionId) {
+  const path = `C:/Users/adm/.claude/projects/D--OpenClaw-workspace/${sessionId}.jsonl`;
+  if (!existsSync(path)) return null;
+  const p = readDebugLoop();
+  const recent = p.sessionId !== sessionId ? [] : p.cycles;
+  try {
+    const lines = readFileSync(path, 'utf-8').split('\n').filter(Boolean);
+    const edits = [];
+    for (const line of lines.slice(-100)) {
+      try {
+        const entry = JSON.parse(line);
+        const content = entry.message?.content;
+        if (!Array.isArray(content)) continue;
+        for (const b of content) {
+          if (b.type === 'tool_use') {
+            if (b.name === 'Edit' && b.input?.file_path) {
+              edits.push({ file: b.input.file_path, type: 'edit' });
+            } else if (b.name === 'Bash' && b.input?.command) {
+              const f = b.input.command.match(/\s([^\s]+\.(js|ts|mjs|cjs|py|sh|json|md|yml|yaml|css|html))\s*$/)?.[1];
+              if (f) edits.push({ file: f, type: 'bash' });
+            }
+          }
+        }
+      } catch {}
+    }
+    // Count edit→bash cycles on same target
+    const cycles = [];
+    for (let i = 1; i < edits.length; i++) {
+      if (edits[i].type === 'bash' && edits[i - 1].type === 'edit' &&
+          edits[i].file === edits[i - 1].file) {
+        cycles.push(edits[i].file);
+      }
+    }
+    const freq = {};
+    for (const f of cycles) { freq[f] = (freq[f] || 0) + 1; }
+    const repeated = Object.entries(freq).find(([, c]) => c >= DEBUG_LOOP_THRESHOLD);
+    writeDebugLoop({ cycles: [...recent, ...cycles].slice(-20), sessionId });
+    if (repeated) return { file: repeated[0], count: repeated[1] };
+  } catch {}
+  return null;
 }
 
 // Extract work output text from transcript (called ONLY when triggering)
@@ -286,6 +424,40 @@ async function main() {
     const freshState = readState();
     const newCount = freshState.count + 1;
     writeState({ ...freshState, count: newCount });
+
+    // Enhanced proactive triggers: check git commits, error repeats, debug loops
+    if (!freshState.fired) {
+      // 1. Git commit → "good work" insight (highest priority, no threshold needed)
+      const gitCommit = detectGitCommit(currentSession);
+      if (gitCommit) {
+        writeState({ ...freshState, count: newCount, fired: true });
+        const msg = writeTrigger(currentSession, newCount, null, `git commit: ${gitCommit.msg}`, `git:${gitCommit.cmd.slice(0, 40)}`);
+        console.log(msg);
+        return;
+      }
+
+      // 2. Error repeat → insight about avoiding the error
+      const errRepeat = detectErrorRepeat(currentSession);
+      if (errRepeat) {
+        writeState({ ...freshState, count: newCount, fired: true });
+        const toolStats = readLiveToolStats(currentSession);
+        const workOutput = extractWorkOutput(currentSession, 0, newCount);
+        const msg = writeTrigger(currentSession, newCount, toolStats, workOutput, `error-repeat:${errRepeat.pattern}`);
+        console.log(msg);
+        return;
+      }
+
+      // 3. Debug loop → insight about fixing the pattern
+      const debugLoop = detectDebugLoop(currentSession);
+      if (debugLoop) {
+        writeState({ ...freshState, count: newCount, fired: true });
+        const toolStats = readLiveToolStats(currentSession);
+        const workOutput = extractWorkOutput(currentSession, 0, newCount);
+        const msg = writeTrigger(currentSession, newCount, toolStats, workOutput, `debug-loop:${debugLoop.file}`);
+        console.log(msg);
+        return;
+      }
+    }
 
     if (newCount >= THRESHOLD && !freshState.fired) {
       writeState({ ...freshState, count: newCount, fired: true });
