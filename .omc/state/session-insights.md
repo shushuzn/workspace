@@ -491,7 +491,23 @@
 **Rule**: Before suggesting a new script, read .omc/scripts/hook-*.mjs to check if it already exists. Repeated suggestions to create existing tools waste insight cycles.
 **Fix**: Audit all 20 hook scripts, document each one's purpose, remove duplicates. For this session: use existing hook-stats.mjs for state inspection instead of 5 manual commands.
 
-### 37. [Active learning hook triggers on meaningless test output]
+### 37. [Active learning hook triggers on meaningless test output] ✅ EXECUTED
 **Observation**: hook-active-learn.mjs triggered on test Write ("hello world" to test.txt) — no real work was done, but system still generated a trigger. The trigger file contains meaningless content because the "work" was just a test.
 **Rule**: Active learning should filter out test/debug operations. A test file write is not learning material.
 **Fix**: In isMeaningfulWork(), add: reject if file_path ends in .txt, .test.*, .spec.*, or contains "test" in path.
+**Verification**: Fix confirmed — isMeaningfulWork() at line 55 now has `/\.(txt|test\.|spec\.|tmp|log)$/.test(fp)` filter.
+
+---
+
+### 38. [Session-insights auto-seed counter from prior session still active] ✅ EXECUTED
+**Verification**: hook-auto-seed.mjs lines 239-244 already checks `state.sessionId === currentSession` and resets to `{ count: 0, fired: false, sessionId: currentSession }` on mismatch.
+
+---
+**Observation**: auto-seed-counter.json shows `sessionId: "7f0f400f-6043-444b-943b-2760b0a745c6"`, count: 2204, threshold: 10, triggeredAt: "2026-04-08T19:45:28.102Z" — but current session has count:0, fired:false. The counter is stale from yesterday's session.
+**Rule**: auto-seed-counter is per-session; new session starts at zero but trigger file persists from prior session.
+**Fix**: Update hook-auto-seed.mjs to check sessionId mismatch and reset counter on session change.
+
+### 39. [auto-insight-trigger.json not cleared on session change] ✅ EXECUTED
+**Observation**: auto-insight-trigger.json was NOT cleared when session changed, leaving stale content (count:2204 from prior session) even though auto-seed-counter.json correctly reset.
+**Fix**: Added `if (existsSync(TRIGGER_FILE)) writeFileSync(TRIGGER_FILE, '', 'utf-8');` at both session reset points in hook-auto-seed.mjs.
+**Verification**: `node hook-auto-seed.mjs --reset` now produces empty file (confirmed with `cat`).

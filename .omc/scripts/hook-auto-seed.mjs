@@ -242,6 +242,7 @@ async function main() {
   if (args.reset) {
     writeState({ count: 0, fired: false, sessionId: currentSession });
     writePatterns({ cmds: [], sessionId: currentSession });
+    if (existsSync(TRIGGER_FILE)) writeFileSync(TRIGGER_FILE, '', 'utf-8'); // clear stale trigger
     console.log('counter + patterns reset');
     return;
   }
@@ -251,6 +252,7 @@ async function main() {
     if (!sameSession) {
       writeState({ count: 0, fired: false, sessionId: currentSession });
       writePatterns({ cmds: [], sessionId: currentSession });
+      if (existsSync(TRIGGER_FILE)) writeFileSync(TRIGGER_FILE, '', 'utf-8'); // clear stale trigger
     }
     const cmd = args.cmd || '';
     if (!cmd) return;
@@ -279,6 +281,7 @@ async function main() {
     if (!sameSession) {
       writeState({ count: 0, fired: false, sessionId: currentSession });
       writePatterns({ cmds: [], sessionId: currentSession });
+      if (existsSync(TRIGGER_FILE)) writeFileSync(TRIGGER_FILE, '', 'utf-8'); // clear stale trigger
     }
     const freshState = readState();
     const newCount = freshState.count + 1;
