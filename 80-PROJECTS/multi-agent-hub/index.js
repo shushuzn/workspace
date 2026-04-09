@@ -1442,6 +1442,7 @@ function parseArgs(argv) {
   let customInitialTemp = null;
   let mode = MODE_DISCUSS;
   let exportSummary = false;
+  let exportCsv = false;
 
   // 离线命令：--list, --replay, --stats, --leaderboard
   if (args.includes('--list')) {
@@ -1503,6 +1504,7 @@ function parseArgs(argv) {
     mode,
     audienceMode: args.includes('--audience'),
     exportSummary: args.includes('--export-summary'),
+    exportCsv: args.includes('--export-csv'),
   };
 }
 
@@ -1523,6 +1525,7 @@ function printHelp() {
   -t, --temp <T>       初始温度 (默认 1.2, 最大 2.0)
   --debate              启用辩论赛模式（正反双方明确立场）
   --export-summary      输出标准化 Markdown 摘要（发言摘要表格、立场分布、ΔS峰值）
+  --export-csv          将每轮温度/能量/ΔS导出为CSV文件
   --list              查看辩论记录索引
   --replay <id>       回放指定辩论
   --stats             查看辩论统计
@@ -1558,7 +1561,7 @@ function printHelp() {
 
 // ─── 主函数 ───────────────────────────────────────────
 async function main() {
-  let { topic, rounds, customInitialTemp, mode, audienceMode, exportSummary } = parseArgs(
+  let { topic, rounds, customInitialTemp, mode, audienceMode, exportSummary, exportCsv } = parseArgs(
     process.argv
   );
 
@@ -1816,6 +1819,18 @@ async function main() {
       printSummaryMarkdown(topic, roundResponses, roundStats, stats, summary, debateVotes);
     } else {
       printAnnealingReport(topic, rounds, stats, roundStats);
+    }
+
+    // ─── CSV导出 ──────────────────────────────────────────
+    if (exportCsv) {
+      const csvLines = ['round,temp,deltaS,quality,status'];
+      for (const s of roundStats) {
+        csvLines.push(`${s.round},${s.temp?.toFixed(4)??''},${s.deltaS?.toFixed(4)??''},${s.quality??''},${s.status??''}`);
+      }
+      const csv = csvLines.join('\n');
+      const path = `annealing_${Date.now()}.csv`;
+      require('fs').writeFileSync(path, csv);
+      console.log(`\n[CSV] Saved to ${path}`);
     }
 
     const filename = saveResult(
