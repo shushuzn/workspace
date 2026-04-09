@@ -704,16 +704,116 @@ function step8_healthCheck() {
     } catch {}
   }
 
-  if (issues.length === 0) {
+  // 6. Hook call chain verification: counter not incrementing (PostToolUse not calling --check)
+  // Compare transcript tool count vs counter count to detect hook failure
+  const transcriptPath = resolve(_TRANSCRIPT_BASE, `${SESSION_ID}.jsonl`);
+  let transcriptToolCount = 0;
+  if (existsSync(transcriptPath)) {
+    try {
+      const lines = readFileSync(transcriptPath, 'utf-8').split('\n').filter(Boolean);
+      for (const line of lines) {
+        try {
+          const entry = JSON.parse(line);
+          const content = entry.message?.content;
+          if (!Array.isArray(content)) continue;
+          for (const b of content) {
+            if (b.type === 'tool_use' && b.name) transcriptToolCount++;
+          }
+        } catch {}
+      }
+    } catch {}
+  }
+  if (existsSync(COUNTER_FILE)) {
+    try {
+      const counter = JSON.parse(readFileSync(COUNTER_FILE, 'utf-8'));
+      if (counter.sessionId === SESSION_ID && counter.count > 5) {
+        const ratio = transcriptToolCount / counter.count;
+        if (ratio > 3) {
+          issues.push(`⚠️ hook call chain broken: counter=${counter.count} but transcript~${transcriptToolCount} (ratio=${ratio.toFixed(1)} — PostToolUse may not be firing)`);
+        }
+      }
+      // Counter stuck at 0 despite high transcript tool count
+      if (counter.count === 0 && transcriptToolCount > 10) {
+        issues.push(`🔴 hook call chain dead: counter=0 but transcript has ${transcriptToolCount} tools — PostToolUse not calling --check at all`);
+      }
+    } catch {}
+  }
+
+  // ── Auto-heal: fix known broken states instead of just reporting ──
+  const autoFixed = [];
+
+  // Heal 1: stale trigger file (counter.fired but trigger still exists)
+  if (existsSync(COUNTER_FILE) && existsSync(TRIGGER_FILE)) {
+    try {
+      const counter = JSON.parse(readFileSync(COUNTER_FILE, 'utf-8'));
+      if (counter.fired && counter.sessionId === SESSION_ID) {
+        try { unlinkSync(TRIGGER_FILE); autoFixed.push('cleared stale auto-insight-trigger (fired=true)'); } catch {}
+      }
+    } catch {}
+  }
+
+  // Heal 2: wrong-session counter (wasn't reset at session start)
+  if (existsSync(COUNTER_FILE)) {
+    try {
+      const counter = JSON.parse(readFileSync(COUNTER_FILE, 'utf-8'));
+      if (counter.sessionId !== SESSION_ID && counter.count > 0) {
+        // Reset it
+        writeFileSync(COUNTER_FILE, JSON.stringify({ count: 0, fired: false, sessionId: SESSION_ID }), 'utf-8');
+        autoFixed.push(`reset cross-session counter (was ${counter.sessionId?.slice(0,8)}, now ${SESSION_ID.slice(0,8)})`);
+      }
+    } catch {}
+  }
+
+  // Heal 3: stale active-learn trigger
+  if (existsSync(ACTIVE_LEARN_FILE)) {
+    try {
+      const trigger = JSON.parse(readFileSync(ACTIVE_LEARN_FILE, 'utf-8'));
+      if (trigger.sessionId && trigger.sessionId !== SESSION_ID) {
+        try { unlinkSync(ACTIVE_LEARN_FILE); autoFixed.push('cleared stale active-learn-trigger'); } catch {}
+      }
+    } catch {}
+  }
+
+  // Heal 4: stale pattern/error/debug files from wrong session
+  for (const [file, label] of [[PATTERN_FILE, 'patterns'], [ERROR_FILE, 'errors'], [DEBUG_FILE, 'debugloop']]) {
+    if (existsSync(file)) {
+      try {
+        const data = JSON.parse(readFileSync(file, 'utf-8'));
+        if (data.sessionId !== SESSION_ID) {
+          const defaultData = label === 'patterns'
+            ? { cmds: [], sessionId: SESSION_ID }
+            : label === 'errors'
+              ? { errors: [], sessionId: SESSION_ID }
+              : { cycles: [], sessionId: SESSION_ID };
+          writeFileSync(file, JSON.stringify(defaultData), 'utf-8');
+          autoFixed.push(`reset stale ${label} (was ${data.sessionId?.slice(0,8) || 'null'})`);
+        }
+      } catch {}
+    }
+  }
+
+  if (issues.length === 0 && autoFixed.length === 0) {
     log('step8: hook-health OK');
     return;
   }
 
-  log('step8: hook-health ISSUES: ' + issues.length);
-  for (const issue of issues) { log('  ' + issue); }
+  if (issues.length > 0) {
+    log('step8: hook-health ISSUES: ' + issues.length);
+    for (const issue of issues) { log('  ' + issue); }
+  }
+  if (autoFixed.length > 0) {
+    log('step8: AUTO-HEALED: ' + autoFixed.join('; '));
+  }
 
   // Write health report for next session injection
-  const report = `## Hook System Health Check\n\n${issues.map(i => `- ${i}`).join('\n')}\n\n_Caught by step8_healthCheck at session end._\n`;
+  let report = `## Hook System Health Check\n\n`;
+  if (issues.length > 0) {
+    report += issues.map(i => `- ${i}`).join('\n') + '\n\n';
+  }
+  if (autoFixed.length > 0) {
+    report += `**Auto-healed this session:**\n` + autoFixed.map(i => `- ✅ ${i}`).join('\n') + '\n\n';
+  }
+  report += `_step8_healthCheck at session end._\n`;
   writeFileSync(VERIFY_FILE_S, report, 'utf-8');
 }
 
