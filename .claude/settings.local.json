@@ -46,7 +46,8 @@
       "mcp__claude-flow__memory_store",
       "mcp__claude-flow__embeddings_status",
       "mcp__claude-flow__embeddings_init",
-      "mcp__claude-flow__hooks_intelligence_pattern-search"
+      "mcp__claude-flow__hooks_intelligence_pattern-search",
+      "mcp__claude-flow__memory_search"
     ]
   },
   "enableAllProjectMcpServers": true,

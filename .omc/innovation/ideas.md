@@ -11,3 +11,4 @@
 - [2026-04-09] STAGE [github-trending] [score:4×4=16] [f:2] RedditVideoMakerBot→wikipedia视频流水线 | benefit: 一句话命令生成完整视频，替代当前多脚本串联 | reason: RedditVideoMakerBot的TTS+剪辑一体化方案可整合 | approach: 分析其pipeline架构→提取narrative生成+字幕+TTS模块→集成进pipeline.py | shipped:2026-04-09
 - [2026-04-09] STAGE [github-trending] [score:3×3=9] [f:3] MegaTrain单卡训千亿参数→rl-trading | benefit: 突破GPU显存限制，在有限硬件上训更大模型 | reason: rl-trading当前受限于单卡显存 | approach: 研究MegaTrain的gradient checkpoint+offload策略→应用到RL训练循环 | shipped:2026-04-09
 - [2026-04-09] STAGE [AUTO:auto-learn] [score:3×4=12] [f:4] 主动学习：基于有意义工作触发insight | benefit: 从实际工作成果而非工具计数生成insight | reason: 新的active learning机制，替代旧的计数触发 | approach: PostToolUse检测有意义工作→记录→AI生成insight | shipped:2026-04-09
+- [2026-04-09] STAGE [AUTO:insight] [score:3×4=12] [f:4] 被动insight生成 | benefit: 工具调用达阈值触发insight | reason: 工具调用已达10次 | approach: hook触发→AI生成→session-insights.md→step7执行 | AUTO:1775710915640

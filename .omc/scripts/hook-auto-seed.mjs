@@ -662,10 +662,48 @@ async function main() {
       writeState({ ...freshState, count: newCount, fired: true });
       const toolStats = readLiveToolStats(currentSession);
       const workOutput = extractWorkOutput(currentSession, 0, newCount);
-      const msg = writeTrigger(currentSession, newCount, toolStats, workOutput, null, null, 0);
-      console.log(msg);
+      writeTrigger(currentSession, newCount, toolStats, workOutput, null, null, 0);
+      // IMMEDIATE INSIGHT PROMPT - output directly to stdout for current session
+      const topBash = toolStats?.topBash?.map((c, i) => `${i + 1}. ${c}`).join('\n') || '';
+      const insightPrompt = `
+
+## IN-SESSION INSIGHT TRIGGER (immediate)
+
+检测到 ${newCount} 次工具调用已达阈值，请立即生成 insight。
+
+工具统计: Bash=${toolStats?.tools?.Bash || 0}, Read=${toolStats?.tools?.Read || 0}, Edit=${toolStats?.tools?.Edit || 0}, Write=${toolStats?.tools?.Write || 0}
+${topBash ? `Top Bash:\n${topBash}` : ''}
+
+格式：
+### N. [标题]
+**Observation**: [具体观察]
+**Rule**: [规则]
+**Fix**: [必须是具体的代码/配置改动，如 "Edit src/config.ts: 添加 timeout 配置项"；如果观察问题只能通过行为改变解决而非代码，写 Fix: N/A]
+**Verification**: [如何客观验证效果]
+
+要求：
+1. Fix 非 N/A 时，**立即执行**（用 Edit/Write 工具修改文件），然后写 insight
+2. Fix: N/A 时只写 insight
+3. 追加 insight 到 .omc/state/session-insights.md，标记 Fix: N/A 或 Fix: ✅EXECUTED
+4. Fix 非 N/A 执行后，必须运行 \`node .omc/scripts/omc-insight-action.mjs --add "insight标题" --action "具体命令"\` 将 Fix 注册为待验证 action
+`;
+      console.log(insightPrompt);
     } else {
-      console.log(`count:${newCount}/${THRESHOLD}`);
+      // Output notepad priority context instead of raw count
+      let notepadStatus = '';
+      try {
+        const notepadPath = resolve(__dirname, '../notepad.md');
+        if (existsSync(notepadPath)) {
+          const lines = readFileSync(notepadPath, 'utf-8').split('\n');
+          const priorityIdx = lines.findIndex(l => l.startsWith('## Priority Context'));
+          if (priorityIdx !== -1) {
+            const nextSection = lines.findIndex((l, i) => i > priorityIdx && l.startsWith('##'));
+            const priorityLines = lines.slice(priorityIdx + 1, nextSection === -1 ? undefined : nextSection).filter(l => l.trim());
+            if (priorityLines.length > 0) notepadStatus = '\n' + priorityLines.slice(0, 3).join('\n');
+          }
+        }
+      } catch {}
+      console.log(`count:${newCount}/${THRESHOLD}${notepadStatus}`);
     }
     return;
   }
