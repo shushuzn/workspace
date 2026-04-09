@@ -403,10 +403,12 @@ ${meta.abstract || '(暂无摘要)'}
   console.log('\nTotal: ' + withMtime.length);
 
 } else if (cmd === 'linkcheck') {
+  const autoFix = process.argv.includes('--auto');
   const idx = loadIndex();
   const byId = {};
   for (const a of idx.articles) byId[a.id] = a;
   let errors = 0;
+  const fixes = [];
   for (const a of idx.articles) {
     const file = join(ARTICLES_DIR, a.file);
     if (!existsSync(file)) continue;
@@ -414,11 +416,38 @@ ${meta.abstract || '(暂无摘要)'}
     const links = [...content.matchAll(/\[\[([^\]]+)\]\]/g)].map(m => m[1]);
     for (const link of links) {
       const target = byId[link] || byId[link.replace(/\s+/g, '-').toLowerCase()];
-      if (!target) { console.log('  [BROKEN]', link, '-> in', a.title); errors++; }
+      if (!target) {
+        console.log('  [BROKEN]', link, '-> in', a.title);
+        errors++;
+        if (autoFix) {
+          // Try to find closest matching article id
+          const linkLower = link.toLowerCase().replace(/\s+/g, '-');
+          let bestMatch = null;
+          for (const id of Object.keys(byId)) {
+            if (id.includes(linkLower) || linkLower.includes(id)) {
+              bestMatch = id;
+              break;
+            }
+          }
+          if (bestMatch) {
+            const newContent = content.replace(/\[\[" + link + "\]\]/, '[[' + bestMatch + ']]');
+            writeFileSync(file, newContent, 'utf8');
+            fixes.push({ file: a.file, from: link, to: bestMatch });
+          }
+        }
+      }
     }
   }
   if (errors === 0) console.log('All links OK.');
-  else console.log('\nTotal broken:', errors);
+  else {
+    console.log('\nTotal broken:', errors);
+    if (autoFix && fixes.length > 0) {
+      console.log('\nAuto-fixed:', fixes.length);
+      for (const f of fixes) console.log('  ', f.file, ':', f.from, '->', f.to);
+    } else if (autoFix) {
+      console.log('  No auto-fix candidates found.');
+    }
+  }
 
 } else if (cmd === 'backlinks') {
   const title = process.argv[3];
