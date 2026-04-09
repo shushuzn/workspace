@@ -196,40 +196,26 @@ ${trigger.toolStats?.topBash?.length ? `Top Bash 命令：\n${trigger.toolStats.
     }
   }
 
-  // 8. Relevant past insights (context-aware retrieval)
+  // 8. Relevant past insights (semantic-style retrieval via keyword expansion)
   const cwd = process.env.OMC_CWD || process.env.PWD || '';
-  if (cwd && existsSync(INSIGHTS_FILE)) {
-    const kw = cwd.split(/[\/\\_\-\.]/).filter(Boolean).slice(-3); // last 3 path segments
-    const insights = readFileSync(INSIGHTS_FILE, 'utf-8');
-    const lines = insights.split('\n');
-    const scored = [];
-    let currentBlock = '';
-    let currentNum = 0;
+  if (cwd) {
+    try {
+      const { retrieve } = await import('./insight-semantic-retrieve.mjs');
+      const ctxKw = cwd.split(/[\/\\_\-\.\:]/).filter(Boolean).slice(-3).join(',');
+      const results = retrieve(ctxKw, []);
+      if (results.length > 0) {
+        const formatted = results.map(r => {
+          const fix = (r.fix.match(/Fix:\s*(.+?)(?:\n|$)/i)?.[1] || 'N/A').trim().slice(0, 120);
+          const status = r.executed ? '✅' : '⚠️';
+          return `### ${r.num}. ${r.title} ${status}\n> ${fix}${fix.length >= 120 ? '...' : ''}`;
+        }).join('\n\n');
+        parts.push(`## Relevant Past Insights (cwd: ${cwd.split(/[\/\\]/).slice(-2).join('/')})
 
-    for (const line of lines) {
-      const tm = line.match(/^### (\d+)\.\s+\[(.+?)\]/);
-      if (tm) {
-        if (currentNum > 0 && kw.some(k => currentBlock.toLowerCase().includes(k.toLowerCase()))) {
-          const relevance = kw.filter(k => currentBlock.toLowerCase().includes(k.toLowerCase())).length;
-          scored.push({ num: currentNum, block: currentBlock.slice(0, 300) });
-        }
-        currentNum = parseInt(tm[1]);
-        currentBlock = line;
-      } else {
-        currentBlock += ' ' + line;
+做任务前先检索相关 past insights，避免重复踩坑：
+
+${formatted}`);
       }
-    }
-    if (scored.length > 0) {
-      const top = scored.sort((a, b) => b.num - a.num).slice(0, 3);
-      const insightList = top.map(i => `### ${i.num}. [...]\n> ${i.block.slice(0, 150)}...`).join('\n\n');
-      parts.push(`## Relevant Past Insights (context: ${cwd.split(/[\/\\]/).slice(-2).join('/')})
-
-检索关键词: ${kw.join(', ')}
-
-${insightList}
-
-做任务前先检索相关 insight — 避免重复踩坑。`);
-    }
+    } catch { /* retrieval optional — don't fail inject on error */ }
   }
 
   if (parts.length === 0) return; // Nothing to inject
