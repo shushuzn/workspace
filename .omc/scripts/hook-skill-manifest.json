@@ -1,0 +1,55 @@
+{
+  "version": "1.0",
+  "description": "OMC Skill Manifest — dynamic trigger conditions for hooks",
+  "skills": {
+    "auto-seed": {
+      "name": "auto-seed",
+      "trigger": "PostToolUse",
+      "description": "Count tool calls → fire when threshold reached",
+      "conditions": {
+        "minToolCount": 10,
+        "minToolVelocity": 2,
+        "minErrorFreq": 3,
+        "minBashRatio": 0.3,
+        "minRecurrence": 2
+      },
+      "priority": 10,
+      "blocks": ["active-learn"],
+      "after": [],
+      "fatalTriggers": ["debug-loop"]
+    },
+    "active-learn": {
+      "name": "active-learn",
+      "trigger": "PostToolUse",
+      "description": "Fire on meaningful novel work (git commits, first-ever extensions, novel pipe combos)",
+      "conditions": {
+        "noveltyRequired": true,
+        "minToolCount": 3,
+        "excludePatterns": ["SELF_SCRIPTS", "node .omc/scripts/hook-"]
+      },
+      "priority": 20,
+      "blocks": [],
+      "after": []
+    },
+    "self-improve": {
+      "name": "self-improve",
+      "trigger": "SessionEnd",
+      "description": "Auto-apply dangerous rules on session end",
+      "conditions": {
+        "dangerousRulesOnly": true
+      },
+      "priority": 5,
+      "blocks": [],
+      "after": []
+    },
+    "meta-audit": {
+      "name": "meta-audit",
+      "trigger": "SessionEnd",
+      "description": "Self-audit: scan ineffective insights + rising error trends",
+      "conditions": {},
+      "priority": 50,
+      "blocks": [],
+      "after": ["self-improve"]
+    }
+  }
+}
