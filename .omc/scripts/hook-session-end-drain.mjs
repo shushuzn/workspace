@@ -947,6 +947,23 @@ function step9_selfAudit() {
     } catch {}
   }
 
+  // 3. Self-reflect failures: error class 'self-reflect' means implementation lacked post-execution review
+  if (existsSync(FREQ_FILE)) {
+    try {
+      const freq = JSON.parse(readFileSync(FREQ_FILE, 'utf-8'));
+      const selfReflect = freq.classes?.['self-reflect'];
+      if (selfReflect && selfReflect.totalCount >= 1) {
+        recommendations.push({
+          type: 'self-reflect',
+          severity: selfReflect.totalCount >= 2 ? 'high' : 'medium',
+          cls: 'self-reflect',
+          count: selfReflect.totalCount,
+          suggestion: `self-reflect failure ×${selfReflect.totalCount}: implementation lacked post-execution review — system bypassed its own check mechanism`,
+        });
+      }
+    } catch {}
+  }
+
   if (recommendations.length === 0) {
     // No issues found — still generate a proactive seed
     recommendations.push({
@@ -1008,6 +1025,9 @@ function generateSeedAction(issue) {
   }
   if (type === 'rising-error') {
     return `[score:3×3=9] [f:3] ${cls}根因分析 | benefit: 找到反复出现的${cls}错误根源 | reason: ${issue.count}次出现说明系统性而非偶发性 | approach: 收集${cls}的所有错误日志→归纳模式→建立防御规则`;
+  }
+  if (type === 'self-reflect') {
+    return `[score:4×3=12] [f:3] 自我审视机制修复 | benefit: 消除实现后不复查的惯性 | reason: ${issue.count}次未审视自己，说明系统缺乏自我检查点 | approach: 在hook-skill-router后增加post-execution审查→检查是否自问'还有什么缺陷'`;
   }
   return null;
 }
