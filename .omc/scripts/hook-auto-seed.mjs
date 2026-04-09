@@ -393,6 +393,8 @@ async function main() {
     writePatterns({ cmds: [], sessionId: currentSession });
     if (existsSync(TRIGGER_FILE)) writeFileSync(TRIGGER_FILE, '', 'utf-8'); // clear stale trigger
     if (existsSync(ACTIVE_LEARN_FILE)) writeFileSync(ACTIVE_LEARN_FILE, '', 'utf-8'); // clear active-learn
+    writeFileSync(ERROR_PATTERN_FILE, JSON.stringify({ errors: [], sessionId: currentSession }), 'utf-8');
+    writeFileSync(DEBUG_LOOP_FILE, JSON.stringify({ cycles: [], sessionId: currentSession }), 'utf-8');
     console.log('counter + patterns reset');
     return;
   }
@@ -404,6 +406,8 @@ async function main() {
       writePatterns({ cmds: [], sessionId: currentSession });
       if (existsSync(TRIGGER_FILE)) writeFileSync(TRIGGER_FILE, '', 'utf-8'); // clear stale trigger
       if (existsSync(ACTIVE_LEARN_FILE)) writeFileSync(ACTIVE_LEARN_FILE, '', 'utf-8'); // clear active-learn
+      writeFileSync(ERROR_PATTERN_FILE, JSON.stringify({ errors: [], sessionId: currentSession }), 'utf-8');
+      writeFileSync(DEBUG_LOOP_FILE, JSON.stringify({ cycles: [], sessionId: currentSession }), 'utf-8');
     }
     const cmd = args.cmd || '';
     if (!cmd) return;
@@ -434,6 +438,8 @@ async function main() {
       writePatterns({ cmds: [], sessionId: currentSession });
       if (existsSync(TRIGGER_FILE)) writeFileSync(TRIGGER_FILE, '', 'utf-8'); // clear stale trigger
       if (existsSync(ACTIVE_LEARN_FILE)) writeFileSync(ACTIVE_LEARN_FILE, '', 'utf-8'); // clear active-learn
+      writeFileSync(ERROR_PATTERN_FILE, JSON.stringify({ errors: [], sessionId: currentSession }), 'utf-8');
+      writeFileSync(DEBUG_LOOP_FILE, JSON.stringify({ cycles: [], sessionId: currentSession }), 'utf-8');
     }
     const freshState = readState();
     const newCount = freshState.count + 1;
