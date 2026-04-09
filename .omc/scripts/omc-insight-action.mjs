@@ -44,13 +44,15 @@ function detectErrorClass(text) {
 }
 
 function recordInsightExecuted(errorClass, insightTitle, fixAction) {
-  if (!errorClass) return;
+  // Always record - even without errorClass, track all executed Fixes
+  if (!insightTitle) return;
   try {
     const data = existsSync(INSIGHT_EFFECTIVENESS_FILE)
       ? JSON.parse(readFileSync(INSIGHT_EFFECTIVENESS_FILE, 'utf-8'))
       : { classes: {} };
-    if (!data.classes[errorClass]) data.classes[errorClass] = { insights: [], recurrenceAfter: [] };
-    const cls2 = data.classes[errorClass];
+    const bucket = errorClass || '_general';
+    if (!data.classes[bucket]) data.classes[bucket] = { insights: [], recurrenceAfter: [] };
+    const cls2 = data.classes[bucket];
     cls2.insights.push({
       title: insightTitle.slice(0, 80),
       fix: fixAction || '',
