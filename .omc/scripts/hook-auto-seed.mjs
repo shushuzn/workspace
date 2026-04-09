@@ -702,11 +702,11 @@ ${topBash ? `Top Bash:\n${topBash}` : ''}
 ### N. [标题]
 **Observation**: [具体观察]
 **Rule**: [规则]
-**Fix**: [必须是具体的代码/配置改动，如 "Edit src/config.ts: 添加 timeout 配置项"；如果观察问题只能通过行为改变解决而非代码，写 Fix: N/A]
+**Fix**: [必须是可直接运行的 shell 命令，如 `node --check` 或 `node .omc/scripts/fix-hook.mjs`；禁止写"修改文件"、"添加配置"等描述，必须是可执行的命令]
 **Verification**: [如何客观验证效果]
 
 要求：
-1. Fix 非 N/A 时，**立即执行**（用 Edit/Write 工具修改文件），然后写 insight
+1. Fix 非 N/A 时，**立即用 Bash 执行**该命令，然后将执行结果追加到 .omc/state/session-insights.md
 2. Fix: N/A 时只写 insight
 3. 追加 insight 到 .omc/state/session-insights.md，标记 Fix: N/A 或 Fix: ✅EXECUTED
 4. Fix 非 N/A 执行后，必须运行 \`node .omc/scripts/omc-insight-action.mjs --add "insight标题" --action "具体命令"\` 将 Fix 注册为待验证 action
