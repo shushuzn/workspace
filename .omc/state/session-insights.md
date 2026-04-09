@@ -511,3 +511,8 @@
 **Observation**: auto-insight-trigger.json was NOT cleared when session changed, leaving stale content (count:2204 from prior session) even though auto-seed-counter.json correctly reset.
 **Fix**: Added `if (existsSync(TRIGGER_FILE)) writeFileSync(TRIGGER_FILE, '', 'utf-8');` at both session reset points in hook-auto-seed.mjs.
 **Verification**: `node hook-auto-seed.mjs --reset` now produces empty file (confirmed with `cat`).
+
+### 40. [Hook 事件检测不是学习 — 是学习触发器]
+**Observation**: Hook 系统（hook-active-learn、hook-auto-seed）在 Write/Edit/10calls 时触发，写 trigger 文件、更新计数器——但这些都是机械的数据记录，没有任何模式提取或认知抽象发生。真正的"学习"发生在 agent 读取这些数据之后。
+**Rule**: Hook = 事件检测 + 状态记录，无认知；Agent 读取分析 = 主动学习。两者不是同一件事。
+**Fix**: N/A — 这是认知澄清，不是 bug。OMC 的 auto-insight 正确描述应为"Hook 检测有意义工作并通知 agent 去分析"，而非"Hook 在学习"。
