@@ -27,6 +27,16 @@ const COUNTER_FILE = resolve(STATE_DIR, 'auto-seed-counter.json');
 
 function log(...a) { console.error('[inject]', ...a); }
 
+// Get current session ID (same logic as hook-auto-seed.mjs)
+function getCurrentSessionId() {
+  if (process.env.OMC_SESSION_ID) return process.env.OMC_SESSION_ID;
+  if (process.env.OMC_TRANSCRIPT_PATH) {
+    const m = process.env.OMC_TRANSCRIPT_PATH.match(/([a-f0-9-]{36})\.jsonl$/);
+    if (m) return m[1];
+  }
+  return null;
+}
+
 // Check counter for interrupted insight generation
 function readCounter() {
   if (!existsSync(COUNTER_FILE)) return null;
@@ -72,10 +82,15 @@ async function main() {
   }
 
   // 1. Auto-insight trigger (highest priority — in-session insight generation)
+  // Only inject if trigger belongs to current session (session mismatch = stale)
+  const currentSession = getCurrentSessionId();
   if (existsSync(TRIGGER_FILE)) {
     try {
       const trigger = JSON.parse(readFileSync(TRIGGER_FILE, 'utf-8'));
-      const today = new Date().toISOString().split('T')[0];
+      if (trigger.sessionId && currentSession && trigger.sessionId !== currentSession) {
+        // Stale trigger from previous session, clear it
+        writeFileSync(TRIGGER_FILE, '', 'utf-8');
+      } else {
       const prompt = `## IN-SESSION INSIGHT TRIGGER
 
 检测到 ${trigger.count} 次工具调用（阈值 ${trigger.threshold}），请立即生成一条 insight。
@@ -98,16 +113,19 @@ ${trigger.toolStats?.topBash?.length ? `Top Bash 命令：\n${trigger.toolStats.
 - 写完后将 insight 追加到 .omc/state/session-insights.md
 - 如果 Fix 不是 N/A，同时追加到 .omc/state/pending-actions.md，格式："- [ ] title | action: Fix内容 | id: auto-[timestamp]"
 `;
-      parts.push(prompt);
+        parts.push(prompt);
+      }
     } catch { /* invalid JSON, ignore */ }
     try { writeFileSync(TRIGGER_FILE, '', 'utf-8'); } catch {}
   }
 
-  // 0b. Active-learn trigger (PreToolUse hook detected meaningful work)
+  // 0b. Active-learn trigger (PostToolUse detected meaningful work)
   if (existsSync(ACTIVE_LEARN_FILE)) {
     try {
       const trigger = JSON.parse(readFileSync(ACTIVE_LEARN_FILE, 'utf-8'));
-      const prompt = `## ACTIVE LEARN TRIGGER (PreToolUse)
+      // Only inject if trigger belongs to current session
+      if (!trigger.sessionId || !currentSession || trigger.sessionId === currentSession) {
+        const prompt = `## ACTIVE LEARN TRIGGER (PostToolUse)
 
 检测到有意义的工作完成：${trigger.work?.tool} — ${(trigger.work?.input?.file_path || trigger.work?.input?.command || '').slice(0, 60)}
 
@@ -122,7 +140,8 @@ ${trigger.prompt || trigger.work?.tool}
 **Fix**: N/A
 
 写完后追加到 .omc/state/session-insights.md`;
-      parts.push(prompt);
+        parts.push(prompt);
+      }
     } catch { /* invalid JSON, ignore */ }
     // Consume the trigger so it doesn't re-fire next session
     try { writeFileSync(ACTIVE_LEARN_FILE, '', 'utf-8'); } catch {}
