@@ -100,6 +100,7 @@ ${trigger.toolStats?.topBash?.length ? `Top Bash 命令：\n${trigger.toolStats.
 `;
       parts.push(prompt);
     } catch { /* invalid JSON, ignore */ }
+    try { writeFileSync(TRIGGER_FILE, '', 'utf-8'); } catch {}
   }
 
   // 0b. Active-learn trigger (PreToolUse hook detected meaningful work)
