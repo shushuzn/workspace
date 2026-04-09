@@ -88,6 +88,14 @@ function searchIndex(query, opts = {}) {
   const idx = JSON.parse(readFileSync(INDEX_FILE, 'utf-8'));
   const limit = opts.limit || 10;
   let results;
+  // Language filter: zh = Chinese-heavy, en = English-heavy
+  if (opts.lang) {
+    idx.entries = idx.entries.filter(e => {
+      const text = (e.title + ' ' + e.description).replace(/[^\u4e00-\u9fff]/g, '');
+      const zhRatio = text.length / (e.title.length + e.description.length + 1);
+      return opts.lang === 'zh' ? zhRatio > 0.3 : zhRatio <= 0.3;
+    });
+  }
   if (opts.fuzzy) {
     results = idx.entries
       .map(e => ({ ...e, _score: Math.max(fuzzyMatch(e.title, query), fuzzyMatch(e.description, query), fuzzyMatch(e.path, query)) }))
@@ -127,11 +135,12 @@ if (args.includes('--rebuild') || args.includes('-r')) {
   const q = get('--query');
   const limit = parseInt(get('--limit') || '10', 10);
   const json = args.includes('--json');
-  if (!q || q === true) { console.log('Usage: node wiki-indexer.mjs --query <term> [--limit N] [--json] [--fuzzy]'); process.exit(1); }
-  searchIndex(q, { json, limit, fuzzy: args.includes('--fuzzy') });
+  const langArg = get('--lang');
+  if (!q || q === true) { console.log('Usage: node wiki-indexer.mjs --query <term> [--limit N] [--json] [--fuzzy] [--lang zh|en]'); process.exit(1); }
+  searchIndex(q, { json, limit, fuzzy: args.includes('--fuzzy'), lang: langArg });
 } else {
   console.log('Usage:');
   console.log('  node shared/wiki-indexer.mjs --rebuild   # Build/update index');
   console.log('  node shared/wiki-indexer.mjs --search <query>  # Human-readable search');
-  console.log('  node shared/wiki-indexer.mjs --query <term> [--limit N] [--json] [--fuzzy]  # JSON search (for scripts)');
+  console.log('  node shared/wiki-indexer.mjs --query <term> [--limit N] [--json] [--fuzzy] [--lang zh|en]  # JSON search (for scripts)');
 }
