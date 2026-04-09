@@ -143,7 +143,7 @@ function detectGitCommit(sessionId) {
         for (const b of content) {
           if (b.type === 'tool_use' && b.name === 'Bash' && b.input?.command) {
             const cmd = b.input.command;
-            if (/^git\s+(commit|push|add)\s+/.test(cmd) || cmd.includes('git commit')) {
+            if (/\bgit\s+(?:commit|push|add)\b/.test(cmd)) {
               const msg = cmd.match(/-m\s+["'](.+?)["']/)?.[1] || cmd.slice(0, 60);
               return { cmd: cmd.slice(0, 80), msg };
             }
