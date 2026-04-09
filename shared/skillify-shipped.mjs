@@ -152,10 +152,13 @@ export async function skillifyOne(seed) {
   const skillContent = `---
 name: "${skillName.replace(/-/g, ' ')}"
 description: "${description.replace(/"/g, '\\"')}"
+version: 1.0.0
+triggers:
+  - ${seed.angle || skillName.replace(/-/g, ' ')}
 ---
-# ${skillName}
 
-## Overview
+# ${skillName.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
+
 ${description}
 
 ## Usage
