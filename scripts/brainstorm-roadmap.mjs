@@ -27,12 +27,16 @@ const seeds = [];
 let i = 0;
 while (i < lines.length) {
   const line = lines[i];
-  const headerMatch = line.match(/^- \[(\d{4}-\d{2}-\d{2}|\d{8})\] STAGE \[([^\]]+)\] \[score:(\d+×\d+=\d+)\] \[f:(\d+)\](?: \[focus:([^\]]+)\])?(?: \[angle:([^\]]+)\])?/);
+  const headerMatch = line.match(/^- \[(\d{4}-\d{2}-\d{2}|\d{8})\] (?:STAGE|seed) \[([^\]]+)\]/);
   if (!headerMatch) { i++; continue; }
 
-  const [, date, source, scoreStr, feas, focus, angle] = headerMatch;
-  const rawScoreStr = line.match(/\[score:([^\]]+)\]/)?.[1] || scoreStr;
-  const scoreMatch = scoreStr.match(/(\d+)[×x](\d+)=(\d+)/);
+  const [, date, source] = headerMatch;
+  // Extract score/feasibility directly from line (not from headerMatch groups)
+  const rawScoreStr = line.match(/\[score:([^\]]+)\]/)?.[1] || '';
+  const feas = line.match(/\[f:(\d+)\]/)?.[1] || '0';
+  const focus = line.match(/\[focus:([^\]]+)\]/)?.[1] || null;
+  const angle = line.match(/\[angle:([^\]]+)\]/)?.[1] || null;
+  const scoreMatch = rawScoreStr.match(/(\d+)[×x](\d+)=(\d+)/);
   const benefit = scoreMatch ? parseInt(scoreMatch[1], 10) : 0;
   const feasNum = scoreMatch ? parseInt(scoreMatch[2], 10) : 0;
   const score = scoreMatch ? parseInt(scoreMatch[3], 10) : 0;
@@ -51,9 +55,18 @@ while (i < lines.length) {
   const shipped = !!shippedMatch;
   const killed = !!killedMatch;
 
-  // Extract description (first line before |)
-  const descMatch = bodyText.match(/description:\s*(.+?)(?:\s*\| benefit:|$)/s);
-  const desc = descMatch ? descMatch[1].trim() : line.replace(/^\s*/, '').split('|')[0].trim();
+  // Extract description: seed entries have desc inline (after last ] before |), STAGE entries use body
+  let desc = '';
+  if (bodyText.includes('description:')) {
+    const descMatch = bodyText.match(/description:\s*(.+?)(?:\s*\| benefit:|$)/s);
+    desc = descMatch ? descMatch[1].trim() : '';
+  }
+  if (!desc) {
+    // For seed entries: desc is after the last ] and before first |
+    const lastBracket = line.lastIndexOf(']');
+    const after = line.slice(lastBracket + 1).trim();
+    desc = after.split('|')[0].trim();
+  }
 
   // Extract project: first try [focus:PROJECT], then → separator in desc
   let project = focus || null;
