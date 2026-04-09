@@ -20,6 +20,13 @@ export class PersistedRegistry extends Registry {
     save(path) {
         const file = path ?? this.registryFile;
         const registrations = this.registrations;
+        // Create backup before writing
+        if (existsSync(file)) {
+            try {
+                writeFileSync(file + '.bak', readFileSync(file), 'utf-8');
+            }
+            catch { /* ignore backup failures */ }
+        }
         writeFileSync(file, JSON.stringify({ version: 1, registrations }, null, 2), 'utf-8');
     }
     /**
@@ -34,14 +41,26 @@ export class PersistedRegistry extends Registry {
         try {
             const raw = JSON.parse(readFileSync(file, 'utf-8'));
             if (!raw?.registrations || !Array.isArray(raw.registrations)) {
-                console.warn(`[registry-persistence] Invalid registry file: ${file}`);
-                return false;
+                throw new Error('Invalid registry file structure');
             }
             this.registrations = raw.registrations;
             return true;
         }
         catch (err) {
             console.warn(`[registry-persistence] Failed to load registry from ${file}: ${err instanceof Error ? err.message : err}`);
+            // Try restoring from backup
+            const bak = file + '.bak';
+            if (existsSync(bak)) {
+                try {
+                    const rawBak = JSON.parse(readFileSync(bak, 'utf-8'));
+                    if (rawBak?.registrations && Array.isArray(rawBak.registrations)) {
+                        console.warn(`[registry-persistence] Restored registry from backup: ${bak}`);
+                        this.registrations = rawBak.registrations;
+                        return true;
+                    }
+                }
+                catch { /* backup also corrupted */ }
+            }
             return false;
         }
     }
