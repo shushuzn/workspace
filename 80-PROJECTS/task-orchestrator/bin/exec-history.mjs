@@ -73,6 +73,27 @@ export function getBestAdapter(taskType) {
   return best;
 }
 
+/**
+ * Get statistics for a specific adapter.
+ * Returns { adapterId, avgDurationMs, successRate, count }
+ */
+export function getAdapterStats(adapterId) {
+  if (!existsSync(HISTORY_FILE)) return null;
+  const lines = readFileSync(HISTORY_FILE, 'utf8').split('\n').filter(Boolean);
+  let total = 0, success = 0, totalDuration = 0;
+  for (const line of lines) {
+    try {
+      const e = JSON.parse(line);
+      if (e.adapterId !== adapterId) continue;
+      total++;
+      if (e.success) success++;
+      totalDuration += e.durationMs || 0;
+    } catch {}
+  }
+  if (total === 0) return null;
+  return { adapterId, avgDurationMs: totalDuration / total, successRate: success / total, count: total };
+}
+
 // CLI interface
 const cmd = process.argv[2];
 if (cmd === 'best') {
