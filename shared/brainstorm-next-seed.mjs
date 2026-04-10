@@ -69,6 +69,29 @@ function main() {
       }
     }
   }
+
+  // Derive from project-gaps — systemized project缺口清单
+  const GAPS_FILE = join(__DIR, '..', '.omc', 'state', 'project-gaps', 'project-gaps.json');
+  if (existsSync(GAPS_FILE)) {
+    try {
+      const gaps = JSON.parse(readFileSync(GAPS_FILE, 'utf-8'));
+      const projects = Object.keys(gaps.projects || {});
+      if (projects.length > 0) {
+        // Pick one random project gap to derive a seed
+        const pick = projects[Math.floor(Math.random() * projects.length)];
+        const missingList = gaps.projects[pick] || [];
+        const missing = missingList[0] || missing;
+        suggestions.push({
+          angle: pick === 'ws-level' ? 'ws-level' : 'feature',
+          focus: pick === 'ws-level' ? null : pick,
+          desc: `${pick}补充：${missing}`,
+          benefit: `填补${pick}项目的${missing}缺口`,
+          reason: `已知资源：${pick}项目已有基础；缺失环节：${missing}；连接方式：从project-gaps.json提取→生成对应seed`
+        });
+      }
+    } catch { /* ignore parse errors */ }
+  }
+
   if (failures.includes('Gate4b')) {
     suggestions.push({
       angle: 'skill-file',
