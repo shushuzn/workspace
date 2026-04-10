@@ -555,6 +555,42 @@
       ],
       "source": "IACR ePrint",
       "eprint": "2019/953"
+    },
+    {
+      "id": "plonk-permutations-over-lagrange-bases-for-oecumenical-noninteractive-arguments-of-knowledge",
+      "title": "PLONK: Permutations over Lagrange-bases for Oecumenical Noninteractive arguments of Knowledge",
+      "category": "security",
+      "file": "security/00-plonk-permutations-over-lagrange-bases-f/plonk-permutations-over-lagrange-bases-for-oecumenical-noninteractive-arguments-of-knowledge.md",
+      "tags": [
+        "论文解读",
+        "ePrint:2019/953"
+      ],
+      "source": "IACR ePrint",
+      "eprint": "2019/953"
+    },
+    {
+      "id": "plonk-permutations-over-lagrange-bases-for-oecumenical-noninteractive-arguments-of-knowledge",
+      "title": "PLONK: Permutations over Lagrange-bases for Oecumenical Noninteractive arguments of Knowledge",
+      "category": "security",
+      "file": "security/00-plonk-permutations-over-lagrange-bases-f/plonk-permutations-over-lagrange-bases-for-oecumenical-noninteractive-arguments-of-knowledge.md",
+      "tags": [
+        "论文解读",
+        "ePrint:2019/953"
+      ],
+      "source": "IACR ePrint",
+      "eprint": "2019/953"
+    },
+    {
+      "id": "bulletproofs-short-proofs-for-confidential-transactions-and-more",
+      "title": "Bulletproofs: Short Proofs for Confidential Transactions and More",
+      "category": "security",
+      "file": "security/00-bulletproofs-short-proofs-for-confidenti/bulletproofs-short-proofs-for-confidential-transactions-and-more.md",
+      "tags": [
+        "论文解读",
+        "ePrint:2017/1066"
+      ],
+      "source": "IACR ePrint",
+      "eprint": "2017/1066"
     }
   ],
   "categories": [

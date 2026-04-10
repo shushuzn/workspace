@@ -79,11 +79,14 @@ async function fetchEprintMeta(id) {
                      || html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i);
     const title = titleMatch ? titleMatch[1].replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim() : '';
 
-    // Authors: <span class="authorName">...</span> or meta tag
+    // Authors: try <span class="authorName">, then singular citation_author meta tags, then plural
     const authorMatches = [...html.matchAll(/<span class="authorName"[^>]*>([^<]+)<\/span>/g)].map(m => m[1]);
+    const metaAuthors = [...html.matchAll(/<meta name="citation_author" content="([^"]+)"/gi)].map(m => m[1]);
     const authors = authorMatches.length > 0
       ? authorMatches.join(', ')
-      : (html.match(/<meta name="citation_authors" content="([^"]+)"/i) || [])[1] || '';
+      : metaAuthors.length > 0
+        ? metaAuthors.join(', ')
+        : (html.match(/<meta name="citation_authors" content="([^"]+)"/i) || [])[1] || '';
 
     // Abstract: parse from HTML section after <h5>Abstract</h5>
     let abstract = '';
