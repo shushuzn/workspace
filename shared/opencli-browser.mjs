@@ -24,9 +24,10 @@ async function main() {
   // Dynamic import of BrowserBridge
   let BrowserBridge, isDaemonRunning;
   try {
-    const mod = await import('../../opencli/dist/browser/index.js');
+    const opencliDir = 'D:/OpenClaw/workspace/80-PROJECTS/opencli/dist/browser';
+    const mod = await import(`file:///${opencliDir}/index.js`);
     BrowserBridge = mod.BrowserBridge;
-    const daemonMod = await import('../../opencli/dist/browser/daemon-client.js');
+    const daemonMod = await import(`file:///${opencliDir}/daemon-client.js`);
     isDaemonRunning = daemonMod.isDaemonRunning;
   } catch (e) {
     console.error('[ERROR] Cannot import opencli:', e.message);

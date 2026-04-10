@@ -132,8 +132,8 @@ if (cmd === 'init') {
   for (const e of entries) {
     byAngle[e.angle] = (byAngle[e.angle] || 0) + 1;
     byF[e.f] = (byF[e.f] || 0) + 1;
-    if (e.desc.includes('shipped:')) shipped++;
-    else if (e.desc.includes('killed:')) killed++;
+    if (e.fullText.includes('shipped:')) shipped++;
+    else if (e.fullText.includes('killed:')) killed++;
     else seed++;
   }
   console.log(`Total ideas: ${total}`);
