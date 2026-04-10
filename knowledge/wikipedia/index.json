@@ -699,6 +699,54 @@
       ],
       "source": "IACR ePrint",
       "eprint": "2021/1599"
+    },
+    {
+      "id": "making-groth39s-zk-snark-simulation-extractable-in-the-random-oracle-model",
+      "title": "Making Groth&#39;s zk-SNARK Simulation Extractable in the Random Oracle Model",
+      "category": "security",
+      "file": "security/00-making-groth39s-zk-snark-simulation-extr/making-groth39s-zk-snark-simulation-extractable-in-the-random-oracle-model.md",
+      "tags": [
+        "论文解读",
+        "ePrint:2018/187"
+      ],
+      "source": "IACR ePrint",
+      "eprint": "2018/187"
+    },
+    {
+      "id": "non-interactive-universal-arguments",
+      "title": "Non-interactive Universal Arguments",
+      "category": "security",
+      "file": "security/00-non-interactive-universal-arguments/non-interactive-universal-arguments.md",
+      "tags": [
+        "论文解读",
+        "ePrint:2023/458"
+      ],
+      "source": "IACR ePrint",
+      "eprint": "2023/458"
+    },
+    {
+      "id": "incrementally-verifiable-computation-via-rate-1-batch-arguments",
+      "title": "Incrementally Verifiable Computation via Rate-1 Batch Arguments",
+      "category": "security",
+      "file": "security/00-incrementally-verifiable-computation-via/incrementally-verifiable-computation-via-rate-1-batch-arguments.md",
+      "tags": [
+        "论文解读",
+        "ePrint:2023/1394"
+      ],
+      "source": "IACR ePrint",
+      "eprint": "2023/1394"
+    },
+    {
+      "id": "notus-dynamic-proofs-of-liabilities-from-zero-knowledge-rsa-accumulators",
+      "title": "Notus: Dynamic Proofs of Liabilities from Zero-knowledge RSA Accumulators",
+      "category": "security",
+      "file": "security/00-notus-dynamic-proofs-of-liabilities-from/notus-dynamic-proofs-of-liabilities-from-zero-knowledge-rsa-accumulators.md",
+      "tags": [
+        "论文解读",
+        "ePrint:2024/395"
+      ],
+      "source": "IACR ePrint",
+      "eprint": "2024/395"
     }
   ],
   "categories": [
