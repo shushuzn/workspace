@@ -118,8 +118,31 @@ if (cmd === 'init') {
     console.log(`  angle: ${r.angle} | score: ${r.score} | f: ${r.f}`);
     console.log('');
   }
+} else if (cmd === 'stats') {
+  if (!existsSync(INDEX_FILE)) {
+    console.error('[ideas-semantic] Index not found. Run: node shared/ideas-semantic-search.mjs init');
+    process.exit(1);
+  }
+  const index = JSON.parse(readFileSync(INDEX_FILE, 'utf8'));
+  const { entries } = index;
+  const total = entries.length;
+  const byAngle = {};
+  const byF = {};
+  let shipped = 0, seed = 0, killed = 0;
+  for (const e of entries) {
+    byAngle[e.angle] = (byAngle[e.angle] || 0) + 1;
+    byF[e.f] = (byF[e.f] || 0) + 1;
+    if (e.desc.includes('shipped:')) shipped++;
+    else if (e.desc.includes('killed:')) killed++;
+    else seed++;
+  }
+  console.log(`Total ideas: ${total}`);
+  console.log(`  seed: ${seed} | shipped: ${shipped} | killed: ${killed}`);
+  console.log(`By difficulty (f):`, Object.entries(byF).sort((a,b)=>a[0]-b[0]).map(([k,v])=>`f:${k}:${v}`).join(' '));
+  console.log(`By angle:`, Object.entries(byAngle).map(([k,v])=>`${k}:${v}`).join(' '));
 } else {
   console.log('Usage:');
   console.log('  node shared/ideas-semantic-search.mjs init              # build index');
   console.log('  node shared/ideas-semantic-search.mjs search "query"    # search');
+  console.log('  node shared/ideas-semantic-search.mjs stats              # pool stats');
 }
