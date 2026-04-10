@@ -559,6 +559,16 @@ created: ${new Date().toISOString()}
   const noCategory = articles.filter(a => a.category === 'AI' && !a.file.includes('/AI/'));
   if (noCategory.length) errors.push(`${noCategory.length} article(s) fell back to AI category: ${noCategory.map(a => a.title).join(', ')}`);
 
+  // Check for incomplete articles (stub content)
+  const PLACEHOLDER_RE = /人工填写|（待填）|TODO|FIXME|placeholder/;
+  const incomplete = [];
+  for (const a of articles) {
+    try {
+      const content = readFileSync(join(__DIR, a.file), 'utf8');
+      if (PLACEHOLDER_RE.test(content)) incomplete.push(a.title);
+    } catch(e) {}
+  }
+
   const byCat = {};
   for (const a of articles) byCat[a.category] = (byCat[a.category]||0)+1;
   console.log(`[wiki] Rebuilt index: ${articles.length} articles`);
@@ -568,6 +578,11 @@ created: ${new Date().toISOString()}
     for (const e of errors) console.log('       -', e);
   } else {
     console.log('       All checks passed.');
+  }
+  if (incomplete.length > 0) {
+    console.log(`       WARNING: ${incomplete.length} article(s) with placeholder content:`);
+    for (const t of incomplete.slice(0, 10)) console.log('       -', t);
+    if (incomplete.length > 10) console.log('       ... and', incomplete.length - 10, 'more');
   }
 
 } else if (cmd === 'sync') {
