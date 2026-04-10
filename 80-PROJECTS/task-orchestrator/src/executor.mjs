@@ -21,9 +21,40 @@ export class Executor {
     registry;
     options;
     cache = new Map();
+    /** Path to persistent cache file */
+    cacheFile;
     constructor(registry, options = {}) {
         this.registry = registry;
         this.options = options;
+        // Load persisted cache if cacheTtlMs is enabled
+        if (this.options.cacheTtlMs) {
+            this.cacheFile = join(os.homedir(), '.unified-agent-cli', 'cache.json');
+            this.loadCache();
+            // Save cache on process exit
+            process.on('exit', () => this.saveCache());
+        }
+    }
+    loadCache() {
+        if (!this.cacheFile || !existsSync(this.cacheFile)) return;
+        try {
+            const data = JSON.parse(readFileSync(this.cacheFile, 'utf-8'));
+            const now = Date.now();
+            for (const [key, entry] of Object.entries(data)) {
+                if (entry.expiresAt > now) {
+                    this.cache.set(key, entry);
+                }
+            }
+            if (this.cache.size > 0) {
+                console.warn(`[cache] loaded ${this.cache.size} entries from ${this.cacheFile}`);
+            }
+        } catch {}
+    }
+    saveCache() {
+        if (!this.cacheFile || this.cache.size === 0) return;
+        try {
+            const obj = Object.fromEntries(this.cache);
+            writeFileSync(this.cacheFile, JSON.stringify(obj), 'utf-8');
+        } catch {}
     }
     /** Current runId (set at the start of execute()) */
     currentRunId;
