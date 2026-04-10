@@ -240,7 +240,7 @@
 
 - [20260410] seed [brainstorm] [score:2x4=8] [f:4] [angle:ws-level] shared/check-deps-health.mjs 增加 --watch 模式 | benefit: 监控依赖变化，异常时自动告警 | reason: 已知资源：check-deps-health.mjs存在基础健康检查；缺失环节：无watch模式持续监控；连接方式：chokidar watch node_modules变化→debounce→重新检查→异常时console.error | approach: 1. bash -c "ls shared/check-deps-health.mjs" | shipped:20260410
 
-- [20260410] seed [brainstorm] [score:3x3=9] [f:3] [angle:feature] [focus:opencli] opencli tui.ts 增加 tab 切换快捷键提示 | benefit: 新用户快速了解tui操作方式 | reason: 已知资源：tui.ts存在render函数；缺失环节：无快捷键提示；连接方式：在tui底部渲染快捷键提示→Tab/Space/Enter等 | approach: 1. bash -c "grep -n 'key\|Key\|shortcut' 80-PROJECTS/opencli/src/tui.ts | head -5"
+- [20260410] seed [brainstorm] [score:3x3=9] [f:3] [angle:feature] [focus:opencli] opencli tui.ts 增加 tab 切换快捷键提示 | benefit: 新用户快速了解tui操作方式 | reason: 已知资源：tui.ts存在render函数；缺失环节：无快捷键提示；连接方式：在tui底部渲染快捷键提示→Tab/Space/Enter等 | approach: 1. bash -c "grep -n 'key\|Key\|shortcut' 80-PROJECTS/opencli/src/tui.ts | head -5" | killed:20260422 REASON_INACCURATE_shortcut_hint_already_exists_line71
 
 - [20260422] seed [brainstorm] [score:3x3=9] [f:3] [angle:feature] [focus:task-orchestrator] executor.mjs adapter 超时后自动降级重试 | benefit: 网络抖动时adapter超时不立即失败，改用本地缓存或降级策略 | reason: 已知资源：executor.mjs:203 runAdapter()调用adapter返回Promise；缺失环节：无超时降级，adapter超时=chain失败；连接方式：setTimeout包装→超时时reject→触发fallbackRetry() | approach: 1. bash -c "grep -n 'runAdapter\|setTimeout\|catch' 80-PROJECTS/task-orchestrator/src/executor.mjs | head -10" | killed:20260422 REASON_INACCURATE_timeout_already_exists_at_line297
 
@@ -253,3 +253,11 @@
 - [20260422] seed [brainstorm] [score:3x3=9] [f:3] [angle:feature] [focus:wikipedia] wiki.mjs --smart-retry 失败后自动换源重试 | benefit: 某个数据源失败时自动换备源，提高pipeline成功率 | reason: 已知资源：wiki.mjs已有arXiv/Google Scholar抓取；缺失环节：单源失败即中断，无自动换源；连接方式：try-catch→失败时切换下一个source URL→继续 | approach: 1. bash -c "grep -n 'sourceUrls\|try\|catch' knowledge/wikipedia/wiki.mjs | head -15" | killed:20260422 REASON_APPROACH_INCORRECT_SS_needs_different_ID_format
 
 - [20260422] seed [brainstorm] [score:3x3=9] [f:3] [angle:feature] [focus:task-orchestrator] executor.mjs --dry-run 输出完整 step 依赖图 | benefit: 执行前可视化所有step的依赖关系，提前发现循环依赖 | reason: 已知资源：executor.mjs已有buildDependencyGraph()；缺失环节：只返回deps Map，无可视化输出；连接方式：增加--dry-run→调用buildDependencyGraph→输出mermaid格式 | approach: 1. bash -c "grep -n 'buildDependencyGraph\|return deps' 80-PROJECTS/task-orchestrator/src/executor.mjs | head -5" | shipped:20260422
+
+- [20260422] seed [brainstorm] [score:4x3=12] [f:3] [angle:skill-file] brainstorm-reason-guard.mjs 要求读取引用代码段才能写reason | benefit: 防止浅层grep导致reason不准，减少killed率 | reason: 已知资源：.omc/scripts/hook-pretool-reflect.mjs已有PreToolUse检查模式；缺失环节：brainstorm生成seed时无reason准确性检查，浅层grep导致reason不准；连接方式：seed生成后→读取引用代码段≥5行→验证"缺失环节"是否真实存在→通过才写pool | approach: 1. bash -c "echo 'brainstorm-reason-guard checks reason by reading 5+ lines before writing to pool'" | shipped:20260422
+
+- [20260422] seed [brainstorm] [score:4x3=12] [f:3] [angle:feature] [focus:wikipedia] wiki.mjs arXiv fetch 增加内存缓存 | benefit: 相同arXiv ID不重复请求，直接从缓存返回，节省网络时间 | reason: 已知资源：wiki.mjs:42 fetchArxivMeta(id)发送HTTP请求解析HTML；缺失环节：无缓存，重复ingest同一篇论文每次都重新请求arXiv；连接方式：增加Map<id, meta>缓存→fetch前先查缓存→命中直接返回 | approach: 1. Read knowledge/wikipedia/wiki.mjs lines 42-65 | shipped:20260422
+
+- [20260422] seed [shipped:20260422] tui.ts 新增 promptSelect 单选菜单函数
+
+- [20260422] seed [shipped:20260422] shared/check-git-dirty.mjs 检测workspace项目脏状态 | benefit: 防止在有未提交改动时做危险操作(如切分支/强制push)，保护工作进度 | reason: 已知资源：workspace有多个submodule和80-PROJECTS项目；缺失环节：每次做git危险操作前无统一脏状态检查；连接方式：git status --short遍历所有项目→脏则输出路径→阻断危险操作 | approach: 1. bash -c "echo 'check-git-dirty scans all repos for uncommitted changes'"

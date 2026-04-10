@@ -639,6 +639,66 @@
       ],
       "source": "IACR ePrint",
       "eprint": "2019/099"
+    },
+    {
+      "id": "proof-carrying-data-from-accumulation-schemes",
+      "title": "Proof-Carrying Data from Accumulation Schemes",
+      "category": "security",
+      "file": "security/00-proof-carrying-data-from-accumulation-sc/proof-carrying-data-from-accumulation-schemes.md",
+      "tags": [
+        "论文解读",
+        "ePrint:2020/499"
+      ],
+      "source": "IACR ePrint",
+      "eprint": "2020/499"
+    },
+    {
+      "id": "proof-carrying-data-without-succinct-arguments",
+      "title": "Proof-Carrying Data without Succinct Arguments",
+      "category": "security",
+      "file": "security/00-proof-carrying-data-without-succinct-arg/proof-carrying-data-without-succinct-arguments.md",
+      "tags": [
+        "论文解读",
+        "ePrint:2020/1618"
+      ],
+      "source": "IACR ePrint",
+      "eprint": "2020/1618"
+    },
+    {
+      "id": "nova-recursive-zero-knowledge-arguments-from-folding-schemes",
+      "title": "Nova: Recursive Zero-Knowledge Arguments from Folding Schemes",
+      "category": "security",
+      "file": "security/00-nova-recursive-zero-knowledge-arguments-/nova-recursive-zero-knowledge-arguments-from-folding-schemes.md",
+      "tags": [
+        "论文解读",
+        "ePrint:2021/370"
+      ],
+      "source": "IACR ePrint",
+      "eprint": "2021/370"
+    },
+    {
+      "id": "caulk-lookup-arguments-in-sublinear-time",
+      "title": "Caulk: Lookup Arguments in Sublinear Time",
+      "category": "security",
+      "file": "security/00-caulk-lookup-arguments-in-sublinear-time/caulk-lookup-arguments-in-sublinear-time.md",
+      "tags": [
+        "论文解读",
+        "ePrint:2022/621"
+      ],
+      "source": "IACR ePrint",
+      "eprint": "2022/621"
+    },
+    {
+      "id": "how-to-prove-any-np-statement-jointly-efficient-distributed-prover-zero-knowledge-protocols",
+      "title": "How to prove any NP statement jointly? Efficient Distributed-prover Zero-Knowledge Protocols",
+      "category": "security",
+      "file": "security/00-how-to-prove-any-np-statement-jointly-ef/how-to-prove-any-np-statement-jointly-efficient-distributed-prover-zero-knowledge-protocols.md",
+      "tags": [
+        "论文解读",
+        "ePrint:2021/1599"
+      ],
+      "source": "IACR ePrint",
+      "eprint": "2021/1599"
     }
   ],
   "categories": [
