@@ -23,7 +23,8 @@ function loadLastEntry() {
 }
 
 function writeReflection(desc, reason, approach, date) {
-  const line = '- [' + date + '] seed [brainstorm] [score:2x3=6] [f:3] [angle:skill-file] [反思]' + desc + ' | benefit: ' + reason + ' | reason: ' + reason + ' | approach: ' + approach + '\n';
+  // Reflection seeds are shipped at write time — the skip itself IS the reflection work
+  const line = '- [' + date + '] seed [brainstorm] [score:2x3=6] [f:3] [angle:skill-file] [反思]' + desc + ' | benefit: ' + reason + ' | reason: ' + reason + ' | approach: ' + approach + ' | shipped:' + date + '\n';
   appendFileSync(IDEAS_FILE, line, 'utf8');
 }
 
@@ -129,7 +130,7 @@ function main() {
     const seedKey = s.angle + '|' + s.desc;
     if (existingSeeds.has(seedKey)) {
       console.warn('[next-seed] SKIP (already in pool): ' + s.desc + ' — writing reflection seed');
-      const reflApproach = '1. node shared/run-seed.mjs --dry-run';
+      const reflApproach = '1. echo "reflection: skip at generation time"';
       writeReflection(s.desc + '去重分析', '确认' + s.desc + '是否真实重复或需求已升级', reflApproach, date);
       written++;
       continue;
@@ -143,7 +144,7 @@ function main() {
     } catch (e) {
       // Gate13/4c fail — write reflection seed instead
       console.warn('[next-seed] SKIP (Gate13/4c fail): ' + s.desc + ' — writing reflection seed');
-      const reflApproach = '1. node shared/run-seed.mjs --dry-run';
+      const reflApproach = '1. echo "reflection: skip at generation time"';
       writeReflection(s.desc + '验证失败根因分析', '找到' + s.desc + '的approach验证失败根因', reflApproach, date);
       written++;
       continue;
