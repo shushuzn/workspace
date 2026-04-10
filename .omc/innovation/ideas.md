@@ -260,4 +260,10 @@
 
 - [20260422] seed [shipped:20260422] tui.ts 新增 promptSelect 单选菜单函数
 
+- [20260422] seed [shipped:20260422] shared/check-git-dirty hookify规则 | benefit: 危险git操作前自动检测脏状态，无需手动调用 | reason: 已知资源：shared/check-git-dirty.mjs可检测11个workspace脏仓库（exit code 1输出）；缺失环节：hookify无自动调用，每次做危险git操作前需手动运行；连接方式：hookify规则→检测git命令→触发check-git-dirty.mjs→脏则拦截 | approach: 1. bash -c "echo 'hookify rule for check-git-dirty: detect git push/merge/reset and run check before executing'"
+
+- [20260422] seed [brainstorm] [score:2x5=10] [f:5] [angle:feature] [focus:agent-arena] agent-arena增加agent对战回放功能 | benefit: 玩家可以回顾历史对战，分析胜负原因 | reason: 已知资源：agent-arena/scripts/generate-levels.mjs可生成关卡；缺失环节：只有实时对战，无历史回放存储；连接方式：battle结果→写入replays/*.json→增加replay命令读取展示 | approach: 1. bash -c "echo 'agent-arena battle replay: store results to replays/ and add replay viewer command'"
+
+- [20260422] seed [brainstorm] [score:3x3=9] [f:3] [angle:ws-level] run-seed.mjs增加verbose模式输出详细信息 | benefit: 调试时能看到每步详细执行信息 | reason: 已知资源：run-seed.mjs已有基础执行逻辑；缺失环节：无verbose模式，出错时信息不足；连接方式：--verbose标志→输出每步详情→便于调试seed执行 | approach: 1. bash -c "echo 'run-seed.mjs verbose mode: add --verbose flag for detailed execution output'"
+
 - [20260422] seed [shipped:20260422] shared/check-git-dirty.mjs 检测workspace项目脏状态 | benefit: 防止在有未提交改动时做危险操作(如切分支/强制push)，保护工作进度 | reason: 已知资源：workspace有多个submodule和80-PROJECTS项目；缺失环节：每次做git危险操作前无统一脏状态检查；连接方式：git status --short遍历所有项目→脏则输出路径→阻断危险操作 | approach: 1. bash -c "echo 'check-git-dirty scans all repos for uncommitted changes'"
