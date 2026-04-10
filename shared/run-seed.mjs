@@ -138,6 +138,59 @@ if (validateApproach !== null) {
   process.exit(0);
 }
 
+// ── Dry-run: validate ALL numbered steps in approach ─────────────────────────
+if (dryRun) {
+  // Extract all numbered steps from the full approach text
+  const approachIdx = process.argv.indexOf('--dry-run');
+  const approachText = approachIdx !== -1 ? process.argv[approachIdx + 1] || '' : '';
+  if (!approachText) {
+    console.error('[DRY-RUN] No approach text provided after --dry-run');
+    process.exit(1);
+  }
+  const stepMatches = [...approachText.matchAll(/^\s*(\d+)\.\s+(.+)/gm)];
+  if (stepMatches.length === 0) {
+    console.error('[DRY-RUN] No numbered steps found in approach');
+    process.exit(1);
+  }
+  let pass = 0, fail = 0;
+  for (const m of stepMatches) {
+    const stepNum = m[1], stepText = m[2].trim();
+    // Reuse the same validation logic for each step
+    const firstStep = stepText;
+    const TOOL_PREFIXES = ['Edit ', 'Read ', 'Write ', 'Grep ', 'Glob ', 'Bash ', 'Search ', 'List ', 'Delete ', 'Create '];
+    if (TOOL_PREFIXES.some(p => firstStep.startsWith(p))) {
+      console.error(`[DRY-RUN] FAIL step ${stepNum}: tool-name command (requires Claude Code): ${firstStep.slice(0, 60)}`);
+      fail++; continue;
+    }
+    if (/^node\s+-[epc]\s+/i.test(firstStep)) {
+      console.error(`[DRY-RUN] FAIL step ${stepNum}: node -e/p/c not allowed`);
+      fail++; continue;
+    }
+    const EXEC_PREFIXES = ['python ', 'bash ', 'sh ', 'cd ', 'mkdir ', '//', '#', '/', 'echo '];
+    const isExecCommand = EXEC_PREFIXES.some(p => firstStep.startsWith(p)) || firstStep.match(/^[a-zA-Z]:\\/);
+    const isNodeScript = firstStep.match(/^node \S+\.(mjs|js)(\s|$)/) || firstStep.match(/^node\s+--/);
+    if (!isExecCommand && !isNodeScript) {
+      console.error(`[DRY-RUN] FAIL step ${stepNum}: no executable prefix: ${firstStep.slice(0, 60)}`);
+      fail++; continue;
+    }
+    // Check script path
+    const nodeScriptMatch = firstStep.match(/^node\s+(\S+\.(?:mjs|js))\b/i);
+    const pythonScriptMatch = firstStep.match(/^python\s+(\S+\.(?:py))\b/i);
+    if (nodeScriptMatch || pythonScriptMatch) {
+      const scriptName = (nodeScriptMatch || pythonScriptMatch)[1];
+      const scriptPath = join(__DIR, '..', scriptName);
+      if (!existsSync(scriptPath)) {
+        console.error(`[DRY-RUN] FAIL step ${stepNum}: script does not exist: ${scriptPath}`);
+        fail++; continue;
+      }
+    }
+    console.log(`[DRY-RUN] PASS step ${stepNum}: ${firstStep.slice(0, 80)}`);
+    pass++;
+  }
+  console.log(`[DRY-RUN] Summary: ${pass} passed, ${fail} failed`);
+  process.exit(fail > 0 ? 1 : 0);
+}
+
 // ── Parse ideas.md ───────────────────────────────────────────────────────────
 const content = readFileSync(IDEAS_PATH, 'utf-8');
 const lines = content.split('\n');
