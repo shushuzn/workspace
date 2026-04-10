@@ -687,47 +687,62 @@ Do not add explanations outside the JSON.`,
 
         const result = { spec: { passed: false, issues: [] }, code: { passed: false, issues: [] } };
 
-        for (const reviewer of reviewers) {
-            const done = await new Promise((resolve) => {
-                const promptFile = join(os.tmpdir(), `review-${randomUUID()}.txt`);
-                writeFileSync(promptFile, reviewer.prompt, 'utf-8');
-                const child = spawn('claude.cmd', ['--print', '--dangerously-skip-permissions', `--system-prompt-file=${promptFile}`], {
-                    shell: true,
-                    stdio: ['pipe', 'pipe', 'pipe'],
-                    windowsHide: true,
-                });
-                let stdout = '';
-                let stderr = '';
-                child.stdout.on('data', (d) => { stdout += d.toString(); });
-                child.stderr.on('data', (d) => { stderr += d.toString(); });
-                child.on('close', () => {
-                    try { rmSync(promptFile); } catch {}
-                    let parsed = null;
-                    try {
-                        // Extract JSON from response (may have markdown code blocks)
-                        const cleaned = stdout.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
-                        parsed = JSON.parse(cleaned);
-                    } catch (e) {
-                        // If JSON parse fails, treat as failure
-                        console.error(`[reviewer] parse error: ${e.message}`);
-                        parsed = { passed: false, issues: [`reviewer parse error: ${stderr || stdout || 'no output'}`.slice(0, 200)] };
+        // Run reviewers in parallel, each with 1 retry on timeout
+        await Promise.all(reviewers.map(async (reviewer) => {
+            for (let attempt = 1; attempt <= 2; attempt++) {
+                try {
+                    const res = await new Promise((resolve) => {
+                        const promptFile = join(os.tmpdir(), `review-${randomUUID()}.txt`);
+                        writeFileSync(promptFile, reviewer.prompt, 'utf-8');
+                        const child = spawn('claude.cmd', ['--print', '--dangerously-skip-permissions', `--system-prompt-file=${promptFile}`], {
+                            shell: true,
+                            stdio: ['pipe', 'pipe', 'pipe'],
+                            windowsHide: true,
+                        });
+                        let stdout = '';
+                        let stderr = '';
+                        child.stdout.on('data', (d) => { stdout += d.toString(); });
+                        child.stderr.on('data', (d) => { stderr += d.toString(); });
+                        child.on('close', () => {
+                            try { rmSync(promptFile); } catch {}
+                            let parsed = null;
+                            try {
+                                const cleaned = stdout.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
+                                parsed = JSON.parse(cleaned);
+                            } catch (e) {
+                                parsed = { passed: false, issues: [`reviewer parse error: ${stderr || stdout || 'no output'}`.slice(0, 200)] };
+                            }
+                            resolve({ parsed, stderr, stdout });
+                        });
+                        child.on('error', () => {
+                            try { rmSync(promptFile); } catch {}
+                            resolve({ parsed: null, stderr: '', stdout: '' });
+                        });
+                        // 60s timeout per reviewer (up from 30s)
+                        setTimeout(() => {
+                            child.kill();
+                            resolve({ parsed: null, stderr: 'timeout', stdout: '' });
+                        }, 60000);
+                    });
+
+                    if (res.parsed) {
+                        result[reviewer.name] = { passed: res.parsed.passed === true, issues: Array.isArray(res.parsed.issues) ? res.parsed.issues : [] };
+                    } else {
+                        // Timeout or spawn error — retry once
+                        if (attempt < 2) {
+                            await new Promise(r => setTimeout(r, 2000)); // 2s backoff
+                            continue;
+                        }
+                        result[reviewer.name] = { passed: false, issues: ['reviewer timeout (60s) or spawn error'] };
                     }
-                    result[reviewer.name] = { passed: parsed.passed === true, issues: Array.isArray(parsed.issues) ? parsed.issues : [] };
-                    resolve();
-                });
-                child.on('error', () => {
-                    try { rmSync(promptFile); } catch {}
-                    result[reviewer.name] = { passed: false, issues: ['reviewer spawn error'] };
-                    resolve();
-                });
-                // 30s timeout per reviewer
-                setTimeout(() => {
-                    child.kill();
-                    result[reviewer.name] = { passed: false, issues: ['reviewer timeout (30s)'] };
-                    resolve();
-                }, 30000);
-            });
-        }
+                    break; // success or exhausted retries
+                } catch {
+                    if (attempt === 2) {
+                        result[reviewer.name] = { passed: false, issues: ['reviewer error'] };
+                    }
+                }
+            }
+        }));
 
         return result;
     }
