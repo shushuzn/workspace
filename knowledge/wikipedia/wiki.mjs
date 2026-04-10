@@ -26,10 +26,23 @@ function saveIndex(idx) {
   writeFileSync(INDEX_JSON, JSON.stringify(idx, null, 2));
 }
 
+// ── Proxy helper ─────────────────────────────────────────────
+async function proxyAgent() {
+  const proxy = process.env.https_proxy || process.env.HTTPS_PROXY ||
+                process.env.http_proxy || process.env.HTTP_PROXY ||
+                process.env.ALL_PROXY || process.env.ALL_PROXY;
+  if (!proxy) return undefined;
+  try {
+    const { HttpsProxyAgent } = await import('https-proxy-agent');
+    return { agent: new HttpsProxyAgent(proxy) };
+  } catch { return undefined; }
+}
+
 // ── arXiv API ────────────────────────────────────────────────
 async function fetchArxivMeta(id) {
+  const opts = await proxyAgent() || {};
   try {
-    const res = await fetch(`http://arxiv.org/abs/${id}`);
+    const res = await fetch(`http://arxiv.org/abs/${id}`, opts);
     if (!res.ok) return null;
     const html = await res.text();
     const title = (html.match(/<title>([^<]+)<\/title>/i) || [])[1] || '';
@@ -43,8 +56,94 @@ async function fetchArxivMeta(id) {
       authors: authors.replace(/\s+/g, ' ').trim(),
       abstract: abstract.replace(/\s+/g, ' ').trim(),
       arxivId: ver,
+      source: 'arXiv',
+      url: `https://arxiv.org/abs/${ver}`,
       category: 'AI',
     };
+  } catch { return null; }
+}
+
+// ── IACR ePrint API ─────────────────────────────────────────
+async function fetchEprintMeta(id) {
+  const opts = await proxyAgent() || {};
+  try {
+    const res = await fetch(`https://eprint.iacr.org/${id}`, {
+      ...opts,
+      headers: { ...(opts.headers || {}), 'User-Agent': 'Mozilla/5.0 (compatible; wiki-bot/1.0)' }
+    });
+    if (!res.ok) return null;
+    const html = await res.text();
+    const titleMatch = html.match(/<meta name="citation_title" content="([^"]+)"/i)
+                     || html.match(/<h1[^>]*>([^<]+)<\/h1>/i);
+    const title = titleMatch ? titleMatch[1].replace(/\s+/g, ' ').trim() : '';
+    const authors = (html.match(/<meta name="citation_authors" content="([^"]+)"/i) || [])[1] || '';
+    const abstract = (html.match(/<meta name="citation_abstract" content="([^"]+)"/i) || [])[1] || '';
+    if (!title) return null;
+    return {
+      title,
+      authors: authors.replace(/\s+/g, ' ').trim(),
+      abstract: abstract.replace(/\s+/g, ' ').trim(),
+      eprintId: id,
+      source: 'IACR ePrint',
+      url: `https://eprint.iacr.org/${id}`,
+      category: 'security',
+    };
+  } catch { return null; }
+}
+
+// ── Semantic Scholar API ─────────────────────────────────────
+async function fetchSemanticScholarMeta(paperId) {
+  const opts = await proxyAgent() || {};
+  const apiKey = process.env.SEMANTIC_SCHOLAR_API_KEY;
+  const headers = apiKey ? { ...opts.headers, 'x-api-key': apiKey } : opts.headers;
+  try {
+    const res = await fetch(
+      `https://api.semanticscholar.org/graph/v1/paper/${paperId}?fields=title,authors,year,abstract,externalIds,venue`,
+      { ...opts, headers }
+    );
+    if (!res.ok) return null;
+    const j = await res.json();
+    if (!j.title) return null;
+    const authors = (j.authors || []).map(a => a.name).join(', ');
+    const arxivId = j.externalIds?.ArXiv;
+    const eprintId = j.externalIds?.Eprint;
+    const venue = j.venue || '';
+    let category = 'AI';
+    const secKeywords = ['security', 'cryptography', 'crypto', 'ieee', 'acm', 'usenix', 'ndss', 'oakland'];
+    if (secKeywords.some(k => venue.toLowerCase().includes(k))) category = 'security';
+    return {
+      title: j.title,
+      authors,
+      abstract: j.abstract || '',
+      year: j.year || '',
+      arxivId: arxivId || null,
+      eprintId: eprintId || null,
+      source: 'Semantic Scholar',
+      url: arxivId ? `https://arxiv.org/abs/${arxivId}` : (eprintId ? `https://eprint.iacr.org/${eprintId}` : `https://api.semanticscholar.org/paper/${paperId}`),
+      venue,
+      category,
+    };
+  } catch { return null; }
+}
+
+// ── Semantic Scholar Search ──────────────────────────────────
+async function searchSemanticScholar(query, year, limit = 10) {
+  const opts = await proxyAgent() || {};
+  const apiKey = process.env.SEMANTIC_SCHOLAR_API_KEY;
+  const headers = apiKey ? { ...opts.headers, 'x-api-key': apiKey } : opts.headers;
+  try {
+    const params = new URLSearchParams({
+      query,
+      fields: 'paperId,title,year,authors,abstract,externalIds,venue,citationCount',
+      limit: String(limit),
+    });
+    if (year) params.set('year', String(year));
+    const res = await fetch(`https://api.semanticscholar.org/graph/v1/paper/search?${params}`, { ...opts, headers });
+    if (!res.ok) {
+      if (res.status === 429) console.error('[wiki] Semantic Scholar rate limited. Get an API key: https://www.semanticscholar.org/product/api');
+      return null;
+    }
+    return await res.json();
   } catch { return null; }
 }
 
@@ -207,65 +306,85 @@ created: ${new Date().toISOString()}
   saveIndex(idx);
 
 } else if (cmd === 'ingest') {
-  const url = process.argv[3];
-  if (!url) { console.log('Usage: node wiki.mjs ingest <arxiv-url>'); process.exit(1); }
+  const rawUrl = process.argv[3];
+  if (!rawUrl) { console.log('Usage: node wiki.mjs ingest <url>'); process.exit(1); }
 
-  const idMatch = url.match(/(\d+\.\d+)/);
-  if (!idMatch) { console.error('[wiki] Invalid arXiv URL'); process.exit(1); }
-  const id = idMatch[1];
+  let meta;
+  let slug, slugDir, category, file, tags, tagLine;
 
-  console.log('[wiki] Fetching arXiv', id, '...');
-  const meta = await fetchArxivMeta(id);
-  if (!meta) { console.error('[wiki] Failed to fetch metadata'); process.exit(1); }
+  function writePaper(meta) {
+    slugDir = '00-' + slugify(meta.title).slice(0, 40);
+    category = meta.category || 'AI';
+    mkdirSync(join(ARTICLES_DIR, category, slugDir), { recursive: true });
+    slug = slugify(meta.title);
+    file = join(ARTICLES_DIR, category, slugDir, slug + '.md');
 
-  const slugDir = '00-' + slugify(meta.title).slice(0, 40);
-  const category = meta.category || 'AI';
-  mkdirSync(join(ARTICLES_DIR, category, slugDir), { recursive: true });
-  const slug = slugify(meta.title);
-  const file = join(ARTICLES_DIR, category, slugDir, slug + '.md');
+    const sourceTag = meta.arxivId ? `arXiv:${meta.arxivId}` : (meta.eprintId ? `ePrint:${meta.eprintId}` : meta.source);
+    tags = ['论文解读', sourceTag];
+    tagLine = `\ntags: [${tags.join(', ')}]`;
 
-  const tags = ['论文解读', meta.arxivId];
-  const tagLine = `\ntags: [${tags.join(', ')}]`;
+    const metaLine = meta.arxivId
+      ? `arxiv: ${meta.arxivId}`
+      : (meta.eprintId ? `eprint: ${meta.eprintId}` : '');
 
-  writeFileSync(file, `---
-id: ${slug}
-title: ${meta.title}
-category: ${category}${tagLine}
-arxiv: ${meta.arxivId}
-created: ${new Date().toISOString()}
----
+    writeFileSync(file, `---\nid: ${slug}\ntitle: ${meta.title}\ncategory: ${category}${tagLine}\n${metaLine}\nsource: ${meta.source}\nurl: ${meta.url}\ncreated: ${new Date().toISOString()}\n---\n\n# ${meta.title}\n\n**${meta.source}**${meta.arxivId ? ` | arXiv: ${meta.arxivId}` : ''}${meta.eprintId ? ` | ePrint: ${meta.eprintId}` : ''} | **Author**: ${meta.authors}${meta.year ? ` | **Year**: ${meta.year}` : ''}${meta.venue ? ` | **Venue**: ${meta.venue}` : ''}\n\n## 摘要\n\n${meta.abstract || '(暂无摘要)'}\n\n## 研究动机\n\n（人工填写）\n\n## 核心方法\n\n（人工填写）\n\n## 关键发现\n\n（人工填写）\n\n## 个人评价\n\n（人工填写）\n`);
 
-# ${meta.title}
+    const idx = loadIndex();
+    const entry = { id: slug, title: meta.title, category, file: `${category}/${slugDir}/${slug}.md`, tags, source: meta.source };
+    if (meta.arxivId) entry.arxiv = meta.arxivId;
+    if (meta.eprintId) entry.eprint = meta.eprintId;
+    idx.articles.push(entry);
+    if (!idx.categories.includes(category)) idx.categories.push(category);
+    saveIndex(idx);
+    console.log('[wiki] Created:', file);
+  }
 
-**arXiv**: ${meta.arxivId} | **Author**: ${meta.authors}
-
-## 摘要
-
-${meta.abstract || '(暂无摘要)'}
-
-## 研究动机
-
-（人工填写）
-
-## 核心方法
-
-（人工填写）
-
-## 关键发现
-
-（人工填写）
-
-## 个人评价
-
-（人工填写）
-`);
-
-  // Update index
-  const idx = loadIndex();
-  idx.articles.push({ id: slug, title: meta.title, category, file: `${category}/${slugDir}/${slug}.md`, tags, arxiv: meta.arxivId });
-  if (!idx.categories.includes(category)) idx.categories.push(category);
-  saveIndex(idx);
-  console.log('[wiki] Created:', file);
+  if (rawUrl.startsWith('eprint:')) {
+    // eprint:2019/953
+    const id = rawUrl.slice(7).trim();
+    console.log('[wiki] Fetching IACR ePrint', id, '...');
+    meta = await fetchEprintMeta(id);
+    if (!meta) { console.error('[wiki] Failed to fetch ePrint metadata'); process.exit(1); }
+    writePaper(meta);
+  } else if (rawUrl.startsWith('ss:') || rawUrl.startsWith('semanticscholar:')) {
+    // ss:<paperId> or semanticscholar:<paperId>
+    const id = rawUrl.replace(/^(ss|semanticscholar):/, '').trim();
+    console.log('[wiki] Fetching Semantic Scholar', id, '...');
+    meta = await fetchSemanticScholarMeta(id);
+    if (!meta) { console.error('[wiki] Failed to fetch Semantic Scholar metadata'); process.exit(1); }
+    writePaper(meta);
+  } else if (rawUrl.includes('arxiv.org')) {
+    // arXiv URL: https://arxiv.org/abs/xxxx.xxxxx
+    const idMatch = rawUrl.match(/(\d+\.\d+)/);
+    if (!idMatch) { console.error('[wiki] Invalid arXiv URL'); process.exit(1); }
+    const id = idMatch[1];
+    console.log('[wiki] Fetching arXiv', id, '...');
+    meta = await fetchArxivMeta(id);
+    if (!meta) { console.error('[wiki] Failed to fetch arXiv metadata'); process.exit(1); }
+    writePaper(meta);
+  } else if (rawUrl.includes('eprint.iacr.org')) {
+    // ePrint URL: https://eprint.iacr.org/2019/953
+    const idMatch = rawUrl.match(/eprint\.iacr\.org\/(\d+\/\d+)/);
+    if (!idMatch) { console.error('[wiki] Invalid ePrint URL'); process.exit(1); }
+    const id = idMatch[1];
+    console.log('[wiki] Fetching IACR ePrint', id, '...');
+    meta = await fetchEprintMeta(id);
+    if (!meta) { console.error('[wiki] Failed to fetch ePrint metadata'); process.exit(1); }
+    writePaper(meta);
+  } else if (rawUrl.includes('semanticscholar.org')) {
+    // SS URL: https://www.semanticscholar.org/paper/...
+    // Extract paperId from URL
+    const idMatch = rawUrl.match(/([a-f0-9]{40,})/i);
+    if (!idMatch) { console.error('[wiki] Invalid Semantic Scholar URL'); process.exit(1); }
+    const id = idMatch[1];
+    console.log('[wiki] Fetching Semantic Scholar', id, '...');
+    meta = await fetchSemanticScholarMeta(id);
+    if (!meta) { console.error('[wiki] Failed to fetch Semantic Scholar metadata'); process.exit(1); }
+    writePaper(meta);
+  } else {
+    console.error('[wiki] Unknown URL type. Supported: arXiv, eprint:ID, ss:PAPER_ID');
+    process.exit(1);
+  }
 
 } else if (cmd === 'edit') {
   const rawArgs = process.argv.slice(3);
@@ -358,6 +477,38 @@ ${meta.abstract || '(暂无摘要)'}
   if (results.length === 0) { console.log('No results.'); process.exit(0); }
   results.forEach((a, i) => console.log('  ' + (i+1) + '. [' + a.category + '] ' + a.title));
   console.log('\nTotal:', results.length);
+
+} else if (cmd === 'search-web') {
+  // Search Semantic Scholar and optionally ingest
+  const args = process.argv.slice(3);
+  const yearIdx = args.indexOf('--year');
+  const limitIdx = args.indexOf('--limit');
+  const ingestIdx = args.indexOf('--ingest');
+  const query = args.find(a => !a.startsWith('--'));
+  if (!query) { console.log('Usage: node wiki.mjs search-web <query> [--year YYYY] [--limit N] [--ingest]'); process.exit(1); }
+  const year = yearIdx >= 0 ? args[yearIdx + 1] : null;
+  const limit = limitIdx >= 0 ? parseInt(args[limitIdx + 1]) : 10;
+  const doIngest = ingestIdx >= 0;
+
+  console.log('[wiki] Searching Semantic Scholar for:', query, year ? `(year=${year})` : '');
+  const result = await searchSemanticScholar(query, year, limit);
+  if (!result || !result.data || result.data.length === 0) {
+    console.log('[wiki] No results found');
+    process.exit(1);
+  }
+  console.log('\nResults:\n');
+  result.data.forEach((p, i) => {
+    const arxiv = p.externalIds?.ArXiv || '';
+    const eprint = p.externalIds?.Eprint || '';
+    const ids = [arxiv && `arXiv:${arxiv}`, eprint && `ePrint:${eprint}`].filter(Boolean).join(' ');
+    console.log('  ' + (i+1) + '. ' + p.title);
+    console.log('     ' + (p.authors||[]).slice(0,3).map(a=>a.name).join(', ') + (p.year ? ` | ${p.year}` : '') + (p.venue ? ` | ${p.venue}` : '') + (ids ? ` | ${ids}` : ''));
+    console.log('     Citations: ' + (p.citationCount || 0));
+    if (arxiv) console.log('     -> node wiki.mjs ingest https://arxiv.org/abs/' + arxiv);
+    else if (eprint) console.log('     -> node wiki.mjs ingest eprint:' + eprint);
+    console.log('');
+  });
+  console.log('Total:', result.data.length, '(total found:', result.total || '?', ')');
 
 } else if (cmd === 'list') {
   const idx = loadIndex();
@@ -633,14 +784,18 @@ ${meta.abstract || '(暂无摘要)'}
   console.log(`Usage: node wiki.mjs <command>
 Commands:
   create "<title>" [--category C] [--tags t1,t2] [--type video-script]
-  ingest <arxiv-url>
+  ingest <url>                    # arXiv / eprint:ID / ss:PAPER_ID / SS-URL
+  search <query>                 # Search local wiki index
+  search-web <query> [--year YYYY] [--limit N]  # Search Semantic Scholar
   edit <title>
   sync
-  search <query>
   list
-  linkcheck
+  linkcheck [--auto]
   orphan
+  backlinks <title>
   scene-parse <video-script.md>
   video-pipeline [--force] [--resume] [--workers=N] [--batch=N]
+  recent [N]
+  batch-export --from YYYY-MM-DD --to YYYY-MM-DD --output DIR
 `);
 }

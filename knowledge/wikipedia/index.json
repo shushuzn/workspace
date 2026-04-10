@@ -543,6 +543,18 @@
         "2402.15293"
       ],
       "arxiv": "2402.15293"
+    },
+    {
+      "id": "plonk-permutations-over-lagrange-bases-for-oecumenical-noninteractive-arguments-of-knowledge",
+      "title": "PLONK: Permutations over Lagrange-bases for Oecumenical Noninteractive arguments of Knowledge",
+      "category": "security",
+      "file": "security/00-plonk-permutations-over-lagrange-bases-f/plonk-permutations-over-lagrange-bases-for-oecumenical-noninteractive-arguments-of-knowledge.md",
+      "tags": [
+        "论文解读",
+        "ePrint:2019/953"
+      ],
+      "source": "IACR ePrint",
+      "eprint": "2019/953"
     }
   ],
   "categories": [
