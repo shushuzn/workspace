@@ -82,6 +82,12 @@ export class Executor {
             for (const step of steps) {
                 console.log('  adapter=' + step.adapterId + ' command=' + step.command + ' args=' + JSON.stringify(step.args));
             }
+            // Output mermaid dependency graph
+            const deps = this.buildDependencyGraph(steps);
+            console.log('\n```mermaid\ngraph TD\n' + deps.map((s, i) =>
+                `${i}["S${i}: ${(steps[i]||{}).adapterId||'?'}"]` +
+                [...s].map(d => `${d} --> ${i}`).join('\n')
+            ).join('\n') + '\n```');
             return steps.map(s => ({ success: true, output: '[DRY RUN]', logs: '', artifacts: [], fatal: false }));
         }
         const workingDir = this.options.workingDir ?? join(os.tmpdir(), 'unified-agent-cli');
