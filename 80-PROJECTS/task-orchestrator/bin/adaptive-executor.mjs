@@ -4,6 +4,14 @@ import { readFileSync, existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
+if (process.argv.includes('--help') || process.argv.includes('-h')) {
+  console.log('Usage: node adaptive-executor.mjs [--strategy NAME] [--adapter ADAPTER]');
+  console.log('  --strategy NAME  Strategy: random, rate-based, history-weighted (default: rate-based)');
+  console.log('  --adapter      Show adapter success rates');
+  console.log('  --help         Show this help');
+  process.exit(0);
+}
+
 const __DIR = dirname(fileURLToPath(import.meta.url));
 const REGISTRY = join(__DIR, '..', 'src', 'registry.mjs');
 const EXECUTOR = join(__DIR, '..', 'src', 'executor.mjs');
