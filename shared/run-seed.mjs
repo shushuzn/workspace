@@ -358,9 +358,12 @@ if (lastBodyLine.match(/\| shipped:/)) {
 }
 newLines[lastBodyIdx] = lastBodyLine.replace(/(\s*)$/, ` | shipped:${today}`);
 
-writeFileSync(IDEAS_PATH, newLines.join('\n'), 'utf-8');
-
-console.log(`\n[SHIPPED] ${top.desc.slice(0, 60)}... → shipped:${today}`);
+if (!dryRun) {
+  writeFileSync(IDEAS_PATH, newLines.join('\n'), 'utf-8');
+  console.log(`\n[SHIPPED] ${top.desc.slice(0, 60)}... → shipped:${today}`);
+} else {
+  console.log('\n[DRY RUN] Would write shipped marker (not written)');
+}
 
 // Self-critique: mandatory 3 questions after shipped
 console.log('\n=== Seed Self-Critique ===');
