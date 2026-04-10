@@ -18,6 +18,15 @@ function parseEntry(line) {
   try { return JSON.parse(line); } catch { return null; }
 }
 
+if (process.argv.includes('--help') || process.argv.includes('-h')) {
+  console.log('Usage: node audit-query.mjs [--recent N] [--run RUNID] [--failed] [--stats]');
+  console.log('  --recent N  Show last N entries');
+  console.log('  --run ID   Show entries for specific runId');
+  console.log('  --failed    Show only failed entries');
+  console.log('  --stats     Show summary statistics');
+  process.exit(0);
+}
+
 const cmd = process.argv.includes('--recent') ? 'recent'
   : process.argv.includes('--run') ? 'run'
   : process.argv.includes('--failed') ? 'failed'

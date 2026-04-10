@@ -261,6 +261,118 @@ function deriveFromProjectGaps() {
   }
 }
 
+// ─── Source 6: shared-scripts syntax scan ──────────────────────────────────────
+
+function deriveFromSharedScripts() {
+  const suggestions = [];
+  try {
+    const { execSync } = require('child_process');
+    const sharedDir = join(__DIR, '..', 'shared');
+    const files = readdirSync(sharedDir).filter(f => f.endsWith('.mjs') && !f.includes('patch'));
+    for (const file of files) {
+      const path = join(sharedDir, file);
+      try {
+        execSync(`node --check "${path}"`, { stdio: 'pipe', windowsHide: true });
+      } catch (e) {
+        const err = e.stderr?.toString() || '';
+        const match = err.match(/SyntaxError: (.+)/);
+        const reason = match ? match[1].trim() : 'unknown syntax error';
+        suggestions.push({
+          angle: 'ws-level',
+          desc: `${file} 语法错误修复 — ${reason.slice(0, 50)}`,
+          benefit: `修复 shared/${file} 的语法错误，恢复脚本可用性`,
+          reason: `已知资源：shared/${file} 存在；缺失环节：SyntaxError 导致脚本无法运行；连接方式：检查错误位置→修复语法问题→通过 node --check`
+        });
+        break; // one at a time
+      }
+    }
+  } catch { /* skip on failure */ }
+  return suggestions;
+}
+
+// ─── Source 7: scan executors for inefficient patterns ─────────────────────────
+
+function deriveFromCodeScan() {
+  const suggestions = [];
+  try {
+    const { execSync } = require('child_process');
+    const dirs = [
+      '80-PROJECTS/task-orchestrator/src',
+      '80-PROJECTS/task-orchestrator/bin',
+    ];
+    for (const dir of dirs) {
+      const fullPath = join(__DIR, '..', dir);
+      if (!existsSync(fullPath)) continue;
+      const files = readdirSync(fullPath).filter(f => f.endsWith('.mjs'));
+      for (const file of files) {
+        const path = join(fullPath, file);
+        // Check for TODO comments that indicate missing implementation
+        const content = readFileSync(path, 'utf8');
+        const todos = [];
+        const re = /\/\/\s*(TODO|FIXME|HACK|XXX):\s*(.+)/g;
+        let m;
+        while ((m = re.exec(content)) !== null) {
+          todos.push({ line: content.slice(0, m.index).split('\n').length, note: m[2].slice(0, 60) });
+        }
+        if (todos.length > 0) {
+          const t = todos[0];
+          suggestions.push({
+            angle: 'feature',
+            focus: 'task-orchestrator',
+            desc: `${file} TODO注释实现 — ${t.note}`,
+            benefit: `消除 TODO 注释，推动真实功能落地`,
+            reason: `已知资源：${dir}/${file} 存在；缺失环节：${t.note}；连接方式：读取TODO内容→实现对应功能→删除TODO注释`
+          });
+          break;
+        }
+        // Check for inefficient O(n²) patterns in executor
+        if (file === 'executor.mjs' && content.includes('for (const ')) {
+          const nestedFor = content.match(/for\s*\(\s*const\s+\w+\s+of\s+[^}]+\)\s*\{[\s\S]*?for\s*\(\s*const\s+/g);
+          if (nestedFor && nestedFor.length > 0) {
+            suggestions.push({
+              angle: 'feature',
+              focus: 'task-orchestrator',
+              desc: `executor.mjs 嵌套循环优化 — ${nestedFor.length}处嵌套for-of`,
+              benefit: `减少嵌套循环次数，提升大chain执行性能`,
+              reason: `已知资源：executor.mjs 存在嵌套for-of；缺失环节：无复杂度控制；连接方式：识别嵌套模式→用Map/Set去重→O(n²)→O(n)`
+            });
+            break;
+          }
+        }
+      }
+      if (suggestions.length > 0) break;
+    }
+  } catch { /* skip */ }
+  return suggestions;
+}
+
+// ─── Source 8: hookify broken rules scan ────────────────────────────────────
+
+function deriveFromHookifyScan() {
+  const suggestions = [];
+  try {
+    const hookifyDir = join(__DIR, '..', '.claude');
+    if (!existsSync(hookifyDir)) return [];
+    const files = readdirSync(hookifyDir).filter(f => f.startsWith('hookify.') && f.endsWith('.local.md'));
+    for (const file of files) {
+      const path = join(hookifyDir, file);
+      const content = readFileSync(path, 'utf8');
+      // Check for deprecated/broken markers
+      if (/⚠️|❌|deprecated|broken/i.test(content)) {
+        const ruleName = file.replace('hookify.', '').replace('.local.md', '');
+        suggestions.push({
+          angle: 'hookify',
+          desc: `hookify规则 ${ruleName} 修复或移除`,
+          benefit: `清理失效规则，保持hookify警觉性准确`,
+          reason: `已知资源：.claude/${file} 存在并标记为失效；缺失环节：失效规则产生噪声；连接方式：读取规则内容→判断可修复或移除→更新规则`
+        });
+        break;
+      }
+    }
+  } catch { /* skip */ }
+  return suggestions;
+}
+
 // ─── Main ─────────────────────────────────────────────────────────────────────
 
 function main() {
@@ -291,6 +403,9 @@ function main() {
   for (const s of deriveFromSessionInsights()) add(s);
   for (const s of deriveFromGitHubTrending()) add(s);
   for (const s of deriveFromProjectGaps()) add(s);
+  for (const s of deriveFromSharedScripts()) add(s);
+  for (const s of deriveFromCodeScan()) add(s);
+  for (const s of deriveFromHookifyScan()) add(s);
 
   // Fallback: only if pool is completely empty
   if (suggestions.length === 0) {

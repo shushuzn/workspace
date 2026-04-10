@@ -47,11 +47,354 @@
       "file": "articles\\security\\iam-特权升级.md",
       "tags": [],
       "created": "2026-04-07"
+    },
+    {
+      "id": "chao-xian-zhan-zheng-ge-fang-wu-pan-yu-zhan-lue-po-chan",
+      "title": "朝鲜战争各方误判与战略破产",
+      "category": "history",
+      "file": "articles\\history\\01-朝鲜战争各方误判与战略破产.md",
+      "tags": [
+        "朝鲜战争",
+        "林彪",
+        "麦卡锡主义",
+        "冷战",
+        "战略决策"
+      ],
+      "created": "2026-04-10"
+    },
+    {
+      "id": "mai-ka-xi-zhu-yi",
+      "title": "麦卡锡主义",
+      "category": "history",
+      "file": "articles\\history\\麦卡锡主义.md",
+      "tags": [
+        "麦卡锡主义",
+        "反共",
+        "冷战",
+        "美国政治"
+      ],
+      "created": "2026-04-10"
+    },
+    {
+      "id": "lin-biao",
+      "title": "林彪",
+      "category": "history",
+      "file": "articles\\history\\林彪.md",
+      "tags": [
+        "林彪",
+        "朝鲜战争",
+        "军事战略",
+        "十大元帅"
+      ],
+      "created": "2026-04-10"
+    },
+    {
+      "id": "mai-ke-a-se",
+      "title": "麦克阿瑟",
+      "category": "history",
+      "file": "articles\\history\\麦克阿瑟.md",
+      "tags": [
+        "麦克阿瑟",
+        "朝鲜战争",
+        "美军",
+        "仁川登陆"
+      ],
+      "created": "2026-04-10"
+    },
+    {
+      "id": "peng-de-huai",
+      "title": "彭德怀",
+      "category": "history",
+      "file": "articles\\history\\彭德怀.md",
+      "tags": [
+        "彭德怀",
+        "朝鲜战争",
+        "志愿军",
+        "开国元帅"
+      ],
+      "created": "2026-04-10"
+    },
+    {
+      "id": "si-da-lin",
+      "title": "斯大林",
+      "category": "history",
+      "file": "articles\\history\\斯大林.md",
+      "tags": [
+        "斯大林",
+        "朝鲜战争",
+        "苏联",
+        "冷战"
+      ],
+      "created": "2026-04-10"
+    },
+    {
+      "id": "jin-ri-cheng",
+      "title": "金日成",
+      "category": "history",
+      "file": "articles\\history\\金日成.md",
+      "tags": [
+        "金日成",
+        "朝鲜战争",
+        "朝鲜",
+        "冷战"
+      ],
+      "created": "2026-04-10"
+    },
+    {
+      "id": "du-lu-men",
+      "title": "杜鲁门",
+      "category": "history",
+      "file": "articles\\history\\杜鲁门.md",
+      "tags": [
+        "杜鲁门",
+        "朝鲜战争",
+        "美国总统",
+        "冷战"
+      ],
+      "created": "2026-04-10"
+    },
+    {
+      "id": "zhong-su-you-hao-tong-meng-hu-zhu-tiao-yue",
+      "title": "中苏友好同盟互助条约",
+      "category": "history",
+      "file": "articles\\history\\中苏友好同盟互助条约.md",
+      "tags": [
+        "中苏友好同盟互助条约",
+        "苏联",
+        "中国",
+        "朝鲜战争",
+        "条约"
+      ],
+      "created": "2026-04-10"
+    },
+    {
+      "id": "ren-chuan-deng-lu",
+      "title": "仁川登陆",
+      "category": "history",
+      "file": "articles\\history\\仁川登陆.md",
+      "tags": [
+        "仁川登陆",
+        "朝鲜战争",
+        "麦克阿瑟",
+        "朝鲜人民军"
+      ],
+      "created": "2026-04-10"
+    },
+    {
+      "id": "san-ba-xian",
+      "title": "三八线",
+      "category": "history",
+      "file": "articles\\history\\三八线.md",
+      "tags": [
+        "三八线",
+        "朝鲜战争",
+        "冷战",
+        "朝鲜半岛"
+      ],
+      "created": "2026-04-10"
+    },
+    {
+      "id": "dong-bei-fang-bian-jun",
+      "title": "东北边防军",
+      "category": "history",
+      "file": "articles\\history\\东北边防军.md",
+      "tags": [
+        "东北边防军",
+        "朝鲜战争",
+        "林彪",
+        "志愿军"
+      ],
+      "created": "2026-04-10"
+    },
+    {
+      "id": "tian-shi-yin-qing",
+      "title": "天使引擎",
+      "category": "history",
+      "file": "articles\\history\\天使引擎.md",
+      "tags": [
+        "天使引擎",
+        "电影解说",
+        "宗教象征",
+        "科幻",
+        "敌基督"
+      ],
+      "created": "2026-04-10"
+    },
+    {
+      "id": "di-ji-du",
+      "title": "敌基督",
+      "category": "history",
+      "file": "articles\\history\\敌基督.md",
+      "tags": [
+        "敌基督",
+        "基督教",
+        "宗教概念",
+        "天使引擎"
+      ],
+      "created": "2026-04-10"
+    },
+    {
+      "id": "wu-lie-er",
+      "title": "乌列尔",
+      "category": "history",
+      "file": "articles\\history\\乌列尔.md",
+      "tags": [
+        "乌列尔",
+        "天使",
+        "七大天使",
+        "宗教",
+        "天使引擎"
+      ],
+      "created": "2026-04-10"
+    },
+    {
+      "id": "ba-la-da-er",
+      "title": "巴拉达尔",
+      "category": "history",
+      "file": "articles\\history\\巴拉达尔.md",
+      "tags": [
+        "巴拉达尔",
+        "人造天使",
+        "天使引擎",
+        "科幻"
+      ],
+      "created": "2026-04-10"
+    },
+    {
+      "id": "en-si-te-man",
+      "title": "恩斯特曼",
+      "category": "history",
+      "file": "articles\\history\\恩斯特曼.md",
+      "tags": [
+        "恩斯特曼",
+        "天使引擎",
+        "科学家",
+        "敌基督"
+      ],
+      "created": "2026-04-10"
+    },
+    {
+      "id": "li-xing-jue-ce-yu-zhan-lue-ke-zhi",
+      "title": "理性决策与战略克制",
+      "category": "history",
+      "file": "articles\\history\\理性决策与战略克制.md",
+      "tags": [
+        "理性决策",
+        "战略克制",
+        "朝鲜战争",
+        "博弈论"
+      ],
+      "created": "2026-04-10"
+    },
+    {
+      "id": "ya-lu-jiang",
+      "title": "鸭绿江",
+      "category": "history",
+      "file": "articles\\history\\鸭绿江.md",
+      "tags": [
+        "鸭绿江",
+        "朝鲜战争",
+        "中朝边境",
+        "志愿军入朝"
+      ],
+      "created": "2026-04-10"
+    },
+    {
+      "id": "ting-zhan-tan-pan",
+      "title": "停战谈判",
+      "category": "history",
+      "file": "articles\\history\\停战谈判.md",
+      "tags": [
+        "停战谈判",
+        "板门店",
+        "朝鲜战争",
+        "冷战"
+      ],
+      "created": "2026-04-10"
+    },
+    {
+      "id": "di-qi-du",
+      "title": "第七毒",
+      "category": "history",
+      "file": "articles\\history\\第七毒.md",
+      "tags": [
+        "第七毒",
+        "无脸怪物",
+        "天使引擎",
+        "科幻"
+      ],
+      "created": "2026-04-10"
+    },
+    {
+      "id": "a-suo-te-tan",
+      "title": "阿索特坦",
+      "category": "history",
+      "file": "articles\\history\\阿索特坦.md",
+      "tags": [
+        "阿索特坦",
+        "天使引擎",
+        "巴拉达尔",
+        "科幻"
+      ],
+      "created": "2026-04-10"
+    },
+    {
+      "id": "di-er-ba-bie-ta",
+      "title": "第二巴别塔",
+      "category": "history",
+      "file": "articles\\history\\第二巴别塔.md",
+      "tags": [
+        "第二巴别塔",
+        "敌基督",
+        "天使引擎",
+        "天使军团"
+      ],
+      "created": "2026-04-10"
+    },
+    {
+      "id": "tian-shi-jun-dui",
+      "title": "天使军团",
+      "category": "history",
+      "file": "articles\\history\\天使军团.md",
+      "tags": [
+        "天使军团",
+        "生化机械士兵",
+        "天使引擎",
+        "第二巴别塔"
+      ],
+      "created": "2026-04-10"
+    },
+    {
+      "id": "huang-yi-zu-zhi",
+      "title": "黄衣组织",
+      "category": "history",
+      "file": "articles\\history\\黄衣组织.md",
+      "tags": [
+        "黄衣组织",
+        "反抗军",
+        "天使引擎",
+        "第七毒"
+      ],
+      "created": "2026-04-10"
+    },
+    {
+      "id": "zhi-yuan-jun",
+      "title": "志愿军",
+      "category": "history",
+      "file": "articles\\history\\志愿军.md",
+      "tags": [
+        "志愿军",
+        "朝鲜战争",
+        "中国人民志愿军",
+        "彭德怀"
+      ],
+      "created": "2026-04-10"
     }
   ],
   "categories": [
     "AI",
     "math",
-    "security"
+    "security",
+    "history"
   ]
 }
