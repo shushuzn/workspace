@@ -591,6 +591,54 @@
       ],
       "source": "IACR ePrint",
       "eprint": "2017/1066"
+    },
+    {
+      "id": "marlin-preprocessing-zksnarks-with-universal-and-updatable-srs",
+      "title": "Marlin: Preprocessing zkSNARKs with Universal and Updatable SRS",
+      "category": "security",
+      "file": "security/00-marlin-preprocessing-zksnarks-with-unive/marlin-preprocessing-zksnarks-with-universal-and-updatable-srs.md",
+      "tags": [
+        "论文解读",
+        "ePrint:2019/1047"
+      ],
+      "source": "IACR ePrint",
+      "eprint": "2019/1047"
+    },
+    {
+      "id": "scalable-transparent-and-post-quantum-secure-computational-integrity",
+      "title": "Scalable, transparent, and post-quantum secure computational integrity",
+      "category": "security",
+      "file": "security/00-scalable-transparent-and-post-quantum-se/scalable-transparent-and-post-quantum-secure-computational-integrity.md",
+      "tags": [
+        "论文解读",
+        "ePrint:2018/046"
+      ],
+      "source": "IACR ePrint",
+      "eprint": "2018/046"
+    },
+    {
+      "id": "aurora-transparent-succinct-arguments-for-r1cs",
+      "title": "Aurora: Transparent Succinct Arguments for R1CS",
+      "category": "security",
+      "file": "security/00-aurora-transparent-succinct-arguments-fo/aurora-transparent-succinct-arguments-for-r1cs.md",
+      "tags": [
+        "论文解读",
+        "ePrint:2018/828"
+      ],
+      "source": "IACR ePrint",
+      "eprint": "2018/828"
+    },
+    {
+      "id": "sonic-zero-knowledge-snarks-from-linear-size-universal-and-updateable-structured-reference-strings",
+      "title": "Sonic: Zero-Knowledge SNARKs from Linear-Size Universal and Updateable Structured Reference Strings",
+      "category": "security",
+      "file": "security/00-sonic-zero-knowledge-snarks-from-linear-/sonic-zero-knowledge-snarks-from-linear-size-universal-and-updateable-structured-reference-strings.md",
+      "tags": [
+        "论文解读",
+        "ePrint:2019/099"
+      ],
+      "source": "IACR ePrint",
+      "eprint": "2019/099"
     }
   ],
   "categories": [
