@@ -34,6 +34,12 @@ export class Executor {
         process.stderr.write(`\r${msg.padEnd(80, ' ')}\r`);
     }
     async execute(steps, ctx) {
+        // Catch unhandled promise rejections during this execution
+        const rejectionHandler = (reason) => {
+            console.error(`[unhandledRejection] ${reason instanceof Error ? reason.message : String(reason)}`);
+        };
+        process.on('unhandledRejection', rejectionHandler);
+        try {
         if (steps.length === 0)
             return [];
         const dryRun = ctx?.dryRun || steps.some(s => s.dryRun);
@@ -397,6 +403,9 @@ export class Executor {
         }
         viz.done();
         return results;
+        } finally {
+            process.removeListener('unhandledRejection', rejectionHandler);
+        }
     }
     /** Build a dependency graph: for each step index, which other step indices it depends on */
     buildDependencyGraph(steps) {
@@ -636,8 +645,9 @@ Do not add explanations outside the JSON.`,
                         // Extract JSON from response (may have markdown code blocks)
                         const cleaned = stdout.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
                         parsed = JSON.parse(cleaned);
-                    } catch {
+                    } catch (e) {
                         // If JSON parse fails, treat as failure
+                        console.error(`[reviewer] parse error: ${e.message}`);
                         parsed = { passed: false, issues: [`reviewer parse error: ${stderr || stdout || 'no output'}`.slice(0, 200)] };
                     }
                     result[reviewer.name] = { passed: parsed.passed === true, issues: Array.isArray(parsed.issues) ? parsed.issues : [] };
@@ -763,8 +773,9 @@ Do not add explanations outside the JSON.`,
                 appendFileSync(logPath, JSON.stringify(entry) + '\n', 'utf-8');
             }
         }
-        catch {
+        catch (e) {
             // Silently ignore audit log write failures
+            console.error(`[audit] failed to write log: ${e.message}`);
         }
     }
     /** Build causality metadata: chain, parent, root, depth for each step */
@@ -814,8 +825,9 @@ Do not add explanations outside the JSON.`,
                 }
             }
         }
-        catch {
+        catch (e) {
             // Silently ignore log write failures
+            console.error(`[persistLogs] failed to write logs: ${e.message}`);
         }
     }
 }
