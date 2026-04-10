@@ -9,6 +9,10 @@ year: 2012
 citations: 2825
 influential_citations: 239
 created: 2026-04-10T13:07:06.185Z
+references:
+  - " Fowler et al., Surface Codes, 2012"
+cross-references:
+  - "[[bian-qun]]"
 ---
 
 # [1208.0928] Surface Codes: Towards Practical Large-Scale Quantum Computation

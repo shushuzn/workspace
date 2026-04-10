@@ -7,6 +7,11 @@ arxiv: 2009.01325
 authors: Nisan Stiennon, Long Ouyang, Jeff Wu, Daniel M. Ziegler, Ryan Lowe, Chelsea Voss, Alec Radford, Dario Amodei, Paul Christiano
 year: 2020
 publication: NeurIPS 2020
+references:
+  - "Stiennon et al., Learning to Summarize with Human Feedback, NeurIPS 2020"
+cross-references:
+  - "[[200514165-language-models-are-few-shot-learners]]"
+  - "[[221208073-constitutional-ai-harmlessness-from-ai-feedback]]"
 created: 2026-04-10T13:12:01.168Z
 ---
 

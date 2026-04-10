@@ -6,6 +6,11 @@ tags: [论文解读, BERT, Transformer, NLP, 预训练]
 arxiv: 1810.04805
 authors: Jacob Devlin, Ming-Wei Chang, Kenton Lee, Kristina Toutanova
 year: 2018
+references:
+  - "Devlin et al., BERT, 2018"
+cross-references:
+  - "[[170603762-attention-is-all-you-need]]"
+  - "[[200514165-language-models-are-few-shot-learners]]"
 created: 2026-04-10T13:10:10.813Z
 ---
 

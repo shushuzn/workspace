@@ -9,6 +9,11 @@ year: 2017
 citations: 172323
 influential_citations: 19585
 created: 2026-04-10T13:11:57.771Z
+references:
+  - "Vaswani et al., Attention Is All You Need, 2017"
+cross-references:
+  - "[[181004805-bert-pre-training-of-deep-bidirectional-transformers-for-language-understanding]]"
+  - "[[200514165-language-models-are-few-shot-learners]]"
 ---
 
 # [1706.03762] Attention Is All You Need

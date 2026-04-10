@@ -6,6 +6,12 @@ tags: [论文解读, GPT-3, 大语言模型, In-Context Learning, 少样本学�
 arxiv: 2005.14165
 authors: Tom B. Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared Kaplan, Prafulla Dhariwal, Arvind Neelakantan, Pranav Shyam, Girish Sastry, Amanda Askell, Sandhini Agarwal, Ariel Herbert-Voss, Gretchen Krueger, Tom Henighan, Rewon Child, Aditya Ramesh, Daniel M. Ziegler, Jeffrey Wu, Clemens Winter, Christopher Hesse, Mark Chen, Eric Sigler, Mateusz Litwin, Scott Gray, Benjamin Chess, Jack Clark, Christopher Berner, Sam McCandlish, Alec Radford, Ilya Sutskever, Dario Amodei
 year: 2020
+references:
+  - "Brown et al., GPT-3, 2020"
+cross-references:
+  - "[[170603762-attention-is-all-you-need]]"
+  - "[[181004805-bert-pre-training-of-deep-bidirectional-transformers-for-language-understanding]]"
+  - "[[200901325-learning-to-summarize-from-human-feedback]]"
 created: 2026-04-10T13:11:56.171Z
 ---
 

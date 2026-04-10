@@ -9,6 +9,10 @@ year: 2022
 citations: 2717
 influential_citations: 215
 created: 2026-04-10T13:12:02.051Z
+references:
+  - "Bai et al., Constitutional AI, 2022"
+cross-references:
+  - "[[200901325-learning-to-summarize-from-human-feedback]]"
 ---
 
 # [2212.08073] Constitutional AI: Harmlessness from AI Feedback
