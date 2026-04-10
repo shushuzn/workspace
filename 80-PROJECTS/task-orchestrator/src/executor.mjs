@@ -347,7 +347,9 @@ export class Executor {
                         }
                         // Depth-based retry skip: root steps (depth <= 1) are critical — always retry; deeper steps are derived, skip retry if first attempt fails
                         const depth = stepDepth.get(stepIdx) ?? 0;
-                        if (depth <= 1 && attempt === 1) {
+                        const chainInfo = causalityInfo.get(stepIdx);
+                        const isRootRelated = chainInfo && (chainInfo.root === stepIdx || (chainInfo.chain && chainInfo.chain.includes(chainInfo.root)));
+                        if ((depth <= 1 || isRootRelated) && attempt === 1) {
                             process.stderr.write(`[retry] depth-${depth} step, forcing retry: ${errMsg.slice(0, 60)}\n`);
                         } else if (depth > 1 && attempt === 1) {
                             process.stderr.write(`[retry-skip] depth-${depth} step (downstream), skipping retry: ${errMsg.slice(0, 60)}\n`);
@@ -606,7 +608,7 @@ export class Executor {
         });
     }
     cacheKey(step) {
-        return `${step.adapterId}:${step.command}:${step.args.join(',')}`;
+        return `${step.adapterId}:${step.command}:${step.args.join(',')}:${step.workingDir||''}`;
     }
     /**
      * Pre-flight check: verify all adapters are available for the given steps.
@@ -801,6 +803,15 @@ Do not add explanations outside the JSON.`,
         const existing = existsSync(SEEDS_FILE) ? readFileSync(SEEDS_FILE, 'utf-8') : '';
         const entry = header + selfReflectPatterns.map(p => `- ${p}`).join('\n') + '\n';
         appendFileSync(SEEDS_FILE, entry, 'utf-8');
+        // Trigger auto-seed if patterns accumulated >= 3
+        if (selfReflectPatterns.length >= 3) {
+            try {
+                execSync('node "D:/OpenClaw/workspace/.omc/scripts/hook-auto-seed.mjs" --ingest', {
+                    stdio: 'ignore',
+                    timeout: 5000
+                });
+            } catch { /* ignore */ }
+        }
 
         if (this.options.verbose) {
             for (const p of selfReflectPatterns) {
