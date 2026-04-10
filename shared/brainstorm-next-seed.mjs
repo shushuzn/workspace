@@ -24,7 +24,7 @@ function loadLastEntry() {
 
 function writeReflection(desc, reason, approach, date) {
   // Reflection seeds are shipped at write time — the skip itself IS the reflection work
-  const line = '- [' + date + '] seed [brainstorm] [score:2x3=6] [f:3] [angle:skill-file] [反思]' + desc + ' | benefit: ' + reason + ' | reason: ' + reason + ' | approach: ' + approach + ' | shipped:' + date + '\n';
+  const line = '- [' + date + '] seed [brainstorm] [score:2x3=6] [f:3] [angle:ws-level] [反思]' + desc + ' | benefit: ' + reason + ' | reason: ' + reason + ' | approach: ' + approach + ' | shipped:' + date + '\n';
   appendFileSync(IDEAS_FILE, line, 'utf8');
 }
 
@@ -69,17 +69,27 @@ function main() {
     try {
       const gaps = JSON.parse(readFileSync(GAPS_FILE, 'utf-8'));
       const projects = Object.keys(gaps.projects || {});
-      if (projects.length > 0) {
-        const pick = projects[Math.floor(Math.random() * projects.length)];
+      const alreadyRefled = new Set();
+      // Collect all gap-based suggestions (max 3)
+      let gapCount = 0;
+      for (const pick of projects) {
+        if (gapCount >= 3) break;
         const missingList = gaps.projects[pick] || [];
-        const missing = missingList[0] || '多项缺口';
-        suggestions.push({
-          angle: pick === 'ws-level' ? 'ws-level' : 'feature',
-          focus: pick === 'ws-level' ? null : pick,
-          desc: pick + '补充：' + missing,
-          benefit: '填补' + pick + '项目的' + missing + '缺口',
-          reason: '已知资源：' + pick + '项目已有基础；缺失环节：' + missing + '；连接方式：从project-gaps.json提取→生成对应seed'
-        });
+        for (const missing of missingList) {
+          if (gapCount >= 3) break;
+          const desc = pick + '补充：' + missing;
+          // Skip if already reflected (avoid reflection loop)
+          if (alreadyRefled.has(desc)) continue;
+          alreadyRefled.add(desc);
+          suggestions.push({
+            angle: pick === 'ws-level' ? 'ws-level' : 'feature',
+            focus: pick === 'ws-level' ? null : pick,
+            desc,
+            benefit: '填补' + pick + '项目的' + missing + '缺口',
+            reason: '已知资源：' + pick + '项目已有基础；缺失环节：' + missing + '；连接方式：待扫描实际项目文件后推导'
+          });
+          gapCount++;
+        }
       }
     } catch { /* ignore */ }
   }
@@ -129,10 +139,7 @@ function main() {
 
     const seedKey = s.angle + '|' + s.desc;
     if (existingSeeds.has(seedKey)) {
-      console.warn('[next-seed] SKIP (already in pool): ' + s.desc + ' — writing reflection seed');
-      const reflApproach = '1. echo "reflection: skip at generation time"';
-      writeReflection(s.desc + '去重分析', '确认' + s.desc + '是否真实重复或需求已升级', reflApproach, date);
-      written++;
+      console.warn('[next-seed] SKIP (already in pool): ' + s.desc);
       continue;
     }
 
@@ -143,11 +150,8 @@ function main() {
       execSync(validationCmd, { stdio: 'pipe' });
       validApproach = true;
     } catch (e) {
-      // Gate13/4c fail — write reflection seed instead
-      console.warn('[next-seed] SKIP (Gate13/4c fail): ' + s.desc + ' — writing reflection seed');
-      const reflApproach = '1. echo "reflection: skip at generation time"';
-      writeReflection(s.desc + '验证失败根因分析', '找到' + s.desc + '的approach验证失败根因', reflApproach, date);
-      written++;
+      // Gate13/4c fail — skip without writing reflection (reason too vague to derive from gap)
+      console.warn('[next-seed] SKIP (Gate13/4c fail): ' + s.desc + ' — reason too vague, need project scan');
       continue;
     }
 

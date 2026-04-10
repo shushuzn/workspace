@@ -106,6 +106,7 @@ if (validateApproach !== null) {
     const IMPLEMENT_PATTERNS = [
       /增加/, /新增/, /集成/, /打通/, /创建/, /写入/, /编写/,
       /集成到/, /接入/, /固化为/, /生成/, /实现/, /添加/,
+      /^无/, /缺失环节[：:]/,
     ];
     const IS_IMPLEMENT = IMPLEMENT_PATTERNS.some(p => p.test(reasonText));
     // Patterns that signal testing/validation only (echo is OK for these)
@@ -179,8 +180,11 @@ while (i < lines.length) {
   const approachMatch = bodyText.match(/\| approach:\s*(.+?)(?:\s*\| shipped:|$)/s)
     || line.match(/\| approach:\s*(.+?)(?:\s*\| shipped:|$)/s);
   const approachText = approachMatch ? approachMatch[1].trim() : '';
+  const reasonMatch = bodyText.match(/\| reason:\s*(.+?)(?:\s*\| approach:|$)/s)
+    || line.match(/\| reason:\s*(.+?)(?:\s*\| approach:|$)/);
+  const reason = reasonMatch ? reasonMatch[1].trim() : '';
 
-  results.push({ date, score, benefit, feas, feasEntry, angle, focus, shipped, killed, desc, approachText, lineIdx: i, bodyLines });
+  results.push({ date, score, benefit, feas, feasEntry, angle, focus, shipped, killed, desc, approachText, reason, lineIdx: i, bodyLines });
 
   i = j;
 }
@@ -355,6 +359,22 @@ if (firstStep.startsWith('node -')) {
   console.log(`[KILLED] ${top.desc.slice(0, 60)}...`);
   // Re-run to pick next seed
   process.exit(2); // 2 = skip and continue
+}
+
+// Gate4c consistency: echo approach + implement-type reason = kill (not shipped)
+const IMPL_PATTERNS_EXEC = [/增加/, /新增/, /集成/, /打通/, /创建/, /写入/, /编写/, /集成到/, /接入/, /固化为/, /生成/, /实现/, /添加/, /^无/, /缺失环节[：:]/];
+const TEST_PATTERNS_EXEC = [/测试/, /验证/, /检查/, /分析/, /巡检/, /诊断/, /去重分析/, /根因分析/, /反思/];
+const reasonForCheck = top.reason || '';
+const isImplReason = IMPL_PATTERNS_EXEC.some(p => p.test(reasonForCheck)) && !TEST_PATTERNS_EXEC.some(p => p.test(reasonForCheck));
+if (isImplReason && /^echo\s/i.test(firstStep)) {
+  const today = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+  const newLines = [...lines];
+  const lastBodyIdx = top.lineIdx + top.bodyLines.length;
+  const lastBodyLine = newLines[lastBodyIdx];
+  newLines[lastBodyIdx] = lastBodyLine.replace(/(\s*)$/, ` | killed:${today} approach_drift: echo approach for implement-type seed`);
+  writeFileSync(IDEAS_PATH, newLines.join('\n'), 'utf-8');
+  console.log(`[KILLED] approach_drift: echo approach for implement-type seed`);
+  process.exit(2);
 }
 
 console.log(`\n[ACTION] ${dryRun ? 'Would execute step ' + stepNum + ': ' : 'Executing step ' + stepNum + ': '}${firstStep}`);
