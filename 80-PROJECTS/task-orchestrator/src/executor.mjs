@@ -142,7 +142,6 @@ export class Executor {
             }
         }
         const results = new Array(steps.length);
-        const resultMap = new Map(); // step index → result
         const stepStartTimes = new Map(); // step index → start timestamp (spans all layers)
         let cascadeStop = false; // true when a fatal step triggers cascade-on-error
         for (let layerIdx = 0; layerIdx < layers.length; layerIdx++) {
@@ -213,8 +212,7 @@ export class Executor {
                     await new Promise(r => setTimeout(r, delayMs));
                     const timerResult = { success: true, output: `waited ${delayMs}ms`, logs: '', artifacts: [], fatal: false };
                     results[stepIdx] = timerResult;
-                    resultMap.set(stepIdx, timerResult);
-                    return;
+                                        return;
                 }
                 const adapter = await this.registry.findAdapter(resolvedStep);
                 if (!adapter) {
@@ -228,8 +226,7 @@ export class Executor {
                         fatal: true,
                     };
                     results[stepIdx] = err;
-                    resultMap.set(stepIdx, err);
-                    return;
+                                        return;
                 }
                 // ── Two-stage review gate ────────────────────────────────────────
                 // Skip review if step already has a passed review, or if reviewers are disabled globally
@@ -252,8 +249,7 @@ export class Executor {
                             code: 'REVIEW_FAILED', fatal: false,
                         };
                         results[stepIdx] = reviewErr;
-                        resultMap.set(stepIdx, reviewErr);
-                        return;
+                                                return;
                     }
                     if (this.options.verbose) {
                         process.stderr.write(`[review] ✓ spec + code both passed\n`);
@@ -277,8 +273,7 @@ export class Executor {
                             code: 'HOOKIFY_BLOCKED', fatal: false,
                         };
                         results[stepIdx] = blockErr;
-                        resultMap.set(stepIdx, blockErr);
-                        return;
+                                                return;
                     }
                 }
                 stepStartTimes.set(stepIdx, Date.now());
@@ -319,8 +314,7 @@ export class Executor {
                                     artifacts: [], error: `Skipped by strategy: ${errMsg}`,
                                     code: errCode, fatal: false, attempts: attempt,
                                 };
-                                resultMap.set(stepIdx, results[stepIdx]);
-                                return; // skip this step, continue to next layer
+                                                                return; // skip this step, continue to next layer
                             }
                             if (strategy.action === 'fallback' && strategy.fallbackCommand) {
                                 // Replace command and re-run without incrementing attempt
@@ -332,8 +326,7 @@ export class Executor {
                                 try {
                                     const fallbackResult = await adapter.execute(fallbackStep, fullCtx);
                                     results[stepIdx] = fallbackResult;
-                                    resultMap.set(stepIdx, fallbackResult);
-                                    return;
+                                                                        return;
                                 }
                                 catch (fbErr) {
                                     // Fallback also failed — fall through to normal retry
@@ -354,8 +347,7 @@ export class Executor {
                         } else if (depth > 1 && attempt === 1) {
                             process.stderr.write(`[retry-skip] depth-${depth} step (downstream), skipping retry: ${errMsg.slice(0, 60)}\n`);
                             result = { success: false, output: '', logs: '', artifacts: [], error: errMsg, code: errCode, fatal: false };
-                            resultMap.set(stepIdx, result);
-                            return;
+                                                        return;
                         }
                         if (attempt > maxRetries) {
                             result = {
@@ -393,8 +385,7 @@ export class Executor {
                 result.attempts = attempt + (result.success ? 1 : 0);
                 result.durationMs = Date.now() - (stepStartTimes.get(stepIdx) ?? Date.now());
                 results[stepIdx] = result;
-                resultMap.set(stepIdx, result);
-                viz.step(resolvedStep.command);
+                                viz.step(resolvedStep.command);
                 if (!this.options.verbose) {
                     const elapsed = ((Date.now() - (stepStartTimes.get(stepIdx) ?? Date.now())) / 1000).toFixed(1);
                     const status = result.success ? `\u2713` : `\u2717`;
@@ -499,24 +490,27 @@ export class Executor {
             }
         }
         
-// Detect cycles using DFS — throw on cycle
+// Detect cycles using single DFS pass (Tarjan-inspired) — O(V+E)
 const visited = new Set();
-const stack = new Set();
-function hasCycle(node) {
-    if (stack.has(node)) throw new Error(`[dependency] cycle detected at step ${node}`);
-    if (visited.has(node)) return false;
+const onStack = new Set();
+let hasGlobalCycle = false;
+let cycleNode = -1;
+function dfsCycle(node) {
+    if (onStack.has(node)) { hasGlobalCycle = true; cycleNode = node; return; }
+    if (visited.has(node)) return;
     visited.add(node);
-    stack.add(node);
+    onStack.add(node);
     for (const dep of (deps.get(node) || new Set())) {
-        if (hasCycle(dep)) return true;
+        dfsCycle(dep);
+        if (hasGlobalCycle) return;
     }
-    stack.delete(node);
-    return false;
+    onStack.delete(node);
 }
 for (let i = 0; i < steps.length; i++) {
-    visited.clear();
-    stack.clear();
-    hasCycle(i);
+    if (!visited.has(i)) {
+        dfsCycle(i);
+        if (hasGlobalCycle) throw new Error(`[dependency] cycle detected at step ${cycleNode}`);
+    }
 }
 
         return deps;
@@ -818,14 +812,13 @@ Do not add explanations outside the JSON.`,
 
         if (selfReflectPatterns.length === 0) return;
 
-        // Append to seeds file
-        mkdirSync(dirname(SEEDS_FILE), { recursive: true });
-        const header = `\n## Self-Audit Seeds (${now})\n`;
-        const existing = existsSync(SEEDS_FILE) ? readFileSync(SEEDS_FILE, 'utf-8') : '';
-        const entry = header + selfReflectPatterns.map(p => `- ${p}`).join('\n') + '\n';
-        appendFileSync(SEEDS_FILE, entry, 'utf-8');
-        // Trigger auto-seed if patterns accumulated >= 3
+        // Only write to SEEDS_FILE and trigger auto-seed if patterns >= 3
         if (selfReflectPatterns.length >= 3) {
+            mkdirSync(dirname(SEEDS_FILE), { recursive: true });
+            const header = `\n## Self-Audit Seeds (${now})\n`;
+            const existing = existsSync(SEEDS_FILE) ? readFileSync(SEEDS_FILE, 'utf-8') : '';
+            const entry = existing.endsWith(header) ? selfReflectPatterns.map(p => `- ${p}`).join('\n') + '\n' : header + selfReflectPatterns.map(p => `- ${p}`).join('\n') + '\n';
+            appendFileSync(SEEDS_FILE, entry, 'utf-8');
             try {
                 execSync('node "D:/OpenClaw/workspace/.omc/scripts/hook-auto-seed.mjs" --ingest', {
                     stdio: 'ignore',
@@ -848,6 +841,16 @@ Do not add explanations outside the JSON.`,
                 mkdirSync(dir, { recursive: true });
             const logPath = this.options.auditLogPath ?? join(dir, 'audit.jsonl');
             const timestamp = new Date().toISOString();
+            // Write run header entry (prompt stored once)
+            appendFileSync(logPath, JSON.stringify({
+                runId,
+                seq: -1,
+                timestamp,
+                type: 'run-header',
+                prompt: prompt ?? '',
+                stepCount: steps.length
+            }) + '\n', 'utf-8');
+
             // Write one AuditLogEntry per step (append-only)
             let seq = 0;
             for (let i = 0; i < steps.length; i++) {
@@ -876,7 +879,7 @@ Do not add explanations outside the JSON.`,
                     causalityDepth: info.depth,
                     cached: result?.cached ?? false,
                     fatal: result?.fatal ?? false,
-                    prompt: prompt ?? '',
+                    
                     review: step.review ?? null,
                 };
                 appendFileSync(logPath, JSON.stringify(entry) + '\n', 'utf-8');
@@ -927,6 +930,9 @@ Do not add explanations outside the JSON.`,
                 }
                 if (r.output) {
                     writeFileSync(join(logsDir, `step-${i + 1}.stdout`), r.output, 'utf-8');
+                if (r.artifacts && r.artifacts.length > 0) {
+                    writeFileSync(join(logsDir, `step-${i + 1}.artifacts.json`), JSON.stringify(r.artifacts, null, 2), 'utf-8');
+                }
                 }
             }
         }
