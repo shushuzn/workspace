@@ -114,6 +114,14 @@ export class Executor {
         // --explain: show layers, parallel groups, and inputSlot wiring
         if (this.options.explain) {
             process.stderr.write(chalk.blue('\n[execution plan]:\n'));
+            // Pre-build outputSlot→step index map for O(1) lookups (was O(n²) nested loop)
+            const outputSlotMap = new Map(); // outputSlotName → [stepIndex, ...]
+            for (let j = 0; j < steps.length; j++) {
+                for (const out of (steps[j].outputSlots || [])) {
+                    if (!outputSlotMap.has(out)) outputSlotMap.set(out, []);
+                    outputSlotMap.get(out).push(j);
+                }
+            }
             for (let li = 0; li < layers.length; li++) {
                 const layerSteps = layers[li].map(idx => steps[idx]);
                 const parallel = layerSteps.length > 1;
@@ -128,9 +136,10 @@ export class Executor {
                     else {
                         process.stderr.write(`    ${chalk.gray('└─')} ${stepColor(step.adapterType)(step.adapterId)}: ${step.command} ${step.args.join(' ')}\n`);
                         for (const input of step.inputSlots) {
-                            for (let j = 0; j < idx; j++) {
-                                if (steps[j].outputSlots.includes(input)) {
-                                    process.stderr.write(`        ${chalk.gray('←')} ${stepColor(steps[j].adapterType)(steps[j].adapterId)}:${chalk.gray(`outputSlots[${input}]`)}\n`);
+                            const producers = outputSlotMap.get(input) || [];
+                            for (const prevIdx of producers) {
+                                if (prevIdx < idx) {
+                                    process.stderr.write(`        ${chalk.gray('←')} ${stepColor(steps[prevIdx].adapterType)(steps[prevIdx].adapterId)}:${chalk.gray(`outputSlots[${input}]`)}\n`);
                                 }
                             }
                         }
