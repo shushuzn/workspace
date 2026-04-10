@@ -30,6 +30,36 @@ const KEYWORD_MAP = [
   { keywords: ['scientist', '科学', 'research', '研究'], agent: 'scientist', confidence: 0.75 },
 ];
 
+function wordTokenize(text) {
+  return text.toLowerCase().match(/\b\w+\b/g) || [];
+}
+
+function cosineSimilarity(a, b) {
+  const tokensA = wordTokenize(a);
+  const tokensB = wordTokenize(b);
+  const set = [...new Set([...tokensA, ...tokensB])];
+  const vec = (arr) => set.map(w => arr.includes(w) ? 1 : 0);
+  const vA = vec(tokensA);
+  const vB = vec(tokensB);
+  const dot = vA.reduce((s, v, i) => s + v * vB[i], 0);
+  const normA = Math.sqrt(vA.reduce((s, v) => s + v * v, 0));
+  const normB = Math.sqrt(vB.reduce((s, v) => s + v * v, 0));
+  if (normA === 0 || normB === 0) return 0;
+  return dot / (normA * normB);
+}
+
+function fuzzyMatch(task, agents) {
+  const results = [];
+  for (const agent of agents) {
+    const desc = [agent.name, agent.description, ...(agent.keywords || [])].join(' ');
+    const score = cosineSimilarity(task, desc);
+    if (score > 0.1) {
+      results.push({ agent: agent.name, score, description: agent.description || '' });
+    }
+  }
+  return results.sort((a, b) => b.score - a.score);
+}
+
 function matchAgent(task) {
   const lower = task.toLowerCase();
   let best = null;
@@ -48,6 +78,33 @@ function main() {
   const taskIdx = args.indexOf('--task');
   const jsonIdx = args.indexOf('--json');
   const helpIdx = args.indexOf('--help');
+  const simIdx = args.indexOf('--similarity');
+
+  if (helpIdx !== -1 || args.length === 0 || simIdx !== -1) {
+    if (simIdx !== -1) {
+      const simTask = args[simIdx + 1] || args.slice(simIdx + 1).join(' ');
+      if (!existsSync(REGISTRY_FILE)) {
+        console.error('[agent-dispatcher] registry not found');
+        process.exit(1);
+      }
+      const registry = JSON.parse(readFileSync(REGISTRY_FILE, 'utf8'));
+      const top = fuzzyMatch(simTask, registry.agents).slice(0, 5);
+      if (top.length === 0) {
+        console.log('[agent-dispatcher] No similar agents found');
+      } else {
+        console.log(`[agent-dispatcher] Top ${top.length} similar agents for: "${simTask}"`);
+        for (const r of top) {
+          console.log(`  ${r.agent} (score: ${r.score.toFixed(2)}) — ${r.description.slice(0, 60)}`);
+        }
+      }
+      process.exit(0);
+    }
+    console.log(`Usage: node agent-dispatcher.mjs --task "任务描述" [--json]`);
+    console.log(`  --task  任务描述`);
+    console.log(`  --json  输出JSON格式`);
+    console.log(`  --similarity "模糊描述"  模糊相似度匹配`);
+    process.exit(0);
+  }
 
   if (helpIdx !== -1 || args.length === 0) {
     console.log(`Usage: node agent-dispatcher.mjs --task "任务描述" [--json]`);
