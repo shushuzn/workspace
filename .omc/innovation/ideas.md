@@ -8,6 +8,8 @@
 
 - [20260412] seed [brainstorm] [score:3x4=12] [f:4] [angle:ws-level] wiki-indexer增加fuzzy模糊搜索 | benefit: 输入近似词也能搜到相关条目 | reason: 已知资源：D:/OpenClaw/workspace/shared/wiki-indexer.mjs已存在，✓ shared/wiki-indexer.mjs 存在，186行；缺失环节：无模糊匹配；连接方式：fuzzy库→搜索时容错匹配 | approach: 1. python shared/wiki-indexer-fuzzy.py test | shipped:20260412
 
+- [20260410] seed [brainstorm] [score:4x3=12] [f:3] [angle:skill-file] 利用134个预定义agent模板 — 当brainstorm遇到特定任务类型时自动spawn对应agent | benefit: OMC每次遇到代码审查/架构设计等任务都是硬做，有了agent模板就能自动分派专业角色，效率提升10x | reason: 已有134个agent模板在插件目录里睡觉(claude-plugins-official:59, compound-engineering:43, omc:22)，OMC skill体系没有与它们挂钩的机制 | approach: 1. node shared/scan-agent-templates.mjs 扫描所有插件的agents/目录，提取name/description/tools/model，输出agent-registry.json 2. 创建skill: agent-dispatcher，读取agent-registry，当brainstorm任务匹配到对应agent类型时，输出spawn建议 3. 修改brainstorm流程，在候选池构建后加一步：用agent-dispatcher检查是否有匹配agent 4. 若匹配，在seed的approach中标注"[spawn:atomic-architect]"，实现时Agent工具加载对应模板
+
 - [20260412] seed [brainstorm] [score:3x4=12] [f:4] [angle:ws-level] hookify规则dry-run验证器 | benefit: 创建hookify规则前先验证regex是否正确 | reason: 已知资源：D:/OpenClaw/workspace/.claude/hookify.warn-rm.local.md格式已有，✓ hookify.warn-rm.local.md 存在；缺失环节：无regex语法验证；连接方式：读取规则regex→用RegExp验证→输出正确/错误 | approach: 1. node shared/hookify-validate.mjs | shipped:20260409
 
 - [20260412] seed [brainstorm] [score:3x4=12] [f:4] [angle:ws-level] brainstorm-metacognition自检报告 | benefit: 自动生成批次效果分析报告，辅助调整策略 | reason: 已知资源：D:/OpenClaw/workspace/.omc/innovation/brainstorm-metacognition.jsonl已有批次记录，✓ brainstorm-metacognition.jsonl 存在；缺失环节：无自动分析报告；连接方式：读取JSONL→统计shipped率/Gate失败率→生成改善建议 | approach: 1. node shared/brainstorm-report.mjs | shipped:20260409

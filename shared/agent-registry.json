@@ -1,0 +1,382 @@
+{
+  "updated": "2026-04-10T00:35:52.012Z",
+  "total": 31,
+  "byModel": {
+    "sonnet": [
+      "agent-sdk-verifier-py",
+      "agent-sdk-verifier-ts",
+      "code-architect",
+      "code-explorer",
+      "code-reviewer",
+      "agent-creator"
+    ],
+    "inherit": [
+      "conversation-analyzer",
+      "plugin-validator",
+      "skill-reviewer",
+      "comment-analyzer",
+      "pr-test-analyzer",
+      "silent-failure-hunter",
+      "type-design-analyzer"
+    ],
+    "opus": [
+      "code-simplifier"
+    ],
+    "claude-opus-4-6": [
+      "analyst",
+      "architect",
+      "critic",
+      "planner",
+      "security-reviewer"
+    ],
+    "claude-sonnet-4-6": [
+      "debugger",
+      "designer",
+      "document-specialist",
+      "executor",
+      "git-master",
+      "qa-tester",
+      "scientist",
+      "test-engineer",
+      "tracer",
+      "verifier"
+    ],
+    "claude-haiku-4-5": [
+      "explore",
+      "writer"
+    ]
+  },
+  "byPlugin": {
+    "claude-code-plugins": 14,
+    "omc": 17
+  },
+  "agents": [
+    {
+      "name": "agent-sdk-verifier-py",
+      "description": "Use this agent to verify that a Python Agent SDK application is properly configured, follows SDK best practices and documentation recommendations, and is ready for deployment or testing. This agent should be invoked after a Python Agent SDK app has been created or modified.",
+      "model": "sonnet",
+      "color": "gray",
+      "tools": [],
+      "file": "C:\\Users\\adm\\.claude\\plugins\\cache\\claude-code-plugins\\agent-sdk-dev\\1.0.0\\agents\\agent-sdk-verifier-py.md",
+      "plugin": "claude-code-plugins"
+    },
+    {
+      "name": "agent-sdk-verifier-ts",
+      "description": "Use this agent to verify that a TypeScript Agent SDK application is properly configured, follows SDK best practices and documentation recommendations, and is ready for deployment or testing. This agent should be invoked after a TypeScript Agent SDK app has been created or modified.",
+      "model": "sonnet",
+      "color": "gray",
+      "tools": [],
+      "file": "C:\\Users\\adm\\.claude\\plugins\\cache\\claude-code-plugins\\agent-sdk-dev\\1.0.0\\agents\\agent-sdk-verifier-ts.md",
+      "plugin": "claude-code-plugins"
+    },
+    {
+      "name": "code-architect",
+      "description": "Designs feature architectures by analyzing existing codebase patterns and conventions, then providing comprehensive implementation blueprints with specific files to create/modify, component designs, data flows, and build sequences",
+      "model": "sonnet",
+      "color": "green",
+      "tools": [
+        "Glob",
+        "Grep",
+        "LS",
+        "Read",
+        "NotebookRead",
+        "WebFetch",
+        "TodoWrite",
+        "WebSearch",
+        "KillShell",
+        "BashOutput"
+      ],
+      "file": "C:\\Users\\adm\\.claude\\plugins\\cache\\claude-code-plugins\\feature-dev\\1.0.0\\agents\\code-architect.md",
+      "plugin": "claude-code-plugins"
+    },
+    {
+      "name": "code-explorer",
+      "description": "Deeply analyzes existing codebase features by tracing execution paths, mapping architecture layers, understanding patterns and abstractions, and documenting dependencies to inform new development",
+      "model": "sonnet",
+      "color": "yellow",
+      "tools": [
+        "Glob",
+        "Grep",
+        "LS",
+        "Read",
+        "NotebookRead",
+        "WebFetch",
+        "TodoWrite",
+        "WebSearch",
+        "KillShell",
+        "BashOutput"
+      ],
+      "file": "C:\\Users\\adm\\.claude\\plugins\\cache\\claude-code-plugins\\feature-dev\\1.0.0\\agents\\code-explorer.md",
+      "plugin": "claude-code-plugins"
+    },
+    {
+      "name": "code-reviewer",
+      "description": "Reviews code for bugs, logic errors, security vulnerabilities, code quality issues, and adherence to project conventions, using confidence-based filtering to report only high-priority issues that truly matter",
+      "model": "sonnet",
+      "color": "red",
+      "tools": [
+        "Glob",
+        "Grep",
+        "LS",
+        "Read",
+        "NotebookRead",
+        "WebFetch",
+        "TodoWrite",
+        "WebSearch",
+        "KillShell",
+        "BashOutput"
+      ],
+      "file": "C:\\Users\\adm\\.claude\\plugins\\cache\\claude-code-plugins\\feature-dev\\1.0.0\\agents\\code-reviewer.md",
+      "plugin": "claude-code-plugins"
+    },
+    {
+      "name": "conversation-analyzer",
+      "description": "Use this agent when analyzing conversation transcripts to find behaviors worth preventing with hooks. Examples: <example>Context: User is running /hookify command without arguments\\nuser: \"/hookify\"\\nassistant: \"I'll analyze the conversation to find behaviors you want to prevent\"\\n<commentary>The /hookify command without arguments triggers conversation analysis to find unwanted behaviors.</commentary></example><example>Context: User wants to create hooks from recent frustrations\\nuser: \"Can you look back at this conversation and help me create hooks for the mistakes you made?\"\\nassistant: \"I'll use the conversation-analyzer agent to identify the issues and suggest hooks.\"\\n<commentary>User explicitly asks to analyze conversation for mistakes that should be prevented.</commentary></example>",
+      "model": "inherit",
+      "color": "yellow",
+      "tools": [
+        "\"Read\"",
+        "\"Grep\""
+      ],
+      "file": "C:\\Users\\adm\\.claude\\plugins\\cache\\claude-code-plugins\\hookify\\0.1.0\\agents\\conversation-analyzer.md",
+      "plugin": "claude-code-plugins"
+    },
+    {
+      "name": "agent-creator",
+      "description": "Use this agent when the user asks to \"create an agent\", \"generate an agent\", \"build a new agent\", \"make me an agent that...\", or describes agent functionality they need. Trigger when user wants to create autonomous agents for plugins. Examples:",
+      "model": "sonnet",
+      "color": "magenta",
+      "tools": [
+        "\"Write\"",
+        "\"Read\""
+      ],
+      "file": "C:\\Users\\adm\\.claude\\plugins\\cache\\claude-code-plugins\\plugin-dev\\0.1.0\\agents\\agent-creator.md",
+      "plugin": "claude-code-plugins"
+    },
+    {
+      "name": "plugin-validator",
+      "description": "Use this agent when the user asks to \"validate my plugin\", \"check plugin structure\", \"verify plugin is correct\", \"validate plugin.json\", \"check plugin files\", or mentions plugin validation. Also trigger proactively after user creates or modifies plugin components. Examples:",
+      "model": "inherit",
+      "color": "yellow",
+      "tools": [
+        "\"Read\"",
+        "\"Grep\"",
+        "\"Glob\"",
+        "\"Bash\""
+      ],
+      "file": "C:\\Users\\adm\\.claude\\plugins\\cache\\claude-code-plugins\\plugin-dev\\0.1.0\\agents\\plugin-validator.md",
+      "plugin": "claude-code-plugins"
+    },
+    {
+      "name": "skill-reviewer",
+      "description": "Use this agent when the user has created or modified a skill and needs quality review, asks to \"review my skill\", \"check skill quality\", \"improve skill description\", or wants to ensure skill follows best practices. Trigger proactively after skill creation. Examples:",
+      "model": "inherit",
+      "color": "cyan",
+      "tools": [
+        "\"Read\"",
+        "\"Grep\"",
+        "\"Glob\""
+      ],
+      "file": "C:\\Users\\adm\\.claude\\plugins\\cache\\claude-code-plugins\\plugin-dev\\0.1.0\\agents\\skill-reviewer.md",
+      "plugin": "claude-code-plugins"
+    },
+    {
+      "name": "code-simplifier",
+      "description": "Use this agent when code has been written or modified and needs to be simplified for clarity, consistency, and maintainability while preserving all functionality. This agent should be triggered automatically after completing a coding task or writing a logical chunk of code. It simplifies code by following project best practices while retaining all functionality. The agent focuses only on recently modified code unless instructed otherwise.\\n\\nExamples:\\n\\n<example>",
+      "model": "opus",
+      "color": "gray",
+      "tools": [],
+      "file": "C:\\Users\\adm\\.claude\\plugins\\cache\\claude-code-plugins\\pr-review-toolkit\\1.0.0\\agents\\code-simplifier.md",
+      "plugin": "claude-code-plugins"
+    },
+    {
+      "name": "comment-analyzer",
+      "description": "Use this agent when you need to analyze code comments for accuracy, completeness, and long-term maintainability. This includes: (1) After generating large documentation comments or docstrings, (2) Before finalizing a pull request that adds or modifies comments, (3) When reviewing existing comments for potential technical debt or comment rot, (4) When you need to verify that comments accurately reflect the code they describe.\\n\\n<example>\\nContext: The user is working on a pull request that adds several documentation comments to functions.\\nuser: \"I've added documentation to these functions. Can you check if the comments are accurate?\"\\nassistant: \"I'll use the comment-analyzer agent to thoroughly review all the comments in this pull request for accuracy and completeness.\"\\n<commentary>\\nSince the user has added documentation comments and wants them checked, use the comment-analyzer agent to verify their accuracy against the actual code.\\n</commentary>\\n</example>\\n\\n<example>\\nContext: The user just asked to generate comprehensive documentation for a complex function.\\nuser: \"Add detailed documentation for this authentication handler function\"\\nassistant: \"I've added the documentation. Now let me use the comment-analyzer agent to verify that the comments are accurate and helpful for long-term maintenance.\"\\n<commentary>\\nAfter generating large documentation comments, proactively use the comment-analyzer to ensure quality.\\n</commentary>\\n</example>\\n\\n<example>\\nContext: The user is preparing to create a pull request with multiple code changes and comments.\\nuser: \"I think we're ready to create the PR now\"\\nassistant: \"Before creating the pull request, let me use the comment-analyzer agent to review all the comments we've added or modified to ensure they're accurate and won't create technical debt.\"\\n<commentary>\\nBefore finalizing a PR, use the comment-analyzer to review all comment changes.\\n</commentary>\\n</example>",
+      "model": "inherit",
+      "color": "green",
+      "tools": [],
+      "file": "C:\\Users\\adm\\.claude\\plugins\\cache\\claude-code-plugins\\pr-review-toolkit\\1.0.0\\agents\\comment-analyzer.md",
+      "plugin": "claude-code-plugins"
+    },
+    {
+      "name": "pr-test-analyzer",
+      "description": "Use this agent when you need to review a pull request for test coverage quality and completeness. This agent should be invoked after a PR is created or updated to ensure tests adequately cover new functionality and edge cases. Examples:\\n\\n<example>\\nContext: Daisy has just created a pull request with new functionality.\\nuser: \"I've created the PR. Can you check if the tests are thorough?\"\\nassistant: \"I'll use the pr-test-analyzer agent to review the test coverage and identify any critical gaps.\"\\n<commentary>\\nSince Daisy is asking about test thoroughness in a PR, use the Task tool to launch the pr-test-analyzer agent.\\n</commentary>\\n</example>\\n\\n<example>\\nContext: A pull request has been updated with new code changes.\\nuser: \"The PR is ready for review - I added the new validation logic we discussed\"\\nassistant: \"Let me analyze the PR to ensure the tests adequately cover the new validation logic and edge cases.\"\\n<commentary>\\nThe PR has new functionality that needs test coverage analysis, so use the pr-test-analyzer agent.\\n</commentary>\\n</example>\\n\\n<example>\\nContext: Reviewing PR feedback before marking as ready.\\nuser: \"Before I mark this PR as ready, can you double-check the test coverage?\"\\nassistant: \"I'll use the pr-test-analyzer agent to thoroughly review the test coverage and identify any critical gaps before you mark it ready.\"\\n<commentary>\\nDaisy wants a final test coverage check before marking PR ready, use the pr-test-analyzer agent.\\n</commentary>\\n</example>",
+      "model": "inherit",
+      "color": "cyan",
+      "tools": [],
+      "file": "C:\\Users\\adm\\.claude\\plugins\\cache\\claude-code-plugins\\pr-review-toolkit\\1.0.0\\agents\\pr-test-analyzer.md",
+      "plugin": "claude-code-plugins"
+    },
+    {
+      "name": "silent-failure-hunter",
+      "description": "Use this agent when reviewing code changes in a pull request to identify silent failures, inadequate error handling, and inappropriate fallback behavior. This agent should be invoked proactively after completing a logical chunk of work that involves error handling, catch blocks, fallback logic, or any code that could potentially suppress errors. Examples:\\n\\n<example>\\nContext: Daisy has just finished implementing a new feature that fetches data from an API with fallback behavior.\\nDaisy: \"I've added error handling to the API client. Can you review it?\"\\nAssistant: \"Let me use the silent-failure-hunter agent to thoroughly examine the error handling in your changes.\"\\n<Task tool invocation to launch silent-failure-hunter agent>\\n</example>\\n\\n<example>\\nContext: Daisy has created a PR with changes that include try-catch blocks.\\nDaisy: \"Please review PR #1234\"\\nAssistant: \"I'll use the silent-failure-hunter agent to check for any silent failures or inadequate error handling in this PR.\"\\n<Task tool invocation to launch silent-failure-hunter agent>\\n</example>\\n\\n<example>\\nContext: Daisy has just refactored error handling code.\\nDaisy: \"I've updated the error handling in the authentication module\"\\nAssistant: \"Let me proactively use the silent-failure-hunter agent to ensure the error handling changes don't introduce silent failures.\"\\n<Task tool invocation to launch silent-failure-hunter agent>\\n</example>",
+      "model": "inherit",
+      "color": "yellow",
+      "tools": [],
+      "file": "C:\\Users\\adm\\.claude\\plugins\\cache\\claude-code-plugins\\pr-review-toolkit\\1.0.0\\agents\\silent-failure-hunter.md",
+      "plugin": "claude-code-plugins"
+    },
+    {
+      "name": "type-design-analyzer",
+      "description": "Use this agent when you need expert analysis of type design in your codebase. Specifically use it: (1) when introducing a new type to ensure it follows best practices for encapsulation and invariant expression, (2) during pull request creation to review all types being added, (3) when refactoring existing types to improve their design quality. The agent will provide both qualitative feedback and quantitative ratings on encapsulation, invariant expression, usefulness, and enforcement.\\n\\n<example>\\nContext: Daisy is writing code that introduces a new UserAccount type and wants to ensure it has well-designed invariants.\\nuser: \"I've just created a new UserAccount type that handles user authentication and permissions\"\\nassistant: \"I'll use the type-design-analyzer agent to review the UserAccount type design\"\\n<commentary>\\nSince a new type is being introduced, use the type-design-analyzer to ensure it has strong invariants and proper encapsulation.\\n</commentary>\\n</example>\\n\\n<example>\\nContext: Daisy is creating a pull request and wants to review all newly added types.\\nuser: \"I'm about to create a PR with several new data model types\"\\nassistant: \"Let me use the type-design-analyzer agent to review all the types being added in this PR\"\\n<commentary>\\nDuring PR creation with new types, use the type-design-analyzer to review their design quality.\\n</commentary>\\n</example>",
+      "model": "inherit",
+      "color": "pink",
+      "tools": [],
+      "file": "C:\\Users\\adm\\.claude\\plugins\\cache\\claude-code-plugins\\pr-review-toolkit\\1.0.0\\agents\\type-design-analyzer.md",
+      "plugin": "claude-code-plugins"
+    },
+    {
+      "name": "analyst",
+      "description": "Pre-planning consultant for requirements analysis (Opus)",
+      "model": "claude-opus-4-6",
+      "color": "gray",
+      "tools": [],
+      "file": "C:\\Users\\adm\\.claude\\plugins\\cache\\omc\\oh-my-claudecode\\4.9.3\\agents\\analyst.md",
+      "plugin": "omc"
+    },
+    {
+      "name": "architect",
+      "description": "Strategic Architecture & Debugging Advisor (Opus, READ-ONLY)",
+      "model": "claude-opus-4-6",
+      "color": "gray",
+      "tools": [],
+      "file": "C:\\Users\\adm\\.claude\\plugins\\cache\\omc\\oh-my-claudecode\\4.9.3\\agents\\architect.md",
+      "plugin": "omc"
+    },
+    {
+      "name": "critic",
+      "description": "Work plan and code review expert — thorough, structured, multi-perspective (Opus)",
+      "model": "claude-opus-4-6",
+      "color": "gray",
+      "tools": [],
+      "file": "C:\\Users\\adm\\.claude\\plugins\\cache\\omc\\oh-my-claudecode\\4.9.3\\agents\\critic.md",
+      "plugin": "omc"
+    },
+    {
+      "name": "debugger",
+      "description": "Root-cause analysis, regression isolation, stack trace analysis, build/compilation error resolution",
+      "model": "claude-sonnet-4-6",
+      "color": "gray",
+      "tools": [],
+      "file": "C:\\Users\\adm\\.claude\\plugins\\cache\\omc\\oh-my-claudecode\\4.9.3\\agents\\debugger.md",
+      "plugin": "omc"
+    },
+    {
+      "name": "designer",
+      "description": "UI/UX Designer-Developer for stunning interfaces (Sonnet)",
+      "model": "claude-sonnet-4-6",
+      "color": "gray",
+      "tools": [],
+      "file": "C:\\Users\\adm\\.claude\\plugins\\cache\\omc\\oh-my-claudecode\\4.9.3\\agents\\designer.md",
+      "plugin": "omc"
+    },
+    {
+      "name": "document-specialist",
+      "description": "External Documentation & Reference Specialist",
+      "model": "claude-sonnet-4-6",
+      "color": "gray",
+      "tools": [],
+      "file": "C:\\Users\\adm\\.claude\\plugins\\cache\\omc\\oh-my-claudecode\\4.9.3\\agents\\document-specialist.md",
+      "plugin": "omc"
+    },
+    {
+      "name": "executor",
+      "description": "Focused task executor for implementation work (Sonnet)",
+      "model": "claude-sonnet-4-6",
+      "color": "gray",
+      "tools": [],
+      "file": "C:\\Users\\adm\\.claude\\plugins\\cache\\omc\\oh-my-claudecode\\4.9.3\\agents\\executor.md",
+      "plugin": "omc"
+    },
+    {
+      "name": "explore",
+      "description": "Codebase search specialist for finding files and code patterns",
+      "model": "claude-haiku-4-5",
+      "color": "gray",
+      "tools": [],
+      "file": "C:\\Users\\adm\\.claude\\plugins\\cache\\omc\\oh-my-claudecode\\4.9.3\\agents\\explore.md",
+      "plugin": "omc"
+    },
+    {
+      "name": "git-master",
+      "description": "Git expert for atomic commits, rebasing, and history management with style detection",
+      "model": "claude-sonnet-4-6",
+      "color": "gray",
+      "tools": [],
+      "file": "C:\\Users\\adm\\.claude\\plugins\\cache\\omc\\oh-my-claudecode\\4.9.3\\agents\\git-master.md",
+      "plugin": "omc"
+    },
+    {
+      "name": "planner",
+      "description": "Strategic planning consultant with interview workflow (Opus)",
+      "model": "claude-opus-4-6",
+      "color": "gray",
+      "tools": [],
+      "file": "C:\\Users\\adm\\.claude\\plugins\\cache\\omc\\oh-my-claudecode\\4.9.3\\agents\\planner.md",
+      "plugin": "omc"
+    },
+    {
+      "name": "qa-tester",
+      "description": "Interactive CLI testing specialist using tmux for session management",
+      "model": "claude-sonnet-4-6",
+      "color": "gray",
+      "tools": [],
+      "file": "C:\\Users\\adm\\.claude\\plugins\\cache\\omc\\oh-my-claudecode\\4.9.3\\agents\\qa-tester.md",
+      "plugin": "omc"
+    },
+    {
+      "name": "scientist",
+      "description": "Data analysis and research execution specialist",
+      "model": "claude-sonnet-4-6",
+      "color": "gray",
+      "tools": [],
+      "file": "C:\\Users\\adm\\.claude\\plugins\\cache\\omc\\oh-my-claudecode\\4.9.3\\agents\\scientist.md",
+      "plugin": "omc"
+    },
+    {
+      "name": "security-reviewer",
+      "description": "Security vulnerability detection specialist (OWASP Top 10, secrets, unsafe patterns)",
+      "model": "claude-opus-4-6",
+      "color": "gray",
+      "tools": [],
+      "file": "C:\\Users\\adm\\.claude\\plugins\\cache\\omc\\oh-my-claudecode\\4.9.3\\agents\\security-reviewer.md",
+      "plugin": "omc"
+    },
+    {
+      "name": "test-engineer",
+      "description": "Test strategy, integration/e2e coverage, flaky test hardening, TDD workflows",
+      "model": "claude-sonnet-4-6",
+      "color": "gray",
+      "tools": [],
+      "file": "C:\\Users\\adm\\.claude\\plugins\\cache\\omc\\oh-my-claudecode\\4.9.3\\agents\\test-engineer.md",
+      "plugin": "omc"
+    },
+    {
+      "name": "tracer",
+      "description": "Evidence-driven causal tracing with competing hypotheses, evidence for/against, uncertainty tracking, and next-probe recommendations",
+      "model": "claude-sonnet-4-6",
+      "color": "gray",
+      "tools": [],
+      "file": "C:\\Users\\adm\\.claude\\plugins\\cache\\omc\\oh-my-claudecode\\4.9.3\\agents\\tracer.md",
+      "plugin": "omc"
+    },
+    {
+      "name": "verifier",
+      "description": "Verification strategy, evidence-based completion checks, test adequacy",
+      "model": "claude-sonnet-4-6",
+      "color": "gray",
+      "tools": [],
+      "file": "C:\\Users\\adm\\.claude\\plugins\\cache\\omc\\oh-my-claudecode\\4.9.3\\agents\\verifier.md",
+      "plugin": "omc"
+    },
+    {
+      "name": "writer",
+      "description": "Technical documentation writer for README, API docs, and comments (Haiku)",
+      "model": "claude-haiku-4-5",
+      "color": "gray",
+      "tools": [],
+      "file": "C:\\Users\\adm\\.claude\\plugins\\cache\\omc\\oh-my-claudecode\\4.9.3\\agents\\writer.md",
+      "plugin": "omc"
+    }
+  ]
+}
