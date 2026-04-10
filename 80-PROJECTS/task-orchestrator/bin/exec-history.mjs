@@ -143,5 +143,3 @@ if (cmd === 'best') {
     }
   }
 }
-  console.log('       node exec-history.mjs record <taskType> <adapterId> <success> <durationMs>');
-}
