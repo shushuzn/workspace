@@ -3,6 +3,7 @@ import { join, dirname } from 'path';
 import os from 'os';
 import { randomUUID } from 'crypto';
 import chalk from 'chalk';
+import { createVisualizer } from '../bin/chain-visualizer.mjs';
 import { spawn } from 'child_process';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const adapterTypeColors = {
@@ -47,6 +48,8 @@ export class Executor {
         mkdirSync(workingDir, { recursive: true });
         const runId = this.options.runId ?? randomUUID();
         this.currentRunId = runId;
+        const viz = createVisualizer(steps.length);
+        viz.start();
         const statePath = join(workingDir, `run-${runId}.json`);
         // Initialize empty task context
         let taskContext = {};
@@ -321,6 +324,7 @@ export class Executor {
                 result.durationMs = Date.now() - (stepStartTimes.get(stepIdx) ?? Date.now());
                 results[stepIdx] = result;
                 resultMap.set(stepIdx, result);
+                viz.step(resolvedStep.command);
                 if (!this.options.verbose) {
                     const elapsed = ((Date.now() - (stepStartTimes.get(stepIdx) ?? Date.now())) / 1000).toFixed(1);
                     const status = result.success ? `\u2713` : `\u2717`;
@@ -391,6 +395,7 @@ export class Executor {
             writeFileSync(outPath, JSON.stringify({ runId, steps: results }, null, 2), 'utf-8');
             console.log(`[executor] JSON output written to ${outPath}`);
         }
+        viz.done();
         return results;
     }
     /** Build a dependency graph: for each step index, which other step indices it depends on */
