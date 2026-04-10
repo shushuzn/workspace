@@ -197,7 +197,11 @@ const unshipped = results
   .filter(s => !focusProject || s.focus === focusProject)
   .filter(s => !filterAngle || s.angle === filterAngle)
   .filter(s => skipIdxs.length === 0 || !skipIdxs.includes(s.lineIdx))
-  .sort((a, b) => b.score - a.score);
+  .sort((a, b) => {
+    // Bonus for high-complexity seeds (f:1, f:2) to prevent them being buried by easy f:4/f:5
+    const feasBonus = (s) => s.feas <= 1 ? 15 : s.feas <= 2 ? 8 : 0;
+    return (b.score + feasBonus(b)) - (a.score + feasBonus(a));
+  });
 
 console.log(`\n=== Seed Runner ===`);
 console.log(`Total seeds: ${results.length} | Unshipped: ${unshipped.length}${focusProject ? ` | focus: ${focusProject}` : ''}${filterAngle ? ` | angle: ${filterAngle}` : ''}`);
