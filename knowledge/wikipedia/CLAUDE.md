@@ -155,9 +155,9 @@ Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>
 
 ### 知识库修正流程
 
-自主执行，逐文件修改：
+逐文件修改：
 1. 读文件 → 反思问题 → Edit → linkcheck → 输出结果
-2. linkcheck 全部通过后自主 commit
+2. linkcheck 全部通过后 commit
 - 视频文案不得包含 `[画面：...]` 等非朗读内容
 - 数学符号（σ、λ、下标）必须替换为可读英文再送入 TTS
 - 视频文案不得使用"本论文/本文/该论文"等学术腔，用科普讲解腔替代
