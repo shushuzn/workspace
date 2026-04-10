@@ -189,14 +189,18 @@ while (i < lines.length) {
   i = j;
 }
 
+const angleIdx = process.argv.indexOf('--filter-angle');
+const filterAngle = angleIdx !== -1 ? process.argv[angleIdx + 1] : null;
+
 const unshipped = results
   .filter(s => !s.shipped && !s.killed)
   .filter(s => !focusProject || s.focus === focusProject)
+  .filter(s => !filterAngle || s.angle === filterAngle)
   .filter(s => skipIdxs.length === 0 || !skipIdxs.includes(s.lineIdx))
   .sort((a, b) => b.score - a.score);
 
 console.log(`\n=== Seed Runner ===`);
-console.log(`Total seeds: ${results.length} | Unshipped: ${unshipped.length}${focusProject ? ` | focus: ${focusProject}` : ''}`);
+console.log(`Total seeds: ${results.length} | Unshipped: ${unshipped.length}${focusProject ? ` | focus: ${focusProject}` : ''}${filterAngle ? ` | angle: ${filterAngle}` : ''}`);
 console.log(`Mode: ${dryRun ? 'DRY RUN' : 'LIVE'}${quickMode ? ' (QUICK)' : ''}`);
 console.log('');
 
