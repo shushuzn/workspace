@@ -111,7 +111,37 @@ if (cmd === 'best') {
   const [, , taskType, adapterId, success, durationMs] = process.argv;
   recordResult(taskType, adapterId, success === 'true', parseInt(durationMs));
   console.log('Recorded:', taskType, adapterId, success);
-} else {
-  console.log('Usage: node exec-history.mjs best <taskType>');
+} else if (cmd === 'stats') {
+  const adapterId = process.argv[3];
+  if (!adapterId) {
+    const lines = readFileSync(HISTORY_FILE, 'utf8').split('\n').filter(Boolean);
+    const byAdapter = {};
+    for (const line of lines) {
+      try {
+        const e = JSON.parse(line);
+        byAdapter[e.adapterId] = byAdapter[e.adapterId] || { success: 0, total: 0, totalDuration: 0 };
+        byAdapter[e.adapterId].total++;
+        if (e.success) byAdapter[e.adapterId].success++;
+        byAdapter[e.adapterId].totalDuration += e.durationMs || 0;
+      } catch {}
+    }
+    console.log('=== Adapter Statistics ===');
+    for (const [id, s] of Object.entries(byAdapter)) {
+      const rate = (s.success / s.total * 100).toFixed(0);
+      const avg = (s.totalDuration / s.total / 1000).toFixed(1) + 's';
+      console.log('  ' + id + ': ' + s.success + '/' + s.total + ' (' + rate + '%) avg=' + avg);
+    }
+  } else {
+    const stats = getAdapterStats(adapterId);
+    if (!stats) {
+      console.log('No history for adapter: ' + adapterId);
+    } else {
+      console.log('=== ' + adapterId + ' ===');
+      console.log('  Runs: ' + stats.count);
+      console.log('  Success rate: ' + (stats.successRate * 100).toFixed(1) + '%');
+      console.log('  Avg duration: ' + (stats.avgDurationMs / 1000).toFixed(1) + 's');
+    }
+  }
+}
   console.log('       node exec-history.mjs record <taskType> <adapterId> <success> <durationMs>');
 }

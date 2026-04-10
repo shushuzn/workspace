@@ -498,6 +498,27 @@ export class Executor {
                 }
             }
         }
+        
+// Detect cycles using DFS — throw on cycle
+const visited = new Set();
+const stack = new Set();
+function hasCycle(node) {
+    if (stack.has(node)) throw new Error(`[dependency] cycle detected at step ${node}`);
+    if (visited.has(node)) return false;
+    visited.add(node);
+    stack.add(node);
+    for (const dep of (deps.get(node) || new Set())) {
+        if (hasCycle(dep)) return true;
+    }
+    stack.delete(node);
+    return false;
+}
+for (let i = 0; i < steps.length; i++) {
+    visited.clear();
+    stack.clear();
+    hasCycle(i);
+}
+
         return deps;
     }
     /** Public: compute topological layers for a step list (used by index.ts for --dry-run display) */
@@ -887,11 +908,7 @@ Do not add explanations outside the JSON.`,
                 current = maxDep;
             }
             // Root = first step in chain (has no deps)
-            let root = i;
-            for (const c of chain) {
-                if (c < root)
-                    root = c;
-            }
+            let root = chain.length > 0 ? Math.min(...chain) : i;
             // If no deps, root is self
             if (stepDeps.size === 0)
                 root = i;
