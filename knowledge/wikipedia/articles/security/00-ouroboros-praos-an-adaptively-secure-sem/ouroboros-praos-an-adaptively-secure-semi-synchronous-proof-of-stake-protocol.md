@@ -1,0 +1,34 @@
+---
+id: ouroboros-praos-an-adaptively-secure-semi-synchronous-proof-of-stake-protocol
+title: Ouroboros Praos: An adaptively-secure, semi-synchronous proof-of-stake protocol
+category: security
+tags: [论文解读, ePrint:2017/573]
+eprint: 2017/573
+source: IACR ePrint
+url: https://eprint.iacr.org/2017/573
+created: 2026-04-10T14:39:45.897Z
+---
+
+# Ouroboros Praos: An adaptively-secure, semi-synchronous proof-of-stake protocol
+
+**IACR ePrint** | ePrint: 2017/573 | **Author**: Bernardo David, Peter Gaži, Aggelos Kiayias, Alexander Russell
+
+## 摘要
+
+We present ``Ouroboros Praos&#39;&#39;, a proof-of-stake blockchain protocol that, for the first time, provides security against fully-adaptive corruption in the semi-synchronous setting: Specifically, the adversary can corrupt any participant of a dynamically evolving population of stakeholders at any moment so long as the stakeholder distribution maintains an honest majority of stake; furthermore, the protocol tolerates an adversarially-controlled message delivery delay unknown to protocol participants. To achieve these guarantees we formalize and realize in the universal composition setting a suitable form of forward secure digital signatures and a new type of verifiable random function that maintains unpredictability under malicious key generation. Our security proof develops a general combinatorial framework for the analysis of semi-synchronous blockchains that may be of independent interest. We prove our protocol secure under standard cryptographic assumptions in the random oracle model.
+
+## 研究动机
+
+（人工填写）
+
+## 核心方法
+
+（人工填写）
+
+## 关键发现
+
+（人工填写）
+
+## 个人评价
+
+（人工填写）

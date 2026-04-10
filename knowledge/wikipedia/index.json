@@ -831,6 +831,114 @@
       ],
       "source": "arXiv",
       "arxiv": "2305.05904"
+    },
+    {
+      "id": "ouroboros-praos-an-adaptively-secure-semi-synchronous-proof-of-stake-protocol",
+      "title": "Ouroboros Praos: An adaptively-secure, semi-synchronous proof-of-stake protocol",
+      "category": "security",
+      "file": "security/00-ouroboros-praos-an-adaptively-secure-sem/ouroboros-praos-an-adaptively-secure-semi-synchronous-proof-of-stake-protocol.md",
+      "tags": [
+        "论文解读",
+        "ePrint:2017/573"
+      ],
+      "source": "IACR ePrint",
+      "eprint": "2017/573"
+    },
+    {
+      "id": "ouroboros-chronos-permissionless-clock-synchronization-via-proof-of-stake",
+      "title": "Ouroboros Chronos: Permissionless Clock Synchronization via Proof-of-Stake",
+      "category": "security",
+      "file": "security/00-ouroboros-chronos-permissionless-clock-s/ouroboros-chronos-permissionless-clock-synchronization-via-proof-of-stake.md",
+      "tags": [
+        "论文解读",
+        "ePrint:2019/838"
+      ],
+      "source": "IACR ePrint",
+      "eprint": "2019/838"
+    },
+    {
+      "id": "simple-verifiable-delay-functions",
+      "title": "Simple Verifiable Delay Functions",
+      "category": "security",
+      "file": "security/00-simple-verifiable-delay-functions/simple-verifiable-delay-functions.md",
+      "tags": [
+        "论文解读",
+        "ePrint:2018/627"
+      ],
+      "source": "IACR ePrint",
+      "eprint": "2018/627"
+    },
+    {
+      "id": "a-survey-of-two-verifiable-delay-functions",
+      "title": "A Survey of Two Verifiable Delay Functions",
+      "category": "security",
+      "file": "security/00-a-survey-of-two-verifiable-delay-functio/a-survey-of-two-verifiable-delay-functions.md",
+      "tags": [
+        "论文解读",
+        "ePrint:2018/712"
+      ],
+      "source": "IACR ePrint",
+      "eprint": "2018/712"
+    },
+    {
+      "id": "one-shot-fiat-shamir-based-nizk-arguments-of-composite-residuosity-and-logarithmic-size-ring-signatures-in-the-standard-model",
+      "title": "One-Shot Fiat-Shamir-based NIZK Arguments of Composite Residuosity and Logarithmic-Size Ring Signatures in the Standard Model",
+      "category": "security",
+      "file": "security/00-one-shot-fiat-shamir-based-nizk-argument/one-shot-fiat-shamir-based-nizk-arguments-of-composite-residuosity-and-logarithmic-size-ring-signatures-in-the-standard-model.md",
+      "tags": [
+        "论文解读",
+        "ePrint:2020/1334"
+      ],
+      "source": "IACR ePrint",
+      "eprint": "2020/1334"
+    },
+    {
+      "id": "ringct-20-a-compact-accumulator-based-linkable-ring-signature-protocol-for-blockchain-cryptocurrency-monero",
+      "title": "RingCT 2.0: A Compact Accumulator-Based (Linkable Ring Signature) Protocol for Blockchain Cryptocurrency Monero",
+      "category": "security",
+      "file": "security/00-ringct-20-a-compact-accumulator-based-li/ringct-20-a-compact-accumulator-based-linkable-ring-signature-protocol-for-blockchain-cryptocurrency-monero.md",
+      "tags": [
+        "论文解读",
+        "ePrint:2017/921"
+      ],
+      "source": "IACR ePrint",
+      "eprint": "2017/921"
+    },
+    {
+      "id": "fast-secure-two-party-ecdsa-signing",
+      "title": "Fast Secure Two-Party ECDSA Signing",
+      "category": "security",
+      "file": "security/00-fast-secure-two-party-ecdsa-signing/fast-secure-two-party-ecdsa-signing.md",
+      "tags": [
+        "论文解读",
+        "ePrint:2017/552"
+      ],
+      "source": "IACR ePrint",
+      "eprint": "2017/552"
+    },
+    {
+      "id": "highly-efficient-and-composable-password-protected-secret-sharing-or-how-to-protect-your-bitcoin-wallet-online",
+      "title": "Highly-Efficient and Composable Password-Protected Secret Sharing (Or: How to Protect Your Bitcoin Wallet Online)",
+      "category": "security",
+      "file": "security/00-highly-efficient-and-composable-password/highly-efficient-and-composable-password-protected-secret-sharing-or-how-to-protect-your-bitcoin-wallet-online.md",
+      "tags": [
+        "论文解读",
+        "ePrint:2016/144"
+      ],
+      "source": "IACR ePrint",
+      "eprint": "2016/144"
+    },
+    {
+      "id": "proofs-of-isogeny-knowledge-and-application-to-post-quantum-one-time-verifiable-random-function",
+      "title": "Proofs of Isogeny Knowledge and Application to Post-quantum One-Time Verifiable Random Function",
+      "category": "security",
+      "file": "security/00-proofs-of-isogeny-knowledge-and-applicat/proofs-of-isogeny-knowledge-and-application-to-post-quantum-one-time-verifiable-random-function.md",
+      "tags": [
+        "论文解读",
+        "ePrint:2021/744"
+      ],
+      "source": "IACR ePrint",
+      "eprint": "2021/744"
     }
   ],
   "categories": [
