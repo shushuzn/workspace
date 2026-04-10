@@ -104,10 +104,10 @@ astro-ph.SR / cs.CR
 
 ## 相关概念
 
-- [[IAM 特权升级]] — 论文的核心研究对象
-- [[Burau-Lyapunov 指数]] — 论文提出的量化方法
-- [[辫群]] — LE 的数学基础
-- [[IAM 云身份与访问管理]] — 方法的应用场景
+- [[iam-te-quan-sheng-ji|IAM 特权升级]] — 论文的核心研究对象
+- [[burau-lyapunov-zhi-shu|Burau-Lyapunov 指数]] — 论文提出的量化方法
+- [[bian-qun|辫群]] — LE 的数学基础
+- [[iam-yun-shen-fen-yu-fang-wen-guan-li|IAM 云身份与访问管理]] — 方法的应用场景
 
 ## 参考文献
 

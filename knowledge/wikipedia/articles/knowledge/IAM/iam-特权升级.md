@@ -43,6 +43,6 @@ cross-references: []
 
 ## 相关条目
 
-- [[IAM 云身份与访问管理]] — 特权升级发生的系统环境
-- [[辫群]] — LE 指数的数学基础，描述权限路径的非阿贝尔组合结构
-- [[Burau-Lyapunov 指数]] — 量化特权升级潜力的核心指标
+- [[iam-yun-shen-fen-yu-fang-wen-guan-li|IAM 云身份与访问管理]] — 特权升级发生的系统环境
+- [[bian-qun|辫群]] — LE 指数的数学基础，描述权限路径的非阿贝尔组合结构
+- [[burau-lyapunov-zhi-shu|Burau-Lyapunov 指数]] — 量化特权升级潜力的核心指标

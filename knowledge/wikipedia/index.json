@@ -51,6 +51,13 @@
       "created": "2026-04-10"
     },
     {
+      "id": "冷战",
+      "title": "冷战",
+      "file": "knowledge/history/冷战.md",
+      "category": "history",
+      "created": "2026-04-10"
+    },
+    {
       "id": "天使军团",
       "title": "天使军团",
       "file": "knowledge/history/天使军团.md",
@@ -139,6 +146,13 @@
       "id": "第二巴别塔",
       "title": "第二巴别塔",
       "file": "knowledge/history/第二巴别塔.md",
+      "category": "history",
+      "created": "2026-04-10"
+    },
+    {
+      "id": "纳斯特曼",
+      "title": "纳斯特曼",
+      "file": "knowledge/history/纳斯特曼.md",
       "category": "history",
       "created": "2026-04-10"
     },

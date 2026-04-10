@@ -600,7 +600,7 @@ created: ${new Date().toISOString()}
     const file = join(ARTICLES_DIR, a.file);
     if (!existsSync(file)) continue;
     const content = readFileSync(file, 'utf8');
-    const links = [...content.matchAll(/\[\[([^\]]+)\]\]/g)].map(m => m[1]);
+    const links = [...content.matchAll(/\[\[([^\]|]+)(?:\|[^\]]+)?\]\]/g)].map(m => m[1]);
     for (const link of links) {
       const target = byId[link] || byId[link.replace(/\s+/g, '-').toLowerCase()];
       if (!target) {

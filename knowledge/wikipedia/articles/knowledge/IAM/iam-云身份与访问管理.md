@@ -39,12 +39,12 @@ IAM 系统可建模为有权有向图：
 
 ## IAM 特权升级
 
-[[IAM 特权升级]] 是 IAM 系统最高危的威胁之一。攻击路径示例：
+[[iam-te-quan-sheng-ji|IAM 特权升级]] 是 IAM 系统最高危的威胁之一。攻击路径示例：
 ```
 ReadS3(bucket) → ListEC2 → DescribeInstance → CreateAccessKey → AdminUser
 ```
 
 ## 相关条目
 
-- [[IAM 特权升级]] — 权限图的攻击路径分析
-- [[Burau-Lyapunov 指数]] — 量化权限图结构的数学工具
+- [[iam-te-quan-sheng-ji|IAM 特权升级]] — 权限图的攻击路径分析
+- [[burau-lyapunov-zhi-shu|Burau-Lyapunov 指数]] — 量化权限图结构的数学工具

@@ -55,7 +55,9 @@
       "mcp__plugin_chrome-devtools-mcp_chrome-devtools__list_pages",
       "mcp__plugin_chrome-devtools-mcp_chrome-devtools__select_page",
       "mcp__plugin_chrome-devtools-mcp_chrome-devtools__fill_form",
-      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__type_text"
+      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__type_text",
+      "Bash(rm -f /d/OpenClaw/workspace/.git/index.lock)",
+      "Bash(rm /d/OpenClaw/workspace/shared/arena-replay-viewer.mjs)"
     ]
   },
   "enableAllProjectMcpServers": true,
