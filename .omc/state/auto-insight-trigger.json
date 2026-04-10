@@ -1,13 +1,13 @@
 {
-  "sessionId": "1775784350647",
+  "sessionId": "1775796846060",
   "work": {
     "tool": "seed-shipped",
     "input": {
-      "seed": "- [20260410] seed [brainstorm] [score:3x4=12] [f:4] [angle:ws-level] shared/idea",
-      "score": 12,
+      "seed": "- [20260410] seed [brainstorm] [score:3x3=9] [f:3] [angle:ws-level] OMC状态检查统一入口",
+      "score": 9,
       "angle": "ws-level"
     }
   },
-  "prompt": "从 seed 执行经验生成 insight：- [20260410] seed [brainstorm] [score:3x4=12] [f:4] [angle:w | angle:ws-level | score:12",
-  "triggeredAt": "2026-04-10T01:25:50.647Z"
+  "prompt": "从 seed 执行经验生成 insight：- [20260410] seed [brainstorm] [score:3x3=9] [f:3] [angle:ws | angle:ws-level | score:9",
+  "triggeredAt": "2026-04-10T04:54:06.060Z"
 }

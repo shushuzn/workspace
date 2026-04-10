@@ -47,7 +47,11 @@
       "mcp__claude-flow__embeddings_status",
       "mcp__claude-flow__embeddings_init",
       "mcp__claude-flow__hooks_intelligence_pattern-search",
-      "mcp__claude-flow__memory_search"
+      "mcp__claude-flow__memory_search",
+      "mcp__claude-flow__agent_list",
+      "mcp__claude-flow__agent_pool",
+      "mcp__claude-flow__system_info",
+      "mcp__plugin_oh-my-claudecode_t__notepad_read"
     ]
   },
   "enableAllProjectMcpServers": true,
