@@ -775,8 +775,8 @@
     {
       "id": "220201649-heco-fully-homomorphic-encryption-compiler",
       "title": "[2202.01649] HECO: Fully Homomorphic Encryption Compiler",
-      "category": "AI",
-      "file": "AI/00-220201649-heco-fully-homomorphic-encrypt/220201649-heco-fully-homomorphic-encryption-compiler.md",
+      "category": "security",
+      "file": "security/00-220201649-heco-fully-homomorphic-encrypt/220201649-heco-fully-homomorphic-encryption-compiler.md",
       "tags": [
         "论文解读",
         "arXiv:2202.01649"
@@ -787,8 +787,8 @@
     {
       "id": "230107041-verifiable-fully-homomorphic-encryption",
       "title": "[2301.07041] Verifiable Fully Homomorphic Encryption",
-      "category": "AI",
-      "file": "AI/00-230107041-verifiable-fully-homomorphic-e/230107041-verifiable-fully-homomorphic-encryption.md",
+      "category": "security",
+      "file": "security/00-230107041-verifiable-fully-homomorphic-e/230107041-verifiable-fully-homomorphic-encryption.md",
       "tags": [
         "论文解读",
         "arXiv:2301.07041"
@@ -799,8 +799,8 @@
     {
       "id": "230505904-revisiting-fully-homomorphic-encryption-schemes",
       "title": "[2305.05904] Revisiting Fully Homomorphic Encryption Schemes",
-      "category": "AI",
-      "file": "AI/00-230505904-revisiting-fully-homomorphic-e/230505904-revisiting-fully-homomorphic-encryption-schemes.md",
+      "category": "security",
+      "file": "security/00-230505904-revisiting-fully-homomorphic-e/230505904-revisiting-fully-homomorphic-encryption-schemes.md",
       "tags": [
         "论文解读",
         "arXiv:2305.05904"

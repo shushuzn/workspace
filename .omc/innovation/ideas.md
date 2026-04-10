@@ -262,7 +262,7 @@
 
 - [20260422] seed [shipped:20260422] shared/check-git-dirty hookify规则 | benefit: 危险git操作前自动检测脏状态，无需手动调用 | reason: 已知资源：shared/check-git-dirty.mjs可检测11个workspace脏仓库（exit code 1输出）；缺失环节：hookify无自动调用，每次做危险git操作前需手动运行；连接方式：hookify规则→检测git命令→触发check-git-dirty.mjs→脏则拦截 | approach: 1. bash -c "echo 'hookify rule for check-git-dirty: detect git push/merge/reset and run check before executing'"
 
-- [20260422] seed [shipped:20260422] agent-arena增加agent对战回放功能 | benefit: 玩家可以回顾历史对战，分析胜负原因 | reason: 已知资源：agent-arena/scripts/generate-levels.mjs可生成关卡；缺失环节：只有实时对战，无历史回放存储；连接方式：battle结果→写入replays/*.json→增加replay命令读取展示 | approach: 1. bash -c "echo 'agent-arena battle replay: store results to replays/ and add replay viewer command'"
+- [20260422] seed [brainstorm] [score:2x3=6] [f:3] [angle:feature] [focus:agent-arena] agent-arena battle analytics增强：增加胜率/战力/技能分析图表 | benefit: 玩家可以分析battle数据优化培养策略 | reason: 已知资源：battle-analytics.js已有基础统计函数；缺失环节：只有简单计数，无可视化图表；连接方式：battle-analytics.js增加函数→BattleResult.svelte展示图表 | approach: 1. Read 80-PROJECTS/agent-arena/src/game/battle-analytics.js | benefit: 玩家可以回顾历史对战，分析胜负原因 | reason: 已知资源：agent-arena/scripts/generate-levels.mjs可生成关卡；缺失环节：只有实时对战，无历史回放存储；连接方式：battle结果→写入replays/*.json→增加replay命令读取展示 | approach: 1. bash -c "echo 'agent-arena battle replay: store results to replays/ and add replay viewer command'"
 
 - [20260422] seed [shipped:20260422] run-seed.mjs增加verbose模式输出详细信息 | benefit: 调试时能看到每步详细执行信息 | reason: 已知资源：run-seed.mjs已有基础执行逻辑；缺失环节：无verbose模式，出错时信息不足；连接方式：--verbose标志→输出每步详情→便于调试seed执行 | approach: 1. bash -c "echo 'run-seed.mjs verbose mode: add --verbose flag for detailed execution output'"
 
