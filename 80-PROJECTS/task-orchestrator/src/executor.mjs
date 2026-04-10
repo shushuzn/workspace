@@ -4,6 +4,7 @@ import os from 'os';
 import { randomUUID } from 'crypto';
 import chalk from 'chalk';
 import { createVisualizer } from '../bin/chain-visualizer.mjs';
+import { createGuard } from './validators/hookify-guard.mjs';
 import { spawn } from 'child_process';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const adapterTypeColors = {
@@ -229,6 +230,21 @@ export class Executor {
                 let maxRetries = resolvedStep.maxRetries ?? this.options.maxRetries ?? 3;
                 let result = null;
                 let attempt = 0;
+                // Hookify guard — block dangerous commands before execution
+                if (this.options.enableHookifyGuard !== false) {
+                    const guard = createGuard();
+                    const check = guard.check(resolvedStep.command);
+                    if (check.blocked) {
+                        const blockErr = {
+                            success: false, output: '', logs: '', artifacts: [],
+                            error: `Hookify blocked: ${check.ruleName} — ${check.message.split('\n')[0]}`,
+                            code: 'HOOKIFY_BLOCKED', fatal: false,
+                        };
+                        results[stepIdx] = blockErr;
+                        resultMap.set(stepIdx, blockErr);
+                        return;
+                    }
+                }
                 stepStartTimes.set(stepIdx, Date.now());
                 while (attempt <= maxRetries) {
                     try {
