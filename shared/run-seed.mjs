@@ -27,6 +27,7 @@ const skipIdxs = process.argv.includes('--skip')
   ? (() => { const i = process.argv.indexOf('--skip') + 1; return process.argv.slice(i, i + 2).map(n => parseInt(n, 10)).filter(n => !isNaN(n)); })()
   : [];
 const warmAll = process.argv.includes('--warm-all');
+const explainMode = process.argv.includes('--explain');
 
 // ── Gate 4c: Validate approach text without writing to pool ────────────────────
 if (validateApproach !== null) {
@@ -162,6 +163,29 @@ if (warmAll) {
 const top = unshipped[0];
 // Default cwd; script resolution may override
 let execCwd = join(__DIR, '..');
+
+if (explainMode) {
+  console.log(`\n=== Seed Explanation ===`);
+  console.log(`  description: ${top.desc}`);
+  console.log(`  score: ${top.score} = Benefit(${top.benefit}) × Feasibility(${top.feas})`);
+  console.log(`  angle: ${top.angle} | focus: ${top.focus || 'none'}`);
+  const bodyLines = top.bodyLines.join('\n');
+  const benefitMatch = bodyLines.match(/benefit:\s*(.+?)(?:\s*\| reason:|$)/s);
+  const reasonMatch = bodyLines.match(/reason:\s*(.+?)(?:\s*\| approach:|$)/s);
+  if (benefitMatch) console.log(`  benefit src: ${benefitMatch[1].trim().slice(0, 80)}`);
+  if (reasonMatch) {
+    const reason = reasonMatch[1].trim();
+    // Highlight the three-part structure
+    const hasResources = reason.includes('已知资源');
+    const hasGap = reason.includes('缺失环节');
+    const hasConnection = reason.includes('连接方式');
+    console.log(`  reason structure: 已知资源=${hasResources ? '✓' : '✗'} 缺失环节=${hasGap ? '✓' : '✗'} 连接方式=${hasConnection ? '✓' : '✗'}`);
+  }
+  console.log(`  approach step 1: ${top.approachText.split('\n')[0].trim().slice(0, 80)}`);
+  console.log(`\n=== End Explanation ===\n`);
+  process.exit(0);
+}
+
 console.log(`Top seed: score:${top.score} f:${top.feas} angle:${top.angle}`);
 console.log(`  ${top.desc}`);
 console.log(`  approach: ${top.approachText.slice(0, 80)}...`);
