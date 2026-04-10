@@ -28,6 +28,7 @@ const skipIdxs = process.argv.includes('--skip')
   : [];
 const warmAll = process.argv.includes('--warm-all');
 const explainMode = process.argv.includes('--explain');
+const quickMode = process.argv.includes('--quick');
 
 // ── Gate 4c: Validate approach text without writing to pool ────────────────────
 if (validateApproach !== null) {
@@ -135,7 +136,7 @@ const unshipped = results
 
 console.log(`\n=== Seed Runner ===`);
 console.log(`Total seeds: ${results.length} | Unshipped: ${unshipped.length}${focusProject ? ` | focus: ${focusProject}` : ''}`);
-console.log(`Mode: ${dryRun ? 'DRY RUN' : 'LIVE'}`);
+console.log(`Mode: ${dryRun ? 'DRY RUN' : 'LIVE'}${quickMode ? ' (QUICK)' : ''}`);
 console.log('');
 
 if (unshipped.length === 0) {
@@ -157,6 +158,39 @@ if (warmAll) {
     const s = unshipped[i];
     console.log(`  ${String(i + 1).padStart(2)}. [score:${s.score}] f:${s.feas} [${s.angle || 'none'}]${s.focus ? ` focus:${s.focus}` : ''} ${s.desc.slice(0, 55)}`);
   }
+  process.exit(0);
+}
+
+if (quickMode) {
+  // Skip --quick/-skip seed itself to prevent infinite recursion
+  const skipIdx = unshipped.findIndex(s =>
+    s.approachText.includes('run-seed.mjs --quick') ||
+    s.approachText.includes('run-seed.mjs --skip')
+  );
+  let top;
+  if (skipIdx === 0) {
+    top = unshipped.length > 1 ? unshipped[1] : unshipped[0];
+  } else if (skipIdx > 0) {
+    top = unshipped[skipIdx - 1];
+  } else {
+    top = unshipped[0];
+  }
+  const firstStepMatch = top.approachText.match(/(?:^|\n)\s*(\d+)\.\s+(.+?)(?:\n\s*\d+\.|[；;]\d+\.|$)/s);
+  if (!firstStepMatch) { console.error('[ERROR] No numbered step'); process.exit(1); }
+  const firstStep = firstStepMatch[2].replace(/[；;]$/, '').trim();
+  console.log(`[QUICK] Executing: ${firstStep}`);
+  const { execSync } = await import('child_process');
+  try {
+    execSync(firstStep, { cwd: join(__DIR, '..'), stdio: 'inherit', timeout: 120_000 });
+  } catch (e) { process.exit(e.status ?? 1); }
+  // mark shipped
+  const today = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+  const lines = readFileSync(IDEAS_PATH, 'utf-8').split('\n');
+  const newLines = [...lines];
+  const lastBodyIdx = top.lineIdx + top.bodyLines.length;
+  newLines[lastBodyIdx] = newLines[lastBodyIdx].replace(/(\s*)$/, ` | shipped:${today}`);
+  writeFileSync(IDEAS_PATH, newLines.join('\n'), 'utf-8');
+  console.log(`[SHIPPED] ${top.desc.slice(0, 60)}...`);
   process.exit(0);
 }
 
