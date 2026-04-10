@@ -73,11 +73,37 @@ async function fetchEprintMeta(id) {
     });
     if (!res.ok) return null;
     const html = await res.text();
+
+    // Title: try meta tag first, then <h1>
     const titleMatch = html.match(/<meta name="citation_title" content="([^"]+)"/i)
-                     || html.match(/<h1[^>]*>([^<]+)<\/h1>/i);
-    const title = titleMatch ? titleMatch[1].replace(/\s+/g, ' ').trim() : '';
-    const authors = (html.match(/<meta name="citation_authors" content="([^"]+)"/i) || [])[1] || '';
-    const abstract = (html.match(/<meta name="citation_abstract" content="([^"]+)"/i) || [])[1] || '';
+                     || html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i);
+    const title = titleMatch ? titleMatch[1].replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim() : '';
+
+    // Authors: <span class="authorName">...</span> or meta tag
+    const authorMatches = [...html.matchAll(/<span class="authorName"[^>]*>([^<]+)<\/span>/g)].map(m => m[1]);
+    const authors = authorMatches.length > 0
+      ? authorMatches.join(', ')
+      : (html.match(/<meta name="citation_authors" content="([^"]+)"/i) || [])[1] || '';
+
+    // Abstract: parse from HTML section after <h5>Abstract</h5>
+    let abstract = '';
+    const absIdx = html.indexOf('<h5 class="mt-3">Abstract</h5>');
+    if (absIdx !== -1) {
+      // Skip past the heading tag itself to get to the content
+      const headingEnd = html.indexOf('</h5>', absIdx);
+      if (headingEnd !== -1) {
+        const contentStart = headingEnd + 6; // length of </h5>
+        const contentSlice = html.slice(contentStart);
+        // Find next section boundary (<h5, <div class="row", <script, <!--)
+        const endMatch = contentSlice.search(/<h5|<div class="row"|<script|<!--/);
+        const rawAbs = endMatch !== -1 ? contentSlice.slice(0, endMatch) : contentSlice;
+        abstract = rawAbs.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+      }
+    } else {
+      // Fallback: try meta tag
+      abstract = (html.match(/<meta name="citation_abstract" content="([^"]+)"/i) || [])[1] || '';
+    }
+
     if (!title) return null;
     return {
       title,
