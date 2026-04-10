@@ -17,6 +17,7 @@ const __DIR = dirname(fileURLToPath(import.meta.url));
 const IDEAS_PATH = join(__DIR, '..', '.omc', 'innovation', 'ideas.md');
 
 const dryRun = process.argv.includes('--dry-run');
+const verboseMode = process.argv.includes('--verbose');
 const validateApproachIdx = process.argv.indexOf('--validate-approach');
 const validateApproach = validateApproachIdx !== -1 ? process.argv[validateApproachIdx + 1] : null;
 const reasonIdx = process.argv.indexOf('--reason');
@@ -448,12 +449,24 @@ if (dryRun) {
 // ── Execute ──────────────────────────────────────────────────────────────────
 const { execSync } = await import('child_process');
 
+if (verboseMode) {
+  console.log(`\n[VERBOSE] Executing seed step:`);
+  console.log(`  cwd: ${execCwd}`);
+  console.log(`  command: ${firstStep}`);
+  console.log(`  timeout: 120000ms`);
+  console.log('');
+}
+
 try {
+  const startTime = Date.now();
   execSync(firstStep, {
     cwd: execCwd,
     stdio: 'inherit',
     timeout: 120_000,
   });
+  if (verboseMode) {
+    console.log(`\n[VERBOSE] Step completed in ${Date.now() - startTime}ms`);
+  }
 } catch (err) {
   const stderr = err.stderr ? err.stderr.toString() : '';
   const stdout = err.stdout ? err.stdout.toString() : '';
