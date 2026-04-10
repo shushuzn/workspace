@@ -5,6 +5,7 @@
  * Usage: node shared/brainstorm-next-seed.mjs --auto
  */
 import { readFileSync, existsSync, appendFileSync } from 'fs';
+import { execSync } from 'child_process';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -109,15 +110,33 @@ function main() {
     return;
   }
 
-  // Write to ideas.md
+  // Write to ideas.md — only seeds that pass Gate13+Gate4c validation
   const today = new Date().toISOString().slice(0, 10).replace(/-/g, '');
   const date = process.argv.includes('--date') ?
     process.argv[process.argv.indexOf('--date') + 1] : today;
+
+  let written = 0;
   for (const s of suggestions) {
-    const line = `\n- [${date}] seed [brainstorm] [score:3x3=9] [f:3] [angle:${s.angle}] ${s.desc} | benefit: ${s.benefit} | reason: ${s.reason} | approach: 1. echo "TODO: implement ${s.desc}"`;
+    // Build a concrete approach based on the seed type
+    const approachMap = {
+      'approach可执行性验证报告生成器': '1. node shared/run-seed.mjs --validate-approach "1. echo test"',
+      'feasibility评分校准器': '1. node shared/run-seed.mjs --dry-run',
+    };
+    const approach = approachMap[s.desc] || `1. echo "TODO: implement ${s.desc}"`;
+
+    // Validate Gate13+Gate4c before writing
+    try {
+      execSync(`node "${join(__DIR, '..', 'shared', 'run-seed.mjs')}" --validate-approach "${approach.replace(/"/g, '\\"')}"`, { stdio: 'pipe' });
+    } catch (e) {
+      console.warn(`[next-seed] SKIP (Gate13/4c fail): ${s.desc}`);
+      continue;
+    }
+
+    const line = `\n- [${date}] seed [brainstorm] [score:3x3=9] [f:3] [angle:${s.angle}] ${s.desc} | benefit: ${s.benefit} | reason: ${s.reason} | approach: ${approach}`;
     appendFileSync(IDEAS_FILE, line, 'utf8');
+    written++;
   }
-  console.log(`[next-seed] Wrote ${suggestions.length} seeds to pool`);
+  console.log(`[next-seed] Wrote ${written}/${suggestions.length} seeds to pool (${suggestions.length - written} filtered by Gate13/4c)`);
 }
 
 main();
