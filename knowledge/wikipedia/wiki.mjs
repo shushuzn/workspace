@@ -516,7 +516,8 @@ created: ${new Date().toISOString()}
     const fm = parseFrontmatter(content);
     if (!fm.title) continue;
 
-    const rel = file.replace(/^articles[\\\/]/, '').replace(/\\/g, '/');
+    // Store path relative to wiki root: 'articles/knowledge/history/X.md'
+    const relPath = file.slice(__DIR.length + 1).replace(/\\/g, '/');
 
     let arxivId = fm.arxiv || null;
     let eprint = fm.eprint || null;
@@ -532,11 +533,11 @@ created: ${new Date().toISOString()}
       .replace(/[^a-z0-9\u0080-\uFFFF]+/g, '-')
       .replace(/^-|-$/g, '').slice(0, 80);
 
-    if (seenFiles.has(rel)) continue;
-    seenFiles.add(rel);
+    if (seenFiles.has(relPath)) continue;
+    seenFiles.add(relPath);
 
     articles.push({
-      id, title: fm.title, file: rel, category,
+      id, title: fm.title, file: relPath, category,
       ...(arxivId && { arxiv: arxivId }),
       ...(eprint && { eprint }),
       ...(source && { source }),
@@ -547,10 +548,27 @@ created: ${new Date().toISOString()}
   const idx = { articles };
   saveIndex(idx);
 
+  // Validate
+  const errors = [];
+  const idSeen = new Set();
+  for (const a of articles) {
+    if (idSeen.has(a.id)) errors.push(`Duplicate ID: "${a.id}" (${a.title})`);
+    idSeen.add(a.id);
+    if (!existsSync(join(__DIR, a.file))) errors.push(`Missing file: ${a.file} for "${a.title}"`);
+  }
+  const noCategory = articles.filter(a => a.category === 'AI' && !a.file.includes('/AI/'));
+  if (noCategory.length) errors.push(`${noCategory.length} article(s) fell back to AI category: ${noCategory.map(a => a.title).join(', ')}`);
+
   const byCat = {};
   for (const a of articles) byCat[a.category] = (byCat[a.category]||0)+1;
   console.log(`[wiki] Rebuilt index: ${articles.length} articles`);
   console.log('       By category:', byCat);
+  if (errors.length) {
+    console.log('       ERRORS:');
+    for (const e of errors) console.log('       -', e);
+  } else {
+    console.log('       All checks passed.');
+  }
 
 } else if (cmd === 'sync') {
   // Legacy: only ensures category directories exist
