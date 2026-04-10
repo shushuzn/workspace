@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync } from 'fs';
+import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync, statSync } from 'fs';
 import { join, dirname, basename } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -457,17 +457,108 @@ created: ${new Date().toISOString()}
     } catch { console.error('[wiki] Failed to open Obsidian'); }
   }
 
-} else if (cmd === 'sync') {
-  const idx = loadIndex();
+} else if (cmd === 'rebuild') {
+  // Scan filesystem and rebuild index.json from frontmatter
+  function walk(dir) {
+    const results = [];
+    try {
+      for (const f of readdirSync(dir)) {
+        const full = join(dir, f);
+        try {
+          if (statSync(full).isDirectory()) results.push(...walk(full));
+          else if (f.endsWith('.md')) results.push(full);
+        } catch(e) {}
+      }
+    } catch(e) {}
+    return results;
+  }
+
+  function getCategory(content) {
+    const lines = content.split(/\r?\n/);
+    let inFrontmatter = false;
+    for (const line of lines) {
+      const trimmed = line.trim();
+      if (trimmed === '---') {
+        if (!inFrontmatter) { inFrontmatter = true; continue; }
+        else break;
+      }
+      if (trimmed.startsWith('category:')) {
+        return trimmed.split(':').slice(1).join(':').trim();
+      }
+    }
+    return 'AI';
+  }
+
+  function parseFrontmatter(content) {
+    const parts = content.split(/^---$/m);
+    if (parts.length < 2) return {};
+    const fm = {};
+    for (const line of parts[1].split(/\r?\n/)) {
+      const colonIdx = line.indexOf(':');
+      if (colonIdx === -1) continue;
+      const key = line.slice(0, colonIdx).trim();
+      let val = line.slice(colonIdx + 1).trim();
+      if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
+        val = val.slice(1, -1);
+      }
+      fm[key] = val;
+    }
+    return fm;
+  }
+
+  const files = walk(ARTICLES_DIR);
+  const seenFiles = new Set();
+  const articles = [];
+
+  for (const file of files) {
+    const content = readFileSync(file, 'utf8');
+    const category = getCategory(content);
+    const fm = parseFrontmatter(content);
+    if (!fm.title) continue;
+
+    const rel = file.replace(/^articles[\\\/]/, '').replace(/\\/g, '/');
+
+    let arxivId = fm.arxiv || null;
+    let eprint = fm.eprint || null;
+    let source = fm.source || null;
+    if (fm.url) {
+      const au = fm.url.match(/arxiv\.org\/abs\/([0-9.]+)/);
+      if (au) { arxivId = au[1]; source = 'arXiv'; }
+      const ep = fm.url.match(/eprint\.iacr\.org\/([0-9]+\/[0-9]+)/);
+      if (ep) { eprint = ep[1]; source = 'IACR ePrint'; }
+    }
+
+    const id = fm.id || fm.title.toLowerCase()
+      .replace(/[^a-z0-9\u0080-\uFFFF]+/g, '-')
+      .replace(/^-|-$/g, '').slice(0, 80);
+
+    if (seenFiles.has(rel)) continue;
+    seenFiles.add(rel);
+
+    articles.push({
+      id, title: fm.title, file: rel, category,
+      ...(arxivId && { arxiv: arxivId }),
+      ...(eprint && { eprint }),
+      ...(source && { source }),
+      ...(fm.created && { created: fm.created }),
+    });
+  }
+
+  const idx = { articles };
+  saveIndex(idx);
+
   const byCat = {};
-  for (const a of idx.articles) byCat[a.category] = byCat[a.category] || [];
-  for (const a of idx.articles) byCat[a.category].push(a);
-  for (const [cat, arts] of Object.entries(byCat)) {
-    const dir = join(ARTICLES_DIR, cat);
+  for (const a of articles) byCat[a.category] = (byCat[a.category]||0)+1;
+  console.log(`[wiki] Rebuilt index: ${articles.length} articles`);
+  console.log('       By category:', byCat);
+
+} else if (cmd === 'sync') {
+  // Legacy: only ensures category directories exist
+  const idx = loadIndex();
+  for (const a of idx.articles) {
+    const dir = join(ARTICLES_DIR, a.category);
     if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
   }
-  saveIndex(idx);
-  writeFileSync(INDEX_HTML, INDEX_HTML);
   console.log('\n[wiki] Synced', idx.articles.length, 'articles');
 
 } else if (cmd === 'batch-export') {
@@ -824,7 +915,8 @@ Commands:
   search <query>                 # Search local wiki index
   search-web <query> [--year YYYY] [--limit N]  # Search Semantic Scholar
   edit <title>
-  sync
+  rebuild                         # Scan filesystem, rebuild index.json
+  sync                            # Ensure category directories exist
   list
   linkcheck [--auto]
   orphan
