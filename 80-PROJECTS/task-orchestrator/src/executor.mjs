@@ -47,7 +47,9 @@ export class Executor {
             if (this.cache.size > 0) {
                 console.warn(`[cache] loaded ${this.cache.size} entries from ${this.cacheFile}`);
             }
-        } catch {}
+        } catch (e) {
+            console.warn(`[cache] failed to parse cache file: ${e.message}`);
+        }
     }
     saveCache() {
         if (!this.cacheFile || this.cache.size === 0) return;
