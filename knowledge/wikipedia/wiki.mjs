@@ -53,6 +53,9 @@ async function fetchArxivMeta(id) {
     const match = id.match(/(\d+\.\d+)/);
     const ver = match ? match[1] : id;
     if (!title) return null;
+    const text = (title + ' ' + abstract).toLowerCase();
+    const secKeywords = ['security', 'cryptography', 'crypto', 'zk', 'zero-knowledge', 'snark', 'stark', 'multiparty', 'multi-party', 'secure computation', 'homomorphic encryption', 'fhe', 'tfhe', 'oblivious', 'garbled circuit', 'secret sharing', 'proactive', 'byzantine', 'malicious'];
+    const isSecurity = secKeywords.some(k => text.includes(k));
     const result = {
       title: title.replace(/\s+/g, ' ').trim(),
       authors: authors.replace(/\s+/g, ' ').trim(),
@@ -60,7 +63,7 @@ async function fetchArxivMeta(id) {
       arxivId: ver,
       source: 'arXiv',
       url: `https://arxiv.org/abs/${ver}`,
-      category: 'AI',
+      category: isSecurity ? 'security' : 'AI',
     };
     arxivCache.set(id, result);
     return result;

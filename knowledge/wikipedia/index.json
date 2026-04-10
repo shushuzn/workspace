@@ -747,6 +747,90 @@
       ],
       "source": "IACR ePrint",
       "eprint": "2024/395"
+    },
+    {
+      "id": "global-scale-secure-multiparty-computation",
+      "title": "Global-Scale Secure Multiparty Computation",
+      "category": "security",
+      "file": "security/00-global-scale-secure-multiparty-computati/global-scale-secure-multiparty-computation.md",
+      "tags": [
+        "论文解读",
+        "ePrint:2017/189"
+      ],
+      "source": "IACR ePrint",
+      "eprint": "2017/189"
+    },
+    {
+      "id": "a-framework-for-constructing-fast-mpc-over-arithmetic-circuits-with-malicious-adversaries-and-an-honest-majority",
+      "title": "A Framework for Constructing Fast MPC over Arithmetic Circuits with Malicious Adversaries and an Honest-Majority",
+      "category": "security",
+      "file": "security/00-a-framework-for-constructing-fast-mpc-ov/a-framework-for-constructing-fast-mpc-over-arithmetic-circuits-with-malicious-adversaries-and-an-honest-majority.md",
+      "tags": [
+        "论文解读",
+        "ePrint:2017/816"
+      ],
+      "source": "IACR ePrint",
+      "eprint": "2017/816"
+    },
+    {
+      "id": "220201649-heco-fully-homomorphic-encryption-compiler",
+      "title": "[2202.01649] HECO: Fully Homomorphic Encryption Compiler",
+      "category": "AI",
+      "file": "AI/00-220201649-heco-fully-homomorphic-encrypt/220201649-heco-fully-homomorphic-encryption-compiler.md",
+      "tags": [
+        "论文解读",
+        "arXiv:2202.01649"
+      ],
+      "source": "arXiv",
+      "arxiv": "2202.01649"
+    },
+    {
+      "id": "230107041-verifiable-fully-homomorphic-encryption",
+      "title": "[2301.07041] Verifiable Fully Homomorphic Encryption",
+      "category": "AI",
+      "file": "AI/00-230107041-verifiable-fully-homomorphic-e/230107041-verifiable-fully-homomorphic-encryption.md",
+      "tags": [
+        "论文解读",
+        "arXiv:2301.07041"
+      ],
+      "source": "arXiv",
+      "arxiv": "2301.07041"
+    },
+    {
+      "id": "230505904-revisiting-fully-homomorphic-encryption-schemes",
+      "title": "[2305.05904] Revisiting Fully Homomorphic Encryption Schemes",
+      "category": "AI",
+      "file": "AI/00-230505904-revisiting-fully-homomorphic-e/230505904-revisiting-fully-homomorphic-encryption-schemes.md",
+      "tags": [
+        "论文解读",
+        "arXiv:2305.05904"
+      ],
+      "source": "arXiv",
+      "arxiv": "2305.05904"
+    },
+    {
+      "id": "230107041-verifiable-fully-homomorphic-encryption",
+      "title": "[2301.07041] Verifiable Fully Homomorphic Encryption",
+      "category": "security",
+      "file": "security/00-230107041-verifiable-fully-homomorphic-e/230107041-verifiable-fully-homomorphic-encryption.md",
+      "tags": [
+        "论文解读",
+        "arXiv:2301.07041"
+      ],
+      "source": "arXiv",
+      "arxiv": "2301.07041"
+    },
+    {
+      "id": "230505904-revisiting-fully-homomorphic-encryption-schemes",
+      "title": "[2305.05904] Revisiting Fully Homomorphic Encryption Schemes",
+      "category": "security",
+      "file": "security/00-230505904-revisiting-fully-homomorphic-e/230505904-revisiting-fully-homomorphic-encryption-schemes.md",
+      "tags": [
+        "论文解读",
+        "arXiv:2305.05904"
+      ],
+      "source": "arXiv",
+      "arxiv": "2305.05904"
     }
   ],
   "categories": [
