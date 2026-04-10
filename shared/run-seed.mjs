@@ -9,7 +9,7 @@
  *   node run-seed.mjs [--dry-run] [--limit N] [--focus PROJECT] [--skip LINEIDX] [--warm-all]
  *   node run-seed.mjs --validate-approach "1. python wiki.mjs --rebuild"
  */
-import { readFileSync, writeFileSync } from 'fs';
+import { readFileSync, writeFileSync, existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -55,6 +55,16 @@ if (validateApproach !== null) {
     console.error(`[VALIDATE] FAIL: "node -e/p/c" inline code is not allowed — Windows shell corrupts quotes/newlines: ${firstStep.slice(0, 60)}`);
     process.exit(1);
   }
+  const DANGEROUS_COMMAND_BLACKLIST = [
+    { pattern: /python\s+-c\s+["'][\s\S]+["']/i, name: 'python -c inline code' },
+    { pattern: /node\s+-[epc]\s+/i, name: 'node -e/p/c inline' },
+    { pattern: /bash\s+-c\s+["'][\s\S]+["']/i, name: 'bash -c inline code' },
+  ];
+  const isDangerousCommand = DANGEROUS_COMMAND_BLACKLIST.some(d => d.pattern.test(firstStep));
+  if (isDangerousCommand) {
+    console.error(`[Gate4b FAIL] Dangerous command pattern detected: ${firstStep.slice(0, 60)}`);
+    process.exit(1);
+  }
   const EXEC_PREFIXES = ['python ', 'bash ', 'sh ', 'cd ', 'mkdir ', '//', '#', '/'];
   const isExecCommand = EXEC_PREFIXES.some(p => firstStep.startsWith(p)) || firstStep.match(/^[a-zA-Z]:\\/);
   // node allowed only as "node xxx.mjs" or "node xxx.js"
@@ -65,9 +75,21 @@ if (validateApproach !== null) {
   }
 
   // Check for script-name pattern that can be resolved
+  const nodeScriptMatch = firstStep.match(/^node\s+(\S+\.(?:mjs|js))\b/i);
+  const pythonScriptMatch = firstStep.match(/^python\s+(\S+\.(?:py))\b/i);
+
+  if (nodeScriptMatch || pythonScriptMatch) {
+    const scriptName = (nodeScriptMatch || pythonScriptMatch)[1];
+    const scriptPath = join(__DIR, '..', scriptName);
+    if (!existsSync(scriptPath)) {
+      console.error(`[VALIDATE] FAIL: script does not exist: ${scriptPath}`);
+      process.exit(1);
+    }
+  }
+
   if (!firstStep.startsWith('python ') && !firstStep.startsWith('bash ') && !firstStep.startsWith('sh ') &&
       !firstStep.startsWith('cd ') && !firstStep.startsWith('mkdir ') && !firstStep.startsWith('#') &&
-      !firstStep.startsWith('/') && !firstStep.match(/^[a-zA-Z]:\\/) && !firstStep.match(/^node \S+\.(mjs|js)(\s|$)/)) {
+      !firstStep.startsWith('/') && !firstStep.match(/^[a-zA-Z]:\\/) && !nodeScriptMatch && !pythonScriptMatch) {
     // Script-name based step — check if scriptMeta can resolve it
     const scriptMatch = validateApproach.match(/(?:^|\s)([\w-]+\.(?:py|mjs|js|ts|sh))(?:[\s\[]|$)/);
     if (!scriptMatch) {
