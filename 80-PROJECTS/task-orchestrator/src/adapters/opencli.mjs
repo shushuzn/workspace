@@ -3,7 +3,7 @@ import { fileURLToPath } from 'url';
 import { AdapterSandbox } from './adapter-sandbox.mjs';
 // Resolve opencli from opencli project dist (sibling to task-orchestrator in workspace)
 const TASK_ORCHESTRATOR_DIR = dirname(fileURLToPath(import.meta.url));
-const WORKSPACE_ROOT = join(TASK_ORCHESTRATOR_DIR, '..', '..', '..', 'opencli', 'dist', 'main.js');
+const WORKSPACE_ROOT = join(TASK_ORCHESTRATOR_DIR, '..', '..', '..', '..', 'opencli', 'dist', 'main.js');
 const OPENCLI_BIN = join(WORKSPACE_ROOT);
 export class OpencliAdapter {
     id = 'opencli';
