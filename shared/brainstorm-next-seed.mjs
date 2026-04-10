@@ -138,7 +138,8 @@ function main() {
 
     let validApproach = false;
     try {
-      const validationCmd = 'node "' + join(__DIR, '..', 'shared', 'run-seed.mjs') + '" --validate-approach "' + approach.replace(/"/g, '\\"') + '"';
+      const reasonArg = (s.reason || '').replace(/"/g, '\\"');
+      const validationCmd = 'node "' + join(__DIR, '..', 'shared', 'run-seed.mjs') + '" --validate-approach "' + approach.replace(/"/g, '\\"') + '" --reason "' + reasonArg + '"';
       execSync(validationCmd, { stdio: 'pipe' });
       validApproach = true;
     } catch (e) {

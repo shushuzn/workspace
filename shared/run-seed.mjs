@@ -19,6 +19,8 @@ const IDEAS_PATH = join(__DIR, '..', '.omc', 'innovation', 'ideas.md');
 const dryRun = process.argv.includes('--dry-run');
 const validateApproachIdx = process.argv.indexOf('--validate-approach');
 const validateApproach = validateApproachIdx !== -1 ? process.argv[validateApproachIdx + 1] : null;
+const reasonIdx = process.argv.indexOf('--reason');
+const reasonText = reasonIdx !== -1 ? process.argv[reasonIdx + 1] : null;
 const limitIdx = process.argv.indexOf('--limit');
 const showLimit = limitIdx !== -1 ? parseInt(process.argv[limitIdx + 1], 10) : 1;
 const focusIdx = process.argv.indexOf('--focus');
@@ -64,7 +66,7 @@ if (validateApproach !== null) {
     console.error(`[Gate4b FAIL] Dangerous command pattern detected: ${firstStep.slice(0, 60)}`);
     process.exit(1);
   }
-  const EXEC_PREFIXES = ['python ', 'bash ', 'sh ', 'cd ', 'mkdir ', '//', '#', '/'];
+  const EXEC_PREFIXES = ['python ', 'bash ', 'sh ', 'cd ', 'mkdir ', '//', '#', '/', 'echo '];
   const isExecCommand = EXEC_PREFIXES.some(p => firstStep.startsWith(p)) || firstStep.match(/^[a-zA-Z]:\\/);
   // node allowed as "node xxx.mjs", "node xxx.js", or "node --version" etc. (built-in flags)
   const isNodeScript = firstStep.match(/^node \S+\.(mjs|js)(\s|$)/) || firstStep.match(/^node\s+--/);
@@ -89,12 +91,45 @@ if (validateApproach !== null) {
   if (!firstStep.startsWith('python ') && !firstStep.startsWith('bash ') && !firstStep.startsWith('sh ') &&
       !firstStep.startsWith('cd ') && !firstStep.startsWith('mkdir ') && !firstStep.startsWith('#') &&
       !firstStep.startsWith('/') && !firstStep.match(/^[a-zA-Z]:\\/) && !nodeScriptMatch && !pythonScriptMatch &&
-      !firstStep.match(/^node\s+--/)) {
+      !firstStep.match(/^node\s+--/) && !firstStep.startsWith('echo ')) {
     // Script-name based step — check if scriptMeta can resolve it
     const scriptMatch = validateApproach.match(/(?:^|\s)([\w-]+\.(?:py|mjs|js|ts|sh))(?:[\s\[]|$)/);
     if (!scriptMatch) {
       console.error(`[VALIDATE] FAIL: cannot resolve script name from: ${firstStep}`);
       process.exit(1);
+    }
+  }
+
+  // ── Gate 4c supplement: approach vs reason consistency check ──
+  if (reasonText !== null) {
+    // Patterns that signal new implementation (not just testing/validation)
+    const IMPLEMENT_PATTERNS = [
+      /增加/, /新增/, /集成/, /打通/, /创建/, /写入/, /编写/,
+      /集成到/, /接入/, /固化为/, /生成/, /实现/, /添加/,
+    ];
+    const IS_IMPLEMENT = IMPLEMENT_PATTERNS.some(p => p.test(reasonText));
+    // Patterns that signal testing/validation only (echo is OK for these)
+    const IS_TEST_PATTERNS = [
+      /测试/, /验证/, /检查/, /分析/, /巡检/, /诊断/, /echo/,
+      /去重分析/, /根因分析/, /反思/,
+    ];
+    const IS_TEST = IS_TEST_PATTERNS.some(p => p.test(reasonText));
+
+    // echo-only approach for implement-type seeds = approach drift
+    if (IS_IMPLEMENT && !IS_TEST && /^echo\s/i.test(firstStep)) {
+      console.error(`[VALIDATE] FAIL: approach drift — reason describes new implementation but approach is just "echo": ${reasonText.slice(0, 60)}`);
+      process.exit(1);
+    }
+    // purely testing approach for implement-type seeds = likely too shallow
+    if (IS_IMPLEMENT && !IS_TEST) {
+      const SHALLOW_PATTERNS = [
+        /^node\s+\S+\.mjs\s+--\w+\s*$/,  // just runs --help/--version with no args
+        /^node\s+shared\/run-seed\.mjs\s+--validate-approach/,
+      ];
+      if (SHALLOW_PATTERNS.some(p => p.test(firstStep))) {
+        console.error(`[VALIDATE] FAIL: approach drift — reason describes new implementation but approach only runs validation: ${firstStep}`);
+        process.exit(1);
+      }
     }
   }
 
