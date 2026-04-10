@@ -28,6 +28,8 @@ for (const line of lines) {
 
   const focusMatch = line.match(/\[focus:([^\]]+)\]/);
   const angleMatch = line.match(/\[angle:([^\]]+)\]/);
+  // Skip reflection seeds — their reason is self-generated (not real implementation)
+  if (angleMatch && angleMatch[1].includes('反思')) continue;
   const reason = reasonMatch[1].trim();
 
   // Extract missing part from "缺失环节：XXX"

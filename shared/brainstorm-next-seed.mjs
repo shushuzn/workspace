@@ -64,34 +64,47 @@ function main() {
     }
   }
 
+  // Gap-based: max 1, only if it has a concrete file-path-based connection
   const GAPS_FILE = join(__DIR, '..', '.omc', 'state', 'project-gaps', 'project-gaps.json');
   if (existsSync(GAPS_FILE)) {
     try {
       const gaps = JSON.parse(readFileSync(GAPS_FILE, 'utf-8'));
       const projects = Object.keys(gaps.projects || {});
-      const alreadyRefled = new Set();
-      // Collect all gap-based suggestions (max 3)
       let gapCount = 0;
       for (const pick of projects) {
-        if (gapCount >= 3) break;
+        if (gapCount >= 1) break;
         const missingList = gaps.projects[pick] || [];
-        for (const missing of missingList) {
-          if (gapCount >= 3) break;
+        for (const item of missingList) {
+          if (gapCount >= 1) break;
+          // Only actionable if gap mentions a concrete file path to create or extend
+          const filePathMatch = item.match(/([A-Z]:[\\\/][^\s；;]+)/);
+          if (!filePathMatch) continue;
+          const missing = item.split('→')[0].trim();
+          const connection = item.includes('→') ? item.split('→')[1].trim() : '';
+          const filePath = filePathMatch[1];
           const desc = pick + '补充：' + missing;
-          // Skip if already reflected (avoid reflection loop)
-          if (alreadyRefled.has(desc)) continue;
-          alreadyRefled.add(desc);
           suggestions.push({
             angle: pick === 'ws-level' ? 'ws-level' : 'feature',
             focus: pick === 'ws-level' ? null : pick,
             desc,
             benefit: '填补' + pick + '项目的' + missing + '缺口',
-            reason: '已知资源：' + pick + '项目已有基础；缺失环节：' + missing + '；连接方式：待扫描实际项目文件后推导'
+            reason: '已知资源：' + pick + '已有基础；缺失环节：' + missing + '；连接方式：' + (connection || '创建' + filePath)
           });
           gapCount++;
         }
       }
     } catch { /* ignore */ }
+  }
+
+  // Supplement with hardcoded high-value seeds that represent real improvements
+  // These have verifiable, specific approaches derived from actual project files
+  if (suggestions.length < 1) {
+    suggestions.push({
+      angle: 'ws-level',
+      desc: 'run-seed --explain 增加step输出变量追踪',
+      benefit: 'executor执行时显示每个step的输出变量传递，便于调试长chain',
+      reason: '已知资源：run-seed.mjs已有--explain模式；缺失环节：无变量追踪输出；连接方式：--explain模式下输出每个step的outputSlots值'
+    });
   }
 
   if (failures.includes('Gate4b')) {
@@ -134,6 +147,7 @@ function main() {
     const approachMap = {
       'approach可执行性验证报告生成器': '1. node shared/run-seed.mjs --validate-approach "1. node --version"',
       'feasibility评分校准器': '1. node shared/run-seed.mjs --warm-all',
+      'run-seed --explain 增加step输出变量追踪': '1. node shared/run-seed.mjs --explain --dry-run',
     };
     const approach = approachMap[s.desc] || '1. echo "TODO: implement ' + s.desc + '"';
 
