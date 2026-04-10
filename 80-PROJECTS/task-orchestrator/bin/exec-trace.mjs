@@ -10,6 +10,13 @@ function trace(event, data = '') {
   traces.push({ step, event, data });
 }
 
+if (process.argv.includes('--help') || process.argv.includes('-h')) {
+  console.log('Usage: node exec-trace.mjs [--input FILE] [--output FILE]');
+  console.log('  --input FILE   Read trace events from FILE (default: stdin)');
+  console.log('  --output FILE  Write Mermaid diagram to FILE (default: stdout)');
+  process.exit(0);
+}
+
 trace('start');
 trace('parse_plan');
 trace('execute_step');
