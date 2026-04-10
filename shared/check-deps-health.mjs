@@ -17,6 +17,7 @@ const PROJECTS_DIR = join(WORKSPACE, '80-PROJECTS');
 
 const AUTO_FIX = process.argv.includes('--auto-fix');
 const WATCH_MODE = process.argv.includes('--watch');
+const JSON_OUTPUT = process.argv.includes('--json');
 
 let projects = [];
 try {
@@ -30,37 +31,45 @@ try {
   process.exit(1);
 }
 
-console.log('╔══════════════════════════════════════════════════╗');
-console.log(`║  Dependency Health Check${AUTO_FIX ? ' (auto-fix)' : ''}`.padEnd(47) + '║');
-console.log('╚══════════════════════════════════════════════════╝\n');
+const result = { healthy: [], missing: [], fixed: [] };
 
-let healthy = 0, missing = 0, fixed = 0;
 for (const proj of projects.sort()) {
   const nm = join(PROJECTS_DIR, proj, 'node_modules');
   const hasNm = existsSync(nm);
   if (hasNm) {
-    healthy++;
-    console.log(`  ✓ ${proj.padEnd(40)} node_modules exists`);
+    result.healthy.push(proj);
   } else {
-    missing++;
-    console.log(`  ✗ ${proj.padEnd(40)} node_modules MISSING`);
+    result.missing.push(proj);
     if (AUTO_FIX) {
       const projDir = join(PROJECTS_DIR, proj);
-      console.log(`    → Running npm install in ${proj}...`);
       try {
         execSync('npm install', { cwd: projDir, stdio: 'pipe', timeout: 120000 });
-        fixed++;
-        console.log(`    ✓ npm install succeeded for ${proj}`);
+        result.fixed.push(proj);
       } catch (e) {
-        console.log(`    ✗ npm install failed for ${proj}: ${e.message}`);
+        // ignore
       }
     }
   }
 }
 
-console.log(`\n  Summary: ${healthy} healthy, ${missing} missing${AUTO_FIX ? `, ${fixed} fixed` : ''} (${projects.length} projects)`);
-if (!AUTO_FIX && missing > 0) {
-  console.log('\n  Run: node shared/check-deps-health.mjs --auto-fix to auto-install');
+if (JSON_OUTPUT) {
+  console.log(JSON.stringify({ healthy: result.healthy, missing: result.missing, fixed: result.fixed, summary: { healthy: result.healthy.length, missing: result.missing.length, fixed: result.fixed.length, total: projects.length } }, null, 2));
+} else {
+  console.log('╔══════════════════════════════════════════════════╗');
+  console.log(`║  Dependency Health Check${AUTO_FIX ? ' (auto-fix)' : ''}`.padEnd(47) + '║');
+  console.log('╚══════════════════════════════════════════════════╝\n');
+
+  for (const proj of result.healthy) {
+    console.log(`  ✓ ${proj.padEnd(40)} node_modules exists`);
+  }
+  for (const proj of result.missing) {
+    console.log(`  ✗ ${proj.padEnd(40)} node_modules MISSING`);
+  }
+
+  console.log(`\n  Summary: ${result.healthy.length} healthy, ${result.missing.length} missing${AUTO_FIX ? `, ${result.fixed.length} fixed` : ''} (${projects.length} projects)`);
+  if (!AUTO_FIX && result.missing.length > 0) {
+    console.log('\n  Run: node shared/check-deps-health.mjs --auto-fix to auto-install');
+  }
 }
 
 // Watch mode
