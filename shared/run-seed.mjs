@@ -49,9 +49,8 @@ if (validateApproach !== null) {
     process.exit(1);
   }
 
-  // Check for executable prefix
-  // node only allowed as "node script.mjs" or "node script.js" — NOT "node -e" / "node -p" / "node -c"
-  if (firstStep.startsWith('node -')) {
+  // Check for node -e/p/c inline (node --version is valid, node -e/p/c is not)
+  if (/^node\s+-[epc]\s+/i.test(firstStep)) {
     console.error(`[VALIDATE] FAIL: "node -e/p/c" inline code is not allowed — Windows shell corrupts quotes/newlines: ${firstStep.slice(0, 60)}`);
     process.exit(1);
   }
@@ -67,8 +66,8 @@ if (validateApproach !== null) {
   }
   const EXEC_PREFIXES = ['python ', 'bash ', 'sh ', 'cd ', 'mkdir ', '//', '#', '/'];
   const isExecCommand = EXEC_PREFIXES.some(p => firstStep.startsWith(p)) || firstStep.match(/^[a-zA-Z]:\\/);
-  // node allowed only as "node xxx.mjs" or "node xxx.js"
-  const isNodeScript = firstStep.match(/^node \S+\.(mjs|js)(\s|$)/);
+  // node allowed as "node xxx.mjs", "node xxx.js", or "node --version" etc. (built-in flags)
+  const isNodeScript = firstStep.match(/^node \S+\.(mjs|js)(\s|$)/) || firstStep.match(/^node\s+--/);
   if (!isExecCommand && !isNodeScript) {
     console.error(`[VALIDATE] FAIL: approach step has no executable prefix: ${firstStep}`);
     process.exit(1);
@@ -89,7 +88,8 @@ if (validateApproach !== null) {
 
   if (!firstStep.startsWith('python ') && !firstStep.startsWith('bash ') && !firstStep.startsWith('sh ') &&
       !firstStep.startsWith('cd ') && !firstStep.startsWith('mkdir ') && !firstStep.startsWith('#') &&
-      !firstStep.startsWith('/') && !firstStep.match(/^[a-zA-Z]:\\/) && !nodeScriptMatch && !pythonScriptMatch) {
+      !firstStep.startsWith('/') && !firstStep.match(/^[a-zA-Z]:\\/) && !nodeScriptMatch && !pythonScriptMatch &&
+      !firstStep.match(/^node\s+--/)) {
     // Script-name based step — check if scriptMeta can resolve it
     const scriptMatch = validateApproach.match(/(?:^|\s)([\w-]+\.(?:py|mjs|js|ts|sh))(?:[\s\[]|$)/);
     if (!scriptMatch) {

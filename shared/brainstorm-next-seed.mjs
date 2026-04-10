@@ -4,7 +4,7 @@
  * Reads last batch metacognition entry, derives seed directions
  * Usage: node shared/brainstorm-next-seed.mjs --auto
  */
-import { readFileSync, existsSync, appendFileSync } from 'fs';
+import { readFileSync, existsSync, appendFileSync, readFileSync as rfSync } from 'fs';
 import { execSync } from 'child_process';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
@@ -139,7 +139,21 @@ function main() {
     process.argv[process.argv.indexOf('--date') + 1] : today;
 
   let written = 0;
+  // Load existing seeds for dedup
+  const existingContent = existsSync(IDEAS_FILE) ? readFileSync(IDEAS_FILE, 'utf-8') : '';
+  const existingSeeds = new Set();
+  for (const line of existingContent.split('\n')) {
+    const m = line.match(/^\- \[[\d]+\] seed \[([^\]]+)\] \[score:[^\]]+\] \[f:\d+\] \[angle:([^\]]+)\] (.+?)(?:\s+\||\s*$)/);
+    if (m) existingSeeds.add(`${m[2]}|${m[3].trim()}`);
+  }
+
   for (const s of suggestions) {
+    // Skip if already exists in pool (same angle + desc)
+    const seedKey = `${s.angle}|${s.desc}`;
+    if (existingSeeds.has(seedKey)) {
+      console.warn(`[next-seed] SKIP (already in pool): ${s.desc}`);
+      continue;
+    }
     // Build a concrete approach based on the seed type
     const approachMap = {
       'approach可执行性验证报告生成器': '1. node shared/run-seed.mjs --validate-approach "1. node --version"',
