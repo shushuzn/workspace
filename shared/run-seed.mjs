@@ -362,6 +362,14 @@ writeFileSync(IDEAS_PATH, newLines.join('\n'), 'utf-8');
 
 console.log(`\n[SHIPPED] ${top.desc.slice(0, 60)}... → shipped:${today}`);
 
+// Self-critique: mandatory 3 questions after shipped
+console.log('\n=== Seed Self-Critique ===');
+console.log('Q1 reason准确吗？已知资源/缺失环节/连接方式与实际一致？');
+console.log('Q2 approach描述好吗？步骤与实际执行路径匹配？');
+console.log('Q3 score虚高了吗？f:评分与实际耗时匹配？');
+console.log('→ 将答案追加到 brainstorm-metacognition.jsonl seed_critiques 字段');
+console.log('');
+
 // Auto-generate insight: write to trigger file after each shipped seed
 try {
   const { writeFileSync: wf, existsSync: ex } = await import('fs');
