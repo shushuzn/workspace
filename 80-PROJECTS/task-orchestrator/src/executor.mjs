@@ -104,6 +104,11 @@ export class Executor {
         const deps = this.buildDependencyGraph(steps);
         // Topological sort into depth layers — all steps in a layer have no unmet dependencies
         const layers = this.topologicalLayers(steps, deps);
+        // Map step index → its layer index (= depth from root)
+        const stepDepth = new Map();
+        for (let li = 0; li < layers.length; li++) {
+            for (const idx of layers[li]) stepDepth.set(idx, li);
+        }
         // --explain: show layers, parallel groups, and inputSlot wiring
         if (this.options.explain) {
             process.stderr.write(chalk.blue('\n[execution plan]:\n'));
@@ -339,6 +344,16 @@ export class Executor {
                             }
                             // 'retry' action or fallback failed → use strategy maxRetries if set
                             maxRetries = strategy.maxRetries ?? maxRetries;
+                        }
+                        // Depth-based retry skip: root steps (depth <= 1) are critical — always retry; deeper steps are derived, skip retry if first attempt fails
+                        const depth = stepDepth.get(stepIdx) ?? 0;
+                        if (depth <= 1 && attempt === 1) {
+                            process.stderr.write(`[retry] depth-${depth} step, forcing retry: ${errMsg.slice(0, 60)}\n`);
+                        } else if (depth > 1 && attempt === 1) {
+                            process.stderr.write(`[retry-skip] depth-${depth} step (downstream), skipping retry: ${errMsg.slice(0, 60)}\n`);
+                            result = { success: false, output: '', logs: '', artifacts: [], error: errMsg, code: errCode, fatal: false };
+                            resultMap.set(stepIdx, result);
+                            return;
                         }
                         if (attempt > maxRetries) {
                             result = {
