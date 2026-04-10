@@ -14,6 +14,8 @@
 
 **禁止跨项目跳转**：工作必须在当前项目进行，不得到其他项目执行任务。当前项目固定为 workspace（`D:\OpenClaw\workspace`）；种子均为 workspace-level。
 
+**固化反思**：每次改动代码、脚本、规则文件后，强制问自己三个问题：①有没有更好的实现方法？②这个改动能不能固化成规则/SKILL.md/hookify规则？③同类问题以前犯过吗、能提取成复用模块吗？**有就立即做**，不要等。输出格式：`[固化] 要固化什么 → 写入哪里` 或 `本次无需固化，原因是XXX`。
+
 **workspace 资源优先**：每次开始实现任何种子前，必须先扫描 workspace root 的 `shared/`、`shared-types/`、`shared-test-fixtures/`、`scripts/`、`30-scripts-tools/`、`40-TOOLS/`、`60-DATA/`、`docs/`，检查是否有可复用模块、类型定义、工具脚本。若有，必须在实现中使用或扩展，而不是重新发明。**检查结果必须体现在 approach 中**（如"扩展 shared-types/X.ts"或"复用 40-TOOLS/X"），禁止忽略 workspace 已有资源。
 
 **当前项目锁定**：每次 session 开始必读 MEMORY.md Active Projects 表的 CURRENT 列（★标记），以此为准；新加项目到 MEMORY.md 时必须同步在那一行打★；禁止在 CURRENT 列无标记时自己选定项目。

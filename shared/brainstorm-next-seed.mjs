@@ -142,8 +142,8 @@ function main() {
   for (const s of suggestions) {
     // Build a concrete approach based on the seed type
     const approachMap = {
-      'approach可执行性验证报告生成器': '1. node shared/run-seed.mjs --validate-approach "1. echo test"',
-      'feasibility评分校准器': '1. node shared/run-seed.mjs --dry-run',
+      'approach可执行性验证报告生成器': '1. node shared/run-seed.mjs --validate-approach "1. node --version"',
+      'feasibility评分校准器': '1. node shared/run-seed.mjs --warm-all',
     };
     const approach = approachMap[s.desc] || `1. echo "TODO: implement ${s.desc}"`;
 
