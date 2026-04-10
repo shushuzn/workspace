@@ -8,6 +8,13 @@ const __DIR = dirname(fileURLToPath(import.meta.url));
 const TARGET = join(__DIR, '..', '80-PROJECTS', 'task-orchestrator', 'src', 'executor.mjs');
 let content = readFileSync(TARGET, 'utf8');
 
+// Detect "already patched" state: run-header type in recordAuditLog
+const patchedPattern = /type:\s*['"]run-header['"]/;
+if (patchedPattern.test(content)) {
+  console.log('[patch] ALREADY APPLIED');
+  process.exit(0);
+}
+
 // Step 1: Remove prompt from per-step entry
 const oldEntryPrompt = "prompt: prompt ?? '',";
 const newEntryPrompt = "";

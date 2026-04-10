@@ -8,6 +8,13 @@ const __DIR = dirname(fileURLToPath(import.meta.url));
 const TARGET = join(__DIR, '..', '80-PROJECTS', 'task-orchestrator', 'src', 'executor.mjs');
 let content = readFileSync(TARGET, 'utf8');
 
+// Detect "already patched" state: step artifacts.json write present
+const patchedPattern = /step-\$\{i\s*\+\s*1\}\.artifacts\.json/;
+if (patchedPattern.test(content)) {
+  console.log('[patch] ALREADY APPLIED');
+  process.exit(0);
+}
+
 const marker = "writeFileSync(join(logsDir, `step-${i + 1}.stdout`), r.output, 'utf-8');";
 const repl = "writeFileSync(join(logsDir, `step-${i + 1}.stdout`), r.output, 'utf-8');\n                if (r.artifacts && r.artifacts.length > 0) {\n                    writeFileSync(join(logsDir, `step-${i + 1}.artifacts.json`), JSON.stringify(r.artifacts, null, 2), 'utf-8');\n                }";
 

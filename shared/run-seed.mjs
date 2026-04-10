@@ -402,6 +402,22 @@ try {
     timeout: 120_000,
   });
 } catch (err) {
+  const stderr = err.stderr ? err.stderr.toString() : '';
+  const stdout = err.stdout ? err.stdout.toString() : '';
+  const output = stderr + stdout;
+  if (output.includes('ALREADY APPLIED')) {
+    // Patch was already applied — mark shipped and continue
+    const today = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+    const newLines = [...lines];
+    const lastBodyIdx = top.lineIdx + top.bodyLines.length;
+    const lastBodyLine = newLines[lastBodyIdx];
+    if (!lastBodyLine.match(/\| shipped:/)) {
+      newLines[lastBodyIdx] = lastBodyLine.replace(/(\s*)$/, ` | shipped:${today}`);
+      writeFileSync(IDEAS_PATH, newLines.join('\n'), 'utf-8');
+    }
+    console.log(`\n[SHIPPED] ${top.desc.slice(0, 60)}... → shipped:${today} (ALREADY APPLIED)`);
+    process.exit(0);
+  }
   console.error(`\n[ERROR] Command failed (exit ${err.status})`);
   console.error(`Seed NOT marked shipped.`);
   process.exit(err.status ?? 1);

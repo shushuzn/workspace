@@ -8,6 +8,13 @@ const __DIR = dirname(fileURLToPath(import.meta.url));
 const TARGET = join(__DIR, '..', '80-PROJECTS', 'task-orchestrator', 'src', 'executor.mjs');
 let content = readFileSync(TARGET, 'utf8');
 
+// Detect "already patched" state: isRootRelated uses chainInfo
+const patchedPattern = /isRootRelated\s*=\s*chainInfo\s*&&\s*\(\s*chainInfo\.root|isRootRelated.*causalityInfo/;
+if (patchedPattern.test(content)) {
+  console.log('[patch] ALREADY APPLIED');
+  process.exit(0);
+}
+
 // Step 1: Add chainInfo variable after depth declaration
 const depthLine = 'const depth = stepDepth.get(stepIdx) ?? 0;';
 const chainInfoLine = 'const chainInfo = causalityInfo.get(stepIdx);';
@@ -18,7 +25,6 @@ if (!content.includes(depthLine)) {
   process.exit(1);
 }
 if (!content.includes('causalityInfo.get(stepIdx)')) {
-  // Not patched yet, add chainInfo line
   content = content.replace(depthLine, depthLine + '\n                        ' + chainInfoLine + '\n                        ' + isRootRelatedLine);
 }
 

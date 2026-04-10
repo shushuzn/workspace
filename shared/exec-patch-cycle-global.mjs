@@ -8,10 +8,14 @@ const __DIR = dirname(fileURLToPath(import.meta.url));
 const TARGET = join(__DIR, '..', '80-PROJECTS', 'task-orchestrator', 'src', 'executor.mjs');
 let content = readFileSync(TARGET, 'utf8');
 
-// Replace the per-node DFS cycle detection with a single global DFS
-// Old: for (let i = 0; i < steps.length; i++) { visited.clear(); stack.clear(); hasCycle(i); }
-// New: single pass using Tarjan-like algorithm with global visited and onStack sets
+// Detect "already patched" state: single DFS pass (Tarjan-inspired)
+const patchedPattern = /hasGlobalCycle|onStack\.has\s*\(\s*node\s*\)/;
+if (patchedPattern.test(content)) {
+  console.log('[patch] ALREADY APPLIED');
+  process.exit(0);
+}
 
+// Replace the per-node DFS cycle detection with a single global DFS
 const oldCycleBlock = `// Detect cycles using DFS — throw on cycle
 const visited = new Set();
 const stack = new Set();

@@ -8,8 +8,13 @@ const __DIR = dirname(fileURLToPath(import.meta.url));
 const TARGET = join(__DIR, '..', '80-PROJECTS', 'task-orchestrator', 'src', 'executor.mjs');
 let content = readFileSync(TARGET, 'utf8');
 
-const marker = `        const header = \`\\n## Self-Audit Seeds (\${now})\\n\`;`;
-const existing = `        const existing = existsSync(SEEDS_FILE) ? readFileSync(SEEDS_FILE, 'utf-8') : '';`;
+// Detect "already patched" state: existing.endsWith(header) check
+const patchedPattern = /existing\.endsWith\s*\(\s*header\s*\)/;
+if (patchedPattern.test(content)) {
+  console.log('[patch] ALREADY APPLIED');
+  process.exit(0);
+}
+
 const oldLine = `        const entry = header + selfReflectPatterns.map(p => \`- \${p}\`).join('\\n') + '\\n';`;
 const newLine = `        const entry = existing.endsWith(header) ? selfReflectPatterns.map(p => \`- \${p}\`).join('\\n') + '\\n' : header + selfReflectPatterns.map(p => \`- \${p}\`).join('\\n') + '\\n';`;
 

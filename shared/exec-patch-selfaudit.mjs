@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Patch executor.mjs runSelfAudit to trigger auto-seed when patterns >= 3
-import { readFileSync, writeFileSync, appendFileSync, mkdirSync, existsSync } from 'fs';
+import { readFileSync, writeFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import { execSync } from 'child_process';
@@ -9,8 +9,16 @@ const __DIR = dirname(fileURLToPath(import.meta.url));
 const TARGET = join(__DIR, '..', '80-PROJECTS', 'task-orchestrator', 'src', 'executor.mjs');
 const content = readFileSync(TARGET, 'utf8');
 
+// Detect "already patched" state: auto-seed trigger block present
+// Look for the hook-auto-seed.mjs call inside the >= 3 block
+const patchedPattern = /execSync\s*\(\s*['"]node\s+["'][^'"]*hook-auto-seed\.mjs['"]/;
+if (patchedPattern.test(content)) {
+  console.log('[patch] ALREADY APPLIED');
+  process.exit(0);
+}
+
 // Find the "Append to seeds file" section and add auto-seed trigger after it
-const appendMarker = 'appendFileSync(SEEDS_FILE, entry, \'utf-8\');';
+const appendMarker = "appendFileSync(SEEDS_FILE, entry, 'utf-8');";
 if (!content.includes(appendMarker)) {
   console.error('[patch] appendFileSync marker not found');
   process.exit(1);

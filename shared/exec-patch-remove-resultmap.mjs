@@ -8,6 +8,13 @@ const __DIR = dirname(fileURLToPath(import.meta.url));
 const TARGET = join(__DIR, '..', '80-PROJECTS', 'task-orchestrator', 'src', 'executor.mjs');
 let content = readFileSync(TARGET, 'utf8');
 
+// Detect "already patched" state: resultMap is gone (no longer in content)
+const patchedPattern = /resultMap\.set\s*\(\s*stepIdx/;
+if (!patchedPattern.test(content)) {
+  console.log('[patch] ALREADY APPLIED');
+  process.exit(0);
+}
+
 // Remove the resultMap declaration (note: arrow is → unicode, not ->)
 let next = content.replace(
     '        const resultMap = new Map(); // step index \u2192 result\n',
