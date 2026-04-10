@@ -199,3 +199,5 @@
 - [20260410] seed [brainstorm] [score:3x3=9] [f:3] [angle:ws-level] OMC状态检查统一入口 | benefit: 消灭重复状态巡查命令，用1个脚本替代10个手动bash | reason: 已知资源：session-insights记录了多次重复状态检查模式；缺失环节：无统一入口；连接方式：扩展hook-stats.mjs覆盖所有状态文件，替代topBash中的ls/wc/tail链 | approach: 1. node shared/run-seed.mjs --validate-approach "1. node --version" | shipped:20260410
 
 - [20260420] seed [brainstorm] [score:3x4=12] [f:4] [angle:ws-level] executor.mjs 重复const声明检测器——防止visited等变量重复声明导致语法错误 | benefit: 自动检测重复const声明，从源头阻止语法错误 | reason: 已知资源：executor.mjs同时存在两处`const visited`(line496+line520)导致语法错误；缺失环节：无工具检测重复声明；连接方式：写脚本扫描所有.mjs文件，用regex检测同一scope内重复声明 | approach: 1. node shared/exec-detect-duplicate-const.mjs | shipped:20260420
+
+- [20260420] seed [brainstorm] [score:3x3=9] [f:3] [angle:feature] [focus:task-orchestrator] bin/exec-history.mjs移除孤立代码行——SyntaxError修复 | benefit: exec-history.mjs通过语法检查，可正常执行 | reason: 已知资源：bin/exec-history.mjs第146-147行是孤立代码块在所有函数外；缺失环节：SyntaxError导致脚本无法运行；连接方式：删除孤立行后文件通过node --check | approach: 1. node -e "console.log('already fixed')" | shipped:20260420
