@@ -389,11 +389,7 @@ created: ${new Date().toISOString()}
     const id = idMatch[1];
     console.log('[wiki] Fetching arXiv', id, '...');
     meta = await fetchArxivMeta(id);
-    if (!meta) {
-      console.error('[wiki] arXiv fetch failed, trying Semantic Scholar as fallback...');
-      meta = await fetchSemanticScholarMeta(id);
-    }
-    if (!meta) { console.error('[wiki] Failed to fetch metadata from any source'); process.exit(1); }
+    if (!meta) { console.error('[wiki] Failed to fetch arXiv metadata'); process.exit(1); }
     writePaper(meta);
   } else if (rawUrl.includes('eprint.iacr.org')) {
     // ePrint URL: https://eprint.iacr.org/2019/953
