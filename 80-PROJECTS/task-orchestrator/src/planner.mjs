@@ -191,6 +191,8 @@ function registrationToRule(reg) {
 export class Planner {
     rules;
     registry;
+    planCache = new Map();
+    cacheTTLMs = 5 * 60 * 1000; // 5-minute TTL
     constructor(registry) {
         this.registry = registry;
         const userRules = loadUserRules();
@@ -296,6 +298,11 @@ export class Planner {
 
     /** Parse a natural language prompt into ordered Steps */
     parse(prompt) {
+        // Plan cache lookup — avoid re-parsing identical prompts
+        const cached = this.planCache.get(prompt);
+        if (cached && (Date.now() - cached.ts) < this.cacheTTLMs) {
+            return { ...cached.result, cached: true };
+        }
         const steps = [];
         const errors = [];
         const warnings = [];
@@ -366,7 +373,10 @@ export class Planner {
             const { command } = rule.commandBuilder(match);
             return { keyword, ruleId: rule.id ?? rule.adapterId, adapterId: rule.adapterId, command: command ?? '' };
         });
-        return { steps, errors, warnings, matchedKeywords, matchedRules };
+        const result = { steps, errors, warnings, matchedKeywords, matchedRules, cached: false };
+        // Cache the result
+        this.planCache.set(prompt, { result, ts: Date.now() });
+        return result;
     }
     /** True if prompt contains keyword, supporting * as wildcards (match any substring) */
     keywordMatches(prompt, keyword) {
