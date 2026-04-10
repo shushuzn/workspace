@@ -163,6 +163,8 @@ console.log('');
 
 if (unshipped.length === 0) {
   console.log('[OK] No unshipped seeds found.');
+  console.log('  → Run: node shared/brainstorm-next-seed.mjs --auto   # generate from metacognition');
+  console.log('  → Or: brainstorm new seeds manually');
   process.exit(0);
 }
 
