@@ -389,6 +389,116 @@
         "彭德怀"
       ],
       "created": "2026-04-10"
+    },
+    {
+      "id": "12080928-surface-codes-towards-practical-large-scale-quantum-computation",
+      "title": "[1208.0928] Surface codes: Towards practical large-scale quantum computation",
+      "category": "AI",
+      "file": "AI/00-12080928-surface-codes-towards-practical/12080928-surface-codes-towards-practical-large-scale-quantum-computation.md",
+      "tags": [
+        "论文解读",
+        "1208.0928"
+      ],
+      "arxiv": "1208.0928"
+    },
+    {
+      "id": "200901325-learning-to-summarize-from-human-feedback",
+      "title": "[2009.01325] Learning to summarize from human feedback",
+      "category": "AI",
+      "file": "AI/00-200901325-learning-to-summarize-from-hum/200901325-learning-to-summarize-from-human-feedback.md",
+      "tags": [
+        "论文解读",
+        "2009.01325"
+      ],
+      "arxiv": "2009.01325"
+    },
+    {
+      "id": "180200934-incorporating-literals-into-knowledge-graph-embeddings",
+      "title": "[1802.00934] Incorporating Literals into Knowledge Graph Embeddings",
+      "category": "AI",
+      "file": "AI/00-180200934-incorporating-literals-into-kn/180200934-incorporating-literals-into-knowledge-graph-embeddings.md",
+      "tags": [
+        "论文解读",
+        "1802.00934"
+      ],
+      "arxiv": "1802.00934"
+    },
+    {
+      "id": "191014346-reply-to-comment-on-34superconductivity-at-low-density-near-a-ferroelectric-quantum-critical-point-doped-srtio-334",
+      "title": "[1910.14346] Reply to Comment on &#34;Superconductivity at low density near a ferroelectric quantum critical point: doped SrTiO_3&#34;",
+      "category": "AI",
+      "file": "AI/00-191014346-reply-to-comment-on-34supercon/191014346-reply-to-comment-on-34superconductivity-at-low-density-near-a-ferroelectric-quantum-critical-point-doped-srtio-334.md",
+      "tags": [
+        "论文解读",
+        "1910.14346"
+      ],
+      "arxiv": "1910.14346"
+    },
+    {
+      "id": "221208073-constitutional-ai-harmlessness-from-ai-feedback",
+      "title": "[2212.08073] Constitutional AI: Harmlessness from AI Feedback",
+      "category": "AI",
+      "file": "AI/00-221208073-constitutional-ai-harmlessness/221208073-constitutional-ai-harmlessness-from-ai-feedback.md",
+      "tags": [
+        "论文解读",
+        "2212.08073"
+      ],
+      "arxiv": "2212.08073"
+    },
+    {
+      "id": "200605543-machine-learning-for-imaging-cherenkov-detectors",
+      "title": "[2006.05543] Machine Learning for Imaging Cherenkov Detectors",
+      "category": "AI",
+      "file": "AI/00-200605543-machine-learning-for-imaging-c/200605543-machine-learning-for-imaging-cherenkov-detectors.md",
+      "tags": [
+        "论文解读",
+        "2006.05543"
+      ],
+      "arxiv": "2006.05543"
+    },
+    {
+      "id": "170802278-optimal-bounds-for-t-singularities-in-stable-surfaces",
+      "title": "[1708.02278] Optimal bounds for T-singularities in stable surfaces",
+      "category": "AI",
+      "file": "AI/00-170802278-optimal-bounds-for-t-singulari/170802278-optimal-bounds-for-t-singularities-in-stable-surfaces.md",
+      "tags": [
+        "论文解读",
+        "1708.02278"
+      ],
+      "arxiv": "1708.02278"
+    },
+    {
+      "id": "170603762-attention-is-all-you-need",
+      "title": "[1706.03762] Attention Is All You Need",
+      "category": "AI",
+      "file": "AI/00-170603762-attention-is-all-you-need/170603762-attention-is-all-you-need.md",
+      "tags": [
+        "论文解读",
+        "1706.03762"
+      ],
+      "arxiv": "1706.03762"
+    },
+    {
+      "id": "181004805-bert-pre-training-of-deep-bidirectional-transformers-for-language-understanding",
+      "title": "[1810.04805] BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+      "category": "AI",
+      "file": "AI/00-181004805-bert-pre-training-of-deep-bidi/181004805-bert-pre-training-of-deep-bidirectional-transformers-for-language-understanding.md",
+      "tags": [
+        "论文解读",
+        "1810.04805"
+      ],
+      "arxiv": "1810.04805"
+    },
+    {
+      "id": "200514165-language-models-are-few-shot-learners",
+      "title": "[2005.14165] Language Models are Few-Shot Learners",
+      "category": "AI",
+      "file": "AI/00-200514165-language-models-are-few-shot-l/200514165-language-models-are-few-shot-learners.md",
+      "tags": [
+        "论文解读",
+        "2005.14165"
+      ],
+      "arxiv": "2005.14165"
     }
   ],
   "categories": [
