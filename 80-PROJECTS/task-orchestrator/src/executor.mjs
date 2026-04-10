@@ -403,7 +403,7 @@ export class Executor {
                     writeFileSync(statePath, JSON.stringify(taskContext), 'utf-8');
                 }
                 // Cache successful results with no inputSlots (only for deterministic steps)
-                if (this.options.cacheTtlMs && result.success && resolvedStep.inputSlots.length === 0) {
+                if (this.options.cacheTtlMs && result.success && resolvedStep.inputSlots.length === 0 && !this.options.dryRunCache) {
                     this.cache.set(cacheKey, { result: { ...result }, expiresAt: Date.now() + this.options.cacheTtlMs });
                     if (this.options.verbose) {
                         process.stderr.write(`[cache] STORED ${resolvedStep.adapterId}: ${resolvedStep.command} (TTL ${this.options.cacheTtlMs}ms)\n`);
