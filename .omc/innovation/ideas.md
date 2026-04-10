@@ -1,5 +1,6 @@
 # Idea Pool
 
+- [20260415] seed [brainstorm] [score:3x4=12] [f:4] [angle:skill-file] brainstorm批次反思自动生成insight——每次ship后自动提取教训写入记忆 | benefit: 每次ship自动复盘，避免重复犯错 | reason: 已知资源：run-seed.mjs已有shipped触发；缺失环节：ship后无自动反思；连接方式：ship后hook调用insight生成→提取Key Learnings→写入记忆 | approach: 1. node shared/run-seed.mjs --dry-run
 - [20260411] seed [brainstorm] [score:3x4=12] [f:4] [angle:ws-level] brainstorm-roadmap支持--project过滤 | benefit: 查看指定项目路线图 | reason: 已知资源：scripts/brainstorm-roadmap.mjs已有；缺失环节：无--project过滤 | approach: 1. bash node scripts/brainstorm-roadmap.mjs --project task-orchestrator | shipped:20260411
 - [20260411] seed [brainstorm] [score:3x4=12] [f:4] [angle:ws-level] brainstorm-roadmap增加--days过滤参数 | benefit: 支持查看最近N天的shipped记录 | reason: 已知资源：brainstorm-roadmap.mjs已有daysLimit解析；缺失环节：无--days命令行参数 | approach: 1. bash node scripts/brainstorm-roadmap.mjs --days 7 | shipped:20260411
 - [20260411] seed [brainstorm] [score:3x4=12] [f:4] [angle:ws-level] run-seed.mjs支持--warm-all输出JSON格式 | benefit: --warm-all --json 输出机器可读格式 | reason: 已知资源：run-seed.mjs已有--warm-all；缺失环节：无JSON格式输出 | approach: 1. bash node shared/run-seed.mjs --warm-all --json | shipped:20260411

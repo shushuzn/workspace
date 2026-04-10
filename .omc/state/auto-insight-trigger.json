@@ -1,0 +1,13 @@
+{
+  "sessionId": "1775784350647",
+  "work": {
+    "tool": "seed-shipped",
+    "input": {
+      "seed": "- [20260410] seed [brainstorm] [score:3x4=12] [f:4] [angle:ws-level] shared/idea",
+      "score": 12,
+      "angle": "ws-level"
+    }
+  },
+  "prompt": "从 seed 执行经验生成 insight：- [20260410] seed [brainstorm] [score:3x4=12] [f:4] [angle:w | angle:ws-level | score:12",
+  "triggeredAt": "2026-04-10T01:25:50.647Z"
+}
