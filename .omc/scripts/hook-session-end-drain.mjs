@@ -1072,6 +1072,22 @@ async function main() {
   // Step 9: Meta-cognitive self-audit
   step9_selfAudit();
 
+  // Step 10: Skill fragment consumer — convert reflect fragments to skills
+  try {
+    const script = resolve(__dirname, 'hook-skill-fragment-consumer.mjs');
+    const p = spawn('node', [script, '--approve-all'], {
+      stdio: ['ignore', 'pipe', 'pipe'],
+      cwd: __dirname,
+      windowsHide: true,
+    });
+    let out = '';
+    p.stdout.on('data', (d) => { out += d.toString(); });
+    p.stderr.on('data', (d) => { out += d.toString(); });
+    p.on('close', () => {
+      if (out.trim()) log(`skill-consumer: ${out.trim().replace(/\n/g, ' ')}`);
+    });
+  } catch (e) { log(`skill-consumer error: ${e.message}`); }
+
   log(`=== drain complete ===`);
 }
 

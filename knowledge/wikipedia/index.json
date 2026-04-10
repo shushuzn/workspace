@@ -499,6 +499,50 @@
         "2005.14165"
       ],
       "arxiv": "2005.14165"
+    },
+    {
+      "id": "230102161-streaming-zero-knowledge-proofs",
+      "title": "[2301.02161] Streaming Zero-Knowledge Proofs",
+      "category": "AI",
+      "file": "AI/00-230102161-streaming-zero-knowledge-proof/230102161-streaming-zero-knowledge-proofs.md",
+      "tags": [
+        "论文解读",
+        "2301.02161"
+      ],
+      "arxiv": "2301.02161"
+    },
+    {
+      "id": "160402804-zero-knowledge-proof-systems-for-qma",
+      "title": "[1604.02804] Zero-knowledge proof systems for QMA",
+      "category": "AI",
+      "file": "AI/00-160402804-zero-knowledge-proof-systems-f/160402804-zero-knowledge-proof-systems-for-qma.md",
+      "tags": [
+        "论文解读",
+        "1604.02804"
+      ],
+      "arxiv": "1604.02804"
+    },
+    {
+      "id": "201210452-experimental-relativistic-zero-knowledge-proofs",
+      "title": "[2012.10452] Experimental relativistic zero-knowledge proofs",
+      "category": "AI",
+      "file": "AI/00-201210452-experimental-relativistic-zero/201210452-experimental-relativistic-zero-knowledge-proofs.md",
+      "tags": [
+        "论文解读",
+        "2012.10452"
+      ],
+      "arxiv": "2012.10452"
+    },
+    {
+      "id": "240215293-sok-what-don39t-we-know-understanding-security-vulnerabilities-in-snarks",
+      "title": "[2402.15293] SoK: What don&#39;t we know? Understanding Security Vulnerabilities in SNARKs",
+      "category": "AI",
+      "file": "AI/00-240215293-sok-what-don39t-we-know-unders/240215293-sok-what-don39t-we-know-understanding-security-vulnerabilities-in-snarks.md",
+      "tags": [
+        "论文解读",
+        "2402.15293"
+      ],
+      "arxiv": "2402.15293"
     }
   ],
   "categories": [
