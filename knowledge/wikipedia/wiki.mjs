@@ -780,6 +780,67 @@ created: ${new Date().toISOString()}
   if (results.length === 0) { console.log('No backlinks.'); }
   else { results.forEach(a => console.log('  - ' + a.title + ' [' + a.category + ']')); }
 
+} else if (cmd === 'status') {
+  const idx = loadIndex();
+  const byId = {}; for (const a of idx.articles) byId[a.id] = a;
+
+  // Count by category
+  const byCat = {};
+  for (const a of idx.articles) byCat[a.category] = (byCat[a.category]||0) + 1;
+
+  // a.file is relative to wiki root: 'articles/knowledge/history/X.md'
+  // Use __DIR to resolve to absolute path
+  const PLACEHOLDER_RE = /人工填写|（待填）|TODO|FIXME|placeholder/;
+  let incomplete = 0;
+  const orphanIds = new Set();
+
+  // First pass: check placeholders and build all links
+  const allLinks = []; // { fromId, target }
+  for (const a of idx.articles) {
+    try {
+      const content = readFileSync(join(__DIR, a.file), 'utf8');
+      if (PLACEHOLDER_RE.test(content)) incomplete++;
+      const linkRe = /\[\[([^\]|]+)(?:\|[^\]]+)?\]\]/g;
+      let m;
+      while ((m = linkRe.exec(content)) !== null) {
+        allLinks.push({ fromId: a.id, target: m[1] });
+      }
+    } catch(e) {}
+  }
+
+  // Find orphans (no other article links to this one)
+  const linkedIds = new Set();
+  for (const link of allLinks) {
+    if (byId[link.target]) linkedIds.add(link.target);
+  }
+  for (const a of idx.articles) {
+    if (!linkedIds.has(a.id)) orphanIds.add(a.id);
+  }
+
+  // Check for broken wiki links
+  const brokenLinks = [];
+  const seenLinks = new Set();
+  for (const link of allLinks) {
+    const key = link.fromId + '||' + link.target;
+    if (seenLinks.has(key)) continue;
+    seenLinks.add(key);
+    if (!byId[link.target]) {
+      brokenLinks.push({ from: link.fromId, target: link.target });
+    }
+  }
+
+  console.log('[wiki] Status');
+  console.log('  Articles:   ', idx.articles.length);
+  console.log('  By category:', byCat);
+  console.log('  Broken links:', brokenLinks.length === 0 ? 'OK' : brokenLinks.length);
+  console.log('  Incomplete: ', incomplete, '(articles with placeholder content)');
+  console.log('  Orphan:     ', orphanIds.size, '(articles with no incoming links)');
+  if (brokenLinks.length > 0) {
+    console.log('  BROKEN:');
+    for (const b of brokenLinks.slice(0, 5)) console.log('    - [[' + b.target + ']] (from: ' + b.from + ')');
+    if (brokenLinks.length > 5) console.log('    ... and', brokenLinks.length - 5, 'more');
+  }
+
 } else if (cmd === 'orphan') {
   const idx = loadIndex();
   const byId = {}; for (const a of idx.articles) byId[a.id] = a;
@@ -950,6 +1011,7 @@ Commands:
   edit <title>
   rebuild                         # Scan filesystem, rebuild index.json
   sync                            # Ensure category directories exist
+  status                          # Dashboard: articles, broken links, incomplete, orphan
   list
   linkcheck [--auto]
   orphan
