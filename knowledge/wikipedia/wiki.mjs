@@ -39,7 +39,9 @@ async function proxyAgent() {
 }
 
 // ── arXiv API ────────────────────────────────────────────────
+const arxivCache = new Map();
 async function fetchArxivMeta(id) {
+  if (arxivCache.has(id)) return arxivCache.get(id);
   const opts = await proxyAgent() || {};
   try {
     const res = await fetch(`http://arxiv.org/abs/${id}`, opts);
@@ -51,7 +53,7 @@ async function fetchArxivMeta(id) {
     const match = id.match(/(\d+\.\d+)/);
     const ver = match ? match[1] : id;
     if (!title) return null;
-    return {
+    const result = {
       title: title.replace(/\s+/g, ' ').trim(),
       authors: authors.replace(/\s+/g, ' ').trim(),
       abstract: abstract.replace(/\s+/g, ' ').trim(),
@@ -60,6 +62,8 @@ async function fetchArxivMeta(id) {
       url: `https://arxiv.org/abs/${ver}`,
       category: 'AI',
     };
+    arxivCache.set(id, result);
+    return result;
   } catch { return null; }
 }
 
