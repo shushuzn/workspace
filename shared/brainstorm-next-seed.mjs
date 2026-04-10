@@ -23,13 +23,7 @@ function loadLastEntry() {
 }
 
 function writeReflection(desc, reason, approach, date) {
-  const line = [
-    '',
-    '- [' + date + '] seed [brainstorm] [score:2x3=6] [f:3] [angle:skill-file] [反思]' + desc,
-    '| benefit: ' + reason,
-    '| reason: ' + reason,
-    '| approach: ' + approach
-  ].join(' ');
+  const line = '- [' + date + '] seed [brainstorm] [score:2x3=6] [f:3] [angle:skill-file] [反思]' + desc + ' | benefit: ' + reason + ' | reason: ' + reason + ' | approach: ' + approach + '\n';
   appendFileSync(IDEAS_FILE, line, 'utf8');
 }
 
@@ -155,7 +149,7 @@ function main() {
       continue;
     }
 
-    const line = '\n- [' + date + '] seed [brainstorm] [score:3x3=9] [f:3] [angle:' + s.angle + '] ' + s.desc + ' | benefit: ' + s.benefit + ' | reason: ' + s.reason + ' | approach: ' + approach;
+    const line = '- [' + date + '] seed [brainstorm] [score:3x3=9] [f:3] [angle:' + s.angle + '] ' + s.desc + ' | benefit: ' + s.benefit + ' | reason: ' + s.reason + ' | approach: ' + approach + '\n';
     appendFileSync(IDEAS_FILE, line, 'utf8');
     written++;
   }
