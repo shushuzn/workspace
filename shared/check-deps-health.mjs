@@ -4,8 +4,9 @@
  * Checks dependency health for workspace projects
  * Verifies node_modules exists for each project with package.json
  * With --auto-fix: runs npm install for projects with missing node_modules
+ * With --watch: continuously monitors dependencies
  */
-import { existsSync, readdirSync } from 'fs';
+import { existsSync, readdirSync, statSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { execSync } from 'child_process';
@@ -15,6 +16,7 @@ const WORKSPACE = join(__DIR, '..');
 const PROJECTS_DIR = join(WORKSPACE, '80-PROJECTS');
 
 const AUTO_FIX = process.argv.includes('--auto-fix');
+const WATCH_MODE = process.argv.includes('--watch');
 
 let projects = [];
 try {
@@ -60,4 +62,45 @@ console.log(`\n  Summary: ${healthy} healthy, ${missing} missing${AUTO_FIX ? `, 
 if (!AUTO_FIX && missing > 0) {
   console.log('\n  Run: node shared/check-deps-health.mjs --auto-fix to auto-install');
 }
-console.log('');
+
+// Watch mode
+if (WATCH_MODE) {
+  console.log('\n  [watch] Monitoring node_modules changes...');
+  console.log('  Press Ctrl+C to stop.\n');
+
+  const checkInterval = 60000; // 60 seconds
+
+  const check = () => {
+    const prev = new Map();
+    for (const proj of projects) {
+      prev.set(proj, existsSync(join(PROJECTS_DIR, proj, 'node_modules')));
+    }
+
+    const interval = setInterval(() => {
+      let changed = false;
+      for (const proj of projects) {
+        const curr = existsSync(join(PROJECTS_DIR, proj, 'node_modules'));
+        if (curr !== prev.get(proj)) {
+          prev.set(proj, curr);
+          if (curr) {
+            console.log(`  [watch] ✓ ${proj}: node_modules appeared`);
+          } else {
+            console.error(`  [watch] ✗ ${proj}: node_modules removed`);
+          }
+          changed = true;
+        }
+      }
+      if (!changed) {
+        process.stdout.write('.'); // heartbeat
+      }
+    }, checkInterval);
+
+    process.on('SIGINT', () => {
+      clearInterval(interval);
+      console.log('\n  [watch] stopped');
+      process.exit(0);
+    });
+  };
+
+  check();
+}
