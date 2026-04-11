@@ -38,6 +38,7 @@ const COMMANDS = {
   chronicle:    { script: 'ci-debug-chronicle.mjs',     args: (a) => a.slice(1) },
   state:        { script: 'ci-state.mjs',               args: (a) => a.slice(1) },
   fix:          { script: 'ci-fix-runner.mjs',         args: (a) => a.slice(1) },
+  fixlog:       { script: 'ci-fix-log.mjs',             args: (a) => a.slice(1) },
   phealth:      { script: 'ci-pattern-health.mjs',     args: (a) => a.slice(1) },
   hreport:      { script: 'ci-health-report.mjs',    args: (a) => a.slice(1) },
   pgraph:      { script: 'ci-pattern-graph.mjs',  args: (a) => a.slice(1) },

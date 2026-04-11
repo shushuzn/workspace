@@ -90,7 +90,8 @@ function recordFixAttempt(name, smokeResult) {
       pattern: name,
       timestamp: new Date().toISOString(),
       result: smokeResult === null ? 'applied' : (smokeResult ? 'confirmed' : 'rejected'),
-      smokeTest: smokeResult
+      smokeTest: smokeResult,
+      reason: args.find(a => a.startsWith('--reason='))?.slice(9) || null
     };
     if (!state.patterns.fixHistory[name]) state.patterns.fixHistory[name] = [];
     state.patterns.fixHistory[name].push(entry);
