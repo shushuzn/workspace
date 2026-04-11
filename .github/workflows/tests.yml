@@ -4,6 +4,7 @@ on:
   push:
     branches: [main]
     paths:
+      - '.github/workflows/*.yml'
       - 'shared/step-parser.mjs'
       - 'shared/step-parser.test.mjs'
       - 'shared/run-seed.mjs'
@@ -12,12 +13,14 @@ on:
       - 'shared/add-seed.test.mjs'
   pull_request:
     paths:
+      - '.github/workflows/*.yml'
       - 'shared/step-parser.mjs'
       - 'shared/step-parser.test.mjs'
       - 'shared/run-seed.mjs'
       - 'shared/run-seed.test.mjs'
       - 'shared/add-seed.mjs'
       - 'shared/add-seed.test.mjs'
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -34,7 +37,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
       - name: Get changed files
         id: changed
         run: |
@@ -97,7 +99,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
       - name: Get changed files
         id: changed
         run: |
