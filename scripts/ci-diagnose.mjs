@@ -11,7 +11,11 @@
  * Pattern matches common failure modes (setup-node, npm install, test failures).
  */
 import { spawn } from 'child_process';
-import { existsSync } from 'fs';
+import { existsSync, readFileSync, writeFileSync } from 'fs';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const GH = process.platform === 'win32' ? 'gh.cmd' : 'gh';
 
@@ -83,66 +87,51 @@ async function downloadArtifact(runId, namePattern) {
   } catch { return null; }
 }
 
-// ── Pattern match common failures ─────────────────────────────────────────────
-const FAILURE_PATTERNS = [
-  {
-    name: 'setup-node cache failure',
-    pattern: /setup-node.*cache.*npm|failed to retrieve.*cache/gi,
-    hint: 'setup-node@v4 cache:\'npm\' is known to fail on GitHub runners. Remove cache:\'npm\' from setup-node action.',
-    severity: 'P0'
-  },
-  {
-    name: 'npm install failure',
-    pattern: /npm ERR|npm install.*failed|EBADPLATFORM/gi,
-    hint: 'Check package.json compatibility and Node version match.',
-    severity: 'P1'
-  },
-  {
-    name: 'c8 coverage threshold',
-    pattern: /coverage below threshold|COVERAGE FAIL|❌ Coverage/gi,
-    hint: 'Coverage dropped below threshold. Check coverage-report.json for per-suite details.',
-    severity: 'P1'
-  },
-  {
-    name: 'test assertion failure',
-    pattern: /AssertionError|expected \d+.*got \d+|fail.*at.*\.test\.mjs/gi,
-    hint: 'Test assertion failed. Check the specific test in test-output.txt.',
-    severity: 'P1'
-  },
-  {
-    name: 'node not found',
-    pattern: /node.*not found|command not found.*node/gi,
-    hint: 'Node.js setup failed. Verify setup-node action version and node-version parameter.',
-    severity: 'P0'
-  },
-  {
-    name: 'exit code 126',
-    pattern: /exit code 126|error 126/gi,
-    hint: 'Permission denied or invalid shebang. This often happens with node -e on Windows Git Bash.',
-    severity: 'P1'
-  },
-  {
-    name: 'gh auth failure',
-    pattern: /gh.*auth|AuthenticationError|GITHUB_TOKEN/gi,
-    hint: 'GitHub token issue. Ensure GITHUB_TOKEN is set and has actions:write permission.',
-    severity: 'P0'
-  },
-  {
-    name: 'ESM import error',
-    pattern: /ERR_PACKAGE_PATH_NOT_EXPORTED|Cannot find module|ERR_REQUIRE_ESM/gi,
-    hint: 'Module resolution error. Check if target file uses ESM correctly.',
-    severity: 'P2'
+// ── Load failure pattern library ───────────────────────────────────────────────
+const PATTERN_FILE = join(__dirname, '..', 'scripts', 'ci-failure-patterns.jsonl');
+let FAILURE_PATTERNS = [];
+
+try {
+  if (existsSync(PATTERN_FILE)) {
+    const content = readFileSync(PATTERN_FILE, 'utf8');
+    FAILURE_PATTERNS = content.trim().split('\n').filter(Boolean).map(l => {
+      try {
+        const entry = JSON.parse(l);
+        return { ...entry, _regex: new RegExp(entry.pattern, 'gi') };
+      } catch { return null; }
+    }).filter(Boolean);
   }
-];
+} catch (e) { /* fallback to hardcoded patterns */ }
 
 function analyzeFailure(text) {
   const findings = [];
   for (const fp of FAILURE_PATTERNS) {
-    if (fp.pattern.test(text)) {
-      findings.push({ name: fp.name, hint: fp.hint, severity: fp.severity });
+    if (fp._regex && fp._regex.test(text)) {
+      // Update occurrences in pattern library
+      updatePatternOccurrence(fp.name);
+      findings.push({ name: fp.name, hint: fp.hint, severity: fp.severity, fix: fp.fix });
     }
   }
   return findings;
+}
+
+function updatePatternOccurrence(name) {
+  try {
+    if (!existsSync(PATTERN_FILE)) return;
+    const content = readFileSync(PATTERN_FILE, 'utf8');
+    const lines = content.trim().split('\n');
+    const updated = lines.map(l => {
+      try {
+        const entry = JSON.parse(l);
+        if (entry.name === name) {
+          entry.occurrences = (entry.occurrences || 0) + 1;
+          entry.lastSeen = new Date().toISOString().split('T')[0];
+        }
+        return JSON.stringify(entry);
+      } catch { return l; }
+    });
+    writeFileSync(PATTERN_FILE, updated.join('\n') + '\n');
+  } catch { /* ignore write errors */ }
 }
 
 // ── Main ──────────────────────────────────────────────────────────────────────
