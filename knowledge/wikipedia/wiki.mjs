@@ -545,7 +545,8 @@ created: ${new Date().toISOString()}
     });
   }
 
-  const idx = { articles };
+  const cats = new Set(articles.map(a => a.category));
+  const idx = { articles, categories: [...cats] };
   saveIndex(idx);
 
   // Validate
@@ -592,6 +593,9 @@ created: ${new Date().toISOString()}
     const dir = join(ARTICLES_DIR, a.category);
     if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
   }
+  const cats = new Set(idx.articles.map(a => a.category));
+  idx.categories = [...cats];
+  saveIndex(idx);
   console.log('\n[wiki] Synced', idx.articles.length, 'articles');
 
 } else if (cmd === 'batch-export') {

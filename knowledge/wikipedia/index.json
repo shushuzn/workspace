@@ -227,6 +227,12 @@
       "created": "2026-04-07"
     },
     {
+      "id": "chern-simons理论讲解",
+      "title": "Chern-Simons理论讲解",
+      "file": "articles/knowledge/physics/00-chern-simons/chern-simons.md",
+      "category": "knowledge/physics"
+    },
+    {
       "id": "12080928-surface-codes-towards-practical-large-scale-quantum-computation",
       "title": "[1208.0928] Surface Codes: Towards Practical Large-Scale Quantum Computation",
       "file": "articles/papers/AI/00-12080928-surface-codes-towards-practical/12080928-surface-codes-towards-practical-large-scale-quantum-computation.md",
@@ -580,5 +586,12 @@
       "source": "IACR ePrint",
       "created": "2026-04-10T14:11:28.285Z"
     }
+  ],
+  "categories": [
+    "history",
+    "security",
+    "math",
+    "knowledge/physics",
+    "AI"
   ]
 }
