@@ -122,8 +122,11 @@ const REVERT = {
   }
 };
 
+const RISK_AUTO_APPROVAL = new Set(['low']);
+
 const FIXES = {
   'setup-node cache failure': {
+    risk: 'low',
     check: () => {
       if (!existsSync(WORKFLOW_FILE)) return { applicable: false, reason: 'tests.yml not found' };
       const content = readFileSync(WORKFLOW_FILE, 'utf8');
@@ -166,7 +169,7 @@ const FIXES = {
       return setupNodeCount >= 1; // at least one setup-node should remain
     }
   },
-  'npm install failure': {
+  'npm install failure': { risk: 'medium',
     check: () => {
       if (!existsSync('./package.json')) return { applicable: false, reason: 'package.json not found' };
       const pkg = JSON.parse(readFileSync('./package.json', 'utf8'));
@@ -183,7 +186,7 @@ const FIXES = {
     },
     smokeTest: async () => null
   },
-  'c8 coverage threshold breach': {
+  'c8 coverage threshold breach': { risk: 'medium',
     check: () => {
       if (!existsSync('./coverage-report.json')) return { applicable: false, reason: 'coverage-report.json not found' };
       const cov = JSON.parse(readFileSync('./coverage-report.json', 'utf8'));
@@ -201,7 +204,7 @@ const FIXES = {
     },
     smokeTest: async () => null
   },
-  'test assertion failure': {
+  'test assertion failure': { risk: 'high',
     check: () => ({ applicable: true, reason: 'test-output.txt needed for details' }),
     dryRun: () => [
       '1. Grep test-output.txt for AssertionError',
@@ -214,7 +217,7 @@ const FIXES = {
     },
     smokeTest: async () => null
   },
-  'node not found': {
+  'node not found': { risk: 'medium',
     check: () => {
       if (!existsSync(WORKFLOW_FILE)) return { applicable: false, reason: 'tests.yml not found' };
       const content = readFileSync(WORKFLOW_FILE, 'utf8');
@@ -231,7 +234,7 @@ const FIXES = {
     },
     smokeTest: async () => null
   },
-  'exit code 126 - permission/shebang': {
+  'exit code 126 - permission/shebang': { risk: 'low',
     check: () => {
       const problematic = ['node -e', 'node -p', 'node -c'];
       if (!existsSync('./scripts')) return { applicable: false, reason: 'scripts/ not found' };
@@ -260,7 +263,7 @@ const FIXES = {
     },
     smokeTest: async () => null
   },
-  'gh auth failure': {
+  'gh auth failure': { risk: 'high',
     check: () => ({ applicable: true, reason: 'Check GITHUB_TOKEN secret in repo settings' }),
     dryRun: () => [
       '1. Verify GITHUB_TOKEN secret is set in repo Settings > Secrets',
@@ -272,7 +275,7 @@ const FIXES = {
     },
     smokeTest: async () => null
   },
-  'ESM import error': {
+  'ESM import error': { risk: 'medium',
     check: () => {
       if (!existsSync('./test-output.txt')) return { applicable: false, reason: 'test-output.txt not found' };
       const content = readFileSync('./test-output.txt', 'utf8');
@@ -309,9 +312,10 @@ async function main() {
     for (const p of patterns) {
       const fix = FIXES[p.name];
       const conf = getConfidence(p);
-      const autoFix = fix && conf !== null && conf >= 0.8 ? '🟢' : '🔒';
+      const risk = fix?.risk || 'high';
+      const autoFix = risk === 'low' && conf !== null && conf >= 0.8 ? '🟢' : '🔒';
       const history = getFixHistory(p.name);
-      console.log(`  ${autoFix} ${p.name}`);
+      console.log(`  ${autoFix} ${p.name} [${risk}]`);
       console.log(`     Severity: ${p.severity} | Confidence: ${conf != null ? `${(conf * 100).toFixed(0)}%` : 'N/A'}`);
       console.log(`     Fix: ${p.fix}`);
       if (fix) {
@@ -397,12 +401,24 @@ async function main() {
     }
     const fix = FIXES[name];
     if (!fix) { console.error(`No executable fix defined for: ${name}`); process.exit(1); }
+    const risk = fix.risk || 'high';
     const check = fix.check();
     if (!check.applicable) {
       console.error(`Fix not applicable: ${check.reason}`);
       process.exit(1);
     }
-    console.log(`\n=== Executing: ${name} ===\n`);
+
+    // Risk-based guard: medium/high fixes require --force or high confidence
+    if (risk !== 'low') {
+      if (conf === null || conf < 0.8) {
+        console.error(`Confidence too low: ${conf !== null ? `${(conf * 100).toFixed(0)}%` : 'N/A'} (need 80% for ${risk} risk fix)`);
+        console.error(`Use --force to override: node scripts/ci-fix-runner.mjs run "${name}" --force`);
+        process.exit(1);
+      }
+    }
+
+    console.log(`\n=== Executing: ${name} ===`);
+    console.log(`Risk: ${risk} | Confidence: ${conf !== null ? `${(conf * 100).toFixed(0)}%` : 'N/A'}\n`);
     try {
       const result = await fix.execute();
       console.log(result);
