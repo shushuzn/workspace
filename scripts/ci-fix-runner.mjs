@@ -117,9 +117,10 @@ function sampleConfidence(pattern) {
   const std = Math.sqrt(variance);
 
   // Sample from normal approximation, clamp to [0, 1]
-  // Apply temperature: less noise for large samples (→ point estimate)
+  // Temperature: exponential decay toward point estimate as n grows
+  // n=2 → 0.67 (exploration), n=8 → 0.37, n=16 → 0.14, n=32 → 0.02 (floor)
   const sampleSize = c + r;
-  const temperature = Math.max(0.1, 1 / Math.sqrt(sampleSize));
+  const temperature = Math.max(0.02, Math.exp(-sampleSize / 8));
   const sampled = mean + std * gaussianRandom() * temperature;
   return Math.max(0, Math.min(1, sampled));
 }
@@ -785,6 +786,7 @@ async function main() {
 
   console.log(`Unknown command: ${cmd}`);
   console.log('Usage: node scripts/ci-fix-runner.mjs [list|dry-run|run|check|smoke|check-file|install-hook|git-check]');
+  process.exit(1);
 }
 
 main().catch(e => { console.error(e); process.exit(1); });
