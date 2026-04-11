@@ -887,6 +887,73 @@ created: ${new Date().toISOString()}
     if (brokenLinks.length > 5) console.log('    ... and', brokenLinks.length - 5, 'more');
   }
 
+} else if (cmd === 'stats') {
+  const idx = loadIndex();
+  const byId = {}; for (const a of idx.articles) byId[a.id] = a;
+  const byTitle = {}; for (const a of idx.articles) byTitle[a.title] = a;
+
+  // Count inbound + outbound links per article
+  const inbound = {}; for (const a of idx.articles) inbound[a.id] = 0;
+  const outbound = {}; for (const a of idx.articles) outbound[a.id] = 0;
+
+  const linkRe = /\[\[([^\]|]+)(?:\|[^\]]+)?\]\]/g;
+  for (const a of idx.articles) {
+    try {
+      const content = readFileSync(join(__DIR, a.file), 'utf8');
+      let m;
+      while ((m = linkRe.exec(content)) !== null) {
+        outbound[a.id]++;
+        const targetId = byId[m[1]] ? m[1] : byTitle[m[1]]?.id;
+        if (targetId && inbound[targetId] !== undefined) inbound[targetId]++;
+      }
+    } catch(e) {}
+  }
+
+  const all = idx.articles.map(a => ({
+    ...a,
+    inbound: inbound[a.id] || 0,
+    outbound: outbound[a.id] || 0,
+    total: (inbound[a.id] || 0) + (outbound[a.id] || 0)
+  }));
+
+  all.sort((a, b) => b.total - a.total);
+
+  console.log('[wiki] Network Stats —', idx.articles.length, 'articles\n');
+  console.log('=== Top 10 Most Connected ===');
+  for (const a of all.slice(0, 10)) {
+    console.log(`  [${a.category}] ${a.title}  in:${a.inbound}  out:${a.outbound}`);
+  }
+  console.log('\n=== Bottom 10 Least Connected ===');
+  for (const a of all.slice(-10)) {
+    console.log(`  [${a.category}] ${a.title}  in:${a.inbound}  out:${a.outbound}`);
+  }
+
+  // Find link opportunities (same category, no link yet)
+  console.log('\n=== Link Opportunities (same category, unlinked) ===');
+  const linkedPairs = new Set();
+  for (const a of idx.articles) {
+    try {
+      const content = readFileSync(join(__DIR, a.file), 'utf8');
+      const found = content.match(/\[\[([^\]|]+)(?:\|[^\]]+)?\]\]/g) || [];
+      for (const f of found) linkedPairs.add(a.id + '||' + f.slice(2, -2));
+    } catch(e) {}
+  }
+  let oppCount = 0;
+  for (const a of idx.articles) {
+    for (const b of idx.articles) {
+      if (a.id === b.id || a.category !== b.category) continue;
+      const key = a.id + '||' + b.id;
+      if (linkedPairs.has(key)) continue;
+      const titleKey = a.id + '||' + b.title;
+      if (linkedPairs.has(titleKey)) continue;
+      console.log(`  [[${a.title}]] → [[${b.title}]]  (same category: ${a.category})`);
+      oppCount++;
+      if (oppCount >= 20) { console.log('  ... (truncated)'); break; }
+    }
+    if (oppCount >= 20) break;
+  }
+  if (oppCount === 0) console.log('  (none found)');
+
 } else if (cmd === 'orphan') {
   const idx = loadIndex();
   const byId = {}; for (const a of idx.articles) byId[a.id] = a;
@@ -1058,6 +1125,7 @@ Commands:
   rebuild                         # Scan filesystem, rebuild index.json
   repair                          # Auto-add missing frontmatter to articles
   sync                            # Ensure category directories exist
+  stats                           # Network stats: most/least connected, link opportunities
   status                          # Dashboard: articles, broken links, incomplete, orphan
   list
   linkcheck [--auto]
