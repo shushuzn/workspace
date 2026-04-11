@@ -1,3 +1,13 @@
+---
+title: Chern-Simons理论
+category: knowledge/physics
+tags:
+  - Chern-Simons理论
+  - 拓扑量子场论
+  - 纽结理论
+created: 2026-04-07
+---
+
 # Chern-Simons理论
 
 ## 基本信息

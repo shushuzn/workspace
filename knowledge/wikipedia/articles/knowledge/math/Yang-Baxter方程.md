@@ -1,3 +1,13 @@
+---
+title: Yang-Baxter方程
+category: math
+tags:
+  - Yang-Baxter方程
+  - 可积系统
+  - 辫群
+created: 2026-04-07
+---
+
 # Yang-Baxter方程
 
 ## 基本信息

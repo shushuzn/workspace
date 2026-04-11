@@ -1,3 +1,13 @@
+---
+title: HOMFLY-PT多项式
+category: math
+tags:
+  - HOMFLY-PT多项式
+  - 纽结不变量
+  - Jones多项式
+created: 2026-04-07
+---
+
 # HOMFLY-PT多项式
 
 ## 基本信息

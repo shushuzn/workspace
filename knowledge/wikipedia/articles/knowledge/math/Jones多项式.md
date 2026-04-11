@@ -1,3 +1,13 @@
+---
+title: Jones多项式
+category: math
+tags:
+  - Jones多项式
+  - 纽结不变量
+  - 拓扑数学
+created: 2026-04-07
+---
+
 # Jones多项式
 
 ## 基本信息

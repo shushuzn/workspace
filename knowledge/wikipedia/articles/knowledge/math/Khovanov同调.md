@@ -1,3 +1,13 @@
+---
+title: Khovanov同调
+category: math
+tags:
+  - Khovanov同调
+  - 范畴化
+  - Jones多项式
+created: 2026-04-07
+---
+
 # Khovanov同调
 
 ## 基本信息
