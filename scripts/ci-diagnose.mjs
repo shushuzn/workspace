@@ -166,10 +166,23 @@ function updatePatternOccurrence(name) {
         if (entry.name === name) {
           entry.occurrences = (entry.occurrences || 0) + 1;
           entry.lastSeen = new Date().toISOString().split('T')[0];
-          // If pattern recurs after fix attempt, it's a false positive — reduce confidence
+          // If pattern recurs after fix, use smoke test result to guide confidence
           if (hadRecentFix && entry.confirmations != null && entry.rejections != null) {
-            entry.rejections = (entry.rejections || 0) + 1;
-            console.log(`  ⚠️ Pattern '${name}' recurred after fix (attempt #${fixCount}) — reducing confidence`);
+            const lastFix = state.patterns?.lastFixAttempt?.[name];
+            const smokeResult = lastFix?.smokeTest;
+            if (smokeResult === false) {
+              // Smoke test failed — fix was wrong, strong rejection
+              entry.rejections = (entry.rejections || 0) + 2;
+              console.log(`  ⚠️ Pattern '${name}' recurred AND smoke test FAILED — strong confidence reduction`);
+            } else if (smokeResult === true) {
+              // Smoke passed but pattern still recurred — mild penalty (partial fix)
+              entry.rejections = (entry.rejections || 0) + 0;
+              console.log(`  ⚠️ Pattern '${name}' recurred after smoke-passed fix — monitoring (no penalty)`);
+            } else {
+              // No smoke result — treat as false positive
+              entry.rejections = (entry.rejections || 0) + 1;
+              console.log(`  ⚠️ Pattern '${name}' recurred after fix (attempt #${fixCount}) — reducing confidence`);
+            }
           }
         }
         return JSON.stringify(entry);
