@@ -41,6 +41,10 @@ jobs:
         id: changed
         run: |
           echo "files=$(git diff --name-only ${{ github.event.pull_request.base.sha }} HEAD)" >> $GITHUB_OUTPUT
+      - name: Detect affected suites
+        id: affected
+        run: |
+          node scripts/detect-affected-suites.mjs ${{ github.event.pull_request.base.sha }} >> $GITHUB_OUTPUT
       - name: Run tests and upload report
         run: |
           npm run test:ci 2>&1 | tee test-output.txt
@@ -61,6 +65,9 @@ jobs:
           name: test-report-pr-${{ github.run_id }}
           path: test-report.json
           retention-days: 7
+      - name: Track coverage trend
+        if: always()
+        run: node scripts/coverage-trend.mjs
       - name: Create Check Run
         if: always()
         run: node shared/create-check-run.mjs
@@ -113,6 +120,9 @@ jobs:
         id: changed
         run: |
           echo "files=$(git diff --name-only HEAD~1)" >> $GITHUB_OUTPUT
+      - name: Detect affected suites
+        id: affected
+        run: node scripts/detect-affected-suites.mjs HEAD~1 >> $GITHUB_OUTPUT
       - name: Run tests and upload report
         run: |
           npm run test:ci 2>&1 | tee test-output.txt
@@ -132,3 +142,6 @@ jobs:
           name: test-report-main-${{ github.run_id }}
           path: test-report.json
           retention-days: 7
+      - name: Track coverage trend
+        if: always()
+        run: node scripts/coverage-trend.mjs
