@@ -764,7 +764,7 @@ created: ${new Date().toISOString()}
   let errors = 0;
   const fixes = [];
   for (const a of idx.articles) {
-    const file = join(ARTICLES_DIR, a.file);
+    const file = join(__DIR, a.file);
     if (!existsSync(file)) continue;
     const content = readFileSync(file, 'utf8');
     const links = [...content.matchAll(/\[\[([^\]|]+)(?:\|[^\]]+)?\]\]/g)].map(m => m[1]);
@@ -813,10 +813,15 @@ created: ${new Date().toISOString()}
   const results = [];
   for (const a of idx.articles) {
     if (a.id === art.id) continue;
-    const file = join(ARTICLES_DIR, a.file);
+    const file = join(__DIR, a.file);
     if (!existsSync(file)) continue;
     const content = readFileSync(file, 'utf8');
-    if (content.includes('[[' + art.title + ']]') || content.includes('[[' + art.id + ']]')) {
+    // Support both [[id]] and [[id|display]] wiki-link formats
+    const linkPatterns = [
+      '[[' + art.title + ']]', '[[' + art.id + ']]',
+      '[[' + art.title + '|', '[[' + art.id + '|',
+    ];
+    if (linkPatterns.some(p => content.includes(p))) {
       results.push(a);
     }
   }
@@ -972,7 +977,7 @@ created: ${new Date().toISOString()}
   const byId = {}; for (const a of idx.articles) byId[a.id] = a;
   const orphans = [];
   for (const a of idx.articles) {
-    const file = join(ARTICLES_DIR, a.file);
+    const file = join(__DIR, a.file);
     if (!existsSync(file)) { orphans.push(a); continue; }
     const content = readFileSync(file, 'utf8');
     let hasLink = false;
