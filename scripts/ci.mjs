@@ -39,6 +39,7 @@ const COMMANDS = {
   state:        { script: 'ci-state.mjs',               args: (a) => a.slice(1) },
   fix:          { script: 'ci-fix-runner.mjs',         args: (a) => a.slice(1) },
   phealth:      { script: 'ci-pattern-health.mjs',     args: (a) => a.slice(1) },
+  hreport:      { script: 'ci-health-report.mjs',    args: (a) => a.slice(1) },
   all:          { script: null, args: () => [] },  // special
 };
 
@@ -105,6 +106,8 @@ Commands:
   chronicle report                      Show debug history stats
   state [get|set|init|dump]           CI state store
   fix [list|dry-run|run|check <name>]  Run fix for failure pattern
+  phealth [alert|trend <name>]          Pattern health dashboard
+  hreport [--output <path>]              Generate HTML health report
   all                                   Run full diagnostic suite
 
 Examples:
