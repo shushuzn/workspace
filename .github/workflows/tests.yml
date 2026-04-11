@@ -68,6 +68,12 @@ jobs:
       - name: Track coverage trend
         if: always()
         run: node scripts/coverage-trend.mjs
+      - name: Run CI health check
+        if: always()
+        run: node scripts/ci-health.mjs && node scripts/ci-health-history.mjs append
+      - name: Check coverage burndown
+        if: always()
+        run: node scripts/coverage-burndown.mjs || true
       - name: Create Check Run
         if: always()
         run: node shared/create-check-run.mjs
@@ -145,3 +151,9 @@ jobs:
       - name: Track coverage trend
         if: always()
         run: node scripts/coverage-trend.mjs
+      - name: Run CI health check
+        if: always()
+        run: node scripts/ci-health.mjs && node scripts/ci-health-history.mjs append
+      - name: Check coverage burndown
+        if: always()
+        run: node scripts/coverage-burndown.mjs || true
