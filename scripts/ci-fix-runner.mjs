@@ -449,8 +449,102 @@ async function main() {
     return;
   }
 
+  if (cmd === 'check-file') {
+    // Pre-flight check: scan a file for patterns that would fail CI
+    const filePath = args[0];
+    if (!filePath) { console.error('Usage: check-file <path>'); process.exit(1); }
+    if (!existsSync(filePath)) { console.error(`File not found: ${filePath}`); process.exit(1); }
+
+    const content = readFileSync(filePath, 'utf8');
+    const patterns = loadPatterns();
+    const matched = [];
+
+    for (const p of patterns) {
+      const fix = FIXES[p.name];
+      if (!fix) continue;
+
+      let fileRelevant = false;
+      let wouldIntroduce = false;
+
+      // Route to type-specific checker
+      if (filePath.endsWith('.yml') || filePath.endsWith('.yaml')) {
+        // Workflow file: check workflow-specific patterns
+        const wfPatterns = {
+          'setup-node cache failure': () => {
+            const re = /cache:\s*['"]npm['"]/;
+            return { match: re.test(content), detail: 'cache: npm found in workflow' };
+          },
+          'node not found': () => {
+            // setup-node without node-version
+            const hasSetup = /uses:\s*actions\/setup-node@v\d/.test(content);
+            const hasVersion = /node-version:\s*['"]?\d+['"]?/.test(content);
+            return { match: hasSetup && !hasVersion, detail: hasSetup ? 'setup-node without node-version' : 'no setup-node action' };
+          },
+          'exit code 126 - permission/shebang': () => {
+            // Scripts with node -e/p/c inline
+            const re = /\bnode\s+-[epc]\s+['"`]/;
+            return { match: re.test(content), detail: 'node -e/p/c inline script detected' };
+          },
+          'gh auth failure': () => {
+            const re = /GITHUB_TOKEN|secrets\./;
+            return { match: !re.test(content), detail: 'workflow uses GITHUB_TOKEN or secrets.*' };
+          }
+        };
+
+        if (wfPatterns[p.name]) {
+          const result = wfPatterns[p.name]();
+          if (result.match) {
+            fileRelevant = true;
+            wouldIntroduce = true;
+          }
+        }
+      } else {
+        // Non-workflow file: only check patterns relevant to source files
+        const sourcePatterns = {
+          'exit code 126 - permission/shebang': () => {
+            const re = /\bnode\s+-[epc]\s+['"`]/;
+            return { match: re.test(content), detail: 'node -e/p/c inline detected' };
+          },
+          'ESM import error': () => {
+            const re = /ERR_REQUIRE_ESM|ERR_PACKAGE_PATH_NOT_EXPORTED|require\(.*\.mjs/;
+            return { match: re.test(content), detail: 'ESM compatibility issue detected' };
+          }
+        };
+
+        if (sourcePatterns[p.name]) {
+          const result = sourcePatterns[p.name]();
+          if (result.match) {
+            fileRelevant = true;
+            wouldIntroduce = true;
+          }
+        }
+      }
+
+      if (fileRelevant) {
+        const conf = getConfidence(p);
+        matched.push({ name: p.name, severity: p.severity, confidence: conf, fix: p.fix, wouldIntroduce });
+      }
+    }
+
+    if (matched.length === 0) {
+      console.log(`✅ No CI failure patterns detected in: ${filePath}`);
+      process.exit(0);
+    }
+
+    console.log(`\n⚠️  CI failure patterns detected in: ${filePath}\n`);
+    for (const m of matched) {
+      const confStr = m.confidence !== null ? `${(m.confidence * 100).toFixed(0)}%` : 'N/A';
+      const icon = m.severity === 'P0' ? '🔴' : '🟡';
+      console.log(`  ${icon} ${m.name} (${m.severity}) | confidence: ${confStr}`);
+      console.log(`     Fix: ${m.fix}`);
+      console.log(`     ${m.wouldIntroduce ? '⚡ Would be introduced' : '⚠️  Already present'}`);
+      console.log();
+    }
+    process.exit(matched.some(m => m.severity === 'P0') ? 2 : 1);
+  }
+
   console.log(`Unknown command: ${cmd}`);
-  console.log('Usage: node scripts/ci-fix-runner.mjs [list|dry-run|run|check|smoke] [pattern-name]');
+  console.log('Usage: node scripts/ci-fix-runner.mjs [list|dry-run|run|check|smoke|check-file] [pattern-name]');
 }
 
 main().catch(e => { console.error(e); process.exit(1); });
