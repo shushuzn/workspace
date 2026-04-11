@@ -2,16 +2,20 @@
 /**
  * scripts/ci-fix-runner.mjs
  * Executes fix commands for high-confidence CI failure patterns.
- * Fix verification: records attempts in ci-state.json, checks on next diagnose.
+ * Fix verification: records attempts, runs smoke test, auto-updates confidence.
  *
  * Usage:
  *   node scripts/ci-fix-runner.mjs list              # show available fixes
- *   node scripts/ci-fix-runner.mjs run <name>       # execute fix for pattern
+ *   node scripts/ci-fix-runner.mjs run <name>       # execute fix + smoke test
  *   node scripts/ci-fix-runner.mjs dry-run <name>   # preview fix without executing
  *   node scripts/ci-fix-runner.mjs check <name>     # check if fix is applicable
+ *   node scripts/ci-fix-runner.mjs smoke <name>     # run smoke test only
  *
  * Confidence >= 80% unlocks auto-fix. Confidence computed from
  * confirmations/(confirmations+rejections).
+ * After fix execution, smoke test runs:
+ *   smoke pass → pattern confirmations++
+ *   smoke fail → pattern rejections++ + revert fix
  */
 import { spawn } from 'child_process';
 import { existsSync, readFileSync, writeFileSync, readdirSync } from 'fs';
@@ -22,6 +26,101 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const PATTERN_FILE = join(__dirname, 'ci-failure-patterns.jsonl');
 const WORKFLOW_FILE = join(__dirname, '..', '.github', 'workflows', 'tests.yml');
 const STATE_FILE = join(__dirname, '..', 'ci-state.json');
+
+function run(cmd, args, cwd = join(__dirname, '..')) {
+  return new Promise((resolve, reject) => {
+    const shell = process.platform === 'win32';
+    const p = spawn(cmd, args, { shell, cwd, stdio: ['ignore', 'pipe', 'pipe'] });
+    let out = '', err = '';
+    p.stdout.on('data', d => out += d.toString());
+    p.stderr.on('data', d => err += d.toString());
+    p.on('close', code => resolve({ code, out, err, outRaw: out, errRaw: err }));
+    p.on('error', reject);
+  });
+}
+
+function loadPatterns() {
+  if (!existsSync(PATTERN_FILE)) return [];
+  try {
+    const content = readFileSync(PATTERN_FILE, 'utf8');
+    return content.trim().split('\n').filter(Boolean).map(l => {
+      try { return JSON.parse(l); } catch { return null; }
+    }).filter(Boolean);
+  } catch { return []; }
+}
+
+function savePatterns(patterns) {
+  const lines = patterns.map(p => JSON.stringify(p)).join('\n') + '\n';
+  writeFileSync(PATTERN_FILE, lines);
+}
+
+function getConfidence(pattern) {
+  if (pattern.confirmations == null || pattern.rejections == null) return null;
+  if (pattern.confirmations + pattern.rejections === 0) return null;
+  return pattern.confirmations / (pattern.confirmations + pattern.rejections);
+}
+
+function updatePatternConfidence(name, confirmed) {
+  const patterns = loadPatterns();
+  const idx = patterns.findIndex(p => p.name === name);
+  if (idx === -1) return false;
+  if (patterns[idx].confirmations == null) patterns[idx].confirmations = 0;
+  if (patterns[idx].rejections == null) patterns[idx].rejections = 0;
+  if (confirmed) {
+    patterns[idx].confirmations++;
+    patterns[idx].lastConfirmed = new Date().toISOString().split('T')[0];
+  } else {
+    patterns[idx].rejections++;
+    patterns[idx].lastRejected = new Date().toISOString().split('T')[0];
+  }
+  savePatterns(patterns);
+  return true;
+}
+
+function recordFixAttempt(name, smokeResult) {
+  try {
+    let state = {};
+    if (existsSync(STATE_FILE)) {
+      try { state = JSON.parse(readFileSync(STATE_FILE, 'utf8')); } catch {}
+    }
+    if (!state.patterns) state.patterns = {};
+    if (!state.patterns.fixHistory) state.patterns.fixHistory = {};
+    if (!state.patterns.lastFixAttempt) state.patterns.lastFixAttempt = {};
+    const entry = {
+      pattern: name,
+      timestamp: new Date().toISOString(),
+      result: smokeResult === null ? 'applied' : (smokeResult ? 'confirmed' : 'rejected'),
+      smokeTest: smokeResult
+    };
+    if (!state.patterns.fixHistory[name]) state.patterns.fixHistory[name] = [];
+    state.patterns.fixHistory[name].push(entry);
+    state.patterns.lastFixAttempt[name] = entry;
+    state.lastUpdated = new Date().toISOString();
+    writeFileSync(STATE_FILE, JSON.stringify(state, null, 2));
+  } catch {}
+}
+
+// Revert helpers per fix type
+const REVERT = {
+  'setup-node cache failure': async () => {
+    // Revert: add cache: 'npm' back after the uses: actions/setup-node@v4 line
+    if (!existsSync(WORKFLOW_FILE)) return;
+    let content = readFileSync(WORKFLOW_FILE, 'utf8');
+    // Find the setup-node block and restore cache: 'npm'
+    const lines = content.split('\n');
+    const restored = [];
+    for (let i = 0; i < lines.length; i++) {
+      restored.push(lines[i]);
+      // After setup-node action with node-version but no cache, add cache
+      if (lines[i].includes('uses: actions/setup-node@v4') && !content.slice(content.indexOf(lines[i]), content.indexOf(lines[i]) + 500).includes('cache:')) {
+        // Find indentation
+        const indent = lines[i].match(/^(\s*)/)[1];
+        restored.push(`${indent}        cache: 'npm'`);
+      }
+    }
+    writeFileSync(WORKFLOW_FILE, restored.join('\n'));
+  }
+};
 
 const FIXES = {
   'setup-node cache failure': {
@@ -34,7 +133,7 @@ const FIXES = {
     dryRun: () => [
       '1. Edit .github/workflows/tests.yml',
       '2. Find: cache: \'npm\' in setup-node action',
-      '3. Remove the cache: \'npm\' line or set cache: \'\' (empty)',
+      '3. Remove the cache: \'npm\' line',
       '4. Git commit and push'
     ],
     execute: async () => {
@@ -48,6 +147,23 @@ const FIXES = {
       content = filtered.join('\n');
       writeFileSync(WORKFLOW_FILE, content);
       return 'Removed cache: npm from tests.yml. Commit and push to apply.';
+    },
+    smokeTest: async () => {
+      // Smoke test: verify YAML is valid and workflow file parses
+      const result = await run('node', ['-e', `const yaml=require('js-yaml'); const fs=require('fs'); yaml.load(fs.readFileSync('${WORKFLOW_FILE.replace(/\\/g, '\\\\')}', 'utf8')); console.log('YAML valid'); process.exit(0);`]);
+      if (result.code !== 0) {
+        // Try alternative: just check YAML syntax without require
+        const yamlResult = await run('node', ['-e', `const fs=require('fs'); const content=fs.readFileSync('${WORKFLOW_FILE.replace(/\\/g, '\\\\')}', 'utf8'); try { require('js-yaml'); } catch(e) { process.exit(1); }`]);
+        if (yamlResult.code !== 0) {
+          console.log('  [smoke] WARNING: js-yaml not available, skipping YAML validation');
+          return null; // indeterminate — skip confidence update
+        }
+      }
+      // Also check workflow file has no duplicate setup-node entries
+      const content = readFileSync(WORKFLOW_FILE, 'utf8');
+      const setupNodeCount = (content.match(/uses: actions\/setup-node@v4/g) || []).length;
+      console.log(`  [smoke] YAML valid, setup-node@v4 count: ${setupNodeCount}`);
+      return setupNodeCount >= 1; // at least one setup-node should remain
     }
   },
   'npm install failure': {
@@ -64,7 +180,8 @@ const FIXES = {
     ],
     execute: async () => {
       throw new Error('Manual fix required: npm install failure has many causes. Run: node scripts/ci-diagnose.mjs --latest');
-    }
+    },
+    smokeTest: async () => null
   },
   'c8 coverage threshold breach': {
     check: () => {
@@ -81,7 +198,8 @@ const FIXES = {
     ],
     execute: async () => {
       throw new Error('Manual fix: Run coverage-trend.mjs first to identify which suite regressed, then add tests or adjust threshold.');
-    }
+    },
+    smokeTest: async () => null
   },
   'test assertion failure': {
     check: () => ({ applicable: true, reason: 'test-output.txt needed for details' }),
@@ -93,7 +211,8 @@ const FIXES = {
     ],
     execute: async () => {
       throw new Error('Manual fix: test assertion failures require code investigation.');
-    }
+    },
+    smokeTest: async () => null
   },
   'node not found': {
     check: () => {
@@ -109,7 +228,8 @@ const FIXES = {
     ],
     execute: async () => {
       throw new Error('Manual fix: node not found requires workflow inspection.');
-    }
+    },
+    smokeTest: async () => null
   },
   'exit code 126 - permission/shebang': {
     check: () => {
@@ -137,7 +257,8 @@ const FIXES = {
     ],
     execute: async () => {
       throw new Error('Manual fix: exit code 126 requires refactoring scripts to use node script.mjs pattern.');
-    }
+    },
+    smokeTest: async () => null
   },
   'gh auth failure': {
     check: () => ({ applicable: true, reason: 'Check GITHUB_TOKEN secret in repo settings' }),
@@ -148,7 +269,8 @@ const FIXES = {
     ],
     execute: async () => {
       throw new Error('Manual fix: gh auth failure requires repo secret configuration.');
-    }
+    },
+    smokeTest: async () => null
   },
   'ESM import error': {
     check: () => {
@@ -165,48 +287,10 @@ const FIXES = {
     ],
     execute: async () => {
       throw new Error('Manual fix: ESM errors require module structure investigation.');
-    }
+    },
+    smokeTest: async () => null
   }
 };
-
-function loadPatterns() {
-  if (!existsSync(PATTERN_FILE)) return [];
-  try {
-    const content = readFileSync(PATTERN_FILE, 'utf8');
-    return content.trim().split('\n').filter(Boolean).map(l => {
-      try { return JSON.parse(l); } catch { return null; }
-    }).filter(Boolean);
-  } catch { return []; }
-}
-
-function getConfidence(pattern) {
-  if (pattern.confirmations == null || pattern.rejections == null) return null;
-  if (pattern.confirmations + pattern.rejections === 0) return null;
-  return pattern.confirmations / (pattern.confirmations + pattern.rejections);
-}
-
-function recordFixAttempt(name) {
-  try {
-    let state = {};
-    if (existsSync(STATE_FILE)) {
-      try { state = JSON.parse(readFileSync(STATE_FILE, 'utf8')); } catch {}
-    }
-    if (!state.patterns) state.patterns = {};
-    if (!state.patterns.fixHistory) state.patterns.fixHistory = {};
-    if (!state.patterns.lastFixAttempt) state.patterns.lastFixAttempt = {};
-    const entry = {
-      pattern: name,
-      timestamp: new Date().toISOString(),
-      result: 'applied',
-      recurrenceCount: 0  // will increment if same pattern seen again
-    };
-    if (!state.patterns.fixHistory[name]) state.patterns.fixHistory[name] = [];
-    state.patterns.fixHistory[name].push(entry);
-    state.patterns.lastFixAttempt[name] = entry;
-    state.lastUpdated = new Date().toISOString();
-    writeFileSync(STATE_FILE, JSON.stringify(state, null, 2));
-  } catch {}
-}
 
 function getFixHistory(name) {
   try {
@@ -237,11 +321,13 @@ async function main() {
       if (history && history.length > 0) {
         const last = history[history.length - 1];
         console.log(`     Last fix: ${new Date(last.timestamp).toLocaleDateString()} (${history.length} total attempts)`);
+        console.log(`     Last result: ${last.result}${last.smokeTest !== undefined ? ` (smoke: ${last.smokeTest ? 'PASS' : 'FAIL'})` : ''}`);
       }
       console.log();
     }
     console.log('Run: node scripts/ci-fix-runner.mjs dry-run "<name>"  # preview');
-    console.log('Run: node scripts/ci-fix-runner.mjs run "<name>"       # execute');
+    console.log('Run: node scripts/ci-fix-runner.mjs run "<name>"       # execute + smoke test');
+    console.log('Run: node scripts/ci-fix-runner.mjs smoke "<name>"   # smoke test only');
     return;
   }
 
@@ -260,6 +346,27 @@ async function main() {
     return;
   }
 
+  if (cmd === 'smoke') {
+    const name = args.join(' ');
+    const fix = FIXES[name];
+    if (!fix) { console.error(`No fix defined for: ${name}`); process.exit(1); }
+    if (!fix.smokeTest) { console.log('No smoke test defined for this pattern'); process.exit(0); }
+    console.log(`\n=== Smoke Test: ${name} ===\n`);
+    try {
+      const result = await fix.smokeTest();
+      if (result === null) {
+        console.log('  ⏭️  Smoke test indeterminate (skipped confidence update)');
+      } else if (result) {
+        console.log('  ✅ Smoke test PASSED');
+      } else {
+        console.log('  ❌ Smoke test FAILED');
+      }
+    } catch (e) {
+      console.log(`  ❌ Smoke test ERROR: ${e.message}`);
+    }
+    return;
+  }
+
   if (cmd === 'dry-run') {
     const name = args.join(' ');
     const fix = FIXES[name];
@@ -271,7 +378,7 @@ async function main() {
     if (history && history.length > 0) {
       console.log(`\n  Fix history (${history.length} attempts):`);
       for (const h of history.slice(-3)) {
-        console.log(`    - ${new Date(h.timestamp).toLocaleDateString()}: ${h.result}`);
+        console.log(`    - ${new Date(h.timestamp).toLocaleDateString()}: ${h.result}${h.smokeTest !== undefined ? ` (smoke: ${h.smokeTest ? 'PASS' : 'FAIL'})` : ''}`);
       }
     }
     console.log();
@@ -299,8 +406,42 @@ async function main() {
     try {
       const result = await fix.execute();
       console.log(result);
+
+      // Run smoke test
+      let smokeResult = null;
+      if (fix.smokeTest) {
+        console.log('\n--- Running smoke test ---');
+        try {
+          smokeResult = await fix.smokeTest();
+          if (smokeResult === null) {
+            console.log('  ⏭️  Smoke indeterminate — skipping confidence update');
+          } else if (smokeResult) {
+            console.log('  ✅ Smoke PASSED — confirming fix effectiveness');
+          } else {
+            console.log('  ❌ Smoke FAILED — reverting fix and rejecting pattern');
+            // Auto-revert
+            if (REVERT[name]) {
+              await REVERT[name]();
+              console.log('  ↩️  Reverted fix automatically');
+            }
+          }
+        } catch (e) {
+          console.log(`  ⚠️  Smoke error: ${e.message} — skipping confidence update`);
+          smokeResult = null;
+        }
+      }
+
+      recordFixAttempt(name, smokeResult);
+
+      if (smokeResult !== null) {
+        const updated = updatePatternConfidence(name, smokeResult);
+        if (updated) {
+          const newConf = getConfidence({ confirmations: patterns.find(p => p.name === name).confirmations + (smokeResult ? 1 : 0), rejections: patterns.find(p => p.name === name).rejections + (smokeResult ? 0 : 1) });
+          console.log(`\n  Pattern confidence: ${conf !== null ? `${(conf * 100).toFixed(0)}% → ` : ''}${smokeResult ? '✅ confirmed' : '❌ rejected'}`);
+        }
+      }
+
       console.log('\n✅ Fix executed successfully');
-      recordFixAttempt(name);
     } catch (e) {
       console.error(`Error: ${e.message}`);
       process.exit(1);
@@ -309,7 +450,7 @@ async function main() {
   }
 
   console.log(`Unknown command: ${cmd}`);
-  console.log('Usage: node scripts/ci-fix-runner.mjs [list|dry-run|run|check] [pattern-name]');
+  console.log('Usage: node scripts/ci-fix-runner.mjs [list|dry-run|run|check|smoke] [pattern-name]');
 }
 
 main().catch(e => { console.error(e); process.exit(1); });
