@@ -113,7 +113,29 @@ function analyzeFailure(text) {
       findings.push({ name: fp.name, hint: fp.hint, severity: fp.severity, fix: fp.fix });
     }
   }
-  return findings;
+  // Record matched patterns to state for graph analysis
+  if (findings.length > 0) recordDiagnosis(findings.map(f => f.name));
+}
+
+function recordDiagnosis(patternNames) {
+  try {
+    let state = {};
+    if (existsSync(STATE_FILE)) {
+      try { state = JSON.parse(readFileSync(STATE_FILE, 'utf8')); } catch {}
+    }
+    if (!state.patterns) state.patterns = {};
+    if (!state.patterns.diagnosisLog) state.patterns.diagnosisLog = [];
+    state.patterns.diagnosisLog.push({
+      timestamp: new Date().toISOString(),
+      patterns: patternNames
+    });
+    // Keep last 100 entries
+    if (state.patterns.diagnosisLog.length > 100) {
+      state.patterns.diagnosisLog = state.patterns.diagnosisLog.slice(-100);
+    }
+    state.lastUpdated = new Date().toISOString();
+    writeFileSync(STATE_FILE, JSON.stringify(state, null, 2));
+  } catch {}
 }
 
 function updatePatternOccurrence(name) {
