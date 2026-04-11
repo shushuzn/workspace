@@ -2,25 +2,26 @@
 /**
  * scripts/ci-fix-runner.mjs
  * Executes fix commands for high-confidence CI failure patterns.
+ * Fix verification: records attempts in ci-state.json, checks on next diagnose.
  *
  * Usage:
  *   node scripts/ci-fix-runner.mjs list              # show available fixes
  *   node scripts/ci-fix-runner.mjs run <name>       # execute fix for pattern
- *   node scripts/ci-fix-runner.mjs dry-run <name>    # preview fix without executing
- *   node scripts/ci-fix-runner.mjs check <name>      # check if fix is applicable
+ *   node scripts/ci-fix-runner.mjs dry-run <name>   # preview fix without executing
+ *   node scripts/ci-fix-runner.mjs check <name>     # check if fix is applicable
  *
- * Fixes are defined in scripts/ci-failure-patterns.jsonl with confidence >= 0.8.
+ * Confidence >= 80% unlocks auto-fix. Confidence computed from
+ * confirmations/(confirmations+rejections).
  */
 import { spawn } from 'child_process';
-import { existsSync, readFileSync, readdirSync } from 'fs';
+import { existsSync, readFileSync, writeFileSync, readdirSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const PATTERN_FILE = join(__dirname, 'ci-failure-patterns.jsonl');
 const WORKFLOW_FILE = join(__dirname, '..', '.github', 'workflows', 'tests.yml');
-
-const GH = process.platform === 'win32' ? 'gh.cmd' : 'gh';
+const STATE_FILE = join(__dirname, '..', 'ci-state.json');
 
 const FIXES = {
   'setup-node cache failure': {
@@ -39,14 +40,12 @@ const FIXES = {
     execute: async () => {
       if (!existsSync(WORKFLOW_FILE)) throw new Error('tests.yml not found');
       let content = readFileSync(WORKFLOW_FILE, 'utf8');
-      // Remove cache: 'npm' line in setup-node action
       const lines = content.split('\n');
       const filtered = lines.map(line => {
         if (line.match(/^\s*cache:\s*['"]npm['"]\s*$/)) return null;
         return line;
       }).filter(l => l !== null);
       content = filtered.join('\n');
-      const { writeFileSync } = await import('fs');
       writeFileSync(WORKFLOW_FILE, content);
       return 'Removed cache: npm from tests.yml. Commit and push to apply.';
     }
@@ -85,10 +84,7 @@ const FIXES = {
     }
   },
   'test assertion failure': {
-    check: () => {
-      if (!existsSync('./test-output.txt')) return { applicable: false, reason: 'test-output.txt not found' };
-      return { applicable: true, reason: 'test-output.txt available for grep' };
-    },
+    check: () => ({ applicable: true, reason: 'test-output.txt needed for details' }),
     dryRun: () => [
       '1. Grep test-output.txt for AssertionError',
       '2. Find the failing test file and line',
@@ -109,8 +105,7 @@ const FIXES = {
     dryRun: () => [
       '1. Check setup-node action in tests.yml',
       '2. Ensure node-version is set (e.g., node-version: \'20\')',
-      '3. Check if using actions/setup-node@v4',
-      '4. Verify actions/setup-node version compatibility'
+      '3. Verify actions/setup-node version compatibility'
     ],
     execute: async () => {
       throw new Error('Manual fix: node not found requires workflow inspection.');
@@ -118,7 +113,6 @@ const FIXES = {
   },
   'exit code 126 - permission/shebang': {
     check: () => {
-      // Check for problematic node -e / node -p patterns in scripts
       const problematic = ['node -e', 'node -p', 'node -c'];
       if (!existsSync('./scripts')) return { applicable: false, reason: 'scripts/ not found' };
       let found = false;
@@ -150,8 +144,7 @@ const FIXES = {
     dryRun: () => [
       '1. Verify GITHUB_TOKEN secret is set in repo Settings > Secrets',
       '2. Ensure token has required permissions (actions:write for check runs)',
-      '3. In workflow, use: secrets.GITHUB_TOKEN',
-      '4. Check if token has expired'
+      '3. In workflow, use: secrets.GITHUB_TOKEN'
     ],
     execute: async () => {
       throw new Error('Manual fix: gh auth failure requires repo secret configuration.');
@@ -186,18 +179,41 @@ function loadPatterns() {
   } catch { return []; }
 }
 
-function run(command) {
-  return new Promise((resolve) => {
-    const parts = command.split(' ');
-    const cmd = parts[0];
-    const args = parts.slice(1);
-    const p = spawn(cmd, args, { shell: true, stdio: 'pipe' });
-    let out = '', err = '';
-    p.stdout.on('data', d => out += d.toString());
-    p.stderr.on('data', d => err += d.toString());
-    p.on('close', code => resolve({ code, out, err }));
-    p.on('error', e => resolve({ code: -1, out: '', err: e.message }));
-  });
+function getConfidence(pattern) {
+  if (pattern.confirmations == null || pattern.rejections == null) return null;
+  if (pattern.confirmations + pattern.rejections === 0) return null;
+  return pattern.confirmations / (pattern.confirmations + pattern.rejections);
+}
+
+function recordFixAttempt(name) {
+  try {
+    let state = {};
+    if (existsSync(STATE_FILE)) {
+      try { state = JSON.parse(readFileSync(STATE_FILE, 'utf8')); } catch {}
+    }
+    if (!state.patterns) state.patterns = {};
+    if (!state.patterns.fixHistory) state.patterns.fixHistory = {};
+    if (!state.patterns.lastFixAttempt) state.patterns.lastFixAttempt = {};
+    const entry = {
+      pattern: name,
+      timestamp: new Date().toISOString(),
+      result: 'applied',
+      recurrenceCount: 0  // will increment if same pattern seen again
+    };
+    if (!state.patterns.fixHistory[name]) state.patterns.fixHistory[name] = [];
+    state.patterns.fixHistory[name].push(entry);
+    state.patterns.lastFixAttempt[name] = entry;
+    state.lastUpdated = new Date().toISOString();
+    writeFileSync(STATE_FILE, JSON.stringify(state, null, 2));
+  } catch {}
+}
+
+function getFixHistory(name) {
+  try {
+    if (!existsSync(STATE_FILE)) return null;
+    const state = JSON.parse(readFileSync(STATE_FILE, 'utf8'));
+    return state.patterns?.fixHistory?.[name] || null;
+  } catch { return null; }
 }
 
 async function main() {
@@ -205,18 +221,22 @@ async function main() {
 
   if (!cmd || cmd === 'list') {
     const patterns = loadPatterns();
-    console.log('\n=== CI Fix Runner — Available Fixes ===\n');
+    console.log('\n=== CI Fix Runner ===\n');
     for (const p of patterns) {
       const fix = FIXES[p.name];
-      const autoFix = p.confidence >= 0.8 && fix ? '🟢' : '🔒';
+      const conf = getConfidence(p);
+      const autoFix = fix && conf !== null && conf >= 0.8 ? '🟢' : '🔒';
+      const history = getFixHistory(p.name);
       console.log(`  ${autoFix} ${p.name}`);
-      const conf = (p.confirmations != null && p.rejections != null && (p.confirmations + p.rejections) > 0)
-        ? p.confirmations / (p.confirmations + p.rejections) : null;
       console.log(`     Severity: ${p.severity} | Confidence: ${conf != null ? `${(conf * 100).toFixed(0)}%` : 'N/A'}`);
       console.log(`     Fix: ${p.fix}`);
       if (fix) {
         const check = fix.check();
         console.log(`     Status: ${check.applicable ? '✅ applicable' : '⏭️  not applicable'} — ${check.reason}`);
+      }
+      if (history && history.length > 0) {
+        const last = history[history.length - 1];
+        console.log(`     Last fix: ${new Date(last.timestamp).toLocaleDateString()} (${history.length} total attempts)`);
       }
       console.log();
     }
@@ -247,6 +267,13 @@ async function main() {
     console.log(`\n=== Dry Run: ${name} ===\n`);
     const steps = fix.dryRun();
     for (const s of steps) console.log(`  ${s}`);
+    const history = getFixHistory(name);
+    if (history && history.length > 0) {
+      console.log(`\n  Fix history (${history.length} attempts):`);
+      for (const h of history.slice(-3)) {
+        console.log(`    - ${new Date(h.timestamp).toLocaleDateString()}: ${h.result}`);
+      }
+    }
     console.log();
     return;
   }
@@ -256,8 +283,9 @@ async function main() {
     const patterns = loadPatterns();
     const pattern = patterns.find(p => p.name === name);
     if (!pattern) { console.error(`Pattern not found: ${name}`); process.exit(1); }
-    if (pattern.confidence < 0.8) {
-      console.error(`Confidence too low: ${(pattern.confidence * 100).toFixed(0)}% (need 80% for auto-fix)`);
+    const conf = getConfidence(pattern);
+    if (conf !== null && conf < 0.8) {
+      console.error(`Confidence too low: ${(conf * 100).toFixed(0)}% (need 80% for auto-fix)`);
       process.exit(1);
     }
     const fix = FIXES[name];
@@ -272,6 +300,7 @@ async function main() {
       const result = await fix.execute();
       console.log(result);
       console.log('\n✅ Fix executed successfully');
+      recordFixAttempt(name);
     } catch (e) {
       console.error(`Error: ${e.message}`);
       process.exit(1);

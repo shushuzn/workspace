@@ -43,7 +43,7 @@ async function main() {
       lastRun: null,
       coverage: null,
       health: null,
-      patterns: { matched: [], newOccurrences: {} },
+      patterns: { matched: [], fixHistory: {}, lastFixAttempt: {} },
       chronicle: { entries: 0 }
     };
     saveState(initial);

@@ -89,6 +89,7 @@ async function downloadArtifact(runId, namePattern) {
 
 // ── Load failure pattern library ───────────────────────────────────────────────
 const PATTERN_FILE = join(__dirname, '..', 'scripts', 'ci-failure-patterns.jsonl');
+const STATE_FILE = join(__dirname, '..', 'ci-state.json');
 let FAILURE_PATTERNS = [];
 
 try {
@@ -120,12 +121,34 @@ function updatePatternOccurrence(name) {
     if (!existsSync(PATTERN_FILE)) return;
     const content = readFileSync(PATTERN_FILE, 'utf8');
     const lines = content.trim().split('\n');
+
+    // Check if we had a prior fix attempt for this pattern
+    let hadRecentFix = false;
+    let fixCount = 0;
+    try {
+      if (existsSync(STATE_FILE)) {
+        const state = JSON.parse(readFileSync(STATE_FILE, 'utf8'));
+        const fixHistory = state.patterns?.fixHistory?.[name];
+        if (fixHistory && fixHistory.length > 0) {
+          const lastFix = fixHistory[fixHistory.length - 1];
+          const daysSinceFix = (Date.now() - new Date(lastFix.timestamp).getTime()) / (1000 * 60 * 60 * 24);
+          hadRecentFix = daysSinceFix < 7;  // fix was applied within 7 days
+          fixCount = fixHistory.length;
+        }
+      }
+    } catch {}
+
     const updated = lines.map(l => {
       try {
         const entry = JSON.parse(l);
         if (entry.name === name) {
           entry.occurrences = (entry.occurrences || 0) + 1;
           entry.lastSeen = new Date().toISOString().split('T')[0];
+          // If pattern recurs after fix attempt, it's a false positive — reduce confidence
+          if (hadRecentFix && entry.confirmations != null && entry.rejections != null) {
+            entry.rejections = (entry.rejections || 0) + 1;
+            console.log(`  ⚠️ Pattern '${name}' recurred after fix (attempt #${fixCount}) — reducing confidence`);
+          }
         }
         return JSON.stringify(entry);
       } catch { return l; }
