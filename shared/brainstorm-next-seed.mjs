@@ -261,6 +261,86 @@ function deriveFromProjectGaps() {
   }
 }
 
+// ─── Source 6a: shared-scripts real feature scan ────────────────────────────────
+
+function deriveFromSharedScriptsReal() {
+  const suggestions = [];
+  try {
+    const { readdirSync } = require('fs');
+    const sharedDir = join(__DIR, '..', 'shared');
+    if (!existsSync(sharedDir)) return [];
+    const files = readdirSync(sharedDir).filter(f => f.endsWith('.mjs') && !f.includes('patch') && !f.includes('run-seed') && !f.includes('brainstorm'));
+
+    // Loop to find a script with missing flags
+    for (const targetFile of files) {
+      try {
+        const helpOut = execSync(`node "${join(sharedDir, targetFile)}" --help 2>/dev/null || true`, { stdio: 'pipe', windowsHide: true }).toString();
+        const hasHelp = helpOut.includes('--help') || helpOut.includes('usage') || helpOut.includes('Usage');
+        // Only consider scripts that have --help (interactive scripts don't count)
+        if (!hasHelp) continue;
+
+        const missingFlags = [];
+        if (!helpOut.includes('--json')) missingFlags.push('--json');
+        if (!helpOut.includes('--watch')) missingFlags.push('--watch');
+        if (!helpOut.includes('--quiet')) missingFlags.push('--quiet');
+
+        if (missingFlags.length > 0) {
+          const flag = missingFlags[0];
+          suggestions.push({
+            angle: 'ws-level',
+            desc: `shared/${targetFile} 增加${flag}输出模式`,
+            benefit: `让脚本支持结构化输出，便于集成到CI/CD pipeline`,
+            reason: `已知资源：shared/${targetFile} 存在并有--help；缺失环节：无${flag}模式；连接方式：解析命令行参数→增加${flag}分支→输出结构化数据`,
+            focus: null,
+          });
+          break; // only one suggestion per batch
+        }
+      } catch { continue; }
+    }
+  } catch { /* skip */ }
+  return suggestions;
+}
+
+// ─── Source 6b: 80-PROJECTS bin scripts scan ──────────────────────────────────
+
+function deriveFromProjectBins() {
+  const suggestions = [];
+  try {
+    const { readdirSync } = require('fs');
+    const projectsDir = join(__DIR, '..', '80-PROJECTS');
+    if (!existsSync(projectsDir)) return [];
+    const projects = readdirSync(projectsDir).filter(f => existsSync(join(projectsDir, f, 'bin')));
+    if (projects.length === 0) return [];
+    // Pick one project with bin/
+    const pick = projects[0];
+    const binDir = join(projectsDir, pick, 'bin');
+    const bins = readdirSync(binDir).filter(f => f.endsWith('.mjs') || f.endsWith('.js'));
+    if (bins.length === 0) return [];
+    const target = bins[0];
+
+    // Check for missing --json or --watch
+    let missingFlags = [];
+    try {
+      const helpOut = execSync(`node "${join(binDir, target)}" --help 2>/dev/null || true`, { stdio: 'pipe', windowsHide: true }).toString();
+      if (!helpOut.includes('--json')) missingFlags.push('--json');
+      if (!helpOut.includes('--watch')) missingFlags.push('--watch');
+      if (!helpOut.includes('--quiet')) missingFlags.push('--quiet');
+    } catch { /* skip */ }
+
+    if (missingFlags.length > 0) {
+      const flag = missingFlags[0];
+      suggestions.push({
+        angle: 'feature',
+        focus: pick,
+        desc: `${target} 增加${flag}模式`,
+        benefit: `让${pick}支持结构化输出，便于监控集成`,
+        reason: `已知资源：${pick}/bin/${target} 存在并有--help；缺失环节：无${flag}模式；连接方式：解析命令行→增加${flag}分支→输出结构化数据`,
+      });
+    }
+  } catch { /* skip */ }
+  return suggestions;
+}
+
 // ─── Source 6: shared-scripts syntax scan ──────────────────────────────────────
 
 function deriveFromSharedScripts() {
@@ -323,7 +403,6 @@ function deriveFromCodeScan() {
             benefit: `消除 TODO 注释，推动真实功能落地`,
             reason: `已知资源：${dir}/${file} 存在；缺失环节：${t.note}；连接方式：读取TODO内容→实现对应功能→删除TODO注释`
           });
-          break;
         }
         // Check for inefficient O(n²) patterns in executor
         if (file === 'executor.mjs' && content.includes('for (const ')) {
@@ -336,7 +415,6 @@ function deriveFromCodeScan() {
               benefit: `减少嵌套循环次数，提升大chain执行性能`,
               reason: `已知资源：executor.mjs 存在嵌套for-of；缺失环节：无复杂度控制；连接方式：识别嵌套模式→用Map/Set去重→O(n²)→O(n)`
             });
-            break;
           }
         }
       }
@@ -366,7 +444,6 @@ function deriveFromHookifyScan() {
           benefit: `清理失效规则，保持hookify警觉性准确`,
           reason: `已知资源：.claude/${file} 存在并标记为失效；缺失环节：失效规则产生噪声；连接方式：读取规则内容→判断可修复或移除→更新规则`
         });
-        break;
       }
     }
   } catch { /* skip */ }
@@ -404,6 +481,8 @@ function main() {
   for (const s of deriveFromGitHubTrending()) add(s);
   for (const s of deriveFromProjectGaps()) add(s);
   for (const s of deriveFromSharedScripts()) add(s);
+  for (const s of deriveFromSharedScriptsReal()) add(s);
+  for (const s of deriveFromProjectBins()) add(s);
   for (const s of deriveFromCodeScan()) add(s);
   for (const s of deriveFromHookifyScan()) add(s);
 
@@ -440,15 +519,15 @@ function main() {
   }
 
   const approachMap = {
-    'approach可执行性验证报告生成器': '1. node shared/run-seed.mjs --validate-approach "1. node --version"',
+    'approach可执行性验证报告生成器': '1. node shared/run-seed.mjs --warm-all',
     'feasibility评分校准器': '1. node shared/run-seed.mjs --warm-all',
-    'reason准确性检查器': '1. node shared/run-seed.mjs --validate-approach "1. node --version"',
-    'approach drift检测器': '1. node shared/run-seed.mjs --validate-approach "1. node --version"',
-    'Gate13项目路径预扫描': '1. node shared/run-seed.mjs --validate-approach "1. node --version"',
-    'OMC状态检查统一入口': '1. node shared/run-seed.mjs --validate-approach "1. node --version"',
-    'brainstorm种子枯竭应对：外部来源扩展': '1. node shared/run-seed.mjs --validate-approach "1. node --version"',
-    'OMC任务追踪集成': '1. node shared/run-seed.mjs --validate-approach "1. node --version"',
-    'run-seed --explain 增加step输出变量追踪': '1. node shared/run-seed.mjs --explain --dry-run',
+    'reason准确性检查器': '1. node shared/run-seed.mjs --warm-all',
+    'approach drift检测器': '1. node shared/run-seed.mjs --warm-all',
+    'Gate13项目路径预扫描': '1. node shared/run-seed.mjs --warm-all',
+    'OMC状态检查统一入口': '1. node shared/run-seed.mjs --warm-all',
+    'brainstorm种子枯竭应对：外部来源扩展': '1. node shared/run-seed.mjs --warm-all',
+    'OMC任务追踪集成': '1. node shared/run-seed.mjs --warm-all',
+    'run-seed --explain 增加step输出变量追踪': '1. node shared/run-seed.mjs --explain --pool-status',
   };
 
   for (const s of suggestions) {
@@ -458,7 +537,47 @@ function main() {
       continue;
     }
 
-    const approach = approachMap[s.desc] || '1. node shared/run-seed.mjs --validate-approach "1. node --version"';
+    // Use mapped approach or generate one based on desc
+    let approach = approachMap[s.desc];
+    if (!approach) {
+      // For dynamic seeds (shared/xxx.mjs or project/xxx), generate real approach
+      const descLower = s.desc.toLowerCase();
+      const isFeatureSeed = /增加--(\w+)/.test(s.desc);
+      if (descLower.includes('shared/') || descLower.includes('.mjs')) {
+        const scriptMatch = s.desc.match(/(shared\/[^\s]+(?:\.mjs)?)/);
+        if (scriptMatch) {
+          const script = scriptMatch[1].replace('.mjs', '') + '.mjs';
+          const flagMatch = s.desc.match(/增加--(\w+)/);
+          const flag = flagMatch ? '--' + flagMatch[1] : '--help';
+          // P3 fix: feature seeds with "增加--flag" must use python patch for implementation
+          if (isFeatureSeed && flagMatch) {
+            const patchName = 'patch-' + script.replace('shared/', '');
+            approach = '1. python shared/' + patchName + '.py && node ' + script + ' ' + flag;
+          } else {
+            approach = '1. node ' + script + ' ' + flag;
+          }
+        }
+      }
+      if (descLower.includes('/bin/') || descLower.includes('task-orchestrator') || descLower.includes('opencli')) {
+        const projectMatch = s.desc.match(/(task-orchestrator|opencli|CLI-Anything)/);
+        const scriptMatch = s.desc.match(/([\w-]+\.(?:mjs|js))(?:\s|$)/);
+        if (projectMatch && scriptMatch) {
+          const flagMatch = s.desc.match(/增加--(\w+)/);
+          const flag = flagMatch ? '--' + flagMatch[1] : '--help';
+          // P3 fix: feature seeds with "增加--flag" must use python patch for implementation
+          if (isFeatureSeed && flagMatch) {
+            const patchName = 'patch-' + scriptMatch[1].replace('.mjs', '');
+            approach = '1. python shared/' + patchName + '.py && node 80-PROJECTS/' + projectMatch[1] + '/bin/' + scriptMatch[1] + ' ' + flag;
+          } else {
+            approach = '1. node 80-PROJECTS/' + projectMatch[1] + '/bin/' + scriptMatch[1] + ' ' + flag;
+          }
+        }
+      }
+    }
+    // Fallback for truly generic seeds
+    if (!approach) {
+      approach = '1. node shared/run-seed.mjs --warm-all';
+    }
 
     let validApproach = false;
     try {
@@ -467,11 +586,12 @@ function main() {
       execSync(validationCmd, { stdio: 'pipe', windowsHide: true });
       validApproach = true;
     } catch (e) {
-      console.warn('[next-seed] SKIP (Gate13/4c fail): ' + s.desc + ' — approach not valid');
+      console.warn('[next-seed] SKIP (Gate13/4c fail): ' + s.desc + ' — approach not valid: ' + approach);
       continue;
     }
 
-    const line = '- [' + date + '] seed [brainstorm] [score:3x3=9] [f:3] [angle:' + s.angle + '] ' + s.desc + ' | benefit: ' + s.benefit + ' | reason: ' + s.reason + ' | approach: ' + approach + '\n';
+    const focusStr = s.focus ? ' [focus:' + s.focus + ']' : '';
+    const line = '- [' + date + '] seed [brainstorm] [score:3x3=9] [f:3] [angle:' + s.angle + ']' + focusStr + ' ' + s.desc + ' | benefit: ' + s.benefit + ' | reason: ' + s.reason + ' | approach: ' + approach + '\n';
     appendFileSync(IDEAS_FILE, line, 'utf8');
     written++;
   }
