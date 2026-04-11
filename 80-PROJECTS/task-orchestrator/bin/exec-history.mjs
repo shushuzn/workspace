@@ -114,14 +114,18 @@ if (hasRecent || hasStats) {
   process.exit(0);
 }
 
-const cmd = process.argv[2];
+const cmd = process.argv.includes('--best') ? 'best' : process.argv[2];
 if (cmd === 'best') {
   const taskType = process.argv[3] || 'browse';
   const best = getBestAdapter(taskType);
   if (!best) {
     console.log('No history for:', taskType);
   } else {
+    if (process.argv.includes('--json')) {
+    console.log(JSON.stringify({ taskType, best }));
+  } else {
     console.log(`Best adapter for "${taskType}": ${best.adapterId}`);
+  }
     console.log(`  Score: ${(best.score * 100).toFixed(1)}%`);
     console.log(`  Success rate: ${(best.successRate * 100).toFixed(1)}%`);
     console.log(`  Runs: ${best.count}`);

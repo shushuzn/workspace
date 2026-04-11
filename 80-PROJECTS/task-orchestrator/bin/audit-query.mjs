@@ -27,6 +27,7 @@ if (process.argv.includes('--help') || process.argv.includes('-h')) {
   process.exit(0);
 }
 
+const isJson = process.argv.includes('--json');
 const cmd = process.argv.includes('--recent') ? 'recent'
   : process.argv.includes('--run') ? 'run'
   : process.argv.includes('--failed') ? 'failed'
@@ -43,16 +44,20 @@ if (entries.length === 0) {
 if (cmd === 'recent') {
   const n = parseInt(process.argv[process.argv.indexOf('--recent') + 1]) || 5;
   const recent = entries.slice(-n).reverse();
-  console.log(`=== Last ${recent.length} audit entries ===`);
-  for (const e of recent) {
-    const dt = new Date(e.timestamp).toISOString().slice(0, 19).replace('T', ' ');
-    const status = e.success ? '✓' : '✗';
-    const fatal = e.fatal ? ' [FATAL]' : '';
-    const cached = e.cached ? ' [CACHED]' : '';
-    const duration = e.durationMs ? ` ${(e.durationMs/1000).toFixed(1)}s` : '';
-    console.log(`${status} ${dt} runId=${e.runId?.slice(0,8)} seq=${e.seq} ${e.adapterId}:${e.command}${duration}${fatal}${cached}`);
-    if (!e.success && e.error) console.log(`  ERROR: ${e.error.slice(0, 120)}`);
-    if (e.causalityDepth > 0) console.log(`  chain depth=${e.causalityDepth} parent=${e.parentStepIdx}`);
+  if (isJson) {
+    console.log(JSON.stringify({ cmd: 'recent', entries: recent.map(e => ({ runId: e.runId, seq: e.seq, adapterId: e.adapterId, command: e.command, success: e.success, durationMs: e.durationMs, fatal: e.fatal })) }));
+  } else {
+    console.log(`=== Last ${recent.length} audit entries ===`);
+    for (const e of recent) {
+      const dt = new Date(e.timestamp).toISOString().slice(0, 19).replace('T', ' ');
+      const status = e.success ? '✓' : '✗';
+      const fatal = e.fatal ? ' [FATAL]' : '';
+      const cached = e.cached ? ' [CACHED]' : '';
+      const duration = e.durationMs ? ` ${(e.durationMs/1000).toFixed(1)}s` : '';
+      console.log(`${status} ${dt} runId=${e.runId?.slice(0,8)} seq=${e.seq} ${e.adapterId}:${e.command}${duration}${fatal}${cached}`);
+      if (!e.success && e.error) console.log(`  ERROR: ${e.error.slice(0, 120)}`);
+      if (e.causalityDepth > 0) console.log(`  chain depth=${e.causalityDepth} parent=${e.parentStepIdx}`);
+    }
   }
 } else if (cmd === 'run') {
   const runId = process.argv[process.argv.indexOf('--run') + 1];
