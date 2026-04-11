@@ -586,6 +586,45 @@ created: ${new Date().toISOString()}
     if (incomplete.length > 10) console.log('       ... and', incomplete.length - 10, 'more');
   }
 
+} else if (cmd === 'repair') {
+  // Scan filesystem for articles missing frontmatter and auto-add it
+  function walk(dir) {
+    const results = [];
+    try {
+      for (const f of readdirSync(dir)) {
+        const full = join(dir, f);
+        try {
+          if (statSync(full).isDirectory()) results.push(...walk(full));
+          else if (f.endsWith('.md')) results.push(full);
+        } catch(e) {}
+      }
+    } catch(e) {}
+    return results;
+  }
+
+  const files = walk(ARTICLES_DIR);
+  let repaired = 0;
+  for (const file of files) {
+    const content = readFileSync(file, 'utf8');
+    if (content.startsWith('---')) continue; // already has frontmatter
+    const m = content.match(/^#\s+(.+)/m);
+    if (!m) continue;
+    const title = m[1];
+    // Determine category from path
+    const relPath = file.slice(__DIR.length + 1).replace(/\\/g, '/');
+    const parts = relPath.split('/');
+    const category = parts.length >= 2 ? parts[0] : 'AI';
+    const id = slugify(title);
+    const tagLine = '\ntags: []';
+    const newContent = `---\nid: ${id}\ntitle: ${title}\ncategory: ${category}${tagLine}\ncreated: ${new Date().toISOString().split('T')[0]}\n---\n\n${content}`;
+    writeFileSync(file, newContent);
+    console.log('[wiki] Repaired:', file);
+    repaired++;
+  }
+  console.log('\n[wiki] Repaired', repaired, 'file(s)');
+  // Rebuild index after repair
+  console.log('[wiki] Run "node wiki.mjs rebuild" to update index');
+
 } else if (cmd === 'sync') {
   // Legacy: only ensures category directories exist
   const idx = loadIndex();
@@ -1017,6 +1056,7 @@ Commands:
   search-web <query> [--year YYYY] [--limit N]  # Search Semantic Scholar
   edit <title>
   rebuild                         # Scan filesystem, rebuild index.json
+  repair                          # Auto-add missing frontmatter to articles
   sync                            # Ensure category directories exist
   status                          # Dashboard: articles, broken links, incomplete, orphan
   list
