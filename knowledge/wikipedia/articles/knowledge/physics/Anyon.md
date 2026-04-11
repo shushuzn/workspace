@@ -43,13 +43,25 @@ $$|\psi\rangle \rightarrow e^{i\theta} |\psi\rangle$$
 | 系统 | Anyon类型 | 电荷 |
 |------|-----------|------|
 | $\nu = 1/3$ | Quasihole | $e/3$ |
-| $\nu = 5/2$ | Pfaffian | $e/4$ |
+| $\nu = 5/2$ | Pfaffian (Ising anyon) | $e/4$ |
+| $\nu = 7/2$ | Fibonacci anyon | $e/4$ |
+
+### Ising anyon vs Fibonacci anyon
+
+| 性质 | Ising anyon | Fibonacci anyon |
+|------|-------------|-----------------|
+| 对应共形场论 | $SU(2)_2$ | $SU(2)_3$ |
+| 基线融合域 | $\mathbf{1}, \sigma, \psi$ | $\mathbf{1}, \tau$ |
+| 编织能力 | 子集（非通用） | **通用** |
+| 实现难度 | 已观测 | 尚未确定性实现 |
+| 典型平台 | $\nu = 5/2$ FQHE | $\nu = 7/2$ FQHE |
 
 ### 拓扑量子计算
 
 **编织门**：
 - Anyon编织实现量子门
 - 拓扑保护（不受环境噪声影响）
+- **Fibonacci anyon 可实现通用量子计算**（任意幺正门）
 - 微软/Google等在研发
 
 ---
