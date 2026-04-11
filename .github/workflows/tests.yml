@@ -1,0 +1,114 @@
+name: Tests
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'shared/step-parser.mjs'
+      - 'shared/step-parser.test.mjs'
+      - 'shared/run-seed.mjs'
+      - 'shared/run-seed.test.mjs'
+      - 'shared/add-seed.mjs'
+      - 'shared/add-seed.test.mjs'
+  pull_request:
+    paths:
+      - 'shared/step-parser.mjs'
+      - 'shared/step-parser.test.mjs'
+      - 'shared/run-seed.mjs'
+      - 'shared/run-seed.test.mjs'
+      - 'shared/add-seed.mjs'
+      - 'shared/add-seed.test.mjs'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # PR: fast path — Node 20 only
+  test-pr:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - name: Get changed files
+        id: changed
+        run: |
+          echo "files=$(git diff --name-only ${{ github.event.pull_request.base.sha }} HEAD)" >> $GITHUB_OUTPUT
+      - name: Run tests and upload report
+        run: |
+          npm run test:ci | tee test-report.json
+      - name: Upload test report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-report-pr-${{ github.run_id }}
+          path: test-report.json
+          retention-days: 7
+      - name: Create Check Run
+        if: always()
+        run: node shared/create-check-run.mjs
+      - name: Create Check Run via API
+        if: always()
+        run: |
+          curl -s -X POST \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/$GITHUB_REPOSITORY/check-runs \
+            -d @check-run.json \
+            -H "X-GitHub-Api-Version: 2022-11-28"
+      - name: Post PR Comment
+        if: github.event_name == 'pull_request'
+        run: |
+          node shared/post-pr-comment.mjs
+          # LIST existing comments to find ours (idempotent)
+          curl -s -H "Authorization: token $GITHUB_TOKEN" \
+            "https://api.github.com/repos/$GITHUB_REPOSITORY/issues/${{ github.event.pull_request.number }}/comments?per_page=100" \
+            > comments.json
+          COMMENT_ID=$(node shared/find-comment.mjs)
+          BODY=$(cat pr-comment.json | jq -r .body | jq -Rs .)
+          if [ "$COMMENT_ID" = "new" ]; then
+            curl -s -X POST \
+              -H "Authorization: token $GITHUB_TOKEN" \
+              -H "Accept: application/vnd.github+json" \
+              -H "Content-Type: application/json" \
+              https://api.github.com/repos/$GITHUB_REPOSITORY/issues/${{ github.event.pull_request.number }}/comments \
+              -d "{\"body\":$BODY}"
+          else
+            curl -s -X PATCH \
+              -H "Authorization: token $GITHUB_TOKEN" \
+              -H "Accept: application/vnd.github+json" \
+              -H "Content-Type: application/json" \
+              https://api.github.com/repos/$GITHUB_REPOSITORY/issues/${{ github.event.pull_request.number }}/comments/$COMMENT_ID \
+              -d "{\"body\":$BODY}"
+          fi
+
+  # Main branch: Node 20 only (full matrix unnecessary for main push)
+  test-main:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - name: Get changed files
+        id: changed
+        run: |
+          echo "files=$(git diff --name-only HEAD~1)" >> $GITHUB_OUTPUT
+      - name: Run tests and upload report
+        run: |
+          npm run test:ci | tee test-report.json
+      - name: Upload test report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-report-main-${{ github.run_id }}
+          path: test-report.json
+          retention-days: 7

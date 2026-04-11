@@ -18,9 +18,18 @@
     "use-sync-external-store": "^1.6.0",
     "zod": "^4.3.6"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "c8": "^11.0.0"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node shared/step-parser.test.mjs && node shared/run-seed.test.mjs && node shared/add-seed.test.mjs",
+    "test:step-parser": "node shared/step-parser.test.mjs",
+    "test:run-seed": "node shared/run-seed.test.mjs",
+    "test:add-seed": "node shared/add-seed.test.mjs",
+    "test:parallel": "npm run test:step-parser & npm run test:run-seed & npm run test:add-seed & wait",
+    "test:json": "node shared/step-parser.test.mjs --json && node shared/run-seed.test.mjs --json && node shared/add-seed.test.mjs --json",
+    "test:ci": "node shared/test-ci.mjs && node shared/test-coverage-ci.mjs",
+    "test:coverage": "npx c8 --reporter=text --report-on=shared/step-parser.mjs --report-on=shared/run-seed.mjs --report-on=shared/add-seed.mjs node shared/step-parser.test.mjs && npx c8 --reporter=text --report-on=shared/step-parser.mjs --report-on=shared/run-seed.mjs --report-on=shared/add-seed.mjs node shared/run-seed.test.mjs && npx c8 --reporter=text --report-on=shared/step-parser.mjs --report-on=shared/run-seed.mjs --report-on=shared/add-seed.mjs node shared/add-seed.test.mjs"
   },
   "repository": {
     "type": "git",
