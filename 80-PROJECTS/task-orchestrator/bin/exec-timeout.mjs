@@ -15,8 +15,12 @@ function main() {
     console.log('Usage: node exec-timeout.mjs <timeout_minutes> <command...>');
     process.exit(0);
   }
-  const timeoutMin = parseInt(args[0], 10);
-  const cmd = args.slice(1);
+  // Parse timeout value and --json flag
+  let timeoutIdx = args.findIndex(a => !isNaN(parseInt(a)));
+  const timeoutMin = parseInt(args[timeoutIdx], 10);
+  const isJson = args.includes('--json');
+  // Build command: skip timeout arg and --json
+  const cmd = args.slice(timeoutIdx + 1).filter(a => a !== '--json');
   const timeoutMs = timeoutMin * 60 * 1000;
 
   try {
@@ -27,7 +31,11 @@ function main() {
     });
     process.exit(result || 0);
   } catch (e) {
-    console.error(`[TIMEOUT] Command timed out after ${timeoutMin} minute(s)`);
+    if (isJson) {
+      console.log(JSON.stringify({type: 'timeout', timeoutMin, message: `Command timed out after ${timeoutMin} minute(s)`}));
+    } else {
+      console.error(`[TIMEOUT] Command timed out after ${timeoutMin} minute(s)`);
+    }
     process.exit(e.status || 1);
   }
 }
