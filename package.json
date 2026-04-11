@@ -12,6 +12,8 @@
     "dequal": "^2.0.3",
     "eventsource-parser": "^3.0.6",
     "json-schema": "^0.4.0",
+    "pdf-parse": "^2.4.5",
+    "pdfjs-dist": "^5.6.205",
     "react": "^19.2.4",
     "swr": "^2.4.1",
     "throttleit": "^2.1.0",
@@ -29,6 +31,7 @@
     "test:parallel": "npm run test:step-parser & npm run test:run-seed & npm run test:add-seed & wait",
     "test:json": "node shared/step-parser.test.mjs --json && node shared/run-seed.test.mjs --json && node shared/add-seed.test.mjs --json",
     "test:ci": "node shared/test-ci.mjs && node shared/test-coverage-ci.mjs",
+    "test:ci-tools": "node scripts/ci-fix-runner.test.mjs",
     "test:coverage": "npx c8 --reporter=text --report-on=shared/step-parser.mjs --report-on=shared/run-seed.mjs --report-on=shared/add-seed.mjs node shared/step-parser.test.mjs && npx c8 --reporter=text --report-on=shared/step-parser.mjs --report-on=shared/run-seed.mjs --report-on=shared/add-seed.mjs node shared/run-seed.test.mjs && npx c8 --reporter=text --report-on=shared/step-parser.mjs --report-on=shared/run-seed.mjs --report-on=shared/add-seed.mjs node shared/add-seed.test.mjs"
   },
   "repository": {

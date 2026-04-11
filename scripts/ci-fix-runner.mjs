@@ -500,8 +500,8 @@ async function main() {
             return { match: re.test(content), detail: 'node -e/p/c inline script detected' };
           },
           'gh auth failure': () => {
-            const re = /GITHUB_TOKEN|secrets\./;
-            return { match: !re.test(content), detail: 'workflow uses GITHUB_TOKEN or secrets.*' };
+            // Cannot reliably detect gh auth failure from workflow content alone
+            return { match: false, detail: 'gh auth requires repo secret configuration' };
           }
         };
 
