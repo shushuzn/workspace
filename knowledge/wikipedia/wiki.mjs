@@ -787,6 +787,7 @@ created: ${new Date().toISOString()}
 } else if (cmd === 'status') {
   const idx = loadIndex();
   const byId = {}; for (const a of idx.articles) byId[a.id] = a;
+  const byTitle = {}; for (const a of idx.articles) byTitle[a.title] = a;
 
   // Count by category
   const byCat = {};
@@ -813,9 +814,11 @@ created: ${new Date().toISOString()}
   }
 
   // Find orphans (no other article links to this one)
+  // Resolve link target to article id via byId (exact ID) or byTitle (title alias)
   const linkedIds = new Set();
   for (const link of allLinks) {
-    if (byId[link.target]) linkedIds.add(link.target);
+    const targetId = byId[link.target] ? link.target : byTitle[link.target]?.id;
+    if (targetId) linkedIds.add(targetId);
   }
   for (const a of idx.articles) {
     if (!linkedIds.has(a.id)) orphanIds.add(a.id);
@@ -828,7 +831,7 @@ created: ${new Date().toISOString()}
     const key = link.fromId + '||' + link.target;
     if (seenLinks.has(key)) continue;
     seenLinks.add(key);
-    if (!byId[link.target]) {
+    if (!byId[link.target] && !byTitle[link.target]) {
       brokenLinks.push({ from: link.fromId, target: link.target });
     }
   }
