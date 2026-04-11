@@ -86,11 +86,13 @@ function getConfidence(pattern) {
 }
 
 function confToPercent(conf) {
-  if (conf === null) return 'N/A';
+  if (conf === null || conf === undefined) return 'N/A';
   if (typeof conf === 'object') {
-    return `${(conf.center * 100).toFixed(0)}% [${(conf.lower * 100).toFixed(0)}%–${(conf.upper * 100).toFixed(0)}%]`;
+    if (isNaN(conf.center)) return 'ERROR';
+    return (conf.center * 100).toFixed(0) + '% [' + (conf.lower * 100).toFixed(0) + '-' + (conf.upper * 100).toFixed(0) + '%]';
   }
-  return `${(conf * 100).toFixed(0)}%`;
+  if (isNaN(conf)) return 'N/A';
+  return (conf * 100).toFixed(0) + '%';
 }
 
 function updatePatternConfidence(name, confirmed) {
@@ -350,7 +352,7 @@ async function main() {
       const autoFix = risk === 'low' && conf !== null && (typeof conf === 'object' ? conf.center : conf) >= 0.8 ? '🟢' : '🔒';
       const history = getFixHistory(p.name);
       console.log(`  ${autoFix} ${p.name} [${risk}]`);
-      console.log(`     Severity: ${p.severity} | Confidence: ${conf != null ? `${(conf * 100).toFixed(0)}%` : 'N/A'}`);
+      console.log(`     Severity: ${p.severity} | Confidence: ${confToPercent(conf)}`);
       console.log(`     Fix: ${p.fix}`);
       if (fix) {
         const check = fix.check();
@@ -436,7 +438,7 @@ async function main() {
     if (recommendations.length > 0) {
       const top = recommendations[0];
       console.log('-> Top pick: ' + top.name);
-      console.log('   Confidence: ' + (top.effConf*100).toFixed(0) + '% | Risk: ' + top.risk + ' | Score: ' + top.score.toFixed(3));
+      console.log('   Confidence: ' + (top.effConf * 100).toFixed(0) + '% | Risk: ' + top.risk + ' | Score: ' + top.score.toFixed(3));
       console.log('   Fix: ' + top.fix);
     }
     console.log();
@@ -523,7 +525,7 @@ async function main() {
     }
 
     console.log(`\n=== Executing: ${name} ===`);
-    console.log(`Risk: ${risk} | Confidence: ${conf !== null ? `${(conf * 100).toFixed(0)}%` : 'N/A'}\n`);
+    console.log(`Risk: ${risk} | Confidence: ${confToPercent(conf)}\n`);
     try {
       const result = await fix.execute();
       console.log(result);
