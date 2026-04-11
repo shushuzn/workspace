@@ -67,6 +67,7 @@ Jones多项式来自辫群 $B_n$ 的表示：
 - [[Chern-Simons理论]] — 物理上产生Jones多项式
 - [[Yang-Baxter方程]] — Jones多项式的代数基础
 - [[可积系统]] — Jones多项式与可积系统的深层联系
+- [[拓扑量子计算]] — Jones多项式来自Anyon编织
 - [[量子场论的数学物理]] — 山崎雅人演讲，包含Jones多项式的完整背景（Chern-Simons→Jones多项式的完整链条）
 
 ---

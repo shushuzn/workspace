@@ -62,6 +62,8 @@ $$L = \frac{k}{4\pi} \int Tr(A \wedge dA + \frac{2}{3} A \wedge A \wedge A)$$
 - [[联络目不变量]] — CS理论的主要应用
 - [[Yang-Baxter方程]] — CS理论中Wilson线的代数结构
 - [[可积系统]] — CS理论与可积系统的关系
+- [[Khovanov同调]] — CS理论高维推广的范畴化视角（Witten conjecture）
+- [[拓扑量子计算]] — CS理论是Anyon统计的物理基础
 
 ---
 
