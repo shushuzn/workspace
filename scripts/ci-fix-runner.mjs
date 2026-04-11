@@ -62,6 +62,13 @@ function savePatterns(patterns) {
  * upper = upper bound
  * Prior: +1 to both confirmations and rejections (Laplace smoothing)
  */
+/**
+ * Wilson score interval (point estimate + CI bounds)
+ * center = point estimate (with Laplace prior)
+ * lower = lower bound of confidence interval (used for conservative decisions)
+ * upper = upper bound
+ * Prior: +1 to both confirmations and rejections (Laplace smoothing)
+ */
 function getConfidence(pattern) {
   if (pattern.confirmations == null || pattern.rejections == null) return null;
   const c = pattern.confirmations;
@@ -83,6 +90,45 @@ function getConfidence(pattern) {
     lower: Math.max(0, center - margin),
     upper: Math.min(1, center + margin),
   };
+}
+
+/**
+ * Thompson Sampling: sample from Beta(α, β) using additive bootstrap.
+ * α = 0.5 + confirmations (Jeffreys prior)
+ * β = 0.5 + rejections
+ * Returns a single sampled value in [0, 1].
+ * Fallback for zero data: returns random uniform.
+ */
+function sampleConfidence(pattern) {
+  if (pattern.confirmations == null || pattern.rejections == null) return Math.random();
+  const c = pattern.confirmations;
+  const r = pattern.rejections;
+  if (c === 0 && r === 0) return Math.random(); // uninformative → uniform
+
+  // Jeffreys prior Beta(0.5, 0.5) + observed data
+  const alpha = c + 0.5;
+  const beta = r + 0.5;
+
+  // Additive bootstrap: mean + Gaussian noise calibrated to variance
+  // Var(Beta(α,β)) = αβ / ((α+β)²(α+β+1))
+  // For small samples, this is more stable than raw gamma sampling
+  const mean = alpha / (alpha + beta);
+  const variance = (alpha * beta) / ((alpha + beta) ** 2 * (alpha + beta + 1));
+  const std = Math.sqrt(variance);
+
+  // Sample from normal approximation, clamp to [0, 1]
+  // Apply temperature: less noise for large samples (→ point estimate)
+  const sampleSize = c + r;
+  const temperature = Math.max(0.1, 1 / Math.sqrt(sampleSize));
+  const sampled = mean + std * gaussianRandom() * temperature;
+  return Math.max(0, Math.min(1, sampled));
+}
+
+/** Box-Muller: standard normal sample */
+function gaussianRandom() {
+  const u1 = Math.random();
+  const u2 = Math.random();
+  return Math.sqrt(-2 * Math.log(u1 || 1e-10)) * Math.cos(2 * Math.PI * u2);
 }
 
 function confToPercent(conf) {
@@ -399,10 +445,11 @@ async function main() {
     for (const p of patterns) {
       const fix = FIXES[p.name];
       if (!fix) continue;
-      const conf = getConfidence(p) ?? 0.5;
+      // Thompson Sampling: sample from Beta posterior instead of using point estimate
+      const sampledConf = sampleConfidence(p);
       const decayEntry = decayReport.find(d => d.name === p.name);
       const decay = decayEntry?.decayFactor ?? 1.0;
-      const effConf = (typeof conf === 'object' ? conf.center : conf) * decay;
+      const effConf = sampledConf * decay;
       const riskWeight = fix.risk === 'low' ? 1.0 : fix.risk === 'medium' ? 0.6 : 0.3;
       const lastFix = lastFixAttempt[p.name];
       const daysSince = lastFix ? (Date.now() - new Date(lastFix.timestamp)) / (1000*60*60*24) : null;
@@ -419,7 +466,7 @@ async function main() {
       const check = fix.check();
       if (!check.applicable) continue;
       const score = effConf * riskWeight * recentPenalty * coBonus;
-      recommendations.push({ name: p.name, fix: p.fix, risk: fix.risk, severity: p.severity, score, effConf, conf, decay, daysSince, applicable: check.applicable });
+      recommendations.push({ name: p.name, fix: p.fix, risk: fix.risk, severity: p.severity, score, effConf, decay, daysSince, applicable: check.applicable });
     }
 
     recommendations.sort((a, b) => b.score - a.score);
