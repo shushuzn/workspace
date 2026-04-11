@@ -347,7 +347,7 @@ async function main() {
       const fix = FIXES[p.name];
       const conf = getConfidence(p);
       const risk = fix?.risk || 'high';
-      const autoFix = risk === 'low' && conf !== null && conf >= 0.8 ? '🟢' : '🔒';
+      const autoFix = risk === 'low' && conf !== null && (typeof conf === 'object' ? conf.center : conf) >= 0.8 ? '🟢' : '🔒';
       const history = getFixHistory(p.name);
       console.log(`  ${autoFix} ${p.name} [${risk}]`);
       console.log(`     Severity: ${p.severity} | Confidence: ${conf != null ? `${(conf * 100).toFixed(0)}%` : 'N/A'}`);
@@ -400,7 +400,7 @@ async function main() {
       const conf = getConfidence(p) ?? 0.5;
       const decayEntry = decayReport.find(d => d.name === p.name);
       const decay = decayEntry?.decayFactor ?? 1.0;
-      const effConf = conf * decay;
+      const effConf = (typeof conf === 'object' ? conf.center : conf) * decay;
       const riskWeight = fix.risk === 'low' ? 1.0 : fix.risk === 'medium' ? 0.6 : 0.3;
       const lastFix = lastFixAttempt[p.name];
       const daysSince = lastFix ? (Date.now() - new Date(lastFix.timestamp)) / (1000*60*60*24) : null;
@@ -428,7 +428,7 @@ async function main() {
       const r = recommendations[i];
       const days = r.daysSince !== null ? Math.floor(r.daysSince) + 'd' : 'never';
       const stars = r.score >= 0.5 ? 'green' : r.score >= 0.3 ? 'yellow' : 'grey';
-      const confStr = r.effConf >= 0.9 ? '95%+' : (r.effConf*100).toFixed(0) + '%';
+      const confStr = (typeof r.effConf === 'object' ? r.effConf.center : r.effConf) >= 0.9 ? '95%+' : ((typeof r.effConf === 'object' ? r.effConf.center : r.effConf)*100).toFixed(0) + '%';
       const name38 = r.name.length > 36 ? r.name.substring(0,35)+'...' : r.name;
       console.log('  ' + String(i+1).padStart(2) + '  ' + name38.padEnd(38) + ' ' + confStr.padEnd(8) + ' ' + r.risk.padEnd(7) + ' ' + days.padEnd(8) + stars + ' ' + r.score.toFixed(3));
     }
@@ -515,7 +515,7 @@ async function main() {
 
     // Risk-based guard: medium/high fixes require --force or high confidence
     if (risk !== 'low' && !force) {
-      if (conf === null || conf < 0.8) {
+      if (conf === null || (typeof conf === 'object' ? conf.center : conf) < 0.8) {
         console.error(`Confidence too low: ${conf !== null ? `${(conf * 100).toFixed(0)}%` : 'N/A'} (need 80% for ${risk} risk fix)`);
         console.error(`Use --force to override: node scripts/ci-fix-runner.mjs run "${name}" --force`);
         process.exit(1);
