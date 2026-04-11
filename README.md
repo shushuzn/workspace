@@ -1,5 +1,7 @@
 # workspace
 
+[![Tests](https://github.com/shushuzn/workspace/actions/workflows/Tests/badge.svg)](https://github.com/shushuzn/workspace/actions/workflows/Tests)
+
 > OpenClaw AI Workstation — 全能力自进化智能体工作站
 
 ```
