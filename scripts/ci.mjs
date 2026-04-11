@@ -41,6 +41,7 @@ const COMMANDS = {
   phealth:      { script: 'ci-pattern-health.mjs',     args: (a) => a.slice(1) },
   hreport:      { script: 'ci-health-report.mjs',    args: (a) => a.slice(1) },
   pgraph:      { script: 'ci-pattern-graph.mjs',  args: (a) => a.slice(1) },
+  deploy:     { script: 'ci-deploy-dashboard.mjs', args: (a) => a.slice(1) },
   all:          { script: null, args: () => [] },  // special
 };
 
