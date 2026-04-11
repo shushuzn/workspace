@@ -54,10 +54,43 @@ function savePatterns(patterns) {
   writeFileSync(PATTERN_FILE, lines);
 }
 
+/**
+ * Wilson score interval with Laplace smoothing.
+ * Returns { center, lower, upper } for the true proportion.
+ * center = point estimate (with Laplace prior)
+ * lower = lower bound of confidence interval (used for conservative decisions)
+ * upper = upper bound
+ * Prior: +1 to both confirmations and rejections (Laplace smoothing)
+ */
 function getConfidence(pattern) {
   if (pattern.confirmations == null || pattern.rejections == null) return null;
-  if (pattern.confirmations + pattern.rejections === 0) return null;
-  return pattern.confirmations / (pattern.confirmations + pattern.rejections);
+  const c = pattern.confirmations;
+  const r = pattern.rejections;
+  if (c === 0 && r === 0) return null;
+
+  // Laplace smoothed counts (+1 prior each)
+  const n = c + r + 2;
+  const p = (c + 1) / n;
+  const z = 1.645; // 90% confidence interval (one-sided)
+
+  // Wilson score interval
+  const denominator = 1 + z * z / n;
+  const center = (p + z * z / (2 * n)) / denominator;
+  const margin = (z * Math.sqrt((p * (1 - p) + z * z / (4 * n)) / n)) / denominator;
+
+  return {
+    center: center,
+    lower: Math.max(0, center - margin),
+    upper: Math.min(1, center + margin),
+  };
+}
+
+function confToPercent(conf) {
+  if (conf === null) return 'N/A';
+  if (typeof conf === 'object') {
+    return `${(conf.center * 100).toFixed(0)}% [${(conf.lower * 100).toFixed(0)}%–${(conf.upper * 100).toFixed(0)}%]`;
+  }
+  return `${(conf * 100).toFixed(0)}%`;
 }
 
 function updatePatternConfidence(name, confirmed) {

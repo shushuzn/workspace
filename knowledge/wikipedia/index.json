@@ -1,6 +1,13 @@
 {
   "articles": [
     {
+      "id": "ai对齐",
+      "title": "AI对齐",
+      "file": "articles/knowledge/AI对齐.md",
+      "category": "knowledge/AI",
+      "created": "2026-04-11"
+    },
+    {
       "id": "朝鲜战争各方误判与战略破产",
       "title": "朝鲜战争各方误判与战略破产",
       "file": "articles/knowledge/history/01-朝鲜战争各方误判与战略破产.md",
@@ -220,9 +227,58 @@
       "created": "2026-04-07"
     },
     {
+      "id": "homfly-pt多项式",
+      "title": "HOMFLY-PT多项式",
+      "file": "articles/knowledge/math/HOMFLY-PT多项式.md",
+      "category": "math",
+      "created": "2026-04-07"
+    },
+    {
+      "id": "jones多项式",
+      "title": "Jones多项式",
+      "file": "articles/knowledge/math/Jones多项式.md",
+      "category": "math",
+      "created": "2026-04-07"
+    },
+    {
+      "id": "khovanov同调",
+      "title": "Khovanov同调",
+      "file": "articles/knowledge/math/Khovanov同调.md",
+      "category": "math",
+      "created": "2026-04-07"
+    },
+    {
+      "id": "yang-baxter方程",
+      "title": "Yang-Baxter方程",
+      "file": "articles/knowledge/math/Yang-Baxter方程.md",
+      "category": "math",
+      "created": "2026-04-07"
+    },
+    {
+      "id": "范畴化",
+      "title": "范畴化",
+      "file": "articles/knowledge/math/范畴化.md",
+      "category": "math",
+      "created": "2026-04-07"
+    },
+    {
       "id": "bian-qun",
       "title": "辫群",
       "file": "articles/knowledge/math/辫群.md",
+      "category": "math",
+      "created": "2026-04-07"
+    },
+    {
+      "id": "量子群",
+      "title": "量子群",
+      "file": "articles/knowledge/math/量子群.md",
+      "category": "math",
+      "created": "2026-04-07"
+    },
+    {
+      "id": "陈类",
+      "title": "陈类",
+      "file": "articles/knowledge/math/陈类.md",
       "category": "math",
       "created": "2026-04-07"
     },
@@ -231,6 +287,90 @@
       "title": "Chern-Simons理论讲解",
       "file": "articles/knowledge/physics/00-chern-simons/chern-simons.md",
       "category": "knowledge/physics"
+    },
+    {
+      "id": "anyon",
+      "title": "Anyon",
+      "file": "articles/knowledge/physics/Anyon.md",
+      "category": "knowledge/physics",
+      "created": "2026-04-07"
+    },
+    {
+      "id": "chern-simons理论",
+      "title": "Chern-Simons理论",
+      "file": "articles/knowledge/physics/Chern-Simons理论.md",
+      "category": "knowledge/physics",
+      "created": "2026-04-07"
+    },
+    {
+      "id": "分数量子霍尔效应",
+      "title": "分数量子霍尔效应",
+      "file": "articles/knowledge/physics/分数量子霍尔效应.md",
+      "category": "knowledge/physics",
+      "created": "2026-04-07"
+    },
+    {
+      "id": "可积系统",
+      "title": "可积系统",
+      "file": "articles/knowledge/physics/可积系统.md",
+      "category": "knowledge/physics",
+      "created": "2026-04-07"
+    },
+    {
+      "id": "拓扑序",
+      "title": "拓扑序",
+      "file": "articles/knowledge/physics/拓扑序.md",
+      "category": "knowledge/physics",
+      "created": "2026-04-07"
+    },
+    {
+      "id": "拓扑相物质",
+      "title": "拓扑相物质",
+      "file": "articles/knowledge/physics/拓扑相物质.md",
+      "category": "knowledge/physics",
+      "created": "2026-04-07"
+    },
+    {
+      "id": "拓扑绝缘体",
+      "title": "拓扑绝缘体",
+      "file": "articles/knowledge/physics/拓扑绝缘体.md",
+      "category": "knowledge/physics",
+      "created": "2026-04-07"
+    },
+    {
+      "id": "拓扑超导",
+      "title": "拓扑超导",
+      "file": "articles/knowledge/physics/拓扑超导.md",
+      "category": "knowledge/physics",
+      "created": "2026-04-07"
+    },
+    {
+      "id": "拓扑量子计算",
+      "title": "拓扑量子计算",
+      "file": "articles/knowledge/physics/拓扑量子计算.md",
+      "category": "knowledge/physics",
+      "created": "2026-04-07"
+    },
+    {
+      "id": "联络目不变量",
+      "title": "联络目不变量",
+      "file": "articles/knowledge/physics/联络目不变量.md",
+      "category": "knowledge/physics",
+      "created": "2026-04-07"
+    },
+    {
+      "id": "表面码",
+      "title": "表面码",
+      "file": "articles/knowledge/physics/表面码.md",
+      "category": "knowledge/physics",
+      "created": "2026-04-07"
+    },
+    {
+      "id": "量子场论的数学物理",
+      "title": "量子场论的数学物理",
+      "file": "articles/knowledge/physics/量子场论的数学物理.md",
+      "category": "knowledge/physics",
+      "created": "2026-04-07"
     },
     {
       "id": "12080928-surface-codes-towards-practical-large-scale-quantum-computation",
@@ -588,6 +728,7 @@
     }
   ],
   "categories": [
+    "knowledge/AI",
     "history",
     "security",
     "math",
