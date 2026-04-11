@@ -390,15 +390,12 @@ async function main() {
   }
 
   if (cmd === 'run') {
-    const name = args.join(' ');
+    const name = args.filter(a => !a.startsWith('--')).join(' ');
+    const force = args.includes('--force');
     const patterns = loadPatterns();
     const pattern = patterns.find(p => p.name === name);
     if (!pattern) { console.error(`Pattern not found: ${name}`); process.exit(1); }
     const conf = getConfidence(pattern);
-    if (conf !== null && conf < 0.8) {
-      console.error(`Confidence too low: ${(conf * 100).toFixed(0)}% (need 80% for auto-fix)`);
-      process.exit(1);
-    }
     const fix = FIXES[name];
     if (!fix) { console.error(`No executable fix defined for: ${name}`); process.exit(1); }
     const risk = fix.risk || 'high';
@@ -409,7 +406,7 @@ async function main() {
     }
 
     // Risk-based guard: medium/high fixes require --force or high confidence
-    if (risk !== 'low') {
+    if (risk !== 'low' && !force) {
       if (conf === null || conf < 0.8) {
         console.error(`Confidence too low: ${conf !== null ? `${(conf * 100).toFixed(0)}%` : 'N/A'} (need 80% for ${risk} risk fix)`);
         console.error(`Use --force to override: node scripts/ci-fix-runner.mjs run "${name}" --force`);
@@ -559,8 +556,78 @@ async function main() {
     process.exit(matched.some(m => m.severity === 'P0') ? 2 : 1);
   }
 
+  if (cmd === 'install-hook') {
+    const { execSync } = await import('child_process');
+    const hookDir = join(__dirname, '..', '.git', 'hooks');
+    const hookPath = join(hookDir, 'pre-commit');
+    const scriptHook = join(__dirname, 'pre-commit-hook.sh');
+
+    if (!existsSync(scriptHook)) {
+      console.error('pre-commit-hook.sh not found. Run: git pull to get it.');
+      process.exit(1);
+    }
+
+    try {
+      writeFileSync(hookPath, readFileSync(scriptHook));
+      execSync(`chmod +x "${hookPath}"`, { shell: true });
+      console.log(`✅ Pre-commit hook installed: ${hookPath}`);
+      console.log('   Staged .yml/.yaml files will be scanned on every commit.');
+      console.log('   To uninstall: rm .git/hooks/pre-commit');
+    } catch (e) {
+      console.error(`Failed to install hook: ${e.message}`);
+      process.exit(1);
+    }
+    return;
+  }
+
+  if (cmd === 'git-check') {
+    // Run check-file on all modified/staged workflow files
+    const { execSync } = await import('child_process');
+    try {
+      const base = args[0] || 'HEAD';
+      const diffCmd = `git diff --name-only ${base} -- '*.yml' '*.yaml'`;
+      const files = execSync(diffCmd, { encoding: 'utf8' })
+        .split('\n').map(f => f.trim()).filter(Boolean);
+
+      if (files.length === 0) {
+        console.log('No workflow files changed.');
+        process.exit(0);
+      }
+
+      console.log(`Scanning ${files.length} workflow file(s)...\n`);
+      let hasP0 = false;
+      let hasIssue = false;
+
+      for (const file of files) {
+        const { code, out } = await run('node', [
+          join(__dirname, 'ci-fix-runner.mjs'),
+          'check-file', file
+        ]);
+        process.stdout.write(out);
+        if (code === 2) hasP0 = true;
+        if (code !== 0) hasIssue = true;
+        console.log();
+      }
+
+      if (hasP0) {
+        console.log('🔴 P0 pattern detected — commit blocked');
+        process.exit(2);
+      } else if (hasIssue) {
+        console.log('🟡 P1/P2 pattern detected — review recommended');
+        process.exit(1);
+      } else {
+        console.log('✅ All workflow files clean');
+        process.exit(0);
+      }
+    } catch (e) {
+      console.error(`git-check failed: ${e.message}`);
+      process.exit(1);
+    }
+    return;
+  }
+
   console.log(`Unknown command: ${cmd}`);
-  console.log('Usage: node scripts/ci-fix-runner.mjs [list|dry-run|run|check|smoke|check-file] [pattern-name]');
+  console.log('Usage: node scripts/ci-fix-runner.mjs [list|dry-run|run|check|smoke|check-file|install-hook|git-check]');
 }
 
 main().catch(e => { console.error(e); process.exit(1); });
