@@ -103,3 +103,10 @@ Constitutional AI 是 AI 安全领域的里程碑式工作，首次系统性地�
 3. **实际影响**：Constitutional AI 之后，Claude 成为第一个在 RLHF 基础上结合 Constitutional AI 训练的商用大模型，为 AI 安全对齐研究提供了有价值的参考。
 
 4. **局限**：Constitutional AI 仍然依赖初始的"人类对齐模型"来提供原则和初始反馈。原则本身的设计（哪些原则被包含、哪些被排除）仍然需要人类判断。
+
+## 相关条目
+
+- [[200901325-learning-to-summarize-from-human-feedback]] — RLHF前身，人类反馈强化学习的经典工作
+- [[表面码]] — 量子纠错的自我修正机制与Constitutional AI的自我改进有深层类比（自纠正框架）
+- [[辫群]] — RL训练中策略的"编织"与辫子的拓扑编织有结构同构性（复合动作的交换律）
+- [[AI对齐]] — Constitutional AI是AI对齐研究的核心技术路线
