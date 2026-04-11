@@ -929,7 +929,7 @@ created: ${new Date().toISOString()}
   }
 
   // Find link opportunities (same category, no link yet)
-  console.log('\n=== Link Opportunities (same category, unlinked) ===');
+  console.log('\n=== Link Opportunities ===');
   const linkedPairs = new Set();
   for (const a of idx.articles) {
     try {
@@ -938,21 +938,31 @@ created: ${new Date().toISOString()}
       for (const f of found) linkedPairs.add(a.id + '||' + f.slice(2, -2));
     } catch(e) {}
   }
-  let oppCount = 0;
+  const opportunities = [];
   for (const a of idx.articles) {
     for (const b of idx.articles) {
-      if (a.id === b.id || a.category !== b.category) continue;
+      if (a.id === b.id) continue;
       const key = a.id + '||' + b.id;
       if (linkedPairs.has(key)) continue;
       const titleKey = a.id + '||' + b.title;
       if (linkedPairs.has(titleKey)) continue;
-      console.log(`  [[${a.title}]] → [[${b.title}]]  (same category: ${a.category})`);
-      oppCount++;
-      if (oppCount >= 20) { console.log('  ... (truncated)'); break; }
+      const isCross = a.category !== b.category;
+      opportunities.push({ from: a, to: b, cross: isCross });
     }
-    if (oppCount >= 20) break;
   }
-  if (oppCount === 0) console.log('  (none found)');
+  opportunities.sort((a, b) => (b.cross ? 1 : 0) - (a.cross ? 1 : 0));
+  const shown = opportunities.slice(0, 15);
+  const crossShown = shown.filter(o => o.cross);
+  const sameShown = shown.filter(o => !o.cross);
+  if (crossShown.length) {
+    console.log('  Cross-domain (highest value):');
+    crossShown.slice(0, 10).forEach(o => console.log(`    [[${o.from.title}]] (${o.from.category}) → [[${o.to.title}]] (${o.to.category})`));
+  }
+  if (sameShown.length) {
+    console.log('  Same-category:');
+    sameShown.slice(0, 5).forEach(o => console.log(`    [[${o.from.title}]] → [[${o.to.title}]]`));
+  }
+  if (opportunities.length > 15) console.log(`  ... and ${opportunities.length - 15} more (run with --all to see)`);
 
 } else if (cmd === 'orphan') {
   const idx = loadIndex();
