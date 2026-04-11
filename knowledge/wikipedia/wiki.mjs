@@ -950,19 +950,22 @@ created: ${new Date().toISOString()}
       opportunities.push({ from: a, to: b, cross: isCross });
     }
   }
+  const showAll = process.argv.includes('--all');
+  const limit = showAll ? opportunities.length : 15;
   opportunities.sort((a, b) => (b.cross ? 1 : 0) - (a.cross ? 1 : 0));
-  const shown = opportunities.slice(0, 15);
+  const shown = opportunities.slice(0, limit);
   const crossShown = shown.filter(o => o.cross);
   const sameShown = shown.filter(o => !o.cross);
   if (crossShown.length) {
     console.log('  Cross-domain (highest value):');
-    crossShown.slice(0, 10).forEach(o => console.log(`    [[${o.from.title}]] (${o.from.category}) → [[${o.to.title}]] (${o.to.category})`));
+    crossShown.slice(0, showAll ? undefined : 10).forEach(o => console.log(`    [[${o.from.title}]] (${o.from.category}) → [[${o.to.title}]] (${o.to.category})`));
   }
-  if (sameShown.length) {
+  if (sameShown.length && showAll) {
     console.log('  Same-category:');
-    sameShown.slice(0, 5).forEach(o => console.log(`    [[${o.from.title}]] → [[${o.to.title}]]`));
+    sameShown.forEach(o => console.log(`    [[${o.from.title}]] → [[${o.to.title}]]`));
   }
-  if (opportunities.length > 15) console.log(`  ... and ${opportunities.length - 15} more (run with --all to see)`);
+  if (!showAll && opportunities.length > 15) console.log(`  ... and ${opportunities.length - 15} more (run with --all to see)`);
+  if (showAll) console.log(`\n  Total: ${opportunities.filter(o=>o.cross).length} cross-domain, ${opportunities.filter(o=>!o.cross).length} same-category`);
 
 } else if (cmd === 'orphan') {
   const idx = loadIndex();
