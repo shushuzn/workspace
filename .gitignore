@@ -96,3 +96,10 @@ execution_results.json
 .obsidian/
 awesome-openclaw-agents/
 80-PROJECTS/conceptual-distance-explorer/
+
+# CI artifacts
+test-report.json
+coverage-report.json
+check-run.json
+pr-comment.json
+comments.json
