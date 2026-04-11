@@ -110,7 +110,7 @@ AI对齐面临一个根本性悖论：
 
 ## 相关条目
 
-- [[Constitutional AI]] — Anthropic的对齐技术路线
+- [[221208073-constitutional-ai-harmlessness-from-ai-feedback]] — Anthropic的对齐技术路线
 - [[辫群]] — AI对齐中的"对齐"与辫子的拓扑性质有深层联系（目标函数的自相似性）
 - [[可积系统]] — 复杂AI系统的可解释性与可积系统的可解性有方法论类比
 - [[范畴化]] — 范畴论可能为AI对齐提供数学基础（函子性、范畴等价）
