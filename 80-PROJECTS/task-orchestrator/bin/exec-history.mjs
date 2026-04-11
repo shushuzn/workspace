@@ -95,6 +95,25 @@ export function getAdapterStats(adapterId) {
 }
 
 // CLI interface
+const args = process.argv.slice(2);
+const hasRecent = args.includes('--recent');
+const hasStats = args.includes('--stats');
+
+if (hasRecent || hasStats) {
+  const lines = readFileSync(HISTORY_FILE, 'utf8').split('\n').filter(Boolean);
+  const entries = lines.map(l => JSON.parse(l));
+  if (hasStats) {
+    const total = entries.length;
+    const success = entries.filter(e => e.success).length;
+    console.log(JSON.stringify({total, successRate: total ? Math.round(success/total*100) : 0}));
+  } else {
+    const n = hasRecent ? parseInt(args[args.indexOf('--recent') + 1] || '10') : 10;
+    const recent = entries.slice(-n);
+    console.log(recent.map(e => `${new Date(e.timestamp).toISOString()} ${e.success ? '✓' : '✗'} ${e.taskType}/${e.adapterId} ${e.durationMs}ms`).join('\n'));
+  }
+  process.exit(0);
+}
+
 const cmd = process.argv[2];
 if (cmd === 'best') {
   const taskType = process.argv[3] || 'browse';
