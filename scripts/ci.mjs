@@ -41,6 +41,7 @@ const COMMANDS = {
   fixlog:       { script: 'ci-fix-log.mjs',             args: (a) => a.slice(1) },
   fixreport:    { script: 'ci-fix-effectiveness-dashboard.mjs', args: (a) => a },
   decay:        { script: 'ci-pattern-health-decay.mjs',       args: (a) => a },
+  predict:      { script: 'ci-fix-predictor.mjs',           args: (a) => a },
   phealth:      { script: 'ci-pattern-health.mjs',     args: (a) => a.slice(1) },
   hreport:      { script: 'ci-health-report.mjs',    args: (a) => a.slice(1) },
   pgraph:      { script: 'ci-pattern-graph.mjs',  args: (a) => a.slice(1) },
@@ -114,6 +115,7 @@ Commands:
   fix [list|dry-run|run|check <name>]  Run fix for failure pattern
   fixreport [--output <path>]              Generate fix effectiveness HTML dashboard
   decay [--apply|--stale]                  Pattern health decay analysis
+  predict [--staged|--diff <f>]           Predict CI failure from git diff
   phealth [alert|trend <name>]          Pattern health dashboard
   hreport [--output <path>]              Generate HTML health report
   all                                   Run full diagnostic suite
