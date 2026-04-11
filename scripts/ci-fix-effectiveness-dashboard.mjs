@@ -59,7 +59,7 @@ function confLabel(conf) {
   return `${(conf * 100).toFixed(0)}%`;
 }
 
-function generateHTML(state, patterns) {
+function generateHTML(state, patterns, recommendData = { recommendations: [], topPick: null }) {
   const fixHistory = state?.patterns?.fixHistory || {};
   const lastFixAttempt = state?.patterns?.lastFixAttempt || {};
   const patternNames = Object.keys(fixHistory);
@@ -172,6 +172,16 @@ function generateHTML(state, patterns) {
 
   .empty { text-align: center; padding: 3rem; color: #475569; }
   .empty-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+
+  .recommend-panel { background: #1e293b; border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem; }
+  .rec-top { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 1.25rem; padding-bottom: 1rem; border-bottom: 1px solid #334155; }
+  .rec-top-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: #64748b; }
+  .rec-top-name { font-size: 1.1rem; font-weight: 700; color: #f8fafc; }
+  .rec-table { width: 100%; border-collapse: collapse; }
+  .rec-table th { text-align: left; padding: 0.4rem 0.75rem; font-size: 0.7rem; color: #475569; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid #334155; font-weight: 500; }
+  .rec-table td { padding: 0.5rem 0.75rem; font-size: 0.8rem; border-bottom: 1px solid #1e293b; }
+  .rec-table tr:last-child td { border-bottom: none; }
+  .rec-note { font-size: 0.65rem; color: #475569; margin-top: 0.75rem; text-align: right; }
 </style>
 </head>
 <body>
@@ -206,6 +216,51 @@ function generateHTML(state, patterns) {
       <div class="card-sub">no events recorded</div>
     </div>
   </div>
+
+  ${recommendData.recommendations.length > 0 ? `
+  <h2>Bayesian Fix Recommendations</h2>
+  <div class="recommend-panel">
+    <div class="rec-top">
+      <div class="rec-top-label">Top Pick</div>
+      <div class="rec-top-name">${(() => {
+        const m = recommendData.topPick?.match(/-> Top pick: (.+)/);
+        return m ? m[1].trim() : '—';
+      })()}</div>
+    </div>
+    <table class="rec-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Pattern</th>
+          <th>EffConf</th>
+          <th>Risk</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${recommendData.recommendations.map((r, i) => {
+          const rowColor = i === 0 ? '#f8fafc' : '#94a3b8';
+          const scoreBar = Math.round(r.score * 100);
+          return `
+        <tr style="color:${rowColor}">
+          <td style="color:#64748b">${i + 1}</td>
+          <td style="font-weight:${i === 0 ? 600 : 400}">${r.name}</td>
+          <td>${r.effConf}</td>
+          <td>${(() => {
+            const lines = recommendData.topPick ? [] : [];
+            return '—';
+          })()}</td>
+          <td><div style="display:flex;align-items:center;gap:0.5rem">
+            <div style="width:60px;height:4px;background:#334155;border-radius:2px;overflow:hidden">
+              <div style="width:${scoreBar}%;height:100%;background:${r.score >= 0.5 ? '#22c55e' : r.score >= 0.3 ? '#eab308' : '#64748b'}"></div>
+            </div>
+            <span style="font-size:0.7rem;color:#64748b">${r.score.toFixed(3)}</span>
+          </div></td>
+        </tr>`;}).join('')}
+      </tbody>
+    </table>
+    <div class="rec-note">Thompson Sampling · exp(-n/8) decay · Updated: ${new Date().toLocaleTimeString()}</div>
+  </div>` : ''}
 
   ${totalPatterns === 0 ? `
   <div class="empty">
@@ -310,7 +365,34 @@ function generateHTML(state, patterns) {
 async function main() {
   const state = loadState();
   const patterns = loadPatterns();
-  const html = generateHTML(state, patterns);
+
+  // Load Bayesian recommendations by direct import
+  let recommendData = { recommendations: [], topPick: null };
+  try {
+    const { getRecommendations } = await import('./ci-recommend-calc.mjs');
+    // Build FIXES map from patterns data (dashboard doesn't have full FIXES)
+    const FIXES = {};
+    for (const p of patterns) {
+      const sev = p.severity || 'P2';
+      const risk = sev === 'P0' ? 'high' : sev === 'P1' ? 'medium' : 'low';
+      FIXES[p.name] = { risk, check: () => ({ applicable: true, reason: 'N/A' }) };
+    }
+    const recs = getRecommendations(FIXES);
+    recommendData = {
+      recommendations: recs.map(r => ({
+        name: r.name,
+        effConf: r.effConf >= 0.9 ? '95%+' : `${(r.effConf * 100).toFixed(0)}%`,
+        risk: r.risk,
+        days: r.daysSince !== null ? `${Math.floor(r.daysSince)}d` : 'never',
+        score: r.score,
+      })),
+      topPick: recs.length > 0 ? `-> Top pick: ${recs[0].name}` : null,
+    };
+  } catch (e) {
+    // Non-fatal: dashboard still generates without recommendations
+  }
+
+  const html = generateHTML(state, patterns, recommendData);
   if (OUTPUT) {
     writeFileSync(OUTPUT, html);
     console.log(`Dashboard written to ${OUTPUT}`);
