@@ -761,6 +761,7 @@ created: ${new Date().toISOString()}
   const idx = loadIndex();
   const byId = {};
   for (const a of idx.articles) byId[a.id] = a;
+  const byTitle = {}; for (const a of idx.articles) byTitle[a.title] = a;
   let errors = 0;
   const fixes = [];
   for (const a of idx.articles) {
@@ -769,7 +770,7 @@ created: ${new Date().toISOString()}
     const content = readFileSync(file, 'utf8');
     const links = [...content.matchAll(/\[\[([^\]|]+)(?:\|[^\]]+)?\]\]/g)].map(m => m[1]);
     for (const link of links) {
-      const target = byId[link] || byId[link.replace(/\s+/g, '-').toLowerCase()];
+      const target = byId[link] || byTitle[link]?.id || byId[link.replace(/\s+/g, '-').toLowerCase()];
       if (!target) {
         console.log('  [BROKEN]', link, '-> in', a.title);
         errors++;
