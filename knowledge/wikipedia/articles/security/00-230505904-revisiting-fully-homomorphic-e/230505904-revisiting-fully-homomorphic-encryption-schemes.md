@@ -41,7 +41,7 @@ Homomorphic encryption is a sophisticated encryption technique that allows compu
 | **BFV** | Fan-Vercauteren | RLWE | 整数算术友好 |
 | **CKKS** | Cheon-Kim-Kim-Song | RLWE | 实数近似计算 |
 | **TFHE** | Tartarus/FHEW | GSW | 快速比特操作 |
-| **FHEW** | Ducas-Micciancio | GSW | 快速自举 |
+| **FHEW** | Ducas-Micciancio | GSW | 快速[[拓扑序|拓扑自举]] |
 
 ### 2. 性能比较
 
@@ -50,7 +50,7 @@ Homomorphic encryption is a sophisticated encryption technique that allows compu
 | 密文大小 | 中 | 中 | 大 |
 | 计算速度 | 快（打包） | 快（打包） | 慢（逐比特） |
 | 精度 | 精确 | 近似 | 精确 |
-| 自举速度 | 中 | 中 | 快 |
+| [[拓扑序|拓扑自举]]速度 | 中 | 中 | 快 |
 
 ### 3. 应用场景映射
 
@@ -72,7 +72,7 @@ Homomorphic encryption is a sophisticated encryption technique that allows compu
 
 1. **没有最优方案**：各方案有权衡，需根据场景选择
 2. **打包编码是关键**：能显著提升批处理效率
-3. **自举是瓶颈**：自举速度决定了FHE的实用边界
+3. **[[拓扑序|拓扑自举]]是瓶颈**：[[拓扑序|拓扑自举]]速度决定了FHE的实用边界
 4. **硬件加速前景**：GPU/FPGA加速有潜力
 5. **标准化进行中**：行业正在推动FHE标准化
 
@@ -82,8 +82,8 @@ Homomorphic encryption is a sophisticated encryption technique that allows compu
 
 **深层跨域联系**：
 
-1. **格密码学 ↔ 拓扑学**：FHE基于格困难问题，而格在拓扑学中有深刻应用——辫群、晶体结构、拓扑不变量都与格有关
+1. **格密码学 ↔ 拓扑学**：FHE基于格困难问题，而格在拓扑学中有深刻应用——[[辫群]]、晶体结构、拓扑[[拓扑序|拓扑不变量]]都与格有关
 
-2. **打包编码 ↔ 拓扑紧化**：FHE的打包编码将多个值压缩到单个密文中，与拓扑紧化（compactification）有概念相似——都是信息的"压缩表示"
+2. **打包编码 ↔ 拓扑[[拓扑序|拓扑紧化]]**：FHE的打包编码将多个值压缩到单个密文中，与拓扑[[拓扑序|拓扑紧化]]（compactification）有概念相似——都是信息的"压缩表示"
 
-3. **自举 ↔ 拓扑自举**：FHE的自举（bootstrapping）刷新密文，与拓扑学中的自举（bootstrap）有语义相似——都是某种"重新初始化"操作
+3. **[[拓扑序|拓扑自举]] ↔ 拓扑[[拓扑序|拓扑自举]]**：FHE的[[拓扑序|拓扑自举]]（bootstrapping）刷新密文，与拓扑学中的[[拓扑序|拓扑自举]]（bootstrap）有语义相似——都是某种"重新初始化"操作

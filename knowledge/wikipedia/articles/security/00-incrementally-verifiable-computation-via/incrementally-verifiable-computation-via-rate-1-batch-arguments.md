@@ -78,8 +78,8 @@ Non-interactive delegation schemes enable producing succinct proofs (that can be
 
 **深层跨域联系**：
 
-1. **证明合并 ↔ 拓扑合成**：证明合并与拓扑学中的同伦合成（homotopy composition）有深层联系——都是将多个路径/证明"粘合"为单一复合结构
+1. **证明合并 ↔ 拓扑[[拓扑序|拓扑合成]]**：证明合并与拓扑学中的同伦[[拓扑序|拓扑合成]]（homotopy composition）有深层联系——都是将多个路径/证明"粘合"为单一复合结构
 
-2. **增量验证 ↔ 拓扑持续性**：IVC的增量特性与拓扑学中的持续同调（persistent homology）有概念相似——都是在逐步演进中保持某种不变量
+2. **增量验证 ↔ 拓扑持续性**：IVC的增量特性与拓扑学中的持续[[拓扑序|拓扑同调]]（persistent homology）有概念相似——都是在逐步演进中保持某种[[拓扑序|拓扑不变量]]
 
 3. **Rate-1特性 ↔ 拓扑效率**：Rate-1（线性效率）与拓扑学中研究的有效不变式有深层联系——都是追求最优的信息压缩率

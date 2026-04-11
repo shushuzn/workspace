@@ -76,7 +76,7 @@ In 2002, Barak and Goldreich introduced the notion of a universal argument and c
 
 **深层跨域联系**：
 
-1. **通用性 ↔ 拓扑万有性**：通用参数（universal argument）与拓扑学中的万有性质（universal property）有深层结构相似——都是某种"能够表示所有其他同类对象"的最高级形式
+1. **通用性 ↔ 拓扑[[拓扑序|拓扑万有性]]**：通用参数（universal argument）与拓扑学中的[[拓扑序|拓扑万有性]]质（universal property）有深层结构相似——都是某种"能够表示所有其他同类对象"的最高级形式
 
 2. **非一致性限制 ↔ 拓扑障碍**：非一致性不允许任意加速与拓扑障碍理论有概念相似——都是研究某种"不可逾越"的界限
 
