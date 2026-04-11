@@ -242,6 +242,16 @@ function analyzeAndPrint(text) {
     for (const f of findings) {
       console.log(`  [${f.severity}] ${f.name}`);
       console.log(`    → ${f.hint}`);
+      if (f.fix) {
+        console.log(`    Fix: ${f.fix}`);
+        // Auto-fix for high-confidence patterns (≥0.8)
+        if (f.confidence !== null && f.confidence >= 0.8) {
+          console.log(`    🟢 Auto-fix available (confidence: ${(f.confidence * 100).toFixed(0)}%)`);
+          console.log(`    → Run: node scripts/ci-pattern-feedback.mjs confirm "${f.name}" --notes="auto-fix applied"`);
+        } else if (f.confidence !== null) {
+          console.log(`    Confidence: ${(f.confidence * 100).toFixed(0)}% (needs ${Math.round((0.8 - f.confidence) * 100)}% more for auto-fix)`);
+        }
+      }
     }
   }
 }
