@@ -31,7 +31,8 @@ const COMMANDS = {
   diagnose:     { script: 'ci-diagnose.mjs',           args: (a) => [] },
   trend:        { script: 'coverage-trend.mjs',          args: (a) => ['--report'] },
   health:       { script: 'ci-health.mjs',               args: (a) => a.includes('--badge') ? ['--badge'] : a.includes('--summary') ? ['--summary'] : [] },
-  predict:      { script: 'coverage-burndown.mjs',       args: (a) => a.includes('--alert') ? ['--alert'] : [] },
+  predict:      { script: 'ci-fix-predictor.mjs',           args: (a) => a },
+  burnalert:   { script: 'coverage-burndown.mjs',       args: (a) => a.includes('--alert') ? ['--alert'] : [] },
   regression:    { script: 'coverage-regression.mjs',      args: () => [] },
   autobaseline:  { script: 'coverage-autobaseline.mjs', args: (a) => a.includes('--update') ? ['--update'] : [] },
   patterns:     { script: 'ci-pattern-feedback.mjs',     args: (a) => a.slice(1) },
@@ -42,6 +43,7 @@ const COMMANDS = {
   fixreport:    { script: 'ci-fix-effectiveness-dashboard.mjs', args: (a) => a },
   decay:        { script: 'ci-pattern-health-decay.mjs',       args: (a) => a },
   predict:      { script: 'ci-fix-predictor.mjs',           args: (a) => a },
+  recommend:   { script: 'ci-fix-runner.mjs',            args: (a) => ['recommend', ...a] },
   phealth:      { script: 'ci-pattern-health.mjs',     args: (a) => a.slice(1) },
   hreport:      { script: 'ci-health-report.mjs',    args: (a) => a.slice(1) },
   pgraph:      { script: 'ci-pattern-graph.mjs',  args: (a) => a.slice(1) },
@@ -105,7 +107,9 @@ Commands:
   diagnose [--run-id=<id>|--latest]    Diagnose CI failure (GitHub API)
   trend [--suite=<name>]               Show coverage trend report
   health [--badge|--summary]           Show CI health score
-  predict [--alert]                    Predict coverage threshold breach
+  predict [--staged|--diff <f>]         Predict CI failure from git diff
+  recommend                           Bayesian fix priority recommendation
+  burnalert [--alert]                 Predict coverage threshold breach
   regression                            Analyze coverage regression root cause
   autobaseline [--update]               Recommend/sync coverage thresholds
   patterns [confirm|reject <name>]     Manage pattern confidence
@@ -123,7 +127,7 @@ Commands:
 Examples:
   node scripts/ci.mjs diagnose --latest
   node scripts/ci.mjs health --summary
-  node scripts/ci.mjs predict --alert
+  node scripts/ci.mjs predict --staged
   node scripts/ci.mjs patterns confirm "setup-node cache failure" --notes="removed cache:npm works"
   node scripts/ci.mjs chronicle append 123 pattern=setup-node-cache-fix resolved=true
 `);
