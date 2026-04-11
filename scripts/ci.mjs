@@ -37,6 +37,7 @@ const COMMANDS = {
   patterns:     { script: 'ci-pattern-feedback.mjs',     args: (a) => a.slice(1) },
   chronicle:    { script: 'ci-debug-chronicle.mjs',     args: (a) => a.slice(1) },
   state:        { script: 'ci-state.mjs',               args: (a) => a.slice(1) },
+  fix:          { script: 'ci-fix-runner.mjs',         args: (a) => a.slice(1) },
   all:          { script: null, args: () => [] },  // special
 };
 
@@ -102,6 +103,7 @@ Commands:
   chronicle append <run_id> [...]       Record debug session
   chronicle report                      Show debug history stats
   state [get|set|init|dump]           CI state store
+  fix [list|dry-run|run|check <name>]  Run fix for failure pattern
   all                                   Run full diagnostic suite
 
 Examples:
