@@ -71,6 +71,9 @@ jobs:
       - name: Run CI health check
         if: always()
         run: node scripts/ci-health.mjs && node scripts/ci-health-history.mjs append
+      - name: Update CI state store
+        if: always()
+        run: node scripts/ci-state-update.mjs
       - name: Check coverage burndown
         if: always()
         run: node scripts/coverage-burndown.mjs || true
@@ -154,6 +157,9 @@ jobs:
       - name: Run CI health check
         if: always()
         run: node scripts/ci-health.mjs && node scripts/ci-health-history.mjs append
+      - name: Update CI state store
+        if: always()
+        run: node scripts/ci-state-update.mjs
       - name: Check coverage burndown
         if: always()
         run: node scripts/coverage-burndown.mjs || true

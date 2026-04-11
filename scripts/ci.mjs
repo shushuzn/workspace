@@ -36,6 +36,7 @@ const COMMANDS = {
   autobaseline:  { script: 'coverage-autobaseline.mjs', args: (a) => a.includes('--update') ? ['--update'] : [] },
   patterns:     { script: 'ci-pattern-feedback.mjs',     args: (a) => a.slice(1) },
   chronicle:    { script: 'ci-debug-chronicle.mjs',     args: (a) => a.slice(1) },
+  state:        { script: 'ci-state.mjs',               args: (a) => a.slice(1) },
   all:          { script: null, args: () => [] },  // special
 };
 
@@ -100,6 +101,7 @@ Commands:
   patterns [confirm|reject <name>]     Manage pattern confidence
   chronicle append <run_id> [...]       Record debug session
   chronicle report                      Show debug history stats
+  state [get|set|init|dump]           CI state store
   all                                   Run full diagnostic suite
 
 Examples:

@@ -70,6 +70,12 @@ worktrees/
 *~
 .nyc_output/
 
+# === CI State ===
+ci-state.json
+ci-health.json
+coverage-report.json
+test-report.json
+
 # === OMC / Skills ===
 active_skills/
 skills.zip
