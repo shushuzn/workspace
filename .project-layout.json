@@ -1,0 +1,230 @@
+{
+  "$schema": "https://openclaw.github.io/schemas/project-layout/v1.json",
+  "version": "1.0.0",
+  "description": "OpenClaw Workstation 项目结构规范",
+  "enforced": true,
+  "directoryRules": {
+    "root": {
+      "description": "项目根目录",
+      "allowedChildren": [
+        "src",
+        "projects",
+        "workspace",
+        "docs",
+        "tests",
+        "scripts",
+        "configs",
+        "cache",
+        ".config",
+        ".temp",
+        ".kb",
+        "80-PROJECTS",
+        "99-archive",
+        "99-backups"
+      ]
+    },
+    "source": {
+      "description": "源代码目录",
+      "path": "src",
+      "required": false
+    },
+    "projects": {
+      "description": "子项目统一入口",
+      "path": "projects",
+      "children": {
+        "description": "各子项目目录"
+      },
+      "required": false
+    },
+    "workspace": {
+      "description": "工作区数据",
+      "path": "workspace",
+      "children": {
+        "sessions": "会话数据",
+        "memory": "记忆数据",
+        "threads": "线程数据"
+      },
+      "required": false
+    },
+    "knowledge": {
+      "description": "知识库",
+      "path": ".kb",
+      "children": {
+        "concepts": "概念定义",
+        "processes": "流程文档",
+        "references": "参考资料",
+        "沉淀": "沉淀知识"
+      },
+      "required": false
+    },
+    "docs": {
+      "description": "文档唯一入口",
+      "path": "docs",
+      "required": true,
+      "exclusive": true
+    },
+    "configs": {
+      "description": "配置文件",
+      "path": "configs",
+      "required": false
+    },
+    "scripts": {
+      "description": "脚本工具",
+      "path": "scripts",
+      "required": false
+    },
+    "tests": {
+      "description": "测试目录",
+      "path": "tests",
+      "required": false
+    },
+    "cache": {
+      "description": "缓存目录（不纳入版本控制）",
+      "path": ".cache",
+      "gitignore": true,
+      "required": false
+    },
+    "temp": {
+      "description": "临时文件目录",
+      "path": ".temp",
+      "gitignore": true,
+      "required": false
+    },
+    "configs_root": {
+      "description": "工具配置统一入口",
+      "path": ".config",
+      "children": {
+        "claude": ".claude 配置",
+        "openclaw": ".openclaw 配置",
+        "opencode": ".opencode 配置",
+        "vscode": ".vscode 配置",
+        "obsidian": ".obsidian 配置",
+        "github": ".github 配置"
+      },
+      "required": false
+    }
+  },
+  "legacyDirectories": {
+    "description": "历史遗留工作区目录（已有项目保留，新项目不应使用）",
+    "paths": {
+      "active_skills": "活跃技能目录",
+      "artifacts": "生成物存储",
+      "browser": "浏览器数据",
+      "channels": "频道配置",
+      "coverage": "覆盖率报告",
+      "data": "通用数据",
+      "dialog": "对话数据",
+      "feishu-bridge": "飞书桥接",
+      "file_store": "文件存储",
+      "flow-archive": "流程归档",
+      "logs": "日志文件",
+      "media": "媒体文件",
+      "memory": "记忆存储",
+      "node_modules": "Node.js依赖",
+      "oh-my-openagent": "oh-my-openagent源码（非git）",
+      "openclaude": "openclaude源码（非git）",
+      "sessions": "会话存档",
+      "shared": "共享代码",
+      "shared-constants": "共享常量",
+      "shared-test-fixtures": "测试固件",
+      "task-orchestrator": "任务编排",
+      "threads": "线程数据",
+      "tool_result": "工具结果缓存",
+      "worktrees": "Git worktrees"
+    }
+  },
+  "namingConventions": {
+    "directory": {
+      "pattern": "^[a-zA-Z][a-zA-Z0-9_-]*$",
+      "description": "目录名必须以字母开头，可包含字母、数字、下划线、连字符",
+      "examples": [
+        "src",
+        "projects",
+        "knowledge-base",
+        "shared_utils",
+        "80-PROJECTS"
+      ]
+    },
+    "dotDirectory": {
+      "pattern": "^\\.[a-zA-Z][a-zA-Z0-9_-]*$",
+      "description": "配置目录如 .config, .cache",
+      "allowed": [
+        ".config",
+        ".cache",
+        ".temp",
+        ".kb",
+        ".snapshots",
+        ".trash",
+        ".git",
+        ".github"
+      ]
+    },
+    "numbered": {
+      "pattern": "^\\d{2,3}-[A-Za-z_-]+$",
+      "description": "用于历史遗留目录，如 80-PROJECTS, 99-archive",
+      "deprecated": false,
+      "note": "已有目录可保留，新目录不应使用"
+    }
+  },
+  "deprecatedPaths": {
+    "structural": [],
+    "toolConfig": [
+      ".claude",
+      ".claude-flow",
+      ".clawhub",
+      ".golutra",
+      ".gstack",
+      ".obsidian",
+      ".omc",
+      ".openclaw",
+      ".opencode",
+      ".pytest_cache",
+      ".ruff_cache",
+      ".swarm",
+      ".vscode"
+    ],
+    "system": [
+      ".git",
+      ".github",
+      "node_modules"
+    ]
+  },
+  "exclusiveRules": {
+    "docs": {
+      "description": "文档必须统一放在 docs/ 目录",
+      "paths": [
+        "README.md",
+        "CHANGELOG.md",
+        "CONTRIBUTING.md"
+      ],
+      "action": "move",
+      "target": "docs/"
+    }
+  },
+  "gitignorePatterns": [
+    ".cache/**",
+    ".temp/**",
+    "node_modules/**",
+    "*.log",
+    "coverage/**",
+    "__pycache__/**",
+    ".pytest_cache/**",
+    ".ruff_cache/**"
+  ],
+  "cleanup": {
+    "dangerousPatterns": [
+      "^!.*",
+      "^\\{.*",
+      "^console\\.",
+      ".*\\)\\.filter.*",
+      ".*\\.slice\\("
+    ],
+    "autoRemove": false,
+    "dryRun": true
+  },
+  "validation": {
+    "onCreate": true,
+    "onMove": true,
+    "onCommit": true
+  }
+}
